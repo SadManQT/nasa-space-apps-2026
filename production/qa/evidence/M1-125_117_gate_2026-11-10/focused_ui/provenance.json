@@ -1,0 +1,33 @@
+{
+  "base_commit": "c112f88",
+  "engine": "4.7.stable.official.5b4e0cb0f",
+  "command": "game/tools/run_tests.sh <suite>; isolated APPDATA and complete TEST_LOG_DIR",
+  "scope": "Five focused suites; not a full gate. Public probe-job API runs before calibration. Briefing keyboard cycle covers all assistance buttons and original actions. Independent read-only review found no assertion weakening.",
+  "results": [
+    {
+      "suite": "test_ch01_game_feel.gd",
+      "result": "CH01 GAME FEEL RESULT: PASS (102 checks, 0 failures)",
+      "test_sha256": "575cb9a6bf9ab35d8c3d5d0c0961159b3e666af70dd6b552db18596eb34eb90b"
+    },
+    {
+      "suite": "test_chapter1_ui_regressions.gd",
+      "result": "CHAPTER 1 UI REGRESSIONS: PASS (42 checks, 0 failures)",
+      "test_sha256": "b0312f6a47ce4d1c8ed9723c243a0e7e01b83cc7ba613f42809a152ba6087d95"
+    },
+    {
+      "suite": "test_journal_tabs.gd",
+      "result": "JOURNAL TABS RESULT: PASS (322 checks, 0 failures)",
+      "test_sha256": "98019e0e238503effdfac34b2fb219adeae6bcae105f7a6d6b38d5424cbb9cfb"
+    },
+    {
+      "suite": "test_outpost_status.gd",
+      "result": "OUTPOST STATUS RESULT: PASS (63 checks, 0 failures)",
+      "test_sha256": "547ad450c3d1c919748a2a829275c78bd242bd2d5d45cf47a450b4ebc04cb1b3"
+    },
+    {
+      "suite": "test_main_menu_contrast.gd",
+      "result": "MAIN MENU CONTRAST RESULT: PASS (170 checks, 0 failures)",
+      "test_sha256": "0241a44605df4d5f5445f1dd50818ba40003a3cf6e84b9eb7d1a4eed4c19cf59"
+    }
+  ]
+}

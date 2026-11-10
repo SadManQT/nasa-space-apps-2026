@@ -126,6 +126,8 @@ func _run() -> void:
 			var compare: Dictionary = targets.pop_at(3)
 			targets.push_back(compare)
 		for target in targets:
+			if String(target.target_id) == "calibrate_probe":
+				_check(bool(PlantInput.complete_probe_transfer(campaign.route).get("accepted", false)), "opening probe transfer precedes dry-zero calibration")
 			var result: Dictionary = campaign.route.perform(String(target.target_id), PlantInput.payload(String(target.target_id)))
 			if not bool(result.get("accepted", false)):
 				traversed = false
