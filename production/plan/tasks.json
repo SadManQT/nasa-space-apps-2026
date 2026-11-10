@@ -1174,7 +1174,11 @@
    ],
    "edit_files": [
     "game/tools/test_ch01_game_feel.gd",
-    "game/tools/test_chapter1_ui_regressions.gd"
+    "game/tools/test_chapter1_ui_regressions.gd",
+    "game/tools/test_main_menu_contrast.gd",
+    "game/tools/test_journal_tabs.gd",
+    "game/tools/test_outpost_status.gd",
+    "game/tools/test_player_text.gd"
    ]
   },
   {
