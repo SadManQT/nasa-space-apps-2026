@@ -145,7 +145,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M4-18">M4-18</a> Consume storm_early_warning in the Chapter 7 shelter run, step the rover heater in Chapter 8 shadow, and align the hazard storm numbers with canon <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Chapters 5/7; Care Round and physical story integration · 22% share</div><div class="counts"><span class="chip s-done">9 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">3 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:75%"></i></div>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Chapters 5/7; Care Round and physical story integration · 22% share</div><div class="counts"><span class="chip s-done">9 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">3 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:69%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
+<li><a class="id" href="#M1-126">M1-126</a> Deliver the reviewed bounded raw-loading change in AssetGeometry that Atik&#x27;s M1-53 requests <span class="chip ">claude</span> <span class="chip ">P1</span><div class="meta">claimed by Sadman/claude on 2026-11-10</div></li>
+</ul></details>
 <details open><summary>Blocked (3)</summary><ul>
 <li><a class="id" href="#M3-5U">M3-5U</a> Upgrade choice after Chapter 4 <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">10 Nov recheck: the old reason is gone. The after-Chapter-4 choice screen, exclusivity, save/load and both modifiers work (M4-17: test_upgrade_pairs_ch4_ch6.gd 33/0; rover now rea…</div></li>
 <li><a class="id" href="#M3-7U">M3-7U</a> Upgrade choice after Chapter 6 <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">10 Nov recheck: the after-Chapter-6 choice screen, exclusivity, save/load and bigger_safe_room (K3 cap) work (M4-17: test_upgrade_pairs_ch4_ch6.gd 33/0; production/qa/evidence/M3-…</div></li>
@@ -8721,6 +8724,33 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "reserved_for": "ramim",
    "effort": 1,
    "batch_phase": "unplanned"
+  },
+  {
+   "id": "M1-126",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "claude",
+   "title": "Deliver the reviewed bounded raw-loading change in AssetGeometry that Atik's M1-53 requests",
+   "status": "in_progress",
+   "owner": "Sadman/claude",
+   "deps": [],
+   "paths": [
+    "game/scripts/asset_geometry.gd",
+    "game/tools/test_asset_geometry_recovery.gd",
+    "production/qa/evidence/M1-53_owner_delivery.md"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-10.",
+   "evidence": "",
+   "updated": "2026-11-10",
+   "prompt": "Owner request: production/qa/perf/atik_batch_2026-11-10/resume_20261110/M1-53_REVIEW_REQUEST.md (candidate ../M1-53_asset_geometry_owner.patch, reviewed not applied blindly). AssetGeometry.prepare() polls THREAD_LOAD_IN_PROGRESS without a bound. Deliver: one owner per raw path through PackedScene publication with overlapping callers sharing the outcome; polling bounded by PreparationWatchdog; on expiry the loading card and an independent decode that never joins the unfinished request; the late request retired and consumed once; an old coroutine stops publishing after takeover at every yield; valid-instance node lifetimes; missing files still fail without a card; eight-animation batches, cache policy and the 50 ms gate unchanged. Acceptance: a suite with real semaphore-held raw jobs that recover before the worker is released; test_loading and test_performance_runtime pass through run_tests.sh. Atik then runs the ten windowed probes and the full gate for M1-53.",
+   "reserved_for": "sadman",
+   "effort": 2,
+   "edit_files": [
+    "game/scripts/asset_geometry.gd",
+    "game/tools/test_asset_geometry_recovery.gd"
+   ],
+   "batch_phase": "implementation"
   }
  ],
  "requirements": [
@@ -9364,7 +9394,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
  "implementation_batch": {
   "id": "2026-11-10-implementation",
   "active": true,
-  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP. 10 Nov: Sadman told his own session to do the tasks his blocked tasks need; M4-17 (rover upgrade shape fix and after-Ch4/after-Ch6 pair verification) added to his row.",
+  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP. 10 Nov: Sadman told his own session to do the tasks his blocked tasks need; M4-17 (rover upgrade shape fix and after-Ch4/after-Ch6 pair verification) added to his row. Sadman then approved doing the M1-53 owner request (M1-126).",
   "priority_order": [
    "ramim",
    "sadman",
@@ -9409,7 +9439,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "M3-7P",
     "M3-7U",
     "M3-7M",
-    "M4-17"
+    "M4-17",
+    "M1-126"
    ],
    "asif": [
     "M1-105",
