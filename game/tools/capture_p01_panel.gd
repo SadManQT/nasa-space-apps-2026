@@ -31,6 +31,7 @@ func _run() -> void:
 		for spec in Gates.targets_for_scene(campaign.route.current_scene_id()):
 			campaign.route.perform(String(spec.target_id), Inputs.payload(String(spec.target_id)))
 		campaign.route.advance_scene()
+	_expect(bool(Inputs.complete_probe_transfer(campaign.route).get("accepted", false)), "opening probe reaches the bench and dry zero before panel calibration")
 	campaign._sync_route_projection()
 	campaign._refresh_world()
 	campaign.hud.refresh_scene()
