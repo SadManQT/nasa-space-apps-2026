@@ -24,6 +24,8 @@ var _physics_stamp := 0
 var _event_last := 0
 var _event_max := 0.0
 var _event_frames := 0
+var _capture_prefix := ""
+var _capture_failed := false
 
 func _init() -> void:
 	_run.call_deferred()
@@ -44,6 +46,8 @@ func _run() -> void:
 			_seconds = maxf(1.0, float(arg.get_slice("=", 1)))
 		if arg.begins_with("--perf-output="):
 			_output = arg.trim_prefix("--perf-output=")
+		if arg.begins_with("--perf-capture-prefix="):
+			_capture_prefix = arg.trim_prefix("--perf-capture-prefix=")
 	_cpu_only = args.has("--perf-cpu-only")
 	_chapter1_rooms = args.has("--perf-chapter1-rooms")
 	if _chapter1_rooms:
@@ -122,6 +126,10 @@ func _run() -> void:
 			await _sample("full_cast_panels", false, true)
 			await _sample_cutscenes()
 	_release_input()
+	if not await _main.preparation.wait_idle():
+		push_error("Probe background preparation did not finish")
+		quit(1)
+		return
 	_main.free()
 	await process_frame
 	# Only our isolated checkpoint and backup, never a user's saved expedition.
@@ -181,6 +189,7 @@ func _event_heartbeat() -> void:
 
 ## Includes the first draw after construction; total latency is not a frame time.
 func _transition_event(label: String, action: Callable) -> void:
+	print("PERF begin ", label)
 	await process_frame
 	LoadTrace.steps.clear()
 	_event_last = Time.get_ticks_usec()
@@ -197,6 +206,11 @@ func _transition_event(label: String, action: Callable) -> void:
 	var event := {"event": label, "duration_ms": elapsed, "max_frame_interval_ms": _event_max, "transition_frames": _event_frames, "steps": LoadTrace.steps.duplicate(true)}
 	_events.append(event)
 	print("PERF transition ", JSON.stringify(event))
+	if not _cpu_only and not _capture_prefix.is_empty():
+		var path := _capture_prefix + "_" + label + ".png"
+		if root.get_texture().get_image().save_png(path) != OK:
+			_capture_failed = true
+			push_error("Probe screenshot failed: " + path)
 
 func _event(label: String, action: Callable) -> void:
 	var start := Time.get_ticks_usec()
@@ -463,11 +477,13 @@ func _percentile(values: Array, quantile: float) -> float:
 	return values[clampi(int(ceil(values.size() * quantile)) - 1, 0, values.size() - 1)]
 
 func _write_results() -> bool:
+	if _capture_failed:
+		return false
 	var json := FileAccess.open(_output + ".json", FileAccess.WRITE)
 	if json == null:
 		push_error("Cannot write probe output: " + _output)
 		return false
-	json.store_string(JSON.stringify({"metadata": _metadata, "cpu_only": _cpu_only, "summaries": _summaries, "events": _events}, "\t"))
+	json.store_string(JSON.stringify({"metadata": _metadata, "cpu_only": _cpu_only, "summaries": _summaries, "events": _events, "preparation_recoveries": PreparationWatchdog.recoveries}, "\t"))
 	var csv := FileAccess.open(_output + ".csv", FileAccess.WRITE)
 	if csv == null:
 		push_error("Cannot write probe CSV: " + _output)
