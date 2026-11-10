@@ -1,6 +1,6 @@
 # M1-122 / M1-123 acceptance reconciliation
 
-10 November 2026, Tanvir/codex. The published integration dependency is cleared. **M1-122 and M1-123 acceptance is verified for bounded closure; final board reconciliation is pending**, using the preserved geometry/input source, focused and native evidence, and the explicitly accepted combined119 result. No new gameplay, collision, movement, asset or settings edit is needed.
+10 November 2026, Tanvir/codex. The published integration dependency is cleared. **M1-122 and M1-123 are Done for their bounded implementation scope**, using the preserved geometry/input source, focused and native evidence, and the explicitly accepted combined119 result. No new gameplay, collision, movement, asset or settings edit is needed.
 
 ## Current published gate
 

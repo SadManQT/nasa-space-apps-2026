@@ -4,8 +4,8 @@
 
 | Task | Current status | Saved work / dependency / resume |
 |---|---|---|
-| M1-122 | Acceptance verified; board closure pending | Collisione5ed6178, positive solid/clearance assertions, inspected native20/3RED to20/0GREEN, current collision19/0/habitat360/0 and accepted119 coverage. No geometry work pending. |
-| M1-123 | Acceptance verified; board closure pending | Source630c9278/approved pilotab337fb4, ordinary native62/0 with four ending/input pairs, current54/0 and accepted119 coverage. Limits and failed sparse diagnostics retained. No runtime edit pending. |
+| M1-122 | Done: bounded collision correction | Collisione5ed6178, positive solid/clearance assertions, inspected native20/3RED to20/0GREEN, current collision19/0/habitat360/0 and accepted119 coverage. No geometry work pending. |
+| M1-123 | Done: bounded real-controller contact recovery | Source630c9278/approved pilotab337fb4, ordinary native62/0 with four ending/input pairs, current54/0 and accepted119 coverage. Limits and failed sparse diagnostics retained. No runtime edit pending. |
 | M1-85 | Blocked: historical native editor-import exit139 still unidentified | Exact executed collectors, five clean cold/warm observations, one285-error restored setup despite exit0, clean retry and retained warm inputs. Need original198663-byte raw log/cache/backtrace from original reporting host/SDD holder (filed Ramim/codex), or fresh bounded native failure with source/cache/diagnostics; Tanvir owns continuation. |
 
 [Current acceptance mapping and source/hash verification](acceptance_20261110_unblocked/README.md) explains the explicitly accepted combined119 result: Windows1-41/macOS42-119 on identical committed game tree e5c5d5ed86b88301088451b472e6be747d57ae69. It is not a single uninterrupted full-run exit; peer raw logs were not published. Published original-Windows performance passes618/0 twice with unchanged50ms limits. These clear the former615/5 and missing-current-gate blockers; older frozen97/117/marker failures must not be repeated as current.

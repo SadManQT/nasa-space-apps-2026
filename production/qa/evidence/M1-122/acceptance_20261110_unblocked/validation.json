@@ -1,6 +1,6 @@
 {
-  "checked_utc": "2026-11-10T16:40:43.564558+00:00",
-  "head": "c13d431c70cd0425251411f7dd25d03149fe2d26",
+  "checked_utc": "2026-11-10T16:42:28.581384+00:00",
+  "head": "59585746e25f4d27aae783c7f8437c3527e86a20",
   "verifier_sha256": "c5e9cd2edcdaedf91de9290f88cc40527f5ea9728169ad4938cc48197f3f9a6a",
   "game_trees": {
     "11722b7d": "e5c5d5ed86b88301088451b472e6be747d57ae69",
@@ -127,8 +127,8 @@
   },
   "board_statuses": {
     "M1-85": "blocked",
-    "M1-122": "in_progress",
-    "M1-123": "in_progress"
+    "M1-122": "done",
+    "M1-123": "done"
   },
   "new_game_runs": 0,
   "qualification": "Reuses explicitly accepted combined119 across Windows/Godot4.7 and macOS/Godot4.7.2. No uninterrupted full119 exit result; peer raw logs absent. Native remains its original Arc Compatibility capture snapshot. Historical exact pose unknown; two sparse-render diagnostics remain failed with79errors each. M1-85 native139 unresolved; no cause inferred from loading repair."

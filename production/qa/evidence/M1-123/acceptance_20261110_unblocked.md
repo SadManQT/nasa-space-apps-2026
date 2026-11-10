@@ -1,6 +1,6 @@
 # M1-123 accepted after integration dependency cleared
 
-10 November 2026, Tanvir/codex. **Acceptance verified for bounded actual-controller contact recovery; final board reconciliation pending.** Delivered source630c9278 and approved pilotab337fb4 are preserved. No new controller/collision/assets/settings change was needed.
+10 November 2026, Tanvir/codex. **Done for bounded actual-controller contact recovery.** Delivered source630c9278 and approved pilotab337fb4 are preserved. No new controller/collision/assets/settings change was needed.
 
 The [shared acceptance record](../M1-122/acceptance_20261110_unblocked/README.md) maps the task requirements to its preserved evidence and the now-accepted combined119 gate. Current movement54/0, collision19/0, habitat360/0 and player105/0 are reported passing; two original-Windows mandatory performance checks pass618/0. The119 result is cross-host accepted coverage, not one uninterrupted full-run command; peer raw logs were not published.
 

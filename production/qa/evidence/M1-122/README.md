@@ -2,7 +2,7 @@
 
 ## Accepted integration closure - 10 November 2026
 
-**M1-122 acceptance is verified; final board reconciliation pending.** [Current acceptance record](acceptance_20261110_unblocked/README.md) combines the existing source/focused/native evidence with the explicitly accepted119-suite coverage on the identical current game tree. Two original-Windows performance checks now pass618/0; the earlier615/5/comms/full-gate blockers are superseded. No game source was changed for this closure. Exact-pose, native-snapshot, peer-report and failed sparse-diagnostic limits remain documented. M1-85 remains separately blocked on original/fresh native-crash diagnostics.
+**M1-122 is Done for its bounded implementation scope.** [Current acceptance record](acceptance_20261110_unblocked/README.md) combines the existing source/focused/native evidence with the explicitly accepted119-suite coverage on the identical current game tree. Two original-Windows performance checks now pass618/0; the earlier615/5/comms/full-gate blockers are superseded. No game source was changed for this closure. Exact-pose, native-snapshot, peer-report and failed sparse-diagnostic limits remain documented. M1-85 remains separately blocked on original/fresh native-crash diagnostics.
 
 ## Historical source-specific handoffs (preserved)
 
