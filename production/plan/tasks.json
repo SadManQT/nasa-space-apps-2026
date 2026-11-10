@@ -4601,7 +4601,7 @@
    "evidence": "",
    "updated": "2026-11-10",
    "prompt": "Found 5 Nov during the round-3 rendered verification: one windowed run of game/tools/perf_probe.gd (--perf-probe, window on top) stopped right after the garden_rebuild transition, at the start of the full-cast stage: Godot idle (~2% CPU) with no progress for 17 minutes. The next run passed cleanly, so it is intermittent. Find whether the threaded preparation (ResourceLoader.load_threaded_request / WorkerThreadPool jobs in game/scripts/loading/, staged construction in campaign_room.gd and chapter1_campaign.gd) can wait forever: a job that never reports, a main-thread await on a status that never changes, a resource requested twice, or a deadlock with a mutex. Add a watchdog: any preparation step that exceeds a time limit logs its step and falls back to synchronous loading behind the loading card instead of hanging.\nAcceptance: run the windowed probe 10 times in a row (command in production/qa/perf_2026-11-04.md) with zero stalls; a test forces a stuck job and proves the fallback completes; run_tests.sh passes.",
-   "blocker": "Explicit Sadman reviewed-change request published in5471e04 at resume_20261110/M1-53_REVIEW_REQUEST.md: exact raw blob, preserved8-clip batches, coalesced request/publication ownership, independent fallback and known freed-node guard issue. Current raw polling is still unbounded; no patch applied or reviewed delivery received. Original watchdog and saved candidate preserved. Held-raw tests and ten full consecutive windowed probes wait for the reviewed owner commit, then required full gate. No owner acceptance or task completion claimed.",
+   "blocker": "Watchdog072c9c7 and saved raw patch preserved; fresh integrated loading29/0 at a236295. User leaves raw AssetGeometry change to Sadman. Reviewed request5471e04 is published at resume_20261110/M1-53_REVIEW_REQUEST.md; no delivery landed, raw blob17cb725681c9074ac8b66f64ed34df73e105bc1c remains unbounded. Resume after reviewed owner commit, including node-lifetime/publication ownership fixes and M1-120 batching preservation; then held-raw regressions before worker release, ten consecutive full windowed probes and full gate. No raw edit or skipped probe acceptance claimed.",
    "reserved_for": "atik",
    "effort": 2,
    "assignment_history": [
@@ -5912,7 +5912,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Investigate and fix reproduced Windows loading performance gate failures",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -5948,12 +5948,7 @@
     "game/tools/run_tests.sh",
     "game/tools/test_runner.py"
    ],
-   "blocker": "Runner repair a236295 verified six unittest methods /13 injected scenarios; first frozen full interrupted with raw logs preserved in66dbc1b. New117-suite frozen full running at a236295, default300s and text-only1500s guard, unchanged50ms assertions. Original Ryzen7/RTX4060 collection cannot be obtained: no configured original-host connection or supplied route. Resume after full result and original-host two-process evidence; no causal timing fix or task completion claimed.",
-   "edit_files": [
-    "production/qa/perf/atik_batch_2026-11-10/resume_20261110/README.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/AI_PROMPT_LOG.md"
-   ]
+   "blocker": "Saved/pushed a236295 runner repair (six unittest methods /13 cases) and b0da693 complete fresh full evidence: source a236295/game e149235d,99/117 pass,18 fail,1785.970s, all117 logs, unchanged source/settings. Loading29/0 and performance582/0 (16 windows/326 stages) pass separately under unchanged50ms limits; no causal timing fix. Original Ryzen7/RTX4060 post-M1-120 two-process evidence unavailable: no host connection/remote route, GitHub runner discovery HTTP403. Last original581/7 and581/6 preserved. Exact18 owner failures and resume conditions in resume_20261110/README.md; require original-host evidence and fresh green integrated gate."
   },
   {
    "id": "M1-69",
@@ -6675,7 +6670,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Resumed matching-tool check published in8f58114: exact arm64UUID5EF81F68-A5CB-3B0C-82FF-E288702E954D, no supplied matching dSYM/indexed result or xctrace; atos remains unnamed. Official expanded release assets checked without using Android/other-version symbols. Prior sample is title-only, not campaign-cause proof. Need matching native campaign/first-draw profile and controlled measured fix/review; no native before/after or cause claimed. resume_20261110/M1-92_MATCHING_TOOLS.md."
+   "blocker": "Exact4.7.2 arm64 UUID5EF81F68-A5CB-3B0C-82FF-E288702E954D checked; no supplied matching dSYM or xctrace/Xcode, atos remains unnamed. Evidence8f58114 at resume_20261110/M1-92_MATCHING_TOOLS.md. Original title-only unsymbolicated stack is not campaign-cause proof; native campaign6607.878ms and prior timeout retained. Fresh headless performance582/0 and full99/117 do not identify native draw cause. Resume with matching native campaign profiling and controlled same-host before/after; no shader/GPU/deadlock cause or repair claimed."
   },
   {
    "id": "M1-93",
@@ -7653,7 +7648,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Original Arc Windows11/Vulkan reproduction remains44/0 followed by180.017s timeout124; original/Compatibility manifests re-read and hashed in resume_20261110/M1-116_ORIGINAL_HOST.md (4722a26). No configured connection, remote execution route, or reachable original Windows process; native Windows thread/wait-state evidence unavailable. Saved collector only samples native stacks on macOS. Resume on original host with exact PID/command/thread/module diagnostics while post-PASS process is alive, then cause-based repair and normal exit plus mandatory gate. Mac Metal/headless results do not certify host."
+   "blocker": "Original Arc Windows11/Vulkan44/0 then180.017s timeout124 remains failed; native/Compatibility manifests re-read and hashed in4722a26 resume_20261110/M1-116_ORIGINAL_HOST.md. No original-host connection, reachable process or Windows thread trace; GitHub runner discovery alsoHTTP403. Collector sampling is macOS-only. Fresh headless input319/0/full99/117 and prior Metal44/0 exit0 do not certify Arc. Resume on original host with exact PID/command/thread wait/module diagnostics during post-PASS hold, then cause-based repair and normal bounded Forward+ exit plus mandatory gate."
   },
   {
    "id": "M1-117",
