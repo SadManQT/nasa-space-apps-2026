@@ -6450,7 +6450,7 @@
     "game/scripts/loading/",
     "production/qa/perf/"
    ],
-   "blocker": "Evidence and review published in 2b848e34; status in 76621158. Historical setup exit 139 not reproduced in eight bounded native/runner invocations. Restored-sidecar setup has 440 UID/file-access errors despite exit 0; full audit supersedes outer success. No native crash cause or fix established. Needs original 198663-byte raw log/cache/native backtrace from original reporter, or a fresh bounded failing native reproduction sufficient for an owned fix/upstream-engine case. Resume condition and preserved manifests: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/README.md. No game/asset/config/runner change claimed."
+   "blocker": "New frozen daa01414 corrected-collector recheck completed: five cold/warm observations clean; restoring1190sidecars (one non-CRLF Steel_Normal difference) produces285UID/file-access setup errors despite exit0/1of1, correctly failed, then clean retry. No historical native crash/cause reproduced. All2493warm-cache and1190input-sidecar hashes still match retained QA input; experiment copy explicitly post-retry. Original198663-byte raw log/cache/backtrace unidentified; September dump remains unlinked. Dependency: original reporting host/SDD-artifact holder (task filed Ramim/codex), or fresh bounded native failure with source/cache/backtrace; Tanvir owns follow-up. Resume on those diagnostics. Exact scripts/logs/blocker: production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/current_recheck_20261110/README.md. No asset/settings/crash fix claimed."
   },
   {
    "id": "M1-86",
@@ -7821,7 +7821,7 @@
     "game/resources/campaign/rooms/",
     "game/scripts/world/"
    ],
-   "blocker": "Source e5ed6178 and evidence pushed through 864ed263. Latest tested game d1436027: mandatory Garden 2/2 (19/0 collision, 54/0 movement); comms still 0/1 because its 45/0 output lacks the recognized marker. Recorded 8edef native RED 20/3 to GREEN 20/0; full attempt capped at 40 minutes after 89/115 reported (73 pass,16 fail), separate remaining26 targets24 pass/2 fail. Later teammate repairs preserved; older failures are snapshot observations. Resume after owners resolve remaining integration/marker/performance failures and a complete current mandatory full runner passes. Exact handoff: production/qa/evidence/M1-122/acceptance_blockers.md. No owned source edits pending; manual QA deferred."
+   "blocker": "Delivered collision e5ed6178 preserved; current f328c0c5 plus approved pilot patch passes mandatory Garden2/2 (19/0,54/0). Fresh post-HUD loading gate615/5 still fails: title52.109,campaign80.204,Garden64.977,cast59.503,terrain56.240ms, unchanged50ms limit. Frozen daa01414 full97/117 and all raw logs saved; newer UI/chapter/room/handoff/text/profile fixes supersede old failures, comms45/0 and P01inputs319/0 are clear. Dependency: active Ramim/M1-125 measured loading/content-query repair and Atik/M1-68 timing investigation; resume after published repair, green focused dependency check and complete current immutable full gate. Evidence production/qa/evidence/M1-122/current_acceptance_20261110/README.md. No owned geometry edit pending; manual QA deferred."
   },
   {
    "id": "M1-123",
@@ -7861,7 +7861,7 @@
     "game/scripts/player/",
     "game/scripts/campaign/"
    ],
-   "blocker": "Source 630c9278 and evidence pushed through 864ed263. Latest tested d1436027 actual campaign movement 54/0; recorded 8edef native 62/0 with four ending/input cases and eight inspected PNGs. Source guards and original-save hash pass. Global acceptance remains blocked: latest-tested comms 0/1 marker failure and no complete passing current full runner; 8edef full/continuation failures documented separately without claiming all persist after repairs. Resume when owners clear remaining global integration checks and complete mandatory current full gate passes. Evidence: production/qa/evidence/M1-123/README.md and M1-122/acceptance_blockers.md. Exact historical pose unknown, selected valid contact cases labeled; manual QA is deferred, not an invented blocker."
+   "blocker": "User approved exact test-file exception while preserving blocked status. Driver source verified by two ordinary mandatory Garden19/0+54/0 runs, standard native62/0 with8inspected PNGs, and fresh post-HUD f328Garden2/2. Earlier54/2 brake drift and62/1native zero-input failure retained; no original input producer/focus cause invented. Both supplemental10FPS cases have54/0 but79GLES3cache-write errors despite exit0 and remain failed for log integrity. Current global loading615/5 and no complete green current full gate block acceptance. Dependency/resume: Ramim/M1-125 and Atik/M1-68 measured loading repair, focused retest then full mandatory runner. Saved source/provenance/16new inspected PNGs: production/qa/evidence/M1-123/current_pilot_20261110/README.md. Runtime/controller/capsule/limits unchanged; manual QA deferred."
   },
   {
    "id": "M1-124",
