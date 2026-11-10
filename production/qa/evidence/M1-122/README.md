@@ -1,5 +1,13 @@
 # M1-122 - Garden furniture collision correction
 
+## Accepted integration closure - 10 November 2026
+
+**M1-122 acceptance is verified; final board reconciliation pending.** [Current acceptance record](acceptance_20261110_unblocked/README.md) combines the existing source/focused/native evidence with the explicitly accepted119-suite coverage on the identical current game tree. Two original-Windows performance checks now pass618/0; the earlier615/5/comms/full-gate blockers are superseded. No game source was changed for this closure. Exact-pose, native-snapshot, peer-report and failed sparse-diagnostic limits remain documented. M1-85 remains separately blocked on original/fresh native-crash diagnostics.
+
+## Historical source-specific handoffs (preserved)
+
+The reports below describe their recorded snapshots and earlier blocked status; they do not override the current acceptance record above.
+
 10 November2026 - latest scoped handoff: collision sourcee5ed6178 is preserved. Current post-sync sourcef328c0c5 plus the approved M1-123 pilot refinement passes mandatory Garden2/2 (19/0,54/0). The fresh loading dependency check fails615/5 after the HUD repair: title52.109,campaign80.204,Garden64.977,fullcast59.503,terrain56.240ms against unchanged<50ms. No current full pass is claimed. [Latest/frozen results and newer owner repairs](current_acceptance_20261110/README.md), [exact current commands](current_acceptance_20261110/post_sync_f328/run.json), [pilot/native handoff](../M1-123/current_pilot_20261110/README.md).
 
 The complete frozen Windows run atdaa01414 is97/117, not the older incomplete115-suite attempt. Subsequent published UI/chapter/room/handoff/text/profile repairs supersede corresponding older failures; comms45/0 and P01inputs319/0 are confirmed passes. M1-122 remains blocked on the measured loading repair and a complete green current gate, not on old comms reporting or historical folder ownership.
