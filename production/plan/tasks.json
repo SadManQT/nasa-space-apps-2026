@@ -7197,7 +7197,7 @@
    "tool": "codex",
    "title": "Expose the Solo/Class session and team-plan bridge for M1-37",
    "status": "in_progress",
-   "owner": "Asif/antigravity",
+   "owner": "Asif/codex",
    "deps": [
     "M1-102"
    ],
@@ -7261,7 +7261,7 @@
    "tool": "codex",
    "title": "Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2",
    "status": "in_progress",
-   "owner": "Asif/antigravity",
+   "owner": "Asif/codex",
    "deps": [],
    "paths": [
     "game/scripts/campaign/",
