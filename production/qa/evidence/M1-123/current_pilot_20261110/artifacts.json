@@ -1,0 +1,356 @@
+{
+  "scope": "M1-123 pilot source/diagnostic evidence",
+  "artifact_count": 70,
+  "artifacts": [
+    {
+      "file": "proposed_handbook_entry.md",
+      "bytes": 1252,
+      "sha256": "27331bae6a275ef48e01d3ca77545e951baf570cf5714e1271a848d854e93400"
+    },
+    {
+      "file": "README.md",
+      "bytes": 6764,
+      "sha256": "528ed80c7ac80beb301129fe808e9804ef07c654cfc4a3f8327b4cbb233b2f18"
+    },
+    {
+      "file": "rerun_sparse_native.py",
+      "bytes": 4954,
+      "sha256": "f1463833dfdba7d2e206c67b534ed7c8b14c63b6c0d2cfd98dd8a80732a41cb4"
+    },
+    {
+      "file": "verification/executed_verifier.py",
+      "bytes": 8380,
+      "sha256": "3722700d0f783d798953a9c5f856d4365e9ebddfb625c6d30c193dd79f971d32"
+    },
+    {
+      "file": "verification/failed_native_audit.json",
+      "bytes": 95289,
+      "sha256": "24f6761a5c99bf6fc36dae4c5901fdbae86c5b4decaf28e47e7447d7e2aa6645"
+    },
+    {
+      "file": "verification/focused1/runner.json",
+      "bytes": 3223,
+      "sha256": "0bf3a6db0bcec4c92cf3ed3e2ac5793364da1293d6b65ec759a98537c0bcdb81"
+    },
+    {
+      "file": "verification/focused1/runner.txt",
+      "bytes": 202,
+      "sha256": "c74c39cbf105d99470b19c3a051e6f54db677c549eaa0ed3325947700613defd"
+    },
+    {
+      "file": "verification/focused1/runner_logs/collision_trace.json",
+      "bytes": 2872,
+      "sha256": "0ba7dd313f6fe67833116b440704a788eb202280854a7e211daea8f8b7fff10b"
+    },
+    {
+      "file": "verification/focused1/runner_logs/movement_trace.json",
+      "bytes": 176795,
+      "sha256": "7f6cff411cdd36c17fa930ce1ebe7427168cc18cf42f4d16cfe6030a3d6aed05"
+    },
+    {
+      "file": "verification/focused1/runner_logs/setup.log",
+      "bytes": 452331,
+      "sha256": "e2ac5ad61d44d8ae44825e90cb69b8aadb3639bc34c580a4b3f4715d747ad0de"
+    },
+    {
+      "file": "verification/focused1/runner_logs/test_garden_collision.gd.log",
+      "bytes": 1902,
+      "sha256": "82fa183a6f55a0850b4471b2fc9d30deebc725258c8192eae23cdaf09f7b2bb6"
+    },
+    {
+      "file": "verification/focused1/runner_logs/test_garden_movement.gd.log",
+      "bytes": 1901,
+      "sha256": "6f0e0c52f4e7e4cb5ec27e113eb6fef172d50597a3cd867cb3988967d6f089f9"
+    },
+    {
+      "file": "verification/focused2/runner.json",
+      "bytes": 3152,
+      "sha256": "02582a031b88cb9e3c103ce763e4d772c8fcd4c5e2e317360d1ed5e987fa5dd5"
+    },
+    {
+      "file": "verification/focused2/runner.txt",
+      "bytes": 202,
+      "sha256": "c74c39cbf105d99470b19c3a051e6f54db677c549eaa0ed3325947700613defd"
+    },
+    {
+      "file": "verification/focused2/runner_logs/collision_trace.json",
+      "bytes": 2872,
+      "sha256": "0ba7dd313f6fe67833116b440704a788eb202280854a7e211daea8f8b7fff10b"
+    },
+    {
+      "file": "verification/focused2/runner_logs/movement_trace.json",
+      "bytes": 178658,
+      "sha256": "17120b70d60a709859736571497d83b36deba716dee9448a45a011335d0676cf"
+    },
+    {
+      "file": "verification/focused2/runner_logs/setup.log",
+      "bytes": 1033,
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+    },
+    {
+      "file": "verification/focused2/runner_logs/test_garden_collision.gd.log",
+      "bytes": 1902,
+      "sha256": "82fa183a6f55a0850b4471b2fc9d30deebc725258c8192eae23cdaf09f7b2bb6"
+    },
+    {
+      "file": "verification/focused2/runner_logs/test_garden_movement.gd.log",
+      "bytes": 1901,
+      "sha256": "6f0e0c52f4e7e4cb5ec27e113eb6fef172d50597a3cd867cb3988967d6f089f9"
+    },
+    {
+      "file": "verification/lfs_checkout.txt",
+      "bytes": 68,
+      "sha256": "d36ebe4fc07cbcca840626176a935f8e746a972b7df5614da080671016fbe3c9"
+    },
+    {
+      "file": "verification/native/capture/M1-123_bloom_controller_contact.png",
+      "bytes": 1401750,
+      "sha256": "39613e45bcb226bbcc3949ebb2af1c6cacfad20614b3484c3682b9019e4fe8c7"
+    },
+    {
+      "file": "verification/native/capture/M1-123_bloom_controller_returned.png",
+      "bytes": 1374957,
+      "sha256": "ac161b9d86c9fec7a6cba343d6a42ff606510a9f72e0f4546a3bf68f32b2299e"
+    },
+    {
+      "file": "verification/native/capture/M1-123_bloom_keyboard_contact.png",
+      "bytes": 1401363,
+      "sha256": "8e9fa1a6b1e5c0363cd5226c1854203392514955eac33caca0d6fa3903d55e03"
+    },
+    {
+      "file": "verification/native/capture/M1-123_bloom_keyboard_returned.png",
+      "bytes": 1376822,
+      "sha256": "d82b1b513018cf7320289373d2824a31f7af55428b3693787f9f6dd8040142b5"
+    },
+    {
+      "file": "verification/native/capture/M1-123_mission_stopped_controller_contact.png",
+      "bytes": 1403136,
+      "sha256": "7b4779badb3a33a8ec70c8316af35fb221c27989c57ae769996a543c7b1c3f07"
+    },
+    {
+      "file": "verification/native/capture/M1-123_mission_stopped_controller_returned.png",
+      "bytes": 1373066,
+      "sha256": "ac18de53770a9ee14b7983e0bdf9a0a16c9480bf28b284b3e0bf06f3846605f7"
+    },
+    {
+      "file": "verification/native/capture/M1-123_mission_stopped_keyboard_contact.png",
+      "bytes": 1404626,
+      "sha256": "cbcad435f9f0b9c7f49f79fd83a77b6aa2affe0fcba849efa084c0adda485445"
+    },
+    {
+      "file": "verification/native/capture/M1-123_mission_stopped_keyboard_returned.png",
+      "bytes": 1377457,
+      "sha256": "f6f685b92e31250013909cd2432a6036f4807b2dc9e502c8ae53c4afc335546d"
+    },
+    {
+      "file": "verification/native/capture/movement_trace.json",
+      "bytes": 179626,
+      "sha256": "0ac65de8fd3ee832becd4c3dc3dbcb69915be58cafab91bf04aa175d75688db3"
+    },
+    {
+      "file": "verification/native/native.json",
+      "bytes": 2205,
+      "sha256": "8348f32ac8e0dd6a7a59015e62f6e42938a54bea1552711db062906f0c5dbe32"
+    },
+    {
+      "file": "verification/native/native.txt",
+      "bytes": 2216,
+      "sha256": "2233d55c7a206dac8297c8f1174ea03bf06fb704b63ad61a85125fd1c6151b7e"
+    },
+    {
+      "file": "verification/run.json",
+      "bytes": 563757,
+      "sha256": "f4324f51f927b53110e030f0e04d779ce241b79066cce3441cf1ecb86193d6b6"
+    },
+    {
+      "file": "verification_resync/executed_verifier.py",
+      "bytes": 8458,
+      "sha256": "20870be86b75c0c59dca7380cf9123122309d95b333095a7b535c0b0707b52ee"
+    },
+    {
+      "file": "verification_resync/focused1/runner.json",
+      "bytes": 3209,
+      "sha256": "ae65490940f4cc738b4c830230463c7c77b239a7d59e52d0c292b43fca775cd3"
+    },
+    {
+      "file": "verification_resync/focused1/runner.txt",
+      "bytes": 202,
+      "sha256": "c74c39cbf105d99470b19c3a051e6f54db677c549eaa0ed3325947700613defd"
+    },
+    {
+      "file": "verification_resync/focused1/runner_logs/collision_trace.json",
+      "bytes": 2872,
+      "sha256": "0ba7dd313f6fe67833116b440704a788eb202280854a7e211daea8f8b7fff10b"
+    },
+    {
+      "file": "verification_resync/focused1/runner_logs/movement_trace.json",
+      "bytes": 234124,
+      "sha256": "c875e580848d7d46fe775a1f036b3a32038e80074a1eb25daa0a47bc37027430"
+    },
+    {
+      "file": "verification_resync/focused1/runner_logs/setup.log",
+      "bytes": 1033,
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+    },
+    {
+      "file": "verification_resync/focused1/runner_logs/test_garden_collision.gd.log",
+      "bytes": 1902,
+      "sha256": "82fa183a6f55a0850b4471b2fc9d30deebc725258c8192eae23cdaf09f7b2bb6"
+    },
+    {
+      "file": "verification_resync/focused1/runner_logs/test_garden_movement.gd.log",
+      "bytes": 1901,
+      "sha256": "6f0e0c52f4e7e4cb5ec27e113eb6fef172d50597a3cd867cb3988967d6f089f9"
+    },
+    {
+      "file": "verification_resync/focused2/runner.json",
+      "bytes": 3207,
+      "sha256": "f333ecc00cec81d18ede89bdb4fd6dc9f611003ff50649e1a626dc321b61d12d"
+    },
+    {
+      "file": "verification_resync/focused2/runner.txt",
+      "bytes": 202,
+      "sha256": "c74c39cbf105d99470b19c3a051e6f54db677c549eaa0ed3325947700613defd"
+    },
+    {
+      "file": "verification_resync/focused2/runner_logs/collision_trace.json",
+      "bytes": 2872,
+      "sha256": "0ba7dd313f6fe67833116b440704a788eb202280854a7e211daea8f8b7fff10b"
+    },
+    {
+      "file": "verification_resync/focused2/runner_logs/movement_trace.json",
+      "bytes": 235942,
+      "sha256": "efab2c97d55162ddc12b15cd8ec080b200a5fd89c7c519c4dae434345bccf78e"
+    },
+    {
+      "file": "verification_resync/focused2/runner_logs/setup.log",
+      "bytes": 1033,
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b"
+    },
+    {
+      "file": "verification_resync/focused2/runner_logs/test_garden_collision.gd.log",
+      "bytes": 1902,
+      "sha256": "82fa183a6f55a0850b4471b2fc9d30deebc725258c8192eae23cdaf09f7b2bb6"
+    },
+    {
+      "file": "verification_resync/focused2/runner_logs/test_garden_movement.gd.log",
+      "bytes": 1901,
+      "sha256": "6f0e0c52f4e7e4cb5ec27e113eb6fef172d50597a3cd867cb3988967d6f089f9"
+    },
+    {
+      "file": "verification_resync/lfs_checkout.txt",
+      "bytes": 66,
+      "sha256": "c7c4c1287ea53e01e0d72f8ad4fe5396f90e6009cb0b3df4a3d514965dc50ece"
+    },
+    {
+      "file": "verification_resync/native/capture/M1-123_bloom_controller_contact.png",
+      "bytes": 1399262,
+      "sha256": "16ba5983ffb1de1f3b2d1261610e61fd1785b2395dcf5219d0278066bccef3d5"
+    },
+    {
+      "file": "verification_resync/native/capture/M1-123_bloom_controller_returned.png",
+      "bytes": 1378589,
+      "sha256": "ce434f15d0c7686c72923d557b1c66d6b9a61cbc0b3f662d813a83818d009fcb"
+    },
+    {
+      "file": "verification_resync/native/capture/M1-123_bloom_keyboard_contact.png",
+      "bytes": 1400516,
+      "sha256": "d96a64cbf61a3eef99d695b2d78da32bedbbb58d15e3a5b8647eef42f32cd3bb"
+    },
+    {
+      "file": "verification_resync/native/capture/M1-123_bloom_keyboard_returned.png",
+      "bytes": 1384027,
+      "sha256": "ffcd1bcce408e221039524ac50b91cd36e5aefa6e9bb680c00f2d3a7738ad60f"
+    },
+    {
+      "file": "verification_resync/native/capture/M1-123_mission_stopped_controller_contact.png",
+      "bytes": 1403152,
+      "sha256": "67d8258d5c03a064b5d6da3e91aac5b6d93a1f423b8c615876ad4cf5d44dbf0d"
+    },
+    {
+      "file": "verification_resync/native/capture/M1-123_mission_stopped_controller_returned.png",
+      "bytes": 1373078,
+      "sha256": "1f7d881827916cea95cc3dee5b8d78fbacdc54645f9b8d46f2b277a5d008f36d"
+    },
+    {
+      "file": "verification_resync/native/capture/M1-123_mission_stopped_keyboard_contact.png",
+      "bytes": 1404744,
+      "sha256": "f6419817ed99e1be0e3e7b85ada11bbe63bff10faa972321fb6e4c6aef773ca0"
+    },
+    {
+      "file": "verification_resync/native/capture/M1-123_mission_stopped_keyboard_returned.png",
+      "bytes": 1376995,
+      "sha256": "21fd60912733327b163c59caff34ac5a8943808dac0b9771a1c40b5472c7f50f"
+    },
+    {
+      "file": "verification_resync/native/capture/movement_trace.json",
+      "bytes": 229531,
+      "sha256": "76d8aeb1a7ae50cde473d772f32750a1230f15446f378f466c21694260876bd2"
+    },
+    {
+      "file": "verification_resync/native/native.json",
+      "bytes": 2246,
+      "sha256": "c80438fa329bac8646aabaa41d68630c516e7e607ac49d2bad776223a799c86c"
+    },
+    {
+      "file": "verification_resync/native/native.txt",
+      "bytes": 2155,
+      "sha256": "a183539015ead03e4b5a13cee845ef73b84e3951f35b3e65fb79832b9719d6f1"
+    },
+    {
+      "file": "verification_resync/post_diagnostic_audit.json",
+      "bytes": 17772,
+      "sha256": "c7c19768f2234f847353a0ef75087c7262dcf2e554f74d6cad87890d0c4a054a"
+    },
+    {
+      "file": "verification_resync/run.json",
+      "bytes": 497225,
+      "sha256": "e48897c44a261ae3b3e0ea1e42613162b25847c2b8e32b7fabbc42df1b523755"
+    },
+    {
+      "file": "verification_resync/sparse_native/capture/movement_trace.json",
+      "bytes": 67066,
+      "sha256": "5ee4dc4f46ef96b48df1d488a4dc61c4271d5d23dbe2b4c191ddf95c21a093a3"
+    },
+    {
+      "file": "verification_resync/sparse_native/native.json",
+      "bytes": 10355,
+      "sha256": "224e40f98167d564f4e4862250a29debfa12d28e87381f7d496ab215575c8a26"
+    },
+    {
+      "file": "verification_resync/sparse_native/native.txt",
+      "bytes": 10134,
+      "sha256": "e10e885676a57c69a07a35ceca476fb51ec922435493902c2b5e3c576fb0f5b2"
+    },
+    {
+      "file": "verification_sparse_short/native.json",
+      "bytes": 9978,
+      "sha256": "3fa0939c22a0046bb117bd738af04384a995492ebcd02835817461ff00b0365f"
+    },
+    {
+      "file": "verification_sparse_short/native.txt",
+      "bytes": 10134,
+      "sha256": "e10e885676a57c69a07a35ceca476fb51ec922435493902c2b5e3c576fb0f5b2"
+    },
+    {
+      "file": "verification_sparse_short/run.json",
+      "bytes": 920076,
+      "sha256": "c5e29b816a23f6824671bcfb52943aaa67ea4275c65ba4dbdd61ac8f9caf088d"
+    },
+    {
+      "file": "verification_sparse_short/trace/movement_trace.json",
+      "bytes": 67066,
+      "sha256": "5ee4dc4f46ef96b48df1d488a4dc61c4271d5d23dbe2b4c191ddf95c21a093a3"
+    },
+    {
+      "file": "verification_summary.json",
+      "bytes": 18170,
+      "sha256": "c85ec47f6cf899813c779bc484f57ab067d498977aa6bae07884fd05e78614a1"
+    },
+    {
+      "file": "verify_current_pilot.py",
+      "bytes": 8458,
+      "sha256": "20870be86b75c0c59dca7380cf9123122309d95b333095a7b535c0b0707b52ee"
+    }
+  ]
+}

@@ -1,12 +1,18 @@
 # M1-123 - Real campaign Garden contact recovery
 
+10 November2026 - [approved current pilot refinement and verification](current_pilot_20261110/README.md): normal input now settles before the unchanged25cm arrival check, corrects within the same360sampling iterations and compares intended/live keys. Two ordinary mandatory Garden runs pass19/0+54/0; standard native passes62/0 with8inspected PNGs. Post-HUD-repair Garden atf328 passes2/2 again. The user authorized the one test file while keeping M1-123 blocked; no runtime/controller/capsule/solid change or task reopening was made.
+
+The earlier62/1native failure remains visible. Both supplemental10FPS diagnostics pass54movement checks but fail log integrity with79shader-cache errors despite exit0; the shorter-profile repeat did not resolve them. No cache/renderer cause or game-input producer is invented. Current required integration remains blocked on fresh615/5loading timings and no complete passing current full gate. [Current integration evidence](../M1-122/current_acceptance_20261110/README.md).
+
+## Earlier delivered source and native evidence
+
 10 November 2026, Tanvir. **Source delivered; acceptance blocked on the global automated gate.** Published source630c9278 adds only test_garden_movement.gd and its UID. No runtime/controller edit was needed for the recorded cases; other members' reservations and newer gameplay changes are preserved.
 
 The regression uses actual SaveService save/load in isolated storage, restores production CampaignScene at EX-CH01-S11/LOC-03 and lets the real PlayerController process keyboard and analog gamepad events. It separately asserts authoritative BLOOM versus MISSION_STOPPED ending and mission status, so the adverse variant cannot silently duplicate the safe one.
 
 For each ending/input pair, one fixture placement starts outside furniture near the photographed corner. Injected input reaches a named tara_bay contact. Recovery changes only movement input: reverse away, steer around the outer side and clear front lane, return to the center. No transform, velocity, facing or animation is written during recovery. Normal camera recenter/steering/step-up, world+crew collision mask3 and capsule radius0.27m remain active. Each trial checks grounded arrival, unpaused/unlocked control and unchanged mission gates/resources.
 
-## Latest synchronization check
+## Earlier d143 synchronization check
 
 After later teammate integration, the latest tested game tree is `d1436027711ea9bf1721ac7dd4bf4f01564ef197` (source bf19dff7, containing the final upstream sync plus evidence-only commits). A fresh mandatory Garden runner passes **2/2: collision19/0, movement54/0**. The fresh comms runner still fails **0/1** because its45/0 assertion output lacks the recognized result marker. [Latest commands/source](../M1-122/final_sync/run.json), [Garden](../M1-122/final_sync/garden/runner.txt), [comms](../M1-122/final_sync/comms/runner.txt).
 

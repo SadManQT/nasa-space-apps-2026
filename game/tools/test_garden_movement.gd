@@ -102,24 +102,42 @@ func _capsule_clear() -> bool:
 
 func _walk_to(goal: Vector3, mode: String) -> bool:
 	var reached := false
+	var settling := false
 	for frame in range(360):
 		var delta := goal - player.global_position
 		delta.y = 0
-		if delta.length() < 0.11:
-			reached = true
-			break
-		_send_world(delta, mode)
-		await _tick("recover")
-	await _release()
+		if settling:
+			_clear_input()
+			if player.horizontal_speed < 0.03:
+				if delta.length() < 0.25:
+					reached = true
+					break
+				settling = false
+				_record("recover_correction")
+		elif delta.length() < 0.11:
+			_clear_input()
+			settling = true
+		if settling:
+			await _tick("recover_settle")
+		else:
+			_send_world(delta, mode)
+			await _tick("recover")
+	if not reached:
+		await _release()
 	_record("leg_end:" + str(goal))
 	return reached and Vector2(player.global_position.x - goal.x, player.global_position.z - goal.z).length() < 0.25
 
 func _send_world(direction: Vector3, mode: String) -> void:
 	var local := Basis(Vector3.UP, -player.follow_camera.yaw) * direction.normalized()
+	var resynced_keys: Array = []
 	if mode == "keyboard":
 		var wanted := {KEY_W: local.z < -0.35, KEY_A: local.x < -0.35, KEY_S: local.z > 0.35, KEY_D: local.x > 0.35}
 		for key in wanted:
-			if _keys[key] != wanted[key]:
+			var physical := Input.is_physical_key_pressed(key)
+			# Synchronize injected intent with the state actually delivered to Input.
+			if _keys[key] != wanted[key] or physical != wanted[key]:
+				if _keys[key] == wanted[key]:
+					resynced_keys.append({"physical_keycode": key, "requested": wanted[key], "observed_before": physical})
 				var event := InputEventKey.new()
 				event.physical_keycode = key
 				event.keycode = key
@@ -134,10 +152,13 @@ func _send_world(direction: Vector3, mode: String) -> void:
 			event.axis_value = row[1]
 			Input.parse_input_event(event)
 	Input.flush_buffered_events()
+	if not resynced_keys.is_empty():
+		_record("input_resync")
+		trace[-1]["resynced_keys"] = resynced_keys
 
-func _release() -> void:
+func _clear_input() -> void:
 	for key in _keys:
-		if _keys[key]:
+		if _keys[key] or Input.is_physical_key_pressed(key):
 			var event := InputEventKey.new()
 			event.physical_keycode = key
 			event.keycode = key
@@ -151,6 +172,9 @@ func _release() -> void:
 		event.axis_value = 0
 		Input.parse_input_event(event)
 	Input.flush_buffered_events()
+
+func _release() -> void:
+	_clear_input()
 	for frame in range(12):
 		await _tick("released")
 
@@ -170,7 +194,9 @@ func _contacts() -> Array:
 func _record(phase: String) -> void:
 	if not is_instance_valid(player):
 		return
-	trace.append({"trial": _trial_id, "phase": phase, "physics_frame": Engine.get_physics_frames(), "position": _v(player.global_position), "camera_yaw": player.follow_camera.yaw, "input": str(Input.get_vector("move_left", "move_right", "move_forward", "move_back", 0.15)), "stick": [Input.get_joy_axis(0, JOY_AXIS_LEFT_X), Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)], "action": player.animation.action_name, "pending_action": player.animation._pending_action, "movement_locked": player.animation.movement_locked, "placement_frames": player.placement_frames, "on_wall": player.is_on_wall(), "speed": player.horizontal_speed, "contacts": _contacts()})
+	var requested_keys := {"W": _keys[KEY_W], "A": _keys[KEY_A], "S": _keys[KEY_S], "D": _keys[KEY_D]}
+	var physical_keys := {"W": Input.is_physical_key_pressed(KEY_W), "A": Input.is_physical_key_pressed(KEY_A), "S": Input.is_physical_key_pressed(KEY_S), "D": Input.is_physical_key_pressed(KEY_D)}
+	trace.append({"requested_keys": requested_keys, "physical_keys": physical_keys, "window_focused": root.has_focus(), "trial": _trial_id, "phase": phase, "physics_frame": Engine.get_physics_frames(), "position": _v(player.global_position), "camera_yaw": player.follow_camera.yaw, "input": str(Input.get_vector("move_left", "move_right", "move_forward", "move_back", 0.15)), "stick": [Input.get_joy_axis(0, JOY_AXIS_LEFT_X), Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)], "action": player.animation.action_name, "pending_action": player.animation._pending_action, "movement_locked": player.animation.movement_locked, "placement_frames": player.placement_frames, "on_wall": player.is_on_wall(), "speed": player.horizontal_speed, "contacts": _contacts()})
 
 func _capture(id: String) -> void:
 	if not _capture_enabled():

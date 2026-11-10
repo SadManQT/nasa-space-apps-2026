@@ -1,0 +1,3 @@
+ok   tools/test_garden_collision.gd :: GARDEN COLLISION RESULT: PASS (19 checks, 0 failures)
+ok   tools/test_garden_movement.gd :: GARDEN MOVEMENT RESULT: PASS (54 checks, 0 failures)
+2/2 suites passed
