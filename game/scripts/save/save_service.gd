@@ -148,6 +148,22 @@ func recover_corrupt(path: String = DEFAULT_PATH, fallback_snapshot: Dictionary 
 func has_valid_save(path: String = DEFAULT_PATH) -> bool:
 	return bool(self.load(path).get("accepted", false))
 
+## Read-only metadata inspection for one save file path (never writes or repairs).
+func inspect_metadata(path: String = DEFAULT_PATH, slot_id: String = "autosave") -> Dictionary:
+	var slots_script = load("res://scripts/save/save_slots.gd")
+	if slots_script == null:
+		return {"slot_id": slot_id, "path": path, "valid": false, "status": "empty"}
+	var slots = slots_script.new(path, session_validator)
+	return slots.inspect_path(path, slot_id)
+
+## Read-only metadata summary for autosave + 3 manual slots (for chapter select & save menus).
+func all_slot_metadata(base_save_path: String = DEFAULT_PATH) -> Array[Dictionary]:
+	var slots_script = load("res://scripts/save/save_slots.gd")
+	if slots_script == null:
+		return []
+	var slots = slots_script.new(base_save_path, session_validator)
+	return slots.all_slot_metadata()
+
 func clear(path: String = DEFAULT_PATH) -> bool:
 	var ok := true
 	for candidate in [path, path + ".tmp", path + ".bak", path + ".bak.tmp"]:

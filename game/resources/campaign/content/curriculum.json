@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "board_task": "M3-69",
+  "about": "Twelve junior-astronaut competencies. Mission completion is the evidence for learned, practised and proved moments; the Academy manual is a read-only view of that evidence. These are training milestones, not exams or certification.",
+  "competencies": [
+    {
+      "id": "life_support", "title": "Life support", "plain": "Air, water and food last only when the crew plans for everyone and keeps a reserve. A leak or a new person changes the plan.",
+      "source_ids": ["bvad_2022_metabolic", "lro_mazarico_2011_illumination"], "explainer_ids": ["sci_crew_needs", "sci_polar_sun"],
+      "moments": {
+        "learned": [{"mission": "EX-M0101", "evidence": "Count crew needs before choosing how to spend commissioning power."}],
+        "practised": [{"mission": "EX-M0103", "evidence": "Forecast air and water while preparing for darkness."}, {"mission": "EX-M0501", "evidence": "Recount the crew when Ferreira arrives."}],
+        "proved": [{"mission": "EX-M0104", "evidence": "Bring everyone through seven shifts with the life-support margin intact."}, {"mission": "EX-M0802", "evidence": "Use the two-person home forecast until the travellers return."}]
+      }
+    },
+    {
+      "id": "power", "title": "Power", "plain": "The low polar Sun makes power uneven. Charge only up to the battery limit, then budget storage for the dark.",
+      "source_ids": ["lro_mazarico_2011_illumination", "vsat_relocatable_array"], "explainer_ids": ["sci_polar_sun", "sci_solar_power"],
+      "moments": {
+        "learned": [{"mission": "EX-M0101", "evidence": "See why the low Sun cannot be treated as an unlimited supply."}],
+        "practised": [{"mission": "EX-M0103", "evidence": "Split daylight energy between storage and the station's needs."}, {"mission": "EX-M0601", "evidence": "Check the eclipse schedule before making a new budget."}, {"mission": "EX-M0604", "evidence": "Restore only the camera feeder and verify protected services stay powered."}],
+        "proved": [{"mission": "EX-M0602", "evidence": "Protect the five essential eclipse segments and keep a margin."}]
+      }
+    },
+    {
+      "id": "thermal", "title": "Thermal control", "plain": "The habitat needs heat, while permanently shadowed ground can chill equipment and samples. Keep both inside their safe limits.",
+      "source_ids": ["diviner_cold_traps", "kaguya_shackleton_floor"], "explainer_ids": ["sci_cold_traps"],
+      "moments": {
+        "learned": [{"mission": "EX-M0102", "evidence": "Balance chamber light, heat and water for the first plants."}],
+        "practised": [{"mission": "EX-M0403", "evidence": "Keep the sealed vault protected in permanent shadow."}],
+        "proved": [{"mission": "EX-M0404", "evidence": "Return with the canisters sealed and temperature protected."}]
+      }
+    },
+    {
+      "id": "radiation", "title": "Radiation and space weather", "plain": "Read the particle warning, shorten exposure, and use the prepared water and crate shielding. A historical storm is a training replay, not Aurora's measured weather.",
+      "source_ids": ["goes13_protons_2017_09", "clowdsley_2021_shielding", "stereo_a_het_2012_07"], "explainer_ids": ["sci_proton_flux_chart", "sci_shielding", "sci_storms_2012_2017"],
+      "moments": {
+        "learned": [{"mission": "EX-M0103", "evidence": "Prepare the shelter before the alarm."}],
+        "practised": [{"mission": "EX-M0104", "evidence": "Compare the 2017 replay with the shelter forecast."}, {"mission": "EX-M0701", "evidence": "Label the 2012 event as a counterfactual exercise."}, {"mission": "EX-M0703", "evidence": "Hold water and cargo shielding through the particle peak."}],
+        "proved": [{"mission": "EX-M0702", "evidence": "Keep protection through the final exposure sample before moving water."}]
+      }
+    },
+    {
+      "id": "plant_science", "title": "Food and plant science", "plain": "Plants grow through stages and need controlled conditions. Clean, labelled pollen transfers let Alo and Tara carry a traceable line to seeds.",
+      "source_ids": ["fast_plants_lifecycle", "mir_brassica_seed_to_seed", "change4_cotton"], "explainer_ids": ["sci_plant_growth", "sci_cotton_moon"],
+      "moments": {
+        "learned": [{"mission": "EX-M0102", "evidence": "Plant both cassettes and begin dated care records."}],
+        "practised": [{"mission": "EX-M0201", "evidence": "Plan a clean, compatible pollen route."}, {"mission": "EX-M0202", "evidence": "Make the reciprocal transfers and record each care day."}, {"mission": "EX-M0303", "evidence": "Read the interrupted garden's stage record without inventing an earlier bloom."}, {"mission": "EX-M0502", "evidence": "Compare the cotton plan with the real lunar germination record."}],
+        "proved": [{"mission": "EX-M0304", "evidence": "Count 42 mature seeds and keep 12 for planting, 30 in reserve."}, {"mission": "EX-M0504", "evidence": "Plant cotton and reconcile the vault inventory."}]
+      }
+    },
+    {
+      "id": "eva", "title": "EVA and suit operations", "plain": "Before a Moon walk, check the suit, a buddy, the route and the return reserve. A field discovery matters only if the team gets home safely.",
+      "source_ids": ["bvad_2022_metabolic", "lro_lola_south_pole_terrain"], "explainer_ids": ["sci_low_gravity", "sci_laser_mapping"],
+      "moments": {
+        "learned": [{"mission": "EX-M0401", "evidence": "Prepare the survey and charge each traveller to the right supply ledger."}],
+        "practised": [{"mission": "EX-M0402", "evidence": "Check the next beacon before crossing a blind corner."}],
+        "proved": [{"mission": "EX-M0404", "evidence": "Bring the sealed cargo and crew home with the return reserve."}]
+      }
+    },
+    {
+      "id": "navigation", "title": "Navigation", "plain": "There is no GPS on this route. Compare measured slopes, bearings and sight lines, then plan for the whole trip home.",
+      "source_ids": ["lro_lola_south_pole_terrain", "jpl_horizons_ch8_relay", "viper_slope_limit"], "explainer_ids": ["sci_laser_mapping", "sci_long_road"],
+      "moments": {
+        "learned": [{"mission": "EX-M0401", "evidence": "Turn an old map into a current survey plan."}],
+        "practised": [{"mission": "EX-M0402", "evidence": "Use slope and line of sight before committing a turn."}],
+        "proved": [{"mission": "EX-M0801", "evidence": "Choose the surveyed long road with a return reserve."}]
+      }
+    },
+    {
+      "id": "rover", "title": "Rover operations", "plain": "The rover has a slope limit, a finite battery and cargo that needs care. A short cut is useful only when every limit passes.",
+      "source_ids": ["viper_slope_limit", "usgs_gazetteer_south_pole"], "explainer_ids": ["sci_rover_slopes", "sci_long_road"],
+      "moments": {
+        "learned": [{"mission": "EX-M0401", "evidence": "Compare route distance with the rover's slope limit."}],
+        "practised": [{"mission": "EX-M0403", "evidence": "Carry sealed cargo and verify the latch for departure."}],
+        "proved": [{"mission": "EX-M0801", "evidence": "Provision the 51-hour trip and drive the safe road within reserve."}]
+      }
+    },
+    {
+      "id": "communication", "title": "Communication", "plain": "A powered radio is not proof of a working link. Check each line of sight and each relay hop, then verify both local and Earth paths.",
+      "source_ids": ["esa_moonlight_relay", "jpl_horizons_ch8_relay", "jpl_horizons_ch1_sky"], "explainer_ids": ["sci_relays", "sci_earth_position"],
+      "moments": {
+        "learned": [{"mission": "EX-M0104", "evidence": "Separate the planned Earth-link cutoff from the sky model."}],
+        "practised": [{"mission": "EX-M0402", "evidence": "Test each mounted beacon before the next corner."}, {"mission": "EX-M0704", "evidence": "Plan a local repeater chain and a separate Earth leg."}],
+        "proved": [{"mission": "EX-M0803", "evidence": "Verify both links and the exact current response before the summit call."}]
+      }
+    },
+    {
+      "id": "lunar_science", "title": "Lunar science", "plain": "The Moon leaves clues in quakes, shadows, ice signals, flashes and eclipses. Use a reference or a second reading before making a claim.",
+      "source_ids": ["apollo_shallow_moonquakes", "lcross_water_2009", "meo_lunar_impact_flashes", "nasa_eclipse_2047_01_12"], "explainer_ids": ["sci_moonquakes", "sci_water_evidence", "sci_impact_flashes", "sci_red_ring"],
+      "moments": {
+        "learned": [{"mission": "EX-M0301", "evidence": "Compare independent pressure readings after the quake."}],
+        "practised": [{"mission": "EX-M0402", "evidence": "Calibrate against dry and wet references before tagging ice-bearing material."}, {"mission": "EX-M0503", "evidence": "Check an impact flash with two cameras."}],
+        "proved": [{"mission": "EX-M0603", "evidence": "Record only what the eclipse camera and labelled diagram support."}]
+      }
+    },
+    {
+      "id": "teamwork", "title": "Teamwork and systems engineering", "plain": "A good crew names roles, tests a shared plan and checks back when conditions change. A debrief records causes without blame.",
+      "source_ids": ["bvad_2022_metabolic", "esa_moonlight_relay"], "explainer_ids": ["sci_crew_needs", "sci_relays"],
+      "moments": {
+        "learned": [{"mission": "EX-M0101", "evidence": "Assign rehearsal roles and make the first shared record."}],
+        "practised": [{"mission": "EX-M0302", "evidence": "Repair the garden spur and verify steady readings before reopening."}, {"mission": "EX-M0602", "evidence": "Share the eclipse plan and read back dependencies."}, {"mission": "EX-M0702", "evidence": "Resolve every name in the shelter roster."}],
+        "proved": [{"mission": "EX-M0804", "evidence": "Credit both teams and reconcile the final home report."}]
+      }
+    },
+    {
+      "id": "scientific_method", "title": "The scientific method", "plain": "Make a prediction, observe what happened, and explain the difference. Keep observed facts apart from inferences and unknowns.",
+      "source_ids": ["fast_plants_lifecycle", "meo_lunar_impact_flashes"], "explainer_ids": ["sci_plant_growth", "sci_impact_flashes"],
+      "moments": {
+        "learned": [{"mission": "EX-M0102", "evidence": "Keep paired plant photos with their conditions."}],
+        "practised": [{"mission": "EX-M0203", "evidence": "Match recorder labels before inferring a story."}, {"mission": "EX-M0204", "evidence": "File the familiar voice as a question, not proof."}],
+        "proved": [{"mission": "EX-M0503", "evidence": "Reject fixed detector spots and count only verified flashes."}]
+      }
+    }
+  ],
+  "chapter_debriefs": [
+    {"chapter": 1, "title": "Night One", "decision_scene": "EX-CH01-S10", "things": [
+      {"text": "A reserve is part of the plan, not spare capacity.", "source_id": "bvad_2022_metabolic"},
+      {"text": "A bright polar site can still have a long dark interval.", "source_id": "lro_mazarico_2011_illumination"},
+      {"text": "Shelter choices follow the measured warning and the actual forecast.", "source_id": "goes13_protons_2017_09"}]},
+    {"chapter": 2, "title": "Be the Bee", "decision_scene": "EX-CH02-S10", "things": [
+      {"text": "Compatible flowers need clean, labelled pollen transfers.", "source_id": "fast_plants_lifecycle"},
+      {"text": "A seed cycle in space takes care and time.", "source_id": "mir_brassica_seed_to_seed"},
+      {"text": "A shallow moonquake can shake equipment, so the crew checks before diagnosing a fault.", "source_id": "apollo_shallow_moonquakes"}]},
+    {"chapter": 3, "title": "Moonquake", "decision_scene": "EX-CH03-S10", "things": [
+      {"text": "Independent readings locate a fault more safely than one alarm.", "source_id": "apollo_shallow_moonquakes"},
+      {"text": "A repair needs a steady test before service returns.", "source_id": "bvad_2022_metabolic"},
+      {"text": "Plants can complete a seed cycle; Aurora records its own 42-seed harvest and 12/30 split.", "source_id": "fast_plants_lifecycle"}]},
+    {"chapter": 4, "title": "Into the Cold Trap", "decision_scene": "EX-CH04-S05", "things": [
+      {"text": "A safe lunar route meets both slope and return-reserve limits.", "source_id": "viper_slope_limit"},
+      {"text": "A bright patch needs a calibrated comparison before an ice claim.", "source_id": "lcross_water_2009"},
+      {"text": "Cold-trap cargo stays sealed and protected from extreme cold.", "source_id": "diviner_cold_traps"}]},
+    {"chapter": 5, "title": "Shooting Stars", "decision_scene": "EX-CH05-S07", "things": [
+      {"text": "Two views help separate a real impact flash from an artifact.", "source_id": "meo_lunar_impact_flashes"},
+      {"text": "A cotton seed can be compared with a real lunar germination record.", "source_id": "change4_cotton"},
+      {"text": "A fifth crew member changes air and food demand.", "source_id": "bvad_2022_metabolic"}]},
+    {"chapter": 6, "title": "The Red Ring", "decision_scene": "EX-CH06-S04", "things": [
+      {"text": "Eclipse phases let the crew budget essential power ahead of time.", "source_id": "nasa_eclipse_2047_01_12"},
+      {"text": "Solar output has a limit even when the Sun returns.", "source_id": "vsat_relocatable_array"},
+      {"text": "A diagram explains the ring but is not a measured surface map.", "source_id": "nasa_eclipse_2047_01_12"}]},
+    {"chapter": 7, "title": "The Great Storm", "decision_scene": "EX-CH07-S04", "things": [
+      {"text": "The 2012 event is a historical measurement used for a what-if.", "source_id": "stereo_a_het_2012_07"},
+      {"text": "Protection stays in place until the final exposure check.", "source_id": "clowdsley_2021_shielding"},
+      {"text": "The Earth path and local relay are different links.", "source_id": "esa_moonlight_relay"}]},
+    {"chapter": 8, "title": "The Lighthouse", "decision_scene": "EX-CH08-S08", "things": [
+      {"text": "Distance and slope both matter on the long road.", "source_id": "usgs_gazetteer_south_pole"},
+      {"text": "Earth bearing and local line of sight need separate checks.", "source_id": "jpl_horizons_ch8_relay"},
+      {"text": "A useful relay needs a checked chain, not just a powered dish.", "source_id": "esa_moonlight_relay"}]}
+  ]
+}

@@ -182,5 +182,18 @@
     "life_cycle": ["Which picture is from our garden, and which only shows what comes later?", "Flowers, then pods, then drying, then harvest.", "Flower (ours, now) → mature pods (reference only) → harvest (later)."],
     "classification": ["Which statements did someone actually record, and which are our guesses?", "A voice that 'sounds like' someone goes under Inferred.", "Example: 'Retreat ordered, 2034' → Observed. 'Voice resembles Ferreira' → Inferred. 'Writer's name' → Unknown."]
   },
-  "limits": "The 2034 recorder, its tokens and both voices are fiction. N. stays anonymous here; the board never names the gardener."
+  "limits": "The 2034 recorder, its tokens and both voices are fiction. N. stays anonymous here; the board never names the gardener.",
+  "panel_steps": {
+    "assign_date_token": {"check": "date", "hints": "tokens"},
+    "assign_device_token": {"check": "device", "hints": "tokens"},
+    "assign_channel_token": {"check": "channel", "hints": "tokens"},
+    "verify_local_checksum": {"check": "checksum_meaning", "hints": "tokens"},
+    "open_reconstructed_transcript": {"confirm": "The transcript opens from the intact local copy. The original recorder stays untouched."},
+    "play_engineer_fragment": {"confirm": "Engineer, stored 2034 recording: \"Biological trial suspended. Crew retreat is mandatory.\""},
+    "play_n_memory": {"confirm": "N., stored 2034 recording: \"My grandmother's mustard fields turned yellow every winter. I wanted some of that light here.\""},
+    "classify_voice_inference": {"check": "classification", "hints": "classification"},
+    "send_fragment_copy": {"check": "package", "hints": "classification"},
+    "acknowledge_handover": {"confirm": "Delivered is not the same as answered. The evening handover is logged; the reply column stays empty."}
+  },
+  "panel": {"flight_rules": ["MP-04 · Verify a label against an independent source; work on a local copy and leave the original untouched."], "risk": {"title": "Original evidence destroyed", "likelihood": 2, "consequence": 4, "level": "MODERATE · removed by photographing, not peeling"}, "wrong_idea": "An earlier flowering garden makes Alo's first bloom false.", "first_time_card": {"title": "Rebuild the recorder copy", "purpose": "Give each file the one value its own source label supports. Playback stays locked until all three match.", "steps": ["Read the photographed plate, date and channel labels.", "Put one token in each file's empty slot.", "Check the local copy, then open the transcript."], "clip": "How archives label a record (explainer clip pending)"}}
 }

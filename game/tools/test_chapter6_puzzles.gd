@@ -7,6 +7,8 @@
 ## Windowed evidence: Godot --path game --windowed --resolution 1280x720 --script res://tools/test_chapter6_puzzles.gd -- --evidence
 extends SceneTree
 
+const Witness3 = preload("res://tools/support/chapter3_witness.gd")
+const Witness2 = preload("res://tools/support/chapter2_witness.gd")
 const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
 
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
@@ -127,7 +129,7 @@ func _build_entry_state() -> void:
 	pollination.start_at("EX-CH02-S01")
 	for scene_id in preload("res://scripts/missions/chapter2_gate_catalog.gd").SCENE_ORDER:
 		for target in pollination.targets_for_current_scene():
-			pollination.perform(target.target_id)
+			pollination.perform(target.target_id, Witness2.payload(String(target.get("puzzle_action", ""))))
 		pollination.advance_scene()
 	var route := RouteScript.new(director)
 	route.start_at("EX-CH03-S01")
@@ -139,6 +141,7 @@ func _build_entry_state() -> void:
 			var payload: Dictionary = target.get("payload_defaults", {}).duplicate(true) if target.get("payload_defaults", {}) is Dictionary else {}
 			if payload.is_empty():
 				payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
+			payload = Witness3.payload(String(target.target_id), director.snapshot(), payload)
 			payload = Witness4.payload(String(target.target_id), director.snapshot(), payload)
 			var result: Dictionary = route.perform(target.target_id, payload)
 			ok = ok and bool(result.get("accepted", false))

@@ -4,6 +4,9 @@ class_name Chapter1Campaign
 signal exit_requested
 ## Ramim's panel subscribes here. Opening/cancelling never submits choices.
 signal p01_panel_requested(view: Dictionary)
+## Chapter 2 decision panel (P-03 and P-04). Opening, previewing and cancelling
+## never commit; only confirm_chapter2_choice with the previewed choices does.
+signal chapter2_panel_requested(view: Dictionary)
 ## A cutscene closed (watched to the end, skipped, or its text card dismissed).
 signal cutscene_closed(result: Dictionary)
 
@@ -22,6 +25,8 @@ const EvaSuitScript = preload("res://scripts/eva/eva_suit.gd")
 const CadetProgressionScript = preload("res://scripts/progression/cadet_progression.gd")
 const FieldSystemsScript = preload("res://scripts/campaign/campaign_field_systems.gd")
 const CampaignProgressionScript = preload("res://scripts/campaign/campaign_progression.gd")
+const SaveSlotsScript = preload("res://scripts/save/save_slots.gd")
+const GameSettingsScript = preload("res://scripts/settings/game_settings.gd")
 const HUDScene: PackedScene = preload("res://scenes/ui/chapter1_campaign_hud.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 
@@ -42,6 +47,8 @@ var content: Dictionary = {}
 var director: CampaignDirector
 var route: RefCounted
 var save_service: SaveService
+var save_slots: SaveSlots
+var game_settings: GameSettings
 var hud: Chapter1CampaignHUD
 var _room: CampaignRoom
 var _crew: CampaignCrew
@@ -57,8 +64,13 @@ var _last_scan_origin := Vector3(INF, INF, INF)
 var _terrain: Node3D
 var _startup_error := ""
 var _ui_paused := false
+## The open Chapter 2 panel and the exact choices last previewed for it.
+var _chapter2_pending: Dictionary = {}
 var _exit_without_save_armed := false
 var save_path: String = SaveScript.DEFAULT_PATH
+var settings_path: String = GameSettingsScript.DEFAULT_PATH
+var _play_time_seconds := 0.0
+var _last_autosave_trigger := "checkpoint"
 var cutscenes: CampaignCutsceneRuntime
 var cutscene_player: CampaignCutscenePlayer
 var audio: CampaignAudioDirector
@@ -75,7 +87,7 @@ func _ready() -> void:
 	if _startup_error.is_empty():
 		_refresh_world()
 		_build_hud()
-		_save_campaign()
+		_save_campaign("scene_join")
 
 func _start_session_incremental() -> void:
 	var stamp := LoadTrace.begin()
@@ -90,6 +102,9 @@ func _start_session_incremental() -> void:
 	stamp = LoadTrace.begin()
 	save_service = SaveScript.new()
 	save_service.session_validator = restore_session
+	save_slots = SaveSlotsScript.new(save_path, restore_session)
+	if game_settings == null:
+		game_settings = GameSettingsScript.new(settings_path)
 	if initial_snapshot.is_empty():
 		director = DirectorScript.new()
 		if director.new_campaign(ContentScript.EXPECTED_CONTENT_REVISION).is_empty():
@@ -117,6 +132,9 @@ func _start_session_incremental() -> void:
 	progression = CadetProgressionScript.new()
 	field_systems = FieldSystemsScript.new(self)
 	var resume: Dictionary = initial_snapshot.get("presentation_resume", {})
+	var loaded_meta: Variant = resume.get("slot_metadata", {})
+	if loaded_meta is Dictionary:
+		_play_time_seconds = maxf(0.0, float((loaded_meta as Dictionary).get("play_time_seconds", 0.0)))
 	field_systems.restore(resume.get("field_systems", {}))
 	_progression_flow = CampaignProgressionScript.new(self)
 	progression_flow = _progression_flow
@@ -139,6 +157,9 @@ func _start_session() -> void:
 	stamp = LoadTrace.begin()
 	save_service = SaveScript.new()
 	save_service.session_validator = restore_session
+	save_slots = SaveSlotsScript.new(save_path, restore_session)
+	if game_settings == null:
+		game_settings = GameSettingsScript.new(settings_path)
 	if initial_snapshot.is_empty():
 		director = DirectorScript.new()
 		if director.new_campaign(ContentScript.EXPECTED_CONTENT_REVISION).is_empty():
@@ -165,6 +186,9 @@ func _start_session() -> void:
 	progression = CadetProgressionScript.new()
 	field_systems = FieldSystemsScript.new(self)
 	var resume: Dictionary = initial_snapshot.get("presentation_resume", {})
+	var loaded_meta: Variant = resume.get("slot_metadata", {})
+	if loaded_meta is Dictionary:
+		_play_time_seconds = maxf(0.0, float((loaded_meta as Dictionary).get("play_time_seconds", 0.0)))
 	field_systems.restore(resume.get("field_systems", {}))
 	var flow_script = load("res://scripts/campaign/campaign_progression.gd")
 	if flow_script != null:
@@ -353,6 +377,40 @@ func p01_view(target_id: String) -> Dictionary:
 		return {"accepted": false, "reason": "P-01 is unavailable in this chapter."}
 	return route.p01_view(target_id)
 
+## Read-only forecast of the player's chosen Chapter 2 inputs. Needs the open,
+## paused panel for this target. Any rejected preview forgets the earlier one.
+func preview_chapter2_choice(target_id: String, payload: Dictionary) -> Dictionary:
+	if _chapter2_pending.is_empty() or String(_chapter2_pending.get("target_id", "")) != target_id or not _ui_paused:
+		return {"accepted": false, "reason": "Open this Chapter 2 panel first; previews need the paused panel."}
+	var forecast := forecast_target(target_id, payload)
+	if not bool(forecast.get("accepted", false)):
+		_chapter2_pending["previewed"] = null
+		return forecast
+	_chapter2_pending["previewed"] = payload.duplicate(true)
+	_chapter2_pending["input_revision"] = int(forecast.get("input_revision", -1))
+	return forecast
+
+## Commits exactly the previewed choices, once, at the physical target.
+func confirm_chapter2_choice(target_id: String, payload: Dictionary) -> Dictionary:
+	if _chapter2_pending.is_empty() or String(_chapter2_pending.get("target_id", "")) != target_id:
+		return {"accepted": false, "reason": "Open this Chapter 2 panel and preview your choice first."}
+	if _ui_paused:
+		return {"accepted": false, "reason": "Close the panel's pause before confirming."}
+	var previewed = _chapter2_pending.get("previewed", null)
+	if not previewed is Dictionary or previewed != payload:
+		return {"accepted": false, "reason": "Preview these exact choices before confirming."}
+	if int(_chapter2_pending.get("input_revision", -2)) != int(director.snapshot().get("state_revision", -1)):
+		return {"accepted": false, "reason": "The expedition changed since the preview. Preview again."}
+	if String(nearby_target().get("target_id", "")) != target_id:
+		return {"accepted": false, "reason": "Walk up to the target and face it to confirm."}
+	var result := perform_target(target_id, payload)
+	if bool(result.get("accepted", false)):
+		_chapter2_pending = {}
+	return result
+
+func cancel_chapter2_choice() -> void:
+	_chapter2_pending = {}
+
 func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 	if loading or not _startup_error.is_empty() or route == null:
 		return {"accepted": false, "reason": "The expedition is unavailable."}
@@ -518,8 +576,19 @@ func interact_nearby() -> Dictionary:
 			return view
 		p01_panel_requested.emit(view)
 		return {"accepted": true, "p01_panel_requested": true, "physical_commit": false, "reason": "Choose the P-01 inputs before confirming."}
+	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-03", "P-04"] and route != null and route.has_method("puzzle_view"):
+		var view: Dictionary = route.puzzle_view(String(selected.target_id))
+		if not view.get("accepted", false):
+			return view
+		if chapter2_panel_requested.get_connections().is_empty():
+			return {"accepted": false, "reason": "The Chapter 2 decision panel is unavailable, so nothing was committed."}
+		_chapter2_pending = {"target_id": String(selected.target_id), "input_revision": int(view.get("input_revision", -1)), "previewed": null}
+		chapter2_panel_requested.emit(view)
+		return {"accepted": true, "chapter2_panel_requested": true, "physical_commit": false, "reason": "Choose the inputs before confirming."}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) == "P-02" and hud != null and hud.open_mission_table(String(selected.target_id)):
 		return {"accepted": true, "reason": "Mission Table open.", "mission_table": true}
+	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-05", "P-06"] and hud != null and hud.open_chapter3_panel(String(selected.target_id)):
+		return {"accepted": true, "reason": "Decision card open.", "chapter3_panel": true}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-07", "P-08"] and hud != null and hud.open_chapter4_panel(String(selected.target_id)):
 		return {"accepted": true, "reason": "Decision card open.", "chapter4_panel": true}
 	if not selected.is_empty() and String(selected.get("puzzle_id", "")) in ["P-11", "P-12"] and hud != null and hud.open_chapter6_panel(String(selected.target_id)):
@@ -539,6 +608,8 @@ func interact_nearby() -> Dictionary:
 func _physics_process(delta: float) -> void:
 	if loading:
 		return
+	if not _ui_paused and not is_cutscene_active():
+		_play_time_seconds += maxf(0.0, delta)
 	if _room == null:
 		return
 	var selected := nearby_target()
@@ -754,6 +825,7 @@ func set_ui_paused(value: bool) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func retry_checkpoint() -> Dictionary:
+	_chapter2_pending = {}
 	var result: Dictionary = route.retry()
 	if bool(result.get("accepted", false)):
 		_sync_route_projection()
@@ -804,14 +876,18 @@ func advance_scene() -> Dictionary:
 		_queue_cutscenes("campaign_complete")
 		if audio != null:
 			audio.play_credits()
-	if bool(result.get("accepted", false)) and _progression_flow != null and (route.current_mission_id() != previous_mission or is_chapter_complete()):
+	var mission_ended: bool = bool(result.get("accepted", false)) and (route.current_mission_id() != previous_mission or is_chapter_complete() or bool(result.get("chapter_complete", false)))
+	if mission_ended and _progression_flow != null:
 		_progression_flow.record_mission(previous_mission)
 	if hud != null:
 		hud.refresh_scene(result)
 		var pending := available_upgrade_chapter()
-		if (bool(result.get("chapter_complete", false)) or bool(result.get("upgrade_pending", false))) and pending > 0 and hud.has_method("open_upgrade"):
+		var learned_chapter := pending if pending > 0 else (8 if bool(result.get("campaign_complete", false)) else 0)
+		if bool(result.get("chapter_complete", false)) and learned_chapter > 0 and hud.has_method("open_chapter_learning") and hud.open_chapter_learning(learned_chapter, pending):
+			pass
+		elif (bool(result.get("chapter_complete", false)) or bool(result.get("upgrade_pending", false))) and pending > 0 and hud.has_method("open_upgrade"):
 			hud.open_upgrade(pending)
-	_save_campaign()
+	_save_campaign("mission_end" if mission_ended else "scene_join")
 	return result
 
 func _start_chapter2() -> Dictionary:
@@ -948,6 +1024,8 @@ func _save_snapshot() -> Dictionary:
 	if _progression_flow != null:
 		resume.merge(_progression_flow.snapshot(), true)
 	snapshot["presentation_resume"] = resume
+	if save_slots != null:
+		snapshot = save_slots.enrich_snapshot(snapshot, SaveSlotsScript.AUTOSAVE_SLOT, _last_autosave_trigger, _play_time_seconds)
 	if _room != null and _room.room_id == "LOC-08" and _room.garage() != null:
 		snapshot["route_runtime"]["garage_dock"] = _room.garage().dock_snapshot()
 	return snapshot
@@ -980,9 +1058,12 @@ func _sync_route_projection() -> void:
 		push_warning("Unable to synchronize the saved campaign scene projection: " + String(result.get("reason", "unknown")))
 
 ## Every autosave goes through here, so a failure is always shown to the player.
-func _save_campaign() -> Dictionary:
+func _save_campaign(trigger: String = "checkpoint") -> Dictionary:
 	if not _startup_error.is_empty():
 		return {"accepted": false, "reason": _startup_error}
+	_last_autosave_trigger = trigger
+	if save_slots != null:
+		save_slots.base_save_path = save_path
 	var stamp := LoadTrace.begin()
 	var result: Dictionary = save_service.save(_save_snapshot(), save_path)
 	LoadTrace.end("campaign_save", stamp)
@@ -993,6 +1074,43 @@ func _save_campaign() -> Dictionary:
 		if hud != null:
 			hud.show_status("AUTOSAVE FAILED · " + String(result.get("reason", "unknown error")) + " · progress since the last save is not on disk yet.")
 	return result
+
+func save_to_slot(slot_id: String, trigger: String = "manual") -> Dictionary:
+	if save_slots == null:
+		save_slots = SaveSlotsScript.new(save_path, restore_session)
+	save_slots.base_save_path = save_path
+	var result: Dictionary = save_slots.save_slot(slot_id, _save_snapshot(), trigger, {"play_time_seconds": _play_time_seconds})
+	if hud != null and bool(result.get("accepted", false)):
+		hud.show_status("SAVED TO " + SaveSlotsScript.slot_label(slot_id).to_upper())
+	return result
+
+func load_from_slot(slot_id: String, allow_auto_recover: bool = true) -> Dictionary:
+	if save_slots == null:
+		save_slots = SaveSlotsScript.new(save_path, restore_session)
+	save_slots.base_save_path = save_path
+	var loaded: Dictionary = save_slots.load_slot(slot_id, allow_auto_recover)
+	if not bool(loaded.get("accepted", false)):
+		return loaded
+	var snap: Dictionary = loaded.get("snapshot", {})
+	var session := restore_session(snap)
+	if not bool(session.get("accepted", false)):
+		return session
+	director = session.director
+	route = session.route
+	var resume: Dictionary = snap.get("presentation_resume", {})
+	var loaded_meta: Variant = resume.get("slot_metadata", {})
+	if loaded_meta is Dictionary:
+		_play_time_seconds = maxf(0.0, float((loaded_meta as Dictionary).get("play_time_seconds", _play_time_seconds)))
+	if field_systems != null:
+		field_systems.restore(resume.get("field_systems", {}))
+	if _progression_flow != null:
+		_progression_flow.restore(resume)
+		progression = _progression_flow.model
+	_sync_route_projection()
+	_refresh_world()
+	if hud != null:
+		hud.refresh_scene(loaded)
+	return loaded
 
 func _fail_startup(reason: String) -> void:
 	_startup_error = reason
@@ -1108,6 +1226,8 @@ func _place_crew() -> void:
 		field_systems.bind_scene()
 	if _player != null and _player.follow_camera != null and _player.follow_camera.camera != null:
 		_player.follow_camera.camera.far = 30000.0 if _terrain != null else 4000.0  # kilometre views on the terrain
+		if game_settings != null:
+			_player.follow_camera.camera.fov = float(game_settings.display.get("fov", 75.0))
 	_crew.set_paused(_ui_paused)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_setup_garage_dock()
@@ -1353,10 +1473,17 @@ func _play_next_cutscene() -> void:
 	if is_cutscene_active() or _cutscene_queue.is_empty():
 		return
 	_set_cinematic(true)
-	cutscene_player.play(_cutscene_queue.pop_front())
+	var next_plan: Dictionary = _cutscene_queue.pop_front()
+	var cid := String(next_plan.get("cutscene_id", ""))
+	if game_settings != null and cutscenes != null:
+		cutscene_player.skip_hold_s = game_settings.effective_cutscene_skip_hold_s(cid, cutscenes.skip_hold_seconds())
+	cutscene_player.play(next_plan)
 
 func _on_cutscene_closed(result: Dictionary) -> void:
-	audio.mark_heard(cutscenes.heard_line_ids(String(result.get("cutscene_id", "")), float(result.get("position_s", 0.0))))
+	var cid := String(result.get("cutscene_id", ""))
+	if game_settings != null and not cid.is_empty():
+		game_settings.mark_cutscene_seen(cid)
+	audio.mark_heard(cutscenes.heard_line_ids(cid, float(result.get("position_s", 0.0))))
 	if _cutscene_queue.is_empty():
 		_set_cinematic(false)
 	cutscene_closed.emit(result)

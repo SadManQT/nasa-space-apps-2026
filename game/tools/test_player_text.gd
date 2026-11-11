@@ -16,6 +16,8 @@ const CarePanel = preload("res://scripts/ui/care_round_panel.gd")
 const LaterGates = preload("res://scripts/missions/extended_gate_catalog.gd")
 const Chapter2Gates = preload("res://scripts/missions/chapter2_gate_catalog.gd")
 const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
+const Chapter2Witness = preload("res://tools/support/chapter2_witness.gd")
+const Chapter3Witness = preload("res://tools/support/chapter3_witness.gd")
 const Chapter4Witness = preload("res://tools/support/chapter4_witness.gd")
 const Chapter6Witness = preload("res://tools/support/chapter6_witness.gd")
 const Chapter8Witness = preload("res://tools/support/chapter8_witness.gd")
@@ -398,6 +400,9 @@ func _player_payload(target: Dictionary, state: Dictionary) -> Dictionary:
 	if payload.is_empty():
 		payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
 	var target_id := String(target.target_id)
+	# Chapter 2 (P-03/P-04) and Chapter 3 (P-05/P-06) take the player's chosen inputs.
+	payload.merge(Chapter2Witness.payload(String(target.get("puzzle_action", ""))), true)
+	payload = Chapter3Witness.payload(target_id, state, payload)
 	payload = Chapter4Witness.payload(target_id, state, payload)
 	payload = Chapter6Witness.payload(target_id, state, payload)
 	return Chapter8Witness.payload(target_id, state, payload)

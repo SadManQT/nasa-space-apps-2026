@@ -50,6 +50,9 @@ func preview_action(action: String, payload: Dictionary = {}) -> Dictionary:
 			return _reject("Record the three reciprocal runs and seven care dates before the stem prediction.")
 		if String(payload.get("prediction", "")).is_empty() or String(payload.get("reason", "")).is_empty() or String(payload.get("future_test", "")).is_empty():
 			return _reject("A prediction needs an expectation, a reason and a future comparison criterion.")
+		var unsupported := prediction_feedback(payload)
+		if not unsupported.is_empty():
+			return _reject(unsupported)
 		return _accept("Prediction is explicit and remains revisable.")
 	if action.begins_with("p03_log_care_day_"):
 		var day := int(action.trim_prefix("p03_log_care_day_"))
@@ -91,6 +94,27 @@ func commit_action(action: String, payload: Dictionary = {}) -> Dictionary:
 		_run_index += 1
 		_step_index = 0
 	return _accept("P-03 action recorded once.")
+
+const CONTENT := "res://resources/campaign/content/p03_pollination.json"
+
+## Empty when every chosen prediction field is a supported option from the
+## content file; otherwise that option's feedback (a promised ratio is refused).
+static func prediction_feedback(payload: Dictionary) -> String:
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(CONTENT)) if FileAccess.file_exists(CONTENT) else null
+	var fields: Dictionary = parsed.get("choices", {}).get("prediction", {}).get("fields", {}) if parsed is Dictionary else {}
+	if fields.is_empty():
+		return "The P-03 prediction options could not be read."
+	for field in ["prediction", "reason", "future_test"]:
+		var chosen := String(payload.get(field, ""))
+		var known := false
+		for option in fields.get(field, []):
+			if String(option.get("value", "")) == chosen:
+				known = true
+				if not bool(option.get("correct", false)):
+					return String(option.get("feedback", "That claim goes beyond the evidence."))
+		if not known:
+			return "Choose the %s from the prediction card." % field.replace("_", " ")
+	return ""
 
 func flags() -> Dictionary:
 	var result := {

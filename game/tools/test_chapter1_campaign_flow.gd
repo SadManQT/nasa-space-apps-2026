@@ -113,6 +113,12 @@ func _run() -> void:
 		_check(bool(advance.get("accepted", false)), scene_id + " advances through the production controller")
 		if index == ACTIONS.size() - 1:
 			_check(campaign.available_upgrade_chapter() == 1, "Chapter 1 offers its earned upgrade at the real boundary")
+			# The chapter end shows What you learned first; closing it opens the upgrade choice.
+			_check(is_instance_valid(campaign.hud._family_panel) and campaign.hud._family_panel.name == "AcademyManual", "Chapter 1 ends on its What you learned page")
+			campaign.hud.close_family()
+			for _frame in 3:
+				await process_frame
+			_check(is_instance_valid(campaign.hud._family_panel) and campaign.hud._family_panel.name != "AcademyManual", "closing that page opens the Chapter 1 upgrade choice")
 			_check(bool(campaign.choose_upgrade(1, "A").get("accepted", false)), "Player chooses the earned Chapter 1 upgrade before the Chapter 2 handoff")
 			_check(not is_instance_valid(campaign.hud._family_panel) and not campaign.query().paused, "Chapter 1 upgrade handoff closes its modal and resumes gameplay")
 		var locked: Dictionary = campaign.director.commit({"command_id": "change-after-exit:" + scene_id, "issuer": "test", "owning_mission_id": campaign.director.query().mission_id, "owning_scene_id": scene_id, "expected_state_revision": campaign.director.query().state_revision, "target_id": choice_id, "verb": "record_choice", "payload": {"choice_id": choice_id, "option_id": scene_id + "-OPT02"}})
@@ -205,7 +211,10 @@ func _test_chapter2_handoff() -> void:
 			campaign._player.global_position = approach
 			campaign._player.velocity = Vector3.ZERO
 			await physics_frame
-			var action := campaign.perform_target(target_id)
+			# P-03 and P-04 take the player's chosen inputs, never catalog defaults.
+			var choices := {"record_stem_prediction": {"prediction": "Both visible colours may appear", "reason": "Alo has purple and Tara has green stems; the complete genotype is not established.", "future_test": "Compare descendant stem observations after seed harvest."},
+				"assign_date_token": {"value": "2034-04"}, "assign_device_token": {"value": "HORT-01"}, "assign_channel_token": {"value": "ENGINEERING"}}
+			var action := campaign.perform_target(target_id, choices.get(target_id, {}))
 			_check(bool(action.get("accepted", false)), "production Chapter 2 commits " + target_id + " (" + String(action.get("reason", "")) + ")")
 			if not bool(action.get("accepted", false)): return
 		if number == 5:
@@ -226,6 +235,12 @@ func _test_chapter2_handoff() -> void:
 		_check(bool(campaign.advance_scene().get("accepted", false)), "production Chapter 2 advances " + scene_id)
 		if number == 12:
 			_check(campaign.available_upgrade_chapter() == 2, "Chapter 2 offers its earned upgrade before Chapter 3")
+			# The chapter end shows What you learned first; closing it opens the upgrade choice.
+			_check(is_instance_valid(campaign.hud._family_panel) and campaign.hud._family_panel.name == "AcademyManual", "Chapter 2 ends on its What you learned page")
+			campaign.hud.close_family()
+			for _frame in 3:
+				await process_frame
+			_check(is_instance_valid(campaign.hud._family_panel) and campaign.hud._family_panel.name != "AcademyManual", "closing that page opens the Chapter 2 upgrade choice")
 			_check(bool(campaign.choose_upgrade(2, "A").get("accepted", false)), "Player chooses the earned Chapter 2 upgrade before Chapter 3")
 			_check(not is_instance_valid(campaign.hud._family_panel) and not campaign.query().paused, "Chapter 2 upgrade handoff closes its modal and resumes gameplay")
 		await process_frame

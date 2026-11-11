@@ -52,7 +52,11 @@ func transition(snapshot: Dictionary, command: Dictionary) -> Dictionary:
 	if not targets.any(func(target): return target.target_id == action and target.command_id == command.get("command_id")):
 		_error = "This operation does not belong to the current physical scene."
 		return _result(snapshot)
-	var check := Answers.new().preview(puzzle_id, action, payload)
+	var answers := Answers.new()
+	# This ledger is rebuilt for every command, so hand it every operation the
+	# book has already committed for the P-05 sequence rules.
+	answers.prior_actions = _book.operations.keys()
+	var check := answers.preview(puzzle_id, action, payload)
 	if not check.accepted:
 		_error = check.reason
 		return _result(snapshot)

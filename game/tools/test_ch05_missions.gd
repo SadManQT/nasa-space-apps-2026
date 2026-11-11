@@ -9,6 +9,8 @@
 ## decision; this suite is the acceptance evidence.
 extends SceneTree
 
+const Witness3 = preload("res://tools/support/chapter3_witness.gd")
+const Witness2 = preload("res://tools/support/chapter2_witness.gd")
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const Chapter2RouteScript = preload("res://scripts/missions/chapter2_route.gd")
 const Chapter2GateCatalog = preload("res://scripts/missions/chapter2_gate_catalog.gd")
@@ -120,7 +122,7 @@ func _run() -> void:
 	pollination.start_at("EX-CH02-S01")
 	for scene_id in Chapter2GateCatalog.SCENE_ORDER:
 		for target in pollination.targets_for_current_scene():
-			var action: Dictionary = pollination.perform(String(target.get("target_id", "")))
+			var action: Dictionary = pollination.perform(String(target.get("target_id", "")), Witness2.payload(String(target.get("puzzle_action", ""))))
 			_check(bool(action.get("accepted", false)), "dated Chapter 2 handoff operation " + String(target.get("target_id", "")))
 		pollination.advance_scene()
 	var route := ExtendedRouteScript.new(director)
@@ -250,6 +252,7 @@ func _drive_chapter(route: RefCounted, director: RefCounted, chapter: int) -> vo
 			# walk does: puzzle data first, then the Chapter 4/6/8 witnesses.
 			if payload.is_empty():
 				payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
+			payload = Witness3.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 			payload = Witness4.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 			payload = Witness6.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 			payload = Witness.payload(String(target.get("target_id", "")), director.snapshot(), payload)
@@ -338,6 +341,7 @@ func _drive_mission_scene(mission: RefCounted, route: RefCounted, director: RefC
 		# walk does: puzzle data first, then the Chapter 4/6/8 witnesses.
 		if payload.is_empty():
 			payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
+		payload = Witness3.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 		payload = Witness4.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 		payload = Witness6.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 		payload = Witness.payload(String(target.get("target_id", "")), director.snapshot(), payload)

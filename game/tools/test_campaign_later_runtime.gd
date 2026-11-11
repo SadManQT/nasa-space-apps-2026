@@ -3,6 +3,7 @@
 extends SceneTree
 
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
+const Witness3 = preload("res://tools/support/chapter3_witness.gd")
 const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const Chapter2RouteScript = preload("res://scripts/missions/chapter2_route.gd")
 const SaveScript = preload("res://scripts/save/save_service.gd")
@@ -58,7 +59,7 @@ func _run() -> void:
 		_campaign._player.global_position = target.global_position + Vector3(0.0, -target.global_position.y, 1.0)
 		_campaign._player.velocity = Vector3.ZERO
 		await physics_frame
-		var operation: Dictionary = _campaign.perform_target("p05_equip_gauge")
+		var operation: Dictionary = _campaign.perform_target("p05_equip_gauge", Witness3.payload("p05_equip_gauge"))
 		_check(bool(operation.get("accepted", false)) and bool(_campaign.route.current_flags().get("p05_equip_gauge_done", false)), "P-05 operation commits through the production physical interaction")
 	else:
 		_check(false, "P-05 operation commits through the production physical interaction")

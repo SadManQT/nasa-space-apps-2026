@@ -6,6 +6,8 @@ class_name CadetRecordPanel
 ## (before → after preview, mutually exclusive A/B), and Safe Room Bunk Rest
 ## summary in the doc 25 §2 dark-glass design system.
 
+const Curriculum = preload("res://scripts/progression/curriculum.gd")
+
 signal closed
 signal upgrade_chosen(chapter: int, option: String)
 signal rest_requested
@@ -92,6 +94,7 @@ func _build() -> void:
 		{"id": "loadout", "label": "Gear Loadout"},
 		{"id": "reports", "label": "Report Cards"},
 		{"id": "upgrades", "label": "Chapter Upgrades"},
+		{"id": "learning", "label": "Learning"},
 		{"id": "rest", "label": "Safe Room Bunk"},
 	]:
 		var t_id := String(item.id)
@@ -133,9 +136,27 @@ func refresh() -> void:
 			_render_reports()
 		"upgrades":
 			_render_upgrades()
+		"learning":
+			_render_learning()
 		"rest":
 			_render_rest()
 	UiDesign.apply_type(self, get_viewport_rect().size.y if is_inside_tree() else 720.0, 1.5 if settings.get("large_text", false) else 1.0)
+
+## Learned, practised and proved moments for the twelve competencies, derived
+## from the scenes this save has completed (never stored separately).
+func _render_learning() -> void:
+	_title_label.text = "What you have learned"
+	_sub_label.text = "Each idea is learned, then practised, then proved in the field. No quizzes."
+	var snapshot: Dictionary = _runtime.director.snapshot() if _runtime != null and _runtime.get("director") != null else {}
+	for row in Curriculum.progress(snapshot):
+		var card := UiDesign.glass_panel(Color.TRANSPARENT, 12)
+		_body.add_child(card)
+		var col := VBoxContainer.new()
+		col.add_theme_constant_override("separation", 4)
+		card.add_child(col)
+		col.add_child(UiDesign.label("%s · %s" % [String(row.title), String(row.label)], "body"))
+		var moments: Dictionary = row.moments
+		col.add_child(UiDesign.label("Learned %d · Practised %d · Proved %d" % [moments.learned.size(), moments.practised.size(), moments.proved.size()], "body", "muted"))
 
 func _render_skills() -> void:
 	_title_label.text = "Cadet Skills"

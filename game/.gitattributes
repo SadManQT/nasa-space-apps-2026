@@ -1,0 +1,2 @@
+# Keep Godot import metadata identical after checkout on every platform.
+*.import text eol=lf

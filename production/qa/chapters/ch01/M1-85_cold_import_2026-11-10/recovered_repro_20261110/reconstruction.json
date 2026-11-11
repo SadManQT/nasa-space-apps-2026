@@ -1,0 +1,16 @@
+{
+  "expected_original_commit": "046662cf278bd8b30ac5cbdcbbbafc08f00c61aa",
+  "parent": "ed86d7bb596a93b8811f5c0849ae9078d65dc98a",
+  "root_tree": "b1ae19056d1ddd44db441ce77e60980248282814",
+  "game_tree": "f59fcc7b080618dc5388cf84c56fd5938ced76ab",
+  "expected_game_tree_matches": true,
+  "patch_sha256": "837c039b4ca3d6ea1f438f0c4d7aa4f610728f417f631b4c35ca938889233d4e",
+  "files": 2568,
+  "bytes": 902391503,
+  "source_manifest_sha256": "5a8d855156c285710dcec9c1f35b4e42082e8d2e92e85d711199d85d5a63c7fe",
+  "object_store": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185r1110\\objects",
+  "index": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185r1110\\reconstruction.index",
+  "qualification": "Reconstructed exact committed Game tree; no original pre-crash cache or original native stack. Local isolated objects/index only; main index/refs/source are untouched.",
+  "prepare_collector_sha256": "d25198451a5324127b60355e2e93f1411c4259e7b31497b682008c730c2e6f5e",
+  "executed_prepare_source": "executed_prepare.py"
+}

@@ -116,15 +116,18 @@ func _p03(data: Dictionary) -> void:
 		_check(design.contains(text), "08 P-03 states " + text)
 	for hint in data.hints.runs:
 		_check(design.contains(hint), "P-03 hint is 08 text: " + hint)
-	var defaults := {}
+	var prediction_target := {}
 	for target in GateCatalog.targets_for_scene("EX-CH02-S06"):
 		if target.get("puzzle_action", "") == "p03_record_prediction":
-			defaults = target.payload_defaults
+			prediction_target = target
+	_check(not prediction_target.is_empty() and not prediction_target.has("payload_defaults"), "P-03 prediction has no prefilled answer in the physical target")
 	for field in ["prediction", "reason", "future_test"]:
-		var hit := false
+		var selected := ""
 		for option in data.choices.prediction.fields[field]:
-			hit = hit or (bool(option.correct) and option.value == defaults.get(field, null))
-		_check(hit, "P-03 prefilled %s is a correct option" % field)
+			if bool(option.correct):
+				selected = String(option.value)
+				break
+		_check(not selected.is_empty(), "P-03 authored %s has an explicit selectable answer" % field)
 
 func _p04(data: Dictionary) -> void:
 	_check(data.expected == P04Script.EXPECTED, "P-04 expected tokens match the script")
@@ -135,8 +138,8 @@ func _p04(data: Dictionary) -> void:
 	for scene_id in ["EX-CH02-S09", "EX-CH02-S10", "EX-CH02-S11"]:
 		for target in GateCatalog.targets_for_scene(scene_id):
 			actions.append(target.get("puzzle_action", ""))
-			if target.has("payload_defaults"):
-				_check(target.payload_defaults.value == data.expected[String(target.puzzle_action).trim_prefix("p04_assign_")], "P-04 prefilled %s matches" % target.puzzle_action)
+			if String(target.get("puzzle_action", "")).begins_with("p04_assign_"):
+				_check(not target.has("payload_defaults"), "P-04 %s has no prefilled token" % target.puzzle_action)
 	for step in data.steps:
 		_check(actions.has(step.action), "P-04 step %s is a catalog action" % step.action)
 	var labels := {}
@@ -144,11 +147,15 @@ func _p04(data: Dictionary) -> void:
 		labels[label.id] = label
 		_check(data.expected[label.field] == label.value, "P-04 source label %s value" % label.id)
 	for field in ["date", "device", "channel"]:
+		var selected := ""
 		for option in data.choices[field].options:
 			var puzzle := P04Script.new()
 			var accepted := bool(puzzle.preview_action(data.choices[field].action, {"value": option.value}).accepted)
 			_check(accepted == bool(option.correct), "P-04 %s option %s agrees with the script" % [field, option.value])
 			_check(labels.has(option.source_label_id), "P-04 %s option names a source label" % field)
+			if bool(option.correct):
+				selected = String(option.value)
+		_check(selected == String(data.expected[field]), "P-04 selected %s token agrees with its source label" % field)
 
 func _json(path: String) -> Dictionary:
 	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))

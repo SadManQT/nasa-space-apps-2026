@@ -6,9 +6,12 @@ const DirectorScript = preload("res://scripts/core/campaign_director.gd")
 const RouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const GateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
 const PuzzleData = preload("res://scripts/puzzles/puzzle_data.gd")
+const Witness3 = preload("res://tools/support/chapter3_witness.gd")
 const Witness4 = preload("res://tools/support/chapter4_witness.gd")
 const Witness6 = preload("res://tools/support/chapter6_witness.gd")
 const Witness = preload("res://tools/support/chapter8_witness.gd")
+const P03_CONTENT := "res://resources/campaign/content/p03_pollination.json"
+const P04_CONTENT := "res://resources/campaign/content/p04_recorder_reconstruction.json"
 
 var checks := 0
 var failures := 0
@@ -24,6 +27,8 @@ func _run() -> void:
 	handoff["chapter1_ready"] = true
 	director.restore_snapshot(handoff)
 	var pollination := preload("res://scripts/missions/chapter2_route.gd").new(director)
+	var p03_content := _chapter2_content(P03_CONTENT)
+	var p04_content := _chapter2_content(P04_CONTENT)
 	_check(pollination.apply_entry_profile().accepted, "P-03 entry profile is explicit")
 	pollination.start_at("EX-CH02-S01")
 	for scene_id in preload("res://scripts/missions/chapter2_gate_catalog.gd").SCENE_ORDER:
@@ -36,7 +41,8 @@ func _run() -> void:
 				pollination.use({"_puzzle_action": target.puzzle_action})
 				run_preview = pollination.preview()
 				_check(run_preview.accepted and director.snapshot() == before_preview, "pollination run preview preserves authoritative state")
-			var action := pollination.perform(target.target_id)
+			var selected: Dictionary = _chapter2_selected_input(String(target.get("puzzle_action", "")), p03_content, p04_content)
+			var action := pollination.perform(target.target_id, selected)
 			if not run_preview.is_empty() and run_preview.accepted:
 				_check(run_preview.snapshot.resources == director.snapshot().resources and run_preview.snapshot.plants == director.snapshot().plants, "pollination run preview returns the actual projected resources and biology")
 			if not action.accepted:
@@ -56,6 +62,7 @@ func _run() -> void:
 			# the decisions recorded in the puzzle data files.
 			if payload.is_empty():
 				payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
+			payload = Witness3.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 			payload = Witness4.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 			payload = Witness6.payload(String(target.get("target_id", "")), director.snapshot(), payload)
 			payload = Witness.payload(String(target.get("target_id", "")), director.snapshot(), payload)
@@ -137,6 +144,27 @@ func _check(condition: bool, message: String) -> void:
 	else:
 		failures += 1
 		push_error("FAIL " + message)
+
+func _chapter2_content(path: String) -> Dictionary:
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))
+	return parsed if parsed is Dictionary else {}
+
+func _chapter2_selected_input(action: String, p03_content: Dictionary, p04_content: Dictionary) -> Dictionary:
+	if action == "p03_record_prediction":
+		var fields: Dictionary = p03_content.get("choices", {}).get("prediction", {}).get("fields", {})
+		var chosen := {}
+		for field in ["prediction", "reason", "future_test"]:
+			for option in fields.get(field, []):
+				if bool(option.get("correct", false)):
+					chosen[field] = String(option.get("value", ""))
+					break
+		return chosen
+	var expected: Dictionary = p04_content.get("expected", {})
+	match action:
+		"p04_assign_date": return {"value": String(expected.get("date", ""))}
+		"p04_assign_device": return {"value": String(expected.get("device", ""))}
+		"p04_assign_channel": return {"value": String(expected.get("channel", ""))}
+	return {}
 
 func _verify_scene(id: String, state: Dictionary) -> void:
 	var expected := {}

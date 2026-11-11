@@ -11,6 +11,8 @@ const SimulationScript = preload("res://scripts/simulation/expedition_simulation
 const Chapter1RouteScript = preload("res://scripts/missions/chapter1_route.gd")
 const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 const PlanFixture = preload("res://tools/support/p02_plan_fixture.gd")
+const Chapter2Witness = preload("res://tools/support/chapter2_witness.gd")
+const Chapter3Witness = preload("res://tools/support/chapter3_witness.gd")
 const Chapter2RouteScript = preload("res://scripts/missions/chapter2_route.gd")
 const ExtendedRouteScript = preload("res://scripts/missions/extended_campaign_route.gd")
 const ExtendedGateCatalog = preload("res://scripts/missions/extended_gate_catalog.gd")
@@ -185,6 +187,8 @@ func _profile_payload(target: Dictionary, state: Dictionary) -> Dictionary:
 	if payload.is_empty():
 		payload = PuzzleData.gate_payload(String(target.get("puzzle_action", "")))
 	payload.merge(PlantInput.payload(target_id), true)
+	payload.merge(Chapter2Witness.payload(String(target.get("puzzle_action", ""))), true)
+	payload = Chapter3Witness.payload(target_id, state, payload)
 	payload = Chapter4Witness.payload(target_id, state, payload)
 	payload = Chapter6Witness.payload(target_id, state, payload)
 	return Chapter8Witness.payload(target_id, state, payload)
@@ -246,7 +250,7 @@ func _test_boundary_and_deterministic_replay() -> void:
 		_check(bool(route.start_at("EX-CH03-S01").get("accepted", false)), "modifier fixture starts Chapter 3")
 		for scene_id in ["EX-CH03-S01", "EX-CH03-S02", "EX-CH03-S03", "EX-CH03-S04"]:
 			for target in ExtendedGateCatalog.targets_for_scene(scene_id):
-				var result: Dictionary = route.perform(String(target.get("target_id", "")), target.get("payload_defaults", {}))
+				var result: Dictionary = route.perform(String(target.get("target_id", "")), Chapter3Witness.payload(String(target.get("target_id", "")), director.snapshot(), target.get("payload_defaults", {})))
 				_check(bool(result.get("accepted", false)), "modifier fixture operation " + String(target.target_id))
 			if scene_id != "EX-CH03-S04":
 				_check(bool(route.advance_scene().get("accepted", false)), "modifier fixture advances " + scene_id)

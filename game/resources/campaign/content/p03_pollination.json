@@ -190,5 +190,30 @@
     "runs": ["A flower needs pollen from its partner.", "Take pollen from the anther to the other plant’s stigma.", "Use A for Tara→Alo and clean B for Alo→Tara."],
     "prediction": ["What can two stem colours tell you, and what can't they?", "Write what you expect and what would surprise you.", "Example of the format: 'Both colours may appear. A surprise would be every plant one colour.'"]
   },
-  "limits": "Fast Plants pollination guidance (plant days 15 to 21, stigma receptive 2 to 4 days, pods about 20 days after pollination) is ideal classroom timing on Earth. Alo was planted on 11 April 2046, so the runs fall on story plant days 19, 22 and 25, and runs 2 and 3 come after that classroom window. Lunar growth and these dates are fiction."
+  "limits": "Fast Plants pollination guidance (plant days 15 to 21, stigma receptive 2 to 4 days, pods about 20 days after pollination) is ideal classroom timing on Earth. Alo was planted on 11 April 2046, so the runs fall on story plant days 19, 22 and 25, and runs 2 and 3 come after that classroom window. Lunar growth and these dates are fiction.",
+  "panel_steps": {
+    "p03_scan_tara": {"check": "pollen_route"},
+    "p03_collect_tara": {"check": "collect_from"},
+    "p03_seal_a": {"check": "transfer_design"},
+    "p03_transfer_alo": {"check": "deliver_to"},
+    "p03_scan_alo": {"confirm": "Alo is now the donor. Read the second label before brush B touches anything."},
+    "p03_collect_alo": {"check": "collect_from"},
+    "p03_seal_b": {"check": "boundary_order"},
+    "p03_transfer_tara": {"check": "deliver_to"},
+    "p03_complete_run_1": {"confirm": "Reciprocal cycle 1, 30 April: charged E1/A1 once for the whole cycle. Seeds are a later observation."},
+    "p03_care_day_2": {"check": "schedule"},
+    "p03_care_day_3": {"confirm": "Care visit recorded for both plants. No pollen run today."},
+    "p03_run_2_forward": {"check": "weather"},
+    "p03_run_2_reverse": {"check": "deliver_to"},
+    "p03_complete_run_2": {"confirm": "Reciprocal cycle 2, 3 May: charged E1/A1 once for the whole cycle."},
+    "p03_care_day_4": {"confirm": "Care visit recorded for both plants. No pollen run today."},
+    "p03_care_day_5": {"confirm": "Care visit recorded for both plants. No pollen run today."},
+    "p03_care_day_6": {"confirm": "Care visit recorded for both plants. No pollen run today."},
+    "p03_care_day_7": {"confirm": "Care visit recorded for both plants. No pollen run today."},
+    "p03_run_3_forward": {"check": "weather"},
+    "p03_run_3_reverse": {"check": "deliver_to"},
+    "p03_complete_run_3": {"confirm": "Reciprocal cycle 3, 6 May: charged E1/A1 once for the whole cycle. Three runs are on the record."},
+    "record_stem_prediction": {"check": "prediction", "hints": "prediction"}
+  },
+  "panel": {"flight_rules": ["FR-06 · Containment: check space weather before every run; open one pressure boundary at a time."], "risk": {"title": "Boundary opened with the next one open", "likelihood": 2, "consequence": 5, "level": "HIGH · blocked by the interlock"}, "wrong_idea": "Move the two chambers together, or use one brush for both directions.", "first_time_card": {"title": "Be the bee", "purpose": "Move pollen, not plants: partner pollen, sealed, one labelled brush per direction.", "steps": ["Pick up pollen from the donor's anther.", "Seal the brush in the closed carrier and pass one boundary at a time.", "Touch the partner's stigma, then reverse with the clean brush."], "clip": "How flowers make seeds (explainer clip pending)"}}
 }

@@ -1,0 +1,46 @@
+{
+  "command": [
+    "C:\\Program Files\\Git\\bin\\bash.exe",
+    "game/tools/run_tests.sh",
+    "m185_import_integrity"
+  ],
+  "pid": 27536,
+  "start_utc_epoch": 1794372737.7744303,
+  "duration_seconds": 16.614,
+  "timed_out": false,
+  "termination": {
+    "needed": false
+  },
+  "raw_exit_code": 139,
+  "unsigned_exit_hex": "0x8b",
+  "effective_exit_code": 139,
+  "log_sha256": "88f7da7dc3b2bdef08e7a2d23add3320ef8c2a4ff4e2eeec3fa6ff6b8442e2e4",
+  "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\resolution_20261111\\red2_restore\\runner_logs",
+  "isolated_env": {
+    "APPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-final-20261111/profiles/red2/roaming",
+    "LOCALAPPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-final-20261111/profiles/red2/local",
+    "TEMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-final-20261111/profiles/red2/tmp",
+    "TMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-final-20261111/profiles/red2/tmp"
+  },
+  "script_error_lines": [],
+  "generic_error_lines": [],
+  "generic_error_count": 0,
+  "warning_count": 0,
+  "last_printed_reimport": "GochiHand-Regular.ttf",
+  "suite_summary": [],
+  "setup_failure": true,
+  "native_crash_signature": true,
+  "audited_logs": [
+    {
+      "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\resolution_20261111\\red2_restore\\runner_logs\\setup.log",
+      "sha256": "ff538ed6ffdc5599ca2789193a96b14dce4aa521c34a4b370adc808b59397df2",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "last_printed_reimport": "GochiHand-Regular.ttf",
+      "suite_summary": [],
+      "setup_failure": false,
+      "native_crash_signature": false
+    }
+  ]
+}
