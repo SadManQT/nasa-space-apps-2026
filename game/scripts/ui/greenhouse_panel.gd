@@ -105,7 +105,7 @@ func bind_campaign(campaign: Node) -> void:
 				causes.append(String(cause).capitalize() + ": " + str(stress[cause]))
 		plants.append({"id": id, "name": {"ALO-01": "Alo", "TARA-01": "Tara", "COTTON-01": "Cotton"}.get(id, id),
 			"lineage": String(specimen.get("lineage_id", "")).trim_prefix("LINEAGE-").replace("-", " x "),
-			"stage": stage.replace("_", " ").capitalize(), "mature": stage == "mature_dry" and not bool(specimen.get("harvested", false)),
+			"visual_record": specimen.duplicate(true), "stage": stage.replace("_", " ").capitalize(), "mature": stage == "mature_dry" and not bool(specimen.get("harvested", false)),
 			"is_archived_founder": stage in ["archived_petal", "archived_nameplate"], "alive": specimen.get("alive", false),
 			"stress_cause": "; ".join(causes), "conditions": "Dated plant record - Instrument temperature/moisture readings are not recorded here.",
 			"summary": "Planted: %s - Last care: %s" % [specimen.get("planted_at", ""), specimen.get("last_care_at", "Not yet recorded")]})
@@ -196,6 +196,7 @@ func _render_chambers_tab() -> void:
 		var head := HBoxContainer.new()
 		head.add_theme_constant_override("separation", 12)
 		box.add_child(head)
+		_plant_preview(p, box)
 		head.add_child(UiKit.icon("plant", "accent" if is_archive else "mei", 44))
 		var badge_prefix := "[MATURE FOUNDER ARCHIVE]  " if is_archive else ""
 		var heading := UiDesign.label(badge_prefix + String(p.get("name", "")), "heading", "accent" if is_archive else "ivory")
@@ -296,3 +297,67 @@ func _unhandled_input(event: InputEvent) -> void:
 	if visible and (event.is_action_pressed("ui_cancel") or (event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_B)) and not event.is_echo():
 		panel_closed.emit()
 		get_viewport().set_input_as_handled()
+
+## Reuse the same dated models as the garden; category illustrations never stand in for a specimen.
+func _plant_preview(plant: Dictionary, parent: Node) -> void:
+	if DisplayServer.get_name() == "headless" or bool(plant.get("is_archived_founder", false)):
+		return
+	var record: Dictionary = plant.get("visual_record", {})
+	var individual := String(record.get("individual_id", plant.get("id", "")))
+	var stage := String(record.get("stage", plant.get("stage", ""))).to_lower()
+	var asset := ""
+	var stage_node := ""
+	if individual in ["ALO-01", "TARA-01"]:
+		var prefix := "PL_Alo_" if individual == "ALO-01" else "PL_Tara_"
+		var form: String = preload("res://scripts/biology/plant_service.gd").new().seedling_form(record)
+		if form in ["seed", "cotyledon", "true_leaf"]:
+			asset = prefix + "Sprout"
+			stage_node = {"seed": "Stage_Seed", "cotyledon": "Stage_Cotyledon", "true_leaf": "Stage_TrueLeaf"}[form]
+		elif individual == "ALO-01":
+			asset = {"bud": "PL_Alo_Bud", "bloom": "PL_Alo_Bloom", "pollinated": "PL_Alo_Bloom"}.get(stage, "")
+		elif stage in ["bloom", "pollinated"]:
+			asset = "PL_Tara_Bloom"
+		asset = preload("res://scripts/world/campaign_room.gd").plant_stage_model(individual, stage, asset)
+	elif individual == "COTTON-01":
+		asset = {"seed": "PL_Cotton_Seed", "sprout": "PL_Cotton_Sprout", "seedling": "PL_Cotton_Seedling", "young": "PL_Cotton_Young", "young_plant": "PL_Cotton_Young"}.get(stage, "")
+	elif individual == "tara" and stage == "flowering":
+		asset = "PL_Tara_Bloom"
+	if asset.is_empty():
+		return
+	var model := AssetGeometry.load_glb("res://assets/plants/%s/%s.glb" % [asset, asset])
+	if model == null:
+		return
+	for part in model.find_children("Stage_*", "Node3D", true, false):
+		part.visible = String(part.name) == stage_node
+	var picture := TextureRect.new()
+	picture.name = "SpecimenPreview_" + individual
+	picture.custom_minimum_size.y = 190
+	picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	picture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	picture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(picture)
+	var viewport := SubViewport.new()
+	viewport.size = Vector2i(480, 300)
+	viewport.own_world_3d = true
+	viewport.transparent_bg = true
+	viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+	picture.add_child(viewport)
+	viewport.add_child(model)
+	var bounds := AssetGeometry.bounds(model)
+	var camera := Camera3D.new()
+	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
+	camera.size = maxf(bounds.size.y * 1.25, bounds.size.x)
+	viewport.add_child(camera)
+	camera.position = bounds.get_center() + Vector3(0, bounds.size.y * 0.1, maxf(bounds.size.y, 0.2) * 2)
+	camera.look_at(bounds.get_center())
+	var light := DirectionalLight3D.new()
+	light.rotation_degrees = Vector3(-25, -25, 0)
+	light.light_energy = 1.6
+	viewport.add_child(light)
+	var world := WorldEnvironment.new()
+	world.environment = Environment.new()
+	world.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	world.environment.ambient_light_color = Color.WHITE
+	world.environment.ambient_light_energy = 0.8
+	viewport.add_child(world)
+	picture.texture = viewport.get_texture()

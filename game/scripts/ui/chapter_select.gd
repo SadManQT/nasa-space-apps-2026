@@ -15,14 +15,12 @@ const AchievementsScript = preload("res://scripts/ui/achievements.gd")
 const ContentScript = preload("res://scripts/content/content_loader.gd")
 const ProgressionScript = preload("res://scripts/progression/cadet_progression.gd")
 const ShellScene = preload("res://scenes/ui/chapter_select/chapter_select.tscn")
-const StationArt = preload("res://assets/ui/title/aurora_cinematic.png")
 
 const CHAPTER_CATALOG := [
 	{
 		"chapter": 1,
 		"title": "Chapter 1 · Night One",
 		"subtitle": "36-hour south-polar commissioning night",
-		"key_art": "res://assets/ui/ch01_card.png",
 		"silhouette_hint": "Locked Chapter 1",
 		"missions": [
 			{"id": "EX-M0101", "title": "First True Leaf (Chamber One Calibration)"},
@@ -35,7 +33,6 @@ const CHAPTER_CATALOG := [
 		"chapter": 2,
 		"title": "Chapter 2 · Be the Bee",
 		"subtitle": "Cross-pollination and the five-frame recorder strip",
-		"key_art": "res://assets/ui/ch02_card.png",
 		"silhouette_hint": "Complete Chapter 1 to reveal Chapter 2",
 		"missions": [
 			{"id": "EX-M0201", "title": "Morning in the Greenhouse"},
@@ -48,7 +45,6 @@ const CHAPTER_CATALOG := [
 		"chapter": 3,
 		"title": "Chapter 3 · Moonquake",
 		"subtitle": "Shallow tremor fault isolation and 42 founder seeds",
-		"key_art": "res://assets/ui/ch03_card.png",
 		"silhouette_hint": "Complete Chapter 2 to reveal Chapter 3",
 		"missions": [
 			{"id": "EX-M0301", "title": "Seismic Ringing"},
@@ -61,7 +57,6 @@ const CHAPTER_CATALOG := [
 		"chapter": 4,
 		"title": "Chapter 4 · Into the Cold Trap",
 		"subtitle": "Ridge survey beacons, VIPER slope route and the −183 °C vault",
-		"key_art": "res://assets/ui/ch04_card.png",
 		"silhouette_hint": "Complete Chapter 3 to reveal Chapter 4",
 		"missions": [
 			{"id": "EX-M0401", "title": "Three Beacons on the Ridge"},
@@ -74,7 +69,6 @@ const CHAPTER_CATALOG := [
 		"chapter": 5,
 		"title": "Chapter 5 · Shooting Stars",
 		"subtitle": "Two-telescope flash coincidence and founder seed stewardship",
-		"key_art": "res://assets/ui/ch05_card.png",
 		"silhouette_hint": "Complete Chapter 4 to reveal Chapter 5",
 		"missions": [
 			{"id": "EX-M0501", "title": "Night Watch Cameras"},
@@ -87,7 +81,6 @@ const CHAPTER_CATALOG := [
 		"chapter": 6,
 		"title": "Chapter 6 · The Red Ring",
 		"subtitle": "Five-hour total lunar eclipse budget and feeder fault isolation",
-		"key_art": "res://assets/ui/ch06_card.png",
 		"silhouette_hint": "Complete Chapter 5 to reveal Chapter 6",
 		"missions": [
 			{"id": "EX-M0601", "title": "Earth's Shadow Approaches"},
@@ -100,7 +93,6 @@ const CHAPTER_CATALOG := [
 		"chapter": 7,
 		"title": "Chapter 7 · The Great Storm",
 		"subtitle": "Solar particle shelter run and two-hop relay restoration",
-		"key_art": "res://assets/ui/ch07_card.png",
 		"silhouette_hint": "Complete Chapter 6 to reveal Chapter 7",
 		"missions": [
 			{"id": "EX-M0701", "title": "Proton Flux Alert"},
@@ -113,7 +105,6 @@ const CHAPTER_CATALOG := [
 		"chapter": 8,
 		"title": "Chapter 8 · Mons Malapert",
 		"subtitle": "The 120 km relay road and dual-link summit transmission",
-		"key_art": "res://assets/ui/ch08_card.png",
 		"silhouette_hint": "Complete Chapter 7 to reveal Chapter 8",
 		"missions": [
 			{"id": "EX-M0801", "title": "Pack for the Long Road"},
@@ -155,7 +146,9 @@ var _body: VBoxContainer
 var _status_label: Label
 var _catalog: Dictionary = ContentScript.load_full()
 var _selected_mission := ""
-var _route_bar: HBoxContainer
+var _route_bar: Control
+var _chapter_cards: GridContainer
+var _locked_art: Texture2D
 var _selection_title: Label
 var _selection_description: Label
 var _selection_button: Button
@@ -194,7 +187,16 @@ func _build_ui() -> void:
 	_scroll = shell.find_child("ChapterSelectScroll", true, false) as ScrollContainer
 	_body = shell.find_child("ChapterSelectBody", true, false) as VBoxContainer
 	_status_label = shell.find_child("ChapterSelectStatus", true, false) as Label
-	_route_bar = shell.find_child("ChapterRoute", true, false) as HBoxContainer
+	_route_bar = shell.find_child("ChapterRoute", true, false) as Control
+	_chapter_cards = shell.find_child("ChapterCardsGrid", true, false) as GridContainer
+	_locked_art = _chapter_cards.get_node("ChapterCard_8/Art").texture
+	_route_bar.resized.connect(func() -> void:
+		(_route_bar.get_node("TimelineCurve") as Line2D).scale.x = _route_bar.size.x / 1208.0)
+	for number in range(1, 9):
+		var step := _route_bar.get_node("ChapterStep_%d" % number) as Button
+		step.pressed.connect(func() -> void: select_chapter(number))
+		var card := _chapter_cards.get_node("ChapterCard_%d" % number)
+		(card.find_child("OpenChapter_%d" % number, true, false) as Button).pressed.connect(func() -> void: select_chapter(number))
 	_selection_title = shell.find_child("SelectionTitle", true, false) as Label
 	_selection_description = shell.find_child("SelectionDescription", true, false) as Label
 	_selection_button = shell.find_child("InspectSelectedChapter", true, false) as Button
@@ -231,6 +233,7 @@ func show_tab(tab_id: String) -> void:
 		tab.add_theme_color_override("font_color", UiDesign.colour("ink" if selected else "ivory"))
 		tab.add_theme_color_override("font_focus_color", UiDesign.colour("ink" if selected else "ivory"))
 	_route_bar.visible = active_tab == "chapters"
+	_chapter_cards.visible = active_tab == "chapters"
 	_selection_button.visible = active_tab == "chapters"
 	_selection_title.text = String(_chapter_spec(selected_chapter).title)
 	_selection_description.text = String(_chapter_spec(selected_chapter).subtitle) if active_tab == "chapters" else ("Your training record and twelve science competencies." if active_tab == "progress" else "Skills earned through real decisions in your expedition.")
@@ -259,64 +262,29 @@ func select_chapter(chapter_num: int) -> bool:
 func _render_chapters_tab() -> void:
 	var max_ch := unlocked_up_to_chapter()
 	selected_chapter = clampi(selected_chapter, 1, max_ch)
-	for child in _route_bar.get_children():
-		_route_bar.remove_child(child)
-		child.queue_free()
 	for number in range(1, 9):
-		var step := UiDesign.button("%02d" % number)
-		step.name = "ChapterStep_%d" % number
-		step.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		step.disabled = number > max_ch
-		step.pressed.connect(func() -> void: select_chapter(number))
-		_route_bar.add_child(step)
-
-	var grid := GridContainer.new()
-	grid.name = "ChapterCardsGrid"
-	grid.columns = 3
-	grid.add_theme_constant_override("h_separation", 18)
-	grid.add_theme_constant_override("v_separation", 18)
-	_body.add_child(grid)
-
-	for base in CHAPTER_CATALOG:
-		var row := _chapter_spec(int(base.chapter))
-		var ch_num := int(row.chapter)
-		var unlocked := ch_num <= max_ch
-		var card := UiDesign.glass_panel(UiDesign.colour("accent" if (unlocked and ch_num == selected_chapter) else "glass_edge"), 14)
-		card.name = "ChapterCard_%d" % ch_num
-		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		grid.add_child(card)
-
-		var box := VBoxContainer.new()
-		box.add_theme_constant_override("separation", 10)
-		card.add_child(box)
-
-		if unlocked:
-			var art := TextureRect.new()
-			art.custom_minimum_size.y = 154
-			art.texture = load(String(row.key_art)) if ResourceLoader.exists(String(row.key_art)) else StationArt
-			art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-			art.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			box.add_child(art)
-			box.add_child(UiDesign.label("CHAPTER %02d  ·  %s" % [ch_num, "SELECTED" if ch_num == selected_chapter else "AVAILABLE"], "caption", "accent"))
-			box.add_child(UiDesign.label(String(row.title), "heading"))
-			box.add_child(UiDesign.label(String(row.subtitle), "caption", "muted"))
-			var open_btn := UiDesign.button("View missions  ›")
-			open_btn.name = "OpenChapter_%d" % ch_num
-			open_btn.pressed.connect(func() -> void: select_chapter(ch_num))
-			box.add_child(open_btn)
-		else:
-			var silhouette := CenterContainer.new()
-			silhouette.custom_minimum_size.y = 154
-			box.add_child(silhouette)
-			silhouette.add_child(UiKit.icon("moon", "muted", 58))
-			box.add_child(UiDesign.label("CHAPTER %02d" % ch_num, "caption", "muted"))
-			box.add_child(UiDesign.label("Beyond the horizon", "heading", "muted"))
-			box.add_child(UiDesign.label(String(row.silhouette_hint), "caption", "muted"))
-			var locked_btn := UiDesign.button("Locked · Complete earlier chapters")
-			locked_btn.name = "OpenChapter_%d" % ch_num
-			locked_btn.disabled = true
-			box.add_child(locked_btn)
+		var row := _chapter_spec(number)
+		var unlocked := number <= max_ch
+		var selected := unlocked and number == selected_chapter
+		var step := _route_bar.get_node("ChapterStep_%d" % number) as Button
+		step.disabled = not unlocked
+		step.button_pressed = selected
+		step.tooltip_text = String(row.title) if unlocked else String(row.silhouette_hint)
+		var card := _chapter_cards.get_node("ChapterCard_%d" % number) as PanelContainer
+		var frame := card.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		frame.border_color = UiDesign.colour("accent" if selected else "glass_edge")
+		frame.set_border_width_all(3 if selected else 1)
+		card.add_theme_stylebox_override("panel", frame)
+		var art := card.get_node("Art") as TextureRect
+		art.texture = art.get_meta("unlocked_art") as Texture2D if unlocked else _locked_art
+		art.modulate = Color.WHITE if unlocked else Color(0.22, 0.26, 0.34, 1.0)
+		var title := card.find_child("Title", true, false) as Label
+		title.text = String(row.title).trim_prefix("Chapter %d - " % number).trim_prefix("Chapter %d · " % number) if unlocked else "Locked"
+		var subtitle := card.find_child("Subtitle", true, false) as Label
+		subtitle.text = String(row.subtitle) if unlocked else String(row.silhouette_hint)
+		var open_btn := card.find_child("OpenChapter_%d" % number, true, false) as Button
+		open_btn.text = "View missions" if unlocked else "Locked - Complete earlier chapters"
+		open_btn.disabled = not unlocked
 
 	# Selected chapter mission list with stars and best results
 	var chosen_spec := _chapter_spec(selected_chapter)
@@ -474,6 +442,8 @@ func _clear() -> void:
 	if _body == null:
 		return
 	for child in _body.get_children():
+		if child == _chapter_cards:
+			continue
 		_body.remove_child(child)
 		child.queue_free()
 	if _scroll != null:
@@ -489,9 +459,12 @@ func _finish_page() -> void:
 func _scale() -> void:
 	if not is_inside_tree():
 		return
-	var grid := find_child("ChapterCardsGrid", true, false) as GridContainer
-	if grid != null:
-		grid.columns = 2 if bool(settings.get("large_text", false)) or get_viewport_rect().size.x < 1000.0 else 3
+	var compact := bool(settings.get("large_text", false)) or get_viewport_rect().size.x < 1000.0
+	if _chapter_cards != null:
+		_chapter_cards.columns = 2 if compact else 3
+	(find_child("Tagline", true, false) as Control).visible = not compact
+	(find_child("ChapterRange", true, false) as Control).visible = not compact
+	(find_child("SelectionRule", true, false) as Control).visible = not compact
 	UiDesign.apply_type(self, get_viewport_rect().size.y, 1.5 if bool(settings.get("large_text", false)) else 1.0)
 
 func _restore_page_focus() -> void:

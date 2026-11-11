@@ -16,6 +16,11 @@ var table: MissionTablePanel
 var panels: CampaignPanels
 var store := Results.new()
 var _body: VBoxContainer
+var _catalog_body: VBoxContainer
+var _exercise_body: VBoxContainer
+var _exercise_panel: PanelContainer
+var _featured_cards: GridContainer
+var _scenario_grid: GridContainer
 var _scroll: ScrollContainer
 var _notice: Label
 var _entry: Dictionary = {}
@@ -60,13 +65,29 @@ func _ready() -> void:
 	add_child(shell)
 	_notice = shell.find_child("TrainerNotice", true, false) as Label
 	_scroll = shell.find_child("TrainerScroll", true, false) as ScrollContainer
-	_body = shell.find_child("TrainerBody", true, false) as VBoxContainer
+	_catalog_body = shell.find_child("CatalogBody", true, false) as VBoxContainer
+	_exercise_body = shell.find_child("ExerciseBody", true, false) as VBoxContainer
+	_exercise_panel = shell.find_child("ExercisePanel", true, false) as PanelContainer
+	_featured_cards = shell.find_child("FeaturedCards", true, false) as GridContainer
+	_scenario_grid = shell.find_child("ScenarioGrid", true, false) as GridContainer
+	_body = _catalog_body
 	_guide = shell.find_child("PracticeGuide", true, false) as Control
 	_back_button = shell.find_child("TrainerExit", true, false) as Button
 	_back_button.pressed.connect(func() -> void: exit_requested.emit() if _page == "catalog" else show_catalog())
 	for label_node in shell.find_children("*", "Label", true, false):
 		var label := label_node as Label
-		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), "muted" if label.get_meta("muted", false) else "ivory")
+		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), String(label.get_meta("lla_colour", "ink")))
+	(shell.find_child("StartPowerPractice", true, false) as Button).pressed.connect(func(): select_scenario("P-02"))
+	(shell.find_child("OpenMoonTrainer", true, false) as Button).pressed.connect(_open_moon_trainer)
+	(shell.find_child("CatalogExit", true, false) as Button).pressed.connect(func(): exit_requested.emit())
+	for image_node in _featured_cards.find_children("Image", "TextureRect", true, false):
+		var texture := (image_node as TextureRect).texture as AtlasTexture
+		var index: int = image_node.get_parent().get_parent().get_index()
+		var side := texture.atlas.get_width() / 3.0
+		texture.region = Rect2(index * side, 0, side, texture.atlas.get_height())
+	for row in catalog.scenarios:
+		var button := _catalog_body.find_child("Scenario_" + row.id, true, false) as Button
+		button.pressed.connect(func(): select_scenario(row.id))
 	table = TABLE_SCENE.instantiate()
 	add_child(table)
 	table.commit_requested.connect(_commit)
@@ -99,41 +120,16 @@ func show_catalog() -> void:
 	exercise = null
 	_entry = {}
 	_clear()
-	_text("Choose a training scenario", "heading")
-	_text("Available scenarios open in one click. Others are coming soon.")
-	_catalog_card("Open Moon Trainer", "Free surface sorties & rover · Available", "OpenMoonTrainer", "moon", _open_moon_trainer)
-	for group in catalog.groups:
-		_text(catalog.groups[group], "heading")
-		for row in catalog.scenarios:
-			if row.demand != group:
-				continue
-			var available: bool = row.get("adapter", "") == "p02"
-			var saved: Dictionary = store.results.get(row.id, {})
-			var detail: String = "Available · Start practice" if available else "Coming soon"
-			if not saved.is_empty():
-				detail += " · Last result: %d of 3 stars" % int(saved.star_count)
-			_catalog_card(row.title, detail, "Scenario_" + row.id, "power" if group == "power" else ("plant" if group == "food" else ("shielding" if group == "shielding" else "life")), func(): select_scenario(row.id), not available)
+	for row in catalog.scenarios:
+		var button := _catalog_body.find_child("Scenario_" + row.id, true, false) as Button
+		var available: bool = row.get("adapter", "") == "p02"
+		var saved: Dictionary = store.results.get(row.id, {})
+		var detail: String = "Available · Start practice" if available else "Coming soon"
+		if not saved.is_empty():
+			detail += " · Last result: %d of 3 stars" % int(saved.star_count)
+		button.text = row.title + "\n" + catalog.groups[row.demand] + " · " + detail
+		button.disabled = not available
 	_finish_page()
-
-func _catalog_card(title: String, detail: String, id: String, icon_kind: String, action: Callable, disabled: bool = false) -> void:
-	var button := UiDesign.button(title + "\n" + detail, 96)
-	button.name = id
-	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	button.disabled = disabled
-	button.pressed.connect(action)
-	for state in ["normal", "disabled", "hover", "pressed"]:
-		var highlighted: bool = state == "hover" or state == "pressed"
-		var style := UiDesign.button_style(UiDesign.colour("accent" if highlighted else "navy").darkened(0.15 if disabled else 0.0), highlighted)
-		style.content_margin_left = 62
-		style.content_margin_right = 20
-		style.content_margin_top = 16
-		style.content_margin_bottom = 16
-		button.add_theme_stylebox_override(state, style)
-	var icon := UiKit.icon(icon_kind, "muted" if disabled else "accent", 28)
-	icon.position = Vector2(18, 32)
-	button.add_child(icon)
-	_body.add_child(button)
 
 func select_scenario(id: String) -> bool:
 	for row in catalog.scenarios:
@@ -238,9 +234,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _clear() -> void:
-	for child in _body.get_children():
-		_body.remove_child(child)
+	for child in _exercise_body.get_children():
+		_exercise_body.remove_child(child)
 		child.queue_free()
+	_catalog_body.visible = _page == "catalog"
+	_exercise_panel.visible = _page != "catalog"
+	_body = _catalog_body if _page == "catalog" else _exercise_body
 	_scroll.scroll_vertical = 0
 
 func _text(value: String, token: String = "body") -> void:
@@ -261,6 +260,8 @@ func _finish_page() -> void:
 
 func _scale() -> void:
 	_guide.visible = _page == "catalog" and not bool(settings.get("large_text", false)) and get_viewport_rect().size.x >= 1100
+	_featured_cards.columns = 1 if get_viewport_rect().size.x < 800 else 3
+	_scenario_grid.columns = 1 if get_viewport_rect().size.x < 900 else 2
 	UiDesign.apply_type(self, get_viewport_rect().size.y, 1.5 if settings.get("large_text", false) else 1.0, [table, panels])
 
 func _restore_page_focus(reading_start: bool = false) -> void:
@@ -270,19 +271,18 @@ func _restore_page_focus(reading_start: bool = false) -> void:
 		_scroll.grab_focus()
 		_scroll.scroll_vertical = 0
 		return
-	for child in _body.get_children():
-		if child is Button and not child.disabled:
+	for child in _body.find_children("*", "Button", true, false):
+		if not child.disabled:
 			child.grab_focus()
 			_scroll.scroll_vertical = 0
 			return
 
 func _set_page_enabled(enabled: bool) -> void:
 	_back_button.disabled = not enabled
-	for child in _body.get_children():
-		if child is Button:
-			if not enabled and not child.has_meta("trainer_disabled"):
-				child.set_meta("trainer_disabled", child.disabled)
-				child.disabled = true
-			elif enabled and child.has_meta("trainer_disabled"):
-				child.disabled = child.get_meta("trainer_disabled")
-				child.remove_meta("trainer_disabled")
+	for child in _body.find_children("*", "Button", true, false):
+		if not enabled and not child.has_meta("trainer_disabled"):
+			child.set_meta("trainer_disabled", child.disabled)
+			child.disabled = true
+		elif enabled and child.has_meta("trainer_disabled"):
+			child.disabled = child.get_meta("trainer_disabled")
+			child.remove_meta("trainer_disabled")

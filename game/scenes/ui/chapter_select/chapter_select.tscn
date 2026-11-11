@@ -1,33 +1,128 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Theme" path="res://resources/ui/lla_theme.tres" id="1_theme"]
 [ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="2_mark"]
 [ext_resource type="Texture2D" path="res://assets/ui/title/aurora_cinematic.png" id="3_atmosphere"]
+[ext_resource type="Texture2D" path="res://assets/ui/proposal/practice_atlas.png" id="4_art"]
+
+[sub_resource type="AtlasTexture" id="Art_power"]
+atlas = ExtResource("4_art")
+region = Rect2(0, 0, 682, 682)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Art_terrain"]
+atlas = ExtResource("4_art")
+region = Rect2(682, 0, 682, 682)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Art_garden"]
+atlas = ExtResource("4_art")
+region = Rect2(1364, 0, 682, 682)
+filter_clip = true
 
 [sub_resource type="StyleBoxFlat" id="Style_card"]
-content_margin_left = 18.0
-content_margin_top = 16.0
-content_margin_right = 18.0
-content_margin_bottom = 16.0
-bg_color = Color(0.07, 0.1, 0.16, 0.96)
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.045, 0.065, 0.105, 0.96)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.31, 0.38, 0.47, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_left = 8
-corner_radius_bottom_right = 8
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_left = 16
+corner_radius_bottom_right = 16
 
-[sub_resource type="StyleBoxFlat" id="Style_active"]
-content_margin_left = 16.0
-content_margin_right = 16.0
-bg_color = Color(0.96, 0.74, 0.19, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_left = 8
-corner_radius_bottom_right = 8
+[sub_resource type="StyleBoxFlat" id="Style_card_selected"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.045, 0.065, 0.105, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.96, 0.77, 0.32, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_left = 16
+corner_radius_bottom_right = 16
+
+[sub_resource type="StyleBoxFlat" id="Style_footer"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(0.065, 0.095, 0.155, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.31, 0.38, 0.47, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_left = 14
+corner_radius_bottom_right = 14
+
+[sub_resource type="StyleBoxFlat" id="Style_marker"]
+bg_color = Color(0.09, 0.13, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.96, 0.77, 0.32, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_left = 24
+corner_radius_bottom_right = 24
+
+[sub_resource type="StyleBoxFlat" id="Style_marker_active"]
+bg_color = Color(0.96, 0.77, 0.32, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.98, 0.95, 0.85, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_left = 24
+corner_radius_bottom_right = 24
+
+[sub_resource type="StyleBoxFlat" id="Style_marker_locked"]
+bg_color = Color(0.06, 0.085, 0.13, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.49, 0.56, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_left = 24
+corner_radius_bottom_right = 24
+
+[sub_resource type="StyleBoxFlat" id="Style_primary"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.96, 0.77, 0.32, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="Gradient" id="Gradient_shade"]
+offsets = PackedFloat32Array(0, 0.42, 1)
+colors = PackedColorArray(0.025, 0.04, 0.07, 0, 0.025, 0.04, 0.07, 0.25, 0.025, 0.04, 0.07, 1)
+
+[sub_resource type="GradientTexture2D" id="Texture_shade"]
+gradient = SubResource("Gradient_shade")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
 
 [node name="ChapterSelectShell" type="Control"]
 layout_mode = 3
@@ -58,7 +153,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.025, 0.04, 0.075, 0.92)
+color = Color(0.025, 0.04, 0.075, 0.82)
 
 [node name="SafeArea" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -68,13 +163,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 36
-theme_override_constants/margin_top = 24
+theme_override_constants/margin_top = 18
 theme_override_constants/margin_right = 36
-theme_override_constants/margin_bottom = 24
+theme_override_constants/margin_bottom = 18
 
 [node name="Page" type="VBoxContainer" parent="SafeArea"]
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 10
 
 [node name="Header" type="HBoxContainer" parent="SafeArea/Page"]
 layout_mode = 2
@@ -93,11 +188,15 @@ layout_mode = 2
 
 [node name="Academy" type="Label" parent="SafeArea/Page/Header"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "LAST LIGHT
-ACADEMY"
-theme_override_font_sizes/font_size = 22
+text = "LAST LIGHT\nACADEMY"
 metadata/lla_type = "heading"
+
+[node name="Tagline" type="Label" parent="SafeArea/Page/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "A LUNAR SCIENCE ADVENTURE\nAT AURORA STATION"
+metadata/lla_type = "caption"
+metadata/muted = true
 
 [node name="ChapterSelectTabs" type="HBoxContainer" parent="SafeArea/Page/Header"]
 layout_mode = 2
@@ -110,8 +209,6 @@ layout_mode = 2
 text = "Chapters"
 toggle_mode = true
 button_pressed = true
-theme_override_styles/normal = SubResource("Style_active")
-theme_override_colors/font_color = Color(0.025, 0.04, 0.06, 1)
 
 [node name="Tab_progress" type="Button" parent="SafeArea/Page/Header/ChapterSelectTabs"]
 custom_minimum_size = Vector2(142, 44)
@@ -128,75 +225,161 @@ toggle_mode = true
 [node name="Title" type="Label" parent="SafeArea/Page"]
 layout_mode = 2
 text = "Your expedition"
-theme_override_font_sizes/font_size = 40
 metadata/lla_type = "title"
 
 [node name="ChapterSelectStatus" type="Label" parent="SafeArea/Page"]
 layout_mode = 2
-text = "Your expedition begins with Chapter 1  ·  0 of 20 achievements earned"
+text = "Your expedition begins with Chapter 1  -  0 of 20 achievements earned"
 autowrap_mode = 2
 metadata/lla_type = "caption"
 metadata/muted = true
 
-[node name="ChapterRoute" type="HBoxContainer" parent="SafeArea/Page"]
+[node name="ChapterRoute" type="Control" parent="SafeArea/Page"]
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
-theme_override_constants/separation = 12
+mouse_filter = 2
 
-[node name="PreviewStep1" type="Button" parent="SafeArea/Page/ChapterRoute"]
-custom_minimum_size = Vector2(0, 44)
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="TimelineCurve" type="Line2D" parent="SafeArea/Page/ChapterRoute"]
+points = PackedVector2Array(24, 32, 75, 23, 130, 17, 185, 13, 240, 11, 295, 11, 350, 13, 405, 16, 460, 20, 515, 24, 570, 28, 625, 32, 680, 36, 735, 39, 790, 42, 845, 45, 900, 48, 955, 51, 1010, 54, 1065, 58, 1120, 62, 1184, 67)
+width = 2.5
+default_color = Color(0.96, 0.77, 0.32, 0.9)
+antialiased = true
+
+[node name="ChapterStep_1" type="Button" parent="SafeArea/Page/ChapterRoute"]
+layout_mode = 1
+anchor_left = 0
+anchor_right = 0
+offset_left = 0.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 56.0
 text = "01"
+toggle_mode = true
+button_pressed = true
 disabled = false
+theme_override_styles/normal = SubResource("Style_marker")
+theme_override_styles/pressed = SubResource("Style_marker_active")
+theme_override_styles/hover = SubResource("Style_marker_active")
+theme_override_styles/disabled = SubResource("Style_marker_locked")
 
-[node name="PreviewStep2" type="Button" parent="SafeArea/Page/ChapterRoute"]
-custom_minimum_size = Vector2(0, 44)
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="ChapterStep_2" type="Button" parent="SafeArea/Page/ChapterRoute"]
+layout_mode = 1
+anchor_left = 0.16
+anchor_right = 0.16
+offset_left = -24.0
+offset_top = -12.0
+offset_right = 24.0
+offset_bottom = 36.0
 text = "02"
+toggle_mode = true
+button_pressed = false
 disabled = true
+theme_override_styles/normal = SubResource("Style_marker")
+theme_override_styles/pressed = SubResource("Style_marker_active")
+theme_override_styles/hover = SubResource("Style_marker_active")
+theme_override_styles/disabled = SubResource("Style_marker_locked")
 
-[node name="PreviewStep3" type="Button" parent="SafeArea/Page/ChapterRoute"]
-custom_minimum_size = Vector2(0, 44)
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="ChapterStep_3" type="Button" parent="SafeArea/Page/ChapterRoute"]
+layout_mode = 1
+anchor_left = 0.32
+anchor_right = 0.32
+offset_left = -24.0
+offset_top = -6.0
+offset_right = 24.0
+offset_bottom = 42.0
 text = "03"
+toggle_mode = true
+button_pressed = false
 disabled = true
+theme_override_styles/normal = SubResource("Style_marker")
+theme_override_styles/pressed = SubResource("Style_marker_active")
+theme_override_styles/hover = SubResource("Style_marker_active")
+theme_override_styles/disabled = SubResource("Style_marker_locked")
 
-[node name="PreviewStep4" type="Button" parent="SafeArea/Page/ChapterRoute"]
-custom_minimum_size = Vector2(0, 44)
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="ChapterStep_4" type="Button" parent="SafeArea/Page/ChapterRoute"]
+layout_mode = 1
+anchor_left = 0.48
+anchor_right = 0.48
+offset_left = -24.0
+offset_top = 6.0
+offset_right = 24.0
+offset_bottom = 54.0
 text = "04"
+toggle_mode = true
+button_pressed = false
 disabled = true
+theme_override_styles/normal = SubResource("Style_marker")
+theme_override_styles/pressed = SubResource("Style_marker_active")
+theme_override_styles/hover = SubResource("Style_marker_active")
+theme_override_styles/disabled = SubResource("Style_marker_locked")
 
-[node name="PreviewStep5" type="Button" parent="SafeArea/Page/ChapterRoute"]
-custom_minimum_size = Vector2(0, 44)
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="ChapterStep_5" type="Button" parent="SafeArea/Page/ChapterRoute"]
+layout_mode = 1
+anchor_left = 0.61
+anchor_right = 0.61
+offset_left = -24.0
+offset_top = 15.0
+offset_right = 24.0
+offset_bottom = 63.0
 text = "05"
+toggle_mode = true
+button_pressed = false
 disabled = true
+theme_override_styles/normal = SubResource("Style_marker")
+theme_override_styles/pressed = SubResource("Style_marker_active")
+theme_override_styles/hover = SubResource("Style_marker_active")
+theme_override_styles/disabled = SubResource("Style_marker_locked")
 
-[node name="PreviewStep6" type="Button" parent="SafeArea/Page/ChapterRoute"]
-custom_minimum_size = Vector2(0, 44)
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="ChapterStep_6" type="Button" parent="SafeArea/Page/ChapterRoute"]
+layout_mode = 1
+anchor_left = 0.74
+anchor_right = 0.74
+offset_left = -24.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 72.0
 text = "06"
+toggle_mode = true
+button_pressed = false
 disabled = true
+theme_override_styles/normal = SubResource("Style_marker")
+theme_override_styles/pressed = SubResource("Style_marker_active")
+theme_override_styles/hover = SubResource("Style_marker_active")
+theme_override_styles/disabled = SubResource("Style_marker_locked")
 
-[node name="PreviewStep7" type="Button" parent="SafeArea/Page/ChapterRoute"]
-custom_minimum_size = Vector2(0, 44)
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="ChapterStep_7" type="Button" parent="SafeArea/Page/ChapterRoute"]
+layout_mode = 1
+anchor_left = 0.86
+anchor_right = 0.86
+offset_left = -24.0
+offset_top = 32.0
+offset_right = 24.0
+offset_bottom = 80.0
 text = "07"
+toggle_mode = true
+button_pressed = false
 disabled = true
+theme_override_styles/normal = SubResource("Style_marker")
+theme_override_styles/pressed = SubResource("Style_marker_active")
+theme_override_styles/hover = SubResource("Style_marker_active")
+theme_override_styles/disabled = SubResource("Style_marker_locked")
 
-[node name="PreviewStep8" type="Button" parent="SafeArea/Page/ChapterRoute"]
-custom_minimum_size = Vector2(0, 44)
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="ChapterStep_8" type="Button" parent="SafeArea/Page/ChapterRoute"]
+layout_mode = 1
+anchor_left = 1
+anchor_right = 1
+offset_left = -48.0
+offset_top = 43.0
+offset_right = 0.0
+offset_bottom = 91.0
 text = "08"
+toggle_mode = true
+button_pressed = false
 disabled = true
+theme_override_styles/normal = SubResource("Style_marker")
+theme_override_styles/pressed = SubResource("Style_marker_active")
+theme_override_styles/hover = SubResource("Style_marker_active")
+theme_override_styles/disabled = SubResource("Style_marker_locked")
 
 [node name="ChapterSelectScroll" type="ScrollContainer" parent="SafeArea/Page"]
 layout_mode = 2
@@ -216,110 +399,549 @@ theme_override_constants/h_separation = 18
 theme_override_constants/v_separation = 18
 
 [node name="ChapterCard_1" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("Style_card")
+clip_contents = true
+theme_override_styles/panel = SubResource("Style_card_selected")
 
-[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Art" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Contents"]
-custom_minimum_size = Vector2(0, 154)
+[node name="Art" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1"]
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("3_atmosphere")
+texture = SubResource("Art_garden")
 expand_mode = 1
 stretch_mode = 6
+modulate = Color(1, 1, 1, 1)
+metadata/unlocked_art = SubResource("Art_garden")
 
-[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Contents"]
+[node name="Shade" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Texture_shade")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Space" type="Control" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Margin/Contents"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Margin/Contents"]
 layout_mode = 2
 text = "CHAPTER 01"
 metadata/lla_type = "caption"
 
-[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Contents"]
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Margin/Contents"]
 layout_mode = 2
 text = "Night One"
 autowrap_mode = 2
 metadata/lla_type = "heading"
 
-[node name="Action" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Contents"]
+[node name="Subtitle" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Margin/Contents"]
+layout_mode = 2
+text = "36-hour south-polar commissioning night"
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="OpenChapter_1" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Margin/Contents"]
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 text = "View missions"
 disabled = false
 
 [node name="ChapterCard_2" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_horizontal = 3
+clip_contents = true
 theme_override_styles/panel = SubResource("Style_card")
 
-[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Horizon" type="ColorRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Contents"]
-custom_minimum_size = Vector2(0, 154)
+[node name="Art" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2"]
 layout_mode = 2
 mouse_filter = 2
-color = Color(0.045, 0.065, 0.1, 1)
+texture = SubResource("Art_terrain")
+expand_mode = 1
+stretch_mode = 6
+modulate = Color(0.22, 0.26, 0.34, 1)
+metadata/unlocked_art = SubResource("Art_power")
 
-[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Contents"]
+[node name="Shade" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Texture_shade")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Space" type="Control" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Margin/Contents"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Margin/Contents"]
 layout_mode = 2
 text = "CHAPTER 02"
 metadata/lla_type = "caption"
 
-[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Contents"]
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Margin/Contents"]
 layout_mode = 2
-text = "Beyond the horizon"
+text = "Locked"
 autowrap_mode = 2
 metadata/lla_type = "heading"
 
-[node name="Action" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Contents"]
+[node name="Subtitle" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Margin/Contents"]
+layout_mode = 2
+text = "Complete Chapter 1 to reveal Chapter 2"
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="OpenChapter_2" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Margin/Contents"]
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
-text = "Locked"
+text = "Locked - Complete earlier chapters"
 disabled = true
 
 [node name="ChapterCard_3" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_horizontal = 3
+clip_contents = true
 theme_override_styles/panel = SubResource("Style_card")
 
-[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Horizon" type="ColorRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Contents"]
-custom_minimum_size = Vector2(0, 154)
+[node name="Art" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3"]
 layout_mode = 2
 mouse_filter = 2
-color = Color(0.045, 0.065, 0.1, 1)
+texture = SubResource("Art_terrain")
+expand_mode = 1
+stretch_mode = 6
+modulate = Color(0.22, 0.26, 0.34, 1)
+metadata/unlocked_art = SubResource("Art_terrain")
 
-[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Contents"]
+[node name="Shade" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Texture_shade")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Space" type="Control" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Margin/Contents"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Margin/Contents"]
 layout_mode = 2
 text = "CHAPTER 03"
 metadata/lla_type = "caption"
 
-[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Contents"]
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Margin/Contents"]
 layout_mode = 2
-text = "Beyond the horizon"
+text = "Locked"
 autowrap_mode = 2
 metadata/lla_type = "heading"
 
-[node name="Action" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Contents"]
+[node name="Subtitle" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Margin/Contents"]
+layout_mode = 2
+text = "Complete Chapter 2 to reveal Chapter 3"
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="OpenChapter_3" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Margin/Contents"]
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
+text = "Locked - Complete earlier chapters"
+disabled = true
+
+[node name="ChapterCard_4" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+clip_contents = true
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Art" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_4"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Art_terrain")
+expand_mode = 1
+stretch_mode = 6
+modulate = Color(0.22, 0.26, 0.34, 1)
+metadata/unlocked_art = SubResource("Art_terrain")
+
+[node name="Shade" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_4"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Texture_shade")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_4"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_4/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Space" type="Control" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_4/Margin/Contents"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_4/Margin/Contents"]
+layout_mode = 2
+text = "CHAPTER 04"
+metadata/lla_type = "caption"
+
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_4/Margin/Contents"]
+layout_mode = 2
 text = "Locked"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Subtitle" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_4/Margin/Contents"]
+layout_mode = 2
+text = "Complete Chapter 3 to reveal Chapter 4"
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="OpenChapter_4" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_4/Margin/Contents"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Locked - Complete earlier chapters"
+disabled = true
+
+[node name="ChapterCard_5" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+clip_contents = true
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Art" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_5"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Art_terrain")
+expand_mode = 1
+stretch_mode = 6
+modulate = Color(0.22, 0.26, 0.34, 1)
+metadata/unlocked_art = SubResource("Art_garden")
+
+[node name="Shade" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_5"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Texture_shade")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_5"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_5/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Space" type="Control" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_5/Margin/Contents"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_5/Margin/Contents"]
+layout_mode = 2
+text = "CHAPTER 05"
+metadata/lla_type = "caption"
+
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_5/Margin/Contents"]
+layout_mode = 2
+text = "Locked"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Subtitle" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_5/Margin/Contents"]
+layout_mode = 2
+text = "Complete Chapter 4 to reveal Chapter 5"
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="OpenChapter_5" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_5/Margin/Contents"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Locked - Complete earlier chapters"
+disabled = true
+
+[node name="ChapterCard_6" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+clip_contents = true
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Art" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_6"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Art_terrain")
+expand_mode = 1
+stretch_mode = 6
+modulate = Color(0.22, 0.26, 0.34, 1)
+metadata/unlocked_art = SubResource("Art_power")
+
+[node name="Shade" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_6"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Texture_shade")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_6"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_6/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Space" type="Control" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_6/Margin/Contents"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_6/Margin/Contents"]
+layout_mode = 2
+text = "CHAPTER 06"
+metadata/lla_type = "caption"
+
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_6/Margin/Contents"]
+layout_mode = 2
+text = "Locked"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Subtitle" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_6/Margin/Contents"]
+layout_mode = 2
+text = "Complete Chapter 5 to reveal Chapter 6"
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="OpenChapter_6" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_6/Margin/Contents"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Locked - Complete earlier chapters"
+disabled = true
+
+[node name="ChapterCard_7" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+clip_contents = true
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Art" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_7"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Art_terrain")
+expand_mode = 1
+stretch_mode = 6
+modulate = Color(0.22, 0.26, 0.34, 1)
+metadata/unlocked_art = SubResource("Art_power")
+
+[node name="Shade" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_7"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Texture_shade")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_7"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_7/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Space" type="Control" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_7/Margin/Contents"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_7/Margin/Contents"]
+layout_mode = 2
+text = "CHAPTER 07"
+metadata/lla_type = "caption"
+
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_7/Margin/Contents"]
+layout_mode = 2
+text = "Locked"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Subtitle" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_7/Margin/Contents"]
+layout_mode = 2
+text = "Complete Chapter 6 to reveal Chapter 7"
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="OpenChapter_7" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_7/Margin/Contents"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Locked - Complete earlier chapters"
+disabled = true
+
+[node name="ChapterCard_8" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+clip_contents = true
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Art" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_8"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Art_terrain")
+expand_mode = 1
+stretch_mode = 6
+modulate = Color(0.22, 0.26, 0.34, 1)
+metadata/unlocked_art = SubResource("Art_terrain")
+
+[node name="Shade" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_8"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("Texture_shade")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_8"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_8/Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Space" type="Control" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_8/Margin/Contents"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_8/Margin/Contents"]
+layout_mode = 2
+text = "CHAPTER 08"
+metadata/lla_type = "caption"
+
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_8/Margin/Contents"]
+layout_mode = 2
+text = "Locked"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Subtitle" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_8/Margin/Contents"]
+layout_mode = 2
+text = "Complete Chapter 7 to reveal Chapter 8"
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="OpenChapter_8" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_8/Margin/Contents"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Locked - Complete earlier chapters"
 disabled = true
 
 [node name="Selection" type="PanelContainer" parent="SafeArea/Page"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("Style_card")
+theme_override_styles/panel = SubResource("Style_footer")
 
 [node name="Contents" type="HBoxContainer" parent="SafeArea/Page/Selection"]
 layout_mode = 2
 theme_override_constants/separation = 20
+
+[node name="ChapterRange" type="Label" parent="SafeArea/Page/Selection/Contents"]
+custom_minimum_size = Vector2(155, 0)
+layout_mode = 2
+text = "CHAPTERS 1-8"
+metadata/lla_type = "body"
+
+[node name="SelectionRule" type="VSeparator" parent="SafeArea/Page/Selection/Contents"]
+layout_mode = 2
 
 [node name="Text" type="VBoxContainer" parent="SafeArea/Page/Selection/Contents"]
 layout_mode = 2
@@ -328,7 +950,7 @@ theme_override_constants/separation = 6
 
 [node name="SelectionTitle" type="Label" parent="SafeArea/Page/Selection/Contents/Text"]
 layout_mode = 2
-text = "Chapter 1 · Night One"
+text = "Chapter 1 - Night One"
 autowrap_mode = 2
 metadata/lla_type = "heading"
 
@@ -340,13 +962,16 @@ metadata/lla_type = "caption"
 metadata/muted = true
 
 [node name="InspectSelectedChapter" type="Button" parent="SafeArea/Page/Selection/Contents"]
-custom_minimum_size = Vector2(170, 44)
+custom_minimum_size = Vector2(190, 48)
 layout_mode = 2
 size_flags_vertical = 4
 text = "View mission list"
+theme_override_styles/normal = SubResource("Style_primary")
+theme_override_colors/font_color = Color(0.025, 0.04, 0.06, 1)
+theme_override_colors/font_focus_color = Color(0.025, 0.04, 0.06, 1)
 
 [node name="ChapterSelectExit" type="Button" parent="SafeArea/Page/Selection/Contents"]
-custom_minimum_size = Vector2(120, 44)
+custom_minimum_size = Vector2(120, 48)
 layout_mode = 2
 size_flags_vertical = 4
 text = "Back (Esc)"
