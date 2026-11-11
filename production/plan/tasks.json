@@ -7374,7 +7374,8 @@
     "production/qa/evidence/M1-103*"
    ],
    "edit_files": [
-    "production/qa/evidence/M1-103_session_handoff_20261111.md"
+    "production/qa/evidence/M1-103_session_handoff_20261111.md",
+    "production/qa/evidence/M1-103_session_handoff_20261111_logs.zip"
    ]
   },
   {
