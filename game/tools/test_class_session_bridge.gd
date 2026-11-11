@@ -4,6 +4,8 @@ extends SceneTree
 
 const MainScript = preload("res://scripts/main.gd")
 const CampaignScript = preload("res://scripts/campaign/chapter1_campaign.gd")
+const ContentScript = preload("res://scripts/content/content_loader.gd")
+const DialogueScript = preload("res://scripts/dialogue/dialogue_service.gd")
 const SaveScript = preload("res://scripts/save/save_service.gd")
 const GateCatalog = preload("res://scripts/missions/chapter1_gate_catalog.gd")
 const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
@@ -34,6 +36,16 @@ func _run() -> void:
 	if not bool(restored.get("accepted", false)):
 		_finish()
 		return
+	var campaign: Chapter1Campaign = CampaignScript.new()
+	campaign.director = restored.director
+	campaign.route = restored.route
+	campaign.content = ContentScript.load_full()
+	campaign._dialogue = DialogueScript.new(campaign.content)
+	var crew_view: Dictionary = campaign.query().get("crew", {})
+	_check(crew_view == {"mode": "class", "players": 4} and typeof(crew_view.players) == TYPE_INT, "campaign query exposes a primitive Class/4 crew view")
+	crew_view["players"] = 2
+	_check(campaign.director.crew().players == 4, "mutating the query crew view cannot change the session crew")
+	campaign.free()
 	var route: RefCounted = restored.route
 	PlanFixture.prepare(route)
 	_reach(route, "EX-CH01-S07")

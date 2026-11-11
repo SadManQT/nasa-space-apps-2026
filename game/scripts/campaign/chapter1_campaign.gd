@@ -317,6 +317,7 @@ func _targets_for_scene() -> Array:
 
 func query() -> Dictionary:
 	var result := director.query()
+	result["crew"] = director.crew()
 	result["scene_id"] = route.current_scene_id()
 	result["mission_id"] = route.current_mission_id()
 	result["room_id"] = route.current_room_id()
