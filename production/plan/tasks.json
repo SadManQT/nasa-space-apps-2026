@@ -6769,7 +6769,7 @@
    "refs": [],
    "note": "10Nov ACTIVE BATCH: assigned to Atik; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by atik/codex on 2026-11-07.\nM1-23 final captures: Services entry wall35.45s Forward+/46.14s Compatibility, max frame180.723/92.312ms (distinguish long async wait from one blocked frame). Separate CPU-only probe reports22 ObjectDB/8 resources at exit after PASS; check pending look-ahead/loader teardown. Raw logs/JSON/CSV are retained; do not infer a deadlock or GPU cause without profiling.",
    "evidence": "",
-   "updated": "2026-11-10",
+   "updated": "2026-11-11",
    "prompt": "Observed during M1-23 native 1080p Forward+/Metal sweep on Apple M4/Godot4.7.2 at49bdcac/bc5eaf7 plus owned benchmark WIP. Fresh isolated user-data/cache-directory layout: title p95~9ms but first campaign transition duration7731.121ms and max process-frame interval7284.349ms. LoadTrace lists room_fixtures_doors LOC01 363.235ms and campaign_ui53.133ms, neither explains the full gap, so investigate native first draw/shader/font/pipeline work rather than guessing or claiming a threaded deadlock. Full headless61/61 including performance537 checks passes; it does not assess this native hitch. M1-23 retained final JSON/CSV/native log under production/qa/perf/M1-23_m4_2026-11-07 (final run timings may differ; use those actual values). Probe isolates first-use preferences and checkpoint, retains first-use frames and labels transition latency separately. Profile exact stages/main-thread/GPU behavior, keep animated loading presentation moving, preserve all assets/UI quality and real first-use costs. Own loading/campaign/performance only; request Sadman renderer/asset or Ramim UI work if measurements identify their path. Acceptance: reproduced then measured improved native first campaign entry on documented hardware, no masking warmup/threshold changes, screenshots/loading trace, appropriate runner green and independent review.",
    "reserved_for": "sadman",
    "effort": 2,
@@ -6799,7 +6799,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "Exact4.7.2 arm64 UUID5EF81F68-A5CB-3B0C-82FF-E288702E954D checked; no supplied matching dSYM or xctrace/Xcode, atos remains unnamed. Evidence8f58114 at resume_20261110/M1-92_MATCHING_TOOLS.md. Original title-only unsymbolicated stack is not campaign-cause proof; native campaign6607.878ms and prior timeout retained. Fresh headless performance582/0 and full99/117 do not identify native draw cause. Resume with matching native campaign profiling and controlled same-host before/after; no shader/GPU/deadlock cause or repair claimed."
+   "blocker": "11 Nov Sadman: reproduced on M4 (cold caches: title frame 24.2 s, first campaign frame 11.5 s; warm: 1.3 s / 0.48 s) and profiled with a debug-symbol 4.7.2 build: first-use Metal shader compilation (main thread in CAMetalLayer nextDrawable while MTLCompilerService compiles). Fix = export shader_baker, which needs Apple's Metal toolchain (Xcode); this Mac has only Command Line Tools and no room for Xcode. Evidence production/qa/perf/M1-92_sadman_20261111/README.md. Also fixed the export plugin that broke every exported build."
   },
   {
    "id": "M1-93",
