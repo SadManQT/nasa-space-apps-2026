@@ -1,0 +1,38 @@
+[
+  {
+    "path": "production/tools/test_verify_gate.py",
+    "git_blob": "23789146c4913b351c01f12c5189836385e31383",
+    "bytes": 1934,
+    "sha256": "db4d918c0fac015b0d423166fa42b107fa6032e786cb0deeb364e78e4feff072"
+  },
+  {
+    "path": "production/tools/verify_gate.py",
+    "git_blob": "4ea3aa0e38c90d6d23d4bc355a5f4207e6a8c5f5",
+    "bytes": 6638,
+    "sha256": "904acaad41583276cd0824b928c96e2122ef595d1f5fadabc03878816527ce6d"
+  },
+  {
+    "path": "production/qa/fun_2026-11-10.md",
+    "git_blob": "55cb2245cfb5e8a43a36e09df654e4c9f5675118",
+    "bytes": 9751,
+    "sha256": "5acf55283c3dc47787e4bbbbd956e887477c568ef80f05265c080ab1dcd929bd"
+  },
+  {
+    "path": "production/cutscenes/v8/src/CS-01.json",
+    "git_blob": "aea8ff72ce6630dca4b944aef6756a351e67b668",
+    "bytes": 1874,
+    "sha256": "208f4c2644fd8e1f1627ff79ae328036f50bc452d21b291a3fe1517cb8b37ceb"
+  },
+  {
+    "path": "game-design/08_PUZZLE_DESIGNS.md",
+    "git_blob": "e18af6f541d84a69149b1b4ac64afd7e40da90fc",
+    "bytes": 50217,
+    "sha256": "a3be0876662ce81fe53b83a3bb8918885bd121fc6f5170402ab707437b2ff44f"
+  },
+  {
+    "path": "production/ASSET_REGISTRY.csv",
+    "git_blob": "8eb9f2a708bf277ba5cc8c555ee92f3d4503f29c",
+    "bytes": 109030,
+    "sha256": "31c9d212df7dfdce0a13ab45a58424894326971073bff45cbfa61597c3ad8038"
+  }
+]

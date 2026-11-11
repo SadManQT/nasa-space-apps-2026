@@ -1,0 +1,16 @@
+{
+  "exists": true,
+  "file_count": 2775,
+  "global_script_class_cache.cfg": {
+    "bytes": 14275,
+    "sha256": "8b2f453699b9c1c36a7450d9d6ef3c8941ff52ff3f60beac7188169ee72fd2a5"
+  },
+  "uid_cache.bin": {
+    "bytes": 81618,
+    "sha256": "5b7b160d979d4055f51784561cc1ace8ef98601b1db98cea3f0809ee7a0d4306"
+  },
+  "editor/filesystem_cache10": {
+    "bytes": 332743,
+    "sha256": "bd0b5cbc3822733dfc0fab30eca79152fbfc7326a858f50dfa1ba957051ba962"
+  }
+}
