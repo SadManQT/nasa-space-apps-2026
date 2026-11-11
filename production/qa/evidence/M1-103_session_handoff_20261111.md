@@ -51,3 +51,9 @@ This session ran `game/tools/run_tests.sh class_session_bridge` on isolated upst
 - Raw cold/warm setup and runner logs, the exact existing-source bridge log, the earlier full-run failures and a source/provenance manifest are retained in [M1-103_session_handoff_20261111_logs.zip](M1-103_session_handoff_20261111_logs.zip). The archive distinguishes this session's results from the historical full run.
 
 No full current-source gate, later-puzzle physical/UI pass or manual acceptance is claimed. The blocking next action remains a specific session/file handoff, followed by integrating and testing the saved implementation. No task has been marked Done by this continuation.
+
+## Subsequent confirmed handoff
+
+The user has now answered **"Take over; earlier session stays stopped."** Session `01a1caac` is the receiving writer for M1-103/M1-105 in `asif-finish`, published in `be968553`, with exact test/evidence reservations. The provider source and its uncommitted diff were integrated against upstream `9eab3e50` with a three-way merge; the saved provider worktree and original checkout remain untouched. The earlier pending-handoff text above is a historical checkpoint, not a current blocker.
+
+The new provider passes the actual physical Class guard **61/0**, existing Class UI **60/0**, session bridge **43/0** (`3/3 suites passed`). Chapter 2 focused coverage passes **4/4**; the additional rejected-preview fix passes **51/0**, **1/1**. Current results and remaining full/UI acceptance are maintained in [M1-103.md](M1-103.md) and [M1-105.md](M1-105.md). The unrelated M4-22 shared UI reservation remains in force.

@@ -14,6 +14,9 @@ func _init() -> void:
 	if not storage.setup("chapter2_input_bridge"):
 		quit(1)
 		return
+	if DisplayServer.get_name() != "headless" and not storage.prepare_rendering_cache():
+		quit(1)
+		return
 	call_deferred("_run")
 
 func _run() -> void:
@@ -34,12 +37,28 @@ func _run() -> void:
 	var opened: Dictionary = campaign.interact_nearby()
 	_check(bool(opened.get("chapter2_panel_requested", false)) and requests.size() == 1 and requests[0].target_id == id, "real nearby USE requests P-03 panel")
 	_check(requests[0].action == "p03_scan_tara" and requests[0].progress is Dictionary and requests[0].input_revision == before.state_revision, "provider receives current primitive view")
+	_check(String(campaign._chapter2_pending.get("scene_id", "")) == "EX-CH02-S04", "open panel is bound to the exact current scene")
 	_check(campaign.director.snapshot() == before and campaign.route.snapshot() == route_before, "opening is read only")
 	_check(not campaign.preview_chapter2_choice(id, {}).get("accepted", false), "preview requires open paused modal")
 	campaign.set_ui_paused(true)
+	campaign._chapter2_pending["scene_id"] = "EX-CH02-S03"
+	_check(not campaign.preview_chapter2_choice(id, {}).get("accepted", false), "a stale scene binding cannot preview")
+	campaign._chapter2_pending["scene_id"] = campaign.route.current_scene_id()
 	var forecast: Dictionary = campaign.preview_chapter2_choice(id, {})
 	_check(bool(forecast.get("accepted", false)) and forecast.input_revision == before.state_revision, "paused modal previews through the real restored route")
 	_check(campaign.director.snapshot().receipts == before.receipts and campaign.route.snapshot() == route_before, "preview has no live receipt or puzzle progress")
+	var approach_position: Vector3 = campaign._player.global_position
+	campaign._player.global_position += Vector3(0, 0, 20)
+	await physics_frame
+	_check(not campaign.preview_chapter2_choice(id, {}).get("accepted", false) and campaign._chapter2_pending.get("previewed", "stale") == null, "moving away during a paused panel invalidates its preview")
+	campaign._player.global_position = approach_position
+	await physics_frame
+	var camera: Camera3D = campaign._player.follow_camera.camera
+	var target_node: Node3D = campaign.physical_target(id)
+	camera.look_at(camera.global_position + (camera.global_position - target_node.global_position))
+	_check(not campaign.preview_chapter2_choice(id, {}).get("accepted", false), "looking away during a paused panel cannot preview the target")
+	camera.look_at(target_node.global_position)
+	_check(bool(campaign.preview_chapter2_choice(id, {}).get("accepted", false)), "returning to the same physical target requires a fresh preview")
 	_check(not campaign.confirm_chapter2_choice(id, {}).get("accepted", false), "paused modal cannot commit")
 	campaign.set_ui_paused(false)
 	campaign._player.global_position += Vector3(0, 0, 20)
@@ -80,6 +99,15 @@ func _run() -> void:
 	_check(not recorder.preview_chapter2_choice(token_id, {"value": "2035-04"}).get("accepted", false), "wrong plausible token is held")
 	_check(recorder.director.snapshot() == token_before, "wrong and missing previews do not mutate")
 	_check(bool(recorder.preview_chapter2_choice(token_id, {"value": "2034-04"}).get("accepted", false)), "source-supported token previews")
+	_check(not recorder.preview_chapter2_choice("assign_device_token", {"value": "HORT-01"}).get("accepted", false) and recorder._chapter2_pending.get("previewed", "stale") == null, "a preview for another target invalidates the earlier accepted choice")
+	recorder.set_ui_paused(false)
+	_check(not recorder.confirm_chapter2_choice(token_id, {"value": "2034-04"}).get("accepted", false), "wrong-target rejection cannot leave the previous preview reusable")
+	recorder.set_ui_paused(true)
+	_check(bool(recorder.preview_chapter2_choice(token_id, {"value": "2034-04"}).get("accepted", false)), "the current target previews again after a wrong-target request")
+	recorder.set_ui_paused(false)
+	_check(not recorder.preview_chapter2_choice(token_id, {"value": "2034-04"}).get("accepted", false) and recorder._chapter2_pending.get("previewed", "stale") == null, "an unpaused preview request also forgets the accepted payload")
+	recorder.set_ui_paused(true)
+	_check(bool(recorder.preview_chapter2_choice(token_id, {"value": "2034-04"}).get("accepted", false)), "the paused panel must provide a fresh preview")
 	_check(not recorder.preview_chapter2_choice(token_id, {"value": 42}).get("accepted", false), "malformed later choice is rejected")
 	recorder.set_ui_paused(false)
 	_check(not recorder.confirm_chapter2_choice(token_id, {"value": "2034-04"}).get("accepted", false), "malformed later choice clears the earlier accepted preview")
@@ -99,9 +127,41 @@ func _run() -> void:
 	_check(not recorder.confirm_chapter2_choice(token_id, {"value": "2034-04"}).get("accepted", false) and recorder.route.snapshot().p04.mapping.is_empty(), "cancel leaves puzzle unsolved")
 	recorder.free()
 	await process_frame
+	if OS.get_cmdline_user_args().has("--capture") and DisplayServer.get_name() != "headless":
+		await _capture_panels()
 	_finish()
 
-func _spawn(scene_id: String) -> Chapter1Campaign:
+## The actual HUD consumer is kept attached for native evidence. No fixture
+## panel substitutes for nearby USE, its paused preview or its lock-in path.
+func _capture_panels() -> void:
+	for spec in [
+		["EX-CH02-S04", "p03_scan_tara", "option", "reciprocal", "M1-105_p03_provider_preview.png"],
+		["EX-CH02-S09", "assign_date_token", "option", "2034-04", "M1-105_p04_provider_preview.png"],
+	]:
+		var campaign := await _spawn(spec[0], false)
+		if campaign == null:
+			continue
+		await _near(campaign, spec[1])
+		var before: Dictionary = campaign.director.snapshot()
+		_check(bool(campaign.interact_nearby().get("chapter2_panel_requested", false)), "native nearby USE opens the actual Chapter 2 HUD panel")
+		await process_frame
+		var panel: Chapter2PuzzlePanel = campaign.hud.chapter2_panel
+		_check(panel.is_open(), "native Chapter 2 panel is visible")
+		panel.choose(spec[2], spec[3])
+		_check(bool(panel.try_it().get("accepted", false)), "native selected input previews through the production provider")
+		await process_frame
+		await RenderingServer.frame_post_draw
+		var path := ProjectSettings.globalize_path("res://../production/qa/evidence/" + String(spec[4]))
+		_check(root.get_texture().get_image().save_png(path) == OK, "native provider preview saved: " + String(spec[4]))
+		_check(campaign.director.snapshot().receipts == before.receipts, "native panel preview changes no receipts")
+		_check(bool(panel.request_commit().get("accepted", false)), "native panel requests its confirmation")
+		_check(bool(panel.confirm_commit().get("accepted", false)), "native panel confirms the exact previewed choice")
+		await process_frame
+		_check(campaign.director.snapshot().receipts.size() == before.receipts.size() + 1, "native HUD commits exactly one authoritative receipt")
+		campaign.free()
+		await process_frame
+
+func _spawn(scene_id: String, detach_panel: bool = true) -> Chapter1Campaign:
 	var director := DirectorScript.new()
 	director.new_campaign(CampaignContentFull.EXPECTED_CONTENT_REVISION)
 	var route := RouteScript.new(director)
@@ -120,8 +180,9 @@ func _spawn(scene_id: String) -> Chapter1Campaign:
 	_check(campaign.route != null and campaign.route.current_scene_id() == scene_id and campaign.hud != null, "production campaign opens " + scene_id)
 	# This suite drives the campaign protocol itself; the HUD card has its own
 	# wiring test (test_chapter2_panel_wiring.gd), so detach it here.
-	for connection in campaign.chapter2_panel_requested.get_connections():
-		campaign.chapter2_panel_requested.disconnect(connection.callable)
+	if detach_panel:
+		for connection in campaign.chapter2_panel_requested.get_connections():
+			campaign.chapter2_panel_requested.disconnect(connection.callable)
 	return campaign
 
 func _near(campaign: Chapter1Campaign, id: String) -> void:
