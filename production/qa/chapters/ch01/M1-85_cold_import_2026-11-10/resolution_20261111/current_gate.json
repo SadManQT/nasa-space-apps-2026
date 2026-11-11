@@ -1,0 +1,95 @@
+{
+  "revision": "f9469d738a4f679b048fc66c158bc0afbc53cd44",
+  "game_tree": "e77596698f906dfd503e511434c09b8bf0d7ace2",
+  "collector_sha256": "38f8439f524aaf755170f6c729a42d397b5496e83481355f6996b23cd2c329dd",
+  "godot_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "manifest_sha256": "a2088e4ddc349e6879f6760fb9fcc69d82b7c2d7dbff974829c964a2317d6c16",
+  "source_files": 7295,
+  "source_bytes": 1097386815,
+  "scratch": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-final-20261111",
+  "original_save_before": "d6ccd5e08f297a131f344bfad1286a24986de9fbde66aa7b6b6d67f30e34b702",
+  "scope": "Fresh project cache and isolated profile. Required runner setup retained; no asset/settings/cache bypass. OS filesystem caches not evicted.",
+  "limits": {
+    "SUITE_TIMEOUT": "300",
+    "PLAYER_TEXT_TIMEOUT": "1500",
+    "UPGRADE_PROFILE_TIMEOUT": "10800"
+  },
+  "complete": false,
+  "full_pass": false,
+  "runs": [
+    {
+      "kind": "focused",
+      "result": {
+        "command": [
+          "C:\\Program Files\\Git\\bin\\bash.exe",
+          "game/tools/run_tests.sh",
+          "m185_import_integrity"
+        ],
+        "pid": 20664,
+        "start_utc_epoch": 1794373052.8553348,
+        "duration_seconds": 361.625,
+        "timed_out": false,
+        "termination": {
+          "needed": false
+        },
+        "raw_exit_code": 1,
+        "unsigned_exit_hex": "0x1",
+        "effective_exit_code": 1,
+        "log_sha256": "fc8b64e145aa8fac60180c4eb195cbc6e0de9780326ced0d3f885c453b08be67",
+        "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-final-20261111\\evidence\\smoke_runner_logs",
+        "isolated_env": {
+          "APPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-final-20261111/profile/roaming",
+          "LOCALAPPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-final-20261111/profile/local",
+          "TEMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-final-20261111/profile/tmp",
+          "TMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-final-20261111/profile/tmp"
+        },
+        "script_error_lines": [],
+        "generic_error_lines": [
+          "ERROR: Parameter \"t\" is null."
+        ],
+        "generic_error_count": 1,
+        "warning_count": 0,
+        "last_printed_reimport": "Executing post-reimport operations...",
+        "suite_summary": [],
+        "setup_failure": true,
+        "native_crash_signature": false,
+        "audited_logs": [
+          {
+            "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-final-20261111\\evidence\\smoke_runner_logs\\setup.log",
+            "sha256": "298db671bbf4728f40f580a34f95169f95576d0bf9c5fac326beb6b0dce3f304",
+            "engine_errors": [
+              "ERROR: Parameter \"t\" is null."
+            ],
+            "script_errors": [],
+            "warning_count": 0,
+            "last_printed_reimport": "Executing post-reimport operations...",
+            "suite_summary": [],
+            "setup_failure": false,
+            "native_crash_signature": false
+          }
+        ]
+      }
+    }
+  ],
+  "raw_logs_sha256": "ef0c814ca1d09d8c776cac6cbc8a4596e01121e86a1eff20c947c2932ff57831",
+  "original_save_unchanged": true,
+  "tracked_nonimport_source_changed": [
+    "game/project.godot"
+  ],
+  "cache_after": {
+    "exists": true,
+    "file_count": 8588,
+    "global_script_class_cache.cfg": {
+      "bytes": 49826,
+      "sha256": "50033b8dfdc4862bca8096017499140d6dacfce9f8c8789b267b992bf0f7a95b"
+    },
+    "uid_cache.bin": {
+      "bytes": 224822,
+      "sha256": "eb34c3510506fd9b7a7463baafabf1d7a04b7242d4a6e7e2b292e1d358edf1f4"
+    },
+    "editor/filesystem_cache10": {
+      "bytes": 913496,
+      "sha256": "b7f94410f735179c960502906df18b8b1d05bc34bd44c86f38ce8fc401348eb5"
+    }
+  }
+}
