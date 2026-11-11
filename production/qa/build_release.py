@@ -84,6 +84,15 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     filename = output / ('LastLightAcademy.exe' if args.platform == 'windows' else 'LastLightAcademy.zip')
     preset = 'Windows x86_64' if args.platform == 'windows' else 'macOS Universal unsigned'
+    # A fresh checkout imports every asset first. Under the headless dummy renderer one
+    # model's import script logs a harmless 'Parameter "t" is null' texture error, so the
+    # import runs as its own step (exit code checked); the export after it is held to
+    # the strict no-ERROR rule.
+    imported = subprocess.run([str(engine), '--headless', '--path', str(ROOT / 'game'), '--import'], cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=1800)
+    (output / 'import.log').write_text(imported.stdout, encoding='utf-8')
+    if imported.returncode != 0:
+        print(imported.stdout[-8000:])
+        raise RuntimeError(f'import.log: exit {imported.returncode}')
     run_checked([engine, '--headless', '--path', ROOT / 'game', '--export-release', preset, filename], output / 'export.log', ROOT)
     if args.smoke:
         if args.platform == 'macos':
