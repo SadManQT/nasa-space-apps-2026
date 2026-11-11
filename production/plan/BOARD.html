@@ -296,11 +296,13 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-120">M1-120</a> Investigate measured Windows EVA scene generation over the loading budget <span class="chip ">any</span> <span class="chip ">P0</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Class mode and Chapter 2/3 feature chains; curriculum · 20% share</div><div class="counts"><span class="chip s-done">7 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">3 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:70%"></i></div>
-<details open><summary>Blocked (3)</summary><ul>
+<div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Class mode and Chapter 2/3 feature chains; curriculum · 20% share</div><div class="counts"><span class="chip s-done">7 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:70%"></i></div>
+<details open><summary>Working now (2)</summary><ul>
+<li><a class="id" href="#M1-103">M1-103</a> Expose the Solo/Class session and team-plan bridge for M1-37 <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Asif/codex on 2026-11-12</div></li>
+<li><a class="id" href="#M1-105">M1-105</a> Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2 <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Asif/codex on 2026-11-12</div></li>
+</ul></details>
+<details open><summary>Blocked (1)</summary><ul>
 <li><a class="id" href="#M1-37">M1-37</a> Four-player co-op Class mode: shared decisions, private role clues (as registered) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Implementation gap: P02 private cards/sign-off,crew choice and printable-card source exist; P01/P03-P16 need live private-clue/signing consumers of saved M1-103 provider candidate…</div></li>
-<li><a class="id" href="#M1-103">M1-103</a> Expose the Solo/Class session and team-plan bridge for M1-37 <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Provider implementation saved/pushed at 68585706c0423f628d30baec41235a1bc47c9ca6 (origin/asif/finish-chains-20261111), with real physical/save/retry Class3/3; current mandatory pe…</div></li>
-<li><a class="id" href="#M1-105">M1-105</a> Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2 <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Chosen-input dispatch/preview implementation and actual Solo Chapter2 UI delivered in candidate 68585706c0423f628d30baec41235a1bc47c9ca6 (origin/asif/finish-chains-20261111); curr…</div></li>
 </ul></details>
 <details><summary>Done (7)</summary><ul>
 <li><a class="id" href="#M3-2P">M3-2P</a> Chapter 2 puzzles P-03 and P-04 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">production/qa/evidence/M3-2P.md; gate production/qa/evidence/M3-2P_M3-2M_M3-3M_gate.md (128/129 + player_text rerun 1/1)</div></li>
@@ -8040,7 +8042,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Expose the Solo/Class session and team-plan bridge for M1-37",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Asif/codex",
    "deps": [
     "M1-102"
@@ -8101,6 +8103,16 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "authorization": "11 Nov: user confirmed takeover; earlier provider session stays stopped."
    },
    "blocker": "Provider implementation saved/pushed at 68585706c0423f628d30baec41235a1bc47c9ca6 (origin/asif/finish-chains-20261111), with real physical/save/retry Class3/3; current mandatory performance fails548/4,0/1: title107.975,newcampaign68.745,garden57.193,fullcast50.840ms vs50ms. Frozen full130/136 is retained; no green current full gate. Caption82/0 now resolved. Resume acceptance after global performance repair and green current integrated full runner; coordinate live M1-37 consumer before landing nonP02 Class guard. Missing M1-37 UI and deferred human capture are separate from delivered provider source. Exact logs/contracts in production/qa/evidence/M1-103.md and followup archives.",
+   "edit_files": [
+    "game/tools/test_class_session_bridge.gd",
+    "game/tools/test_class_campaign_guard.gd",
+    "game/tools/test_class_campaign_guard.gd.uid",
+    "production/qa/evidence/M1-103.md",
+    "production/qa/evidence/M1-103_followup_logs.zip",
+    "production/qa/evidence/M1-103_session_handoff_20261111.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ],
    "batch_phase": "implementation"
   },
   {
@@ -8131,7 +8143,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Asif/codex",
    "deps": [],
    "paths": [
@@ -8199,6 +8211,14 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "authorization": "11 Nov: user confirmed takeover; earlier provider session stays stopped."
    },
    "blocker": "Chosen-input dispatch/preview implementation and actual Solo Chapter2 UI delivered in candidate 68585706c0423f628d30baec41235a1bc47c9ca6 (origin/asif/finish-chains-20261111); current Chapter2 4/4,native75/0,exit0,zero ERROR diagnostics,two inspected PNGs. Acceptance blocked by current mandatory performance548/4,0/1 (107.975/68.745/57.193/50.840ms vs50ms) and no green current full gate; frozen full130/136 retained. Caption82/0 now green. Resume when current integrated full runner passes; no missing P03/P04 panel or old Atik-owner wait. See production/qa/evidence/M1-105.md.",
+   "edit_files": [
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "game/tools/test_chapter2_input_bridge.gd",
+    "production/qa/evidence/M1-105.md",
+    "production/qa/evidence/M1-105_followup_logs.zip",
+    "production/qa/evidence/M1-105_p03_provider_preview.png",
+    "production/qa/evidence/M1-105_p04_provider_preview.png"
+   ],
    "batch_phase": "implementation"
   },
   {

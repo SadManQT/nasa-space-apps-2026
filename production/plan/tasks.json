@@ -7322,7 +7322,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Expose the Solo/Class session and team-plan bridge for M1-37",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Asif/codex",
    "deps": [
     "M1-102"
@@ -7382,7 +7382,17 @@
     "handoff_from": "01a1c541-420f-7651-bb49-e736b26477da",
     "authorization": "11 Nov: user confirmed takeover; earlier provider session stays stopped."
    },
-   "blocker": "Provider implementation saved/pushed at 68585706c0423f628d30baec41235a1bc47c9ca6 (origin/asif/finish-chains-20261111), with real physical/save/retry Class3/3; current mandatory performance fails548/4,0/1: title107.975,newcampaign68.745,garden57.193,fullcast50.840ms vs50ms. Frozen full130/136 is retained; no green current full gate. Caption82/0 now resolved. Resume acceptance after global performance repair and green current integrated full runner; coordinate live M1-37 consumer before landing nonP02 Class guard. Missing M1-37 UI and deferred human capture are separate from delivered provider source. Exact logs/contracts in production/qa/evidence/M1-103.md and followup archives."
+   "blocker": "Provider implementation saved/pushed at 68585706c0423f628d30baec41235a1bc47c9ca6 (origin/asif/finish-chains-20261111), with real physical/save/retry Class3/3; current mandatory performance fails548/4,0/1: title107.975,newcampaign68.745,garden57.193,fullcast50.840ms vs50ms. Frozen full130/136 is retained; no green current full gate. Caption82/0 now resolved. Resume acceptance after global performance repair and green current integrated full runner; coordinate live M1-37 consumer before landing nonP02 Class guard. Missing M1-37 UI and deferred human capture are separate from delivered provider source. Exact logs/contracts in production/qa/evidence/M1-103.md and followup archives.",
+   "edit_files": [
+    "game/tools/test_class_session_bridge.gd",
+    "game/tools/test_class_campaign_guard.gd",
+    "game/tools/test_class_campaign_guard.gd.uid",
+    "production/qa/evidence/M1-103.md",
+    "production/qa/evidence/M1-103_followup_logs.zip",
+    "production/qa/evidence/M1-103_session_handoff_20261111.md",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
+   ]
   },
   {
    "id": "M1-104",
@@ -7411,7 +7421,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2",
-   "status": "blocked",
+   "status": "in_progress",
    "owner": "Asif/codex",
    "deps": [],
    "paths": [
@@ -7478,7 +7488,15 @@
     "handoff_from": "01a1c541-420f-7651-bb49-e736b26477da",
     "authorization": "11 Nov: user confirmed takeover; earlier provider session stays stopped."
    },
-   "blocker": "Chosen-input dispatch/preview implementation and actual Solo Chapter2 UI delivered in candidate 68585706c0423f628d30baec41235a1bc47c9ca6 (origin/asif/finish-chains-20261111); current Chapter2 4/4,native75/0,exit0,zero ERROR diagnostics,two inspected PNGs. Acceptance blocked by current mandatory performance548/4,0/1 (107.975/68.745/57.193/50.840ms vs50ms) and no green current full gate; frozen full130/136 retained. Caption82/0 now green. Resume when current integrated full runner passes; no missing P03/P04 panel or old Atik-owner wait. See production/qa/evidence/M1-105.md."
+   "blocker": "Chosen-input dispatch/preview implementation and actual Solo Chapter2 UI delivered in candidate 68585706c0423f628d30baec41235a1bc47c9ca6 (origin/asif/finish-chains-20261111); current Chapter2 4/4,native75/0,exit0,zero ERROR diagnostics,two inspected PNGs. Acceptance blocked by current mandatory performance548/4,0/1 (107.975/68.745/57.193/50.840ms vs50ms) and no green current full gate; frozen full130/136 retained. Caption82/0 now green. Resume when current integrated full runner passes; no missing P03/P04 panel or old Atik-owner wait. See production/qa/evidence/M1-105.md.",
+   "edit_files": [
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "game/tools/test_chapter2_input_bridge.gd",
+    "production/qa/evidence/M1-105.md",
+    "production/qa/evidence/M1-105_followup_logs.zip",
+    "production/qa/evidence/M1-105_p03_provider_preview.png",
+    "production/qa/evidence/M1-105_p04_provider_preview.png"
+   ]
   },
   {
    "id": "M1-106",
