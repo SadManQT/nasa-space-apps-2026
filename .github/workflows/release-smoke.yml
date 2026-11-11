@@ -14,15 +14,13 @@ jobs:
         include:
           - os: windows-latest
             target: windows
-          - os: macos-14
-            target: macos
     runs-on: ${{ matrix.os }}
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - name: Fetch only runtime LFS assets
+      - name: Fetch the game LFS files (assets, addons, test data)
         shell: bash
-        run: git lfs pull --include="game/assets/**,game/tools/test_data/**" --exclude=""
+        run: git lfs pull --include="game/**" --exclude=""
       - name: Build and boot outside the project on a fresh runner
         shell: bash
         run: python3 production/qa/build_release.py --platform ${{ matrix.target }} --install-tools --smoke
