@@ -98,6 +98,10 @@ static func colour(name: String, fallback: Color = Color("#ECEEF0")) -> Color:
 
 ## One of the four type sizes ("title", "heading", "body", "caption") in canvas
 ## pixels for a canvas of `viewport_height`, times the large-text scale.
+static func font(token: String = "body") -> Font:
+	var key := "heading" if token in ["title", "heading"] else "body"
+	return load(String(tokens().get("font", {}).get(key, "res://addons/gohud/assets/fonts/roboto/Roboto.ttf"))) as Font
+
 static func font_px(token: String, viewport_height: float, scale: float = 1.0) -> int:
 	var type: Dictionary = tokens().get("type", {})
 	var base := float(type.get(token, type.get("body", 20)))
@@ -147,14 +151,16 @@ static func button(label: String, min_height: int = 44) -> Button:
 	result.add_theme_stylebox_override("normal", button_style(colour("navy"), false))
 	result.add_theme_stylebox_override("hover", button_style(colour("accent"), true))
 	result.add_theme_stylebox_override("pressed", button_style(colour("accent").darkened(0.12), true))
-	result.add_theme_stylebox_override("focus", button_style(Color("#243B5A"), true))
+	result.add_theme_stylebox_override("focus", focus_style())
 	result.add_theme_stylebox_override("disabled", button_style(colour("navy").darkened(0.35), false))
 	return result
 
 static func button_style(fill: Color, highlighted: bool) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = fill
-	style.set_corner_radius_all(8)
+	style.set_corner_radius_all(3)
+	style.set_border_width_all(1)
+	style.border_color = colour("glass_edge")
 	style.content_margin_left = 14
 	style.content_margin_right = 14
 	style.anti_aliasing = true
@@ -164,8 +170,19 @@ static func button_style(fill: Color, highlighted: bool) -> StyleBoxFlat:
 	return style
 
 ## Marks a label with a type token and colour; `apply_type` sizes it later.
+static func focus_style() -> StyleBoxFlat:
+	var style := button_style(Color.TRANSPARENT, true)
+	style.draw_center = false
+	style.border_color = colour("accent")
+	style.expand_margin_left = 2
+	style.expand_margin_right = 2
+	style.expand_margin_top = 2
+	style.expand_margin_bottom = 2
+	return style
+
 static func style_label(label: Label, token: String, colour_name: String = "ivory") -> Label:
 	label.set_meta("lla_type", token)
+	label.add_theme_font_override("font", font(token))
 	label.add_theme_color_override("font_color", colour(colour_name))
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -190,6 +207,7 @@ static func apply_type(node: Node, viewport_height: float, scale: float, skip: A
 				var icon_side := px(float(control.get_meta("lla_icon_px")) * scale, viewport_height)
 				control.custom_minimum_size = Vector2(icon_side, icon_side)
 			if control.has_meta("lla_type"):
+				control.add_theme_font_override("font", font(String(control.get_meta("lla_type"))))
 				control.add_theme_font_size_override("font_size", font_px(String(control.get_meta("lla_type")), viewport_height, scale))
 			elif control is Button or control is CheckButton:
 				control.add_theme_font_size_override("font_size", font_px("body", viewport_height, scale))

@@ -70,7 +70,7 @@ func setup(save_state: Dictionary) -> void:
 		_continue_button.disabled = not has_save
 		_continue_button.focus_mode = continue_focus
 	_continue_button.text = "CONTINUE EXPEDITION" if has_save else "CONTINUE · NO CHECKPOINT"
-	_save_note.text = "Verified checkpoint: %s" % String(save_state.get("checkpoint_id", "Chapter 1")) if has_save else "No saved expedition yet. New Expedition is always safe to start."
+	_save_note.text = "Checkpoint: %s" % String(save_state.get("checkpoint_id", "Chapter 1")) if has_save else "No saved expedition yet. New Expedition is always safe to start."
 	_save_note.modulate = IVORY if has_save else MUTED
 	if _panels != null:
 		_panels.bind_query(_query)
@@ -171,47 +171,54 @@ func close_science() -> void:
 	_restore_modal_focus()
 
 func _build() -> void:
-	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var backdrop := ColorRect.new()
-	backdrop.color = INK
-	backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(backdrop)
-	# Quiet geometry makes the title feel like a mission console without adding unapproved art.
-	_add_glow_panel(Vector2(0.66, 0.0), Vector2(1.0, 0.92), Color(0.10, 0.16, 0.27, 0.62))
-	_add_glow_panel(Vector2(0.0, 0.86), Vector2(1.0, 1.0), Color(0.12, 0.08, 0.17, 0.9))
-
-	var margins := MarginContainer.new()
-	margins.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	margins.add_theme_constant_override("margin_left", 58)
-	margins.add_theme_constant_override("margin_right", 58)
-	margins.add_theme_constant_override("margin_top", 34)
-	margins.add_theme_constant_override("margin_bottom", 30)
-	add_child(margins)
-	var page := VBoxContainer.new()
-	page.add_theme_constant_override("separation", 20)
-	margins.add_child(page)
-	page.add_child(_build_header())
-	var scroll := ScrollContainer.new()
-	scroll.name = "TitleContentScroll"
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	scroll.follow_focus = true
-	page.add_child(scroll)
-	var body := HBoxContainer.new()
-	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_theme_constant_override("separation", 26)
-	scroll.add_child(body)
-	body.add_child(_build_command_panel())
-	body.add_child(_build_diorama_panel())
-	page.add_child(_build_footer())
-
+	_begin_button = %NewExpedition
+	_continue_button = %Continue
+	_save_note = %SaveNote
+	_footer_status = %AccessibilityStatus
+	_begin_button.pressed.connect(_show_briefing)
+	_continue_button.pressed.connect(func() -> void:
+		emit_command("continue_campaign", "campaign")
+		continue_requested.emit()
+	)
+	%MissionTrainerEntry.pressed.connect(func(): trainer_requested.emit())
+	%MoonTrainerEntry.pressed.connect(func(): moon_trainer_requested.emit())
+	%ChapterSelectEntry.pressed.connect(func(): chapter_select_requested.emit())
+	%DeveloperShowcaseEntry.visible = OS.has_feature("editor")
+	%DeveloperShowcaseEntry.pressed.connect(func(): showcase_requested.emit())
+	%ScienceEntry.pressed.connect(func(): science_requested.emit())
+	%SettingsEntry.pressed.connect(func() -> void:
+		emit_command("open_panel", "settings_accessibility")
+		accessibility_requested.emit()
+		open_panel("settings_accessibility")
+	)
+	%CreditsEntry.pressed.connect(func() -> void:
+		emit_command("open_panel", "credits")
+		open_panel("credits")
+	)
+	for button in [_begin_button, _continue_button, %MissionTrainerEntry, %MoonTrainerEntry, %ChapterSelectEntry, %ScienceEntry, %SettingsEntry, %CreditsEntry, %DeveloperShowcaseEntry]:
+		button.add_theme_stylebox_override("normal", _button_style(MUSTARD if button == _begin_button else UiDesign.colour("navy"), 1.0))
+		button.add_theme_stylebox_override("hover", _button_style(Color("#FFD95A"), 1.0))
+		button.add_theme_stylebox_override("pressed", _button_style(Color("#D8A915"), 1.0))
+		button.add_theme_stylebox_override("focus", _button_style(Color.TRANSPARENT, 0.0, INK if button == _begin_button else MUSTARD))
+		button.add_theme_color_override("font_color", INK if button == _begin_button else IVORY)
+		button.add_theme_color_override("font_focus_color", INK if button == _begin_button else IVORY)
+		button.add_theme_color_override("font_hover_color", INK)
+		button.add_theme_color_override("font_pressed_color", INK)
 	_build_briefing()
 	_build_science()
 	if not defer_panels:
 		attach_panels()
 	_apply_accessibility()
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("ui_cancel"):
+		return
+	if _briefing != null and _briefing.visible:
+		_hide_briefing()
+		get_viewport().set_input_as_handled()
+	elif _science != null and _science.visible:
+		close_science()
+		get_viewport().set_input_as_handled()
 
 func attach_panels() -> void:
 	if _panels != null:
@@ -224,191 +231,6 @@ func attach_panels() -> void:
 	_panels.panel_closed.connect(_on_panel_closed)
 	_panels.accessibility_changed.connect(_on_accessibility_changed)
 	_apply_accessibility()
-
-func _build_header() -> Control:
-	var header := HBoxContainer.new()
-	header.custom_minimum_size.y = 72
-	header.add_theme_constant_override("separation", 16)
-	var mark := Label.new()
-	mark.text = "◒"
-	mark.modulate = MUSTARD
-	mark.add_theme_font_size_override("font_size", 38)
-	header.add_child(mark)
-	var stack := VBoxContainer.new()
-	stack.add_theme_constant_override("separation", 0)
-	header.add_child(stack)
-	var title := Label.new()
-	title.text = "LAST LIGHT ACADEMY"
-	title.add_theme_font_size_override("font_size", 30)
-	title.add_theme_color_override("font_color", IVORY)
-	stack.add_child(title)
-	var subtitle := Label.new()
-	subtitle.text = "AURORA STATION  /  SOUTH-POLAR TRAINING SCENARIO"
-	subtitle.add_theme_font_size_override("font_size", 13)
-	subtitle.add_theme_color_override("font_color", CYAN)
-	stack.add_child(subtitle)
-	var spacer := Control.new()
-	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	header.add_child(spacer)
-	var tag := Label.new()
-	tag.text = "SPACE APPS 2026\nJUNIOR ASTRONAUT MISSION TRAINER"
-	tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	tag.add_theme_font_size_override("font_size", 13)
-	tag.add_theme_color_override("font_color", MUSTARD)
-	header.add_child(tag)
-	return header
-
-func _build_command_panel() -> Control:
-	var panel := _panel(Color(0.08, 0.12, 0.20, 0.96), 18, Color(0.32, 0.43, 0.60, 0.55))
-	panel.custom_minimum_size = Vector2(480, 0)
-	var margin := MarginContainer.new()
-	margin.name = "Margin"
-	margin.add_theme_constant_override("margin_left", 28)
-	margin.add_theme_constant_override("margin_right", 28)
-	margin.add_theme_constant_override("margin_top", 26)
-	margin.add_theme_constant_override("margin_bottom", 24)
-	panel.add_child(margin)
-	var content := VBoxContainer.new()
-	content.name = "Content"
-	content.add_theme_constant_override("separation", 14)
-	margin.add_child(content)
-	var eyebrow := Label.new()
-	eyebrow.text = "MISSION CONTROL / OFFLINE READY"
-	eyebrow.add_theme_font_size_override("font_size", 13)
-	eyebrow.add_theme_color_override("font_color", CYAN)
-	content.add_child(eyebrow)
-	var heading := Label.new()
-	heading.text = "Run a real\nmission decision."
-	heading.add_theme_font_size_override("font_size", 32)
-	heading.add_theme_color_override("font_color", IVORY)
-	content.add_child(heading)
-	var copy := Label.new()
-	copy.text = "Observe → discuss → preview → commit → learn.\nYour first choice changes what the crew can see next."
-	copy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	copy.add_theme_font_size_override("font_size", 17)
-	copy.add_theme_color_override("font_color", MUTED)
-	content.add_child(copy)
-	var divider := HSeparator.new()
-	divider.modulate = Color(0.40, 0.52, 0.72, 0.45)
-	content.add_child(divider)
-	_begin_button = _button("NEW EXPEDITION  ›", MUSTARD, INK)
-	_begin_button.pressed.connect(_show_briefing)
-	content.add_child(_begin_button)
-	_continue_button = _button("CONTINUE · NO CHECKPOINT", Color(0.15, 0.20, 0.31), IVORY)
-	_continue_button.pressed.connect(func() -> void:
-		emit_command("continue_campaign", "campaign")
-		continue_requested.emit()
-	)
-	content.add_child(_continue_button)
-	var trainer_button := _button("MISSION TRAINER", Color(0.15, 0.20, 0.31), IVORY)
-	trainer_button.name = "MissionTrainerEntry"
-	trainer_button.pressed.connect(func(): trainer_requested.emit())
-	content.add_child(trainer_button)
-	var moon_trainer_button := _button("MOON TRAINER  ·  FIELD SORTIES", Color(0.15, 0.20, 0.31), IVORY)
-	moon_trainer_button.name = "MoonTrainerEntry"
-	moon_trainer_button.pressed.connect(func() -> void: moon_trainer_requested.emit())
-	content.add_child(moon_trainer_button)
-	var chapter_select_button := _button("CHAPTERS, PROGRESS & ACHIEVEMENTS", Color(0.15, 0.20, 0.31), IVORY)
-	chapter_select_button.name = "ChapterSelectEntry"
-	chapter_select_button.pressed.connect(func() -> void: chapter_select_requested.emit())
-	content.add_child(chapter_select_button)
-	_save_note = Label.new()
-	_save_note.text = "No saved expedition yet. New Expedition is always safe to start."
-	_save_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_save_note.add_theme_font_size_override("font_size", 13)
-	_save_note.add_theme_color_override("font_color", MUTED)
-	content.add_child(_save_note)
-	var lower_spacer := Control.new()
-	lower_spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_child(lower_spacer)
-	var science_button := _button("SCIENCE + SOURCES", Color(0.12, 0.18, 0.28), IVORY)
-	science_button.pressed.connect(func() -> void: science_requested.emit())
-	content.add_child(science_button)
-	# Developer tool: offered only in editor builds, never to players in exported builds.
-	if OS.has_feature("editor"):
-		var showcase_button := _button("DEVELOPER ASSET SHOWCASE", Color(0.10, 0.14, 0.22), MUTED)
-		showcase_button.pressed.connect(func() -> void: showcase_requested.emit())
-		content.add_child(showcase_button)
-	var settings_button := _button("SETTINGS / ACCESSIBILITY", Color(0.10, 0.14, 0.22), IVORY)
-	settings_button.pressed.connect(func() -> void:
-		emit_command("open_panel", "settings_accessibility")
-		accessibility_requested.emit()
-		open_panel("settings_accessibility")
-	)
-	content.add_child(settings_button)
-	var credits_button := _button("CREDITS", Color(0.10, 0.14, 0.22), MUTED)
-	credits_button.pressed.connect(func() -> void:
-		emit_command("open_panel", "credits")
-		open_panel("credits")
-	)
-	content.add_child(credits_button)
-	return panel
-
-func _build_diorama_panel() -> Control:
-	var panel := _panel(Color(0.06, 0.08, 0.14, 0.74), 18, Color(0.95, 0.76, 0.22, 0.38))
-	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 28)
-	margin.add_theme_constant_override("margin_right", 28)
-	margin.add_theme_constant_override("margin_top", 26)
-	margin.add_theme_constant_override("margin_bottom", 24)
-	panel.add_child(margin)
-	var content := VBoxContainer.new()
-	content.add_theme_constant_override("separation", 18)
-	margin.add_child(content)
-	var label := Label.new()
-	label.text = "THE TRAINING QUESTION"
-	label.add_theme_font_size_override("font_size", 13)
-	label.add_theme_color_override("font_color", MUSTARD)
-	content.add_child(label)
-	var quote := Label.new()
-	quote.text = "How do you keep people safe\nwhen power, air, shielding\nand a living garden share\none small station?"
-	quote.add_theme_font_size_override("font_size", 26)
-	quote.add_theme_color_override("font_color", IVORY)
-	quote.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	content.add_child(quote)
-	var diagram := HBoxContainer.new()
-	diagram.add_theme_constant_override("separation", 8)
-	content.add_child(diagram)
-	for item in [["POWER", ORANGE], ["AIR", CYAN], ["CARE", GREEN], ["SAFETY", PURPLE]]:
-		var card := _mini_card(item[0], item[1])
-		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		diagram.add_child(card)
-	var line := Label.new()
-	line.text = "Chapter 1: twelve caption-first scenes\nfor judges, classrooms and families."
-	line.add_theme_font_size_override("font_size", 16)
-	line.add_theme_color_override("font_color", MUTED)
-	line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	content.add_child(line)
-	var spacer := Control.new()
-	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_child(spacer)
-	var disclosure := Label.new()
-	disclosure.text = "SIMULATED · Aurora Station, cadets and 2046 timeline are fictional.\nScience displays identify observed, computed and simulated content."
-	disclosure.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	disclosure.add_theme_font_size_override("font_size", 13)
-	disclosure.add_theme_color_override("font_color", Color(0.72, 0.80, 0.91, 1))
-	content.add_child(disclosure)
-	return panel
-
-func _build_footer() -> Control:
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 16)
-	var left := Label.new()
-	_footer_status = left
-	left.text = _accessibility_footer()
-	left.add_theme_font_size_override("font_size", 12)
-	left.add_theme_color_override("font_color", MUTED)
-	row.add_child(left)
-	var spacer := Control.new()
-	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(spacer)
-	var right := Label.new()
-	right.text = "INDEPENDENT TEAM PROJECT  ·  NOT NASA-ENDORSED"
-	right.add_theme_font_size_override("font_size", 12)
-	right.add_theme_color_override("font_color", Color(0.64, 0.72, 0.84, 1))
-	row.add_child(right)
-	return row
 
 func _build_briefing() -> void:
 	_briefing = _panel(Color(0.03, 0.05, 0.10, 0.98), 18, Color(0.95, 0.76, 0.22, 0.75))
@@ -456,7 +278,7 @@ func _build_briefing() -> void:
 	roles.add_theme_constant_override("h_separation", 10)
 	roles.add_theme_constant_override("v_separation", 10)
 	body.add_child(roles)
-	for item in [["KAI", "POWER & HEAT", ORANGE], ["AMARA", "AIR & MEASUREMENT", CYAN], ["MEI", "GARDEN & PLANT CARE", GREEN], ["RAFI", "SAFETY & FIELD OPERATIONS", PURPLE]]:
+	for item in [["KAI", "POWER & HEAT", ORANGE], ["AMARA", "AIR & MEASUREMENT", CYAN], ["MEI", "GARDEN & PLANT CARE", GREEN], ["RAFI", "SPACE WEATHER", PURPLE]]:
 		roles.add_child(_role_card(item[0], item[1], item[2]))
 	var assist_header := Label.new()
 	assist_header.text = "ASSIST MODE  ·  CHANGE ANYTIME IN SETTINGS"
@@ -686,25 +508,14 @@ func _apply_text_scale(node: Node) -> void:
 				control.add_theme_font_size_override("font_size", int(round(float(control.get_meta("lla_base_font_size")) * text_scale())))
 		_apply_text_scale(child)
 
-func _add_glow_panel(anchor: Vector2, end_anchor: Vector2, color: Color) -> void:
-	var panel := ColorRect.new()
-	panel.color = color
-	panel.anchor_left = anchor.x
-	panel.anchor_top = anchor.y
-	panel.anchor_right = end_anchor.x
-	panel.anchor_bottom = end_anchor.y
-	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(panel)
-	move_child(panel, 1)
-
-func _panel(color: Color, radius: int, border: Color = Color.TRANSPARENT) -> PanelContainer:
+func _panel(color: Color, _radius: int, border: Color = Color.TRANSPARENT) -> PanelContainer:
 	var panel := PanelContainer.new()
 	var style := StyleBoxFlat.new()
 	style.bg_color = color
-	style.corner_radius_top_left = radius
-	style.corner_radius_top_right = radius
-	style.corner_radius_bottom_left = radius
-	style.corner_radius_bottom_right = radius
+	style.corner_radius_top_left = 4
+	style.corner_radius_top_right = 4
+	style.corner_radius_bottom_left = 4
+	style.corner_radius_bottom_right = 4
 	if border.a > 0.0:
 		style.border_width_left = 1
 		style.border_width_top = 1
@@ -736,31 +547,20 @@ func _button(text: String, fill: Color, text_color: Color) -> Button:
 func _button_style(color: Color, alpha: float, border: Color = Color.TRANSPARENT) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color(color, alpha)
-	style.corner_radius_top_left = 10
-	style.corner_radius_top_right = 10
-	style.corner_radius_bottom_left = 10
-	style.corner_radius_bottom_right = 10
+	style.corner_radius_top_left = 3
+	style.corner_radius_top_right = 3
+	style.corner_radius_bottom_left = 3
+	style.corner_radius_bottom_right = 3
 	style.content_margin_left = 16
 	style.content_margin_right = 16
 	if border.a > 0.0:
+		style.draw_center = false
 		style.border_width_left = 2
 		style.border_width_top = 2
 		style.border_width_right = 2
 		style.border_width_bottom = 2
 		style.border_color = border
 	return style
-
-func _mini_card(label: String, color: Color) -> PanelContainer:
-	var panel := _panel(Color(color, 0.18), 10, Color(color, 0.58))
-	var text := Label.new()
-	text.text = "●\n" + label
-	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	text.custom_minimum_size = Vector2(0, 70)
-	text.add_theme_font_size_override("font_size", 14)
-	text.add_theme_color_override("font_color", color)
-	panel.add_child(text)
-	return panel
 
 func _role_card(name: String, role: String, color: Color) -> PanelContainer:
 	var panel := _panel(Color(color, 0.13), 8, Color(color, 0.45))

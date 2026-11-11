@@ -1,28 +1,28 @@
 {
  "schema_version": 1,
- "source": "game-design/25_PLAYER_CLARITY_AND_MOON_JOURNEY.md section 2.1 (design system) and production/ART_BIBLE.md section 3 (palette). Sizes are for 1080p; the HUD scales them by viewport height.",
+ "source": "User-directed industrial UI refinement, 10 Nov 2026; preserves doc 25 clarity and accessibility contracts.",
  "reference_height": 1080,
  "type": {
   "title": 40,
   "heading": 28,
   "body": 20,
-  "caption": 16,
+  "caption": 18,
   "minimum": 18,
   "large_text_scale": 1.5,
   "max_line_characters": 60
  },
  "colour": {
   "ink": "#05060A",
-  "navy": "#1F2A44",
-  "ivory": "#ECEEF0",
-  "muted": "#A8B4C8",
+  "navy": "#182431",
+  "ivory": "#E8EDF0",
+  "muted": "#ADBBC7",
   "accent": "#F2C230",
   "caution": "#F2A33A",
   "danger": "#E56B6F",
   "good": "#68C78B",
-  "glass": "#0C1424CC",
-  "glass_edge": "#ECEEF02E",
-  "scrim": "#05060ABD",
+  "glass": "#101923F0",
+  "glass_edge": "#405163",
+  "scrim": "#05060AD9",
   "kai": "#F26B21",
   "amara": "#20B8C9",
   "mei": "#4CAF50",
@@ -30,7 +30,7 @@
   "ferreira": "#B8A06A"
  },
  "panel": {
-  "radius": 12,
+  "radius": 4,
   "edge_width": 1,
   "padding": 16,
   "grid": 8,
@@ -60,5 +60,9 @@
   "next_line": "Space",
   "auto_dialogue": "A",
   "debug_overlay": "F10"
+ },
+ "font": {
+  "body": "res://addons/gohud/assets/fonts/roboto/Roboto.ttf",
+  "heading": "res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf"
  }
 }

@@ -231,14 +231,28 @@ static func state_card(state: String, detail: String = "") -> PanelContainer:
 static func theme() -> Theme:
 	if _theme != null:
 		return _theme
+	# One preset at boot keeps Gohud components consistent with the house kit.
+	GoUi.use_preset(GoThemePresets.SCIFI_DARK)
+	GoUi.config.color_overrides = {GoTheme.ACCENT: UiDesign.colour("accent"), GoTheme.ACCENT_FILL: UiDesign.colour("accent"), GoTheme.ON_ACCENT: UiDesign.colour("ink"), GoTheme.TEXT: UiDesign.colour("ivory"), GoTheme.MUTED: UiDesign.colour("muted"), GoTheme.SURFACE: UiDesign.colour("navy")}
+	GoUi.config.metric_overrides = {GoTheme.RADIUS: 4, GoTheme.RADIUS_SMALL: 3, GoTheme.RADIUS_LARGE: 4}
+	GoUi.refresh()
 	var result := Theme.new()
+	# Persist Gohud's chamfered surface in the Theme: visible in the editor and runtime.
+	var hero := GoUi.skin().surface_box(GoTheme.BOX_CARD, UiDesign.colour("glass_edge"), 1.0)
+	for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
+		hero.set_content_margin(side, 0.0)
+	result.set_type_variation("HeroPanel", "PanelContainer")
+	result.set_stylebox("panel", "HeroPanel", hero)
+	result.default_font = UiDesign.font()
+	result.set_type_variation("TitleLabel", "Label")
+	result.set_font("font", "TitleLabel", UiDesign.font("heading"))
 	var body_px := int(UiDesign.tokens().get("type", {}).get("body", 20))
 	result.default_font_size = body_px
 	result.set_color("font_color", "Label", UiDesign.colour("ivory"))
 	result.set_stylebox("normal", "Button", UiDesign.button_style(UiDesign.colour("navy"), false))
 	result.set_stylebox("hover", "Button", UiDesign.button_style(UiDesign.colour("accent"), true))
 	result.set_stylebox("pressed", "Button", UiDesign.button_style(UiDesign.colour("accent").darkened(0.12), true))
-	result.set_stylebox("focus", "Button", UiDesign.button_style(Color("#243B5A"), true))
+	result.set_stylebox("focus", "Button", UiDesign.focus_style())
 	result.set_stylebox("disabled", "Button", UiDesign.button_style(UiDesign.colour("navy").darkened(0.35), false))
 	result.set_color("font_color", "Button", UiDesign.colour("ivory"))
 	result.set_color("font_hover_color", "Button", UiDesign.colour("ink"))
@@ -247,6 +261,12 @@ static func theme() -> Theme:
 	result.set_color("font_disabled_color", "Button", UiDesign.colour("muted", Color("#A8B4C8")).darkened(0.25))
 	result.set_constant("h_separation", "Button", 8)
 	for kind in ["CheckButton", "CheckBox"]:
+		# Checked rows keep dark backing for panels with explicit ivory label overrides.
+		result.set_stylebox("normal", kind, UiDesign.button_style(UiDesign.colour("navy"), false))
+		result.set_stylebox("hover", kind, UiDesign.button_style(UiDesign.colour("navy").lightened(0.08), true))
+		result.set_stylebox("pressed", kind, UiDesign.button_style(UiDesign.colour("navy").lightened(0.08), true))
+		result.set_stylebox("hover_pressed", kind, UiDesign.button_style(UiDesign.colour("navy").lightened(0.12), true))
+		result.set_stylebox("focus", kind, UiDesign.focus_style())
 		result.set_color("font_color", kind, UiDesign.colour("ivory"))
 		result.set_color("font_hover_color", kind, UiDesign.colour("accent"))
 		result.set_color("font_focus_color", kind, UiDesign.colour("accent"))
@@ -291,6 +311,8 @@ static func _channel(v: float) -> float:
 static func _bar_style(fill: Color) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = fill
-	style.set_corner_radius_all(5)
+	style.set_corner_radius_all(2)
+	style.content_margin_top = 3
+	style.content_margin_bottom = 3
 	style.anti_aliasing = true
 	return style
