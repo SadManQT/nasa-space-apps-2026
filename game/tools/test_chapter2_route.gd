@@ -110,7 +110,7 @@ func _check(condition: bool, message: String) -> void:
 func _chosen_input(target: Dictionary) -> Dictionary:
 	match String(target.get("puzzle_action", "")):
 		"p03_record_prediction":
-			return {"prediction": "Both visible colours may appear", "reason": "The full genotype is unknown.", "future_test": "Count the descendants' stems after harvest."}
+			return {"prediction": "Both visible colours may appear", "reason": "Alo has purple and Tara has green stems; the complete genotype is not established.", "future_test": "Compare descendant stem observations after seed harvest."}
 		"p04_assign_date": return {"value": "2034-04"}
 		"p04_assign_device": return {"value": "HORT-01"}
 		"p04_assign_channel": return {"value": "ENGINEERING"}

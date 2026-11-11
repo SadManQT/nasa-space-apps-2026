@@ -1,7 +1,17 @@
 extends RefCounted
 class_name P04RecorderReconstruction
 
-const EXPECTED := {"date": "2034-04", "device": "HORT-01", "channel": "ENGINEERING"}
+const CONTENT := "res://resources/campaign/content/p04_recorder_reconstruction.json"
+## The supported date, device and channel live in the content file (M3-2P).
+static var EXPECTED: Dictionary = _load_expected()
+
+static func _load_expected() -> Dictionary:
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(CONTENT)) if FileAccess.file_exists(CONTENT) else null
+	var expected = parsed.get("expected", null) if parsed is Dictionary else null
+	if not expected is Dictionary or expected.keys().size() != 3:
+		push_error("P-04 content has no expected date, device and channel: " + CONTENT)
+		return {"date": "", "device": "", "channel": ""}
+	return expected
 
 var _mapping := {}
 var _checksum_verified := false
@@ -17,7 +27,7 @@ func preview_action(action: String, payload: Dictionary = {}) -> Dictionary:
 		"p04_assign_date", "p04_assign_device", "p04_assign_channel":
 			var field := action.trim_prefix("p04_assign_")
 			var value := String(payload.get("value", ""))
-			if value != String(EXPECTED[field]):
+			if value.is_empty() or value != String(EXPECTED[field]):
 				return _reject("The %s token does not match its source label." % field)
 			return _accept("Verified %s token is ready." % field)
 		"p04_verify_checksum":

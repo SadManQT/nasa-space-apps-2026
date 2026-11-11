@@ -118,6 +118,10 @@ func _spawn(scene_id: String) -> Chapter1Campaign:
 	root.add_child(campaign)
 	await process_frame
 	_check(campaign.route != null and campaign.route.current_scene_id() == scene_id and campaign.hud != null, "production campaign opens " + scene_id)
+	# This suite drives the campaign protocol itself; the HUD card has its own
+	# wiring test (test_chapter2_panel_wiring.gd), so detach it here.
+	for connection in campaign.chapter2_panel_requested.get_connections():
+		campaign.chapter2_panel_requested.disconnect(connection.callable)
 	return campaign
 
 func _near(campaign: Chapter1Campaign, id: String) -> void:

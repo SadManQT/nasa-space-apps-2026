@@ -8,9 +8,14 @@ const GateCatalog = preload("res://scripts/missions/chapter2_gate_catalog.gd")
 const P03Script = preload("res://scripts/puzzles/p03_pollination.gd")
 const P04Script = preload("res://scripts/puzzles/p04_recorder_reconstruction.gd")
 const ResultScript = preload("res://scripts/core/command_result.gd")
+const PuzzlesScript = preload("res://scripts/puzzles/chapter2_puzzles.gd")
+const ContentScript = preload("res://scripts/content/content_loader.gd")
+const ScienceScript = preload("res://scripts/science/science_data.gd")
 
 var _p03: RefCounted
 var _p04: RefCounted
+var _puzzles: RefCounted
+var _science: RefCounted
 var _scene_index := 0
 var _scene_flags := {}
 var _dialogue_acks := {}
@@ -24,6 +29,7 @@ func _init(director: RefCounted = null, skip_initial_scene: bool = false) -> voi
 	_create_dispatcher(DispatcherScript)
 	_p03 = P03Script.new()
 	_p04 = P04Script.new()
+	_puzzles = PuzzlesScript.new()
 	for scene_id in GateCatalog.scene_ids():
 		_scene_flags[scene_id] = {}
 		_dialogue_acks[scene_id] = []
@@ -177,7 +183,7 @@ func chapter_ready() -> Dictionary:
 	return {"ready": complete, "completed_scene_count": _completed_scene_ids.size(), "reason": "Chapter 2 readiness requires all twelve physical scene gates, three reciprocal pollen runs, seven care dates and the reconstructed recorder copy."}
 
 func snapshot() -> Dictionary:
-	return {"retry_checkpoint": _retry_checkpoint.duplicate(true), "schema_version": 1, "current_scene_id": current_scene_id(), "current_scene_index": _scene_index, "completed_scene_ids": _completed_scene_ids.duplicate(), "scene_flags": _scene_flags.duplicate(true), "dialogue_acks": _dialogue_acks.duplicate(true), "p03": _p03.snapshot(), "p04": _p04.snapshot(), "world": _world.snapshot(), "chapter_ready": chapter_ready()}
+	return {"retry_checkpoint": _retry_checkpoint.duplicate(true), "schema_version": 1, "current_scene_id": current_scene_id(), "current_scene_index": _scene_index, "completed_scene_ids": _completed_scene_ids.duplicate(), "scene_flags": _scene_flags.duplicate(true), "dialogue_acks": _dialogue_acks.duplicate(true), "p03": _p03.snapshot(), "p04": _p04.snapshot(), "puzzle_ui": _puzzles.snapshot(), "world": _world.snapshot(), "chapter_ready": chapter_ready()}
 
 func restore(data: Dictionary) -> Dictionary:
 	var staged := _stage(data)
@@ -189,6 +195,7 @@ func restore(data: Dictionary) -> Dictionary:
 	_world = staged.world
 	_p03 = staged.p03
 	_p04 = staged.p04
+	_puzzles = staged.puzzles
 	_scene_index = GateCatalog.SCENE_ORDER.find(data.current_scene_id)
 	_completed_scene_ids = data.completed_scene_ids.duplicate()
 	_scene_flags = data.scene_flags.duplicate(true)
@@ -205,9 +212,15 @@ func _stage(data: Dictionary) -> Dictionary:
 	var world: RefCounted = WorldRouteScript.new(_director)
 	var p03: RefCounted = P03Script.new()
 	var p04: RefCounted = P04Script.new()
+	var puzzles: RefCounted = PuzzlesScript.new()
+	# Saves made before M3-2P carry no panel state; they resume with a fresh card.
+	if data.has("puzzle_ui"):
+		if not data.puzzle_ui is Dictionary: return {"accepted": false, "reason": "Chapter 2 panel state must be a Dictionary."}
+		var ui: Dictionary = puzzles.restore(data.puzzle_ui)
+		if not bool(ui.get("accepted", false)): return ui
 	for restored in [world.restore(data.world), p03.restore(data.p03), p04.restore(data.p04)]:
 		if not bool(restored.get("accepted", false)): return restored
-	return {"accepted": true, "world": world, "p03": p03, "p04": p04}
+	return {"accepted": true, "world": world, "p03": p03, "p04": p04, "puzzles": puzzles}
 
 func _set_current_scene(index: int, project_clock: bool = true) -> Dictionary:
 	_scene_index = clampi(index, 0, GateCatalog.SCENE_ORDER.size() - 1)
@@ -235,6 +248,70 @@ func _context_flags() -> Dictionary:
 	for flag in _p03.flags().keys(): result[String(flag)] = _p03.flags()[flag]
 	for flag in _p04.flags().keys(): result[String(flag)] = _p04.flags()[flag]
 	return result
+
+## M3-2P: the panel's own state (selections, filed clues, hints, attempts).
+func chapter2_puzzles() -> RefCounted:
+	return _puzzles
+
+## Everything the Chapter 2 decision panel renders for one physical step. The
+## P-03/P-04 rule models and their answers stay behind this boundary.
+func chapter2_view(target_id: String) -> Dictionary:
+	var spec: Dictionary = _puzzles.step(target_id)
+	if spec.is_empty():
+		return {}
+	var state: Dictionary = _director.snapshot()
+	var scene_id := String(spec.get("scene", ""))
+	var scene: Dictionary = _puzzles.scene(scene_id)
+	var content: Dictionary = ContentScript.load_full()
+	var found: Array = _puzzles.found_clues(scene_id)
+	var clues: Array = []
+	for raw in scene.get("clues", []):
+		var clue: Dictionary = raw.duplicate(true)
+		var line_id := String(clue.get("line_id", ""))
+		if not line_id.is_empty():
+			var line: Dictionary = ContentScript.dialogue_by_id(content, line_id)
+			clue["speaker"] = String(line.get("speaker_label", line.get("speaker", "")))
+			clue["line"] = String(line.get("text", ""))
+		var holders: Array = []
+		for holder in clue.get("holders", []):
+			holders.append(_puzzles.role(String(holder)).get("name", String(holder)))
+		clue["holder_names"] = holders
+		clue["found"] = found.has(String(clue.get("id", "")))
+		clues.append(clue)
+	var puzzle_id: String = _puzzles.puzzle_id_for_step(target_id)
+	if _science == null:
+		_science = ScienceScript.new()
+	var prerequisite := ""
+	var current := false
+	for target in GateCatalog.targets_for_scene(current_scene_id()):
+		if String(target.get("target_id", "")) == target_id:
+			current = true
+			for flag in target.get("required_flags", []):
+				if not bool(_context_flags().get(String(flag), false)):
+					prerequisite = String(target.get("unmet_reason", "Complete the earlier step first."))
+	if not current:
+		prerequisite = "This step belongs to another Chapter 2 scene."
+	return {
+		"target_id": target_id, "step": spec, "scene": scene, "clues": clues,
+		"puzzle_id": puzzle_id, "puzzle": _puzzles.puzzle(puzzle_id),
+		"mission_id": String(scene.get("mission", current_mission_id())),
+		"data_card": _science.mission_card(String(scene.get("mission", current_mission_id()))),
+		"scenario_datetime": String(state.get("scenario_datetime", "")),
+		"resources": state.get("resources", {}).duplicate(true),
+		"selection": _puzzles.selection(target_id), "attempt": _puzzles.payload_for(target_id),
+		"hints": _puzzles.revealed_hints(target_id), "hints_total": _puzzles.hint_ladder(target_id).size(),
+		"attempts": _puzzles.attempts(target_id), "signed": [],
+		"committed": _step_committed(scene_id, target_id),
+		"prerequisite_reason": prerequisite,
+		"first_time": not _puzzles.first_time_seen(puzzle_id),
+	}
+
+func _step_committed(scene_id: String, target_id: String) -> bool:
+	for target in GateCatalog.targets_for_scene(scene_id):
+		if String(target.get("target_id", "")) == target_id:
+			var flag := String(target.get("physical_flag", ""))
+			return bool(_scene_flags.get(scene_id, {}).get(flag, false)) or (scene_id == current_scene_id() and bool(_context_flags().get(flag, false)))
+	return false
 
 func _payload_for_target(target: Dictionary, override: Dictionary) -> Dictionary:
 	# P-03 and P-04 must receive the player's chosen inputs. Catalog defaults
