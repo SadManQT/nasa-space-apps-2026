@@ -7372,7 +7372,8 @@
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-103*",
-    "PRODUCTION_HANDBOOK.md"
+    "PRODUCTION_HANDBOOK.md",
+    "game/tools/test_class_campaign_guard.gd.uid"
    ],
    "edit_session": {
     "session_id": "01a1caac-b095-7890-8cdd-6632f5f056fe",
@@ -7386,7 +7387,8 @@
     "production/qa/evidence/M1-103.md",
     "production/qa/evidence/M1-103_followup_logs.zip",
     "production/qa/evidence/M1-103_session_handoff_20261111.md",
-    "PRODUCTION_HANDBOOK.md"
+    "PRODUCTION_HANDBOOK.md",
+    "game/tools/test_class_campaign_guard.gd.uid"
    ]
   },
   {
