@@ -638,7 +638,7 @@
     "docs/GAMEPLAY_DESIGN_FINAL.md",
     "game-design/10_GAMEPLAY_SYSTEMS.md"
    ],
-   "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-37.\n9Nov recheck: core crew contract M1-102 is done; runtime bridge M1-103 is still todo. Saved8a792c1 port/human Class capture remain pending; no source port started in this small task.",
+   "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\n5 Nov: being finished by Sadman's night shift; if it ends blocked with a parked branch, the assignee releases it and continues from night/M1-37.\n9Nov recheck: core crew contract M1-102 is done; runtime bridge M1-103 is still todo. Saved8a792c1 port/human Class capture remain pending; no source port started in this small task.\n11Nov current user reply: Keep Ramim's reservation active. Do not edit M4-22-reserved chapter1_campaign_hud.gd or p01_panel.gd; Class integration awaits a future saved-work handoff. This is an active implementation reservation, separate from deferred human Class QA.",
    "evidence": "",
    "updated": "2026-11-11",
    "id": "M1-37",
