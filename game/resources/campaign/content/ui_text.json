@@ -166,7 +166,7 @@
   "close": "Close",
   "close_key": "Esc",
   "chapter_complete": {
-   "goal": "Chapter complete",
+   "goal": "Chapter %d complete",
    "why": "Your progress is saved for the next chapter"
   },
   "debug_hint": "Developer view (F10)",
