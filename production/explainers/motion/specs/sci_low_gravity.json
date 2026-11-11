@@ -2,7 +2,7 @@
  "id": "sci_low_gravity",
  "title": "Low gravity",
  "level": "explainer",
- "length_s": 34,
+ "length_s": 35.87,
  "fps": 24,
  "purpose": "Teach how one-sixth gravity changes walking, dust and braking on the Moon.",
  "scenes": "low_gravity.js",
@@ -14,13 +14,13 @@
  "values": {},
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 15,
+   "from": 4.0,
+   "to": 15.0,
    "scene": "jump",
    "label": "diagram",
    "credit": "Physics: the Moon's gravity is about one-sixth of Earth's",
@@ -28,16 +28,16 @@
    "moon": "Moon"
   },
   {
-   "from": 15,
-   "to": 22,
+   "from": 15.0,
+   "to": 22.0,
    "scene": "dust",
    "label": "diagram",
    "credit": "Physics: no air on the Moon",
    "dust": "Dust flies in clean arcs"
   },
   {
-   "from": 22,
-   "to": 29,
+   "from": 22.0,
+   "to": 29.0,
    "scene": "brake",
    "label": "diagram",
    "credit": "Physics: less weight, less grip",
@@ -46,8 +46,8 @@
    "stop": "Stopping distance"
   },
   {
-   "from": 29,
-   "to": 34,
+   "from": 29.0,
+   "to": 35.87,
    "scene": "takeaway"
   }
  ],
@@ -74,5 +74,36 @@
   ]
  ],
  "ends_on": "Move slower than feels natural, and leave yourself room to stop.",
- "literals": []
+ "literals": [],
+ "narration": {
+  "audio": "production/explainers/narration/sci_low_gravity.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.0,
+    "to": 3.08
+   },
+   {
+    "at": 8.9,
+    "from": 4.73,
+    "to": 8.54
+   },
+   {
+    "at": 15.5,
+    "from": 9.87,
+    "to": 15.02
+   },
+   {
+    "at": 22.5,
+    "from": 16.27,
+    "to": 20.68
+   },
+   {
+    "at": 29.6,
+    "from": 21.99,
+    "to": 26.66
+   }
+  ]
+ }
 }

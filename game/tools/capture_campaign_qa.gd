@@ -39,12 +39,18 @@ var first_chapter := 1
 var last_chapter := 8
 var _dev_regex := RegEx.new()
 var _id_regex := RegEx.new()
+## --transcript: no screenshots; write what a player reads, scene by scene, to transcript.md.
+var transcript := false
+var _goal_before := ""
+var _lines: PackedStringArray = []
 
 func _init() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
 	for arg in OS.get_cmdline_user_args():
+		if arg == "--transcript":
+			transcript = true
 		if arg.begins_with("--chapters="):
 			var span := arg.trim_prefix("--chapters=").split("-")
 			first_chapter = int(span[0])
@@ -71,6 +77,10 @@ func _run() -> void:
 		if not done:
 			break
 		chapter += 1
+	if transcript:
+		var notes := FileAccess.open(out_dir.path_join("transcript.md"), FileAccess.WRITE)
+		notes.store_string("\n".join(_lines) + "\n")
+		notes.close()
 	var file := FileAccess.open(out_dir.path_join("report.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "  "))
 	file.close()
@@ -87,7 +97,9 @@ func _play_chapter(chapter: int, record: bool) -> bool:
 			_fail("expected %s but the campaign is at %s" % [expected, scene_id])
 			return false
 		var entry := {"scene_id": scene_id, "room_id": String(campaign.route.current_room_id()), "date": String(campaign.director.snapshot().get("scenario_datetime", "")), "dev_text": [], "targets": 0}
-		if record:
+		if record and transcript:
+			_note_scene_start(scene_id, entry)
+		if record and not transcript:
 			await _shot(chapter, scene_id + "_start")
 			entry.dev_text = _scan_text()
 		if chapter == 1:
@@ -101,7 +113,7 @@ func _play_chapter(chapter: int, record: bool) -> bool:
 					return false
 			entry.targets = targets.size()
 		_close_panels()
-		if record:
+		if record and not transcript:
 			await _shot(chapter, scene_id + "_end")
 			for hit in _scan_text():
 				if not (entry.dev_text as Array).has(hit):
@@ -136,10 +148,13 @@ func _chapter1_scene(index: int, scene_id: String) -> bool:
 		campaign._player.global_position = Vector3(target.global_position.x, 0.0, target.global_position.z + 1.0)
 		campaign._player.velocity = Vector3.ZERO
 		await physics_frame
+		var goal_before := String(campaign.hud._title.text)
 		var result := campaign.perform_target(String(target_id), PlantInput.payload(String(target_id)))
 		if not bool(result.get("accepted", false)):
 			_fail("%s %s: %s" % [scene_id, target_id, String(result.get("reason", ""))])
 			return false
+		await process_frame
+		_note_target(goal_before, String(target_id))
 	return true
 
 func _use(target: Dictionary, chapter: int) -> bool:
@@ -158,6 +173,7 @@ func _use(target: Dictionary, chapter: int) -> bool:
 		payload = Witness6.payload(target_id, state, payload)
 		payload = Witness8.payload(target_id, state, payload)
 	_close_panels()
+	_goal_before = String(campaign.hud._title.text)
 	var result := campaign.perform_target(target_id, payload)
 	# A timed transition (an airlock equalising) plays first; wait as a player would.
 	for wait in 15:
@@ -170,6 +186,8 @@ func _use(target: Dictionary, chapter: int) -> bool:
 	if not bool(result.get("accepted", false)):
 		_fail("%s %s: %s" % [campaign.route.current_scene_id(), target_id, String(result.get("reason", ""))])
 		return false
+	await process_frame
+	_note_target(_goal_before, target_id)
 	return true
 
 ## Stands where a player would: the authored approach point, then a ring of
@@ -263,6 +281,25 @@ func _scan_text() -> Array:
 		if found != null:
 			hits.append({"match": found.get_string(), "text": text.left(160), "node": String(control.name)})
 	return hits
+
+func _note_scene_start(scene_id: String, entry: Dictionary) -> void:
+	if not transcript:
+		return
+	var hud = campaign.hud
+	_lines.append("")
+	_lines.append("## %s · %s · %s" % [scene_id, String(entry.room_id), String(entry.date)])
+	_lines.append("- Goal card: %s — %s" % [String(hud._title.text), String(hud._why.text)])
+	if not String(hud._status.text).is_empty():
+		_lines.append("- Toast on arrival: %s" % String(hud._status.text).replace("\n", " / "))
+	for line in campaign.current_dialogue():
+		if line is Dictionary:
+			_lines.append("  > %s: %s" % [String(line.get("speaker_label", line.get("speaker", "?"))), String(line.get("text", ""))])
+
+func _note_target(goal_before: String, target_id: String) -> void:
+	if not transcript:
+		return
+	var hud = campaign.hud
+	_lines.append("- [%s] goal \"%s\" → %s" % [target_id, goal_before, String(hud._status.text).replace("\n", " / ")])
 
 func _fail(message: String) -> void:
 	report.failures.append(message)

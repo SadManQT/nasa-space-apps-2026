@@ -244,7 +244,15 @@ func _test_campaign() -> void:
 	_check(player.video != null and player.video.stream != null and player.video.stream.resource_path.ends_with("sci_solar_power.ogv"), "S01 H2 selects the registered solar-power/battery explainer")
 	if player.video != null and player.video.stream != null:
 		player.video.paused = true
-		player.update_caption(20.0)
+		# Look the line up in the registry: narration re-times clips, so no fixed second.
+		var spill_at := 20.0
+		var registry = JSON.parse_string(FileAccess.get_file_as_string("res://resources/campaign/content/explainers.json"))
+		for clip in registry.get("explainers", []):
+			if String(clip.get("id", "")) == "sci_solar_power":
+				for line in clip.get("captions", []):
+					if String(line.get("text", "")).contains("extra power spills"):
+						spill_at = float(line.get("start", 20.0)) + 0.5
+		player.update_caption(spill_at)
 		_check(player.caption.text.contains("extra power spills"), "S01 registered clip actually explains full-store overflow")
 	player.close()
 	(hud.panels.find_child("RevealHint", true, false) as Button).pressed.emit()
