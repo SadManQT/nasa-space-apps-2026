@@ -79,3 +79,7 @@ The user explicitly assigned Tanvir M1-116 to check and complete on the original
 ## Subsequent user assignment: approved UI proposals (11 November)
 
 Ramim implements M4-22 only, from the approved `ui_proposal/` sheets. This replaces M4-20 visual styling. Preserve all gameplay features and the other members exact-file reservations; no unrelated implementation is authorized.
+
+##12November: M4-22 Sadman takeover
+
+User stopped Ramim further implementation because of usage limits and explicitly requests Sadman to finish the approved UI plan. M4-22 moves from Ramim to Sadman only. All source,19captures and qualified raw logs are saved/pushed on `ramim/ui-proposals-20261111@ac3603b7`; Ramim reservations are released. Read [M4-22_SADMAN_HANDOFF.md](M4-22_SADMAN_HANDOFF.md), claim the exact task and publish fresh exact-file reservations before editing. Preserve all other assignments/WIP; task remains incomplete until final verification and safe integration.

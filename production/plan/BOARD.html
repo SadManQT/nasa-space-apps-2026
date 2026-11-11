@@ -86,10 +86,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up lists assigned ready tasks; claim one exact ID. Deferred and acceptance work stays visible separately.</p>
 <div class="grid team">
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">Shared gameplay; Chapters 4/6/8; opening and progression UI · 40% share</div><div class="counts"><span class="chip s-done">25 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:96%"></i></div>
-<details open><summary>Working now (1)</summary><ul>
-<li><a class="id" href="#M4-22">M4-22</a> Implement the approved 15-sheet UI proposal across the playable interfaces <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Ramim/codex on 2026-11-11</div></li>
-</ul></details>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">Shared gameplay; Chapters 4/6/8; opening and progression UI · 40% share</div><div class="counts"><span class="chip s-done">25 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:100%"></i></div>
 <details><summary>Done (25)</summary><ul>
 <li><a class="id" href="#M1-18">M1-18</a> First five minutes: title screen, onboarding and UX polish <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">production/qa/evidence/M3-61_ramim_audit.md</div></li>
 <li><a class="id" href="#M1-31">M1-31</a> Make it fun: Chapter 1 game-feel and reward pass <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">production/qa/evidence/M3-61_ramim_audit.md 10 Nov final reconciliation: user explicitly accepts the combined1-41 Ramim /42-119 Sadman-Clau…</div></li>
@@ -150,7 +147,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M4-23">M4-23</a> Style the new next-step, idle-nudge and door-passage toasts in the M4-20 UI pass <span class="chip ">any</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Chapters 5/7; Care Round and physical story integration · 22% share</div><div class="counts"><span class="chip s-done">14 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:93%"></i></div>
+<div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Chapters 5/7; Care Round and physical story integration · 22% share</div><div class="counts"><span class="chip s-done">14 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">1 todo</span></div><div class="bar"><i style="width:88%"></i></div>
+<details open><summary>Next up today (1)</summary><ul>
+<li><a class="id" href="#M4-22">M4-22</a> Implement the approved 15-sheet UI proposal across the playable interfaces <span class="chip ">claude</span> <span class="chip ">P0</span></li>
+</ul></details>
 <details open><summary>Blocked (1)</summary><ul>
 <li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">11 Nov Sadman: reproduced on M4 (cold caches: title frame 24.2 s, first campaign frame 11.5 s; warm: 1.3 s / 0.48 s) and profiled with a debug-symbol 4.7.2 build: first-use Metal …</div></li>
 </ul></details>
@@ -9039,10 +9039,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "id": "M4-22",
    "milestone": "M4",
    "priority": "P0",
-   "tool": "codex",
+   "tool": "claude",
    "title": "Implement the approved 15-sheet UI proposal across the playable interfaces",
-   "status": "in_progress",
-   "owner": "Ramim/codex",
+   "status": "todo",
+   "owner": "",
    "deps": [],
    "paths": [
     "game/scripts/ui/",
@@ -9059,61 +9059,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/AI_PROMPT_LOG.md"
    ],
    "refs": [],
-   "note": "Filed by Ramim/codex on 2026-11-11.",
+   "note": "User-directed Sadman takeover12Nov2026. Saved branch ramim/ui-proposals-20261111@ac3603b7; read production/plan/M4-22_SADMAN_HANDOFF.md and finish the existing plan. Ramim reservations released only after source/evidence push. Do not mark Done or discard/reimplement saved work.",
    "evidence": "",
-   "updated": "2026-11-11",
+   "updated": "2026-11-12",
    "prompt": "User 11 Nov: implement ui_proposal references, replacing rejected industrial style. UI only: cinematic title, soft navy/gold surfaces, premium fonts, settings, HUD, mission/puzzle panels, journal, garden, route, comms, debrief, chapters, trainer and supporting interfaces. Keep every existing feature, command, accessibility and navigation working. Publish exact-file reservations; preserve competing WIP; native/scripted verification and safe sync/push.",
-   "reserved_for": "ramim",
+   "reserved_for": "sadman",
    "effort": 2,
-   "edit_files": [
-    "game/scripts/ui/ui_design.gd",
-    "game/scripts/ui/ui_kit.gd",
-    "game/resources/ui/ui_design.json",
-    "game/resources/ui/lla_theme.tres",
-    "game/scripts/ui/main_menu.gd",
-    "game/scenes/ui/main_menu.tscn",
-    "game/scripts/ui/settings_menu.gd",
-    "game/scenes/ui/settings_menu.tscn",
-    "game/scripts/ui/chapter_select.gd",
-    "game/scenes/ui/chapter_select/chapter_select.tscn",
-    "game/scripts/ui/mission_table_panel.gd",
-    "game/scenes/ui/mission_table_panel.tscn",
-    "game/scripts/ui/p01_panel.gd",
-    "game/scenes/ui/p01_panel.tscn",
-    "game/scripts/ui/greenhouse_panel.gd",
-    "game/scenes/ui/greenhouse_panel.tscn",
-    "game/scripts/ui/campaign_panels.gd",
-    "game/scenes/ui/campaign_panels.tscn",
-    "game/scripts/ui/chapter1_campaign_hud.gd",
-    "game/scenes/ui/chapter1_campaign_hud.tscn",
-    "game/scripts/ui/comms_panel.gd",
-    "game/scenes/ui/comms_panel.tscn",
-    "game/scripts/ui/credits_panel.gd",
-    "game/scripts/ui/how_to_card.gd",
-    "game/scripts/ui/hint_player.gd",
-    "game/scripts/trainer/mission_trainer.gd",
-    "game/scripts/trainer/moon_trainer.gd",
-    "game/scripts/loading/loading_card.gd",
-    "game/tools/test_ui_polish.gd",
-    "game/tools/test_ui_proposal.gd",
-    "game/tools/capture_ui_proposal.gd",
-    "game/assets/ui/branding/aurora_mark.svg",
-    "game/assets/ui/title/aurora_cinematic.png",
-    "game/scenes/trainer/mission_trainer.tscn",
-    "game/scenes/trainer/moon_trainer.tscn",
-    "game/scripts/main.gd",
-    "game/tools/test_chapter1_ui_regressions.gd",
-    "game/tools/test_first_five_minutes.gd",
-    "production/ASSET_REGISTRY.csv",
-    "production/manifest/screen_assets.csv",
-    "production/review/visual_review.md",
-    "production/review/asset_verification.md",
-    "game/assets/ui/proposal/probe_setup.png",
-    "game/assets/ui/proposal/practice_atlas.png",
-    "game/tools/test_mission_trainer.gd",
-    "game/scripts/trainer/p02_trainer.gd",
-    "game/tools/test_comms.gd"
-   ],
    "integration_paths": [
     "game/scenes/trainer/",
     "game/scripts/main.gd",
@@ -9121,6 +9072,15 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/manifest/screen_assets.csv",
     "production/review/visual_review.md",
     "production/review/asset_verification.md"
+   ],
+   "assignment_history": [
+    {
+     "date": "2026-11-12",
+     "reserved_for": "ramim",
+     "owner": "Ramim/codex",
+     "status": "in_progress",
+     "reason": "User stopped further Ramim implementation for usage limits and explicitly requested Sadman takeover. All saved UI source/evidence pushed at ac3603b7 on ramim/ui-proposals-20261111; this is not completion."
+    }
    ],
    "batch_phase": "implementation"
   },
@@ -9787,7 +9747,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
  "implementation_batch": {
   "id": "2026-11-10-implementation",
   "active": true,
-  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP. 10 Nov: Sadman told his own session to do the tasks his blocked tasks need; M4-17 (rover upgrade shape fix and after-Ch4/after-Ch6 pair verification) added to his row. Sadman then approved doing the M1-53 owner request (M1-126). 10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif. 10 Nov late: Sadman answered yes to taking over Asif's in-progress tasks (his Codex must stop editing these files); Asif's saved branches asif/bridges-20261110, asif/implementation-20261110 and asif/curriculum-20261110 are merged with their authorship, not rewritten. 11 Nov: user explicitly reassigned these ten exact IDs to Asif; preserve completed source and historical owners. This overrides Sadman's 10 Nov takeover for this batch. 11 Nov: Tanvir user explicitly requested checking and completing M1-116 on the original Arc laptop. Preserve Atik saved source/evidence and all other task assignments/reservations. 11 Nov: user explicitly assigns Ramim M4-22 approved-proposal UI integration, superseding the rejected industrial presentation only; gameplay and other members work remain protected.",
+  "authority": "User-approved 50-task reassignment; video, submission and manual QA deferred. User subsequently authorized Ramim to override owners for M1-125 integrated 117-suite repairs, preserving WIP. 10 Nov: Sadman told his own session to do the tasks his blocked tasks need; M4-17 (rover upgrade shape fix and after-Ch4/after-Ch6 pair verification) added to his row. Sadman then approved doing the M1-53 owner request (M1-126). 10 Nov 23:30: Sadman explicitly told his own session to finish all of Atik's and Asif's tasks and their blocked ones; tasks with live Asif reservations (M1-103, M1-105, M3-3P, M3-69) stay with Asif. 10 Nov late: Sadman answered yes to taking over Asif's in-progress tasks (his Codex must stop editing these files); Asif's saved branches asif/bridges-20261110, asif/implementation-20261110 and asif/curriculum-20261110 are merged with their authorship, not rewritten. 11 Nov: user explicitly reassigned these ten exact IDs to Asif; preserve completed source and historical owners. This overrides Sadman's 10 Nov takeover for this batch. 11 Nov: Tanvir user explicitly requested checking and completing M1-116 on the original Arc laptop. Preserve Atik saved source/evidence and all other task assignments/reservations. 11 Nov: user explicitly assigns Ramim M4-22 approved-proposal UI integration, superseding the rejected industrial presentation only; gameplay and other members work remain protected. 12Nov: user stopped Ramim UI implementation at the usage limit and explicitly assigned Sadman M4-22 continuation from saved ac3603b7; all other task assignments/reservations stay intact.",
   "priority_order": [
    "ramim",
    "sadman",
@@ -9822,8 +9782,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "M4-18",
     "M4-19",
     "M4-20",
-    "M4-21",
-    "M4-22"
+    "M4-21"
    ],
    "sadman": [
     "M4-16",
@@ -9840,7 +9799,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "M4-17",
     "M1-126",
     "M1-53",
-    "M1-92"
+    "M1-92",
+    "M4-22"
    ],
    "asif": [
     "M1-105",
