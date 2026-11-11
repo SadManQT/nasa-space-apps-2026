@@ -7790,7 +7790,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Investigate post-result Forward+ exit timeout on Intel Arc laptop",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Tanvir/codex",
    "deps": [],
    "paths": [
@@ -7801,7 +7801,7 @@
    ],
    "refs": [],
    "note": "10Nov ACTIVE BATCH: assigned to Atik; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Tanvir/codex on 2026-11-09.\n11 Nov: Tanvir user explicitly requested checking and completing M1-116 on the original Arc laptop. Preserve Atik saved source/evidence and all other task assignments/reservations.",
-   "evidence": "",
+   "evidence": "Original Arc Windows11/Intel130V acceptance, source802624b1: unchanged real campaign fixture45/0 twice under Forward+ Vulkan, normal exits28.208s/20.997s; Compatibility45/0 normal16.829s; zero raw native errors. Mandatory game/tools/run_tests.sh campaign_interaction_input39/0,1/1 clean. Actual launcher/companion PIDs and all six disappearances retained; source/save guards pass. Independent review recommends Done for current bounded-exit scope. Evidence b0f9729b: production/qa/evidence/M1-116_arc_20261111/README.md, provenance.json,42-member raw_logs.zip and exact-byte hash manifest. Initial separate setup editor0/runner1 dummy t-null remains FAILED; original Nov9 timeout cause unknown, no universal crash/runtime repair inferred. Parent accepted split full gate remains separate in M4-21; no new full/manualQA/video/export claim.",
    "updated": "2026-11-11",
    "prompt": "Tanvir M1-65 independent dry-zero retest on 9 Nov2026, source cc4e180 (game from415aa23). Windows11 Intel Arc130V, Godot4.7.2, Forward+ Vulkan1280x720. Repro exact command and source hashes in production/qa/playtests/first_impressions/retest_2026-11-09/native/run.json; QA adapter capture_dry_zero.gd extends existing test_campaign_interaction_input.gd and redirects evidence only. Fixture emits PASS44/0, writes five screenshots and input trace, but subprocess does not exit within180.017s; timeout captured as124, capture_checks_passed:false. No Godot process remained at subsequent check. Do not conflate with the original missing-panel gameplay blockage, infer a driver/deadlock cause, or claim a reproduced permanent movement lock. Same fixture in Compatibility exits0 in13.450s with44/0 (native_compatibility/run.json). Focused mandatory runner input38/0 and P01 four suites589/0 pass. Investigate with existing runtime/loading/player ownership and coordinate engine/settings owner if needed; retain successful behavior and both attempts. Acceptance: identify bounded exit/teardown behavior on this weakest laptop, preserve isolated saves, and show Forward+ windowed fixture prints its valid result and terminates without forced timeout; run mandatory relevant runner with complete diagnostics. Full suite remains required by the parent owner tasks.",
    "reserved_for": "tanvir",
@@ -7836,18 +7836,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "previous_blocker": "Original Arc Windows11/Vulkan44/0 then180.017s timeout124 remains failed; native/Compatibility manifests re-read and hashed in4722a26 resume_20261110/M1-116_ORIGINAL_HOST.md. No original-host connection, reachable process or Windows thread trace; GitHub runner discovery alsoHTTP403. Collector sampling is macOS-only. Fresh headless input319/0/full99/117 and prior Metal44/0 exit0 do not certify Arc. Resume on original host with exact PID/command/thread wait/module diagnostics during post-PASS hold, then cause-based repair and normal bounded Forward+ exit plus mandatory gate.",
-   "edit_files": [
-    "production/qa/evidence/M1-116_arc_20261111/README.md",
-    "production/qa/evidence/M1-116_arc_20261111/collect.py",
-    "production/qa/evidence/M1-116_arc_20261111/provenance.json",
-    "production/qa/evidence/M1-116_arc_20261111/artifacts.json",
-    "production/qa/evidence/M1-116_arc_20261111/review.md",
-    "production/qa/evidence/M1-116_arc_20261111/raw_logs.zip",
-    "production/AI_PROMPT_LOG.md",
-    "PRODUCTION_HANDBOOK.md",
-    "production/qa/evidence/M1-116_arc_20261111/.gitattributes"
-   ]
+   "previous_blocker": "Original Arc Windows11/Vulkan44/0 then180.017s timeout124 remains failed; native/Compatibility manifests re-read and hashed in4722a26 resume_20261110/M1-116_ORIGINAL_HOST.md. No original-host connection, reachable process or Windows thread trace; GitHub runner discovery alsoHTTP403. Collector sampling is macOS-only. Fresh headless input319/0/full99/117 and prior Metal44/0 exit0 do not certify Arc. Resume on original host with exact PID/command/thread wait/module diagnostics during post-PASS hold, then cause-based repair and normal bounded Forward+ exit plus mandatory gate."
   },
   {
    "id": "M1-117",
