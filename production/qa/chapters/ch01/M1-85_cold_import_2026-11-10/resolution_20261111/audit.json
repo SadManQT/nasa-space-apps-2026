@@ -1,0 +1,113 @@
+{
+  "current_canonical_revision": "93de2b236726d6cb0130ae2a6524ae4c2be2a78e",
+  "current_game_tree": "e77596698f906dfd503e511434c09b8bf0d7ace2",
+  "canonical_import_sidecars": 2939,
+  "canonical_crlf_paths": [],
+  "all_effective_import_eol_lf": true,
+  "canonical_blob_pairs_sha256": "5cddf349da2a68c004ce8740b4cfb1a8f79c87e1192cb7582205c6064226e5f7",
+  "matrix_audit_complete": true,
+  "current_gate_audit_complete": false,
+  "final_acceptance_review_complete": false,
+  "stopped_original_replay_complete": false,
+  "green_continuation_complete": true,
+  "preserved_native_failure": true,
+  "red_restore_failures": 2,
+  "red_restore_native139": 1,
+  "green_restore_clean": 2,
+  "all_controls_clean": true,
+  "original_save_unchanged": true,
+  "red2_postcrash_state_unchanged": true,
+  "legacy_reimport_steps_field": "Counts progress lines including preparation/finalization; never an asset-import count.",
+  "cases": [
+    {
+      "label": "baseline1",
+      "healthy": true,
+      "raw_setup_exit": 0,
+      "raw_suite_exit": 0,
+      "runner_exit": 0,
+      "generic_errors": 0,
+      "native_signature": false
+    },
+    {
+      "label": "red1_control",
+      "healthy": true,
+      "raw_setup_exit": 0,
+      "raw_suite_exit": 0,
+      "runner_exit": 0,
+      "generic_errors": 0,
+      "native_signature": false
+    },
+    {
+      "label": "red1_restore",
+      "healthy": false,
+      "raw_setup_exit": 0,
+      "raw_suite_exit": null,
+      "runner_exit": 1,
+      "generic_errors": 2,
+      "native_signature": false
+    },
+    {
+      "label": "green1_control",
+      "healthy": true,
+      "raw_setup_exit": 0,
+      "raw_suite_exit": 0,
+      "runner_exit": 0,
+      "generic_errors": 0,
+      "native_signature": false
+    },
+    {
+      "label": "green1_restore",
+      "healthy": true,
+      "raw_setup_exit": 0,
+      "raw_suite_exit": 0,
+      "runner_exit": 0,
+      "generic_errors": 0,
+      "native_signature": false
+    },
+    {
+      "label": "baseline2",
+      "healthy": true,
+      "raw_setup_exit": 0,
+      "raw_suite_exit": 0,
+      "runner_exit": 0,
+      "generic_errors": 0,
+      "native_signature": false
+    },
+    {
+      "label": "red2_control",
+      "healthy": true,
+      "raw_setup_exit": 0,
+      "raw_suite_exit": 0,
+      "runner_exit": 0,
+      "generic_errors": 0,
+      "native_signature": false
+    },
+    {
+      "label": "red2_restore",
+      "healthy": false,
+      "raw_setup_exit": 139,
+      "raw_suite_exit": null,
+      "runner_exit": 139,
+      "generic_errors": 0,
+      "native_signature": true
+    },
+    {
+      "label": "green2_control",
+      "healthy": true,
+      "raw_setup_exit": 0,
+      "raw_suite_exit": 0,
+      "runner_exit": 0,
+      "generic_errors": 0,
+      "native_signature": false
+    },
+    {
+      "label": "green2_restore",
+      "healthy": true,
+      "raw_setup_exit": 0,
+      "raw_suite_exit": 0,
+      "runner_exit": 0,
+      "generic_errors": 0,
+      "native_signature": false
+    }
+  ]
+}

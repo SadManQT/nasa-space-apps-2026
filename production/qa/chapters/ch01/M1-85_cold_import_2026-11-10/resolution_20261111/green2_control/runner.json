@@ -1,0 +1,59 @@
+{
+  "command": [
+    "C:/Program Files/Git/bin/bash.exe",
+    "game/tools/run_tests.sh",
+    "m185_import_integrity"
+  ],
+  "pid": 28204,
+  "start_utc_epoch": 1794372990.231269,
+  "duration_seconds": 8.639,
+  "timed_out": false,
+  "termination": {
+    "needed": false
+  },
+  "raw_exit_code": 0,
+  "unsigned_exit_hex": "0x0",
+  "effective_exit_code": 0,
+  "log_sha256": "e94329a3f33858456f335ca35395140da193d6ea4742477720f3cd3a06e530ad",
+  "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\resolution_20261111\\green2_control\\runner_logs",
+  "isolated_env": {
+    "APPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-final-20261111/profiles/green2/roaming",
+    "LOCALAPPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-final-20261111/profiles/green2/local",
+    "TEMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-final-20261111/profiles/green2/tmp",
+    "TMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-final-20261111/profiles/green2/tmp"
+  },
+  "script_error_lines": [],
+  "generic_error_lines": [],
+  "generic_error_count": 0,
+  "warning_count": 0,
+  "last_printed_reimport": null,
+  "suite_summary": [
+    "1/1 suites passed"
+  ],
+  "setup_failure": false,
+  "native_crash_signature": false,
+  "audited_logs": [
+    {
+      "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\resolution_20261111\\green2_control\\runner_logs\\setup.log",
+      "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "last_printed_reimport": null,
+      "suite_summary": [],
+      "setup_failure": false,
+      "native_crash_signature": false
+    },
+    {
+      "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\worktrees\\tanvir-pilot-20261110\\production\\qa\\chapters\\ch01\\M1-85_cold_import_2026-11-10\\resolution_20261111\\green2_control\\runner_logs\\test_m185_import_integrity.gd.log",
+      "sha256": "f5250137008ca3a9f577a8e5eb99d95707a03e243646f4be20450a4753c33e8c",
+      "engine_errors": [],
+      "script_errors": [],
+      "warning_count": 0,
+      "last_printed_reimport": null,
+      "suite_summary": [],
+      "setup_failure": false,
+      "native_crash_signature": false
+    }
+  ]
+}

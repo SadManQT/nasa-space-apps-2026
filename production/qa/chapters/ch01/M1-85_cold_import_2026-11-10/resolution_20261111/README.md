@@ -1,13 +1,20 @@
-# M1-85 resolution checkpoint - 11 November 2026
+# M1-85 - verified import protection and fresh native reproduction
 
-In progress; no new native-crash cause or completed engine matrix is claimed.
+11 November2026, Tanvir/codex. **Current-source full gate and final review remain in progress.** No native crash cause or universal crash repair is claimed. M1-122/M1-123 remain Done. Manual QA/videos are deferred.
 
-The actual shell runner now rejects setup ERROR diagnostics even when Godot exits zero, retains setup/suite raw exit files, and preserves the existing script/native/timeout behavior. Actual-shell regressions: 11 methods passed, one POSIX-only signal fixture skipped on Windows; see [unit_runner.txt](unit_runner.txt).
+The Game-scoped LF checkout rule preserves all2939 already-LF canonical sidecar blobs without asset/font/renderer/settings edits. Mandatory setup now rejects every ERROR diagnostic even when Godot exits0, retains raw setup/suite exits, and preserves existing script/native/timeout protections. [Actual-shell regressions](unit_runner.txt):11 methods pass, one POSIX-only signal fixture skipped on Windows. [Policy audit](canonical_metadata.json), [current/replay audit](audit.json).
 
-The scoped Game attribute rule keeps import sidecars LF across Windows checkout. [canonical_metadata.json](canonical_metadata.json) records 2939 already-LF canonical blobs, so no asset parameter or bulk metadata rewrite is included.
+| Matched restoration | Metadata byte changes | Raw setup / runner exit | Result |
+|---|---:|---|---|
+| [Original checkout1](red1_restore/runner.json) |960CRLF-only|0 /1|Two get_multiple_md5 file-open ERRORs; guard correctly runs no suite|
+| [LF checkout1](green1_restore/runner.json) |0|0 /0|Clean setup and font probe5/0|
+| [Original checkout2](red2_restore/runner.json) |960CRLF-only|139 /139|Fresh native crash; no suite, ERROR or backtrace|
+| [LF checkout2](green2_restore/runner.json) |0|0 /0|Clean setup and font probe5/0|
 
-The retained original-source A/B replay is running in ignored isolated projects. The first baseline passed the real imported-font probe5/0 with setup/suite exits0 and no raw errors; see [baseline1](baseline1/runner.json). The published [replay](replay_policy.py) and [current-gate collector](current_gate.py) retain remaining work as pending. Current-source mandatory/full checks and upstream handoff remain pending. The historical native exit139 remains unexplained. M1-122/M1-123 remain completed, and no new movement/collision changes are included. Manual QA/videos remain deferred.
+Both pairs start from SHA-matched warm project/cache/profile clones and have clean same-path controls. They derive from the same retained warm input, not independent cold-cache generations. The original [replay](replay_policy.py), [stopped state](run.json) and complete raw phase logs preserve the native failure as FAIL. `run.json.complete` intentionally remains false after its safety stop. After [read-only capture](native_capture.json), the separately recorded [green-only continuation](green_continuation.json) passed and reverified the failed red2 state unchanged. No red2 retry occurred.
 
-First matched pair: [red restore](red1_restore/runner.json) correctly FAILS setup after two file-access ERRORs at editor exit0 (no suite); [LF restore](green1_restore/runner.json) is clean with probe5/0 and both phase exits0. Both same-path controls were clean. This is one pair; second pair/current full gate remain pending.
+The fresh native log is197474bytes. Final font progress messages cannot identify the failing importer. [Snapshot manifest](native_inputs.json) covers5359post-crash files and5352files in each matching input. The retained baseline is reconstructed pre-control input, not the exact pre-crash cache. The failed snapshot is post-crash. No linked native stack/dump was available in the [narrow host diagnostic search](native_system_events.json). This supplies actionable linked engine evidence; it does not establish the historical crash's identical cause.
 
-Fresh native reproduction: second CRLF restoration exited139 in16.614s before any suite, after a clean control. The replay stopped intentionally: run.json.complete remains false. [Raw fatal record](red2_restore/runner.json), [complete preserved-state hashes](native_inputs.json), [capture/provenance](native_capture.json), [narrow system-event search](native_system_events.json). The post-crash red2 copy is never retried; baseline2 retains a byte-identical pre-control input. No native stack/dump or crash cause is claimed. A separate green-only continuation and current-source gate remain pending.
+Current-source checking uses [current_gate.py](current_gate.py), frozen revision/game-tree and full source/LFS manifest, a fresh project cache and isolated profile, and the unchanged mandatory `game/tools/run_tests.sh`. The cold focused probe and all133current suites are pending; older comms/performance failures are not asserted as current. The collector separately records collection completion and exact full acceptance, checks every expected verdict/raw log/phase exit, preserves failed logs, and checks source/player-save integrity.
+
+[Upstream handoff draft](upstream_report.md) includes historical raw/source recovery, the fresh failure, bounded replay, version-pinned engine boundary and exact missing native diagnostics. It has not been posted externally. The active M4-20 handbook reservation is respected; [saved handbook entry](handbook_handoff.md) awaits coordinated application.
