@@ -7388,7 +7388,9 @@
     "production/qa/evidence/M1-103.md",
     "production/qa/evidence/M1-103_followup_logs.zip",
     "production/qa/evidence/M1-103_session_handoff_20261111.md",
-    "game/tools/test_class_campaign_guard.gd.uid"
+    "game/tools/test_class_campaign_guard.gd.uid",
+    "PRODUCTION_HANDBOOK.md",
+    "production/AI_PROMPT_LOG.md"
    ]
   },
   {
