@@ -225,6 +225,10 @@ func open_settings() -> void:
 	_settings_menu = SettingsMenu.new(null, SaveSlots.new(save_path, Chapter1Campaign.restore_session))
 	set_accessibility(_settings_menu.game_settings.accessibility_for_campaign())
 	_settings_menu.closed.connect(_close_settings)
+	_settings_menu.onboarding_reset_requested.connect(func() -> void:
+		if _panels == null:
+			attach_panels()
+		_panels.hint_player.reset_seen())
 	_settings_menu.settings_changed.connect(func(snapshot: Dictionary) -> void:
 		set_accessibility(snapshot.get("accessibility", {})))
 	_settings_menu.slot_loaded.connect(func(_slot_id: String, snapshot: Dictionary) -> void:

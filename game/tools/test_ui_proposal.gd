@@ -5,6 +5,7 @@ var checks := 0
 var failures := 0
 
 func _init() -> void:
+	CampaignCutscenePlayer.autoplay = false
 	call_deferred("_run")
 
 func _run() -> void:
@@ -100,7 +101,15 @@ func _run() -> void:
 	_check(active.get("family_mode", false) and not active.get("captions", true) and active.get("subtitle_scale") == 1.5, "actual campaign receives all configured preferences")
 	_check(_interact_key(KEY_F), "fresh campaign panels never restore the stale legacy H shortcut over F")
 	_check(campaign.hud._prompt_key.text == "F", "in-world Use hint displays the configured key")
+	campaign.game_settings.remap_keyboard("interact", KEY_H)
+	campaign.hud.apply_accessibility()
+	campaign.hud.panels.hint_player.close()
+	await _key(KEY_H)
+	_check(campaign.hud.panels.active_panel().is_empty(), "remapped Use H never invokes the old What now shortcut")
+	_check(campaign.hud._prompt_key.text == "H", "in-world key cap updates after a later remap")
 	main.free()
+	await process_frame
+	await process_frame
 	storage.cleanup()
 	print("UI PROPOSAL RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)

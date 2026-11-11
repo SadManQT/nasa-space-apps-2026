@@ -194,6 +194,9 @@ func _prepare_initial_field() -> void:
 	await region.configure_sector("aurora_ridge", "EX-CH04-S02")
 	if _active_sortie.is_empty():
 		field_ready = true
+		_camera.position = Vector3(20.0, _field_height(20.0, 29.0) + 8.0, 29.0)
+		_camera.look_at(Vector3(0.0, _field_height(0.0, 5.0) + 1.0, 5.0), Vector3.UP)
+		_scroll.scroll_vertical = 0
 
 func _init_simulation() -> void:
 	var mode := String(settings.get("assist_mode", "Cadet"))
@@ -318,7 +321,9 @@ func _rebuild_assist_bar() -> void:
 		_assist_selector.remove_child(child)
 		child.queue_free()
 	var current: String = String(settings.get("assist_mode", "Cadet")).capitalize()
-	_assist_selector.add_child(UiDesign.label("Assist mode:", "caption", "muted"))
+	var label := UiDesign.label("Assist mode:", "caption", "muted")
+	label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	_assist_selector.add_child(label)
 	for mode_id: String in ["Story", "Cadet", "Expedition"]:
 		var is_active: bool = current == mode_id
 		var label_text: String = mode_id + (" (Active)" if is_active else "")
@@ -1077,4 +1082,6 @@ func _restore_page_focus() -> void:
 	for child in _body.get_children():
 		if child is Button and not (child as Button).disabled:
 			(child as Button).grab_focus()
+			if _page == "catalog":
+				_scroll.scroll_vertical = 0
 			return

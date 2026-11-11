@@ -158,6 +158,7 @@ func show_tab(tab_id: String) -> void:
 		var button := _shell.get_node("%Tab_" + tid) as Button
 		button.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent" if tid == active_tab else "navy"), tid == active_tab))
 		button.add_theme_color_override("font_color", UiDesign.colour("ink" if tid == active_tab else "ivory"))
+		button.add_theme_color_override("font_focus_color", UiDesign.colour("ink" if tid == active_tab else "ivory"))
 	for c in _body.get_children():
 		_body.remove_child(c)
 		c.queue_free()
@@ -230,6 +231,7 @@ func _render_chambers_tab() -> void:
 		mist_btn.name = "CareMist_" + pid
 		mist_btn.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent"), true))
 		mist_btn.add_theme_color_override("font_color", UiDesign.colour("ink"))
+		mist_btn.add_theme_color_override("font_focus_color", UiDesign.colour("ink"))
 		mist_btn.pressed.connect(func() -> void:
 			if _campaign != null:
 				_submit("plant_care", pid, {"care_id": "water"})

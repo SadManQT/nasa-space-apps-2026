@@ -13,6 +13,7 @@ signal settings_changed(snapshot: Dictionary)
 signal slot_loaded(slot_id: String, snapshot: Dictionary)
 signal slot_saved(slot_id: String, result: Dictionary)
 signal chapter_select_requested
+signal onboarding_reset_requested
 
 const GameSettingsScript = preload("res://scripts/settings/game_settings.gd")
 const SaveSlotsScript = preload("res://scripts/save/save_slots.gd")
@@ -361,6 +362,12 @@ func _build_controls_tab() -> void:
 		row.add_child(pad_btn)
 
 func _build_assist_tab() -> void:
+	var replay := UiDesign.button("Replay first-time guidance")
+	replay.name = "ReplayFirstTimeGuidance"
+	replay.pressed.connect(func() -> void:
+		onboarding_reset_requested.emit()
+		_status_label.text = "Guidance will appear again on your next action.")
+	_body.add_child(replay)
 	_body.add_child(UiDesign.label("Captions, Subtitles & Assist Modes", "heading"))
 	_body.add_child(UiDesign.label("Story canon and real lunar math stay identical in every mode; assist modes change only guidance and timer pressure.", "caption", "muted"))
 

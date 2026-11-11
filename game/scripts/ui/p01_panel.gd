@@ -303,6 +303,7 @@ func _options(column: VBoxContainer, field: String, options: Array) -> void:
 		if selected:
 			button.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent"), true))
 			button.add_theme_color_override("font_color", UiDesign.colour("ink"))
+			button.add_theme_color_override("font_focus_color", UiDesign.colour("ink"))
 	var choices := row.get_children()
 	for index in range(choices.size() - 1):
 		var current := choices[index] as Button
@@ -368,6 +369,7 @@ func _button(parent: Node, text: String, id: String, action: Callable) -> Button
 	if id in ["TryIt", "ConfirmChoice"]:
 		button.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent"), true))
 		button.add_theme_color_override("font_color", UiDesign.colour("ink"))
+		button.add_theme_color_override("font_focus_color", UiDesign.colour("ink"))
 	button.pressed.connect(action)
 	parent.add_child(button)
 	return button

@@ -222,7 +222,7 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "CAPTIONS ON  /  TIMER-FREE"
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 12
 size_flags_horizontal = 3
 autowrap_mode = 2
 theme_override_colors/font_color = Color(0.78,0.81,0.86,1)
@@ -233,12 +233,12 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Asset showcase"
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 12
 
 [node name="Independence" type="Label" parent="Page/Footer"]
 layout_mode = 2
 text = "INDEPENDENT TEAM PROJECT  /  NOT NASA-ENDORSED"
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 12
 theme_override_colors/font_color = Color(0.78,0.81,0.86,1)
 horizontal_alignment = 2
 mouse_filter = 2
