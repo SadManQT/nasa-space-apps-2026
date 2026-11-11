@@ -15,3 +15,7 @@ The initial remote audit found245/282 Done,6 active implementation rows open and
 The user explicitly instructed stopping duplicate verification and accepting Ramim suites1-35 plus Sadman suites36 onward. The first35 names exactly match the sorted current134-suite inventory; all35 pass on source02659d0b. The local run actually retained41 completed passes and no suite-failure line before the requested stop; its controller exit1 reflects termination, not a complete full-run verdict. Peer raw logs/source equivalence were not independently reverified for this acceptance.
 
 See verification.txt for the full requested partition and actual completed result lines. This is a combined/user-accepted gate, not a single134/134 local invocation. Earlier UI19/0, menu contrast170/0 and first-five59/0 results plus native production-scene captures are retained in ../M4-20/. No further UI changes were made after the user's stop instruction. Existing M4/Arc hardware and raw-diagnostic limits remain.
+
+## Final board status
+
+247/283 Done. Five current implementation tasks remain: M1-92, M1-116, M1-103, M1-105, M1-37. Thirty-one deferred rows also remain unfinished. All15 acceptance-only rows are Done. M4-20 and this audit are Done for the delivered/accepted scope. Shared main published as b331757d before this administrative closure; no further UI source changes.

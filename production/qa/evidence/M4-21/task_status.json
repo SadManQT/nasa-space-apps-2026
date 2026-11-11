@@ -2,32 +2,18 @@
   "source_commit": "02659d0b97a149350ca50bfedf7e4eff119a35db",
   "game_tree": "df1beb75490dc4328751e439e390fb0debafa586",
   "all_status_counts": {
-    "done": 245,
+    "done": 247,
     "todo": 27,
     "blocked": 6,
-    "in_progress": 5
+    "in_progress": 3
   },
   "members": {
     "ramim": {
       "total": 25,
       "counts": {
-        "done": 23,
-        "in_progress": 2
+        "done": 25
       },
-      "unfinished": [
-        {
-          "id": "M4-20",
-          "status": "in_progress",
-          "title": "Industrial UI visual and usability polish (user request)",
-          "blocker": ""
-        },
-        {
-          "id": "M4-21",
-          "status": "in_progress",
-          "title": "Verify all task statuses and integrate completed team changes safely",
-          "blocker": ""
-        }
-      ]
+      "unfinished": []
     },
     "sadman": {
       "total": 16,
@@ -259,5 +245,8 @@
   ],
   "acceptance_counts": {
     "done": 15
-  }
+  },
+  "verification_source_commit": "02659d0b97a149350ca50bfedf7e4eff119a35db",
+  "status_snapshot": "After accepted combined gate and M4-20/M4-21 closure",
+  "total_tasks": 283
 }

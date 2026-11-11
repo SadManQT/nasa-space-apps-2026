@@ -86,12 +86,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up lists assigned ready tasks; claim one exact ID. Deferred and acceptance work stays visible separately.</p>
 <div class="grid team">
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">Shared gameplay; Chapters 4/6/8; opening and progression UI · 40% share</div><div class="counts"><span class="chip s-done">23 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:92%"></i></div>
-<details open><summary>Working now (2)</summary><ul>
-<li><a class="id" href="#M4-20">M4-20</a> Industrial UI visual and usability polish (user request) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
-<li><a class="id" href="#M4-21">M4-21</a> Verify all task statuses and integrate completed team changes safely <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-11</div></li>
-</ul></details>
-<details><summary>Done (23)</summary><ul>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">Shared gameplay; Chapters 4/6/8; opening and progression UI · 40% share</div><div class="counts"><span class="chip s-done">25 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:100%"></i></div>
+<details><summary>Done (25)</summary><ul>
 <li><a class="id" href="#M1-18">M1-18</a> First five minutes: title screen, onboarding and UX polish <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">production/qa/evidence/M3-61_ramim_audit.md</div></li>
 <li><a class="id" href="#M1-31">M1-31</a> Make it fun: Chapter 1 game-feel and reward pass <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">production/qa/evidence/M3-61_ramim_audit.md 10 Nov final reconciliation: user explicitly accepts the combined1-41 Ramim /42-119 Sadman-Clau…</div></li>
 <li><a class="id" href="#M3-4P">M3-4P</a> Chapter 4 puzzles P-07 and P-08 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">production/qa/evidence/M3-61_ramim_audit.md</div></li>
@@ -115,6 +111,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-125">M1-125</a> Repair and verify the integrated full-suite gate under user owner override <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">10 Nov final reconciliation: user explicitly accepts the combined1-41 Ramim /42-119 Sadman-Claude result without repeating game tests. All1…</div></li>
 <li><a class="id" href="#M4-18">M4-18</a> Consume storm_early_warning in the Chapter 7 shelter run, step the rover heater in Chapter 8 shadow, and align the hazard storm numbers with canon <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">dee36744: required run_tests.sh hazards24/0, campaign_field_systems14/0 including save/resume, upgrade_pairs_ch4_ch6 34/0. Native24/0 and34…</div></li>
 <li><a class="id" href="#M4-19">M4-19</a> Install Godot UI skill and Gohud addon (user request) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">User-requested tools installed: godot-ui-integration and gohud skills in ~/.codex/skills; upstream Gohud 58c3780c vendored with authored DP…</div></li>
+<li><a class="id" href="#M4-20">M4-20</a> Industrial UI visual and usability polish (user request) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Saved UI implementation37517e2d merged and pushed to main b331757d. Focused polish19/0, menu contrast170/0 and first-five59/0; current inte…</div></li>
+<li><a class="id" href="#M4-21">M4-21</a> Verify all task statuses and integrate completed team changes safely <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Audited all283 task rows,54 remote feature/archive branches and7 local worktrees. Completed shared source merged/pushed b331757d; generated…</div></li>
 </ul></details>
 <details><summary>Source delivered: acceptance only (11)</summary><ul>
 <li><a class="id" href="#M1-08">M1-08</a> P-01 Commission &amp; Plant: a real, interactive puzzle panel <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -8948,7 +8946,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Industrial UI visual and usability polish (user request)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [],
    "paths": [
@@ -8966,29 +8964,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-10.",
-   "evidence": "",
-   "updated": "2026-11-10",
+   "evidence": "Saved UI implementation37517e2d merged and pushed to main b331757d. Focused polish19/0, menu contrast170/0 and first-five59/0; current integrated Chapter1 UI42/0 and requested suites1-35 pass. User explicitly accepts Sadman36-onward combined gate and stops duplicate testing/UI iteration. Actual41 completed local passes retained; no single full134 run or peer-source equivalence claim. Native production scenes/150% captures and review fixes in M4-20; integration details M4-21.",
+   "updated": "2026-11-11",
    "prompt": "User delegates complete visual polish using approved DOOM-inspired direction, safe merges/pushes and an update after every push. Improve shared typography/themes/states and authored main menu, preserve other member locks and all gameplay/save/accessibility contracts. Validate actual native screenshots, 150% text and keyboard navigation.",
    "reserved_for": "ramim",
    "effort": 2,
-   "edit_files": [
-    "game/scripts/ui/ui_design.gd",
-    "game/scripts/ui/ui_kit.gd",
-    "game/scripts/ui/main_menu.gd",
-    "game/scenes/ui/main_menu.tscn",
-    "game/resources/ui/ui_design.json",
-    "game/resources/ui/lla_theme.tres",
-    "game/assets/ui/title/aurora_title.jpg",
-    "game/assets/ui/title/aurora_title.jpg.import",
-    "game/tools/test_ui_polish.gd",
-    "game/tools/capture_ui_polish.gd",
-    "production/qa/evidence/M4-20/menu.png",
-    "production/qa/evidence/M4-20/menu_large.png",
-    "production/qa/evidence/M4-20/settings.png",
-    "production/qa/evidence/M4-20/README.md",
-    "production/plan/ui_polish_20261110.md",
-    "PRODUCTION_HANDBOOK.md"
-   ],
    "batch_phase": "implementation"
   },
   {
@@ -8997,7 +8977,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Verify all task statuses and integrate completed team changes safely",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [],
    "paths": [
@@ -9005,18 +8985,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-11.",
-   "evidence": "",
+   "evidence": "Audited all283 task rows,54 remote feature/archive branches and7 local worktrees. Completed shared source merged/pushed b331757d; generated UID collisions archived, original source WIP backed up, no unresolved Git index conflicts. Preserve unsafe Asif Class-provider41a2bd07 and historical night/media branches. User accepted Ramim1-35 + Sadman36-onward; no further duplicate tests. Five actual implementation tasks and31 deferred rows remain unfinished; see M4-21 inventory/review/verification.",
    "updated": "2026-11-11",
    "prompt": "Explicit user request 11 Nov: check all task completion statuses, merge safely with everyones changes preserved and no unresolved conflicts; report after each push. Preserve archived/unsafe WIP and retain truthful open statuses. Verify integrated source and original workspace sync.",
    "reserved_for": "ramim",
    "effort": 2,
-   "edit_files": [
-    "production/qa/evidence/M4-21/README.md",
-    "production/qa/evidence/M4-21/task_status.json",
-    "production/qa/evidence/M4-21/branch_inventory.json",
-    "production/qa/evidence/M4-21/review.md",
-    "production/qa/evidence/M4-21/verification.txt"
-   ],
    "batch_phase": "implementation"
   }
  ],

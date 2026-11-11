@@ -8201,7 +8201,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Industrial UI visual and usability polish (user request)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [],
    "paths": [
@@ -8219,29 +8219,11 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-10.",
-   "evidence": "",
-   "updated": "2026-11-10",
+   "evidence": "Saved UI implementation37517e2d merged and pushed to main b331757d. Focused polish19/0, menu contrast170/0 and first-five59/0; current integrated Chapter1 UI42/0 and requested suites1-35 pass. User explicitly accepts Sadman36-onward combined gate and stops duplicate testing/UI iteration. Actual41 completed local passes retained; no single full134 run or peer-source equivalence claim. Native production scenes/150% captures and review fixes in M4-20; integration details M4-21.",
+   "updated": "2026-11-11",
    "prompt": "User delegates complete visual polish using approved DOOM-inspired direction, safe merges/pushes and an update after every push. Improve shared typography/themes/states and authored main menu, preserve other member locks and all gameplay/save/accessibility contracts. Validate actual native screenshots, 150% text and keyboard navigation.",
    "reserved_for": "ramim",
-   "effort": 2,
-   "edit_files": [
-    "game/scripts/ui/ui_design.gd",
-    "game/scripts/ui/ui_kit.gd",
-    "game/scripts/ui/main_menu.gd",
-    "game/scenes/ui/main_menu.tscn",
-    "game/resources/ui/ui_design.json",
-    "game/resources/ui/lla_theme.tres",
-    "game/assets/ui/title/aurora_title.jpg",
-    "game/assets/ui/title/aurora_title.jpg.import",
-    "game/tools/test_ui_polish.gd",
-    "game/tools/capture_ui_polish.gd",
-    "production/qa/evidence/M4-20/menu.png",
-    "production/qa/evidence/M4-20/menu_large.png",
-    "production/qa/evidence/M4-20/settings.png",
-    "production/qa/evidence/M4-20/README.md",
-    "production/plan/ui_polish_20261110.md",
-    "PRODUCTION_HANDBOOK.md"
-   ]
+   "effort": 2
   },
   {
    "id": "M4-21",
@@ -8249,7 +8231,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Verify all task statuses and integrate completed team changes safely",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Ramim/codex",
    "deps": [],
    "paths": [
@@ -8257,18 +8239,11 @@
    ],
    "refs": [],
    "note": "Filed by Ramim/codex on 2026-11-11.",
-   "evidence": "",
+   "evidence": "Audited all283 task rows,54 remote feature/archive branches and7 local worktrees. Completed shared source merged/pushed b331757d; generated UID collisions archived, original source WIP backed up, no unresolved Git index conflicts. Preserve unsafe Asif Class-provider41a2bd07 and historical night/media branches. User accepted Ramim1-35 + Sadman36-onward; no further duplicate tests. Five actual implementation tasks and31 deferred rows remain unfinished; see M4-21 inventory/review/verification.",
    "updated": "2026-11-11",
    "prompt": "Explicit user request 11 Nov: check all task completion statuses, merge safely with everyones changes preserved and no unresolved conflicts; report after each push. Preserve archived/unsafe WIP and retain truthful open statuses. Verify integrated source and original workspace sync.",
    "reserved_for": "ramim",
-   "effort": 2,
-   "edit_files": [
-    "production/qa/evidence/M4-21/README.md",
-    "production/qa/evidence/M4-21/task_status.json",
-    "production/qa/evidence/M4-21/branch_inventory.json",
-    "production/qa/evidence/M4-21/review.md",
-    "production/qa/evidence/M4-21/verification.txt"
-   ]
+   "effort": 2
   }
  ],
  "requirements": [
