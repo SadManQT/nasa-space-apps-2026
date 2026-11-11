@@ -2,6 +2,7 @@
 import argparse
 import json
 import difflib
+import re
 import os
 from pathlib import Path
 import runpy
@@ -35,15 +36,22 @@ def main():
     original_project=next(r['raw'] for r in inputs if r['path']=='game/project.godot')
     normalized_project=(failed/'project/game/project.godot').read_bytes()
     def settings(raw):
-        result={};section=''
+        result={};section='';key=None;value=[]
+        def flush():
+            if key is not None:
+                assert key not in result
+                result[key]='\n'.join(value).strip()
         for line in raw.decode().splitlines():
-            line=line.strip()
-            if not line or line.startswith(';'):continue
-            if line.startswith('[') and line.endswith(']'):section=line[1:-1];continue
-            key,value=line.split('=',1);full=section+'/'+key
-            assert full not in result
-            result[full]=value
-        return result
+            text=line.strip()
+            if re.fullmatch(r'\[[A-Za-z0-9_/]+\]',text):
+                flush();section=text[1:-1];key=None;value=[]
+            else:
+                match=re.fullmatch(r'([A-Za-z0-9_./-]+)=(.*)',text)
+                if match:
+                    flush();key=section+'/'+match.group(1);value=[match.group(2)]
+                elif key is not None:value.append(line)
+                else:assert not text or text.startswith(';')
+        flush();return result
     before_cfg=settings(original_project);after_cfg=settings(normalized_project)
     removed='rendering/renderer/rendering_method.web'
     assert set(before_cfg)-set(after_cfg)=={removed} and not set(after_cfg)-set(before_cfg)
