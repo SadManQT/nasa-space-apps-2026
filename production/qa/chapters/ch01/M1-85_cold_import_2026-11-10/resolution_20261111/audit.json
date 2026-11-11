@@ -7,7 +7,7 @@
   "canonical_blob_pairs_sha256": "5cddf349da2a68c004ce8740b4cfb1a8f79c87e1192cb7582205c6064226e5f7",
   "matrix_audit_complete": true,
   "current_gate_audit_complete": true,
-  "final_acceptance_review_complete": false,
+  "final_acceptance_review_complete": true,
   "stopped_original_replay_complete": false,
   "green_continuation_complete": true,
   "preserved_native_failure": true,
@@ -267,7 +267,19 @@
     "current_metadata_raw_checks": 145,
     "native_exact_files_checked": 10711,
     "native_missing_extra_sha_size_mtime_changes": 0,
-    "final_task_acceptance": "pending final independent assessment"
+    "final_task_acceptance": "Done for bounded investigation under owned protection/actionable upstream-evidence alternative; global raw integrity/cold failure remain unresolved."
   },
-  "phase_exit_semantics": "setup.exit is native editor status; suite.exit is runner phase status (fatal/timeout overrides preserve child exit in raw log)."
+  "phase_exit_semantics": "setup.exit is native editor status; suite.exit is runner phase status (fatal/timeout overrides preserve child exit in raw log).",
+  "task_investigation_acceptance": true,
+  "final_sync": {
+    "revision": "b52dbcfe3fdb508f76b8b2ef1c78034b54290fb5",
+    "game_tree": "cc736236818064a412d9923cbc0223011e670780",
+    "only_later_Game_additions": [
+      "game/tools/capture_campaign_qa.gd",
+      "game/tools/perf_ab.gd"
+    ],
+    "required_suite_list_unchanged": true,
+    "utilities_executed": false,
+    "assessment": "Independent review: no runtime/import/autoload or required-suite behavior changed; no further133 repetition needed."
+  }
 }
