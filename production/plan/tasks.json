@@ -8354,7 +8354,8 @@
     "game/assets/ui/proposal/probe_setup.png",
     "game/assets/ui/proposal/practice_atlas.png",
     "game/tools/test_mission_trainer.gd",
-    "game/scripts/trainer/p02_trainer.gd"
+    "game/scripts/trainer/p02_trainer.gd",
+    "game/tools/test_comms.gd"
    ],
    "integration_paths": [
     "game/scenes/trainer/",
