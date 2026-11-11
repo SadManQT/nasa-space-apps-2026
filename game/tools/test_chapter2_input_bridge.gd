@@ -49,10 +49,8 @@ func _run() -> void:
 	var camera: Camera3D = campaign._player.follow_camera.camera
 	var target_node: Node3D = campaign.physical_target(id)
 	camera.look_at(camera.global_position + (camera.global_position - target_node.global_position))
-	await process_frame
 	_check(not campaign.preview_chapter2_choice(id, {}).get("accepted", false), "looking away during a paused panel cannot preview the target")
 	camera.look_at(target_node.global_position)
-	await process_frame
 	_check(bool(campaign.preview_chapter2_choice(id, {}).get("accepted", false)), "returning to the same physical target requires a fresh preview")
 	_check(not campaign.confirm_chapter2_choice(id, {}).get("accepted", false), "paused modal cannot commit")
 	campaign.set_ui_paused(false)

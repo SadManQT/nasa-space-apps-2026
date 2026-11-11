@@ -474,6 +474,9 @@ func preview_chapter2_choice(target_id: String, payload: Dictionary) -> Dictiona
 	if String(nearby_target(true).get("target_id", "")) != target_id:
 		_chapter2_pending["previewed"] = null
 		return {"accepted": false, "reason": "Walk up to this target and face it before previewing again."}
+	if int(_chapter2_pending.get("input_revision", -2)) != int(director.snapshot().get("state_revision", -1)):
+		_chapter2_pending["previewed"] = null
+		return {"accepted": false, "reason": "The expedition changed since this panel opened. Open it again."}
 	var forecast := forecast_target(target_id, payload)
 	if not bool(forecast.get("accepted", false)):
 		_chapter2_pending["previewed"] = null
