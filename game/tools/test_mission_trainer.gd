@@ -35,6 +35,10 @@ func _run() -> void:
 			available += 1
 			entry = row
 	_check(available == 1 and entry.id == "P-02", "only the implemented real panel is playable")
+	var authored := preload("res://scenes/trainer/mission_trainer.tscn").instantiate()
+	_check(authored.find_child("FeaturedCards", true, false).get_child_count() == 3 and authored.find_children("Scenario_*", "Button", true, false).size() == 16, "editor scene contains three featured cards and the complete catalog before runtime")
+	_check((authored.find_child("GardenComingSoon", true, false) as Button).disabled, "garden feature honestly remains coming soon")
+	authored.free()
 	_test_logic()
 	_test_storage()
 	await _test_ui()
@@ -141,11 +145,15 @@ func _test_ui() -> void:
 	_check(trainer != null and not menu.visible and menu.process_mode == Node.PROCESS_MODE_DISABLED and main.get("_campaign") == null, "real title entry blocks hidden menu without launching campaign")
 	_check(trainer.settings.large_text, "title settings carry into trainer")
 	var rows := 0
-	for child in trainer._body.get_children():
-		if child is Button and String(child.name).begins_with("Scenario_"):
+	for child in trainer._body.find_children("Scenario_*", "Button", true, false):
+		if String(child.name).begins_with("Scenario_"):
 			rows += 1
 			_check(child.custom_minimum_size.y >= 44 and child.disabled == (child.name != "Scenario_P-02"), "real catalog availability and minimum control target")
 	_check(rows == 16 and not trainer.select_scenario("P-01"), "all catalog rows present and coming-soon cannot start")
+	trainer._set_page_enabled(false)
+	_check((trainer.find_child("StartPowerPractice", true, false) as Button).disabled and (trainer.find_child("OpenMoonTrainer", true, false) as Button).disabled, "modal blocks nested featured actions")
+	trainer._set_page_enabled(true)
+	_check(not (trainer.find_child("StartPowerPractice", true, false) as Button).disabled and (trainer.find_child("GardenComingSoon", true, false) as Button).disabled, "modal close restores available and coming-soon featured states")
 	await _check_page(trainer, "catalog at 150 percent")
 	_walk_new_text(trainer._body, "catalog")
 	(trainer.find_child("Scenario_P-02", true, false) as Button).pressed.emit()
@@ -219,7 +227,11 @@ func _test_ui() -> void:
 	trainer = main.get("_trainer")
 	_check(trainer.store.results.has("P-02"), "reopened trainer reads separately persisted real result")
 	trainer.exit_requested.emit()
+	_check(await main.preparation.wait_idle(), "title-owned look-ahead drains before fixture teardown")
+	await process_frame
+	await process_frame
 	main.free()
+	await process_frame
 	await process_frame
 
 func _check_page(trainer: Control, context: String) -> void:

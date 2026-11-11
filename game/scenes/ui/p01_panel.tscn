@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/p01_panel.gd" id="1"]
 [ext_resource type="FontFile" path="res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf" id="2"]
 [ext_resource type="FontFile" path="res://addons/gohud/assets/fonts/roboto/Roboto.ttf" id="3"]
 [ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="4"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/proposal/probe_setup.png" id="5"]
 
 [sub_resource type="StyleBoxFlat" id="FrameStyle"]
 bg_color = Color(0.045, 0.07, 0.12, 0.97)
@@ -153,7 +155,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.68, 0.74, 0.82, 1)
-text = "Set the dry zero ? Try your values before changing the equipment."
+text = "Set the dry zero - Try your values before changing the equipment."
 autowrap_mode = 3
 
 [node name="Steps" type="GridContainer" parent="Frame/Stack"]
@@ -219,6 +221,24 @@ theme_override_styles/panel = SubResource("CardStyle")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16
+
+[node name="ProbeArtwork" type="TextureRect" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 228)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ArtworkCaption" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.68, 0.74, 0.82, 1)
+text = "REFERENCE SETUP  /  SIMULATED INSTRUMENT"
+autowrap_mode = 3
 
 [node name="ObservedHeading" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
 unique_name_in_owner = true
@@ -306,7 +326,7 @@ layout_mode = 2
 mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
-text = "Raw reading     ?     Calibrated value"
+text = "Raw reading          Calibrated value"
 autowrap_mode = 3
 
 [node name="NumbersSample" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content/EquipmentInputs"]

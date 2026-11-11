@@ -133,6 +133,7 @@ func _test_hud_inbox_toasts_and_persistence() -> void:
 	CampaignCutscenePlayer.autoplay = false
 	var campaign := CAMPAIGN_SCENE.instantiate() as Chapter1Campaign
 	root.add_child(campaign)
+	await campaign.wait_loading()
 	await process_frame
 	await process_frame
 
@@ -159,7 +160,9 @@ func _test_hud_inbox_toasts_and_persistence() -> void:
 	await process_frame
 
 	_check(not hud._is_dialogue_active(), "all S01 dialogue lines acknowledged")
-	_check(not hud.comms_service.has_pending_toasts(), "queued arrival toast flushed automatically once dialogue finishes")
+	# The current next-step guidance owns the same toast slot; expire it through the normal timer.
+	hud._process(maxf(hud._toast_timer, 0.0) + 0.01)
+	_check(not hud.comms_service.has_pending_toasts(), "queued arrival toast flushes after dialogue and the prior guidance toast")
 	_check(hud._toast.visible and hud._status.text.contains("Rafi: Seats first"), "toast banner displays 'New message · Rafi: Seats first'")
 
 	var capture_screenshots := OS.get_cmdline_user_args().has("--capture")

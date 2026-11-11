@@ -217,6 +217,8 @@ func _render() -> void:
 	%ProbeTitle.text = "Calibrate the moisture probe" if _target in ["calibrate_probe", "span_probe", "recheck_probe"] else _action_title()
 	%ProbeSubtitle.text = _action_title() + " · Try your values before changing the equipment."
 	%ProbeColumns.columns = 2 if get_viewport_rect().size.x >= 1100 and not _settings.get("large_text", false) else 1
+	%ProbeArtwork.visible = _target in ["calibrate_probe", "span_probe", "recheck_probe"]
+	%ArtworkCaption.visible = %ProbeArtwork.visible
 	%ProbeObserved.text = _readings(_view)
 	_render_steps()
 	var equipment := _equipment
@@ -322,6 +324,8 @@ func _number(column: VBoxContainer, field: String, title: String, step: float) -
 	entry.text = str(_choices[field]) if _choices.has(field) else ""
 	entry.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	entry.custom_minimum_size = Vector2(90, 44)
+	entry.add_theme_font_override("font", UiDesign.font("heading"))
+	entry.add_theme_font_size_override("font_size", 26)
 	entry.accessibility_name = title
 	entry.tooltip_text = title + "; type a number or use minus and plus."
 	entry.text_changed.connect(func(text): choose(field, text.to_float() if text.is_valid_float() else text))

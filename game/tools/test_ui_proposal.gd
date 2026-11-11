@@ -107,6 +107,19 @@ func _run() -> void:
 	await _key(KEY_H)
 	_check(campaign.hud.panels.active_panel().is_empty(), "remapped Use H never invokes the old What now shortcut")
 	_check(campaign.hud._prompt_key.text == "H", "in-world key cap updates after a later remap")
+	var inbox: CommsPanel = campaign.hud.comms_panel
+	inbox.open_inbox("commander")
+	_check(inbox._thread_buttons.size() == 5 and inbox.find_child("SenderPortrait", true, false) != null and inbox.find_child("CrewNotesList", true, false) != null, "Messages preserves five channels in the authored portrait/chat composition")
+	var delivered := inbox._message_buttons.size()
+	inbox.select_sender("No delivered sender")
+	_check(inbox._message_buttons.is_empty(), "sender filter never exposes unavailable messages")
+	inbox.select_sender("")
+	_check(inbox._message_buttons.size() == delivered, "All messages restores the channel without changing delivery")
+	inbox.close_inbox()
+	_check(inbox._portrait_views.is_empty(), "closing Messages releases its portrait renderers")
+	_check(await campaign.preparation.wait_idle(), "owned look-ahead finishes before fixture teardown")
+	await process_frame
+	await process_frame
 	main.free()
 	await process_frame
 	await process_frame
