@@ -2,7 +2,7 @@
 
 11 November2026, Tanvir/codex. **Current-source full gate and final review remain in progress.** No native crash cause or universal crash repair is claimed. M1-122/M1-123 remain Done. Manual QA/videos are deferred.
 
-The Game-scoped LF checkout rule preserves all2939 already-LF canonical sidecar blobs without asset/font/renderer/settings edits. Mandatory setup now rejects every ERROR diagnostic even when Godot exits0, retains raw setup/suite exits, and preserves existing script/native/timeout protections. [Actual-shell regressions](unit_runner.txt):11 methods pass, one POSIX-only signal fixture skipped on Windows. [Policy audit](canonical_metadata.json), [current/replay audit](audit.json).
+The Game-scoped LF checkout rule preserves all2939 already-LF canonical sidecar blobs without asset/font/renderer/settings edits. Mandatory setup now rejects every ERROR diagnostic even when Godot exits0, retains raw setup/suite exits, and preserves existing script/native/timeout protections. [Actual-shell regressions](unit_runner.txt):11 methods total:10passed and one POSIX-only signal fixture skipped on Windows. [Policy audit](canonical_metadata.json), [current/replay audit](audit.json).
 
 | Matched restoration | Metadata byte changes | Raw setup / runner exit | Result |
 |---|---:|---|---|

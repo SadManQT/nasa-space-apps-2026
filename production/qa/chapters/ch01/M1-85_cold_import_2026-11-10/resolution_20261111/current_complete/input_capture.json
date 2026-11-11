@@ -1,0 +1,21 @@
+{
+  "failed_cold_record_sha256": "55b015308b11b41ab0a5b47f8771d31efe84e6134b12bc572cbf86544449beee",
+  "failed_input_manifest_sha256": "29b78be5c7a1ac5dc1f8e3a65c1a92fdd2b1a3d46028e652ba9311d31d143159",
+  "files": 15893,
+  "bytes": 2148389063,
+  "copy_matches": true,
+  "editor_normalization": {
+    "original_project_sha256": "cff48a51d3a479f387679d684d1ffaa7799018a371f554fffd85de787acf8836",
+    "editor_project_sha256": "8b5026164d8dd2462c1ee234c5a1471c4bd557aeb7b7184f4a54022c4340ae8a",
+    "only_removed_setting": "rendering/renderer/rendering_method.web",
+    "removed_value": "gl_compatibility",
+    "all_other_setting_values_equal": true,
+    "default_equivalence_source": "https://github.com/godotengine/godot/blob/4.7.2-stable/main/main.cpp#L2483",
+    "local_autosave_call": "game/addons/gohud/plugin.gd:57,77; _enter_tree declares fields and saves ProjectSettings",
+    "diff": "--- \n+++ \n@@ -22,6 +22,10 @@\n window/size/window_width_override=1280\n window/size/window_height_override=720\n window/stretch/mode=\"canvas_items\"\n+\n+[editor_plugins]\n+\n+enabled=PackedStringArray(\"res://addons/runtime_assets/plugin.cfg\", \"res://addons/gohud/plugin.cfg\")\n \n [importer_defaults]\n \n@@ -97,14 +101,9 @@\n \n common/physics_interpolation=true\n \n-[editor_plugins]\n-\n-enabled=PackedStringArray(\"res://addons/runtime_assets/plugin.cfg\", \"res://addons/gohud/plugin.cfg\")\n-\n [rendering]\n \n+textures/vram_compression/import_etc2_astc=true\n anti_aliasing/quality/msaa_3d=1\n anti_aliasing/quality/use_taa=true\n anti_aliasing/quality/use_taa.web=false\n-renderer/rendering_method.web=\"gl_compatibility\"\n-textures/vram_compression/import_etc2_astc=true\n",
+    "qualification": "Exact recorded editor auto-save normalization in isolated copy; not byte-identical project.godot. No authored settings change."
+  },
+  "original_failed_state": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-final-20261111",
+  "warm_copy": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-complete-20261111",
+  "limitation": "Copied post-import failed cold state at a new project/profile absolute path. Original cold remains FAILED; never retry its preserved project."
+}
