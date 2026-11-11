@@ -7372,6 +7372,9 @@
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-103*"
+   ],
+   "edit_files": [
+    "production/qa/evidence/M1-103_session_handoff_20261111.md"
    ]
   },
   {
