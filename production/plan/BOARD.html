@@ -292,11 +292,14 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-120">M1-120</a> Investigate measured Windows EVA scene generation over the loading budget <span class="chip ">any</span> <span class="chip ">P0</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Class mode and Chapter 2/3 feature chains; curriculum · 20% share</div><div class="counts"><span class="chip s-done">9 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:90%"></i></div>
+<div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Class mode and Chapter 2/3 feature chains; curriculum · 20% share</div><div class="counts"><span class="chip s-done">8 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:80%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
+<li><a class="id" href="#M1-103">M1-103</a> Expose the Solo/Class session and team-plan bridge for M1-37 <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Asif/codex on 2026-11-11</div></li>
+</ul></details>
 <details open><summary>Blocked (1)</summary><ul>
 <li><a class="id" href="#M1-37">M1-37</a> Four-player co-op Class mode: shared decisions, private role clues (as registered) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">11 Nov: Class mode built and merged (crew choice, private hand-off, team-plan sign-off through sign_team_plan, printable role cards; test_class_mode 60/0, evidence production/qa/e…</div></li>
 </ul></details>
-<details><summary>Done (9)</summary><ul>
+<details><summary>Done (8)</summary><ul>
 <li><a class="id" href="#M3-2P">M3-2P</a> Chapter 2 puzzles P-03 and P-04 as real interactive panels <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">production/qa/evidence/M3-2P.md; gate production/qa/evidence/M3-2P_M3-2M_M3-3M_gate.md (128/129 + player_text rerun 1/1)</div></li>
 <li><a class="id" href="#M3-2M">M3-2M</a> Chapter 2 missions EX-M0201 to EX-M0204: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">production/qa/evidence/M3-2M.md; gate production/qa/evidence/M3-2P_M3-2M_M3-3M_gate.md (128/129 + player_text rerun 1/1)</div></li>
 <li><a class="id" href="#M3-2U">M3-2U</a> Upgrade choice after Chapter 1 <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">test_upgrade_pairs_ch1_ch2 35 checks, 0 failures (taller mast +2, fuel cell cap 26 and +4 entry, exclusive, saved/restored) through run_tes…</div></li>
@@ -304,7 +307,6 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M3-3M">M3-3M</a> Chapter 3 missions EX-M0301 to EX-M0304: physical play, crew and retry <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">production/qa/evidence/M3-3M.md; gate production/qa/evidence/M3-2P_M3-2M_M3-3M_gate.md (128/129 + player_text rerun 1/1)</div></li>
 <li><a class="id" href="#M3-3U">M3-3U</a> Upgrade choice after Chapter 2 <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">test_upgrade_pairs_ch1_ch2 35 checks, 0 failures (red-blue LEDs FULL 2 to 1, blankets remove COOL damage, exclusive, saved/restored) throug…</div></li>
 <li><a class="id" href="#M3-69">M3-69</a> The junior-astronaut curriculum: competencies, the Academy manual and &#x27;what you learned&#x27; debriefs <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Curriculum from Asif&#x27;s branch (8cf5ea81) wired into the Journal Manual tab, pause menu, chapter end and cadet record: test_curriculum 183/0…</div></li>
-<li><a class="id" href="#M1-103">M1-103</a> Expose the Solo/Class session and team-plan bridge for M1-37 <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Class crew and P-02 sign-off bridge landed from Asif&#x27;s branch (ef23dc45): test_class_session_bridge 29/0, test_session_crew 135/0, chapter1…</div></li>
 <li><a class="id" href="#M1-105">M1-105</a> Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2 <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">Chosen-input P-03/P-04 route (Asif 31e60ada) plus the missing campaign side: test_chapter2_input_bridge 41/0, test_chapter2_route 220/0, te…</div></li>
 </ul></details>
 <details><summary>Deferred: video, submission and manual QA (7)</summary><ul>
@@ -8164,8 +8166,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Expose the Solo/Class session and team-plan bridge for M1-37",
-   "status": "done",
-   "owner": "Sadman/claude",
+   "status": "in_progress",
+   "owner": "Asif/codex",
    "deps": [
     "M1-102"
    ],
@@ -8214,6 +8216,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-103*"
+   ],
+   "edit_files": [
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "game/tools/test_class_session_bridge.gd",
+    "production/qa/evidence/M1-103.md"
    ],
    "batch_phase": "implementation"
   },
