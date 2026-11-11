@@ -1,0 +1,88 @@
+{
+ "id": "how_pollination_route",
+ "title": "The pollination route",
+ "cards": [
+  "pollination_route"
+ ],
+ "length_s": 16,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH02-S04",
+  "done": []
+ },
+ "setup": [
+  [
+   "call",
+   "hud",
+   "open_chapter2_panel",
+   "p03_scan_tara"
+  ]
+ ],
+ "steps": [
+  [
+   0.5,
+   "arrow",
+   [
+    180,
+    360
+   ],
+   3.4,
+   "What we know"
+  ],
+  [
+   4.0,
+   "arrow",
+   [
+    640,
+    380
+   ],
+   3.6,
+   "Your decision"
+  ],
+  [
+   8.0,
+   "click",
+   "Try"
+  ],
+  [
+   8.8,
+   "arrow",
+   [
+    1100,
+    360
+   ],
+   3.4,
+   "Before and after"
+  ],
+  [
+   12.4,
+   "ring",
+   "Commit",
+   2.6,
+   "Lock in"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.9,
+   "The left side holds what we know: the clues and who found them."
+  ],
+  [
+   4.0,
+   7.9,
+   "Choose the donor, the brush and the carrier for this step."
+  ],
+  [
+   8.0,
+   12.3,
+   "Try it shows before and after. Nothing moves yet."
+  ],
+  [
+   12.4,
+   16.0,
+   "Lock in when it is right. Then reverse with the clean brush."
+  ]
+ ],
+ "verify": "Decision choice clicks are added after a --dump of the M4-20 panel (Choice_<field>_<id> names)."
+}

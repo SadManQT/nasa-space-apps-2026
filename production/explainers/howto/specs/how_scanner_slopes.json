@@ -1,0 +1,82 @@
+{
+ "id": "how_scanner_slopes",
+ "title": "The scanner pulse and slopes",
+ "cards": [
+  "eva_suit_scanner"
+ ],
+ "length_s": 16,
+ "stage": {
+  "kind": "trainer",
+  "sortie": "sortie_scanner"
+ },
+ "setup": [
+  [
+   "call",
+   "trainer",
+   "enter_field"
+  ]
+ ],
+ "steps": [
+  [
+   0.6,
+   "hold",
+   "move_forward",
+   2.4,
+   "W"
+  ],
+  [
+   3.4,
+   "key",
+   "F",
+   "Hold F"
+  ],
+  [
+   3.4,
+   "call",
+   "trainer",
+   "_perform_scanner_pulse"
+  ],
+  [
+   4.2,
+   "ring",
+   "ScannerPulseBanner",
+   4.0,
+   "Slope bands"
+  ],
+  [
+   8.6,
+   "ring",
+   "EvaVisorCard",
+   4.0,
+   "Suit reserve"
+  ],
+  [
+   12.8,
+   "ring",
+   "player",
+   3.0
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.3,
+   "Before you cross the ground, read it."
+  ],
+  [
+   3.4,
+   8.5,
+   "Hold F to pulse the scanner. Bands run from 1, flat, to 4, no-go."
+  ],
+  [
+   8.6,
+   12.7,
+   "The visor keeps your oxygen, power and cooling above the return line."
+  ],
+  [
+   12.8,
+   16.0,
+   "Walk the low bands. Steeper ground costs more and can be unsafe."
+  ]
+ ]
+}

@@ -46,7 +46,7 @@
      "Test each corner beacon before driving past it.",
      "Calibrate the dry reference, then tag positive samples."
     ],
-    "clip": "Cold-trap route and scanner threshold (explainer clip pending)"
+    "how_to": "rover_route_planner"
    }
   },
   "P-08": {
@@ -64,8 +64,7 @@
      "Probe, sleeve, cradle and latch the closed case in the field.",
      "Warm the sealed container in three dry glovebox stages.",
      "Confirm no condensation before opening and recording twelve specimens."
-    ],
-    "clip": "Glovebox warm-up and vault inventory (explainer clip pending)"
+    ]
    }
   }
  },

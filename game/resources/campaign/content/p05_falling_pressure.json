@@ -47,7 +47,7 @@
           "Inspect six candidates with at most two in each investigation phase.",
           "Verify annex isolation, close GARDEN only and check the repaired line five times."
         ],
-        "clip": "Differential pressure isolation (explainer clip pending)"
+        "how_to": "reference_gauge"
       }
     }
   },

@@ -1,0 +1,69 @@
+{
+ "id": "how_rover_reserve",
+ "title": "The rover and the return reserve",
+ "cards": [
+  "rover_route_planner"
+ ],
+ "length_s": 16,
+ "stage": {
+  "kind": "trainer",
+  "sortie": "sortie_rover"
+ },
+ "setup": [
+  [
+   "call",
+   "trainer",
+   "enter_field"
+  ]
+ ],
+ "steps": [
+  [
+   0.6,
+   "click",
+   "OpenRoutePlannerAction"
+  ],
+  [
+   1.6,
+   "ring",
+   "RoverRoutePlanner",
+   4.0,
+   "Compare the routes"
+  ],
+  [
+   5.8,
+   "ring",
+   "RouteEstimateDetailsLabel",
+   4.0,
+   "Slope and energy"
+  ],
+  [
+   10.0,
+   "ring",
+   "ConfirmPlannedRouteButton",
+   2.4,
+   "Confirm"
+  ],
+  [
+   12.4,
+   "click",
+   "ConfirmPlannedRouteButton"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   5.7,
+   "Open the Route Planner and compare the routes on the slope map."
+  ],
+  [
+   5.8,
+   9.9,
+   "Each route lists its steepest slope and the energy it needs."
+  ],
+  [
+   10.0,
+   16.0,
+   "Confirm only a route that keeps the return in the battery."
+  ]
+ ]
+}

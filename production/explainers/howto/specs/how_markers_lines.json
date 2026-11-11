@@ -1,0 +1,86 @@
+{
+ "id": "how_markers_lines",
+ "title": "Markers and fixed lines",
+ "cards": [
+  "survey_markers_network"
+ ],
+ "length_s": 16,
+ "stage": {
+  "kind": "trainer",
+  "sortie": "sortie_markers"
+ },
+ "setup": [
+  [
+   "call",
+   "trainer",
+   "enter_field"
+  ]
+ ],
+ "steps": [
+  [
+   0.6,
+   "ring",
+   "player",
+   3.0,
+   "Carrying a marker"
+  ],
+  [
+   3.8,
+   "call",
+   "trainer",
+   "interact_field"
+  ],
+  [
+   3.8,
+   "key",
+   "E",
+   "E"
+  ],
+  [
+   5.0,
+   "ring",
+   "player",
+   3.0,
+   "Placed"
+  ],
+  [
+   8.4,
+   "click",
+   "OpenCoverageMapAction"
+  ],
+  [
+   9.4,
+   "ring",
+   "CoverageDiagramCanvas",
+   4.4,
+   "Links back to base"
+  ],
+  [
+   14.2,
+   "click",
+   "CloseCoverageMapButton"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.7,
+   "Survey markers and fixed lines make a route safe for later trips."
+  ],
+  [
+   3.8,
+   8.3,
+   "At the outlined site, press E to place the marker. It stays."
+  ],
+  [
+   8.4,
+   14.1,
+   "The Coverage Map shows each link back to the station."
+  ],
+  [
+   14.2,
+   16.0,
+   "A blocked link needs a marker on higher ground."
+  ]
+ ]
+}
