@@ -36,10 +36,10 @@ def main():
           'collector_sha256':sha(Path(__file__)),'godot_sha256':sha(args.godot),'manifest_sha256':sha(out/'current_source_manifest.json'),
           'source_files':len(inputs),'source_bytes':sum(r['bytes'] for r in inputs),'scratch':str(scratch),'original_save_before':before_save,
           'scope':'Fresh project cache and isolated profile. Required runner setup retained; no asset/settings/cache bypass. OS filesystem caches not evicted.',
-          'limits':{k:env[k] for k in ['SUITE_TIMEOUT','PLAYER_TEXT_TIMEOUT','UPGRADE_PROFILE_TIMEOUT']},'complete':False,'runs':[]}
+          'limits':{k:env[k] for k in ['SUITE_TIMEOUT','PLAYER_TEXT_TIMEOUT','UPGRADE_PROFILE_TIMEOUT']},'complete':False,'full_pass':False,'runs':[]}
     dump(out/'current_gate.json',meta)
+    logs=scratch/'evidence';logs.mkdir()
     try:
-        logs=scratch/'evidence';logs.mkdir()
         focused=api['invoke'](logs,'smoke_runner',[str(args.bash),'game/tools/run_tests.sh','m185_import_integrity'],project,env,900)
         meta['runs'].append({'kind':'focused','result':focused})
         shutil.copyfile(logs/'smoke_runner.txt',out/'current_smoke.txt')
@@ -47,21 +47,35 @@ def main():
         assert focused['effective_exit_code']==0 and focused['generic_error_count']==0 and not focused['script_error_lines'] and focused['suite_summary']==['1/1 suites passed'],'Focused import integrity failed'
         full=api['invoke'](logs,'runner',[str(args.bash),'game/tools/run_tests.sh'],project,env,14400)
         meta['runs'].append({'kind':'full','result':full})
-        folder=out/'current_full';folder.mkdir()
-        shutil.copyfile(logs/'runner.txt',folder/'runner.txt');shutil.copyfile(logs/'runner.json',folder/'runner.json')
-        shutil.copyfile(logs/'runner.txt',out/'full_gate.txt')
+        expected=sorted(Path(r['path']).name for r in inputs if Path(r['path']).parent.as_posix()=='game/tools' and Path(r['path']).name.startswith('test_') and r['path'].endswith('.gd'))
+        phase=logs/'runner_logs'
+        exits={p.name.removesuffix('.exit.txt'):int(p.read_text().strip()) for p in phase.glob('*.exit.txt')}
+        raw_suites=sorted(p.name.removesuffix('.log') for p in phase.glob('test_*.gd.log'))
+        verdicts=[]
+        for line in (logs/'runner.txt').read_text(encoding='utf-8',errors='replace').splitlines():
+            if line.startswith(('ok   tools/','FAIL tools/')):verdicts.append(line.split('tools/',1)[1].split(' ::',1)[0])
+        meta['coverage']={'expected':expected,'raw_suites':raw_suites,'verdicts':sorted(verdicts),'phase_exits':exits}
+        meta['full_pass']=(full['effective_exit_code']==0 and not full['script_error_lines'] and not full['native_crash_signature']
+            and full['suite_summary']==[f'{len(expected)}/{len(expected)} suites passed']
+            and raw_suites==expected and sorted(verdicts)==expected and sorted(exits)==['setup']+expected
+            and all(v==0 for v in exits.values()) and not api['diagnostics'](phase/'setup.log')['engine_errors'])
+        meta['complete']=True
+    finally:
+        folder=out/'current_full';folder.mkdir(exist_ok=True)
+        for name in ['runner.txt','runner.json']:
+            if (logs/name).exists():shutil.copyfile(logs/name,folder/name)
+        if (logs/'runner.txt').exists():shutil.copyfile(logs/'runner.txt',out/'full_gate.txt')
         with zipfile.ZipFile(folder/'raw_logs.zip','w',compression=zipfile.ZIP_DEFLATED) as archive:
             for path in sorted(logs.rglob('*')):
                 if path.is_file():archive.write(path,path.relative_to(logs).as_posix())
         meta['raw_logs_sha256']=sha(folder/'raw_logs.zip')
-        meta['complete']=True
-    finally:
         meta['original_save_unchanged']=(sha(save) if save.exists() else None)==before_save
-        meta['tracked_nonimport_source_changed']=[r['path'] for r in inputs if not r['path'].endswith('.import') and sha(project/r['path'])!=r['sha256']]
+        meta['tracked_nonimport_source_changed']=[r['path'] for r in inputs if not r['path'].endswith('.import') and (not (project/r['path']).is_file() or sha(project/r['path'])!=r['sha256'])]
         meta['cache_after']=api['cache_state'](project)
+        meta['full_pass']=bool(meta['full_pass'] and meta['original_save_unchanged'] and not meta['tracked_nonimport_source_changed'])
         dump(out/'current_gate.json',meta)
-    assert meta['original_save_unchanged'] and not meta['tracked_nonimport_source_changed']
-    print('Current gate completed:',meta['runs'][-1]['result']['suite_summary'],flush=True)
+    print('Current gate collected; accepted:',meta['full_pass'],flush=True)
+    raise SystemExit(0 if meta['full_pass'] else 1)
 
 
 if __name__=='__main__':main()
