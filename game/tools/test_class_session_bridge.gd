@@ -59,10 +59,16 @@ func _run() -> void:
 		var forged_class: Dictionary = class_view.selection.duplicate(true)
 		forged_class["state_revision"] = int(forged_class.state_revision) + 1
 		_check(not bool(campaign.sign_class_team_plan("kai", "calibrate_probe", p01_payload, forged_class).get("accepted", false)), "forged later-puzzle revision cannot sign")
+		_check(not bool(campaign.sign_class_team_plan("unknown", "calibrate_probe", p01_payload, class_view.selection).get("accepted", false)), "unknown later-puzzle role cannot sign")
+		var changed_payload: Dictionary = p01_payload.duplicate(true)
+		changed_payload["raw_reading"] = 11
+		_check(not bool(campaign.sign_class_team_plan("kai", "calibrate_probe", changed_payload, class_view.selection).get("accepted", false)), "a changed later-puzzle input cannot reuse the reviewed choice")
 		for role_id in class_view.required_roles:
 			_check(bool(campaign.sign_class_team_plan(String(role_id), "calibrate_probe", p01_payload, class_view.selection).get("accepted", false)), String(role_id) + " signs the exact later-puzzle forecast")
 		_check(bool(campaign.sign_class_team_plan("kai", "calibrate_probe", p01_payload, class_view.selection).get("duplicate", false)), "repeat later-puzzle signature is idempotent")
 		_check(campaign._class_commit_hold("calibrate_probe", p01_payload).is_empty(), "four current signatures permit the later-puzzle commit")
+		campaign.cancel_class_team_plan()
+		_check(bool(campaign._class_commit_hold("calibrate_probe", p01_payload).get("class_team_plan_required", false)), "cancelling a Class review invalidates every signature")
 	campaign.free()
 	PlanFixture.prepare(route)
 	_reach(route, "EX-CH01-S07")
