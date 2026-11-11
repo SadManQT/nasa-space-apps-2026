@@ -37,7 +37,7 @@ func _run() -> void:
 	while not main.title_ready:
 		await process_frame
 	var menu := main.get_node("TitleLayer/MainMenu") as MainMenu
-	var title_settings := _find_button(menu, "SETTINGS / ACCESSIBILITY")
+	var title_settings := menu.find_child("SettingsEntry", true, false) as Button
 	_reveal_control(title_settings)
 	await process_frame
 	await process_frame

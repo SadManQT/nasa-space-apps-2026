@@ -1,0 +1,206 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/ui/comms_panel.gd" id="1"]
+[ext_resource type="Theme" path="res://resources/ui/lla_theme.tres" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="3"]
+
+[node name="CommsPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme = ExtResource("2")
+script = ExtResource("1")
+
+[node name="Scrim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03,0.05,0.09,0.75)
+
+[node name="OuterMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="InboxFrame" type="PanelContainer" parent="OuterMargin"]
+layout_mode = 2
+
+[node name="RootColumn" type="VBoxContainer" parent="OuterMargin/InboxFrame"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HeaderBar" type="HBoxContainer" parent="OuterMargin/InboxFrame/RootColumn"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Mark" type="TextureRect" parent="OuterMargin/InboxFrame/RootColumn/HeaderBar"]
+layout_mode = 2
+custom_minimum_size = Vector2(40,40)
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="TitleColumn" type="VBoxContainer" parent="OuterMargin/InboxFrame/RootColumn/HeaderBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="KickerLabel" type="Label" parent="OuterMargin/InboxFrame/RootColumn/HeaderBar/TitleColumn"]
+layout_mode = 2
+text = "AURORA STATION  /  CREW COMMUNICATIONS"
+metadata/lla_type = "caption"
+mouse_filter = 2
+
+
+[node name="TitleLabel" type="Label" parent="OuterMargin/InboxFrame/RootColumn/HeaderBar/TitleColumn"]
+layout_mode = 2
+text = "Messages"
+metadata/lla_type = "title"
+mouse_filter = 2
+
+
+[node name="UnreadSummaryLabel" type="Label" parent="OuterMargin/InboxFrame/RootColumn/HeaderBar"]
+layout_mode = 2
+text = "All messages read"
+metadata/lla_type = "caption"
+mouse_filter = 2
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="OuterMargin/InboxFrame/RootColumn/HeaderBar"]
+layout_mode = 2
+custom_minimum_size = Vector2(112,44)
+text = "Close - Esc"
+
+[node name="BodyRow" type="HBoxContainer" parent="OuterMargin/InboxFrame/RootColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="ThreadPane" type="PanelContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(192,0)
+
+[node name="ThreadColumn" type="VBoxContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/ThreadPane"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ThreadHeader" type="Label" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/ThreadPane/ThreadColumn"]
+layout_mode = 2
+text = "CHANNELS"
+metadata/lla_type = "caption"
+mouse_filter = 2
+
+
+[node name="ThreadScroll" type="ScrollContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/ThreadPane/ThreadColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="ThreadListBox" type="VBoxContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/ThreadPane/ThreadColumn/ThreadScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="MessageListPane" type="PanelContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(304,0)
+
+[node name="ListColumn" type="VBoxContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageListPane"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ListHeader" type="Label" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageListPane/ListColumn"]
+layout_mode = 2
+text = "INBOX"
+metadata/lla_type = "caption"
+mouse_filter = 2
+
+
+[node name="MessageScroll" type="ScrollContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageListPane/ListColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="MessageListBox" type="VBoxContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageListPane/ListColumn/MessageScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="EmptyListLabel" type="Label" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageListPane/ListColumn/MessageScroll/MessageListBox"]
+layout_mode = 2
+text = "No messages in this channel yet."
+metadata/lla_type = "caption"
+mouse_filter = 2
+autowrap_mode = 2
+
+[node name="MessageDetailPane" type="PanelContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DetailColumn" type="VBoxContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageDetailPane"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="MetaRow" type="HBoxContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageDetailPane/DetailColumn"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DetailSenderLabel" type="Label" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageDetailPane/DetailColumn/MetaRow"]
+layout_mode = 2
+text = "STATION INBOX"
+metadata/lla_type = "caption"
+mouse_filter = 2
+size_flags_horizontal = 3
+autowrap_mode = 2
+
+[node name="DetailTimeLabel" type="Label" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageDetailPane/DetailColumn/MetaRow"]
+layout_mode = 2
+text = ""
+metadata/lla_type = "caption"
+mouse_filter = 2
+
+
+[node name="DetailSubjectLabel" type="Label" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageDetailPane/DetailColumn"]
+layout_mode = 2
+text = "Select a message to read"
+metadata/lla_type = "heading"
+mouse_filter = 2
+autowrap_mode = 2
+metadata/verbatim = true
+
+[node name="DetailGoalBadge" type="Label" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageDetailPane/DetailColumn"]
+layout_mode = 2
+text = "NEXT STEP ON HUD"
+metadata/lla_type = "caption"
+mouse_filter = 2
+visible = false
+
+[node name="DetailBodyScroll" type="ScrollContainer" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageDetailPane/DetailColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="DetailBodyLabel" type="Label" parent="OuterMargin/InboxFrame/RootColumn/BodyRow/MessageDetailPane/DetailColumn/DetailBodyScroll"]
+layout_mode = 2
+text = "The crew and Earth link will send notes as your expedition unfolds."
+metadata/lla_type = "body"
+mouse_filter = 2
+size_flags_horizontal = 3
+autowrap_mode = 2
+metadata/verbatim = true

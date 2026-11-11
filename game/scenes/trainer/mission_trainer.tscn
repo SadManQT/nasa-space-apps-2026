@@ -1,0 +1,217 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Theme" path="res://resources/ui/lla_theme.tres" id="1_theme"]
+[ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="2_mark"]
+[ext_resource type="Texture2D" path="res://assets/ui/title/aurora_cinematic.png" id="3_art"]
+
+[sub_resource type="StyleBoxFlat" id="Style_panel"]
+content_margin_left = 24.0
+content_margin_top = 22.0
+content_margin_right = 24.0
+content_margin_bottom = 22.0
+bg_color = Color(0.045, 0.065, 0.11, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.37, 0.46, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_left = 14
+corner_radius_bottom_right = 14
+
+[sub_resource type="StyleBoxFlat" id="Style_card"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+bg_color = Color(0.08, 0.11, 0.17, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.35, 0.43, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+
+[node name="MissionTrainerShell" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_theme")
+
+[node name="Atmosphere" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_art")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
+modulate = Color(0.45, 0.45, 0.45, 1)
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Panel" type="PanelContainer" parent="SafeArea"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="Page" type="VBoxContainer" parent="SafeArea/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Mark" type="TextureRect" parent="SafeArea/Panel/Page/Header"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_mark")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rule" type="VSeparator" parent="SafeArea/Panel/Page/Header"]
+layout_mode = 2
+
+[node name="Brand" type="Label" parent="SafeArea/Panel/Page/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LAST LIGHT ACADEMY"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Title" type="Label" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+text = "Mission trainer"
+autowrap_mode = 2
+metadata/lla_type = "title"
+
+[node name="TrainerNotice" type="Label" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+text = "Practice freely. Training results are separate from your expedition."
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="Content" type="HBoxContainer" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="TrainerScroll" type="ScrollContainer" parent="SafeArea/Panel/Page/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="TrainerBody" type="VBoxContainer" parent="SafeArea/Panel/Page/Content/TrainerScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="Choose" type="Label" parent="SafeArea/Panel/Page/Content/TrainerScroll/TrainerBody"]
+layout_mode = 2
+text = "Choose a training scenario"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Practice" type="Button" parent="SafeArea/Panel/Page/Content/TrainerScroll/TrainerBody"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+text = "Seven Shifts, One Night\nAvailable - Start practice"
+alignment = 0
+autowrap_mode = 2
+
+[node name="Surface" type="Button" parent="SafeArea/Panel/Page/Content/TrainerScroll/TrainerBody"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+text = "Open Moon Trainer\nFree surface sorties and rover"
+alignment = 0
+autowrap_mode = 2
+
+[node name="PracticeGuide" type="PanelContainer" parent="SafeArea/Panel/Page/Content"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Panel/Page/Content/PracticeGuide"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="SafeArea/Panel/Page/Content/PracticeGuide/Contents"]
+layout_mode = 2
+text = "Practice a decision"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Description" type="Label" parent="SafeArea/Panel/Page/Content/PracticeGuide/Contents"]
+layout_mode = 2
+text = "Use what you know to make a choice, see the result, and learn from it."
+autowrap_mode = 2
+metadata/lla_type = "body"
+metadata/muted = true
+
+[node name="Step1" type="Label" parent="SafeArea/Panel/Page/Content/PracticeGuide/Contents"]
+layout_mode = 2
+text = "1   Observe the evidence"
+autowrap_mode = 2
+metadata/lla_type = "body"
+
+[node name="Step2" type="Label" parent="SafeArea/Panel/Page/Content/PracticeGuide/Contents"]
+layout_mode = 2
+text = "2   Try a plan"
+autowrap_mode = 2
+metadata/lla_type = "body"
+
+[node name="Step3" type="Label" parent="SafeArea/Panel/Page/Content/PracticeGuide/Contents"]
+layout_mode = 2
+text = "3   Review what changed"
+autowrap_mode = 2
+metadata/lla_type = "body"
+
+[node name="FooterRule" type="HSeparator" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+
+[node name="Footer" type="HBoxContainer" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Info" type="Label" parent="SafeArea/Panel/Page/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Choose your own pace. All training is independent of campaign saves."
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="Spacer" type="Control" parent="SafeArea/Panel/Page/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="TrainerExit" type="Button" parent="SafeArea/Panel/Page/Footer"]
+custom_minimum_size = Vector2(130, 44)
+layout_mode = 2
+text = "Back (Esc)"

@@ -14,6 +14,8 @@ const CampaignScript = preload("res://scripts/campaign/chapter1_campaign.gd")
 const AchievementsScript = preload("res://scripts/ui/achievements.gd")
 const ContentScript = preload("res://scripts/content/content_loader.gd")
 const ProgressionScript = preload("res://scripts/progression/cadet_progression.gd")
+const ShellScene = preload("res://scenes/ui/chapter_select/chapter_select.tscn")
+const StationArt = preload("res://assets/ui/title/aurora_cinematic.png")
 
 const CHAPTER_CATALOG := [
 	{
@@ -153,6 +155,10 @@ var _body: VBoxContainer
 var _status_label: Label
 var _catalog: Dictionary = ContentScript.load_full()
 var _selected_mission := ""
+var _route_bar: HBoxContainer
+var _selection_title: Label
+var _selection_description: Label
+var _selection_button: Button
 
 func _ready() -> void:
 	name = "ChapterSelectPanel"
@@ -182,81 +188,54 @@ func unlocked_up_to_chapter() -> int:
 	return AchievementsScript.chapter_number(_snapshot)
 
 func _build_ui() -> void:
-	var backdrop := ColorRect.new()
-	backdrop.color = UiDesign.colour("ink")
-	backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(backdrop)
-
-	var margin := MarginContainer.new()
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for side in ["left", "right", "top", "bottom"]:
-		margin.add_theme_constant_override("margin_" + side, 32)
-	add_child(margin)
-
-	var glass := UiDesign.glass_panel()
-	margin.add_child(glass)
-
-	var stack := VBoxContainer.new()
-	stack.add_theme_constant_override("separation", 12)
-	glass.add_child(stack)
-
-	var header := HBoxContainer.new()
-	header.add_theme_constant_override("separation", 12)
-	stack.add_child(header)
-	var title_lbl := UiDesign.label("Expedition Chapters, Progress & Achievements", "title")
-	title_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	header.add_child(title_lbl)
-
-	var exit_btn := UiDesign.button("Back to Title")
-	exit_btn.name = "ChapterSelectExit"
-	exit_btn.pressed.connect(func() -> void: exit_requested.emit())
-	header.add_child(exit_btn)
-
-	_status_label = UiDesign.label(_summary_line(), "body", "accent")
-	stack.add_child(_status_label)
-
-	_tab_bar = HBoxContainer.new()
-	_tab_bar.name = "ChapterSelectTabs"
-	_tab_bar.add_theme_constant_override("separation", 10)
-	stack.add_child(_tab_bar)
-
-	for tab_spec in [
-		["chapters", "Chapter Select & Missions"],
-		["progress", "Cadet Progress & Curriculum"],
-		["achievements", "Skill Achievements (20)"]
-	]:
-		var tid: String = tab_spec[0]
-		var btn := UiDesign.button(tab_spec[1])
-		btn.name = "Tab_" + tid
+	var shell := ShellScene.instantiate()
+	add_child(shell)
+	_tab_bar = shell.find_child("ChapterSelectTabs", true, false) as HBoxContainer
+	_scroll = shell.find_child("ChapterSelectScroll", true, false) as ScrollContainer
+	_body = shell.find_child("ChapterSelectBody", true, false) as VBoxContainer
+	_status_label = shell.find_child("ChapterSelectStatus", true, false) as Label
+	_route_bar = shell.find_child("ChapterRoute", true, false) as HBoxContainer
+	_selection_title = shell.find_child("SelectionTitle", true, false) as Label
+	_selection_description = shell.find_child("SelectionDescription", true, false) as Label
+	_selection_button = shell.find_child("InspectSelectedChapter", true, false) as Button
+	_selection_button.pressed.connect(func() -> void:
+		show_tab("chapters")
+		var missions := find_child("SelectedChapterMissions", true, false) as Control
+		_scroll.ensure_control_visible.call_deferred(missions))
+	(shell.find_child("ChapterSelectExit", true, false) as Button).pressed.connect(func() -> void: exit_requested.emit())
+	for tid in ["chapters", "progress", "achievements"]:
+		var btn := _tab_bar.get_node("Tab_" + tid) as Button
 		btn.pressed.connect(func() -> void: show_tab(tid))
-		_tab_bar.add_child(btn)
-
-	_scroll = ScrollContainer.new()
-	_scroll.name = "ChapterSelectScroll"
-	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	_scroll.follow_focus = true
-	stack.add_child(_scroll)
-
-	_body = VBoxContainer.new()
-	_body.name = "ChapterSelectBody"
-	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_body.add_theme_constant_override("separation", 12)
-	_scroll.add_child(_body)
-
+	for label_node in shell.find_children("*", "Label", true, false):
+		var label := label_node as Label
+		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), "muted" if label.get_meta("muted", false) else "ivory")
 	get_viewport().size_changed.connect(_scale)
 
 func _summary_line() -> String:
 	var max_ch := unlocked_up_to_chapter()
 	var ach_count := AchievementsScript.unlocked_count(_snapshot)
 	if _snapshot.is_empty():
-		return "Read-only expedition overview · Chapter 1 unlocked · %d of 20 skill achievements earned." % ach_count
-	return "Read-only save view · Reached Chapter %d of 8 · %d of 20 skill achievements earned." % [max_ch, ach_count]
+		return "Your expedition begins with Chapter 1  ·  %d of 20 achievements earned" % ach_count
+	return "Reached Chapter %d of 8  ·  %d of 20 achievements earned" % [max_ch, ach_count]
 
 func show_tab(tab_id: String) -> void:
 	active_tab = tab_id if ["chapters", "progress", "achievements"].has(tab_id) else "chapters"
+	selected_chapter = clampi(selected_chapter, 1, unlocked_up_to_chapter())
 	if _status_label != null:
 		_status_label.text = _summary_line()
+	for tab_node in _tab_bar.get_children():
+		var tab := tab_node as Button
+		var selected: bool = tab.name == "Tab_" + active_tab
+		tab.button_pressed = selected
+		tab.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent" if selected else "navy"), selected))
+		tab.add_theme_color_override("font_color", UiDesign.colour("ink" if selected else "ivory"))
+		tab.add_theme_color_override("font_focus_color", UiDesign.colour("ink" if selected else "ivory"))
+	_route_bar.visible = active_tab == "chapters"
+	_selection_button.visible = active_tab == "chapters"
+	_selection_title.text = String(_chapter_spec(selected_chapter).title)
+	_selection_description.text = String(_chapter_spec(selected_chapter).subtitle) if active_tab == "chapters" else ("Your training record and twelve science competencies." if active_tab == "progress" else "Skills earned through real decisions in your expedition.")
+	if active_tab != "chapters":
+		_selection_title.text = "Cadet progress" if active_tab == "progress" else "Skill achievements"
 	_clear()
 	match active_tab:
 		"chapters":
@@ -272,6 +251,7 @@ func select_chapter(chapter_num: int) -> bool:
 	if chapter_num < 1 or chapter_num > max_ch:
 		return false
 	selected_chapter = chapter_num
+	_selected_mission = ""
 	if active_tab == "chapters":
 		show_tab("chapters")
 	return true
@@ -279,52 +259,61 @@ func select_chapter(chapter_num: int) -> bool:
 func _render_chapters_tab() -> void:
 	var max_ch := unlocked_up_to_chapter()
 	selected_chapter = clampi(selected_chapter, 1, max_ch)
-	_body.add_child(UiDesign.label("Act One Chapters (1–8) · Locked chapters remain spoiler-free silhouettes", "heading"))
+	for child in _route_bar.get_children():
+		_route_bar.remove_child(child)
+		child.queue_free()
+	for number in range(1, 9):
+		var step := UiDesign.button("%02d" % number)
+		step.name = "ChapterStep_%d" % number
+		step.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		step.disabled = number > max_ch
+		step.pressed.connect(func() -> void: select_chapter(number))
+		_route_bar.add_child(step)
 
 	var grid := GridContainer.new()
 	grid.name = "ChapterCardsGrid"
-	grid.columns = 2
-	grid.add_theme_constant_override("h_separation", 12)
-	grid.add_theme_constant_override("v_separation", 12)
+	grid.columns = 3
+	grid.add_theme_constant_override("h_separation", 18)
+	grid.add_theme_constant_override("v_separation", 18)
 	_body.add_child(grid)
 
 	for base in CHAPTER_CATALOG:
 		var row := _chapter_spec(int(base.chapter))
 		var ch_num := int(row.chapter)
 		var unlocked := ch_num <= max_ch
-		var card := UiDesign.glass_panel(UiDesign.colour("accent" if (unlocked and ch_num == selected_chapter) else "border"))
+		var card := UiDesign.glass_panel(UiDesign.colour("accent" if (unlocked and ch_num == selected_chapter) else "glass_edge"), 14)
 		card.name = "ChapterCard_%d" % ch_num
 		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		grid.add_child(card)
 
 		var box := VBoxContainer.new()
-		box.add_theme_constant_override("separation", 6)
+		box.add_theme_constant_override("separation", 10)
 		card.add_child(box)
 
-		# Key art banner or silhouette placeholder
-		var banner := ColorRect.new()
-		banner.custom_minimum_size = Vector2(0, 56)
-		banner.color = Color(0.10, 0.16, 0.28, 0.95) if unlocked else Color(0.03, 0.04, 0.07, 0.98)
-		box.add_child(banner)
-		var banner_lbl := UiDesign.label(
-			("KEY ART · CHAPTER %d" % ch_num) if unlocked else ("SILHOUETTE · CHAPTER %d LOCKED" % ch_num),
-			"caption",
-			"accent" if unlocked else "muted"
-		)
-		banner_lbl.position = Vector2(12, 16)
-		banner.add_child(banner_lbl)
-
 		if unlocked:
+			var art := TextureRect.new()
+			art.custom_minimum_size.y = 154
+			art.texture = load(String(row.key_art)) if ResourceLoader.exists(String(row.key_art)) else StationArt
+			art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+			art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			box.add_child(art)
+			box.add_child(UiDesign.label("CHAPTER %02d  ·  %s" % [ch_num, "SELECTED" if ch_num == selected_chapter else "AVAILABLE"], "caption", "accent"))
 			box.add_child(UiDesign.label(String(row.title), "heading"))
 			box.add_child(UiDesign.label(String(row.subtitle), "caption", "muted"))
-			var open_btn := UiDesign.button("Inspect Chapter %d Missions" % ch_num)
+			var open_btn := UiDesign.button("View missions  ›")
 			open_btn.name = "OpenChapter_%d" % ch_num
 			open_btn.pressed.connect(func() -> void: select_chapter(ch_num))
 			box.add_child(open_btn)
 		else:
-			box.add_child(UiDesign.label("Chapter %d · Locked Silhouette" % ch_num, "heading", "muted"))
+			var silhouette := CenterContainer.new()
+			silhouette.custom_minimum_size.y = 154
+			box.add_child(silhouette)
+			silhouette.add_child(UiKit.icon("moon", "muted", 58))
+			box.add_child(UiDesign.label("CHAPTER %02d" % ch_num, "caption", "muted"))
+			box.add_child(UiDesign.label("Beyond the horizon", "heading", "muted"))
 			box.add_child(UiDesign.label(String(row.silhouette_hint), "caption", "muted"))
-			var locked_btn := UiDesign.button("Locked · Complete Earlier Chapters")
+			var locked_btn := UiDesign.button("Locked · Complete earlier chapters")
 			locked_btn.name = "OpenChapter_%d" % ch_num
 			locked_btn.disabled = true
 			box.add_child(locked_btn)
@@ -491,12 +480,18 @@ func _clear() -> void:
 		_scroll.scroll_vertical = 0
 
 func _finish_page() -> void:
+	for button_node in _body.find_children("*", "Button", true, false):
+		var button := button_node as Button
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_scale()
 	_restore_page_focus.call_deferred()
 
 func _scale() -> void:
 	if not is_inside_tree():
 		return
+	var grid := find_child("ChapterCardsGrid", true, false) as GridContainer
+	if grid != null:
+		grid.columns = 2 if bool(settings.get("large_text", false)) or get_viewport_rect().size.x < 1000.0 else 3
 	UiDesign.apply_type(self, get_viewport_rect().size.y, 1.5 if bool(settings.get("large_text", false)) else 1.0)
 
 func _restore_page_focus() -> void:

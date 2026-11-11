@@ -18,6 +18,7 @@ const GameSettingsScript = preload("res://scripts/settings/game_settings.gd")
 const SaveSlotsScript = preload("res://scripts/save/save_slots.gd")
 const SaveSlotsPanelScript = preload("res://scripts/ui/save_slots.gd")
 const ChapterSelectScript = preload("res://scripts/ui/chapter_select.gd")
+const ShellScene = preload("res://scenes/ui/settings_menu.tscn")
 
 const TABS := [
 	["display", "Display"],
@@ -37,12 +38,14 @@ var _listening_device := ""
 var _reset_confirm_pending := false
 var _notice_text := ""
 
-var _tab_bar: HBoxContainer
+var _tab_bar: VBoxContainer
 var _status_label: Label
 var _scroll: ScrollContainer
 var _body: VBoxContainer
 var _embedded_slots_panel: SaveSlotsPanel
 var _chapter_select_overlay: Control
+var _preview: PanelContainer
+var _shell: Control
 
 func _init(p_settings: GameSettings = null, p_slots: SaveSlots = null) -> void:
 	game_settings = p_settings if p_settings != null else GameSettingsScript.new()
@@ -72,91 +75,51 @@ func show_tab(tab_id: String) -> void:
 	active_tab = tab_id if TABS.any(func(item): return item[0] == tab_id) else "display"
 	_listening_action = ""
 	_listening_device = ""
+	if _scroll != null:
+		_scroll.scroll_vertical = 0
 	_rebuild_body()
 
 func _build_shell() -> void:
-	var backdrop := ColorRect.new()
-	backdrop.color = Color(0.02, 0.03, 0.05, 0.88)
-	backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(backdrop)
-
-	var margin := MarginContainer.new()
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for side in ["left", "right", "top", "bottom"]:
-		margin.add_theme_constant_override("margin_" + side, 28)
-	add_child(margin)
-
-	var glass := UiDesign.glass_panel()
-	margin.add_child(glass)
-
-	var root_col := VBoxContainer.new()
-	root_col.add_theme_constant_override("separation", 12)
-	glass.add_child(root_col)
-
-	var header := HBoxContainer.new()
-	header.add_theme_constant_override("separation", 12)
-	root_col.add_child(header)
-
-	var title_box := VBoxContainer.new()
-	title_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title_box.add_theme_constant_override("separation", 2)
-	header.add_child(title_box)
-	title_box.add_child(UiDesign.label("Settings, Controls & Saves", "title", "accent"))
-	title_box.add_child(UiDesign.label("Display, audio volumes, keyboard and controller bindings, captions, assist modes and save slots.", "caption", "muted"))
-
-	var reset_btn := UiDesign.button("Reset to Defaults")
-	reset_btn.name = "ResetSettingsButton"
-	reset_btn.pressed.connect(_on_reset_pressed)
-	header.add_child(reset_btn)
-
-	var close_btn := UiDesign.button("Back (Esc)")
-	close_btn.name = "CloseSettingsButton"
-	close_btn.pressed.connect(func() -> void: closed.emit())
-	header.add_child(close_btn)
-
-	_tab_bar = HBoxContainer.new()
-	_tab_bar.name = "SettingsTabs"
-	_tab_bar.add_theme_constant_override("separation", 8)
-	root_col.add_child(_tab_bar)
+	var shell := ShellScene.instantiate() as Control
+	_shell = shell
+	add_child(shell)
+	_tab_bar = shell.find_child("SettingsTabs", true, false) as VBoxContainer
+	_status_label = shell.find_child("SettingsStatusLabel", true, false) as Label
+	_scroll = shell.find_child("SettingsScroll", true, false) as ScrollContainer
+	_body = shell.find_child("SettingsBody", true, false) as VBoxContainer
+	_preview = shell.find_child("ReadingPreview", true, false) as PanelContainer
+	(shell.find_child("ResetSettingsButton", true, false) as Button).pressed.connect(_on_reset_pressed)
+	(shell.find_child("CloseSettingsButton", true, false) as Button).pressed.connect(func() -> void: closed.emit())
 	for spec in TABS:
 		var tid: String = spec[0]
-		var tlabel: String = spec[1]
-		var btn := UiDesign.button(tlabel)
-		btn.name = "Tab_" + tid
+		var btn := _tab_bar.get_node("Tab_" + tid) as Button
 		btn.pressed.connect(func() -> void:
 			_reset_confirm_pending = false
 			show_tab(tid))
-		_tab_bar.add_child(btn)
-
-	_status_label = UiDesign.label("All changes save automatically to this machine.", "body", "accent")
-	_status_label.name = "SettingsStatusLabel"
-	root_col.add_child(_status_label)
-
-	var sep := HSeparator.new()
-	root_col.add_child(sep)
-
-	_scroll = ScrollContainer.new()
-	_scroll.name = "SettingsScroll"
-	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	_scroll.follow_focus = true
-	root_col.add_child(_scroll)
-
-	_body = VBoxContainer.new()
-	_body.name = "SettingsBody"
-	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_body.add_theme_constant_override("separation", 12)
-	_scroll.add_child(_body)
+	for label_node in shell.find_children("*", "Label", true, false):
+		var label := label_node as Label
+		var token := String(label.get_meta("lla_type", "body"))
+		UiDesign.style_label(label, token, "muted" if label.get_meta("muted", false) else "ivory")
+	get_viewport().size_changed.connect(_scale)
 
 func _rebuild_body() -> void:
 	if _body == null:
 		return
+	var focused := get_viewport().gui_get_focus_owner()
+	var focus_name := String(focused.name) if focused != null and is_ancestor_of(focused) else "Tab_" + active_tab
+	var previous_scroll := _scroll.scroll_vertical
 	for child in _body.get_children():
 		_body.remove_child(child)
-		child.free()
+		child.queue_free()
 	_embedded_slots_panel = null
-	if not _notice_text.is_empty():
-		_status_label.text = _notice_text
+	_status_label.text = _notice_text if not _notice_text.is_empty() else "All changes save automatically to this machine."
+	for spec in TABS:
+		var tab := _tab_bar.get_node("Tab_" + String(spec[0])) as Button
+		var selected: bool = spec[0] == active_tab
+		tab.button_pressed = selected
+		tab.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent" if selected else "navy"), selected))
+		tab.add_theme_color_override("font_color", UiDesign.colour("ink" if selected else "ivory"))
+		tab.add_theme_color_override("font_focus_color", UiDesign.colour("ink" if selected else "ivory"))
 	match active_tab:
 		"display":
 			_build_display_tab()
@@ -168,8 +131,26 @@ func _rebuild_body() -> void:
 			_build_assist_tab()
 		"saves":
 			_build_saves_tab()
-	var scale := float(game_settings.accessibility.get("subtitle_scale", 1.0)) if game_settings != null else 1.0
-	UiDesign.apply_type(self, get_viewport_rect().size.y if is_inside_tree() else 720.0, scale)
+	for button_node in _body.find_children("*", "Button", true, false):
+		var button := button_node as Button
+		if not button.get_parent() is HFlowContainer:
+			button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_scale()
+	_restore_focus.call_deferred(focus_name, previous_scroll)
+
+func _scale() -> void:
+	var text_scale := float(game_settings.accessibility.get("subtitle_scale", 1.0)) if game_settings != null else 1.0
+	_preview.visible = active_tab == "assist" and text_scale <= 1.25 and get_viewport_rect().size.x >= 1100.0
+	UiDesign.apply_type(self, get_viewport_rect().size.y if is_inside_tree() else 720.0, text_scale)
+
+func _restore_focus(focus_name: String, previous_scroll: int) -> void:
+	if is_queued_for_deletion() or is_instance_valid(_chapter_select_overlay):
+		return
+	_scroll.scroll_vertical = previous_scroll
+	var target := find_child(focus_name, true, false) as Control
+	if target == null:
+		target = _tab_bar.get_node("Tab_" + active_tab) as Control
+	target.grab_focus()
 
 func _build_display_tab() -> void:
 	_body.add_child(UiDesign.label("Display & Graphics", "heading"))
@@ -203,8 +184,9 @@ func _build_display_tab() -> void:
 	win_card.add_child(win_col)
 	var cur_win := String(game_settings.display.get("window_mode", "Windowed"))
 	win_col.add_child(UiDesign.label("Window Mode · Current: %s" % cur_win, "body", "ivory"))
-	var win_row := HBoxContainer.new()
-	win_row.add_theme_constant_override("separation", 8)
+	var win_row := HFlowContainer.new()
+	win_row.add_theme_constant_override("h_separation", 8)
+	win_row.add_theme_constant_override("v_separation", 8)
 	win_col.add_child(win_row)
 	for mode_opt in GameSettingsScript.WINDOW_MODES:
 		var btn := UiDesign.button((mode_opt + " (Selected)") if mode_opt == cur_win else mode_opt)
@@ -232,8 +214,9 @@ func _build_display_tab() -> void:
 	var cur_cap := int(game_settings.display.get("frame_cap", 60))
 	var cap_word := "Unlimited" if cur_cap <= 0 else ("%d FPS" % cur_cap)
 	sync_col.add_child(UiDesign.label("Frame Rate Cap · Current: %s" % cap_word, "body", "ivory"))
-	var cap_row := HBoxContainer.new()
-	cap_row.add_theme_constant_override("separation", 8)
+	var cap_row := HFlowContainer.new()
+	cap_row.add_theme_constant_override("h_separation", 8)
+	cap_row.add_theme_constant_override("v_separation", 8)
 	sync_col.add_child(cap_row)
 	for cap_opt in GameSettingsScript.FRAME_CAPS:
 		var label_txt := "Unlimited" if cap_opt == 0 else ("%d FPS" % cap_opt)
@@ -252,8 +235,9 @@ func _build_display_tab() -> void:
 	qual_card.add_child(qual_col)
 	var cur_qual := String(game_settings.display.get("quality_preset", "High"))
 	qual_col.add_child(UiDesign.label("Quality Preset · Current: %s" % cur_qual, "body", "ivory"))
-	var qual_row := HBoxContainer.new()
-	qual_row.add_theme_constant_override("separation", 8)
+	var qual_row := HFlowContainer.new()
+	qual_row.add_theme_constant_override("h_separation", 8)
+	qual_row.add_theme_constant_override("v_separation", 8)
 	qual_col.add_child(qual_row)
 	for q_opt in GameSettingsScript.QUALITY_PRESETS:
 		var btn := UiDesign.button((q_opt + " (Selected)") if q_opt == cur_qual else q_opt)
@@ -273,7 +257,7 @@ func _build_display_tab() -> void:
 	fov_slider.max_value = 100.0
 	fov_slider.step = 1.0
 	fov_slider.value = cur_fov
-	fov_slider.custom_minimum_size.y = 28
+	fov_slider.custom_minimum_size.y = 44
 	fov_slider.value_changed.connect(func(v: float) -> void:
 		fov_lbl.text = "Field of View (FOV): %d°" % int(round(v))
 		game_settings.set_display_option("fov", v)
@@ -305,19 +289,18 @@ func _build_audio_tab() -> void:
 		var bus: String = entry[0]
 		var title: String = entry[1]
 		var current_val := float(game_settings.audio.get(bus, 1.0))
-		var row := HBoxContainer.new()
+		var row := VBoxContainer.new()
 		row.add_theme_constant_override("separation", 12)
 		audio_col.add_child(row)
 
 		var lbl := UiDesign.label("%s: %d%%" % [title, int(round(current_val * 100.0))], "body", "ivory")
 		lbl.name = "VolumeLabel_" + bus
-		lbl.custom_minimum_size.x = 280
 		row.add_child(lbl)
 
 		var slider := HSlider.new()
 		slider.name = "Volume_" + bus
 		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		slider.custom_minimum_size.y = 28
+		slider.custom_minimum_size.y = 44
 		slider.min_value = 0.0
 		slider.max_value = 1.0
 		slider.step = 0.05
@@ -341,17 +324,20 @@ func _build_controls_tab() -> void:
 		card.name = "BindRow_" + action_id
 		_body.add_child(card)
 
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 12)
-		card.add_child(row)
+		var column := VBoxContainer.new()
+		column.add_theme_constant_override("separation", 8)
+		card.add_child(column)
 
 		var action_lbl := UiDesign.label(label_text, "body", "ivory")
 		action_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.add_child(action_lbl)
+		column.add_child(action_lbl)
+		var row := HFlowContainer.new()
+		row.add_theme_constant_override("h_separation", 8)
+		row.add_theme_constant_override("v_separation", 8)
+		column.add_child(row)
 
 		# Keyboard glyph + rebind button
 		var kb_glyph_txt := game_settings.keyboard_glyph(action_id)
-		row.add_child(UiKit.key_glyph(kb_glyph_txt))
 		var kb_listening := _listening_action == action_id and _listening_device == "keyboard"
 		var kb_btn := UiDesign.button("Press any key..." if kb_listening else ("Key: " + kb_glyph_txt))
 		kb_btn.name = "RebindKey_" + action_id
@@ -364,7 +350,6 @@ func _build_controls_tab() -> void:
 
 		# Controller glyph + rebind button
 		var pad_glyph_txt := game_settings.controller_glyph(action_id)
-		row.add_child(UiKit.key_glyph(pad_glyph_txt))
 		var pad_listening := _listening_action == action_id and _listening_device == "controller"
 		var pad_btn := UiDesign.button("Press controller button..." if pad_listening else ("Pad: " + pad_glyph_txt))
 		pad_btn.name = "RebindPad_" + action_id
@@ -397,8 +382,9 @@ func _build_assist_tab() -> void:
 
 	var cur_sub_size := String(game_settings.accessibility.get("subtitle_size", "Medium"))
 	cap_col.add_child(UiDesign.label("Subtitle & Text Size · Current: %s (%d%%)" % [cur_sub_size, int(round(float(game_settings.accessibility.get("subtitle_scale", 1.0)) * 100.0))], "body", "ivory"))
-	var sub_row := HBoxContainer.new()
-	sub_row.add_theme_constant_override("separation", 8)
+	var sub_row := HFlowContainer.new()
+	sub_row.add_theme_constant_override("h_separation", 8)
+	sub_row.add_theme_constant_override("v_separation", 8)
 	cap_col.add_child(sub_row)
 	for sz_opt in GameSettingsScript.SUBTITLE_SIZES:
 		var btn := UiDesign.button((sz_opt + " (Selected)") if sz_opt == cur_sub_size else sz_opt)
@@ -450,8 +436,9 @@ func _build_assist_tab() -> void:
 
 	var cur_session := String(game_settings.accessibility.get("session_mode", "Solo"))
 	assist_col.add_child(UiDesign.label("Group & Classroom Session Mode · Current: %s" % cur_session, "body", "ivory"))
-	var session_row := HBoxContainer.new()
-	session_row.add_theme_constant_override("separation", 8)
+	var session_row := HFlowContainer.new()
+	session_row.add_theme_constant_override("h_separation", 8)
+	session_row.add_theme_constant_override("v_separation", 8)
 	assist_col.add_child(session_row)
 	for smode in GameSettingsScript.SESSION_MODES:
 		var btn := UiDesign.button((smode + " Mode (Selected)") if smode == cur_session else (smode + " Mode"))
@@ -489,7 +476,7 @@ func _build_saves_tab() -> void:
 
 	var top_card := UiDesign.glass_panel()
 	_body.add_child(top_card)
-	var top_row := HBoxContainer.new()
+	var top_row := VBoxContainer.new()
 	top_row.add_theme_constant_override("separation", 12)
 	top_card.add_child(top_row)
 
@@ -536,13 +523,21 @@ func _open_chapter_select_overlay() -> void:
 		_chapter_select_overlay.queue_free()
 	var panel := ChapterSelectScript.new()
 	panel.save_path = save_slots.base_save_path
+	panel.settings = game_settings.accessibility.duplicate(true)
 	panel.z_index = 120
-	panel.exit_requested.connect(func() -> void:
-		if is_instance_valid(_chapter_select_overlay):
-			_chapter_select_overlay.queue_free()
-			_chapter_select_overlay = null)
+	panel.exit_requested.connect(_close_chapter_select_overlay)
 	_chapter_select_overlay = panel
+	_shell.hide()
 	add_child(panel)
+
+func _close_chapter_select_overlay() -> void:
+	if is_instance_valid(_chapter_select_overlay):
+		_chapter_select_overlay.queue_free()
+	_chapter_select_overlay = null
+	_shell.show()
+	var entry := find_child("OpenChapterSelectButton", true, false) as Control
+	if entry != null:
+		entry.grab_focus()
 
 func _on_reset_pressed() -> void:
 	if not _reset_confirm_pending:
@@ -567,6 +562,13 @@ func _input(event: InputEvent) -> void:
 	if not visible:
 		return
 	if not _listening_action.is_empty():
+		if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+			_listening_action = ""
+			_listening_device = ""
+			_notice_text = "Binding unchanged."
+			_rebuild_body()
+			get_viewport().set_input_as_handled()
+			return
 		if _listening_device == "keyboard" and event is InputEventKey and event.pressed and not event.echo:
 			var key_ev := event as InputEventKey
 			var code := int(key_ev.physical_keycode if key_ev.physical_keycode != KEY_NONE else key_ev.keycode)
@@ -602,8 +604,7 @@ func _input(event: InputEvent) -> void:
 	var back: bool = event.is_action_pressed("ui_cancel") or (event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_B)
 	if back and not event.is_echo():
 		if is_instance_valid(_chapter_select_overlay):
-			_chapter_select_overlay.queue_free()
-			_chapter_select_overlay = null
+			_close_chapter_select_overlay()
 		else:
 			closed.emit()
 		get_viewport().set_input_as_handled()

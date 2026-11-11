@@ -1,12 +1,352 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://scripts/ui/chapter_select.gd" id="1_chapter_select"]
+[ext_resource type="Theme" path="res://resources/ui/lla_theme.tres" id="1_theme"]
+[ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="2_mark"]
+[ext_resource type="Texture2D" path="res://assets/ui/title/aurora_cinematic.png" id="3_atmosphere"]
 
-[node name="ChapterSelectPanel" type="Control"]
+[sub_resource type="StyleBoxFlat" id="Style_card"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+bg_color = Color(0.07, 0.1, 0.16, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.31, 0.38, 0.47, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+
+[sub_resource type="StyleBoxFlat" id="Style_active"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+bg_color = Color(0.96, 0.74, 0.19, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+
+[node name="ChapterSelectShell" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_chapter_select")
+theme = ExtResource("1_theme")
+
+[node name="Atmosphere" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_atmosphere")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Scrim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.025, 0.04, 0.075, 0.92)
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 24
+
+[node name="Page" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Header" type="HBoxContainer" parent="SafeArea/Page"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Mark" type="TextureRect" parent="SafeArea/Page/Header"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_mark")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BrandRule" type="VSeparator" parent="SafeArea/Page/Header"]
+layout_mode = 2
+
+[node name="Academy" type="Label" parent="SafeArea/Page/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LAST LIGHT
+ACADEMY"
+theme_override_font_sizes/font_size = 22
+metadata/lla_type = "heading"
+
+[node name="ChapterSelectTabs" type="HBoxContainer" parent="SafeArea/Page/Header"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="Tab_chapters" type="Button" parent="SafeArea/Page/Header/ChapterSelectTabs"]
+custom_minimum_size = Vector2(142, 44)
+layout_mode = 2
+text = "Chapters"
+toggle_mode = true
+button_pressed = true
+theme_override_styles/normal = SubResource("Style_active")
+theme_override_colors/font_color = Color(0.025, 0.04, 0.06, 1)
+
+[node name="Tab_progress" type="Button" parent="SafeArea/Page/Header/ChapterSelectTabs"]
+custom_minimum_size = Vector2(142, 44)
+layout_mode = 2
+text = "Progress"
+toggle_mode = true
+
+[node name="Tab_achievements" type="Button" parent="SafeArea/Page/Header/ChapterSelectTabs"]
+custom_minimum_size = Vector2(142, 44)
+layout_mode = 2
+text = "Achievements"
+toggle_mode = true
+
+[node name="Title" type="Label" parent="SafeArea/Page"]
+layout_mode = 2
+text = "Your expedition"
+theme_override_font_sizes/font_size = 40
+metadata/lla_type = "title"
+
+[node name="ChapterSelectStatus" type="Label" parent="SafeArea/Page"]
+layout_mode = 2
+text = "Your expedition begins with Chapter 1  ·  0 of 20 achievements earned"
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="ChapterRoute" type="HBoxContainer" parent="SafeArea/Page"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PreviewStep1" type="Button" parent="SafeArea/Page/ChapterRoute"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "01"
+disabled = false
+
+[node name="PreviewStep2" type="Button" parent="SafeArea/Page/ChapterRoute"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "02"
+disabled = true
+
+[node name="PreviewStep3" type="Button" parent="SafeArea/Page/ChapterRoute"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "03"
+disabled = true
+
+[node name="PreviewStep4" type="Button" parent="SafeArea/Page/ChapterRoute"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "04"
+disabled = true
+
+[node name="PreviewStep5" type="Button" parent="SafeArea/Page/ChapterRoute"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "05"
+disabled = true
+
+[node name="PreviewStep6" type="Button" parent="SafeArea/Page/ChapterRoute"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "06"
+disabled = true
+
+[node name="PreviewStep7" type="Button" parent="SafeArea/Page/ChapterRoute"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "07"
+disabled = true
+
+[node name="PreviewStep8" type="Button" parent="SafeArea/Page/ChapterRoute"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "08"
+disabled = true
+
+[node name="ChapterSelectScroll" type="ScrollContainer" parent="SafeArea/Page"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="ChapterSelectBody" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 18
+
+[node name="ChapterCardsGrid" type="GridContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody"]
+layout_mode = 2
+columns = 3
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 18
+
+[node name="ChapterCard_1" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Art" type="TextureRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Contents"]
+custom_minimum_size = Vector2(0, 154)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_atmosphere")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Contents"]
+layout_mode = 2
+text = "CHAPTER 01"
+metadata/lla_type = "caption"
+
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Contents"]
+layout_mode = 2
+text = "Night One"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Action" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_1/Contents"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "View missions"
+disabled = false
+
+[node name="ChapterCard_2" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Horizon" type="ColorRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Contents"]
+custom_minimum_size = Vector2(0, 154)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.045, 0.065, 0.1, 1)
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Contents"]
+layout_mode = 2
+text = "CHAPTER 02"
+metadata/lla_type = "caption"
+
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Contents"]
+layout_mode = 2
+text = "Beyond the horizon"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Action" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_2/Contents"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Locked"
+disabled = true
+
+[node name="ChapterCard_3" type="PanelContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Horizon" type="ColorRect" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Contents"]
+custom_minimum_size = Vector2(0, 154)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.045, 0.065, 0.1, 1)
+
+[node name="Number" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Contents"]
+layout_mode = 2
+text = "CHAPTER 03"
+metadata/lla_type = "caption"
+
+[node name="Title" type="Label" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Contents"]
+layout_mode = 2
+text = "Beyond the horizon"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Action" type="Button" parent="SafeArea/Page/ChapterSelectScroll/ChapterSelectBody/ChapterCardsGrid/ChapterCard_3/Contents"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Locked"
+disabled = true
+
+[node name="Selection" type="PanelContainer" parent="SafeArea/Page"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Contents" type="HBoxContainer" parent="SafeArea/Page/Selection"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Text" type="VBoxContainer" parent="SafeArea/Page/Selection/Contents"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="SelectionTitle" type="Label" parent="SafeArea/Page/Selection/Contents/Text"]
+layout_mode = 2
+text = "Chapter 1 · Night One"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="SelectionDescription" type="Label" parent="SafeArea/Page/Selection/Contents/Text"]
+layout_mode = 2
+text = "Prepare Aurora Station for its first lunar night."
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="InspectSelectedChapter" type="Button" parent="SafeArea/Page/Selection/Contents"]
+custom_minimum_size = Vector2(170, 44)
+layout_mode = 2
+size_flags_vertical = 4
+text = "View mission list"
+
+[node name="ChapterSelectExit" type="Button" parent="SafeArea/Page/Selection/Contents"]
+custom_minimum_size = Vector2(120, 44)
+layout_mode = 2
+size_flags_vertical = 4
+text = "Back (Esc)"

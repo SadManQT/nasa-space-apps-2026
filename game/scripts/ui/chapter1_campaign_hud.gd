@@ -179,7 +179,7 @@ func setup(value: Chapter1Campaign) -> void:
 			panels.close_panel()
 			open_messages()},
 		{"label": String(_words.get("journal", "Journal")), "name": "Journal", "action": _on_journal_pressed},
-		{"label": String(_words.get("settings", "Settings")), "name": "Settings", "action": func() -> void: panels.open_panel("settings_accessibility")},
+		{"label": String(_words.get("settings", "Settings")), "name": "Settings", "action": func() -> void: open_family("settings_menu")},
 		{"label": String(_words.get("save", "Save")), "name": "Save", "action": func() -> void:
 			panels.close_panel()
 			_on_save_pressed()},
@@ -187,7 +187,7 @@ func setup(value: Chapter1Campaign) -> void:
 			panels.close_panel()
 			_on_exit_pressed()},
 	]
-	for entry in [["save_slots", "Save Slots"], ["settings_menu", "Settings & Controls"], ["cadet_record", "Cadet Record & Upgrades"], ["manual", "Academy Manual"], ["jobs", "Station Jobs"], ["discovery", "Discovery Log"], ["greenhouse", "Greenhouse"], ["coverage", "Coverage Map"], ["route_planner", "Rover Route Planner"], ["rover", "Rover Dashboard"], ["hazards", "Hazards Monitor"], ["field", "Field Equipment"], ["credits", "Credits"]]:
+	for entry in [["save_slots", "Save Slots"], ["cadet_record", "Cadet Record & Upgrades"], ["manual", "Academy Manual"], ["jobs", "Station Jobs"], ["discovery", "Discovery Log"], ["greenhouse", "Greenhouse"], ["coverage", "Coverage Map"], ["route_planner", "Rover Route Planner"], ["rover", "Rover Dashboard"], ["hazards", "Hazards Monitor"], ["field", "Field Equipment"], ["credits", "Credits"]]:
 		var family_id: String = entry[0]
 		pause_actions.append({"label": entry[1], "name": "Open_" + family_id, "action": func(): open_family(family_id)})
 	panels.set_pause_actions(pause_actions)
@@ -429,41 +429,27 @@ func _hide_toast() -> void:
 		_fade(_toast, false)
 
 func _build() -> void:
-	var view := get_viewport_rect().size
-	var margin := _margin()
-	# Goal card, top left.
-	_goal_card = UiDesign.glass_panel(Color.TRANSPARENT, 14)
-	_goal_card.name = "GoalCard"
-	_goal_card.position = Vector2(margin, margin)
-	# A container grows with its content but never shrinks on its own: refit when the text gets shorter.
+	var shell: Control = self
+	if not has_node("GoalCard"):
+		shell = load("res://scenes/ui/chapter1_campaign_hud.tscn").instantiate()
+		shell.set_script(null)
+		add_child(shell)
+	theme = UiKit.theme()
+	_goal_card = shell.get_node("GoalCard")
+	_goal_card.add_theme_stylebox_override("panel", UiDesign.glass_style(Color.TRANSPARENT, Color.TRANSPARENT, 14))
 	_goal_card.minimum_size_changed.connect(func() -> void: _goal_card.reset_size.call_deferred())
-	var card_box := VBoxContainer.new()
-	card_box.add_theme_constant_override("separation", 4)
-	_goal_card.add_child(card_box)
-	_chapter_line = UiDesign.label("", "caption", "muted")
-	card_box.add_child(_chapter_line)
-	var goal_row := HBoxContainer.new()
-	goal_row.add_theme_constant_override("separation", 8)
-	card_box.add_child(goal_row)
+	var card_box := _goal_card.get_node("Content")
+	_chapter_line = card_box.get_node("Chapter")
+	var goal_row := card_box.get_node("Goal")
 	_goal_icon = UiDesign.LineIcon.new("goal", UiDesign.colour("accent"))
 	_goal_icon.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	goal_row.add_child(_goal_icon)
-	_title = UiDesign.label("", "heading", "ivory")
-	_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_title.accessibility_name = "Current goal"
-	goal_row.add_child(_title)
-	_why = UiDesign.label("", "body", "muted")
-	card_box.add_child(_why)
-	var what_now_key := UiDesign.label("%s · %s" % [String(_words.get("what_now_key", "H")), String(_words.get("what_now", "What now"))], "caption", "muted")
-	what_now_key.name = "WhatNowKey"
-	card_box.add_child(what_now_key)
-	_advance = UiDesign.button("%s · %s" % [String(_words.get("continue", "Continue")), String(_words.get("continue_key", "Enter"))], 40)
-	_advance.name = "Continue"
-	_advance.visible = false
+	goal_row.move_child(_goal_icon, 0)
+	_title = goal_row.get_node("Title")
+	_why = card_box.get_node("Why")
+	_advance = card_box.get_node("Continue")
 	_advance.disabled = true
 	_advance.pressed.connect(_on_advance_pressed)
-	card_box.add_child(_advance)
-	add_child(_goal_card)
 	# World marker and the prompt on the object in reach.
 	_marker = Marker.new()
 	_marker.name = "GoalMarker"
@@ -512,42 +498,19 @@ func _build() -> void:
 	eva_visor.name = "EvaVisorHud"
 	eva_visor.visible = false
 	add_child(eva_visor)
-	# Dialogue, bottom centre.
-	_dialogue_bar = UiDesign.glass_panel(Color.TRANSPARENT, 14)
-	_dialogue_bar.name = "Dialogue"
+	# The scene owns the caption composition; canon text arrives through the runtime.
+	_dialogue_bar = shell.get_node("Dialogue")
+	_dialogue_bar.add_theme_stylebox_override("panel", UiDesign.glass_style(Color.TRANSPARENT, Color.TRANSPARENT, 14))
 	_dialogue_bar.visible = false
 	_dialogue_bar.set_meta("lla_shown", false)
-	_dialogue_bar.mouse_filter = Control.MOUSE_FILTER_STOP
-	var dialogue_box := VBoxContainer.new()
-	dialogue_box.add_theme_constant_override("separation", 6)
-	_dialogue_bar.add_child(dialogue_box)
-	var speaker_row := HBoxContainer.new()
-	dialogue_box.add_child(speaker_row)
-	_caption_speaker = UiDesign.label("", "caption", "accent")
-	_caption_speaker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	speaker_row.add_child(_caption_speaker)
-	_caption_count = UiDesign.label("", "caption", "muted")
-	_caption_count.autowrap_mode = TextServer.AUTOWRAP_OFF
-	speaker_row.add_child(_caption_count)
-	_caption_line = UiDesign.label("", "body", "ivory")
-	_caption_line.set_meta("verbatim", true)  # canon lines stay word for word (STORY_FULL.md)
-	dialogue_box.add_child(_caption_line)
-	var dialogue_buttons := HBoxContainer.new()
-	dialogue_buttons.add_theme_constant_override("separation", 8)
-	dialogue_buttons.alignment = BoxContainer.ALIGNMENT_END
-	dialogue_box.add_child(dialogue_buttons)
-	_auto_button = UiDesign.button(String(_words.get("auto", "Auto")), 36)
-	_auto_button.name = "Auto"
-	_auto_button.toggle_mode = true
-	_auto_button.focus_mode = Control.FOCUS_NONE  # Space is Next's key; a clicked Auto must not take it
+	var dialogue_box := _dialogue_bar.get_node("Content")
+	_caption_speaker = dialogue_box.get_node("SpeakerRow/Speaker")
+	_caption_count = dialogue_box.get_node("SpeakerRow/Count")
+	_caption_line = dialogue_box.get_node("Line")
+	_auto_button = dialogue_box.get_node("Actions/Auto")
 	_auto_button.toggled.connect(_on_auto_toggled)
-	dialogue_buttons.add_child(_auto_button)
-	_next_line = UiDesign.button("%s · %s" % [String(_words.get("next_line", "Next")), String(_words.get("next_line_key", "Space"))], 36)
-	_next_line.name = "Next"
-	_next_line.focus_mode = Control.FOCUS_NONE  # Space presses it from anywhere
+	_next_line = dialogue_box.get_node("Actions/Next")
 	_next_line.pressed.connect(_on_next_line)
-	dialogue_buttons.add_child(_next_line)
-	add_child(_dialogue_bar)
 	# What now content (shown inside the panel layer on H).
 	_what_now_home = Control.new()
 	_what_now_home.name = "WhatNowHome"
@@ -1460,6 +1423,10 @@ func apply_accessibility() -> void:
 	if runtime == null:
 		return
 	var settings: Dictionary = runtime.query().get("accessibility", {})
+	if runtime.game_settings != null:
+		_prompt_key.text = runtime.game_settings.keyboard_glyph("interact")
+		_next_line.text = "%s - %s" % [String(_words.get("next_line", "Next")), runtime.game_settings.keyboard_glyph("next_line")]
+		_advance.text = "%s - %s" % [String(_words.get("continue", "Continue")), runtime.game_settings.keyboard_glyph("advance")]
 	var captions := bool(settings.get("captions", true))
 	_caption_speaker.visible = captions
 	_caption_line.visible = captions

@@ -1,6 +1,81 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Script" path="res://scripts/ui/mission_table_panel.gd" id="1_table"]
+[ext_resource type="Script" path="res://scripts/ui/mission_table_panel.gd" id="1"]
+[ext_resource type="FontFile" path="res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf" id="2"]
+[ext_resource type="FontFile" path="res://addons/gohud/assets/fonts/roboto/Roboto.ttf" id="3"]
+[ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="4"]
+
+[sub_resource type="StyleBoxFlat" id="FrameStyle"]
+bg_color = Color(0.045, 0.07, 0.12, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.36, 0.46, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 24.0
+content_margin_top = 20.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id="CardStyle"]
+bg_color = Color(0.085, 0.12, 0.18, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.36, 0.46, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="GoldStyle"]
+bg_color = Color(0.96, 0.75, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.88, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="FocusStyle"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.86, 0.94, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+draw_center = false
+
+[sub_resource type="Theme" id="ShellTheme"]
+default_font = ExtResource("3")
+default_font_size = 16
+Label/colors/font_color = Color(0.92, 0.94, 0.96, 1)
+Button/colors/font_color = Color(0.92, 0.94, 0.96, 1)
+Button/colors/font_hover_color = Color(0.04, 0.05, 0.07, 1)
+Button/styles/normal = SubResource("CardStyle")
+Button/styles/hover = SubResource("GoldStyle")
+Button/styles/pressed = SubResource("GoldStyle")
+Button/styles/focus = SubResource("FocusStyle")
 
 [node name="MissionTablePanel" type="Control"]
 layout_mode = 3
@@ -10,4 +85,488 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_table")
+theme = SubResource("ShellTheme")
+script = ExtResource("1")
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.01, 0.02, 0.04, 0.7)
+
+[node name="Frame" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("FrameStyle")
+
+[node name="Stack" type="VBoxContainer" parent="Frame"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="Frame/Stack"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Brand" type="HBoxContainer" parent="Frame/Stack/Header"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="Mark" type="TextureRect" parent="Frame/Stack/Header/Brand"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Academy" type="Label" parent="Frame/Stack/Header/Brand"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 16
+text = "LAST LIGHT
+ACADEMY"
+autowrap_mode = 0
+
+[node name="Titles" type="VBoxContainer" parent="Frame/Stack/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="TableTitle" type="Label" parent="Frame/Stack/Header/Titles"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 36
+text = "Seven Shifts"
+autowrap_mode = 3
+
+[node name="TableSubtitle" type="Label" parent="Frame/Stack/Header/Titles"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.68, 0.74, 0.82, 1)
+text = "Plan together. Try it. Then lock it in."
+autowrap_mode = 3
+
+[node name="NightStrip" type="GridContainer" parent="Frame/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 7
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="Shift1" type="PanelContainer" parent="Frame/Stack/NightStrip"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("GoldStyle")
+
+[node name="Caption1" type="Label" parent="Frame/Stack/NightStrip/Shift1"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.04, 0.05, 0.07, 1)
+text = "Shift 1"
+autowrap_mode = 3
+
+[node name="Shift2" type="PanelContainer" parent="Frame/Stack/NightStrip"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="Caption2" type="Label" parent="Frame/Stack/NightStrip/Shift2"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Shift 2"
+autowrap_mode = 3
+
+[node name="Shift3" type="PanelContainer" parent="Frame/Stack/NightStrip"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="Caption3" type="Label" parent="Frame/Stack/NightStrip/Shift3"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Shift 3"
+autowrap_mode = 3
+
+[node name="Shift4" type="PanelContainer" parent="Frame/Stack/NightStrip"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="Caption4" type="Label" parent="Frame/Stack/NightStrip/Shift4"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Shift 4"
+autowrap_mode = 3
+
+[node name="Shift5" type="PanelContainer" parent="Frame/Stack/NightStrip"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="Caption5" type="Label" parent="Frame/Stack/NightStrip/Shift5"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Shift 5"
+autowrap_mode = 3
+
+[node name="Shift6" type="PanelContainer" parent="Frame/Stack/NightStrip"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="Caption6" type="Label" parent="Frame/Stack/NightStrip/Shift6"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Shift 6"
+autowrap_mode = 3
+
+[node name="Shift7" type="PanelContainer" parent="Frame/Stack/NightStrip"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="Caption7" type="Label" parent="Frame/Stack/NightStrip/Shift7"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Shift 7"
+autowrap_mode = 3
+
+[node name="TableBodyScroll" type="ScrollContainer" parent="Frame/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="Body" type="VBoxContainer" parent="Frame/Stack/TableBodyScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="PlanColumns" type="GridContainer" parent="Frame/Stack/TableBodyScroll/Body"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 16
+
+[node name="PlanCard" type="PanelContainer" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="PlanContent" type="VBoxContainer" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/PlanCard"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="Heading" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/PlanCard/PlanContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 22
+text = "Choose this shift?s settings"
+autowrap_mode = 3
+
+[node name="AirTitle" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/PlanCard/PlanContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 20
+text = "Air maker"
+autowrap_mode = 3
+
+[node name="AirDescription" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/PlanCard/PlanContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Make fresh air for the station."
+autowrap_mode = 3
+
+[node name="AirChoices" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/PlanCard/PlanContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Off       Low       High"
+autowrap_mode = 3
+
+[node name="Rule" type="HSeparator" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/PlanCard/PlanContent"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LightTitle" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/PlanCard/PlanContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 20
+text = "Garden light"
+autowrap_mode = 3
+
+[node name="LightDescription" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/PlanCard/PlanContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Light for the greenhouse crops."
+autowrap_mode = 3
+
+[node name="LightChoices" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/PlanCard/PlanContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Off       Dim       Full"
+autowrap_mode = 3
+
+[node name="ForecastCard" type="PanelContainer" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="ForecastContent" type="VBoxContainer" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="Heading" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 24
+text = "Try your plan"
+autowrap_mode = 3
+
+[node name="Simulated" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.4, 0.84, 0.92, 1)
+text = "Preview ? nothing changes yet."
+autowrap_mode = 3
+
+[node name="Battery" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Battery ? before ? after"
+autowrap_mode = 3
+
+[node name="BatteryBar" type="ProgressBar" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+mouse_filter = 2
+value = 60.0
+show_percentage = false
+
+[node name="Air" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Air ? before ? after"
+autowrap_mode = 3
+
+[node name="AirBar" type="ProgressBar" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+mouse_filter = 2
+value = 60.0
+show_percentage = false
+
+[node name="Alo" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Alo ? before ? after"
+autowrap_mode = 3
+
+[node name="AloBar" type="ProgressBar" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+mouse_filter = 2
+value = 60.0
+show_percentage = false
+
+[node name="Garden" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Garden ? before ? after"
+autowrap_mode = 3
+
+[node name="GardenBar" type="ProgressBar" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+mouse_filter = 2
+value = 60.0
+show_percentage = false
+
+[node name="CrewCard" type="PanelContainer" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="CrewContent" type="VBoxContainer" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/CrewCard"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="Heading" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/CrewCard/CrewContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 22
+text = "Crew notes"
+autowrap_mode = 3
+
+[node name="Kai" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/CrewCard/CrewContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 20
+text = "Kai ? Power & heat"
+autowrap_mode = 3
+
+[node name="KaiNote" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/CrewCard/CrewContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Share what you know before locking in the shift."
+autowrap_mode = 3
+
+[node name="Rule" type="HSeparator" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/CrewCard/CrewContent"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Amara" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/CrewCard/CrewContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 20
+text = "Amara ? Atmosphere"
+autowrap_mode = 3
+
+[node name="AmaraNote" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/CrewCard/CrewContent"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Keep air in reserve."
+autowrap_mode = 3
+
+[node name="Confirmation" type="VBoxContainer" parent="Frame/Stack/TableBodyScroll/Body"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="MoreContent" type="VBoxContainer" parent="Frame/Stack/TableBodyScroll/Body"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="Footer" type="VBoxContainer" parent="Frame/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Notice" type="Label" parent="Frame/Stack/Footer"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Choose settings, preview the result, then confirm your shift."
+autowrap_mode = 3
+
+[node name="Actions" type="HFlowContainer" parent="Frame/Stack/Footer"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="PreviewSample" type="Button" parent="Frame/Stack/Footer/Actions"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Try it"
+theme_override_styles/normal = SubResource("GoldStyle")
+theme_override_colors/font_color = Color(0.04, 0.05, 0.07, 1)
+
+[node name="CommitSample" type="Button" parent="Frame/Stack/Footer/Actions"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Lock in shift"
+
+[node name="CloseSample" type="Button" parent="Frame/Stack/Footer/Actions"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Close (Esc)"

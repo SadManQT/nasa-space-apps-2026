@@ -52,8 +52,14 @@ var _task_time_left := 0.0
 var _focus_name := ""
 var _overlay: ColorRect
 var _frame: PanelContainer
-var _content: VBoxContainer
 var _body: VBoxContainer
+var _columns: GridContainer
+var _plan_host: VBoxContainer
+var _forecast_host: VBoxContainer
+var _crew_host: VBoxContainer
+var _more_host: VBoxContainer
+var _footer: VBoxContainer
+var _strip: GridContainer
 var _more := false
 var _card_more := {}
 var _portraits := {}
@@ -75,22 +81,22 @@ func _ready() -> void:
 	# Above the HUD's outpost readout (z 70): the table carries its own summary.
 	z_index = 100
 	theme = UiKit.theme()
-	_overlay = ColorRect.new()
-	_overlay.color = Color(0.0, 0.01, 0.03, 0.82)
-	_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
-	add_child(_overlay)
-	_frame = PanelContainer.new()
-	_frame.add_theme_stylebox_override("panel", _box(NAVY_DEEP, Color(0.13, 0.72, 0.78, 0.84), 14, 1))
-	_frame.mouse_filter = Control.MOUSE_FILTER_STOP
-	add_child(_frame)
-	var margin := MarginContainer.new()
-	for side in ["left", "right", "top", "bottom"]:
-		margin.add_theme_constant_override("margin_" + side, 18)
-	_frame.add_child(margin)
-	_content = VBoxContainer.new()
-	_content.add_theme_constant_override("separation", 10)
-	margin.add_child(_content)
+	_overlay = $Shade
+	_overlay.color = UiDesign.colour("scrim")
+	_frame = $Frame
+	_frame.add_theme_stylebox_override("panel", UiDesign.glass_style())
+	_columns = %PlanColumns
+	_body = %Confirmation
+	_plan_host = %PlanContent
+	_forecast_host = %ForecastContent
+	_crew_host = %CrewContent
+	_more_host = %MoreContent
+	_footer = %Footer
+	_strip = %NightStrip
+	UiDesign.style_label(%TableTitle, "title")
+	UiDesign.style_label(%TableSubtitle, "body", "muted")
+	for card in [%PlanCard, %ForecastCard, %CrewCard]:
+		card.add_theme_stylebox_override("panel", UiDesign.glass_style())
 	_handoff = HANDOFF_SCENE.instantiate() as RoleCardHandoff
 	_handoff.name = "RoleCardHandoff"
 	add_child(_handoff)
@@ -98,7 +104,7 @@ func _ready() -> void:
 	_handoff.finished.connect(_on_handoff_closed)
 	_handoff.cancelled.connect(func() -> void: _on_handoff_closed([]))
 	hide()
-	get_viewport().size_changed.connect(_layout)
+	get_viewport().size_changed.connect(_render)
 
 ## Opens the table for one P-02 gate. `settings` carries large_text and
 ## timer_free from the accessibility settings.
@@ -117,7 +123,6 @@ func open(route: RefCounted, target_id: String, settings: Dictionary = {}) -> vo
 	if _target_id == "p02_shift1" and not _table().selection(1).has("transfer"):
 		_table().set_choice(1, "transfer", "HOLD", _committed())
 	show()
-	_layout()
 	_render()
 	opened.emit(target_id)
 	_grab_first_focus()
@@ -416,61 +421,56 @@ func _render() -> void:
 	if _focus_name.is_empty() and focused != null and is_ancestor_of(focused):
 		_focus_name = String(focused.name)
 	_refresh_view()
-	for child in _content.get_children():
-		_content.remove_child(child)
-		child.queue_free()
+	for host in [_body, _plan_host, _forecast_host, _crew_host, _more_host, _footer, _strip]:
+		for child in host.get_children():
+			host.remove_child(child)
+			child.queue_free()
 	_render_header()
-	_body = VBoxContainer.new()
-	_body.add_theme_constant_override("separation", 14)
-	var scroll := _scroll(_body, "TableBodyScroll")
-	_content.add_child(scroll)
+	_columns.visible = not _confirming
+	_body.visible = _confirming
+	_more_host.visible = _more and not _confirming
 	if _confirming and class_mode():
 		_render_team_plan()
 	elif _confirming:
 		_render_confirmation()
 	else:
-		var columns := GridContainer.new()
-		columns.columns = 2 if get_viewport_rect().size.x >= 1100 and _scale() == 1.0 else 1
-		columns.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		columns.add_theme_constant_override("h_separation", 24)
-		columns.add_theme_constant_override("v_separation", 18)
-		_body.add_child(columns)
-		columns.add_child(_render_plan())
-		columns.add_child(_render_forecast())
-		_body.add_child(_render_cards())
+		_columns.columns = 3 if get_viewport_rect().size.x >= 1100 and _scale() == 1.0 else 1
+		_plan_host.add_child(_render_plan())
+		_forecast_host.add_child(_render_forecast())
+		_crew_host.add_child(_render_cards())
 		if _more:
 			var more := _column("More about this plan", 0)
 			more.name = "MoreDetails"
-			_body.add_child(more)
+			_more_host.add_child(more)
 			var pin := _button("Save as Plan A", "PinPlanA")
 			pin.pressed.connect(pin_plan_a)
 			more.add_child(pin)
 			_render_projection(more)
 		_render_footer()
-	_layout()
+	UiDesign.apply_type($Frame, get_viewport_rect().size.y, _scale(), [_columns, _body, _more_host, _footer, _strip])
 	_restore_focus()
 
 func _render_header() -> void:
-	var title := _wrap("Mission Table · Seven Shifts", 22, MUSTARD)
-	_content.add_child(title)
-	var strip := GridContainer.new()
-	strip.name = "NightStrip"
-	strip.columns = 7 if get_viewport_rect().size.x >= 1000 else 4
-	strip.add_theme_constant_override("h_separation", 6)
-	_content.add_child(strip)
+	_strip.columns = 7 if get_viewport_rect().size.x >= 1000 and _scale() == 1.0 else 4
 	for shift in range(1, 8):
+		var active: bool = _view.get("shifts", []).has(shift)
+		var surface := UiDesign.glass_panel(MUSTARD if active else UiDesign.colour("glass_edge"), 8)
+		if active:
+			surface.add_theme_stylebox_override("panel", UiDesign.glass_style(MUSTARD, MUSTARD, 8))
 		var cell := VBoxContainer.new()
 		cell.name = "NightShift%d" % shift
 		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		var head := HBoxContainer.new()
-		head.add_child(UiKit.icon("sun" if shift <= 2 else "moon", "accent", 18))
-		head.add_child(_label("%d · %s" % [shift, "Sun" if shift <= 2 else "Dark"], 12, MUTED if shift <= _committed() else IVORY))
+		head.add_child(UiKit.icon("sun" if shift <= 2 else "moon", "ink" if active else "accent", 18))
+		head.add_child(_label("%d · %s" % [shift, "Sun" if shift <= 2 else "Dark"], 12, INK if active else (MUTED if shift <= _committed() else IVORY)))
 		cell.add_child(head)
 		var event: String = {2: "Drill", 4: "Earth link ends", 7: "Sunrise after"}.get(shift, "")
 		if shift in [5, 6] and _arrived("rafi"):
 			event = "Storm outlook"
-		cell.add_child(_wrap(event, 11, MUTED))
-		strip.add_child(cell)
+		cell.add_child(_wrap(event, 11, INK if active else MUTED))
+		surface.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		surface.add_child(cell)
+		_strip.add_child(surface)
 
 func _render_cards() -> Control:
 	if class_mode():
@@ -574,8 +574,10 @@ func _field_row(shift: int, field: String, current: Dictionary, locked: bool) ->
 		button.disabled = locked
 		button.tooltip_text = display_text(_option_cost(option.cost))
 		if selected:
-			button.add_theme_stylebox_override("normal", _box(NAVY, MUSTARD, 7, 2))
-			button.add_theme_stylebox_override("pressed", _box(NAVY, MUSTARD, 7, 2))
+			button.add_theme_stylebox_override("normal", UiDesign.button_style(MUSTARD, true))
+			button.add_theme_stylebox_override("pressed", UiDesign.button_style(MUSTARD, true))
+			button.add_theme_color_override("font_color", INK)
+			button.add_theme_color_override("font_pressed_color", INK)
 		var picked = value
 		button.pressed.connect(func() -> void: choose(shift, field, picked))
 		row.add_child(button)
@@ -653,6 +655,7 @@ func _render_forecast() -> Control:
 		heading = "Now → after shifts %d to %d" % [int(shifts.front()), int(shifts.back())]
 	var column := _column(heading, 0)
 	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	column.add_child(_wrap("SIMULATED · nothing changes yet.", 12, CYAN))
 	var resources: Dictionary = _view.get("resources", {})
 	var forecast: Dictionary = _view.get("gate_preview", {})
 	var after: Dictionary = forecast.get("final_state", {}) if forecast.get("accepted", false) else {}
@@ -724,16 +727,16 @@ func _render_footer() -> void:
 	var reason := _commit_reason()
 	var status := _wrap(_notice if not _notice.is_empty() else (reason if not reason.is_empty() else "Ready. Lock in shift, then confirm. Nothing changes before confirmation."), 13, MUSTARD if not reason.is_empty() else GREEN)
 	status.name = "TableStatus"
-	_content.add_child(status)
+	_footer.add_child(status)
 	var row := HFlowContainer.new()
 	row.name = "TableFooter"
 	row.add_theme_constant_override("h_separation", 8)
 	row.add_theme_constant_override("v_separation", 6)
-	_content.add_child(row)
+	_footer.add_child(row)
 	var try_button := _button("Try it", "Preview")
 	try_button.pressed.connect(func() -> void: preview())
-	if _guide_step() == 3:
-		try_button.add_theme_stylebox_override("normal", _box(NAVY, MUSTARD, 7, 2))
+	try_button.add_theme_stylebox_override("normal", UiDesign.button_style(MUSTARD, true))
+	try_button.add_theme_color_override("font_color", INK)
 	row.add_child(try_button)
 	var commit := _button("Prepare shift (Space)" if _view.get("gate", {}).get("preview_only", false) else "Lock in shift (Space)", "Commit")
 	commit.disabled = not reason.is_empty()
@@ -765,7 +768,7 @@ func _render_confirmation() -> void:
 	_body.add_child(_render_forecast())
 	var row := HFlowContainer.new()
 	row.add_theme_constant_override("h_separation", 8)
-	_content.add_child(row)
+	_footer.add_child(row)
 	var back := _button("Back (Esc)", "CancelCommit")
 	back.pressed.connect(cancel_confirm)
 	row.add_child(back)
@@ -867,13 +870,13 @@ func _render_team_plan() -> void:
 	if not _notice.is_empty():
 		var notice := _wrap(_notice, 13, IVORY)
 		notice.name = "TableStatus"
-		_content.add_child(notice)
+		_footer.add_child(notice)
 	var gate := _wrap(CrewScript.text("team_plan", "all_signed") if missing == 0 else CrewScript.text("team_plan", "operator_blocked", {"signed": str(signed.size()), "total": "4"}), 14, GREEN if missing == 0 else MUSTARD)
 	gate.name = "TeamPlanGate"
-	_content.add_child(gate)
+	_footer.add_child(gate)
 	var row := HFlowContainer.new()
 	row.add_theme_constant_override("h_separation", 8)
-	_content.add_child(row)
+	_footer.add_child(row)
 	var back := _button(CrewScript.text("team_plan", "back_button"), "CancelCommit")
 	back.pressed.connect(cancel_confirm)
 	row.add_child(back)
@@ -1036,38 +1039,20 @@ func _grab_first_focus() -> void:
 	if preview_button != null:
 		_focus_later(preview_button)
 
-func _layout() -> void:
-	if _frame == null or not is_inside_tree():
-		return
-	var size_now := get_viewport_rect().size
-	_frame.position = Vector2(12, 12)
-	_frame.size = Vector2(size_now.x - 24, size_now.y - 24)
-
 func _scale() -> float:
 	return 1.5 if bool(_settings.get("large_text", false)) else 1.0
 
 func _fs(size: int) -> int:
-	return int(round(maxi(12, size) * _scale()))
+	return int(round(maxi(14, size) * _scale()))
 
 # --- Widget helpers ------------------------------------------------------------
 
-func _scroll(column: Control, node_name: String) -> ScrollContainer:
-	var scroll := ScrollContainer.new()
-	scroll.name = node_name
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	scroll.follow_focus = true
-	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.add_child(column)
-	return scroll
-
 func _column(title: String, width: float) -> VBoxContainer:
 	var column := VBoxContainer.new()
-	column.add_theme_constant_override("separation", 7)
+	column.add_theme_constant_override("separation", 12)
 	if width > 0:
 		column.custom_minimum_size.x = width
-	column.add_child(_wrap(title, 13, MUSTARD))
+	column.add_child(_wrap(title, 18, IVORY))
 	return column
 
 func _card_box(highlight: bool, available: bool) -> PanelContainer:
@@ -1084,6 +1069,8 @@ func _card_box(highlight: bool, available: bool) -> PanelContainer:
 func _label(text: String, size: int, color: Color) -> Label:
 	var label := Label.new()
 	label.text = display_text(text)
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.add_theme_font_override("font", UiDesign.font("heading" if size >= 16 else "body"))
 	label.add_theme_font_size_override("font_size", _fs(size))
 	label.add_theme_color_override("font_color", color)
 	return label
@@ -1096,22 +1083,12 @@ func _wrap(text: String, size: int, color: Color) -> Label:
 	return label
 
 func _button(text: String, node_name: String) -> Button:
-	var button := Button.new()
+	var button := UiDesign.button(display_text(text))
 	button.name = node_name.validate_node_name()
 	button.text = display_text(text)
 	button.custom_minimum_size = Vector2(0, maxf(MIN_TARGET, 32 * _scale()))
 	button.focus_mode = Control.FOCUS_ALL
 	button.add_theme_font_size_override("font_size", _fs(14))
-	button.add_theme_color_override("font_color", IVORY)
-	button.add_theme_color_override("font_pressed_color", IVORY)
-	button.add_theme_color_override("font_hover_color", INK)
-	button.add_theme_color_override("font_focus_color", IVORY)
-	button.add_theme_color_override("font_disabled_color", Color(0.66, 0.71, 0.78, 0.75))
-	button.add_theme_stylebox_override("normal", _box(NAVY, Color(0.32, 0.45, 0.66, 0.9), 7, 1))
-	button.add_theme_stylebox_override("pressed", _box(NAVY, Color(0.32, 0.45, 0.66, 0.9), 7, 1))
-	button.add_theme_stylebox_override("hover", _box(MUSTARD, INK, 7, 2))
-	button.add_theme_stylebox_override("focus", _box(Color(0, 0, 0, 0), IVORY, 7, 3))
-	button.add_theme_stylebox_override("disabled", _box(NAVY_DEEP, MUTED, 7, 1))
 	return button
 
 func _box(fill: Color, border: Color, radius: int, width: int) -> StyleBoxFlat:

@@ -3,6 +3,7 @@ class_name MainMenu
 
 signal new_expedition_requested
 signal continue_requested
+signal slot_continue_requested(snapshot: Dictionary)
 signal science_requested
 signal showcase_requested
 signal trainer_requested
@@ -12,10 +13,10 @@ signal command_emitted(command: Dictionary)
 signal accessibility_requested
 
 const NAVY := Color("#1F2A44")
-const INK := Color("#05060A")
-const IVORY := Color("#ECEEF0")
-const MUTED := Color("#A8B4C8")
-const MUSTARD := Color("#F2C230")
+const INK := Color("#0A101C")
+const IVORY := Color("#F2EFE7")
+const MUTED := Color("#B8C4D6")
+const MUSTARD := Color("#F5C451")
 const ORANGE := Color("#F26B21")
 const CYAN := Color("#20B8C9")
 const GREEN := Color("#4CAF50")
@@ -44,6 +45,9 @@ var _accessibility := {
 var _assist_mode := "Cadet"
 var _assist_summary: Label
 var _footer_status: Label
+var _settings_menu: SettingsMenu
+var save_path := SaveService.DEFAULT_PATH
+var _profile_accessibility: Dictionary = {}
 
 func _ready() -> void:
 	var loaded_theme := load("res://resources/ui/lla_theme.tres") as Theme
@@ -69,8 +73,8 @@ func setup(save_state: Dictionary) -> void:
 			_begin_button.grab_focus()
 		_continue_button.disabled = not has_save
 		_continue_button.focus_mode = continue_focus
-	_continue_button.text = "CONTINUE EXPEDITION" if has_save else "CONTINUE · NO CHECKPOINT"
-	_save_note.text = "Checkpoint: %s" % String(save_state.get("checkpoint_id", "Chapter 1")) if has_save else "No saved expedition yet. New Expedition is always safe to start."
+	_continue_button.text = "Continue expedition" if has_save else "Continue - no checkpoint"
+	_save_note.text = "Checkpoint: %s" % String(save_state.get("checkpoint_id", "Chapter 1")) if has_save else "A new expedition awaits. Your progress saves as you play."
 	_save_note.modulate = IVORY if has_save else MUTED
 	if _panels != null:
 		_panels.bind_query(_query)
@@ -94,7 +98,11 @@ func query_snapshot() -> Dictionary:
 	return _query.duplicate(true)
 
 func accessibility_settings() -> Dictionary:
-	return _accessibility.merged({"assist_mode": _assist_mode, "bindings": _panels.bindings_snapshot() if _panels != null else {}}, true)
+	var copy := _profile_accessibility.merged(_accessibility, true)
+	copy["assist_mode"] = _assist_mode
+	# Full Settings owns its key map; an old checkpoint's E/H shortcut is not an override.
+	copy["bindings"] = {} if not _profile_accessibility.is_empty() else (_panels.bindings_snapshot() if _panels != null else {})
+	return copy
 
 func assist_mode() -> String:
 	return _assist_mode
@@ -187,19 +195,19 @@ func _build() -> void:
 	%DeveloperShowcaseEntry.pressed.connect(func(): showcase_requested.emit())
 	%ScienceEntry.pressed.connect(func(): science_requested.emit())
 	%SettingsEntry.pressed.connect(func() -> void:
-		emit_command("open_panel", "settings_accessibility")
 		accessibility_requested.emit()
-		open_panel("settings_accessibility")
+		open_settings()
 	)
 	%CreditsEntry.pressed.connect(func() -> void:
 		emit_command("open_panel", "credits")
 		open_panel("credits")
 	)
 	for button in [_begin_button, _continue_button, %MissionTrainerEntry, %MoonTrainerEntry, %ChapterSelectEntry, %ScienceEntry, %SettingsEntry, %CreditsEntry, %DeveloperShowcaseEntry]:
-		button.add_theme_stylebox_override("normal", _button_style(MUSTARD if button == _begin_button else UiDesign.colour("navy"), 1.0))
+		button.add_theme_stylebox_override("normal", _button_style(MUSTARD if button == _begin_button else UiDesign.colour("navy"), 1.0 if button == _begin_button else 0.0))
 		button.add_theme_stylebox_override("hover", _button_style(Color("#FFD95A"), 1.0))
 		button.add_theme_stylebox_override("pressed", _button_style(Color("#D8A915"), 1.0))
 		button.add_theme_stylebox_override("focus", _button_style(Color.TRANSPARENT, 0.0, INK if button == _begin_button else MUSTARD))
+		button.add_theme_stylebox_override("disabled", _button_style(Color.TRANSPARENT, 0.0))
 		button.add_theme_color_override("font_color", INK if button == _begin_button else IVORY)
 		button.add_theme_color_override("font_focus_color", INK if button == _begin_button else IVORY)
 		button.add_theme_color_override("font_hover_color", INK)
@@ -209,6 +217,30 @@ func _build() -> void:
 	if not defer_panels:
 		attach_panels()
 	_apply_accessibility()
+
+func open_settings() -> void:
+	if is_instance_valid(_settings_menu):
+		return
+	_capture_modal_focus()
+	_settings_menu = SettingsMenu.new(null, SaveSlots.new(save_path, Chapter1Campaign.restore_session))
+	set_accessibility(_settings_menu.game_settings.accessibility_for_campaign())
+	_settings_menu.closed.connect(_close_settings)
+	_settings_menu.settings_changed.connect(func(snapshot: Dictionary) -> void:
+		set_accessibility(snapshot.get("accessibility", {})))
+	_settings_menu.slot_loaded.connect(func(_slot_id: String, snapshot: Dictionary) -> void:
+		_close_settings()
+		slot_continue_requested.emit(snapshot))
+	add_child(_settings_menu)
+	_set_buttons_enabled(false, _settings_menu)
+
+func _close_settings() -> void:
+	if not is_instance_valid(_settings_menu):
+		return
+	_settings_menu.hide()
+	_settings_menu.queue_free()
+	_settings_menu = null
+	_set_buttons_enabled(true)
+	_restore_modal_focus()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("ui_cancel"):
@@ -474,6 +506,12 @@ func _on_accessibility_changed(settings: Dictionary) -> void:
 	_apply_accessibility()
 
 func _set_accessibility_local(settings: Dictionary) -> void:
+	for key in ["subtitle_size", "subtitle_scale", "session_mode", "family_mode", "class_mode"]:
+		if settings.has(key):
+			_profile_accessibility[key] = settings[key]
+	if not _profile_accessibility.is_empty() and settings.has("large_text") and not settings.has("subtitle_scale"):
+		_profile_accessibility["subtitle_scale"] = 1.5 if settings.large_text else 1.0
+		_profile_accessibility["subtitle_size"] = "Extra Large" if settings.large_text else "Medium"
 	if settings.get("assist_mode", "") in ["Story", "Cadet", "Expedition"]:
 		set_assist_mode(String(settings.assist_mode))
 	for key in _accessibility.keys():
@@ -496,7 +534,7 @@ func _apply_accessibility() -> void:
 
 func _apply_text_scale(node: Node) -> void:
 	for child in node.get_children():
-		if child == _panels or (_panels != null and _panels.is_ancestor_of(child)):
+		if child == _panels or child == _settings_menu or (_panels != null and _panels.is_ancestor_of(child)):
 			continue
 		if child is Control:
 			var control := child as Control
@@ -512,10 +550,10 @@ func _panel(color: Color, _radius: int, border: Color = Color.TRANSPARENT) -> Pa
 	var panel := PanelContainer.new()
 	var style := StyleBoxFlat.new()
 	style.bg_color = color
-	style.corner_radius_top_left = 4
-	style.corner_radius_top_right = 4
-	style.corner_radius_bottom_left = 4
-	style.corner_radius_bottom_right = 4
+	style.corner_radius_top_left = 10
+	style.corner_radius_top_right = 10
+	style.corner_radius_bottom_left = 10
+	style.corner_radius_bottom_right = 10
 	if border.a > 0.0:
 		style.border_width_left = 1
 		style.border_width_top = 1
@@ -547,10 +585,10 @@ func _button(text: String, fill: Color, text_color: Color) -> Button:
 func _button_style(color: Color, alpha: float, border: Color = Color.TRANSPARENT) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color(color, alpha)
-	style.corner_radius_top_left = 3
-	style.corner_radius_top_right = 3
-	style.corner_radius_bottom_left = 3
-	style.corner_radius_bottom_right = 3
+	style.corner_radius_top_left = 8
+	style.corner_radius_top_right = 8
+	style.corner_radius_bottom_left = 8
+	style.corner_radius_bottom_right = 8
 	style.content_margin_left = 16
 	style.content_margin_right = 16
 	if border.a > 0.0:

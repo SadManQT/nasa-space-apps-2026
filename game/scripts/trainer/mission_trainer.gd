@@ -7,6 +7,7 @@ const Science = preload("res://scripts/science/science_data.gd")
 const Chart = preload("res://scripts/ui/data_chart.gd")
 const TABLE_SCENE = preload("res://scenes/ui/mission_table_panel.tscn")
 const PANELS_SCENE = preload("res://scenes/ui/campaign_panels.tscn")
+const SHELL_SCENE = preload("res://scenes/trainer/mission_trainer.tscn")
 var results_path := Results.DEFAULT_PATH
 var settings: Dictionary = {}
 var catalog: Dictionary = {}
@@ -21,6 +22,8 @@ var _entry: Dictionary = {}
 var _page := "catalog"
 var _revision := 0
 var _opening := false
+var _guide: Control
+var _back_button: Button
 var moon_trainer: Control
 var moon_trainer_results_path := "user://moon_trainer_results.json"
 
@@ -49,36 +52,21 @@ func _close_moon_trainer() -> void:
 func _ready() -> void:
 	name = "MissionTrainer"
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	theme = UiKit.theme()
 	catalog = JSON.parse_string(FileAccess.get_file_as_string("res://resources/trainer/scenarios.json"))
 	store.path = results_path
 	var loaded := store.load_results()
-	var background := ColorRect.new()
-	background.color = UiDesign.colour("ink")
-	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(background)
-	var margin := MarginContainer.new()
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for side in ["left", "right", "top", "bottom"]:
-		margin.add_theme_constant_override("margin_" + side, 32)
-	add_child(margin)
-	var glass := UiDesign.glass_panel()
-	margin.add_child(glass)
-	var stack := VBoxContainer.new()
-	stack.add_theme_constant_override("separation", 12)
-	glass.add_child(stack)
-	stack.add_child(UiDesign.label("Junior Astronaut Mission Trainer", "title"))
-	_notice = UiDesign.label("Practice freely. Training results are separate from your expedition.", "body", "accent")
-	stack.add_child(_notice)
-	_scroll = ScrollContainer.new()
-	_scroll.name = "TrainerScroll"
-	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	_scroll.follow_focus = true
-	stack.add_child(_scroll)
-	_body = VBoxContainer.new()
-	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_body.add_theme_constant_override("separation", 12)
-	_scroll.add_child(_body)
+	var shell := SHELL_SCENE.instantiate()
+	add_child(shell)
+	_notice = shell.find_child("TrainerNotice", true, false) as Label
+	_scroll = shell.find_child("TrainerScroll", true, false) as ScrollContainer
+	_body = shell.find_child("TrainerBody", true, false) as VBoxContainer
+	_guide = shell.find_child("PracticeGuide", true, false) as Control
+	_back_button = shell.find_child("TrainerExit", true, false) as Button
+	_back_button.pressed.connect(func() -> void: exit_requested.emit() if _page == "catalog" else show_catalog())
+	for label_node in shell.find_children("*", "Label", true, false):
+		var label := label_node as Label
+		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), "muted" if label.get_meta("muted", false) else "ivory")
 	table = TABLE_SCENE.instantiate()
 	add_child(table)
 	table.commit_requested.connect(_commit)
@@ -113,7 +101,7 @@ func show_catalog() -> void:
 	_clear()
 	_text("Choose a training scenario", "heading")
 	_text("Available scenarios open in one click. Others are coming soon.")
-	_button("Open Moon Trainer (Free Surface Sorties & Rover)", "OpenMoonTrainer", _open_moon_trainer)
+	_catalog_card("Open Moon Trainer", "Free surface sorties & rover · Available", "OpenMoonTrainer", "moon", _open_moon_trainer)
 	for group in catalog.groups:
 		_text(catalog.groups[group], "heading")
 		for row in catalog.scenarios:
@@ -121,12 +109,31 @@ func show_catalog() -> void:
 				continue
 			var available: bool = row.get("adapter", "") == "p02"
 			var saved: Dictionary = store.results.get(row.id, {})
-			var label: String = row.title + (" · Train" if available else " · Coming soon")
+			var detail: String = "Available · Start practice" if available else "Coming soon"
 			if not saved.is_empty():
-				label += " · Last result: %d of 3 stars" % int(saved.star_count)
-			_button(label, "Scenario_" + row.id, func(): select_scenario(row.id), not available)
-	_button("Back to title", "TrainerExit", func(): exit_requested.emit())
+				detail += " · Last result: %d of 3 stars" % int(saved.star_count)
+			_catalog_card(row.title, detail, "Scenario_" + row.id, "power" if group == "power" else ("plant" if group == "food" else ("shielding" if group == "shielding" else "life")), func(): select_scenario(row.id), not available)
 	_finish_page()
+
+func _catalog_card(title: String, detail: String, id: String, icon_kind: String, action: Callable, disabled: bool = false) -> void:
+	var button := UiDesign.button(title + "\n" + detail, 96)
+	button.name = id
+	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	button.disabled = disabled
+	button.pressed.connect(action)
+	for state in ["normal", "disabled", "hover", "pressed"]:
+		var highlighted: bool = state == "hover" or state == "pressed"
+		var style := UiDesign.button_style(UiDesign.colour("accent" if highlighted else "navy").darkened(0.15 if disabled else 0.0), highlighted)
+		style.content_margin_left = 62
+		style.content_margin_right = 20
+		style.content_margin_top = 16
+		style.content_margin_bottom = 16
+		button.add_theme_stylebox_override(state, style)
+	var icon := UiKit.icon(icon_kind, "muted" if disabled else "accent", 28)
+	icon.position = Vector2(18, 32)
+	button.add_child(icon)
+	_body.add_child(button)
 
 func select_scenario(id: String) -> bool:
 	for row in catalog.scenarios:
@@ -253,6 +260,7 @@ func _finish_page() -> void:
 	_restore_page_focus.call_deferred(_page == "brief")
 
 func _scale() -> void:
+	_guide.visible = _page == "catalog" and not bool(settings.get("large_text", false)) and get_viewport_rect().size.x >= 1100
 	UiDesign.apply_type(self, get_viewport_rect().size.y, 1.5 if settings.get("large_text", false) else 1.0, [table, panels])
 
 func _restore_page_focus(reading_start: bool = false) -> void:
@@ -265,9 +273,11 @@ func _restore_page_focus(reading_start: bool = false) -> void:
 	for child in _body.get_children():
 		if child is Button and not child.disabled:
 			child.grab_focus()
+			_scroll.scroll_vertical = 0
 			return
 
 func _set_page_enabled(enabled: bool) -> void:
+	_back_button.disabled = not enabled
 	for child in _body.get_children():
 		if child is Button:
 			if not enabled and not child.has_meta("trainer_disabled"):

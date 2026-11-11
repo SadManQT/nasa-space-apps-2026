@@ -1,0 +1,289 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Theme" path="res://resources/ui/lla_theme.tres" id="1_theme"]
+[ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="2_mark"]
+[ext_resource type="Texture2D" path="res://assets/ui/title/aurora_cinematic.png" id="3_atmosphere"]
+
+[sub_resource type="StyleBoxFlat" id="Style_shell"]
+content_margin_left = 28.0
+content_margin_top = 22.0
+content_margin_right = 28.0
+content_margin_bottom = 22.0
+bg_color = Color(0.045, 0.067, 0.11, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.36, 0.46, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_left = 18
+corner_radius_bottom_right = 18
+
+[sub_resource type="StyleBoxFlat" id="Style_preview"]
+content_margin_left = 14.0
+content_margin_top = 14.0
+content_margin_right = 14.0
+content_margin_bottom = 14.0
+bg_color = Color(0.075, 0.1, 0.16, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.37, 0.46, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+
+[sub_resource type="StyleBoxFlat" id="Style_active"]
+content_margin_left = 14.0
+content_margin_right = 14.0
+bg_color = Color(0.96, 0.74, 0.19, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+
+[sub_resource type="StyleBoxEmpty" id="Style_empty"]
+
+[node name="SettingsShell" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_theme")
+
+[node name="Atmosphere" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_atmosphere")
+expand_mode = 1
+stretch_mode = 6
+modulate = Color(0.55, 0.55, 0.55, 1)
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Panel" type="PanelContainer" parent="SafeArea"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_shell")
+
+[node name="Page" type="VBoxContainer" parent="SafeArea/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Brand" type="HBoxContainer" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="AuroraMark" type="TextureRect" parent="SafeArea/Panel/Page/Brand"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_mark")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rule" type="VSeparator" parent="SafeArea/Panel/Page/Brand"]
+layout_mode = 2
+
+[node name="BrandText" type="VBoxContainer" parent="SafeArea/Panel/Page/Brand"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Academy" type="Label" parent="SafeArea/Panel/Page/Brand/BrandText"]
+layout_mode = 2
+text = "LAST LIGHT ACADEMY"
+theme_override_font_sizes/font_size = 23
+metadata/lla_type = "heading"
+
+[node name="Station" type="Label" parent="SafeArea/Panel/Page/Brand/BrandText"]
+layout_mode = 2
+text = "AURORA STATION  ·  LUNAR SOUTH POLE  ·  2046–2047"
+theme_override_font_sizes/font_size = 13
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="Title" type="Label" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+text = "Settings"
+theme_override_font_sizes/font_size = 42
+metadata/lla_type = "title"
+
+[node name="Content" type="HBoxContainer" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="SettingsTabs" type="VBoxContainer" parent="SafeArea/Panel/Page/Content"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Tab_display" type="Button" parent="SafeArea/Panel/Page/Content/SettingsTabs"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.03, 0.04, 0.06, 1)
+theme_override_styles/normal = SubResource("Style_active")
+text = "Display"
+toggle_mode = true
+button_pressed = true
+alignment = 0
+
+[node name="Tab_audio" type="Button" parent="SafeArea/Panel/Page/Content/SettingsTabs"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+text = "Audio"
+toggle_mode = true
+alignment = 0
+
+[node name="Tab_controls" type="Button" parent="SafeArea/Panel/Page/Content/SettingsTabs"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+text = "Controls"
+toggle_mode = true
+alignment = 0
+
+[node name="Tab_assist" type="Button" parent="SafeArea/Panel/Page/Content/SettingsTabs"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+text = "Captions & Assist"
+toggle_mode = true
+alignment = 0
+autowrap_mode = 2
+
+[node name="Tab_saves" type="Button" parent="SafeArea/Panel/Page/Content/SettingsTabs"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+text = "Saves & Chapters"
+toggle_mode = true
+alignment = 0
+autowrap_mode = 2
+
+[node name="NavigationRule" type="VSeparator" parent="SafeArea/Panel/Page/Content"]
+layout_mode = 2
+
+[node name="SettingsScroll" type="ScrollContainer" parent="SafeArea/Panel/Page/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="SettingsBody" type="VBoxContainer" parent="SafeArea/Panel/Page/Content/SettingsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="DisplayHeading" type="Label" parent="SafeArea/Panel/Page/Content/SettingsScroll/SettingsBody"]
+layout_mode = 2
+text = "Display & Graphics"
+theme_override_font_sizes/font_size = 26
+metadata/lla_type = "heading"
+
+[node name="DisplayDescription" type="Label" parent="SafeArea/Panel/Page/Content/SettingsScroll/SettingsBody"]
+layout_mode = 2
+text = "Choose the display settings that feel right for your expedition."
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="Resolution" type="PanelContainer" parent="SafeArea/Panel/Page/Content/SettingsScroll/SettingsBody"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_preview")
+
+[node name="Example" type="Label" parent="SafeArea/Panel/Page/Content/SettingsScroll/SettingsBody/Resolution"]
+layout_mode = 2
+text = "Resolution\n\n1920 × 1080"
+metadata/lla_type = "body"
+
+[node name="WindowMode" type="PanelContainer" parent="SafeArea/Panel/Page/Content/SettingsScroll/SettingsBody"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_preview")
+
+[node name="Example" type="Label" parent="SafeArea/Panel/Page/Content/SettingsScroll/SettingsBody/WindowMode"]
+layout_mode = 2
+text = "Window mode\n\nWindowed"
+metadata/lla_type = "body"
+
+[node name="ReadingPreview" type="PanelContainer" parent="SafeArea/Panel/Page/Content"]
+visible = false
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("Style_preview")
+
+[node name="PreviewContent" type="VBoxContainer" parent="SafeArea/Panel/Page/Content/ReadingPreview"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Station" type="TextureRect" parent="SafeArea/Panel/Page/Content/ReadingPreview/PreviewContent"]
+custom_minimum_size = Vector2(0, 145)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_atmosphere")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Speaker" type="Label" parent="SafeArea/Panel/Page/Content/ReadingPreview/PreviewContent"]
+layout_mode = 2
+text = "Mei"
+metadata/lla_type = "heading"
+
+[node name="Caption" type="Label" parent="SafeArea/Panel/Page/Content/ReadingPreview/PreviewContent"]
+layout_mode = 2
+text = "Let’s check the garden together."
+autowrap_mode = 2
+metadata/lla_type = "body"
+
+[node name="Note" type="Label" parent="SafeArea/Panel/Page/Content/ReadingPreview/PreviewContent"]
+layout_mode = 2
+text = "Reading preview"
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="FooterRule" type="HSeparator" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+
+[node name="SettingsStatusLabel" type="Label" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+text = "All changes save automatically to this machine."
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="Footer" type="HBoxContainer" parent="SafeArea/Panel/Page"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ResetSettingsButton" type="Button" parent="SafeArea/Panel/Page/Footer"]
+custom_minimum_size = Vector2(220, 44)
+layout_mode = 2
+text = "Reset to Defaults"
+
+[node name="Spacer" type="Control" parent="SafeArea/Panel/Page/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="CloseSettingsButton" type="Button" parent="SafeArea/Panel/Page/Footer"]
+custom_minimum_size = Vector2(130, 44)
+layout_mode = 2
+text = "Back (Esc)"

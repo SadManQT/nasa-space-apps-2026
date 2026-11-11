@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "source": "User-directed industrial UI refinement, 10 Nov 2026; preserves doc 25 clarity and accessibility contracts.",
+ "source": "Approved user ui_proposal sheets01-15, 11 Nov 2026; cinematic navy/gold presentation with doc25 clarity and accessibility.",
  "reference_height": 1080,
  "type": {
   "title": 40,
@@ -12,17 +12,17 @@
   "max_line_characters": 60
  },
  "colour": {
-  "ink": "#05060A",
-  "navy": "#182431",
-  "ivory": "#E8EDF0",
-  "muted": "#ADBBC7",
-  "accent": "#F2C230",
+  "ink": "#0A101C",
+  "navy": "#202C40",
+  "ivory": "#F2EFE7",
+  "muted": "#B8C4D6",
+  "accent": "#F5C451",
   "caution": "#F2A33A",
   "danger": "#E56B6F",
   "good": "#68C78B",
-  "glass": "#101923F0",
-  "glass_edge": "#405163",
-  "scrim": "#05060AD9",
+  "glass": "#152137F5",
+  "glass_edge": "#4A596F",
+  "scrim": "#080D17AD",
   "kai": "#F26B21",
   "amara": "#20B8C9",
   "mei": "#4CAF50",
@@ -30,9 +30,9 @@
   "ferreira": "#B8A06A"
  },
  "panel": {
-  "radius": 4,
+  "radius": 8,
   "edge_width": 1,
-  "padding": 16,
+  "padding": 20,
   "grid": 8,
   "safe_margin": 64,
   "max_layers": 2
@@ -63,6 +63,7 @@
  },
  "font": {
   "body": "res://addons/gohud/assets/fonts/roboto/Roboto.ttf",
-  "heading": "res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf"
+  "heading": "res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf",
+  "display": "res://addons/gohud/assets/fonts/cinzel/Cinzel.ttf"
  }
 }

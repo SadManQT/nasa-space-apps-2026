@@ -1,12 +1,189 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/trainer/moon_trainer.gd" id="1_moon_trainer"]
+[ext_resource type="Theme" path="res://resources/ui/lla_theme.tres" id="1_theme"]
+[ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="2_mark"]
 
-[node name="MoonTrainer" type="Control"]
+[sub_resource type="StyleBoxFlat" id="Style_panel"]
+content_margin_left = 24.0
+content_margin_top = 22.0
+content_margin_right = 24.0
+content_margin_bottom = 22.0
+bg_color = Color(0.045, 0.065, 0.11, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.37, 0.46, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_left = 14
+corner_radius_bottom_right = 14
+
+[sub_resource type="StyleBoxFlat" id="Style_card"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+bg_color = Color(0.08, 0.11, 0.17, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.35, 0.43, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+
+[node name="MoonTrainerShell" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_moon_trainer")
+theme = ExtResource("1_theme")
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Layout" type="HBoxContainer" parent="SafeArea"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ConsolePanel" type="PanelContainer" parent="SafeArea/Layout"]
+custom_minimum_size = Vector2(620, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="Page" type="VBoxContainer" parent="SafeArea/Layout/ConsolePanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="SafeArea/Layout/ConsolePanel/Page"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Mark" type="TextureRect" parent="SafeArea/Layout/ConsolePanel/Page/Header"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_mark")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Rule" type="VSeparator" parent="SafeArea/Layout/ConsolePanel/Page/Header"]
+layout_mode = 2
+
+[node name="Brand" type="Label" parent="SafeArea/Layout/ConsolePanel/Page/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LAST LIGHT ACADEMY"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Title" type="Label" parent="SafeArea/Layout/ConsolePanel/Page"]
+layout_mode = 2
+text = "Moon trainer"
+autowrap_mode = 2
+metadata/lla_type = "title"
+
+[node name="MoonTrainerNotice" type="Label" parent="SafeArea/Layout/ConsolePanel/Page"]
+layout_mode = 2
+text = "Real south-polar LOLA terrain. No story spoilers; results save separately from your expedition."
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="AssistModeBar" type="HBoxContainer" parent="SafeArea/Layout/ConsolePanel/Page"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PreviewStory" type="Button" parent="SafeArea/Layout/ConsolePanel/Page/AssistModeBar"]
+custom_minimum_size = Vector2(120, 44)
+layout_mode = 2
+text = "Story"
+
+[node name="PreviewCadet" type="Button" parent="SafeArea/Layout/ConsolePanel/Page/AssistModeBar"]
+custom_minimum_size = Vector2(120, 44)
+layout_mode = 2
+text = "Cadet"
+
+[node name="PreviewExpedition" type="Button" parent="SafeArea/Layout/ConsolePanel/Page/AssistModeBar"]
+custom_minimum_size = Vector2(120, 44)
+layout_mode = 2
+text = "Expedition"
+
+[node name="Divider" type="HSeparator" parent="SafeArea/Layout/ConsolePanel/Page"]
+layout_mode = 2
+
+[node name="MoonTrainerScroll" type="ScrollContainer" parent="SafeArea/Layout/ConsolePanel/Page"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="MoonTrainerBody" type="VBoxContainer" parent="SafeArea/Layout/ConsolePanel/Page/MoonTrainerScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="Heading" type="Label" parent="SafeArea/Layout/ConsolePanel/Page/MoonTrainerScroll/MoonTrainerBody"]
+layout_mode = 2
+text = "Select a lunar surface training sortie"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="PreviewCard" type="PanelContainer" parent="SafeArea/Layout/ConsolePanel/Page/MoonTrainerScroll/MoonTrainerBody"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_card")
+
+[node name="Contents" type="VBoxContainer" parent="SafeArea/Layout/ConsolePanel/Page/MoonTrainerScroll/MoonTrainerBody/PreviewCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="SafeArea/Layout/ConsolePanel/Page/MoonTrainerScroll/MoonTrainerBody/PreviewCard/Contents"]
+layout_mode = 2
+text = "Walking on the Moon & Suit Budget"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+
+[node name="Description" type="Label" parent="SafeArea/Layout/ConsolePanel/Page/MoonTrainerScroll/MoonTrainerBody/PreviewCard/Contents"]
+layout_mode = 2
+text = "Read the route, check your suit reserve, and return safely from the ridge."
+autowrap_mode = 2
+metadata/lla_type = "caption"
+metadata/muted = true
+
+[node name="Action" type="Button" parent="SafeArea/Layout/ConsolePanel/Page/MoonTrainerScroll/MoonTrainerBody/PreviewCard/Contents"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Start sortie"
+
+[node name="TerrainWindow" type="VBoxContainer" parent="SafeArea/Layout"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Spacer" type="Control" parent="SafeArea/Layout/TerrainWindow"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="TerrainSource" type="Label" parent="SafeArea/Layout/TerrainWindow"]
+layout_mode = 2
+text = "THE LUNAR SOUTH POLE\nLive LOLA terrain"
+autowrap_mode = 2
+metadata/lla_type = "caption"
