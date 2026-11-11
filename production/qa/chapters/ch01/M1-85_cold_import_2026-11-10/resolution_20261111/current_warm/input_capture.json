@@ -17,5 +17,14 @@
   },
   "original_failed_state": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-final-20261111",
   "warm_copy": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-warm-20261111",
-  "limitation": "Copied post-import failed cold state at a new project/profile absolute path. Original cold remains FAILED; never retry its preserved project."
+  "limitation": "Copied post-import failed cold state at a new project/profile absolute path. Original cold remains FAILED; never retry its preserved project.",
+  "intentional_runner_stop": {
+    "utc_epoch": 1794374171.3996146,
+    "process": {
+      "collector": 23372,
+      "runner": 27092,
+      "command": "\"C:\\Program Files\\Git\\bin\\bash.exe\" game/tools/run_tests.sh"
+    },
+    "reason": "Collector omitted required non-Game support fixtures. Partial full attempt invalid as complete integration gate; retain evidence and restart with exact frozen support files."
+  }
 }
