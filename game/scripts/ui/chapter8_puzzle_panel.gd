@@ -37,6 +37,7 @@ const STAGE_TEXT := {"learn": "LEARN · a guided example that cannot fail", "app
 const HOME_ROWS := [["E", "Battery", "energy_capacity"], ["A", "Air", "air_capacity"], ["H", "Garden health", "health_capacity"], ["C", "Crop", "crop_capacity"], ["R", "Food (days)", ""]]
 
 var _route: RefCounted
+var hint_player: Control   # the HUD's shared player; first-time cards replay their how-to clip there
 var _target_id := ""
 var _settings := {"large_text": false, "timer_free": true, "class_mode": false}
 var _view: Dictionary = {}
@@ -453,7 +454,11 @@ func _render_first_time(column: VBoxContainer) -> void:
 	for line in card.get("steps", []):
 		inner.add_child(_wrap("%d. %s" % [index, String(line)], 13, IVORY))
 		index += 1
-	inner.add_child(_wrap("Clip: " + String(card.get("clip", "")), 11, MUTED))
+	var how_to := String(card.get("how_to", ""))
+	if not how_to.is_empty() and hint_player != null:
+		var watch := _button("WATCH HOW · " + String(HowToCard.lesson(how_to).get("title", "")).to_upper(), "WatchHowTo")
+		watch.pressed.connect(func() -> void: hint_player.show_how_to(how_to))
+		inner.add_child(watch)
 	var got_it := _button("GOT IT", "FirstTime")
 	got_it.pressed.connect(dismiss_first_time)
 	inner.add_child(got_it)

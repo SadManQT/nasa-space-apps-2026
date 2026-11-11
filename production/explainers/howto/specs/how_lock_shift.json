@@ -1,0 +1,90 @@
+{
+ "id": "how_lock_shift",
+ "title": "Locking in a shift",
+ "cards": [
+  "lock_shift"
+ ],
+ "length_s": 14,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH01-S07",
+  "done": [
+   "role_cards"
+  ]
+ },
+ "setup": [
+  [
+   "call",
+   "hud",
+   "open_mission_table",
+   "p02_shift1"
+  ],
+  [
+   "call",
+   "hud.mission_table",
+   "preview"
+  ]
+ ],
+ "steps": [
+  [
+   0.5,
+   "ring",
+   "Commit",
+   2.6,
+   "Lock in"
+  ],
+  [
+   3.2,
+   "click",
+   "Commit"
+  ],
+  [
+   4.0,
+   "ring",
+   "ConfirmCommit",
+   3.4,
+   "Confirm"
+  ],
+  [
+   7.6,
+   "ring",
+   "CancelCommit",
+   1.8,
+   "Or go back"
+  ],
+  [
+   9.6,
+   "click",
+   "ConfirmCommit"
+  ],
+  [
+   10.6,
+   "ring",
+   "GoalCard",
+   3.2,
+   "The shift runs"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.0,
+   "When the forecast looks safe, press Lock in."
+  ],
+  [
+   3.1,
+   7.4,
+   "Lock in asks once more. Read the plan one last time."
+  ],
+  [
+   7.5,
+   9.5,
+   "Back returns to the table with nothing changed."
+  ],
+  [
+   9.6,
+   14.0,
+   "Confirm uses the plan, and the shift goes ahead."
+  ]
+ ]
+}

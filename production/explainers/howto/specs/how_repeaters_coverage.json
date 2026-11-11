@@ -1,0 +1,75 @@
+{
+ "id": "how_repeaters_coverage",
+ "title": "Repeaters and the coverage map",
+ "cards": [
+  "repeaters_coverage"
+ ],
+ "length_s": 14,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH08-S04",
+  "near": "p15_restore_marker_2",
+  "offset": [
+   0.0,
+   0.0,
+   1.4
+  ]
+ },
+ "setup": [],
+ "steps": [
+  [
+   0.5,
+   "ring",
+   "GoalCard",
+   3.0
+  ],
+  [
+   3.6,
+   "call",
+   "hud",
+   "open_family",
+   "coverage"
+  ],
+  [
+   4.4,
+   "ring",
+   "CoverageDiagramCanvas",
+   5.6,
+   "Each link"
+  ],
+  [
+   10.2,
+   "ring",
+   "VoiceNetworkStatusLabel",
+   2.6,
+   "Voice path"
+  ],
+  [
+   13.0,
+   "click",
+   "CloseCoverageMapButton"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.5,
+   "Radio travels in straight lines from one repeater to the next."
+  ],
+  [
+   3.6,
+   7.0,
+   "The Coverage Map draws every link back to the station."
+  ],
+  [
+   7.1,
+   10.1,
+   "Terrain between two repeaters blocks the link."
+  ],
+  [
+   10.2,
+   14.0,
+   "Restore or move a repeater until every link shows clear."
+  ]
+ ]
+}

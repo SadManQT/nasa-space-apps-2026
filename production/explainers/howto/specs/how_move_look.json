@@ -1,0 +1,80 @@
+{
+ "id": "how_move_look",
+ "title": "Moving and looking",
+ "cards": [
+  "move",
+  "look"
+ ],
+ "length_s": 14,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH01-S01"
+ },
+ "setup": [],
+ "steps": [
+  [
+   0.8,
+   "hold",
+   "move_forward",
+   2.2,
+   "W"
+  ],
+  [
+   3.4,
+   "hold",
+   "move_left",
+   0.9,
+   "A"
+  ],
+  [
+   4.5,
+   "hold",
+   "move_right",
+   0.9,
+   "D"
+  ],
+  [
+   6.2,
+   "hold",
+   "camera_left",
+   1.6,
+   "Right stick"
+  ],
+  [
+   8.2,
+   "hold",
+   "camera_right",
+   1.8,
+   "Right stick"
+  ],
+  [
+   10.6,
+   "ring",
+   "GoalCard",
+   3.2,
+   "Your goal"
+  ]
+ ],
+ "captions": [
+  [
+   0.4,
+   3.2,
+   "Walk with W, A, S and D, or the left stick."
+  ],
+  [
+   3.4,
+   5.9,
+   "A and D step sideways. S walks back."
+  ],
+  [
+   6.1,
+   10.2,
+   "To look around, hold the right mouse button and move, or use the right stick."
+  ],
+  [
+   10.5,
+   14.0,
+   "Head for the gold outline. Walking never runs down a hidden clock."
+  ]
+ ]
+}

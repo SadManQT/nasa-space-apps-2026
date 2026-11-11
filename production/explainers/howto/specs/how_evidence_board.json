@@ -1,0 +1,80 @@
+{
+ "id": "how_evidence_board",
+ "title": "The evidence board",
+ "cards": [
+  "evidence"
+ ],
+ "length_s": 14,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH01-S12"
+ },
+ "setup": [],
+ "steps": [
+  [
+   0.6,
+   "key",
+   "J",
+   "J"
+  ],
+  [
+   1.6,
+   "click",
+   "Tab_evidence"
+  ],
+  [
+   2.6,
+   "ring",
+   "Column_observed",
+   3.2,
+   "What we saw"
+  ],
+  [
+   5.8,
+   "ring",
+   "Column_inferred",
+   3.0,
+   "What we think"
+  ],
+  [
+   8.8,
+   "ring",
+   "Column_unknown",
+   3.0,
+   "Still to find out"
+  ],
+  [
+   12.4,
+   "key",
+   "Escape",
+   "Esc"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   2.5,
+   "Press J for the Journal, then open Evidence."
+  ],
+  [
+   2.6,
+   5.7,
+   "Observed holds what was seen, with its source."
+  ],
+  [
+   5.8,
+   8.7,
+   "Inferred holds what we think it means."
+  ],
+  [
+   8.8,
+   12.0,
+   "Unknown keeps the blanks. A clue moves only with a new source."
+  ],
+  [
+   12.1,
+   14.0,
+   "Esc closes the Journal."
+  ]
+ ]
+}

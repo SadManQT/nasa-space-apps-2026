@@ -1,0 +1,88 @@
+{
+ "id": "how_recorder_history",
+ "title": "Reading a recorder's history",
+ "cards": [
+  "recorder_history"
+ ],
+ "length_s": 16,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH02-S09",
+  "done": []
+ },
+ "setup": [
+  [
+   "call",
+   "hud",
+   "open_chapter2_panel",
+   "assign_date_token"
+  ]
+ ],
+ "steps": [
+  [
+   0.5,
+   "arrow",
+   [
+    180,
+    360
+   ],
+   3.4,
+   "What we know"
+  ],
+  [
+   4.0,
+   "arrow",
+   [
+    640,
+    380
+   ],
+   3.6,
+   "Your decision"
+  ],
+  [
+   8.0,
+   "click",
+   "Try"
+  ],
+  [
+   8.8,
+   "arrow",
+   [
+    1100,
+    360
+   ],
+   3.4,
+   "Before and after"
+  ],
+  [
+   12.4,
+   "ring",
+   "Commit",
+   2.6,
+   "Lock in"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.9,
+   "Read the photographed plate, the date and the channel labels."
+  ],
+  [
+   4.0,
+   7.9,
+   "Put one token in each empty slot of the local copy."
+  ],
+  [
+   8.0,
+   12.3,
+   "Try it checks the copy. The original stays untouched."
+  ],
+  [
+   12.4,
+   16.0,
+   "Playback opens only when every label matches."
+  ]
+ ],
+ "verify": "Decision choice clicks are added after a --dump of the M4-20 panel (Choice_<field>_<id> names)."
+}

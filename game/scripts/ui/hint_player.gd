@@ -199,9 +199,19 @@ func _render() -> void:
 		var card := Card.new()
 		_body.add_child(card)
 		card.show_lesson(_lesson)
-		card.clip_requested.connect(func():
-			mode = "concept"
-			_render())
+		if not String(_lesson.get("how_clip", "")).is_empty():
+			_render_media(String(_lesson.how_clip), false)
+		var first_use := UiDesign.label("Try it now: " + String(_lesson.get("nudge", "")), "body", "accent")
+		first_use.name = "FirstUse"
+		first_use.visible = _lesson.has("nudge")
+		_body.add_child(first_use)
+		if not String(_lesson.get("clip", "")).is_empty():
+			var science := UiDesign.button("Watch the science")
+			science.name = "HowToClip"
+			science.pressed.connect(func():
+				mode = "concept"
+				_render())
+			_body.add_child(science)
 	elif level == 1 and mode == "hint":
 		_body.add_child(UiDesign.label(String(_lesson.get("nudge", "Compare the marked object with your goal."))))
 	elif level == 2 or mode in ["concept", "watch"]:
@@ -225,7 +235,7 @@ func _render() -> void:
 		_add_action(actions, "Back to How to", "BackToHowTo", func():
 			mode = "how_to"
 			_render())
-	_add_action(actions, "Start planning" if not _first_time_id.is_empty() else "Close (Esc / B)", "CloseHint", close)
+	_add_action(actions, "Try it now" if not _first_time_id.is_empty() else "Close (Esc / B)", "CloseHint", close)
 	UiDesign.apply_type(_frame, get_viewport_rect().size.y, 1.5 if _settings.large_text else 1.0)
 	_layout()
 	_trap_focus()
@@ -237,8 +247,8 @@ func _add_action(parent: Node, text: String, id: String, action: Callable) -> vo
 	button.pressed.connect(action)
 	parent.add_child(button)
 
-func _render_media() -> void:
-	_entry = Explainers.find(String(_lesson.get("clip", "")))
+func _render_media(clip_id: String = String(_lesson.get("clip", "")), explain: bool = true) -> void:
+	_entry = Explainers.find(clip_id)
 	var path := String(_entry.get("path", ""))
 	var stream = load(path) if path.begins_with("res://assets/explainers/") and ResourceLoader.exists(path) else null
 	if not stream is VideoStream:
@@ -290,7 +300,8 @@ func _render_media() -> void:
 		_body.add_child(controls)
 		_add_action(controls, "Pause", "PauseClip", toggle_pause)
 		_add_action(controls, "Replay", "ReplayClip", replay)
-	_body.add_child(UiDesign.label(String(_lesson.get("relationship", _entry.get("ends_on", "")))))
+	if explain:
+		_body.add_child(UiDesign.label(String(_lesson.get("relationship", _entry.get("ends_on", "")))))
 
 func toggle_pause() -> void:
 	if is_instance_valid(video) and video.stream != null and not bool(_settings.reduced_motion):

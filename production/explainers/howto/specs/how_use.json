@@ -1,0 +1,22 @@
+{
+ "id": "how_use",
+ "title": "Using things",
+ "cards": ["use"],
+ "length_s": 12,
+ "stage": {"kind": "campaign", "scene": "EX-CH01-S01", "near": "commission_route", "offset": [0.0, 0.0, 1.6]},
+ "setup": [],
+ "steps": [
+  [0.6, "hold", "move_forward", 0.5, "W"],
+  [1.6, "ring", "Prompt", 3.4, "In reach"],
+  [5.2, "key", "E", "E"],
+  [6.4, "ring", "Toast", 3.0, "What changed"],
+  [9.6, "ring", "GoalCard", 2.4, "Next goal"]
+ ],
+ "captions": [
+  [0.3, 2.4, "Walk up to the marked station or crew member."],
+  [2.5, 5.0, "When the key prompt appears, the thing is in reach."],
+  [5.1, 7.6, "Press E, or the bottom face button, to use it."],
+  [7.7, 9.8, "The note at the top right says what changed."],
+  [9.9, 12.0, "Esc steps back at any time without losing progress."]
+ ]
+}

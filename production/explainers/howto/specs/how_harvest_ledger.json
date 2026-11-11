@@ -1,0 +1,88 @@
+{
+ "id": "how_harvest_ledger",
+ "title": "The harvest ledger",
+ "cards": [
+  "harvest_ledger"
+ ],
+ "length_s": 16,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH03-S10",
+  "done": []
+ },
+ "setup": [
+  [
+   "call",
+   "hud",
+   "open_chapter3_panel",
+   "p06_count_42"
+  ]
+ ],
+ "steps": [
+  [
+   0.5,
+   "arrow",
+   [
+    180,
+    360
+   ],
+   3.4,
+   "What we know"
+  ],
+  [
+   4.0,
+   "arrow",
+   [
+    640,
+    380
+   ],
+   3.6,
+   "Your decision"
+  ],
+  [
+   8.0,
+   "click",
+   "Try"
+  ],
+  [
+   8.8,
+   "arrow",
+   [
+    1100,
+    360
+   ],
+   3.4,
+   "Before and after"
+  ],
+  [
+   12.4,
+   "ring",
+   "Commit",
+   2.6,
+   "Lock in"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.9,
+   "The ledger keeps every seed of the line accounted for."
+  ],
+  [
+   4.0,
+   7.9,
+   "Count each well before you split the seeds."
+  ],
+  [
+   8.0,
+   12.3,
+   "Try it checks that planting and reserve add up."
+  ],
+  [
+   12.4,
+   16.0,
+   "Lock in the split. The lineage stays on the record."
+  ]
+ ],
+ "verify": "Decision choice clicks are added after a --dump of the M4-20 panel (Choice_<field>_<id> names)."
+}

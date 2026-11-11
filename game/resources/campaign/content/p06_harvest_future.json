@@ -47,7 +47,7 @@
           "Stop Alo-only irrigation and wait for the five-day dry-down.",
           "Count six wells, plant twelve and seal thirty with lineage intact."
         ],
-        "clip": "Selective dry-down and founder-seed count (explainer clip pending)"
+        "how_to": "harvest_ledger"
       }
     }
   },

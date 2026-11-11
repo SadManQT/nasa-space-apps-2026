@@ -1,0 +1,123 @@
+{
+ "id": "how_payload_carrying",
+ "title": "Carrying and stacking supplies",
+ "cards": [
+  "payload_carrying"
+ ],
+ "length_s": 16,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH01-S10",
+  "done": [
+   "confirm_four_sheltered"
+  ]
+ },
+ "setup": [
+  [
+   "call",
+   "hud",
+   "open_mission_table",
+   "p02_shift5_alarm"
+  ],
+  [
+   "payload"
+  ],
+  [
+   "call",
+   "activity",
+   "begin",
+   true
+  ],
+  [
+   "call",
+   "activity",
+   "set_physics_process",
+   false
+  ]
+ ],
+ "steps": [
+  [
+   0.6,
+   "ring",
+   "player",
+   3.0,
+   "You"
+  ],
+  [
+   3.8,
+   "call",
+   "activity",
+   "pickup_bundle",
+   0
+  ],
+  [
+   3.8,
+   "key",
+   "E",
+   "E"
+  ],
+  [
+   4.4,
+   "ring",
+   "player",
+   3.4,
+   "Carrying"
+  ],
+  [
+   8.2,
+   "call",
+   "activity",
+   "place_bundle",
+   0
+  ],
+  [
+   8.2,
+   "key",
+   "E",
+   "E"
+  ],
+  [
+   9.6,
+   "call",
+   "activity",
+   "pickup_bundle",
+   1
+  ],
+  [
+   10.8,
+   "call",
+   "activity",
+   "place_bundle",
+   1
+  ],
+  [
+   12.0,
+   "call",
+   "activity",
+   "finish_task"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.6,
+   "When the alarm sounds, the supplies go to the shelter."
+  ],
+  [
+   3.7,
+   8.0,
+   "Walk to a case and press E to pick it up."
+  ],
+  [
+   8.1,
+   11.8,
+   "Carry it to an outlined slot and press E to set it down."
+  ],
+  [
+   11.9,
+   16.0,
+   "Every case you place counts in the plan's forecast."
+  ]
+ ],
+ "verify": "Walking between case and slot is shown with near jumps; add hold move_forward steps after a test render."
+}

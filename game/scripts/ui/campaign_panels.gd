@@ -1191,6 +1191,24 @@ func _render_hint_ladder(_hints: Dictionary) -> void:
 		hint_player.set_settings(_settings)
 		hint_player.show_how_to(HowToCard.card_id(_query)))
 	_body.add_child(how_to)
+	# Journal → How to (doc 25 §7): replay any mechanic met so far, clip included.
+	var scene_id := String(_query.get("scene_id", ""))
+	var reached := HowToCard.reached(int(scene_id.substr(5, 2)) if scene_id.begins_with("EX-CH") else 1)
+	if reached.is_empty():
+		return
+	_section("HOW TO")
+	var replays := HFlowContainer.new()
+	replays.name = "HowToReplays"
+	replays.add_theme_constant_override("h_separation", 8)
+	replays.add_theme_constant_override("v_separation", 8)
+	_body.add_child(replays)
+	for id in reached:
+		var replay := _button(String(HowToCard.lesson(id).get("title", id)))
+		replay.name = "HowTo_" + String(id)
+		replay.pressed.connect(func():
+			hint_player.set_settings(_settings)
+			hint_player.show_how_to(String(id)))
+		replays.add_child(replay)
 
 func request_hint() -> void:
 	hint_player.set_settings(_settings)
