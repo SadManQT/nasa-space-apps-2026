@@ -1687,11 +1687,7 @@
      0.0,
      -2.2
     ],
-    "rover_ferreira": [
-     -4.6,
-     0.0,
-     -3.7
-    ]
+    "rover_ferreira": [-5.02, 0.0, -3.14]
    },
    "stations": {
     "p09_check_lander_clearance": "garage_pad_camera",
