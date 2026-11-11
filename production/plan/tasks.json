@@ -6603,7 +6603,17 @@
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/native_inputs.json",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/native_system_events.json",
     "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/green_continuation.py",
-    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/green_continuation.json"
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/green_continuation.json",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/current_warm_gate.py",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/current_cold_inputs.json",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/current_warm/current_source_manifest.json",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/current_warm/current_gate.json",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/current_warm/current_smoke.txt",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/current_warm/full_gate.txt",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/current_warm/current_full/runner.txt",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/current_warm/current_full/runner.json",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/current_warm/current_full/raw_logs.zip",
+    "production/qa/chapters/ch01/M1-85_cold_import_2026-11-10/resolution_20261111/current_warm/input_capture.json"
    ]
   },
   {
