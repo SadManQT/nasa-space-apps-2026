@@ -8318,7 +8318,9 @@
     "game/assets/ui/title/aurora_cinematic.png",
     "game/scenes/trainer/mission_trainer.tscn",
     "game/scenes/trainer/moon_trainer.tscn",
-    "game/scripts/main.gd"
+    "game/scripts/main.gd",
+    "game/tools/test_chapter1_ui_regressions.gd",
+    "game/tools/test_first_five_minutes.gd"
    ],
    "integration_paths": [
     "game/scenes/trainer/",
