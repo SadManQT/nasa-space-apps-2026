@@ -26,8 +26,10 @@ setup_log=$(mktemp) || exit 2
 setup_rc=$?
 if [ -n "${TEST_LOG_DIR:-}" ]; then
   cp "$setup_log" "$TEST_LOG_DIR/setup.log" || { rm -f "$setup_log"; exit 2; }
+  printf '%s\n' "$setup_rc" > "$TEST_LOG_DIR/setup.exit.txt" || { rm -f "$setup_log"; exit 2; }
 fi
-if [ "$setup_rc" -ne 0 ] || grep -qE 'SCRIPT ERROR|Parse Error|Could not find type|Failed to load script' "$setup_log"; then
+# Import errors are failures even when Godot exits 0. Keep suite diagnostics caller-specific.
+if [ "$setup_rc" -ne 0 ] || grep -qE 'SCRIPT ERROR|ERROR:|Parse Error|Could not find type|Failed to load script' "$setup_log"; then
   echo "FAIL setup: Godot class-cache/import refresh failed (exit $setup_rc); no suites were run."
   cat "$setup_log"
   rm -f "$setup_log"
@@ -88,6 +90,7 @@ for t in tools/test_*${1:-}*.gd; do
   else wait "$pid"; rc=$?; fi
   if [ -n "${TEST_LOG_DIR:-}" ]; then
     cp "$tmp" "$TEST_LOG_DIR/$(basename "$t").log" || { rm -f "$tmp"; exit 2; }
+    printf '%s\n' "$rc" > "$TEST_LOG_DIR/$(basename "$t").exit.txt" || { rm -f "$tmp"; exit 2; }
   fi
   out=$(cat "$tmp"); rm -f "$tmp"
   line=$(grep -E 'RESULT|REGRESSIONS:|^(PASS|FAIL) ' <<<"$out" | tail -1)

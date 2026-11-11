@@ -63,6 +63,11 @@ case " $* " in
       setup_error) echo 'import diagnostic: fixture failure'; exit 42 ;;
       setup_crash) echo 'import diagnostic: crash fixture'; exit 139 ;;
       setup_parse) echo 'SCRIPT ERROR: Parse Error: setup fixture'; exit 0 ;;
+      setup_script_plain) echo 'SCRIPT ERROR fixture without colon'; exit 0 ;;
+      setup_uid) echo 'ERROR: Unrecognized UID: uid://setup_fixture'; exit 0 ;;
+      setup_file_access) echo 'ERROR: Condition "f.is_null()" is true. Continuing.'; echo '   at: get_multiple_md5 (core/io/file_access.cpp:967)'; exit 0 ;;
+      setup_ansi) printf '\\033[91mERROR: colored import fixture\\033[0m\\n'; exit 0 ;;
+      setup_warning) echo 'WARNING: ordinary import fixture'; exit 0 ;;
     esac
     exit 0 ;;
 esac
@@ -70,6 +75,7 @@ echo invoked >> "$RUNNER_CALLS"
 case "$RUNNER_CASE" in
   suite_parse) echo 'SCRIPT ERROR: Parse Error: suite fixture' ;;
   suite_error) echo 'PROBE RESULT: PASS'; exit 7 ;;
+  suite_expected_error) echo 'ERROR: expected suite fixture';;
   timeout) exec sleep 30 ;;
   suite_runtime_hang) echo 'SCRIPT ERROR: Invalid call: fixture'; exec sleep 30 ;;
   suite_pass_runtime_hang)
@@ -132,11 +138,14 @@ echo 'PROBE RESULT: PASS'
                         else:
                             os.kill(child_pid, signal.SIGKILL)
             self.assertTrue((root / "logs" / "setup.log").is_file(), result.stdout + result.stderr)
-            if mode.startswith("setup_"):
+            result.setup_log = (root / "logs" / "setup.log").read_text()
+            result.setup_exit = int((root / "logs" / "setup.exit.txt").read_text().strip())
+            if mode.startswith("setup_") and mode != "setup_warning":
                 self.assertFalse((root / "logs" / (suite_name + ".log")).exists())
             else:
                 self.assertTrue((root / "logs" / (suite_name + ".log")).is_file())
                 result.suite_log = (root / "logs" / (suite_name + ".log")).read_text()
+                result.suite_exit = int((root / "logs" / (suite_name + ".exit.txt")).read_text().strip())
             if mode == "suite_many_failures":
                 self.assertIn("FAIL detail 8", (root / "logs" / "test_probe.gd.log").read_text())
                 self.assertNotIn("FAIL detail 8", result.stdout)
@@ -195,9 +204,33 @@ echo 'PROBE RESULT: PASS'
                 result, invoked = self.run_case(mode)
                 self.assertEqual(result.returncode, code, result.stdout + result.stderr)
                 self.assertFalse(invoked)
+                self.assertEqual(result.setup_exit, 0 if mode == "setup_parse" else code)
                 self.assertIn("FAIL setup:", result.stdout)
                 self.assertIn("fixture", result.stdout)
                 self.assertNotIn("suites passed", result.stdout)
+
+    def test_zero_exit_import_errors_stop_before_any_suite(self):
+        for mode in ["setup_uid", "setup_file_access", "setup_ansi", "setup_script_plain"]:
+            with self.subTest(mode=mode):
+                result, invoked = self.run_case(mode)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                self.assertEqual(result.setup_exit, 0)
+                self.assertFalse(invoked)
+                self.assertIn("FAIL setup:", result.stdout)
+                self.assertIn("ERROR", result.setup_log)
+                if mode == "setup_ansi":
+                    self.assertIn("\x1b[91m", result.setup_log)
+                self.assertNotIn("suites passed", result.stdout)
+
+    def test_warnings_allow_suite_and_expected_suite_errors_stay_scoped(self):
+        for mode in ["setup_warning", "suite_expected_error"]:
+            with self.subTest(mode=mode):
+                result, invoked = self.run_case(mode)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertTrue(invoked)
+                self.assertEqual(result.setup_exit, 0)
+                self.assertEqual(result.suite_exit, 0)
+                self.assertIn("1/1 suites passed", result.stdout)
 
     def test_successful_setup_runs_suite(self):
         result, invoked = self.run_case("success")
