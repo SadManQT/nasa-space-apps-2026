@@ -8320,11 +8320,19 @@
     "game/scenes/trainer/moon_trainer.tscn",
     "game/scripts/main.gd",
     "game/tools/test_chapter1_ui_regressions.gd",
-    "game/tools/test_first_five_minutes.gd"
+    "game/tools/test_first_five_minutes.gd",
+    "production/ASSET_REGISTRY.csv",
+    "production/manifest/screen_assets.csv",
+    "production/review/visual_review.md",
+    "production/review/asset_verification.md"
    ],
    "integration_paths": [
     "game/scenes/trainer/",
-    "game/scripts/main.gd"
+    "game/scripts/main.gd",
+    "production/ASSET_REGISTRY.csv",
+    "production/manifest/screen_assets.csv",
+    "production/review/visual_review.md",
+    "production/review/asset_verification.md"
    ]
   }
  ],
