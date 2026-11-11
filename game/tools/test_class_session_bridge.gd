@@ -45,8 +45,25 @@ func _run() -> void:
 	_check(crew_view == {"mode": "class", "players": 4} and typeof(crew_view.players) == TYPE_INT, "campaign query exposes a primitive Class/4 crew view")
 	crew_view["players"] = 2
 	_check(campaign.director.crew().players == 4, "mutating the query crew view cannot change the session crew")
-	campaign.free()
 	var route: RefCounted = restored.route
+	_reach(route, "EX-CH01-S03")
+	campaign._sync_route_projection()
+	PlantInput.complete_probe_transfer(route)
+	var p01_payload: Dictionary = PlantInput.payload("calibrate_probe")
+	var class_view: Dictionary = campaign.class_team_plan_view("calibrate_probe", p01_payload)
+	_check(bool(class_view.get("accepted", false)) and class_view.get("required_roles", []).size() == 4, "later puzzle provider exposes four roles and the chosen P-01 input")
+	if bool(class_view.get("accepted", false)):
+		var before_class: Dictionary = campaign.director.snapshot()
+		var unsigned_class: Dictionary = campaign._class_commit_hold("calibrate_probe", p01_payload)
+		_check(bool(unsigned_class.get("class_team_plan_required", false)) and campaign.director.snapshot() == before_class, "plain Class puzzle commit holds without changing state")
+		var forged_class: Dictionary = class_view.selection.duplicate(true)
+		forged_class["state_revision"] = int(forged_class.state_revision) + 1
+		_check(not bool(campaign.sign_class_team_plan("kai", "calibrate_probe", p01_payload, forged_class).get("accepted", false)), "forged later-puzzle revision cannot sign")
+		for role_id in class_view.required_roles:
+			_check(bool(campaign.sign_class_team_plan(String(role_id), "calibrate_probe", p01_payload, class_view.selection).get("accepted", false)), String(role_id) + " signs the exact later-puzzle forecast")
+		_check(bool(campaign.sign_class_team_plan("kai", "calibrate_probe", p01_payload, class_view.selection).get("duplicate", false)), "repeat later-puzzle signature is idempotent")
+		_check(campaign._class_commit_hold("calibrate_probe", p01_payload).is_empty(), "four current signatures permit the later-puzzle commit")
+	campaign.free()
 	PlanFixture.prepare(route)
 	_reach(route, "EX-CH01-S07")
 	_check(route.current_scene_id() == "EX-CH01-S07" and bool(route.perform("role_cards").get("accepted", false)), "Class route reaches the actual P-02 station")

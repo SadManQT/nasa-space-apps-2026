@@ -7,6 +7,8 @@ signal p01_panel_requested(view: Dictionary)
 ## Chapter 2 decision panel (P-03 and P-04). Opening, previewing and cancelling
 ## never commit; only confirm_chapter2_choice with the previewed choices does.
 signal chapter2_panel_requested(view: Dictionary)
+## Class puzzle commits ask every role to review the same current forecast.
+signal class_team_plan_requested(view: Dictionary)
 ## A cutscene closed (watched to the end, skipped, or its text card dismissed).
 signal cutscene_closed(result: Dictionary)
 
@@ -27,6 +29,7 @@ const FieldSystemsScript = preload("res://scripts/campaign/campaign_field_system
 const CampaignProgressionScript = preload("res://scripts/campaign/campaign_progression.gd")
 const SaveSlotsScript = preload("res://scripts/save/save_slots.gd")
 const GameSettingsScript = preload("res://scripts/settings/game_settings.gd")
+const CrewModesScript = preload("res://scripts/classmode/crew_modes.gd")
 const HUDScene: PackedScene = preload("res://scenes/ui/chapter1_campaign_hud.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://scenes/player/player.tscn")
 
@@ -66,6 +69,8 @@ var _startup_error := ""
 var _ui_paused := false
 ## The open Chapter 2 panel and the exact choices last previewed for it.
 var _chapter2_pending: Dictionary = {}
+## Signatures are evidence for one exact live choice, never checkpoint state.
+var _class_team_signoffs: Dictionary = {}
 var _exit_without_save_armed := false
 var save_path: String = SaveScript.DEFAULT_PATH
 var settings_path: String = GameSettingsScript.DEFAULT_PATH
@@ -349,6 +354,89 @@ func query() -> Dictionary:
 		result["puzzle"] = decision
 	return result
 
+## Public Class contract for the later puzzle panels. P-02 keeps its existing
+## route-owned team plan, while every other puzzle uses this physical campaign
+## bridge so plain USE and panel callbacks share one commit guard.
+func class_team_plan_view(target_id: String, payload: Dictionary = {}) -> Dictionary:
+	if director == null or route == null or String(director.crew().get("mode", "solo")) != "class":
+		return {"accepted": false, "reason": "A Class expedition is required for a team plan."}
+	var spec := _class_puzzle_spec(target_id)
+	if spec.is_empty():
+		return {"accepted": false, "reason": "This is not a later puzzle decision in the current scene."}
+	var forecast := forecast_target(target_id, payload)
+	if not bool(forecast.get("accepted", false)):
+		return {"accepted": false, "reason": String(forecast.get("reason", "Review a valid choice before signing."))}
+	var state := director.snapshot()
+	var after: Dictionary = forecast.get("query", {})
+	var selection := {
+		"target_id": target_id,
+		"scene_id": route.current_scene_id(),
+		"crew": director.crew(),
+		"state_revision": int(state.get("state_revision", -1)),
+		"payload": payload.duplicate(true),
+		"forecast": {
+			"resources": after.get("resources", {}).duplicate(true),
+			"status": String(after.get("status", "")),
+			"current_shift": int(after.get("current_shift", 0)),
+			"scenario_datetime": String(after.get("scenario_datetime", "")),
+		},
+	}
+	var signed: Array = []
+	var stale: Array = []
+	for role_id in CrewModesScript.ROLE_ORDER:
+		if not _class_team_signoffs.has(role_id):
+			continue
+		if _class_team_signoffs[role_id] == selection:
+			signed.append(role_id)
+		else:
+			stale.append(role_id)
+	return {
+		"accepted": true,
+		"target_id": target_id,
+		"puzzle_id": String(spec.get("puzzle_id", "")),
+		"focus_label": String(spec.get("focus_label", target_id)),
+		"crew": director.crew(),
+		"required_roles": CrewModesScript.ROLE_ORDER.duplicate(),
+		"signed_roles": signed,
+		"stale_roles": stale,
+		"selection": selection,
+		"forecast": forecast.duplicate(true),
+	}
+
+func sign_class_team_plan(role_id: String, target_id: String, payload: Dictionary, reviewed_selection: Variant) -> Dictionary:
+	var view := class_team_plan_view(target_id, payload)
+	if not bool(view.get("accepted", false)):
+		return view
+	if not view.required_roles.has(role_id):
+		return {"accepted": false, "reason": "This role cannot sign the Class team plan."}
+	if not reviewed_selection is Dictionary or reviewed_selection != view.selection:
+		return {"accepted": false, "reason": "The choice or forecast changed. Review it again."}
+	var duplicate: bool = _class_team_signoffs.get(role_id, {}) == view.selection
+	_class_team_signoffs[role_id] = view.selection.duplicate(true)
+	return {"accepted": true, "duplicate": duplicate, "role_id": role_id}
+
+func cancel_class_team_plan() -> void:
+	_class_team_signoffs.clear()
+
+func _class_puzzle_spec(target_id: String) -> Dictionary:
+	for spec in targets_for_current_scene():
+		if String(spec.get("target_id", "")) == target_id and not String(spec.get("puzzle_id", "")).is_empty() and String(spec.get("puzzle_id", "")) != "P-02":
+			return spec
+	return {}
+
+func _class_commit_hold(target_id: String, payload: Dictionary) -> Dictionary:
+	if director == null or String(director.crew().get("mode", "solo")) != "class" or _class_puzzle_spec(target_id).is_empty():
+		return {}
+	var view := class_team_plan_view(target_id, payload)
+	if not bool(view.get("accepted", false)):
+		return view
+	for role_id in view.required_roles:
+		if not view.signed_roles.has(role_id):
+			if not class_team_plan_requested.get_connections().is_empty():
+				class_team_plan_requested.emit(view.duplicate(true))
+			return {"accepted": false, "class_team_plan_required": true, "reason": "Every Class role must sign this exact choice before lock-in."}
+	return {}
+
 ## Project the real route operation on a restored copy. This exercises the
 ## owning puzzle/ledger/director transition, including custom physical steps,
 ## without changing live receipts, flags, resources, time or saves.
@@ -411,6 +499,7 @@ func confirm_chapter2_choice(target_id: String, payload: Dictionary) -> Dictiona
 
 func cancel_chapter2_choice() -> void:
 	_chapter2_pending = {}
+	_class_team_signoffs.clear()
 
 func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 	if loading or not _startup_error.is_empty() or route == null:
@@ -439,7 +528,8 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 		if not clear:
 			result = {"accepted": false, "reason": "Move into clear view of " + String(target.get_meta("focus_label", "the target")) + "."}
 		else:
-			result = route.perform(target_id, payload, {"room_id": _room.room_id, "distance_m": distance, "line_of_sight": clear})
+			var class_hold := _class_commit_hold(target_id, payload)
+			result = class_hold if not class_hold.is_empty() else route.perform(target_id, payload, {"room_id": _room.room_id, "distance_m": distance, "line_of_sight": clear})
 	if result.has("result") and result.result is Dictionary and result.get("accepted", false):
 		for key in ["reason", "deltas", "warnings", "ledger_summary"]:
 			if result.result.has(key):
@@ -481,6 +571,8 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 		hud.refresh_after_action(result)
 	if bool(result.get("accepted", false)) and field_systems != null:
 		field_systems.sync_route()
+	if bool(result.get("accepted", false)):
+		_class_team_signoffs.clear()
 	_save_campaign()
 	return result
 
@@ -827,6 +919,7 @@ func set_ui_paused(value: bool) -> void:
 
 func retry_checkpoint() -> Dictionary:
 	_chapter2_pending = {}
+	_class_team_signoffs.clear()
 	var result: Dictionary = route.retry()
 	if bool(result.get("accepted", false)):
 		_sync_route_projection()
@@ -865,6 +958,8 @@ func advance_scene() -> Dictionary:
 		result = _transition_after_chapter()
 	else:
 		result = route.advance_scene()
+	if bool(result.get("accepted", false)):
+		_class_team_signoffs.clear()
 	if not mugs_named.is_empty():
 		result["mugs_named"] = mugs_named
 	if bool(result.get("accepted", false)) and bool(result.get("chapter_complete", false)) and not bool(result.get("campaign_complete", false)):
