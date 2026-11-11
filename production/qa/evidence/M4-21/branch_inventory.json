@@ -1,0 +1,561 @@
+{
+  "audited_main": "eb4a096fea19716d3f49b661da6ecfaa945080a7",
+  "remote_branches": [
+    {
+      "ref": "origin/asif/bridges-20261110",
+      "sha": "31e60ada2439d26ec91e5e8291be93e597da2a61",
+      "behind": 88,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    },
+    {
+      "ref": "origin/asif/class-provider-20261111",
+      "sha": "41a2bd0776d83c5b5edfb81951a15644c3829462",
+      "behind": 13,
+      "ahead": 6,
+      "non_equivalent_count": 6,
+      "recent_unique": [
+        "41a2bd07 wip(M1-105): reject stale Chapter 2 modal previews",
+        "3e0c0948 wip(M1-105): bind Chapter 2 preview to nearby physical target"
+      ],
+      "decision": "Retain saved WIP: non-P02 Class guard has no live signing UI; M1-103/M1-105 acceptance pending."
+    },
+    {
+      "ref": "origin/asif/curriculum-20261110",
+      "sha": "8cf5ea8151ebd84998a6020a5c8d356847b665dd",
+      "behind": 121,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    },
+    {
+      "ref": "origin/asif/implementation-20261110",
+      "sha": "8fd6849b82946f392fe78f02040dbdf022a1fa8c",
+      "behind": 122,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    },
+    {
+      "ref": "origin/night/M1-03",
+      "sha": "f7ec969f7f322ad326402b1c2a4b238d0f6326cd",
+      "behind": 586,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "f7ec969f feat: Habitat kit and Chapter 1 room concept sheets for approval"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-05",
+      "sha": "574dda3ac06d1bf71b841f655eb5cb94dd1bacf7",
+      "behind": 557,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "574dda3a wip: M1-05 (paused 5 Nov 11:45 to restart the workers safely; the next run resumes from here)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-06",
+      "sha": "1158f837d011dba5780e1f9f64b56934cfdff226",
+      "behind": 494,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "1158f837 wip: M1-06 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-07",
+      "sha": "a7140a30e37c50cd11fab9bb95dbad6951ba1092",
+      "behind": 474,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "a7140a30 wip: M1-07 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-08",
+      "sha": "1f01baaa88ee0945de826b6ad7d7763b8bfe5b08",
+      "behind": 540,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "1f01baaa wip: M1-08 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-100",
+      "sha": "b276bb4d3b85190cff296c3e191752a41ec3e553",
+      "behind": 341,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "b276bb4d wip: M1-100 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-18",
+      "sha": "29877b8f739be0a12c9324bcdc0d7067a1bac8af",
+      "behind": 584,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "29877b8f wip: M1-18 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-19",
+      "sha": "8a253dd7f8cbf488f98f259c23e5c073a2ad55d1",
+      "behind": 530,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    },
+    {
+      "ref": "origin/night/M1-19-saved",
+      "sha": "3f67b0111292438a40248f4ff977f0b839098179",
+      "behind": 551,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "3f67b011 wip: M1-19 (paused 5 Nov 11:45 to restart the workers safely; the next run resumes from here)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-29",
+      "sha": "a1e0a6ce6572ce8112eab988f0cc48ef6c37196d",
+      "behind": 514,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    },
+    {
+      "ref": "origin/night/M1-34",
+      "sha": "fece37e293b3063de41818a3b89111b52544bbd9",
+      "behind": 511,
+      "ahead": 2,
+      "non_equivalent_count": 2,
+      "recent_unique": [
+        "fece37e2 wip: M1-34 (night shift, not landed)",
+        "2818392c feat: Real south-pole terrain from NASA LRO LOLA elevation data"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-37",
+      "sha": "8a792c11cd549a8fe1b0d2c5568101c31ef2bf5e",
+      "behind": 513,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "8a792c11 wip: M1-37 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-47",
+      "sha": "467a16f7458da2401d85fd9a79ad7f0846ad108e",
+      "behind": 581,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "467a16f7 wip: M1-47 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-49",
+      "sha": "2158d1c7c88a931b7a738a56e20b0c13f6e8608d",
+      "behind": 540,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "2158d1c7 wip: M1-49 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-50",
+      "sha": "0c79ea7b4b28ec9a74b441f0957ae631cae3dda9",
+      "behind": 580,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "0c79ea7b wip: M1-50 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-51",
+      "sha": "0eb7f7c2b50c79b18086bcba0238b60a0e853669",
+      "behind": 575,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "0eb7f7c2 feat: Re-edit CS-01 into a cold open: exterior silence, interior hum, title over the gold band (existing footage only)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-52",
+      "sha": "88301efda7a8cbd9a344e4049503caabd81e1216",
+      "behind": 528,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "88301efd wip: M1-52 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-53",
+      "sha": "f6285e46eabae8e02274cffac9d53f9e31fb3209",
+      "behind": 537,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "f6285e46 wip: M1-53 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-54",
+      "sha": "e83b8836c4af6d33e87df9973e5c30e907e0f067",
+      "behind": 545,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "e83b8836 wip: M1-54 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-58",
+      "sha": "53d5fff1ffa063f9cc0d91525ba2851a3030f145",
+      "behind": 511,
+      "ahead": 2,
+      "non_equivalent_count": 2,
+      "recent_unique": [
+        "53d5fff1 wip: M1-58 (night shift, not landed)",
+        "0953ceae feat: Carrying payloads, and the shift-5 STACK as a real carry-and-place task"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-76",
+      "sha": "b38ac3d3feecd4a7ff6a5a7db897fe8994f5707e",
+      "behind": 460,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "b38ac3d3 wip: M1-76 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-81",
+      "sha": "4c5e4e18f4aa5fc8b03bebfcb63d3b6036c62c6c",
+      "behind": 428,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "4c5e4e18 wip: M1-81 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-86",
+      "sha": "1bc7813455fff5fbdae4bfcc10fbd294f78d1424",
+      "behind": 413,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "1bc78134 wip: M1-86 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-87",
+      "sha": "8bd450fd2e8dd1046bdfa29ccf488c2bda9a2399",
+      "behind": 388,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "8bd450fd wip: M1-87 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-89",
+      "sha": "59ab82ea88b9462c51a067c3c097a7d0312dd193",
+      "behind": 381,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "59ab82ea wip: M1-89 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-91",
+      "sha": "e2336d4118f16cfc5d9acfd6f4e535f5ab00789a",
+      "behind": 341,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "e2336d41 wip: M1-91 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M1-96",
+      "sha": "879b67afce66e508290c3b3889b5db183a701f0f",
+      "behind": 341,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "879b67af wip: M1-96 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-104",
+      "sha": "27a573915bf759fc115cb9c2e51a908504d1774d",
+      "behind": 351,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "27a57391 wip: M3-104 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-108",
+      "sha": "5803b88862bcc57c661a3aaec374187d9203f404",
+      "behind": 341,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "5803b888 wip: M3-108 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-2A",
+      "sha": "8907a1f72cee598fa64c03df0b5dd9d3605ac615",
+      "behind": 494,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "8907a1f7 wip: M3-2A (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-2P",
+      "sha": "5203a6fb1a3f4dfbc975e489ecc25e278e776b36",
+      "behind": 523,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "5203a6fb wip: M3-2P (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-2R",
+      "sha": "b91078e8140715d69fb69c988d899f71481c02e0",
+      "behind": 423,
+      "ahead": 2,
+      "non_equivalent_count": 2,
+      "recent_unique": [
+        "b91078e8 wip: M3-2R (night shift, not landed)",
+        "310b817e feat: Chapter 2 rooms and locations"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-3A",
+      "sha": "6246460adadd9d37377cc9f694082c9097323bdf",
+      "behind": 494,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "6246460a wip: M3-3A (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-3P",
+      "sha": "704baf3ffc5f48d60e5a13f37545793761524341",
+      "behind": 519,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "704baf3f wip: M3-3P (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-4P",
+      "sha": "f815b1a19aeb3d9ed2b15e9819cacbc69dbd6aa1",
+      "behind": 518,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    },
+    {
+      "ref": "origin/night/M3-5A",
+      "sha": "a1672162d179657d9d2596ed33f57b862b36a858",
+      "behind": 478,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "a1672162 wip: M3-5A (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-5P",
+      "sha": "3a1112e98d9b9eb8894ad69121562d85b907bdd9",
+      "behind": 517,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    },
+    {
+      "ref": "origin/night/M3-6P",
+      "sha": "d04968d21fbd284050f0f9894c51abda96cf6f02",
+      "behind": 516,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    },
+    {
+      "ref": "origin/night/M3-6R",
+      "sha": "cd547b114db180c2525f20f870a23240a20f30f6",
+      "behind": 468,
+      "ahead": 2,
+      "non_equivalent_count": 2,
+      "recent_unique": [
+        "cd547b11 wip: M3-6R (night shift, not landed)",
+        "47a63dd3 feat: Chapter 6 rooms and locations"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-7A",
+      "sha": "0f2396f52b7709c17615b1c5ad603b6fdbe9b8e3",
+      "behind": 480,
+      "ahead": 2,
+      "non_equivalent_count": 2,
+      "recent_unique": [
+        "0f2396f5 wip: M3-7A (night shift, not landed)",
+        "66542ffa feat: Chapter 7 assets: the storm shelter and uplink props"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-7P",
+      "sha": "d503b42e62cecc8c0be51f18b79a9fb1fd5cdae0",
+      "behind": 515,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    },
+    {
+      "ref": "origin/night/M3-8P",
+      "sha": "9a83b6822144c1c3a1b157a0cb240468fcb4b0a6",
+      "behind": 529,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "9a83b682 wip: M3-8P (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-94",
+      "sha": "c81b8eb0aeba2377109e2b77b530d26c9e07aea5",
+      "behind": 548,
+      "ahead": 2,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "b8fbbdb7 wip: M3-94 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-97",
+      "sha": "5051d6494b3f6fd8b6aaa0646d1749c406420542",
+      "behind": 527,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "5051d649 wip: M3-97 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M3-99",
+      "sha": "a41b57155fa422b9e00daa29ac6da53e634cbd86",
+      "behind": 521,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    },
+    {
+      "ref": "origin/night/M3-99-saved",
+      "sha": "33ffca653ac6ce2347aa956015402dccf05ff5c2",
+      "behind": 565,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "33ffca65 wip: M3-99 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M4-02",
+      "sha": "7549dfc13addf54192148dd3810e5247ddaf57bb",
+      "behind": 466,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "7549dfc1 wip: M4-02 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/night/M4-05",
+      "sha": "f484b2caf656c3abae78941c4338f1885ca9c09f",
+      "behind": 353,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "f484b2ca wip: M4-05 (night shift, not landed)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/sadman/m110-m111-media",
+      "sha": "6b7054dd9112f25982af9ff1ab2d446ea65ca24e",
+      "behind": 641,
+      "ahead": 1,
+      "non_equivalent_count": 1,
+      "recent_unique": [
+        "6b7054dd wip: unfinished M1-10/M1-11 media runtime work (parked)"
+      ],
+      "decision": "Retain historical/superseded/parked WIP; prior M1-121 review says not to overlay onto current main."
+    },
+    {
+      "ref": "origin/work/atik-loading-20261110",
+      "sha": "d1f9a7a26a3482a5bc450eae984f5a6a1a8a15ca",
+      "behind": 206,
+      "ahead": 0,
+      "decision": "Already reachable from main; preserve history."
+    }
+  ]
+}

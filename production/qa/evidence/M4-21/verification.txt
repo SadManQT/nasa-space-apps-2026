@@ -1,0 +1,186 @@
+User-directed combined acceptance, 11 November 2026
+
+Ramim: suites 1-35 passed through game/tools/run_tests.sh on original Windows/Godot 4.7, source 02659d0b97a149350ca50bfedf7e4eff119a35db, game tree df1beb75490dc4328751e439e390fb0debafa586.
+Sadman: suites 36 onward accepted from the user's explicit report that Sadman checked the remainder. That peer run/source/raw logs were not independently reverified for this reconciliation.
+Supplement: local UI polish19/0, main-menu contrast170/0 and first-five59/0 before integration; production native scene captures retained.
+
+The interrupted local invocation actually completed 41 passing suites with no recorded suite failures, then was stopped at the user's request. Its controller exit was1 due to forced stop. It has no full134/134 final result and is not a failed game-suite claim. Coverage is combined/user-accepted, not one full local invocation. Original hardware and existing diagnostic limits remain.
+
+Requested partition:
+1 tools/test_academy_manual_wiring.gd | Ramim observed PASS
+2 tools/test_asset_geometry_recovery.gd | Ramim observed PASS
+3 tools/test_asset_showcase.gd | Ramim observed PASS
+4 tools/test_campaign_boot.gd | Ramim observed PASS
+5 tools/test_campaign_crew.gd | Ramim observed PASS
+6 tools/test_campaign_field_systems.gd | Ramim observed PASS
+7 tools/test_campaign_interaction_input.gd | Ramim observed PASS
+8 tools/test_campaign_knowledge.gd | Ramim observed PASS
+9 tools/test_campaign_later_runtime.gd | Ramim observed PASS
+10 tools/test_campaign_media.gd | Ramim observed PASS
+11 tools/test_campaign_messages.gd | Ramim observed PASS
+12 tools/test_campaign_progression.gd | Ramim observed PASS
+13 tools/test_campaign_session.gd | Ramim observed PASS
+14 tools/test_care_round_panel.gd | Ramim observed PASS
+15 tools/test_care_round_props.gd | Ramim observed PASS
+16 tools/test_care_round_runtime.gd | Ramim observed PASS
+17 tools/test_ch01_game_feel.gd | Ramim observed PASS
+18 tools/test_ch01_room_hooks.gd | Ramim observed PASS
+19 tools/test_ch01_s03_route.gd | Ramim observed PASS
+20 tools/test_ch02_missions.gd | Ramim observed PASS
+21 tools/test_ch03_assets.gd | Ramim observed PASS
+22 tools/test_ch03_missions.gd | Ramim observed PASS
+23 tools/test_ch04_assets.gd | Ramim observed PASS
+24 tools/test_ch04_missions.gd | Ramim observed PASS
+25 tools/test_ch05_assets.gd | Ramim observed PASS
+26 tools/test_ch05_missions.gd | Ramim observed PASS
+27 tools/test_ch06_missions.gd | Ramim observed PASS
+28 tools/test_ch07_missions.gd | Ramim observed PASS
+29 tools/test_ch08_missions.gd | Ramim observed PASS
+30 tools/test_chapter1_campaign_flow.gd | Ramim observed PASS
+31 tools/test_chapter1_logic_regressions.gd | Ramim observed PASS
+32 tools/test_chapter1_outcomes.gd | Ramim observed PASS
+33 tools/test_chapter1_ui_regressions.gd | Ramim observed PASS
+34 tools/test_chapter2_input_bridge.gd | Ramim observed PASS
+35 tools/test_chapter2_panel_wiring.gd | Ramim observed PASS
+36 tools/test_chapter2_rooms.gd | Sadman remainder accepted by explicit user instruction
+37 tools/test_chapter2_route.gd | Sadman remainder accepted by explicit user instruction
+38 tools/test_chapter3_panel_wiring.gd | Sadman remainder accepted by explicit user instruction
+39 tools/test_chapter3_rooms.gd | Sadman remainder accepted by explicit user instruction
+40 tools/test_chapter4_puzzles.gd | Sadman remainder accepted by explicit user instruction
+41 tools/test_chapter4_rooms.gd | Sadman remainder accepted by explicit user instruction
+42 tools/test_chapter5_rooms.gd | Sadman remainder accepted by explicit user instruction
+43 tools/test_chapter6_puzzles.gd | Sadman remainder accepted by explicit user instruction
+44 tools/test_chapter6_rooms.gd | Sadman remainder accepted by explicit user instruction
+45 tools/test_chapter7_assets.gd | Sadman remainder accepted by explicit user instruction
+46 tools/test_chapter7_rooms.gd | Sadman remainder accepted by explicit user instruction
+47 tools/test_chapter8_assets.gd | Sadman remainder accepted by explicit user instruction
+48 tools/test_chapter8_puzzles.gd | Sadman remainder accepted by explicit user instruction
+49 tools/test_chapter8_rooms.gd | Sadman remainder accepted by explicit user instruction
+50 tools/test_chapter_select.gd | Sadman remainder accepted by explicit user instruction
+51 tools/test_class_mode.gd | Sadman remainder accepted by explicit user instruction
+52 tools/test_class_session_bridge.gd | Sadman remainder accepted by explicit user instruction
+53 tools/test_comms.gd | Sadman remainder accepted by explicit user instruction
+54 tools/test_curriculum.gd | Sadman remainder accepted by explicit user instruction
+55 tools/test_cutscene_choice_card.gd | Sadman remainder accepted by explicit user instruction
+56 tools/test_director_message_metadata.gd | Sadman remainder accepted by explicit user instruction
+57 tools/test_earth_screen.gd | Sadman remainder accepted by explicit user instruction
+58 tools/test_eclipse_props.gd | Sadman remainder accepted by explicit user instruction
+59 tools/test_eclipse_rim_gate.gd | Sadman remainder accepted by explicit user instruction
+60 tools/test_en_airlock.gd | Sadman remainder accepted by explicit user instruction
+61 tools/test_eva.gd | Sadman remainder accepted by explicit user instruction
+62 tools/test_explainers.gd | Sadman remainder accepted by explicit user instruction
+63 tools/test_extended_campaign_route.gd | Sadman remainder accepted by explicit user instruction
+64 tools/test_exterior_terrain.gd | Sadman remainder accepted by explicit user instruction
+65 tools/test_face_atlas.gd | Sadman remainder accepted by explicit user instruction
+66 tools/test_face_expression.gd | Sadman remainder accepted by explicit user instruction
+67 tools/test_first_five_minutes.gd | Sadman remainder accepted by explicit user instruction
+68 tools/test_garden_collision.gd | Sadman remainder accepted by explicit user instruction
+69 tools/test_garden_movement.gd | Sadman remainder accepted by explicit user instruction
+70 tools/test_habitat_kit.gd | Sadman remainder accepted by explicit user instruction
+71 tools/test_habitat_rooms.gd | Sadman remainder accepted by explicit user instruction
+72 tools/test_hair_springs.gd | Sadman remainder accepted by explicit user instruction
+73 tools/test_hazards.gd | Sadman remainder accepted by explicit user instruction
+74 tools/test_hint_player.gd | Sadman remainder accepted by explicit user instruction
+75 tools/test_hud_world_lifetime.gd | Sadman remainder accepted by explicit user instruction
+76 tools/test_journal_tabs.gd | Sadman remainder accepted by explicit user instruction
+77 tools/test_later_numeric.gd | Sadman remainder accepted by explicit user instruction
+78 tools/test_lip_sync.gd | Sadman remainder accepted by explicit user instruction
+79 tools/test_loading.gd | Sadman remainder accepted by explicit user instruction
+80 tools/test_lunar_kit.gd | Sadman remainder accepted by explicit user instruction
+81 tools/test_m155_mission_table.gd | Sadman remainder accepted by explicit user instruction
+82 tools/test_m185_import_integrity.gd | Sadman remainder accepted by explicit user instruction
+83 tools/test_main_menu_contrast.gd | Sadman remainder accepted by explicit user instruction
+84 tools/test_mission_table_lifetime.gd | Sadman remainder accepted by explicit user instruction
+85 tools/test_mission_trainer.gd | Sadman remainder accepted by explicit user instruction
+86 tools/test_moon_region.gd | Sadman remainder accepted by explicit user instruction
+87 tools/test_moon_trainer.gd | Sadman remainder accepted by explicit user instruction
+88 tools/test_narrative_props.gd | Sadman remainder accepted by explicit user instruction
+89 tools/test_network.gd | Sadman remainder accepted by explicit user instruction
+90 tools/test_outpost_status.gd | Sadman remainder accepted by explicit user instruction
+91 tools/test_p01_inputs.gd | Sadman remainder accepted by explicit user instruction
+92 tools/test_p01_labels.gd | Sadman remainder accepted by explicit user instruction
+93 tools/test_p01_nearby.gd | Sadman remainder accepted by explicit user instruction
+94 tools/test_p01_panel.gd | Sadman remainder accepted by explicit user instruction
+95 tools/test_p02_mission_table.gd | Sadman remainder accepted by explicit user instruction
+96 tools/test_p03_p04_content.gd | Sadman remainder accepted by explicit user instruction
+97 tools/test_p05_p06_puzzles.gd | Sadman remainder accepted by explicit user instruction
+98 tools/test_p09_p10_panels.gd | Sadman remainder accepted by explicit user instruction
+99 tools/test_p13_p14_panels.gd | Sadman remainder accepted by explicit user instruction
+100 tools/test_payload.gd | Sadman remainder accepted by explicit user instruction
+101 tools/test_performance_runtime.gd | Sadman remainder accepted by explicit user instruction
+102 tools/test_plant_seedlings.gd | Sadman remainder accepted by explicit user instruction
+103 tools/test_player_controller.gd | Sadman remainder accepted by explicit user instruction
+104 tools/test_player_text.gd | Sadman remainder accepted by explicit user instruction
+105 tools/test_probe_calibration_job.gd | Sadman remainder accepted by explicit user instruction
+106 tools/test_progression.gd | Sadman remainder accepted by explicit user instruction
+107 tools/test_review_scene.gd | Sadman remainder accepted by explicit user instruction
+108 tools/test_room_presentation.gd | Sadman remainder accepted by explicit user instruction
+109 tools/test_route_messages.gd | Sadman remainder accepted by explicit user instruction
+110 tools/test_rover.gd | Sadman remainder accepted by explicit user instruction
+111 tools/test_save_service_recovery.gd | Sadman remainder accepted by explicit user instruction
+112 tools/test_save_slots.gd | Sadman remainder accepted by explicit user instruction
+113 tools/test_science_data.gd | Sadman remainder accepted by explicit user instruction
+114 tools/test_science_watch.gd | Sadman remainder accepted by explicit user instruction
+115 tools/test_session_crew.gd | Sadman remainder accepted by explicit user instruction
+116 tools/test_settings.gd | Sadman remainder accepted by explicit user instruction
+117 tools/test_sound_captions.gd | Sadman remainder accepted by explicit user instruction
+118 tools/test_story_echoes.gd | Sadman remainder accepted by explicit user instruction
+119 tools/test_story_log.gd | Sadman remainder accepted by explicit user instruction
+120 tools/test_tara_lifecycle.gd | Sadman remainder accepted by explicit user instruction
+121 tools/test_terrain.gd | Sadman remainder accepted by explicit user instruction
+122 tools/test_terrain_lola.gd | Sadman remainder accepted by explicit user instruction
+123 tools/test_terrain_session.gd | Sadman remainder accepted by explicit user instruction
+124 tools/test_terrain_work_lights.gd | Sadman remainder accepted by explicit user instruction
+125 tools/test_toon_materials.gd | Sadman remainder accepted by explicit user instruction
+126 tools/test_ui_families.gd | Sadman remainder accepted by explicit user instruction
+127 tools/test_ui_kit.gd | Sadman remainder accepted by explicit user instruction
+128 tools/test_ui_polish.gd | Sadman remainder accepted by explicit user instruction
+129 tools/test_upgrade_pairs_ch1_ch2.gd | Sadman remainder accepted by explicit user instruction
+130 tools/test_upgrade_pairs_ch4_ch6.gd | Sadman remainder accepted by explicit user instruction
+131 tools/test_upgrade_profiles.gd | Sadman remainder accepted by explicit user instruction
+132 tools/test_worker_a_systems.gd | Sadman remainder accepted by explicit user instruction
+133 tools/test_worker_b_world_missions.gd | Sadman remainder accepted by explicit user instruction
+134 tools/test_worker_c_content.gd | Sadman remainder accepted by explicit user instruction
+
+Retained local completed-result lines (including six extra beyond requested boundary):
+ok   tools/test_academy_manual_wiring.gd :: ACADEMY MANUAL WIRING RESULT: PASS (15 checks, 0 failures)
+ok   tools/test_asset_geometry_recovery.gd :: ASSET GEOMETRY RECOVERY RESULT: PASS (53 checks, 0 failures)
+ok   tools/test_asset_showcase.gd :: SHOWCASE RESULT: PASS (2767 checks, 0 failures)
+ok   tools/test_campaign_boot.gd :: CAMPAIGN BOOT RESULT: PASS (5 checks, 0 failures)
+ok   tools/test_campaign_crew.gd :: CAMPAIGN CREW RESULT: PASS (903 checks, 0 failures)
+ok   tools/test_campaign_field_systems.gd :: CAMPAIGN FIELD SYSTEMS RESULT: PASS (14 checks, 0 failures)
+ok   tools/test_campaign_interaction_input.gd :: CAMPAIGN INTERACTION INPUT RESULT: PASS (39 checks, 0 failures)
+ok   tools/test_campaign_knowledge.gd :: CAMPAIGN KNOWLEDGE RESULT: PASS (47 checks, 0 failures)
+ok   tools/test_campaign_later_runtime.gd :: LATER CAMPAIGN RUNTIME RESULT: PASS (96 checks, 0 failures)
+ok   tools/test_campaign_media.gd :: CAMPAIGN MEDIA RESULT: PASS (115 checks, 0 failures)
+ok   tools/test_campaign_messages.gd :: CAMPAIGN MESSAGES RESULT: PASS (28 checks, 0 failures)
+ok   tools/test_campaign_progression.gd :: CAMPAIGN PROGRESSION RESULT: PASS (22 checks, 0 failures)
+ok   tools/test_campaign_session.gd :: CAMPAIGN SESSION RESULT: PASS (15/15 checks, 0 failures)
+ok   tools/test_care_round_panel.gd :: CARE ROUND PANEL RESULT: PASS (32 checks, 0 failures)
+ok   tools/test_care_round_props.gd :: CARE ROUND PROPS RESULT: PASS (81 checks, 0 failures)
+ok   tools/test_care_round_runtime.gd :: CARE ROUND RUNTIME RESULT: PASS (86 checks, 0 failures)
+ok   tools/test_ch01_game_feel.gd :: CH01 GAME FEEL RESULT: PASS (102 checks, 0 failures)
+ok   tools/test_ch01_room_hooks.gd :: CH01 ROOM HOOKS RESULT: PASS (117 checks, 0 failures)
+ok   tools/test_ch01_s03_route.gd :: CH01 S03 ROUTE RESULT: PASS (8 checks, 0 failures)
+ok   tools/test_ch02_missions.gd :: CH02 MISSIONS RESULT: PASS (289 checks, 0 failures)
+ok   tools/test_ch03_assets.gd :: CH03 ASSETS RESULT: PASS (328 checks, 0 failures)
+ok   tools/test_ch03_missions.gd :: CH03 MISSIONS RESULT: PASS (277 checks, 0 failures)
+ok   tools/test_ch04_assets.gd :: CH04_ASSETS RESULT: PASS (314 checks, 0 failures)
+ok   tools/test_ch04_missions.gd :: CH04 MISSIONS RESULT: PASS (134 checks, 0 failures)
+ok   tools/test_ch05_assets.gd :: CH05 ASSETS RESULT: PASS (174 checks, 0 failures)
+ok   tools/test_ch05_missions.gd :: CHAPTER 5 MISSIONS RESULT: PASS (890 checks, 0 failures)
+ok   tools/test_ch06_missions.gd :: CH06 MISSIONS RESULT: PASS (116 checks, 0 failures)
+ok   tools/test_ch07_missions.gd :: CHAPTER 7 MISSIONS RESULT: PASS (1038 checks, 0 failures)
+ok   tools/test_ch08_missions.gd :: CH08 MISSIONS RESULT: PASS (132 checks, 0 failures)
+ok   tools/test_chapter1_campaign_flow.gd :: CHAPTER 1 CAMPAIGN FLOW RESULT: PASS (512 checks, 0 failures)
+ok   tools/test_chapter1_logic_regressions.gd :: CHAPTER 1 LOGIC REGRESSIONS: 34 checks, 0 failures
+ok   tools/test_chapter1_outcomes.gd :: CHAPTER 1 OUTCOMES RESULT: PASS (140 checks, 0 failures)
+ok   tools/test_chapter1_ui_regressions.gd :: CHAPTER 1 UI REGRESSIONS: PASS (42 checks, 0 failures)
+ok   tools/test_chapter2_input_bridge.gd :: CHAPTER 2 INPUT BRIDGE RESULT: PASS (41 checks, 0 failures)
+ok   tools/test_chapter2_panel_wiring.gd :: CHAPTER 2 PANEL WIRING RESULT: PASS (149 checks, 0 failures)
+ok   tools/test_chapter2_rooms.gd :: CHAPTER 2 ROOMS RESULT: PASS (3603 checks, 0 failures)
+ok   tools/test_chapter2_route.gd :: CHAPTER 2 ROUTE RESULT: PASS (220 checks, 0 failures)
+ok   tools/test_chapter3_panel_wiring.gd :: CHAPTER 3 PANEL WIRING RESULT: PASS (17 checks, 0 failures)
+ok   tools/test_chapter3_rooms.gd :: CHAPTER 3 ROOMS RESULT: PASS (4717 checks, 0 failures)
+ok   tools/test_chapter4_puzzles.gd :: CHAPTER 4 PUZZLES RESULT: PASS (66 checks, 0 failures)
+ok   tools/test_chapter4_rooms.gd :: CHAPTER 4 ROOMS RESULT: PASS (2450 checks, 0 failures)
