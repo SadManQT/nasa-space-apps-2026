@@ -8052,7 +8052,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/missions/"
    ],
    "refs": [],
-   "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-08.",
+   "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-08.\n11Nov confirmed session handoff: receiving Codex 01a1caac in asif-finish takes saved provider work from stopped 01a1c541. The M1-105-reserved campaign file is the single-writer integration point for both assigned provider tasks; M1-103 reserves its own tests/evidence. Original checkout and all other sessions reservations remain unchanged.",
    "evidence": "Class crew and P-02 sign-off bridge landed from Asif's branch (ef23dc45): test_class_session_bridge 29/0, test_session_crew 135/0, chapter1_campaign_flow 512/0. Gate: production/qa/evidence/M3-3P_M3-69_M1-105_gate.md (full run of 128 suites on 1f98a3a3: 124 passed; the 4 failures resolved or explained; related suites re-run green). Contract: production/qa/evidence/M1-103.md. The Class UI itself (M1-37) is not built.",
    "updated": "2026-11-11",
    "prompt": "M1-37 saved UI on origin/night/M1-37 (8a792c1) depends on unlanded runtime initial_crew, query().crew and a crew-aware P-02 commit path. Ramim cannot edit campaign/missions. After the bounded core configuration contract, expose fresh New Expedition crew configuration, query a primitive crew view, and preserve the saved crew on Continue and gameplay retry through the existing save store. Publish exact UI registration/selected-plan contract for private role cards and all-role team-plan sign-offs (P-02 first, reusable for later puzzle panels). A plain physical USE/default payload must not silently bypass the Class confirmation; stale sign-offs must not authorize a changed forecast/revision/crew. Reuse existing authoritative model/dispatcher validation and make any absent Ramim provider fail clearly rather than auto-sign or auto-fill. Do not edit Ramim UI/puzzles or invent a second simulator/store. Coordinate a small provider seam that can be tested independently before the UI port; do not claim the complete Class experience from a bridge test. Never use restore_snapshot merely to update presentation configuration mid-shift. Saved night source includes that unsafe approach and is only a reference. Test fresh/continue/legacy-save/retry and malformed/missing/stale sign-off cases through real routes; run focused and full runner without relaxing known timing gates. Publish handoff and unblock Ramim implementation when the public contract is available.",
@@ -8093,6 +8093,19 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-103*"
    ],
+   "edit_session": {
+    "session_id": "01a1caac-b095-7890-8cdd-6632f5f056fe",
+    "worktree": "nasa-space-apps-2026-asif-finish",
+    "handoff_from": "01a1c541-420f-7651-bb49-e736b26477da",
+    "authorization": "11 Nov: user confirmed takeover; earlier provider session stays stopped."
+   },
+   "edit_files": [
+    "game/tools/test_class_session_bridge.gd",
+    "game/tools/test_class_campaign_guard.gd",
+    "production/qa/evidence/M1-103.md",
+    "production/qa/evidence/M1-103_followup_logs.zip",
+    "production/qa/evidence/M1-103_session_handoff_20261111.md"
+   ],
    "batch_phase": "implementation"
   },
   {
@@ -8131,7 +8144,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/missions/"
    ],
    "refs": [],
-   "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-08.\n10 Nov user explicitly overrides owner restrictions for the integrated 117-suite repair. Ramim takes only the published campaign file at 6b8f835; prior Asif branch/WIP and all other reservations remain preserved. Changes are isolated and will be merged against the latest owner work.",
+   "note": "10Nov ACTIVE BATCH: assigned to Asif; task paths plus integration_paths override historical member/folder references below. Reserve exact files before editing. Preserve prior source, evidence and unfinished work; a previous owner label alone is not a blocker. See production/plan/CURRENT_BATCH.md.\nFiled by Ramim/codex on 2026-11-08.\n10 Nov user explicitly overrides owner restrictions for the integrated 117-suite repair. Ramim takes only the published campaign file at 6b8f835; prior Asif branch/WIP and all other reservations remain preserved. Changes are isolated and will be merged against the latest owner work.\n11Nov confirmed session handoff: receiving Codex 01a1caac in asif-finish takes saved provider work from stopped 01a1c541. The M1-105-reserved campaign file is the single-writer integration point for both assigned provider tasks; M1-103 reserves its own tests/evidence. Original checkout and all other sessions reservations remain unchanged.",
    "evidence": "Chosen-input P-03/P-04 route (Asif 31e60ada) plus the missing campaign side: test_chapter2_input_bridge 41/0, test_chapter2_route 220/0, test_p03_p04_content 307/0, flow 512/0. Gate: production/qa/evidence/M3-3P_M3-69_M1-105_gate.md (full run of 128 suites on 1f98a3a3: 124 passed; the 4 failures resolved or explained; related suites re-run green). Contract: production/qa/evidence/M1-105.md. The panel UI is M3-2P (not built).",
    "updated": "2026-11-11",
    "prompt": "M3-2P read-only audit on main018b297: Chapter1Campaign.interact_nearby intercepts only P01/P02; P03/P04 fall through perform_target with catalog payload_defaults. Chapter2Route keeps authoritative _p03/_p04 state in snapshot but publishes no panel view. Saved origin/night/M3-2P tip5203a6f has a larger unlanded runtime patch; do not copy it wholesale or duplicate its temporary-director preview framework. Provide a bounded public chosen-input provider seam following current P01 pattern, for P03/P04 only: real nearby USE requests the owned Ramim panel and cannot commit prefilled correct inputs; a read-only primitive view exposes current target/action, authoritative P03/P04 progress and required inputs; preview/confirmation receives explicit player choices through existing forecast_target/perform_target/dispatcher and validates paused-modal handoff, scene/revision, range/line-of-sight/prerequisites, cancellation, malformed/missing/wrong choices, costs/idempotence, retry/save/load. Reuse the real pure puzzle models and existing forecast route; no second store/simulator and no assigning model state from UI. Publish exact signal/provider/view/payload API before UI implementation. Coordinate with Sadman authored P03/P04 data and Ramim changes to pure models; keep current normal campaign tests meaningful via explicit selected inputs, never auto-sign Class or introduce dependencies on unfinished Class mode for Solo. Do not edit Ramim UI/puzzles. Test actual nearby USE and chosen-input preview/confirm/save/retry in real Chapter2. Focused/full runner with honest M1-68/M1-100 limits. Saved source is reference only.",
@@ -8187,8 +8200,17 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "edit_files": [
     "game/scripts/campaign/chapter1_campaign.gd",
     "game/tools/test_chapter2_input_bridge.gd",
-    "production/qa/evidence/M1-105.md"
+    "production/qa/evidence/M1-105.md",
+    "production/qa/evidence/M1-105_p03_provider_preview.png",
+    "production/qa/evidence/M1-105_p04_provider_preview.png",
+    "production/qa/evidence/M1-105_followup_logs.zip"
    ],
+   "edit_session": {
+    "session_id": "01a1caac-b095-7890-8cdd-6632f5f056fe",
+    "worktree": "nasa-space-apps-2026-asif-finish",
+    "handoff_from": "01a1c541-420f-7651-bb49-e736b26477da",
+    "authorization": "11 Nov: user confirmed takeover; earlier provider session stays stopped."
+   },
    "batch_phase": "implementation"
   },
   {
