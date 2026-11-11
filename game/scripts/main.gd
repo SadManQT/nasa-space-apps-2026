@@ -2,6 +2,7 @@ extends Node3D
 
 const CAMPAIGN_PATH := "res://scenes/campaign/chapter1_campaign.tscn"
 const MENU_SCENE: PackedScene = preload("res://scenes/ui/main_menu.tscn")
+const CREW_CHOICE_SCENE: PackedScene = preload("res://scenes/ui/crew_choice_overlay.tscn")
 const SaveScript = preload("res://scripts/save/save_service.gd")
 const CampaignScript = preload("res://scripts/campaign/chapter1_campaign.gd")
 const LegacySave = preload("res://scripts/save/legacy_save.gd")
@@ -23,6 +24,7 @@ var _menu_layer: CanvasLayer
 var _menu: MainMenu
 var _campaign: Node3D
 var _replace_dialog: ConfirmationDialog
+var _crew_choice: CrewChoiceOverlay
 var _save_service: SaveService
 var _load_notice := ""
 var _trainer: Control
@@ -152,7 +154,7 @@ func _show_title(preloaded_snapshot: Variant = null, incremental: bool = false) 
 	if incremental:
 		_menu.defer_panels = true
 	_menu_layer.add_child(_menu)
-	_menu.new_expedition_requested.connect(_start_new_expedition)
+	_menu.new_expedition_requested.connect(_choose_crew)
 	_menu.continue_requested.connect(_continue_expedition)
 	_menu.science_requested.connect(_menu.open_science)
 	_menu.showcase_requested.connect(_open_showcase)
@@ -240,6 +242,30 @@ func _close_chapter_select() -> void:
 	var entry := _menu.find_child("ChapterSelectEntry", true, false) as Control
 	if entry != null:
 		entry.grab_focus()
+
+## M1-37: New Expedition first asks who is playing (Solo or Class 2-4), then
+## starts with that crew. Back returns to the title without touching a save.
+func _choose_crew() -> void:
+	if is_instance_valid(_crew_choice) or _launching or not is_instance_valid(_menu):
+		return
+	_crew_choice = CREW_CHOICE_SCENE.instantiate() as CrewChoiceOverlay
+	_crew_choice.settings = _menu.accessibility_settings()
+	_menu.process_mode = Node.PROCESS_MODE_DISABLED
+	_crew_choice.chosen.connect(func(crew: Dictionary) -> void:
+		_close_crew_choice()
+		_start_new_expedition(crew))
+	_crew_choice.cancelled.connect(_close_crew_choice)
+	_menu_layer.add_child(_crew_choice)
+
+func _close_crew_choice() -> void:
+	if is_instance_valid(_crew_choice):
+		_crew_choice.queue_free()
+	_crew_choice = null
+	if is_instance_valid(_menu):
+		_menu.process_mode = Node.PROCESS_MODE_INHERIT
+		var entry := _menu.get("_begin_button") as Control
+		if entry != null and entry.is_visible_in_tree():
+			entry.grab_focus()
 
 ## The title's zero-argument signal starts Solo. A crew-aware title can pass
 ## its explicit selection here before any existing checkpoint is replaced.
