@@ -1,0 +1,11 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+M1-75 GEOMETRY: title_100 [P: (52.0, 196.0), S: (348.0, 44.0)] mode 2
+M1-75 TAB: 100 text=Mission trainer disabled=false focus_mode=2
+M1-75 GEOMETRY: briefing_100 [P: (837.0, 553.0), S: (160.0, 48.0)] mode 2
+M1-75 GEOMETRY: secondary_100 [P: (52.0, 308.0), S: (348.0, 44.0)] mode 2
+M1-75 GEOMETRY: title_150 [P: (52.0, 245.0), S: (340.0, 44.0)] mode 2
+M1-75 TAB: 150 text=Mission trainer disabled=false focus_mode=2
+M1-75 GEOMETRY: briefing_150 [P: (774.0, 553.0), S: (223.0, 48.0)] mode 2
+M1-75 GEOMETRY: secondary_150 [P: (52.0, 389.0), S: (340.0, 44.0)] mode 2
+MAIN MENU CONTRAST RESULT: PASS (155 checks, 0 failures)

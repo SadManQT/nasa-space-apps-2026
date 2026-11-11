@@ -1,0 +1,6 @@
+ok   tools/test_chapter1_ui_regressions.gd :: CHAPTER 1 UI REGRESSIONS: PASS (42 checks, 0 failures)
+ok   tools/test_ui_families.gd :: UI FAMILIES RESULT: PASS (84 checks, 0 failures)
+ok   tools/test_ui_kit.gd :: UI KIT RESULT: PASS (522 checks, 0 failures)
+ok   tools/test_ui_polish.gd :: UI POLISH RESULT: PASS (19 checks, 0 failures)
+ok   tools/test_ui_proposal.gd :: UI PROPOSAL RESULT: PASS (64 checks, 0 failures)
+5/5 suites passed

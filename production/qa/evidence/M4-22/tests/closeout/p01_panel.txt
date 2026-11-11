@@ -1,0 +1,2 @@
+ok   tools/test_p01_panel.gd :: P01 PANEL RESULT: PASS (140 checks, 0 failures)
+1/1 suites passed

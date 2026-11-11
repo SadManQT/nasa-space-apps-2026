@@ -1,0 +1,2 @@
+ok   tools/test_main_menu_contrast.gd :: MAIN MENU CONTRAST RESULT: PASS (155 checks, 0 failures)
+1/1 suites passed

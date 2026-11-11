@@ -101,11 +101,11 @@ func _run() -> void:
 	assert(inputs.complete_probe_transfer(campaign.route).accepted, "probe transfer precedes calibration")
 	assert(campaign.hud.p01_panel.open(campaign, "calibrate_probe"), "calibration uses real campaign view")
 	campaign.hud.panels.hint_player.close()
+	await _shot("07_calibration")
+	assert(campaign.hud.p01_panel.get_node("%ProbeScroll").scroll_vertical == 0, "calibration opens at the reference setup and first input")
 	campaign.hud.p01_panel.choose("reference", "dry")
 	campaign.hud.p01_panel.choose("raw_reading", 10)
 	campaign.hud.p01_panel.choose("calibrated_reading", 0)
-	campaign.hud.p01_panel._render()
-	await _shot("07_calibration")
 	campaign.hud.p01_panel.preview()
 	await _shot("07_calibration_prediction")
 	campaign.hud.p01_panel.discard()
@@ -121,7 +121,8 @@ func _run() -> void:
 	await _shot("06_mission_table")
 	table.close()
 	table.free()
-	assert(await campaign.preparation.wait_idle(), "capture owns its look-ahead until drained")
+	if campaign.preparation != null:
+		assert(await campaign.preparation.wait_idle(), "capture owns its look-ahead until drained")
 	campaign.free()
 	await process_frame
 	print("UI PROPOSAL CAPTURE RESULT: %s (%d captures, %d failures)" % ["PASS" if failures == 0 else "FAIL", captures, failures])

@@ -395,6 +395,8 @@ func _restore_focus() -> void:
 	if target != null:
 		target.grab_focus()
 	_focus = ""
+	if _choices.is_empty() and _target in ["calibrate_probe", "span_probe", "recheck_probe"]:
+		%ProbeScroll.set_deferred("scroll_vertical", 0)
 	if bool(_prediction.get("accepted", false)) and not _confirming and not _leaving:
 		var scroll := find_child("ProbeScroll", true, false) as ScrollContainer
 		var projected := find_child("ProbePrediction", true, false) as Control

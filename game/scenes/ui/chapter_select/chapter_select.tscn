@@ -187,7 +187,9 @@ stretch_mode = 5
 layout_mode = 2
 
 [node name="Academy" type="Label" parent="SafeArea/Page/Header"]
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
+size_flags_vertical = 4
 text = "LAST LIGHT\nACADEMY"
 metadata/lla_type = "heading"
 

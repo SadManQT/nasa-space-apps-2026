@@ -211,6 +211,8 @@ func _build_ui() -> void:
 	for label_node in shell.find_children("*", "Label", true, false):
 		var label := label_node as Label
 		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), "muted" if label.get_meta("muted", false) else "ivory")
+		if label.name == "Academy":
+			label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	get_viewport().size_changed.connect(_scale)
 
 func _summary_line() -> String:

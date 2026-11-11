@@ -15,3 +15,7 @@
 **Engine:** local Godot4.7, target4.7.2. Godot MCP unavailable (no registered tool/server); CLI and native captures used. Existing user import/settings changes stay untouched in the original checkout.
 
 **Verification progress:** Baseline UI polish19/0. New theme/families522/0 and84/0. Corrected MissionTable109/0, lifetime11/0, calibration140/0, trainer976/0. Settings80/0, chapter select119/0, comms45/0, title contrast155/0, first-five-minutes59/0, campaignUI42/0, How-to227/0. New restart/remap/Family regression and full Moon Trainer gate still being verified; no whole-project completion claim.
+
+## User-directed takeover -12November2026
+
+Implementation stopped at user request; remaining saved UI changes and evidence are pushed on ramim/ui-proposals-20261111. Sadman continues the full plan from [M4-22_SADMAN_HANDOFF.md](M4-22_SADMAN_HANDOFF.md). Validation/delivery remains unchecked; do not mark Done from the focused passes alone.

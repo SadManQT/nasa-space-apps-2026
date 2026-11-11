@@ -206,7 +206,7 @@ func _build_ui() -> void:
 	_all_messages_button.pressed.connect(func(): select_sender(""))
 	for label in shell.find_children("*", "Label", true, false):
 		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), "ivory")
-	for compact_name in ["ThreadHeader", "ListHeader"]:
+	for compact_name in ["BrandLabel", "ThreadHeader", "ListHeader"]:
 		(shell.find_child(compact_name, true, false) as Label).autowrap_mode = TextServer.AUTOWRAP_OFF
 	for tid in CommsServiceScript.THREAD_ORDER:
 		var button := shell.find_child("Thread_" + tid, true, false) as Button
