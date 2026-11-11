@@ -624,7 +624,7 @@ func state_predicates(scene_id: String, snapshot: Dictionary) -> Array:
 			if snapshot.inventories.founder_seed42.get("total", 0) != Rules.data.biology.founder_total or snapshot.plants.filter(func(plant): return plant.individual_id == Plants.ALO_ID and plant.harvested and not plant.alive).is_empty(): missing.append("actual dry founder harvest and archived original")
 		"EX-CH03-S11":
 			if snapshot.inventories.get("reserve30", 0) != Rules.data.biology.founder_reserve or not snapshot.inventories.founder_seed42.get("sealed", false): missing.append("sealed founder reserve and planted allocation")
-		"EX-CH04-S08":
+		"EX-CH04-S10":   # the dry glovebox inventory (canon order: lift S08, return S09, warm/open/count S10)
 			if snapshot.inventories.vault12.get("distinct_specimen_ids", []).size() != Rules.data.biology.vault_total: missing.append("twelve distinct recovered vault specimens")
 		"EX-CH05-S11":
 			if puzzles.get("P-10", {}).get("phase", 0) != 3: missing.append("three maintained observation samples")

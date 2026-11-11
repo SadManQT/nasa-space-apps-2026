@@ -854,7 +854,7 @@
   },
   "p08_latch_cradle": {
    "id": "p08_latch_cradle",
-   "scene": "EX-CH04-S07",
+   "scene": "EX-CH04-S08",
    "title": "Latch transport cradle",
    "goal": "Seat the sleeved case into the two-point transport cradle",
    "why": "Probe, sleeve, cradle — inner seal stays closed.",
@@ -865,7 +865,7 @@
   },
   "p08_secure_mount": {
    "id": "p08_secure_mount",
-   "scene": "EX-CH04-S07",
+   "scene": "EX-CH04-S08",
    "title": "Secure and lock-test rover mount",
    "goal": "Latch the cradle to the rover cargo mount and verify the physical lock test",
    "why": "An indicator showing closed is verified by a pull test.",
@@ -876,7 +876,7 @@
   },
   "p08_return_to_base": {
    "id": "p08_return_to_base",
-   "scene": "EX-CH04-S08",
+   "scene": "EX-CH04-S09",
    "title": "Return to Aurora airlock",
    "goal": "Complete the return leg along the three-beacon ridge with 40 reserve remaining",
    "why": "The saved reserve forecast is kept beside the actual arrival reading.",
@@ -887,7 +887,7 @@
   },
   "p08_dock_dry_glovebox": {
    "id": "p08_dock_dry_glovebox",
-   "scene": "EX-CH04-S08",
+   "scene": "EX-CH04-S09",
    "title": "Dock sealed case in dry glovebox",
    "goal": "Transfer the unopened case into the dry nitrogen quarantine glovebox",
    "why": "Dry glovebox air prevents moisture from condensing on cold metal and seeds.",
@@ -898,7 +898,7 @@
   },
   "p08_warm_cold": {
    "id": "p08_warm_cold",
-   "scene": "EX-CH04-S08",
+   "scene": "EX-CH04-S10",
    "title": "Begin sealed warm-up (cold stage)",
    "goal": "Start the three-stage sealed warm-up from the cold baseline toward cool",
    "why": "Gradual warming in a closed dry container protects dry seed coats.",
@@ -923,7 +923,7 @@
   },
   "p08_warm_cool": {
    "id": "p08_warm_cool",
-   "scene": "EX-CH04-S08",
+   "scene": "EX-CH04-S10",
    "title": "Hold cool equilibration stage",
    "goal": "Confirm temperature stabilisation at the intermediate cool stage",
    "why": "Each warm-up stage equilibrates before the next step.",
@@ -934,7 +934,7 @@
   },
   "p08_warm_room": {
    "id": "p08_warm_room",
-   "scene": "EX-CH04-S08",
+   "scene": "EX-CH04-S10",
    "title": "Finish sealed warm-up (room stage)",
    "goal": "Complete the third warm-up stage to room temperature while still sealed",
    "why": "The sealed warm-up finishes at room stage before the condensation check.",
@@ -959,7 +959,7 @@
   },
   "p08_check_condensation": {
    "id": "p08_check_condensation",
-   "scene": "EX-CH04-S08",
+   "scene": "EX-CH04-S10",
    "title": "Verify zero condensation",
    "goal": "Confirm no condensation formed during the three-stage dry warm-up",
    "why": "Stable and dry is the gate to opening the inner biological seal.",
@@ -970,7 +970,7 @@
   },
   "p08_open_inner_seal": {
    "id": "p08_open_inner_seal",
-   "scene": "EX-CH04-S08",
+   "scene": "EX-CH04-S10",
    "title": "Open inner biological seal",
    "goal": "Unlatch the inner biological seal inside the dry quarantine glovebox",
    "why": "All three warm-up stages and the dry check have passed.",
@@ -981,7 +981,7 @@
   },
   "p08_inventory_12": {
    "id": "p08_inventory_12",
-   "scene": "EX-CH04-S08",
+   "scene": "EX-CH04-S10",
    "title": "Inventory twelve vault specimens",
    "goal": "Count the 12 distinct physical seed specimens in the vault wells (separate from album pages)",
    "why": "Twelve distinct specimens, twelve condition entries.",
@@ -1003,7 +1003,7 @@
   },
   "p08_scan_lid": {
    "id": "p08_scan_lid",
-   "scene": "EX-CH04-S09",
+   "scene": "EX-CH04-S10",
    "title": "Scan inner lid inscription",
    "goal": "Scan the handwritten note inside the vault lid",
    "why": "The lid says: ask Commander Ferreira about Expedition Zero.",
@@ -1014,7 +1014,7 @@
   },
   "p08_save_viability_pending": {
    "id": "p08_save_viability_pending",
-   "scene": "EX-CH04-S09",
+   "scene": "EX-CH04-S10",
    "title": "Set quarantine viability status",
    "goal": "Record the twelve dry specimens as pending viability evaluation, not assumed healthy",
    "why": "Dry storage preserves labels and seed coats; germination requires its own later test.",
@@ -1036,7 +1036,7 @@
   },
   "p08_manifest_reconciled": {
    "id": "p08_manifest_reconciled",
-   "scene": "EX-CH04-S10",
+   "scene": "EX-CH04-S09",
    "title": "Reconcile vault manifest",
    "goal": "Match all twelve specimen labels to the 2034 vault ledger",
    "why": "Every well matches its recorded cultivar and condition entry.",
@@ -1047,7 +1047,7 @@
   },
   "p08_personnel_home": {
    "id": "p08_personnel_home",
-   "scene": "EX-CH04-S10",
+   "scene": "EX-CH04-S09",
    "title": "Confirm field team home",
    "goal": "Close the rover manifest with Kai and Rafi safely back inside Aurora",
    "why": "Both ledgers reconcile without double-charging.",
@@ -1058,7 +1058,7 @@
   },
   "p08_quarantine_complete": {
    "id": "p08_quarantine_complete",
-   "scene": "EX-CH04-S10",
+   "scene": "EX-CH04-S09",
    "title": "Sign quarantine completion",
    "goal": "Sign the dry-quarantine handover for the twelve vault specimens",
    "why": "Cotton and eleven companion lots remain sealed pending approved planting.",

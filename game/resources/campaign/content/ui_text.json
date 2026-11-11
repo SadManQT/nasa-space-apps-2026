@@ -2182,10 +2182,10 @@
    "hint": "Keep both cargo records and the return reserve visible in the handover."
   },
   "p08_dock_dry_glovebox": {
-   "goal": "Dock the case at the dry glovebox",
+   "goal": "Dock the case at the dry cargo lock",
    "why": "Dry controlled warming protects the unopened specimens",
    "prompt": "Dock the case at the dry glovebox",
-   "result": "Closed vault case docked in the dry quarantine glovebox.",
+   "result": "Closed vault case docked at the dry cargo lock, still sealed.",
    "hint": "Check the dry workspace before starting the sealed warming sequence."
   },
   "p08_warm_cold": {
@@ -2231,14 +2231,14 @@
    "hint": "Match each well with its manifest rather than counting album pictures."
   },
   "p08_scan_lid": {
-   "goal": "Scan the lid writing at the cargo lock",
+   "goal": "Scan the lid writing at the dry glovebox",
    "why": "Copy every word exactly; do not guess who wrote it",
    "prompt": "Scan the lid writing at the cargo lock",
    "result": "Vault lid inscription scanned and preserved exactly.",
    "hint": "Keep the source image beside its transcription."
   },
   "p08_save_viability_pending": {
-   "goal": "Log seeds as untested at the handover console",
+   "goal": "Log seeds as untested at the vault manifest",
    "why": "Recovery does not prove every specimen will grow",
    "prompt": "Log seeds as untested at the handover console",
    "result": "Saved: nobody knows yet if these seeds can still grow.",
@@ -2252,24 +2252,24 @@
    "hint": "Keep the closed case and its condition ledger together."
   },
   "p08_manifest_reconciled": {
-   "goal": "Check the vault manifest in the garden",
-   "why": "Twelve physical specimens must match twelve records",
+   "goal": "Check the cargo record at the supply ledger",
+   "why": "What came home must match what left the vault",
    "prompt": "Check the vault manifest in the garden",
-   "result": "Twelve seeds match twelve manifest lines. Cotton is one of them.",
+   "result": "Cargo record matches: one sealed vault case and both crew within their reserve.",
    "hint": "Check each distinct label without adding a specimen for a journal unlock."
   },
   "p08_personnel_home": {
-   "goal": "Mark everyone home on the survey board",
+   "goal": "Mark everyone home at the handover console",
    "why": "Both field cadets must be home before handover",
    "prompt": "Mark everyone home on the survey board",
    "result": "Both field cadets confirmed home with the base team.",
    "hint": "Read names and arrival responses as well as the cargo report."
   },
   "p08_quarantine_complete": {
-   "goal": "Finish quarantine records at the dry glovebox",
-   "why": "Later planting needs the protected recovery record",
+   "goal": "Finish quarantine at the dry cargo lock",
+   "why": "The sealed case must stay protected on its way to the garden",
    "prompt": "Finish quarantine records at the dry glovebox",
-   "result": "Quarantine done. Whether the seeds can grow is still unknown.",
+   "result": "Quarantine transfer done. The sealed case goes to the garden glovebox next.",
    "hint": "Check the condition entries before closing the recovery handover."
   },
   "p08_send_manifest": {

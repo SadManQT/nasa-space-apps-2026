@@ -2772,7 +2772,11 @@
      0,
      -0.35
     ],
-    "garden_rafi": [-3.75, 0, -3.35],
+    "garden_rafi": [
+     -3.75,
+     0,
+     -3.35
+    ],
     "garden_kai": [
      -1.2,
      0,
@@ -3004,7 +3008,11 @@
        0,
        -0.3
       ],
-      "garden_amara": [-3.45, 0, -2.36],
+      "garden_amara": [
+       -3.45,
+       0,
+       -2.36
+      ],
       "garden_kai": [
        -0.7,
        0,
@@ -5045,9 +5053,14 @@
     }
    ],
    "stations": {
-    "p08_manifest_reconciled": "ch04_vault_manifest",
-    "p08_personnel_home": "ch04_personnel_home",
-    "p08_quarantine_complete": "ch04_dry_glovebox"
+    "p08_warm_cold": "ch04_dry_glovebox",
+    "p08_warm_cool": "ch04_dry_glovebox",
+    "p08_warm_room": "ch04_dry_glovebox",
+    "p08_check_condensation": "ch04_dry_glovebox",
+    "p08_open_inner_seal": "ch04_dry_glovebox",
+    "p08_inventory_12": "ch04_dry_glovebox",
+    "p08_scan_lid": "ch04_dry_glovebox",
+    "p08_save_viability_pending": "ch04_vault_manifest"
    },
    "anchors": {
     "garden_player": [

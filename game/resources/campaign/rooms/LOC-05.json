@@ -1862,11 +1862,11 @@
     "prepare_closed_carrier": "transfer_brush_kit",
     "verify_transfer_boundaries": "transfer_carrier",
     "preview_cycle_budget": "transfer_route_diagram",
-    "p03_scan_tara": "transfer_carrier",
+    "p03_scan_tara": "transfer_microscope",
     "p03_collect_tara": "transfer_carrier",
     "p03_seal_a": "transfer_brush_kit",
     "p03_transfer_alo": "transfer_glove_ports",
-    "p03_scan_alo": "transfer_glove_ports",
+    "p03_scan_alo": "transfer_microscope",
     "p03_collect_alo": "transfer_glove_ports",
     "p03_seal_b": "transfer_brush_kit",
     "p03_transfer_tara": "transfer_carrier",
@@ -1912,9 +1912,9 @@
        -0.4
       ],
       "transfer_kai": [
-       -0.45,
-       0,
-       -0.6
+       0.9,
+       0.0,
+       0.6
       ],
       "transfer_rafi": [
        3.4,
