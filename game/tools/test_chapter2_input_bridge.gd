@@ -40,6 +40,20 @@ func _run() -> void:
 	var forecast: Dictionary = campaign.preview_chapter2_choice(id, {})
 	_check(bool(forecast.get("accepted", false)) and forecast.input_revision == before.state_revision, "paused modal previews through the real restored route")
 	_check(campaign.director.snapshot().receipts == before.receipts and campaign.route.snapshot() == route_before, "preview has no live receipt or puzzle progress")
+	var approach_position: Vector3 = campaign._player.global_position
+	campaign._player.global_position += Vector3(0, 0, 20)
+	await physics_frame
+	_check(not campaign.preview_chapter2_choice(id, {}).get("accepted", false) and campaign._chapter2_pending.get("previewed", "stale") == null, "moving away during a paused panel invalidates its preview")
+	campaign._player.global_position = approach_position
+	await physics_frame
+	var camera: Camera3D = campaign._player.follow_camera.camera
+	var target_node: Node3D = campaign.physical_target(id)
+	camera.look_at(camera.global_position + (camera.global_position - target_node.global_position))
+	await process_frame
+	_check(not campaign.preview_chapter2_choice(id, {}).get("accepted", false), "looking away during a paused panel cannot preview the target")
+	camera.look_at(target_node.global_position)
+	await process_frame
+	_check(bool(campaign.preview_chapter2_choice(id, {}).get("accepted", false)), "returning to the same physical target requires a fresh preview")
 	_check(not campaign.confirm_chapter2_choice(id, {}).get("accepted", false), "paused modal cannot commit")
 	campaign.set_ui_paused(false)
 	campaign._player.global_position += Vector3(0, 0, 20)

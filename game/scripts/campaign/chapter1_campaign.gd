@@ -471,6 +471,9 @@ func p01_view(target_id: String) -> Dictionary:
 func preview_chapter2_choice(target_id: String, payload: Dictionary) -> Dictionary:
 	if _chapter2_pending.is_empty() or String(_chapter2_pending.get("target_id", "")) != target_id or not _ui_paused:
 		return {"accepted": false, "reason": "Open this Chapter 2 panel first; previews need the paused panel."}
+	if String(nearby_target(true).get("target_id", "")) != target_id:
+		_chapter2_pending["previewed"] = null
+		return {"accepted": false, "reason": "Walk up to this target and face it before previewing again."}
 	var forecast := forecast_target(target_id, payload)
 	if not bool(forecast.get("accepted", false)):
 		_chapter2_pending["previewed"] = null
@@ -515,8 +518,6 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 		var clear := _has_line_of_sight(target)
 		if not clear:
 			result = {"accepted": false, "reason": "Move into clear view of " + String(target.get_meta("focus_label", "the target")) + "."}
-		elif director != null and String(director.crew().get("mode", "solo")) == "class" and not _class_puzzle_spec(target_id).is_empty() and String(nearby_target().get("target_id", "")) != target_id:
-			result = {"accepted": false, "reason": "Walk up to this puzzle target and face it before signing."}
 		else:
 			var bay := _room.garage()
 			var cycled: Dictionary = bay.request_dock_cycle("habitat")
@@ -529,6 +530,8 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 		var clear := _has_line_of_sight(target)
 		if not clear:
 			result = {"accepted": false, "reason": "Move into clear view of " + String(target.get_meta("focus_label", "the target")) + "."}
+		elif director != null and String(director.crew().get("mode", "solo")) == "class" and not _class_puzzle_spec(target_id).is_empty() and String(nearby_target().get("target_id", "")) != target_id:
+			result = {"accepted": false, "reason": "Walk up to this puzzle target and face it before signing."}
 		else:
 			var class_hold := _class_commit_hold(target_id, payload)
 			result = class_hold if not class_hold.is_empty() else route.perform(target_id, payload, {"room_id": _room.room_id, "distance_m": distance, "line_of_sight": clear})
@@ -610,8 +613,8 @@ func target_completed(spec: Dictionary, flags_override: Variant = null, director
 	var receipts: Dictionary = director_receipts_override if director_receipts_override is Dictionary else director.snapshot().get("receipts", {})
 	return receipts.has(String(spec.get("command_id", "")))
 
-func nearby_target() -> Dictionary:
-	if _ui_paused or _player == null or _room == null:
+func nearby_target(ignore_ui_pause: bool = false) -> Dictionary:
+	if (_ui_paused and not ignore_ui_pause) or _player == null or _room == null:
 		return {}
 	var camera := _player.follow_camera.camera
 	var flags: Dictionary = route.current_flags() if route.has_method("current_flags") else route.gate_status().get("physical_flags", {})
