@@ -75,3 +75,7 @@ On 10 November the user explicitly authorized Ramim to override task/folder owne
 ## 11 November: M1-116 original-host continuation
 
 The user explicitly assigned Tanvir M1-116 to check and complete on the original Windows/Intel Arc laptop. This overrides its earlier Atik/Sadman assignment for this ID only. Preserve the existing collector, handoffs and failed native evidence; all other assignments and active reservations remain.
+
+## Subsequent user assignment: approved UI proposals (11 November)
+
+Ramim implements M4-22 only, from the approved `ui_proposal/` sheets. This replaces M4-20 visual styling. Preserve all gameplay features and the other members exact-file reservations; no unrelated implementation is authorized.
