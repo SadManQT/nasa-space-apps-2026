@@ -668,15 +668,7 @@
     "p08_read_external_probe": "vault_probe",
     "p08_fit_sleeve": "vault_sleeve",
     "p08_latch_cradle": "vault_sleeve",
-    "p08_secure_mount": "vault_rover",
-    "p08_return_to_base": "vault_rover",
-    "p08_dock_dry_glovebox": "vault_rover",
-    "p08_warm_cold": "vault_sleeve",
-    "p08_warm_cool": "vault_sleeve",
-    "p08_warm_room": "vault_sleeve",
-    "p08_check_condensation": "vault_sleeve",
-    "p08_open_inner_seal": "vault_case",
-    "p08_inventory_12": "vault_case"
+    "p08_secure_mount": "vault_rover"
    },
    "review_views": {
     "ch04_recovery": {

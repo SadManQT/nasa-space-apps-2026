@@ -29,7 +29,8 @@ func _run() -> void:
 		for source in entry.get("sources", []):
 			_check(FileAccess.file_exists("res://resources/data/nasa/%s.json" % source), "%s: source %s is a bundled fixture" % [id, source])
 		var length := float(entry.get("length_s", 0.0))
-		_check(length >= 8.0 and length <= 45.5, "%s: 8-45 s long" % id)
+		# Narrated clips (11 Nov 2026) give every spoken line its full time: up to 65 s.
+		_check(length >= 8.0 and length <= 65.5, "%s: 8-65 s long" % id)
 		var last := 0.0
 		for caption: Dictionary in entry.get("captions", []):
 			var start := float(caption.get("start", -1.0))

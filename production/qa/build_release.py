@@ -59,10 +59,12 @@ def install_tools(kind):
             (destination / name).write_bytes(bundle.read('templates/' + name))
     return str(engine)
 
-def run_checked(command, log, cwd, timeout=900, result_pattern=None):
+def run_checked(command, log, cwd, timeout=900, result_pattern=None, ignore=None):
     result = subprocess.run([str(x) for x in command], cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=timeout)
     log.write_text(result.stdout, encoding='utf-8')
     errors = re.findall(r'(?:SCRIPT ERROR|Parse Error|^ERROR:).*', result.stdout, re.MULTILINE)
+    if ignore:
+        errors = [e for e in errors if not re.search(ignore, e)]
     if result.returncode != 0 or errors or (result_pattern and not re.search(result_pattern, result.stdout)):
         print(result.stdout[-16000:])
         raise RuntimeError(f'{log.name}: exit {result.returncode}, errors={errors[:4]}')
@@ -84,7 +86,19 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     filename = output / ('LastLightAcademy.exe' if args.platform == 'windows' else 'LastLightAcademy.zip')
     preset = 'Windows x86_64' if args.platform == 'windows' else 'macOS Universal unsigned'
-    run_checked([engine, '--headless', '--path', ROOT / 'game', '--export-release', preset, filename], output / 'export.log', ROOT)
+    # A fresh checkout imports every asset first. Under the headless dummy renderer one
+    # model's import script logs a harmless 'Parameter "t" is null' texture error, so the
+    # import runs as its own step (exit code checked); the export after it is held to
+    # the strict no-ERROR rule.
+    imported = subprocess.run([str(engine), '--headless', '--path', str(ROOT / 'game'), '--import'], cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=1800)
+    (output / 'import.log').write_text(imported.stdout, encoding='utf-8')
+    if imported.returncode != 0:
+        print(imported.stdout[-8000:])
+        raise RuntimeError(f'import.log: exit {imported.returncode}')
+    # The editor process that runs the export reports its own leftovers when it quits
+    # (seen on the Windows runner); that is not an export error. The game smoke below
+    # keeps the strict rule.
+    run_checked([engine, '--headless', '--path', ROOT / 'game', '--export-release', preset, filename], output / 'export.log', ROOT, ignore=r'resources still in use at exit')
     if args.smoke:
         if args.platform == 'macos':
             extracted = output / 'unpacked'

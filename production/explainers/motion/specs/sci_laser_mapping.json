@@ -2,7 +2,7 @@
  "id": "sci_laser_mapping",
  "title": "Mapping the Moon with a laser",
  "level": "explainer",
- "length_s": 42,
+ "length_s": 47.15,
  "fps": 24,
  "purpose": "Teach how LOLA measures height with laser echoes, how heights become a map and slopes, and how a safe road is planned from them.",
  "scenes": "laser_mapping.js",
@@ -37,13 +37,13 @@
  },
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 15,
+   "from": 4.0,
+   "to": 15.84,
    "scene": "pulse",
    "label": "diagram",
    "credit": "Not to scale",
@@ -51,8 +51,8 @@
    "echo": "Echo time → distance → height"
   },
   {
-   "from": 15,
-   "to": 28,
+   "from": 15.84,
+   "to": 29.76,
    "scene": "map",
    "label": "measured",
    "credit": "NASA LRO LOLA · GSFC PGDA · the Aurora ridge, {mpp} m per point, shaded for clarity",
@@ -60,8 +60,8 @@
    "grid": "One height every {mpp} m"
   },
   {
-   "from": 28,
-   "to": 37,
+   "from": 29.76,
+   "to": 40.28,
    "scene": "slope",
    "label": "model",
    "credit": "Numbers computed from LOLA heights · drawing not to scale",
@@ -70,45 +70,45 @@
    "road": "Road: {road_len} km, never steeper than {road_slope}°"
   },
   {
-   "from": 37,
-   "to": 42,
+   "from": 40.28,
+   "to": 47.15,
    "scene": "takeaway"
   }
  ],
  "captions": [
   [
    4.4,
-   8.6,
+   9.44,
    "NASA's LRO spacecraft fires laser pulses at the Moon from orbit."
   ],
   [
-   9.0,
-   14.6,
+   9.84,
+   15.44,
    "Timing each echo gives the distance, and so the height of the ground."
   ],
   [
-   15.4,
-   19.8,
+   16.24,
+   21.17,
    "Millions of those heights make a map, down to one point every {mpp} m."
   ],
   [
-   20.2,
-   23.8,
+   21.57,
+   25.17,
    "This is the real ridge where Aurora stands."
   ],
   [
-   24.2,
-   27.8,
+   25.57,
+   29.56,
    "Two NASA maps of it agree to about {rms} m."
   ],
   [
-   28.4,
-   32.0,
+   30.16,
+   33.81,
    "From heights you get slopes: how steep each step is."
   ],
   [
-   32.4,
-   36.6,
+   34.21,
+   39.88,
    "So the road to the cold trap is {road_len} km, never steeper than {road_slope}°."
   ]
  ],
@@ -122,5 +122,51 @@
    "text": "LOLA",
    "why": "instrument name"
   }
- ]
+ ],
+ "narration": {
+  "audio": "production/explainers/narration/sci_laser_mapping.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.0,
+    "to": 4.74
+   },
+   {
+    "at": 9.94,
+    "from": 6.21,
+    "to": 10.38
+   },
+   {
+    "at": 16.34,
+    "from": 11.75,
+    "to": 16.38
+   },
+   {
+    "at": 21.67,
+    "from": 17.73,
+    "to": 20.18
+   },
+   {
+    "at": 25.67,
+    "from": 21.43,
+    "to": 25.12
+   },
+   {
+    "at": 30.26,
+    "from": 26.31,
+    "to": 29.66
+   },
+   {
+    "at": 34.31,
+    "from": 30.95,
+    "to": 36.32
+   },
+   {
+    "at": 40.88,
+    "from": 37.51,
+    "to": 42.18
+   }
+  ]
+ }
 }

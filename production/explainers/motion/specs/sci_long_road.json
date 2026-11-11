@@ -2,7 +2,7 @@
  "id": "sci_long_road",
  "title": "The long road to Malapert",
  "level": "explainer",
- "length_s": 38,
+ "length_s": 41.56,
  "fps": 24,
  "purpose": "Teach map distance on the Moon: the official place names, the straight-line distance from the pole to Mons Malapert, and why the drivable road is far longer.",
  "scenes": "long_road.js",
@@ -33,13 +33,13 @@
  },
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 18,
+   "from": 4.0,
+   "to": 19.6,
    "scene": "names",
    "label": "model",
    "credit": "USGS / IAU Gazetteer of Planetary Nomenclature · great-circle distance",
@@ -48,8 +48,8 @@
    "marathons": "Almost three marathons"
   },
   {
-   "from": 18,
-   "to": 28,
+   "from": 19.6,
+   "to": 29.77,
    "scene": "road",
    "label": "model",
    "credit": "Road computed from LOLA heights (gentle cells only)",
@@ -57,8 +57,8 @@
    "slope_l": "Steepest stretch: {slope}°"
   },
   {
-   "from": 28,
-   "to": 32,
+   "from": 29.77,
+   "to": 33.77,
    "scene": "card",
    "label": "model",
    "credit": "Gazetteer feature centres",
@@ -66,43 +66,84 @@
    "sub": "The game's road and its stops are fiction"
   },
   {
-   "from": 32,
-   "to": 38,
+   "from": 33.77,
+   "to": 41.56,
    "scene": "takeaway"
   }
  ],
  "captions": [
   [
    4.4,
-   8.4,
+   8.73,
    "Places on the Moon have official names, kept on a public map."
   ],
   [
-   8.8,
-   13.2,
+   9.13,
+   14.8,
    "Mons Malapert is a real mountain about {straight} km from the south pole."
   ],
   [
-   13.6,
-   17.6,
+   15.2,
+   19.2,
    "That is almost three marathons laid end to end."
   ],
   [
-   18.4,
-   22.8,
+   20.0,
+   24.4,
    "But a rover cannot drive straight over craters and steep slopes."
   ],
   [
-   23.2,
-   27.6,
+   24.8,
+   29.37,
    "A road on gentle ground is about {road} km long."
   ],
   [
-   28.4,
-   31.6,
+   30.17,
+   33.37,
    "Those are the features' centres."
   ]
  ],
  "ends_on": "The straight line is never the road. Pack for the road you will actually drive.",
- "literals": []
+ "literals": [],
+ "narration": {
+  "audio": "production/explainers/narration/sci_long_road.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.03,
+    "to": 4.06
+   },
+   {
+    "at": 9.23,
+    "from": 6.59,
+    "to": 11.96
+   },
+   {
+    "at": 15.3,
+    "from": 13.27,
+    "to": 15.96
+   },
+   {
+    "at": 20.1,
+    "from": 17.31,
+    "to": 21.04
+   },
+   {
+    "at": 24.9,
+    "from": 22.39,
+    "to": 26.66
+   },
+   {
+    "at": 30.27,
+    "from": 27.91,
+    "to": 29.6
+   },
+   {
+    "at": 34.37,
+    "from": 30.97,
+    "to": 36.56
+   }
+  ]
+ }
 }

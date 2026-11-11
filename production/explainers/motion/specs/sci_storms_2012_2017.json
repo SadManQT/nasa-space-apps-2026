@@ -2,7 +2,7 @@
  "id": "sci_storms_2012_2017",
  "title": "Solar storms in 2012 and 2017",
  "level": "explainer",
- "length_s": 42,
+ "length_s": 49.96,
  "fps": 24,
  "purpose": "Teach the real July 2012 CME that missed Earth and hit STEREO-A, compare it with the 2017 storm, and label the game's storm as a what-if.",
  "scenes": "storms.js",
@@ -38,13 +38,13 @@
  },
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 16,
+   "from": 4.0,
+   "to": 18.87,
    "scene": "miss",
    "label": "measured",
    "credit": "NASA DONKI · July 2012 CME",
@@ -54,8 +54,8 @@
    "cme": "CME at {speed} km/s"
   },
   {
-   "from": 16,
-   "to": 30,
+   "from": 18.87,
+   "to": 37.31,
    "scene": "compare",
    "label": "measured",
    "credit": "NASA STEREO-A HET (2012) · NOAA GOES-13 (2017), hourly means",
@@ -64,8 +64,8 @@
    "y": "Protons (log scale)"
   },
   {
-   "from": 30,
-   "to": 36,
+   "from": 37.31,
+   "to": 43.31,
    "scene": "card",
    "label": "measured",
    "credit": "DONKI · STEREO-A",
@@ -73,40 +73,40 @@
    "sub": "Real data, labelled counterfactual: the 2012 storm hit STEREO-A, not the Moon"
   },
   {
-   "from": 36,
-   "to": 42,
+   "from": 43.31,
+   "to": 49.96,
    "scene": "takeaway"
   }
  ],
  "captions": [
   [
    4.4,
-   8.8,
+   11.67,
    "In July 2012, the Sun threw out a huge cloud at about {speed} km/s."
   ],
   [
-   9.2,
-   14.8,
+   12.07,
+   17.67,
    "It missed Earth and hit the STEREO-A spacecraft instead."
   ],
   [
-   16.4,
-   20.8,
+   19.27,
+   25.92,
    "STEREO-A's protons rose within hours; the shock arrived about {hours} hours later."
   ],
   [
-   21.2,
-   25.8,
+   26.32,
+   33.11,
    "The 2017 storm did reach Earth, peaking near {peak17} pfu."
   ],
   [
-   26.2,
-   29.6,
+   33.51,
+   36.91,
    "Both are real. Only one hit home."
   ],
   [
-   30.4,
-   35.6,
+   37.71,
+   42.91,
    "So the game's storm asks: what if the 2012 storm had hit the Moon?"
   ]
  ],
@@ -140,5 +140,46 @@
    "text": "Chapter 7",
    "why": "the game's chapter number"
   }
- ]
+ ],
+ "narration": {
+  "audio": "production/explainers/narration/sci_storms_2012_2017.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.75,
+    "to": 7.72
+   },
+   {
+    "at": 12.17,
+    "from": 9.15,
+    "to": 13.08
+   },
+   {
+    "at": 19.37,
+    "from": 14.45,
+    "to": 20.8
+   },
+   {
+    "at": 26.42,
+    "from": 22.01,
+    "to": 28.5
+   },
+   {
+    "at": 33.61,
+    "from": 29.77,
+    "to": 32.52
+   },
+   {
+    "at": 37.81,
+    "from": 33.87,
+    "to": 38.52
+   },
+   {
+    "at": 43.91,
+    "from": 39.71,
+    "to": 44.16
+   }
+  ]
+ }
 }

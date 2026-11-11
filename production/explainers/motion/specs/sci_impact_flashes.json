@@ -2,7 +2,7 @@
  "id": "sci_impact_flashes",
  "title": "Impact flashes",
  "level": "explainer",
- "length_s": 38,
+ "length_s": 42.81,
  "fps": 24,
  "purpose": "Teach that meteoroids hitting the Moon make brief flashes, how NASA watches for them, and why two telescopes must agree.",
  "scenes": "impact_flashes.js",
@@ -27,13 +27,13 @@
  },
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 18,
+   "from": 4.0,
+   "to": 21.2,
    "scene": "watch",
    "label": "measured",
    "credit": "NASA Marshall Meteoroid Environment Office",
@@ -43,8 +43,8 @@
    "count_l": "{count} flashes in five years"
   },
   {
-   "from": 18,
-   "to": 29,
+   "from": 21.2,
+   "to": 32.2,
    "scene": "check",
    "label": "diagram",
    "credit": "NASA's rule: two telescopes must agree",
@@ -54,8 +54,8 @@
    "fake": "Only one saw it: rejected"
   },
   {
-   "from": 29,
-   "to": 33,
+   "from": 32.2,
+   "to": 36.2,
    "scene": "card",
    "label": "measured",
    "credit": "NASA MEO",
@@ -63,43 +63,84 @@
    "sub": "The chapter's flash candidates are written for the game"
   },
   {
-   "from": 33,
-   "to": 38,
+   "from": 36.2,
+   "to": 42.81,
    "scene": "takeaway"
   }
  ],
  "captions": [
   [
    4.4,
-   8.4,
+   8.89,
    "Tiny bits of space rock hit the Moon and make brief flashes of light."
   ],
   [
-   8.8,
-   12.8,
+   9.29,
+   13.29,
    "NASA watches the Moon's dark side for them about {nights} nights a month."
   ],
   [
-   13.2,
-   17.6,
+   13.69,
+   20.8,
    "In the first five years they confirmed {count} flashes, {pct} during meteor showers."
   ],
   [
-   18.4,
-   22.6,
+   21.6,
+   25.8,
    "A camera can glitch, so one sighting is not enough."
   ],
   [
-   23.0,
-   28.4,
+   26.2,
+   31.6,
    "A flash counts only when two telescopes both see it at the same moment."
   ],
   [
-   29.4,
    32.6,
+   35.8,
    "These flashes were watched from Earth."
   ]
  ],
  "ends_on": "Trust a reading when two independent checks agree, not when one says so.",
- "literals": []
+ "literals": [],
+ "narration": {
+  "audio": "production/explainers/narration/sci_impact_flashes.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.05,
+    "to": 4.24
+   },
+   {
+    "at": 9.39,
+    "from": 6.41,
+    "to": 10.06
+   },
+   {
+    "at": 13.79,
+    "from": 11.65,
+    "to": 18.46
+   },
+   {
+    "at": 21.7,
+    "from": 19.79,
+    "to": 23.64
+   },
+   {
+    "at": 26.3,
+    "from": 25.03,
+    "to": 29.14
+   },
+   {
+    "at": 32.7,
+    "from": 30.69,
+    "to": 32.68
+   },
+   {
+    "at": 36.8,
+    "from": 34.11,
+    "to": 38.52
+   }
+  ]
+ }
 }
