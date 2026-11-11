@@ -8242,6 +8242,33 @@
     "production/plan/ui_polish_20261110.md",
     "PRODUCTION_HANDBOOK.md"
    ]
+  },
+  {
+   "id": "M4-21",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Verify all task statuses and integrate completed team changes safely",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
+   "deps": [],
+   "paths": [
+    "production/qa/evidence/M4-21/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-11.",
+   "evidence": "",
+   "updated": "2026-11-11",
+   "prompt": "Explicit user request 11 Nov: check all task completion statuses, merge safely with everyones changes preserved and no unresolved conflicts; report after each push. Preserve archived/unsafe WIP and retain truthful open statuses. Verify integrated source and original workspace sync.",
+   "reserved_for": "ramim",
+   "effort": 2,
+   "edit_files": [
+    "production/qa/evidence/M4-21/README.md",
+    "production/qa/evidence/M4-21/task_status.json",
+    "production/qa/evidence/M4-21/branch_inventory.json",
+    "production/qa/evidence/M4-21/review.md",
+    "production/qa/evidence/M4-21/verification.txt"
+   ]
   }
  ],
  "requirements": [
@@ -8919,7 +8946,8 @@
     "M1-125",
     "M4-18",
     "M4-19",
-    "M4-20"
+    "M4-20",
+    "M4-21"
    ],
    "sadman": [
     "M4-16",

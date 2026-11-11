@@ -86,9 +86,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   <h2 id="team">Team</h2>
 <p class="sub">Who is doing what. Next up lists assigned ready tasks; claim one exact ID. Deferred and acceptance work stays visible separately.</p>
 <div class="grid team">
-<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">Shared gameplay; Chapters 4/6/8; opening and progression UI · 40% share</div><div class="counts"><span class="chip s-done">23 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:96%"></i></div>
-<details open><summary>Working now (1)</summary><ul>
+<div class="panel" data-member="ramim"><b>Nafis Mohtasim Ramim</b> <span class="id">ramim</span><div class="meta">Shared gameplay; Chapters 4/6/8; opening and progression UI · 40% share</div><div class="counts"><span class="chip s-done">23 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:92%"></i></div>
+<details open><summary>Working now (2)</summary><ul>
 <li><a class="id" href="#M4-20">M4-20</a> Industrial UI visual and usability polish (user request) <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-10</div></li>
+<li><a class="id" href="#M4-21">M4-21</a> Verify all task statuses and integrate completed team changes safely <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Ramim/codex on 2026-11-11</div></li>
 </ul></details>
 <details><summary>Done (23)</summary><ul>
 <li><a class="id" href="#M1-18">M1-18</a> First five minutes: title screen, onboarding and UX polish <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">production/qa/evidence/M3-61_ramim_audit.md</div></li>
@@ -8989,6 +8990,34 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "PRODUCTION_HANDBOOK.md"
    ],
    "batch_phase": "implementation"
+  },
+  {
+   "id": "M4-21",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "codex",
+   "title": "Verify all task statuses and integrate completed team changes safely",
+   "status": "in_progress",
+   "owner": "Ramim/codex",
+   "deps": [],
+   "paths": [
+    "production/qa/evidence/M4-21/"
+   ],
+   "refs": [],
+   "note": "Filed by Ramim/codex on 2026-11-11.",
+   "evidence": "",
+   "updated": "2026-11-11",
+   "prompt": "Explicit user request 11 Nov: check all task completion statuses, merge safely with everyones changes preserved and no unresolved conflicts; report after each push. Preserve archived/unsafe WIP and retain truthful open statuses. Verify integrated source and original workspace sync.",
+   "reserved_for": "ramim",
+   "effort": 2,
+   "edit_files": [
+    "production/qa/evidence/M4-21/README.md",
+    "production/qa/evidence/M4-21/task_status.json",
+    "production/qa/evidence/M4-21/branch_inventory.json",
+    "production/qa/evidence/M4-21/review.md",
+    "production/qa/evidence/M4-21/verification.txt"
+   ],
+   "batch_phase": "implementation"
   }
  ],
  "requirements": [
@@ -9666,7 +9695,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "M1-125",
     "M4-18",
     "M4-19",
-    "M4-20"
+    "M4-20",
+    "M4-21"
    ],
    "sadman": [
     "M4-16",
