@@ -1,24 +1,44 @@
-# M1-85 - verified import protection and fresh native reproduction
+# M1-85 - import investigation and verified owned protection
 
-11 November2026, Tanvir/codex. **Current-source full gate and final review remain in progress.** No native crash cause or universal crash repair is claimed. M1-122/M1-123 remain Done. Manual QA/videos are deferred.
+11 November2026, Tanvir/codex. **Final investigation acceptance is under independent review.** The required current full run reports133/133 assertion/runner passes, with24raw suite ERRORs:5intentional negative fixtures and19remaining diagnostics. **Raw-log integrity remains FAILED.** The merged-source mandatory import/font recheck is clean1/1. No native crash cause or universal engine repair is claimed. M1-122/M1-123 remain Done; manual QA/videos stay deferred.
 
-The Game-scoped LF checkout rule preserves all2939 already-LF canonical sidecar blobs without asset/font/renderer/settings edits. Mandatory setup now rejects every ERROR diagnostic even when Godot exits0, retains raw setup/suite exits, and preserves existing script/native/timeout protections. [Actual-shell regressions](unit_runner.txt):11 methods total:10passed and one POSIX-only signal fixture skipped on Windows. [Policy audit](canonical_metadata.json), [current/replay audit](audit.json).
+## Delivered owned source
 
-| Matched restoration | Metadata byte changes | Raw setup / runner exit | Result |
+The Game-scoped LF checkout rule preserves2939already-LF canonical sidecars without authored asset/font/renderer/settings changes. Mandatory setup now rejects ERROR diagnostics even at native exit0 and retains editor/phase exits; existing script/native/timeout guards remain. [Actual-shell tests](unit_runner.txt):11total methods,10passed and1POSIX-only signal fixture skipped on Windows. [Canonical metadata](canonical_metadata.json), [consolidated audit](audit.json). Suite exit files are runner phase statuses; forced fatal/timeout paths also retain the native child status in the raw log.
+
+## Bounded native proof
+
+| Matched restoration | Metadata byte changes | Raw setup / runner exit | Observation |
 |---|---:|---|---|
-| [Original checkout1](red1_restore/runner.json) |960CRLF-only|0 /1|Two get_multiple_md5 file-open ERRORs; guard correctly runs no suite|
-| [LF checkout1](green1_restore/runner.json) |0|0 /0|Clean setup and font probe5/0|
-| [Original checkout2](red2_restore/runner.json) |960CRLF-only|139 /139|Fresh native crash; no suite, ERROR or backtrace|
-| [LF checkout2](green2_restore/runner.json) |0|0 /0|Clean setup and font probe5/0|
+| [Original checkout1](red1_restore/runner.json) |960CRLF-only|0 /1|Two get_multiple_md5 file-open ERRORs; guard stops before suites|
+| [LF checkout1](green1_restore/runner.json) |0|0 /0|Clean setup and real font probe5/0|
+| [Original checkout2](red2_restore/runner.json) |960CRLF-only|139 /139|Fresh native failure; no suite, ERROR or backtrace|
+| [LF checkout2](green2_restore/runner.json) |0|0 /0|Clean setup and real font probe5/0|
 
-Both pairs start from SHA-matched warm project/cache/profile clones and have clean same-path controls. They derive from the same retained warm input, not independent cold-cache generations. The original [replay](replay_policy.py), [stopped state](run.json) and complete raw phase logs preserve the native failure as FAIL. `run.json.complete` intentionally remains false after its safety stop. After [read-only capture](native_capture.json), the separately recorded [green-only continuation](green_continuation.json) passed and reverified the failed red2 state unchanged. No red2 retry occurred.
+Every same-path control is clean. Baselines are separately prepared clones of the same retained warm input, not independent cold-cache generations. [Executed replay](replay_policy.py), [stopped state](run.json):complete intentionally remainsfalse after the safety stop. The separately recorded [green-only continuation](green_continuation.json) ran after [native capture](native_capture.json), never retried red2, and reverified its hashes unchanged. The legacy reimport_steps field counts progress lines, not imported assets.
 
-The fresh native log is197474bytes. Final font progress messages cannot identify the failing importer. [Snapshot manifest](native_inputs.json) covers5359post-crash files and5352files in each matching input. The retained baseline is reconstructed pre-control input, not the exact pre-crash cache. The failed snapshot is post-crash. No linked native stack/dump was available in the [narrow host diagnostic search](native_system_events.json). This supplies actionable linked engine evidence; it does not establish the historical crash's identical cause.
+The197474-byte fresh native setup log has no stack. Final adjacent font progress cannot identify a failing importer. [Complete snapshot manifest](native_inputs.json) records5359post-crash files and5352matching pre-control baseline files. An independent post-full-run rehash checked all10711files, exact file sets, sizes, hashes and timestamps with0changes. The baseline is reconstructible pre-control state, not the exact cache immediately before failure; red2 is post-crash. No linked stack/dump was found in the [narrow recorded search](native_system_events.json). The faulting image/module and historical crash's identical cause remain unproved.
 
-Current-source checking uses [current_gate.py](current_gate.py), frozen revision/game-tree and full source/LFS manifest, a fresh project cache and isolated profile, and the unchanged mandatory `game/tools/run_tests.sh`. The fresh cold focused attempt FAILED: raw editor exit0, runner1, one dummy texture_2d_initialize ERROR and no suites. [Cold result](current_gate.json), [raw logs](current_full/raw_logs.zip). The editor also autosaved project.godot (section order and removal of the default-valued web renderer key), so its byte-source guard remains failed. A separate, explicitly qualified warm-copy133-suite run is being prepared; older comms/performance failures are not asserted as current. The collector separately records collection completion and exact full acceptance, checks every expected verdict/raw log/phase exit, preserves failed logs, and checks source/player-save integrity.
+## Current acceptance gate - distinct outcomes
 
-[Upstream handoff draft](upstream_report.md) includes historical raw/source recovery, the fresh failure, bounded replay, version-pinned engine boundary and exact missing native diagnostics. It has not been posted externally. The active M4-20 handbook reservation is respected; [saved handbook entry](handbook_handoff.md) awaits coordinated application.
+- [Fresh current cold attempt](current_gate.json):FAILED, raw editor0/runner1, one dummy texture_2d_initialize ERROR, no suites. Its original state remains preserved. The editor also autosaved project.godot; allother setting values match, and only an explicit web renderer value equal to Godot's default was removed. The original byte-source/full flags remainfalse.
+- [First warm attempt](current_warm/current_gate.json):incomplete and rejected. The isolated collector omitted six outside-Game fixtures. Its17reported results, missing-fixture failure and intentional stop are retained; it is not a game-regression claim or full pass.
+- [Complete-input warm run](current_complete/current_gate.json):frozen revisionf9469d73/Gamee7759669, all133assertion/phase verdicts pass in5480.034s. The exact recorded editor normalization is disclosed; allother tracked nonimport source, six [frozen support files](current_complete/support_manifest.json), real-player save and original failed snapshot guards pass. [Full verdicts](current_complete/full_gate.txt), [all raw logs](current_complete/current_full/raw_logs.zip). Its generated full_pass/qualified_warm_full_pass flags are runner/coverage/source-guard verdicts; they do not override the separate FAILED raw-log audit.
+- [Merged current mandatory recheck](postmerge/run.json):revision92e96a72/Game23550681, clean1/1, font5/0, setup/suite0,0rawERRORs. The sole Game delta is a teammate's export callbacks; import/campaign code is unchanged. The independent review accepts a mandatory parse/import recheck for this delta; no export/package was made. The earlier133result remains pinned to its original source.
 
-Current integration collection correction: the first warm full attempt omitted six outside-Game test fixtures, so its showcase failure is a collector-input defect, not a game regression. It was intentionally stopped and retained with exact process/stop reason in current_warm/input_capture.json; acceptance stays false. The complete-input collector freezes those six files from the same revision, records their Git/SHA256 manifest and final integrity guards, creates only an empty capture-output folder, and restarts the whole133-suite gate in a new isolated copy.
+Current comms45/0, runtime performance548/0, player_text13038/0 and Garden collision19/0 + movement54/0 pass. Their old failures are not reported as current. Both full and merged calls use the mandatory game/tools/run_tests.sh; no thresholds or expected suites were removed.
 
-Live complete-input gate checkpoint: 129/133 suites reported,0failures; all-profile suite and remaining final suites still running. The current_complete full_gate.txt/raw archive are an explicitly incomplete live snapshot; current_gate.full_pass remains false pending final coverage/source/save/preserved-state verification. Current comms45/0, performance548/0, Garden19/0+54/0 and player_text13038/0 pass; their old failures are not carried forward.
+## Remaining diagnostics and exact handoff
+
+The full assertion pass is not error-free. [audit.json](audit.json) lists all24raw diagnostics. Five are source-backed negative fixtures:3malformed-GLB errors in test_asset_geometry_recovery,1unknown HelmetRoles role and1unknown narrative variant. The other19 remain failed log-integrity observations:
+
+| Count | Recorded boundary | Follow-up scope |
+|---:|---|---|
+|9|Directory-open errors from game/tools/support/isolated_storage.gd:29|Shared test-support cache-directory preparation|
+|1|Dummy texture t-null from game/scripts/campaign/care_round_runtime.gd:206|Care runtime/renderer boundary|
+|2|p.d-null from game/scripts/ui/chapter1_campaign_hud.gd:1652|HUD renderer boundary|
+|7|RID/allocator/resource-in-use exit errors in campaign_session and chapter_select|Runtime/test teardown and engine resources|
+
+No new owner/task claim or repair is invented for these nonowned paths. Current integration/runtime/test-support owners must coordinate exact-file reservations for follow-up; assignment of an additional Tanvir implementation task requires an explicit reassignment. Preserve Asif's campaign work and Ramim's active M4-20 handbook reservation. A new native-cause investigation should use a copy of the retained input with linked native symbols/stack or a minimized reproducer; original-artifact waiting is no longer needed.
+
+[Upstream handoff](upstream_report.md) provides exact raw/source recovery, fresh failure and version-pinned engine boundaries. It is saved, not posted externally. Earlier engine hashes identify the console launcher; [postmerge provenance](postmerge/run.json) additionally measures its companion executable before that recheck, not retroactively before the earlier crash. [Saved handbook entry](handbook_handoff.md) awaits Ramim's coordinated application. No other member's source/settings/assets or task status was changed.

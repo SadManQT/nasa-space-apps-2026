@@ -127,3 +127,8 @@ ok   tools/test_ui_families.gd :: UI FAMILIES RESULT: PASS (84 checks, 0 failure
 ok   tools/test_ui_kit.gd :: UI KIT RESULT: PASS (522 checks, 0 failures)
 ok   tools/test_upgrade_pairs_ch1_ch2.gd :: UPGRADE PAIRS CH1 CH2 RESULT: PASS (35 checks, 0 failures)
 ok   tools/test_upgrade_pairs_ch4_ch6.gd :: UPGRADE PAIRS CH4 CH6 RESULT: PASS (34 checks, 0 failures)
+ok   tools/test_upgrade_profiles.gd :: UPGRADE PROFILES RESULT: PASS (130308 checks, 0 failures)
+ok   tools/test_worker_a_systems.gd :: WORKER A SYSTEMS RESULT: PASS (108 checks, 0 failures)
+ok   tools/test_worker_b_world_missions.gd :: WORKER B WORLD/MISSIONS RESULT: PASS (429 checks, 0 failures)
+ok   tools/test_worker_c_content.gd :: WORKER C CONTENT RESULT: PASS (572 checks, 0 failures)
+133/133 suites passed

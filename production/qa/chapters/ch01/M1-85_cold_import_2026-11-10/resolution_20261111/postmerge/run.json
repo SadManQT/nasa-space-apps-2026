@@ -1,0 +1,141 @@
+{
+  "revision": "92e96a7220d7a8f50e20f6b312603aa84c04a5e7",
+  "game_tree": "235506816dd02d6a78ef8cbc4a064ac959ea6005",
+  "collector_sha256": "8106794d21a9872082f1bf2fff0fd77ff7ba193278f32f98c5342f256d7c4724",
+  "source_manifest_sha256": "9ae390ee41acd99be3e903ee5ec839c69d3ee1e78d99eecaec37282526fe9fbc",
+  "base_full_record_sha256": "37b59f62ea4d7b48a749b8c6c3422fd530c57f6eaf10d6ee8ea7e6b545d03c30",
+  "base_revision": "f9469d738a4f679b048fc66c158bc0afbc53cd44",
+  "scratch": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-postmerge-20261111",
+  "original_full_scratch": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-complete-20261111",
+  "changed_Game_paths": [
+    "game/addons/runtime_assets/plugin.gd"
+  ],
+  "godot_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "binary_hash_scope": "Console launcher hash in earlier records; companion measured here before merged-source recheck, not retroactively pinned for earlier crash. Faulting image unknown.",
+  "engine_binaries": {
+    "console": {
+      "path": "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe",
+      "sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+      "bytes": 198152,
+      "mtime_ns": 1789048353575364700
+    },
+    "companion": {
+      "path": "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64.exe",
+      "sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "bytes": 180858888,
+      "mtime_ns": 1789048353560423400
+    }
+  },
+  "editor_normalization": {
+    "original_project_sha256": "cff48a51d3a479f387679d684d1ffaa7799018a371f554fffd85de787acf8836",
+    "editor_project_sha256": "8b5026164d8dd2462c1ee234c5a1471c4bd557aeb7b7184f4a54022c4340ae8a",
+    "only_removed_setting": "rendering/renderer/rendering_method.web",
+    "removed_value": "gl_compatibility",
+    "all_other_setting_values_equal": true,
+    "default_equivalence_source": "https://github.com/godotengine/godot/blob/4.7.2-stable/main/main.cpp#L2483",
+    "local_autosave_call": "game/addons/gohud/plugin.gd:57,77; _enter_tree declares fields and saves ProjectSettings",
+    "diff": "--- \n+++ \n@@ -22,6 +22,10 @@\n window/size/window_width_override=1280\n window/size/window_height_override=720\n window/stretch/mode=\"canvas_items\"\n+\n+[editor_plugins]\n+\n+enabled=PackedStringArray(\"res://addons/runtime_assets/plugin.cfg\", \"res://addons/gohud/plugin.cfg\")\n \n [importer_defaults]\n \n@@ -97,14 +101,9 @@\n \n common/physics_interpolation=true\n \n-[editor_plugins]\n-\n-enabled=PackedStringArray(\"res://addons/runtime_assets/plugin.cfg\", \"res://addons/gohud/plugin.cfg\")\n-\n [rendering]\n \n+textures/vram_compression/import_etc2_astc=true\n anti_aliasing/quality/msaa_3d=1\n anti_aliasing/quality/use_taa=true\n anti_aliasing/quality/use_taa.web=false\n-renderer/rendering_method.web=\"gl_compatibility\"\n-textures/vram_compression/import_etc2_astc=true\n",
+    "qualification": "Exact recorded editor auto-save normalization in isolated copy; not byte-identical project.godot. No authored settings change."
+  },
+  "scope": "New copy of accepted full-run project/cache/profile. Only current Git export plugin overlaid; its changed callbacks run during export, not the headless campaign gate. Mandatory editor refresh/font probe still run. No release export/build or cold qualification.",
+  "complete": true,
+  "accepted": true,
+  "result": {
+    "command": [
+      "C:\\Program Files\\Git\\bin\\bash.exe",
+      "game/tools/run_tests.sh",
+      "m185_import_integrity"
+    ],
+    "pid": 13792,
+    "start_utc_epoch": 1794380332.0666094,
+    "duration_seconds": 16.179,
+    "timed_out": false,
+    "termination": {
+      "needed": false
+    },
+    "raw_exit_code": 0,
+    "unsigned_exit_hex": "0x0",
+    "effective_exit_code": 0,
+    "log_sha256": "e94329a3f33858456f335ca35395140da193d6ea4742477720f3cd3a06e530ad",
+    "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-postmerge-20261111\\evidence\\runner_logs",
+    "isolated_env": {
+      "APPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-postmerge-20261111/profile/roaming",
+      "LOCALAPPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-postmerge-20261111/profile/local",
+      "TEMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-postmerge-20261111/profile/tmp",
+      "TMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-postmerge-20261111/profile/tmp"
+    },
+    "script_error_lines": [],
+    "generic_error_lines": [],
+    "generic_error_count": 0,
+    "warning_count": 0,
+    "last_printed_reimport": null,
+    "suite_summary": [
+      "1/1 suites passed"
+    ],
+    "setup_failure": false,
+    "native_crash_signature": false,
+    "audited_logs": [
+      {
+        "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-postmerge-20261111\\evidence\\runner_logs\\setup.log",
+        "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+        "engine_errors": [],
+        "script_errors": [],
+        "warning_count": 0,
+        "last_printed_reimport": null,
+        "suite_summary": [],
+        "setup_failure": false,
+        "native_crash_signature": false
+      },
+      {
+        "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-postmerge-20261111\\evidence\\runner_logs\\test_m185_import_integrity.gd.log",
+        "sha256": "f5250137008ca3a9f577a8e5eb99d95707a03e243646f4be20450a4753c33e8c",
+        "engine_errors": [],
+        "script_errors": [],
+        "warning_count": 0,
+        "last_printed_reimport": null,
+        "suite_summary": [],
+        "setup_failure": false,
+        "native_crash_signature": false
+      }
+    ]
+  },
+  "tracked_nonimport_source_changed": [],
+  "support_unchanged": true,
+  "original_full_selected_cache_before": {
+    "exists": true,
+    "file_count": 8587,
+    "global_script_class_cache.cfg": {
+      "bytes": 49826,
+      "sha256": "50033b8dfdc4862bca8096017499140d6dacfce9f8c8789b267b992bf0f7a95b"
+    },
+    "uid_cache.bin": {
+      "bytes": 224822,
+      "sha256": "eb34c3510506fd9b7a7463baafabf1d7a04b7242d4a6e7e2b292e1d358edf1f4"
+    },
+    "editor/filesystem_cache10": {
+      "bytes": 913496,
+      "sha256": "00b246d495e855d747bf09207379abf88c7223d9562522397671eb3935d13d6e"
+    }
+  },
+  "original_full_selected_cache_after": {
+    "exists": true,
+    "file_count": 8587,
+    "global_script_class_cache.cfg": {
+      "bytes": 49826,
+      "sha256": "50033b8dfdc4862bca8096017499140d6dacfce9f8c8789b267b992bf0f7a95b"
+    },
+    "uid_cache.bin": {
+      "bytes": 224822,
+      "sha256": "eb34c3510506fd9b7a7463baafabf1d7a04b7242d4a6e7e2b292e1d358edf1f4"
+    },
+    "editor/filesystem_cache10": {
+      "bytes": 913496,
+      "sha256": "00b246d495e855d747bf09207379abf88c7223d9562522397671eb3935d13d6e"
+    }
+  },
+  "original_full_selected_cache_unchanged": true,
+  "original_save_unchanged": true,
+  "setup_exit": 0,
+  "suite_exit": 0,
+  "raw_logs_sha256": "a9f18435d8e6acb8ba96689928bedda6a92497810ba6f70fb258ca5697621fc1"
+}

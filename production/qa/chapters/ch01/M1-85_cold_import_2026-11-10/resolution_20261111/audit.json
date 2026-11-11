@@ -6,7 +6,7 @@
   "all_effective_import_eol_lf": true,
   "canonical_blob_pairs_sha256": "5cddf349da2a68c004ce8740b4cfb1a8f79c87e1192cb7582205c6064226e5f7",
   "matrix_audit_complete": true,
-  "current_gate_audit_complete": false,
+  "current_gate_audit_complete": true,
   "final_acceptance_review_complete": false,
   "stopped_original_replay_complete": false,
   "green_continuation_complete": true,
@@ -109,5 +109,165 @@
       "generic_errors": 0,
       "native_signature": false
     }
-  ]
+  ],
+  "current_full_revision": "f9469d738a4f679b048fc66c158bc0afbc53cd44",
+  "current_full_game_tree": "e77596698f906dfd503e511434c09b8bf0d7ace2",
+  "runner_assertion_gate_pass": true,
+  "runner_suites": "133/133",
+  "raw_engine_errors": 24,
+  "intentional_fixture_errors": 5,
+  "remaining_raw_diagnostics": 19,
+  "raw_log_integrity_pass": false,
+  "overall_clean_full_acceptance": false,
+  "current_raw_diagnostics": [
+    {
+      "suite_log": "test_asset_geometry_recovery.gd.log",
+      "errors": [
+        "ERROR: glTF: Error parsing .gltf JSON data: Expected 'true', 'false', or 'null', got 'not' at line: 0",
+        "ERROR: Condition \"err != OK\" is true. Returning: err",
+        "ERROR: Failed loading resource: D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-complete-20261111/profile/tmp/lla-recovery-10744.glb.lla_gltf."
+      ],
+      "intentional_negative_fixture": true,
+      "expected_count": 3
+    },
+    {
+      "suite_log": "test_campaign_session.gd.log",
+      "errors": [
+        "ERROR: 1 RID allocations of type 'N13RendererDummy15MaterialStorage13DummyMaterialE' were leaked at exit.",
+        "ERROR: 1 RID allocations of type 'N13RendererDummy15MaterialStorage11DummyShaderE' were leaked at exit.",
+        "ERROR: 1 RID allocations of type 'N13RendererDummy9DummyMeshE' were leaked at exit.",
+        "ERROR: 3 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.",
+        "ERROR: 1 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.",
+        "ERROR: Pages in use exist at exit in PagedAllocator: N20RasterizerSceneDummy21GeometryInstanceDummyE"
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_care_round_runtime.gd.log",
+      "errors": [
+        "ERROR: Parameter \"t\" is null."
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_ch02_missions.gd.log",
+      "errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-complete-20261111/profile/roaming/Godot/app_userdata/Last Light Academy/shader_cache\".",
+        "ERROR: Condition \"p.d == 0\" is true. Returning: Point2()"
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_ch03_assets.gd.log",
+      "errors": [
+        "ERROR: HelmetRoles: unknown role noor"
+      ],
+      "intentional_negative_fixture": true,
+      "expected_count": 1
+    },
+    {
+      "suite_log": "test_ch03_missions.gd.log",
+      "errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-complete-20261111/profile/roaming/Godot/app_userdata/Last Light Academy/shader_cache\"."
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_ch04_missions.gd.log",
+      "errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-complete-20261111/profile/roaming/Godot/app_userdata/Last Light Academy/shader_cache\"."
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_ch06_missions.gd.log",
+      "errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-complete-20261111/profile/roaming/Godot/app_userdata/Last Light Academy/shader_cache\".",
+        "ERROR: Condition \"p.d == 0\" is true. Returning: Point2()"
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_chapter4_puzzles.gd.log",
+      "errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-complete-20261111/profile/roaming/Godot/app_userdata/Last Light Academy/shader_cache\"."
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_chapter6_puzzles.gd.log",
+      "errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-complete-20261111/profile/roaming/Godot/app_userdata/Last Light Academy/shader_cache\"."
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_chapter_select.gd.log",
+      "errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-complete-20261111/profile/roaming/Godot/app_userdata/Last Light Academy/shader_cache\".",
+        "ERROR: 1 resources still in use at exit (run with --verbose for details)."
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_mission_trainer.gd.log",
+      "errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-complete-20261111/profile/roaming/Godot/app_userdata/Last Light Academy/shader_cache\"."
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_moon_trainer.gd.log",
+      "errors": [
+        "ERROR: Couldn't open directory at path \"D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-complete-20261111/profile/roaming/Godot/app_userdata/Last Light Academy/shader_cache\"."
+      ],
+      "intentional_negative_fixture": false,
+      "expected_count": 0
+    },
+    {
+      "suite_log": "test_narrative_props.gd.log",
+      "errors": [
+        "ERROR: Unknown narrative prop variant: PR_Mug_Named/NOBODY"
+      ],
+      "intentional_negative_fixture": true,
+      "expected_count": 1
+    }
+  ],
+  "merged_recheck_revision": "92e96a7220d7a8f50e20f6b312603aa84c04a5e7",
+  "merged_recheck_game_tree": "235506816dd02d6a78ef8cbc4a064ac959ea6005",
+  "merged_mandatory_clean": true,
+  "merged_source_changed_paths": [
+    "game/addons/runtime_assets/plugin.gd"
+  ],
+  "engine_binaries_measured_before_postmerge": {
+    "console": {
+      "path": "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64_console.exe",
+      "sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+      "bytes": 198152,
+      "mtime_ns": 1789048353575364700
+    },
+    "companion": {
+      "path": "D:\\Godot\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64.exe",
+      "sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "bytes": 180858888,
+      "mtime_ns": 1789048353560423400
+    }
+  },
+  "independent_review": {
+    "current_metadata_raw_checks": 145,
+    "native_exact_files_checked": 10711,
+    "native_missing_extra_sha_size_mtime_changes": 0,
+    "final_task_acceptance": "pending final independent assessment"
+  },
+  "phase_exit_semantics": "setup.exit is native editor status; suite.exit is runner phase status (fatal/timeout overrides preserve child exit in raw log)."
 }
