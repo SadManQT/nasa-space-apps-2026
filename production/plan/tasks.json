@@ -7499,11 +7499,6 @@
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-103*"
-   ],
-   "edit_files": [
-    "game/scripts/campaign/chapter1_campaign.gd",
-    "game/tools/test_class_session_bridge.gd",
-    "production/qa/evidence/M1-103.md"
    ]
   },
   {
@@ -7533,8 +7528,8 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Expose chosen-input P03/P04 panel dispatch for Ramim Chapter 2",
-   "status": "done",
-   "owner": "Sadman/claude",
+   "status": "in_progress",
+   "owner": "Asif/codex",
    "deps": [],
    "paths": [
     "game/scripts/campaign/",
@@ -7593,6 +7588,11 @@
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_*.gd",
     "production/qa/evidence/M1-105*"
+   ],
+   "edit_files": [
+    "game/scripts/campaign/chapter1_campaign.gd",
+    "game/tools/test_chapter2_input_bridge.gd",
+    "production/qa/evidence/M1-105.md"
    ]
   },
   {
