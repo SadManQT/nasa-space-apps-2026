@@ -1,0 +1,78 @@
+{
+ "id": "how_care_photo",
+ "title": "The care-round photo",
+ "cards": [
+  "care_photo"
+ ],
+ "length_s": 14,
+ "stage": {
+  "kind": "care_round",
+  "scene": "EX-CH01-S04",
+  "done": [
+   "plant_alo",
+   "plant_tara",
+   "water_alo",
+   "water_tara",
+   "label_alo",
+   "label_tara",
+   "seal_alo",
+   "seal_tara"
+  ]
+ },
+ "setup": [],
+ "steps": [
+  [
+   0.5,
+   "ring",
+   "Current_ALO-01",
+   3.4,
+   "Today and the last photo"
+  ],
+  [
+   4.2,
+   "click",
+   "Align_→_ALO-01"
+  ],
+  [
+   5.0,
+   "click",
+   "Align_→_ALO-01"
+  ],
+  [
+   6.0,
+   "ring",
+   "Current_ALO-01",
+   2.6,
+   "Lined up"
+  ],
+  [
+   9.0,
+   "click",
+   "photograph_ALO-01"
+  ],
+  [
+   10.0,
+   "ring",
+   "photograph_ALO-01",
+   3.6,
+   "Filed with today's date"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   4.0,
+   "Each care round, photograph both plants from the same spot."
+  ],
+  [
+   4.1,
+   8.8,
+   "Nudge today's view until it lines up with the faint earlier photo."
+  ],
+  [
+   8.9,
+   14.0,
+   "Take the photo. It is filed with today's date for comparing growth."
+  ]
+ ]
+}

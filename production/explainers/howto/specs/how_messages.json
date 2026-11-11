@@ -1,0 +1,24 @@
+{
+ "id": "how_messages",
+ "title": "Messages",
+ "cards": ["messages"],
+ "length_s": 14,
+ "stage": {"kind": "campaign", "scene": "EX-CH01-S03"},
+ "setup": [],
+ "steps": [
+  [1.0, "key", "M", "M"],
+  [2.0, "ring", "ThreadListBox", 2.6, "Who wrote"],
+  [4.8, "click", "Thread_crew"],
+  [6.0, "ring", "MessageListBox", 2.0],
+  [7.4, "click", "MsgItem_MSG-CH01-002"],
+  [8.4, "ring", "MessageDetailPane", 3.6, "Read it here"],
+  [12.6, "key", "Escape", "Esc"]
+ ],
+ "captions": [
+  [0.2, 2.0, "Crew and Earth send short messages between jobs."],
+  [2.1, 4.7, "Press M to open Messages. Threads are on the left."],
+  [4.8, 8.3, "Pick a thread, then a message. Unread ones are marked."],
+  [8.4, 12.0, "Some messages point at your goal. Reading pauses the clock."],
+  [12.1, 14.0, "Esc closes Messages."]
+ ]
+}

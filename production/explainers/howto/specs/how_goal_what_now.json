@@ -1,0 +1,23 @@
+{
+ "id": "how_goal_what_now",
+ "title": "The goal card and What now",
+ "cards": ["goal", "journal"],
+ "length_s": 15,
+ "stage": {"kind": "campaign", "scene": "EX-CH01-S01", "done": ["commission_route"]},
+ "setup": [],
+ "steps": [
+  [0.4, "ring", "GoalCard", 4.0, "Your goal and why"],
+  [4.6, "key", "H", "H"],
+  [5.2, "ring", "WhatNow", 3.4],
+  [8.8, "click", "WhatNowHint"],
+  [9.6, "ring", "CloseHint", 2.8, "Close, or ask again"],
+  [12.6, "key", "Escape", "Esc"],
+  [13.4, "key", "Escape", "Esc"]
+ ],
+ "captions": [
+  [0.3, 4.4, "The goal card at the top left always says what to do and why."],
+  [4.5, 8.6, "Press H for What now: the goal, where it is, and help."],
+  [8.7, 12.4, "Hint gives one small step at a time. It never changes your rewards."],
+  [12.5, 15.0, "Esc closes it. The clock waits while you read."]
+ ]
+}

@@ -249,6 +249,8 @@ func setup(value: Chapter1Campaign) -> void:
 	chapter8_panel.opened.connect(func(_target: String) -> void: _on_panel_opened("chapter8_panel"))
 	chapter8_panel.closed.connect(func(_target: String) -> void: _on_panel_closed("chapter8_panel"))
 	chapter8_panel.commit_requested.connect(_on_chapter8_commit)
+	for puzzle_panel in [chapter2_panel, chapter3_panel, chapter4_panel, chapter6_panel, chapter8_panel]:
+		puzzle_panel.hint_player = panels.hint_player   # first-time cards play their how-to clip
 	LoadTrace.end("hud_chapter_panels", stamp)
 	if runtime.incremental_loading:
 		await get_tree().process_frame
@@ -791,6 +793,8 @@ func _apply_goal() -> void:
 	_advance.visible = ready and not complete
 	_advance.disabled = complete or not ready
 	_marker_node = runtime.physical_target(String(_goal_info.get("target_id", ""))) if not String(_goal_info.get("target_id", "")).is_empty() else null
+	for lesson_id in HowToCard.first_time_for(String(_goal_info.get("target_id", ""))):
+		offer_first_time(lesson_id)   # doc 25 §7: the card shows the first time its mechanic is needed
 	_wn_goal.text = _title.text
 	_wn_why.text = _why.text
 	_wn_why.visible = _why.visible

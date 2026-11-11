@@ -56,6 +56,12 @@ func _run() -> void:
 	if hud == null or campaign.route == null:
 		_finish()
 		return
+	# The walk fires route witnesses with no player in between, so the doc 25 §7 mechanic cards (which pause the
+	# clock until closed) are marked read here; test_how_to_clips and test_hint_player cover them.
+	hud.panels.hint_player.seen_path = storage.directory.path_join("how_to_seen_walk.cfg")
+	for lesson_id in HowToCard.mechanics():
+		if not lesson_id in ["move", "look", "use", "mission_table"]:
+			hud.panels.hint_player._remember(lesson_id)
 	await _walk_first_table(campaign)
 	PlanFixture.prepare(campaign.route)
 	var scenes := Gates.scene_ids()

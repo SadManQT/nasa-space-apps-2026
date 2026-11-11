@@ -3,6 +3,44 @@
  "about": "Explainer clips the hint player, data cards and Journal play (MASTER_PLAN.md section 5). Science explainers are built by production/tools/motion/build.py from production/explainers/motion/specs/; do not edit their entries by hand.",
  "explainers": [
   {
+   "id": "how_move_look",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Moving and looking",
+   "path": "res://assets/explainers/how_move_look.ogv",
+   "length_s": 14.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "move",
+    "look"
+   ],
+   "captions": [
+    {
+     "start": 0.4,
+     "end": 3.2,
+     "text": "Walk with W, A, S and D, or the left stick."
+    },
+    {
+     "start": 3.4,
+     "end": 5.9,
+     "text": "A and D step sideways. S walks back."
+    },
+    {
+     "start": 6.1,
+     "end": 10.2,
+     "text": "To look around, hold the right mouse button and move, or use the right stick."
+    },
+    {
+     "start": 10.5,
+     "end": 14.0,
+     "text": "Head for the gold outline. Walking never runs down a hidden clock."
+    }
+   ],
+   "ends_on": "Head for the gold outline. Walking never runs down a hidden clock.",
+   "spec": "production/explainers/howto/specs/how_move_look.json"
+  },
+  {
    "id": "sci_cold_traps",
    "kind": "science",
    "level": "explainer",
@@ -1105,5 +1143,28 @@
    "ends_on": "Test before you trust: one sample does not tell you the whole crater.",
    "spec": "production/explainers/motion/specs/sci_water_evidence.json"
   }
+ ],
+ "pending_render": [
+  "how_care_photo",
+  "how_controller_links",
+  "how_energy_budget",
+  "how_evidence_board",
+  "how_goal_what_now",
+  "how_harvest_ledger",
+  "how_impact_flash",
+  "how_lock_shift",
+  "how_markers_lines",
+  "how_messages",
+  "how_mission_table",
+  "how_payload_carrying",
+  "how_pollination_route",
+  "how_recorder_history",
+  "how_reference_gauge",
+  "how_repeaters_coverage",
+  "how_rover_reserve",
+  "how_scanner_slopes",
+  "how_station_strip",
+  "how_storm_shelter",
+  "how_use"
  ]
 }

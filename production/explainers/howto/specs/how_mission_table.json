@@ -1,0 +1,86 @@
+{
+ "id": "how_mission_table",
+ "title": "The Mission Table in three steps",
+ "cards": [
+  "mission_table"
+ ],
+ "length_s": 16,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH01-S07",
+  "done": [
+   "role_cards"
+  ]
+ },
+ "setup": [
+  [
+   "call",
+   "hud",
+   "open_mission_table",
+   "p02_shift1"
+  ]
+ ],
+ "steps": [
+  [
+   0.5,
+   "ring",
+   "NightStrip",
+   3.6,
+   "1 · This shift"
+  ],
+  [
+   4.4,
+   "arrow",
+   [
+    640,
+    330
+   ],
+   3.6,
+   "2 · Choose the rows"
+  ],
+  [
+   8.4,
+   "click",
+   "Preview"
+  ],
+  [
+   9.2,
+   "arrow",
+   [
+    1060,
+    300
+   ],
+   3.8,
+   "3 · Read the forecast"
+  ],
+  [
+   13.2,
+   "ring",
+   "Commit",
+   2.8,
+   "Ready? Lock in"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   4.2,
+   "Step 1: read the shift at the top: daylight or dark, and the time."
+  ],
+  [
+   4.3,
+   8.2,
+   "Step 2: choose the air and light rows the crew suggests."
+  ],
+  [
+   8.3,
+   13.0,
+   "Step 3: press Try it. The forecast shows the result. Nothing changes yet."
+  ],
+  [
+   13.1,
+   16.0,
+   "Change a row and try again as often as you like."
+  ]
+ ]
+}

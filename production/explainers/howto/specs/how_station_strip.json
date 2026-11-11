@@ -1,0 +1,19 @@
+{
+ "id": "how_station_strip",
+ "title": "The station strip",
+ "cards": ["station_strip"],
+ "length_s": 12,
+ "stage": {"kind": "campaign", "scene": "EX-CH01-S05", "near": "test_hand_light", "offset": [0.0, 0.0, 1.4]},
+ "setup": [],
+ "steps": [
+  [1.0, "key", "E", "E"],
+  [2.2, "ring", "OutpostStatus", 6.0, "Station strip"],
+  [8.6, "ring", "GoalCard", 3.0]
+ ],
+ "captions": [
+  [0.3, 2.6, "Some jobs use the station's power, air or water."],
+  [2.7, 5.6, "The station strip appears at the top right when a value changes."],
+  [5.7, 8.5, "Each bar has a word as well as a colour: steady, low or full."],
+  [8.6, 12.0, "It fades again while you walk, so the view stays clear."]
+ ]
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "about": "UI teaching only. Examples use hypothetical different numbers; never a canonical answer or autofill. Movement/look/use onboarding remains M1-18.",
+  "about": "UI teaching only (doc 25 §7). Each mechanic's card has a title, purpose, at most three steps, its how-to clip (how_clip, built by production/explainers/howto/build.py), a guided first use (nudge) and the goal targets that first need it (first_targets). 'clip' is the optional science explainer. Examples use hypothetical different numbers; never a canonical answer.",
   "cards": {
     "spare_power": {
       "title": "How to use spare sunlight",
@@ -27,7 +27,9 @@
       "nudge": "Store air while sunlight would overflow.",
       "relationship": "Daylight can charge a battery. In darkness, each device draws from that store; compare what remains after the shift.",
       "example": "Different example - hypothetical, not your night plan: a store holds 9 battery units. A lamp needs 2 and a fan needs 1 for one shift. The total cost is 3; 9 minus 3 leaves 6. Repeat the subtraction for each later shift, then compare the remaining store with its reserve. Use your own forecast and crew notes for this night.",
-      "highlight": "air_production"
+      "highlight": "air_production",
+      "chapter": 1,
+      "how_clip": "how_mission_table"
     },
     "probe": {
       "title": "How to check a reading",
@@ -53,7 +55,12 @@
       "clip": "",
       "nudge": "Compare the current goal with the marked object's evidence.",
       "relationship": "An observation says what was measured. A claim explains it. Check whether the evidence supports the claim before making a decision.",
-      "example": "Different example - hypothetical: a practice lamp is lit for 3 of 9 checks. That observation alone does not prove why it went dark. Compare the power record with the same times before making a claim. Use the evidence from your current scene."
+      "example": "Different example - hypothetical: a practice lamp is lit for 3 of 9 checks. That observation alone does not prove why it went dark. Compare the power record with the same times before making a claim. Use the evidence from your current scene.",
+      "chapter": 1,
+      "how_clip": "how_evidence_board",
+      "first_targets": [
+        "classify_information"
+      ]
     },
     "move": {
       "title": "How to move around Aurora",
@@ -66,7 +73,9 @@
       "clip": "",
       "nudge": "Use W A S D to walk toward the Mission Table or the crew.",
       "relationship": "Every room in Aurora connects through pressurised hatches. Moving closer to a person or console brings up its interaction prompt.",
-      "example": "Different example - hypothetical: in a practice bay, walking within two steps of the bench highlights its name and key prompt."
+      "example": "Different example - hypothetical: in a practice bay, walking within two steps of the bench highlights its name and key prompt.",
+      "chapter": 1,
+      "how_clip": "how_move_look"
     },
     "look": {
       "title": "How to look around",
@@ -79,7 +88,9 @@
       "clip": "",
       "nudge": "Hold the Right Mouse Button to look around the room.",
       "relationship": "Looking around helps you spot the gold objective marker, wall status boards and crew stations before you commit a plan.",
-      "example": "Different example - hypothetical: panning across a practice dome reveals both the air tank gauge on the left wall and the chamber lamp on the right."
+      "example": "Different example - hypothetical: panning across a practice dome reveals both the air tank gauge on the left wall and the chamber lamp on the right.",
+      "chapter": 1,
+      "how_clip": "how_move_look"
     },
     "use": {
       "title": "How to use equipment and talk",
@@ -92,7 +103,9 @@
       "clip": "",
       "nudge": "Press E when a station or crew member prompt is highlighted.",
       "relationship": "Using a station opens its real controls or conversation so you can observe readings before making a decision.",
-      "example": "Different example - hypothetical: pressing E at a practice workbench opens its reading card; closing it with Esc leaves every setting unchanged."
+      "example": "Different example - hypothetical: pressing E at a practice workbench opens its reading card; closing it with Esc leaves every setting unchanged.",
+      "chapter": 1,
+      "how_clip": "how_use"
     },
     "journal": {
       "title": "How to use the Expedition Journal",
@@ -105,7 +118,333 @@
       "clip": "",
       "nudge": "Press J to open the Expedition Journal and check 'Now'.",
       "relationship": "Reading the Journal pauses the clock. It keeps only what you have already observed or completed, with zero future spoilers.",
-      "example": "Different example - hypothetical: opening the Now tab during a practice shift lists the current room, why the task matters, and three optional hint steps."
+      "example": "Different example - hypothetical: opening the Now tab during a practice shift lists the current room, why the task matters, and three optional hint steps.",
+      "chapter": 1,
+      "how_clip": "how_goal_what_now"
+    },
+    "goal": {
+      "title": "How to read your goal",
+      "purpose": "The goal card says what to do and why; What now helps when you are stuck.",
+      "steps": [
+        "Read the goal card at the top left: the goal and why it matters.",
+        "Press H for What now: the goal, where it is, and a hint.",
+        "Ask for one hint step at a time; hints never change rewards."
+      ],
+      "nudge": "Press H to open What now.",
+      "relationship": "The goal card always names the next job. What now adds where it is and a hint ladder that never changes your rewards.",
+      "example": "Different example - hypothetical: a practice goal reads 'Check the spare lamp' and why: 'the night shift needs light'.",
+      "chapter": 1,
+      "how_clip": "how_goal_what_now",
+      "clip": "",
+      "first_targets": [
+        "commission_result"
+      ]
+    },
+    "station_strip": {
+      "title": "How to read the station strip",
+      "purpose": "See power, air and water change when a job uses them.",
+      "steps": [
+        "Watch the top right after a job: the strip appears when a value changes.",
+        "Read each bar's word as well as its colour.",
+        "Let it fade while you walk; it returns when something changes or runs low."
+      ],
+      "nudge": "Watch the top right after this job.",
+      "relationship": "The strip only shows when a station value changes or runs low, so the view stays clear while you walk.",
+      "example": "Different example - hypothetical: a practice lamp test lowers a battery bar by one step, and the strip shows it for a few seconds.",
+      "chapter": 1,
+      "how_clip": "how_station_strip",
+      "clip": "",
+      "first_targets": [
+        "test_hand_light"
+      ]
+    },
+    "messages": {
+      "title": "How to read Messages",
+      "purpose": "Crew and Earth send short messages between jobs.",
+      "steps": [
+        "Press M to open Messages.",
+        "Pick a thread on the left, then a message.",
+        "Press Esc to close; reading pauses the clock."
+      ],
+      "nudge": "Press M to read your messages.",
+      "relationship": "Messages connect the scenes. Some point at your current goal; none of them change a setting for you.",
+      "example": "Different example - hypothetical: a practice thread holds one unread note from a crew member about a seat plan.",
+      "chapter": 1,
+      "how_clip": "how_messages",
+      "clip": "",
+      "first_targets": [
+        "practice_fault"
+      ]
+    },
+    "lock_shift": {
+      "title": "How to lock in a shift",
+      "purpose": "A plan only counts once you lock it in and confirm it.",
+      "steps": [
+        "Try the plan and read its forecast.",
+        "Press Lock in when the forecast looks safe.",
+        "Confirm to use the plan, or go back to change it."
+      ],
+      "nudge": "Try the plan first, then lock it in.",
+      "relationship": "Try it never changes the station. Lock in asks once more; only Confirm uses the plan.",
+      "example": "Different example - hypothetical: a practice plan forecasts 6 battery units left; locking it in asks for a confirm before anything changes.",
+      "chapter": 1,
+      "how_clip": "how_lock_shift",
+      "clip": "",
+      "first_targets": [
+        "p02_stage_shift2"
+      ]
+    },
+    "payload_carrying": {
+      "title": "How to carry and stack supplies",
+      "purpose": "Carry each case to its marked slot, one at a time.",
+      "steps": [
+        "Walk to a supply case and press E to pick it up.",
+        "Carry it to an outlined slot and press E to set it down.",
+        "Assisted mode lets you choose the cases without a timer."
+      ],
+      "nudge": "Pick up a case with E, then set it in an outlined slot.",
+      "relationship": "Each case you place counts in the plan's forecast. Nothing is lost if you stop early; the forecast shows what you delivered.",
+      "example": "Different example - hypothetical: two of four practice cases placed means the forecast counts two.",
+      "chapter": 1,
+      "how_clip": "how_payload_carrying",
+      "clip": "",
+      "first_targets": [
+        "p02_shift5_alarm"
+      ]
+    },
+    "care_photo": {
+      "title": "How to take a care-round photo",
+      "purpose": "Line up today's photo with the last one so growth is easy to compare.",
+      "steps": [
+        "Look at the faint earlier photo behind today's view.",
+        "Nudge today's view until the two line up.",
+        "Take the photo; it is filed with today's date."
+      ],
+      "nudge": "Line up the photo with the faint earlier one, then take it.",
+      "relationship": "Photos taken from the same place on different days show real growth, not a change of angle.",
+      "example": "Different example - hypothetical: a practice sprout looks taller only because the camera moved; lining up the frames shows the true change.",
+      "chapter": 1,
+      "how_clip": "how_care_photo",
+      "clip": "",
+      "first_targets": [
+        "record_paired_conditions"
+      ]
+    },
+    "pollination_route": {
+      "title": "How to move pollen",
+      "purpose": "Move pollen between two sealed chambers without mixing the brushes.",
+      "steps": [
+        "Choose the donor, the brush and the carrier for this step.",
+        "Try it and read the preview before anything moves.",
+        "Lock in, then reverse with the clean brush."
+      ],
+      "nudge": "Choose this step's donor and brush, then try it.",
+      "relationship": "Each direction has its own brush, and only one pressure boundary opens at a time.",
+      "example": "Different example - hypothetical: a practice flower pair uses brush 1 one way and brush 2 back, never the same brush twice.",
+      "chapter": 2,
+      "how_clip": "how_pollination_route",
+      "clip": "",
+      "first_targets": [
+        "p03_scan_tara"
+      ]
+    },
+    "recorder_history": {
+      "title": "How to read a recorder's history",
+      "purpose": "Give each file the one value its own label supports.",
+      "steps": [
+        "Read the photographed plate, date and channel labels.",
+        "Put one token in each empty slot.",
+        "Check the local copy before playing it."
+      ],
+      "nudge": "Match each file's label to one token.",
+      "relationship": "A recorded file is trusted only when every label agrees with an independent source. The original stays untouched.",
+      "example": "Different example - hypothetical: a practice tape labelled 'Channel 2' takes the channel 2 token, not the one that sounds familiar.",
+      "chapter": 2,
+      "how_clip": "how_recorder_history",
+      "clip": "",
+      "first_targets": [
+        "assign_date_token"
+      ]
+    },
+    "reference_gauge": {
+      "title": "How to find a fault with a reference gauge",
+      "purpose": "Check a warning with an independent gauge before moving any valve.",
+      "steps": [
+        "Read each line on the reference gauge twice, ten minutes apart.",
+        "Inspect the places that could leak, a few at a time.",
+        "Isolate only the line that fell, then check it holds."
+      ],
+      "nudge": "Equip the reference gauge and read the lines.",
+      "relationship": "A falling reading on one line, with the others steady, points at that line. The gauge is independent of the panel warning.",
+      "example": "Different example - hypothetical: practice lines read 100, 100, 100, then 100, 96, 100 ten minutes later; only the middle line is falling.",
+      "chapter": 3,
+      "how_clip": "how_reference_gauge",
+      "clip": "",
+      "first_targets": [
+        "p05_equip_gauge"
+      ]
+    },
+    "harvest_ledger": {
+      "title": "How to keep the harvest ledger",
+      "purpose": "Count the seeds and split them between planting and the reserve.",
+      "steps": [
+        "Separate old evidence from today's mature pods.",
+        "Count every well before you split the seeds.",
+        "Write the planting and reserve numbers so they add up."
+      ],
+      "nudge": "Count the wells before you split the seeds.",
+      "relationship": "A ledger keeps the lineage: every seed is either planted or sealed in reserve, and the two add up to the count.",
+      "example": "Different example - hypothetical: 5 practice wells of 4 seeds make 20; planting 8 leaves 12 in reserve.",
+      "chapter": 3,
+      "how_clip": "how_harvest_ledger",
+      "clip": "",
+      "first_targets": [
+        "p06_scan_growth_chart"
+      ]
+    },
+    "eva_suit_scanner": {
+      "title": "How to read the scanner and slopes",
+      "purpose": "Pulse the scanner to read the ground before you walk or drive on it.",
+      "steps": [
+        "Hold F to pulse the scanner across the ground.",
+        "Read the numbered slope bands: 1 flat to 4 no-go.",
+        "Keep your suit reserve above the return line."
+      ],
+      "nudge": "Hold F to pulse the scanner.",
+      "relationship": "Slope bands come from measured heights. Steeper ground costs more energy and can be unsafe to cross.",
+      "example": "Different example - hypothetical: a practice ridge shows band 2 on the path and band 4 on its edge; the path is the safe line.",
+      "chapter": 4,
+      "how_clip": "how_scanner_slopes",
+      "clip": "",
+      "first_targets": [
+        "p07_check_scanner"
+      ]
+    },
+    "survey_markers_network": {
+      "title": "How to place markers and fixed lines",
+      "purpose": "Markers and fixed lines make a route safe for every later trip.",
+      "steps": [
+        "Carry a marker to the next site and press E to place it.",
+        "Anchor a fixed line on the steep stretch.",
+        "Open the Coverage Map to check each link."
+      ],
+      "nudge": "Place the next marker at the outlined site.",
+      "relationship": "Things you build stay. A marker in line of sight of the last one extends the network back to the station.",
+      "example": "Different example - hypothetical: a practice marker behind a ridge shows no link; one on the crest links both ways.",
+      "chapter": 4,
+      "how_clip": "how_markers_lines",
+      "clip": "",
+      "first_targets": [
+        "p07_place_beacon_1"
+      ]
+    },
+    "rover_route_planner": {
+      "title": "How to plan a rover trip",
+      "purpose": "Pick a road the rover can drive and keep the return in the battery.",
+      "steps": [
+        "Open the Route Planner and compare the routes.",
+        "Keep every stretch inside the slope limit.",
+        "Confirm only a route that leaves the return reserve."
+      ],
+      "nudge": "Open the Route Planner and compare the routes.",
+      "relationship": "The trip home costs energy too. A route is safe only if the battery still holds the return reserve at the far end.",
+      "example": "Different example - hypothetical: a practice route uses 40 of 100 units each way, leaving 20 for the reserve.",
+      "chapter": 4,
+      "how_clip": "how_rover_reserve",
+      "clip": "",
+      "first_targets": [
+        "p07_choose_route_b"
+      ]
+    },
+    "impact_flash": {
+      "title": "How to classify an impact flash",
+      "purpose": "Tell a real impact flash from a detector fault.",
+      "steps": [
+        "Compare more than one frame of each flash.",
+        "A real flash changes and fades; a fault stays the same.",
+        "Keep only flashes that both checks support."
+      ],
+      "nudge": "Compare the frames before you classify a flash.",
+      "relationship": "A meteoroid flash is brief and changes from frame to frame. A stuck pixel or glint looks the same in every frame.",
+      "example": "Different example - hypothetical: a practice spot that is equally bright in five frames is a detector fault, not an impact.",
+      "chapter": 5,
+      "how_clip": "how_impact_flash",
+      "clip": "",
+      "first_targets": [
+        "p10_verify_flashes"
+      ]
+    },
+    "energy_budget": {
+      "title": "How to budget energy for darkness",
+      "purpose": "Plan every dark segment so the essentials never go off.",
+      "steps": [
+        "Keep the essential loads on in every segment.",
+        "Add other loads only where the battery allows.",
+        "Check the reserve that remains when the light returns."
+      ],
+      "nudge": "Keep the essentials on in every segment first.",
+      "relationship": "In darkness nothing recharges the battery. Each segment subtracts its loads; the reserve must survive to the last one.",
+      "example": "Different example - hypothetical: a practice battery of 12 runs 2 units of essentials for 4 segments and keeps 4 in reserve.",
+      "chapter": 6,
+      "how_clip": "how_energy_budget",
+      "clip": "",
+      "first_targets": [
+        "p11_commit_allocation"
+      ]
+    },
+    "storm_shelter": {
+      "title": "How to shelter from a solar storm",
+      "purpose": "Get everyone behind shielding and watch the dosimeter.",
+      "steps": [
+        "Follow the shelter plan: people first, then supplies.",
+        "Read the dosimeter: the dose rate and the total.",
+        "Stay sheltered until the storm level falls."
+      ],
+      "nudge": "Open the hazard panel and read the dosimeter.",
+      "relationship": "Water and regolith between you and the Sun slow the particles. Less time outside and more shielding mean a lower dose.",
+      "example": "Different example - hypothetical: a practice dosimeter shows the rate dropping when the crew moves behind the water wall.",
+      "chapter": 7,
+      "how_clip": "how_storm_shelter",
+      "clip": "",
+      "first_targets": [
+        "p13_commit_plan"
+      ]
+    },
+    "repeaters_coverage": {
+      "title": "How to use repeaters and the coverage map",
+      "purpose": "A signal needs a clear line from each repeater to the next.",
+      "steps": [
+        "Open the Coverage Map.",
+        "Find the link that is broken or blocked by terrain.",
+        "Restore or move a repeater until every link shows clear."
+      ],
+      "nudge": "Open the Coverage Map and find the broken link.",
+      "relationship": "Radio travels in straight lines. Terrain between two repeaters blocks the link; a repeater on high ground restores it.",
+      "example": "Different example - hypothetical: a practice chain of three repeaters fails at the second because a hill blocks it.",
+      "chapter": 7,
+      "how_clip": "how_repeaters_coverage",
+      "clip": "",
+      "first_targets": [
+        "p15_restore_marker_2"
+      ]
+    },
+    "controller_links": {
+      "title": "How to replace the controller and check both links",
+      "purpose": "Swap the controller safely, then prove each link on its own.",
+      "steps": [
+        "Isolate, test for zero, replace, close and restore power.",
+        "Lock the local link first, then the Earth link.",
+        "Accept only an exact reply."
+      ],
+      "nudge": "Isolate the power before you touch the controller.",
+      "relationship": "A relay works only when every link passes its own test. One good link does not prove the other.",
+      "example": "Different example - hypothetical: a practice relay passes its local check but the Earth echo returns one wrong character, so it is not accepted.",
+      "chapter": 8,
+      "how_clip": "how_controller_links",
+      "clip": "",
+      "first_targets": [
+        "p16_isolate_power"
+      ]
     }
   },
   "scenes": {
@@ -119,5 +458,30 @@
     "EX-CH01-S10": "mission_table",
     "EX-CH01-S11": "mission_table",
     "EX-CH01-S12": "mission_table"
-  }
+  },
+  "mechanics": [
+    "move",
+    "look",
+    "use",
+    "goal",
+    "station_strip",
+    "messages",
+    "mission_table",
+    "lock_shift",
+    "payload_carrying",
+    "care_photo",
+    "evidence",
+    "pollination_route",
+    "recorder_history",
+    "reference_gauge",
+    "harvest_ledger",
+    "eva_suit_scanner",
+    "survey_markers_network",
+    "rover_route_planner",
+    "impact_flash",
+    "energy_budget",
+    "storm_shelter",
+    "repeaters_coverage",
+    "controller_links"
+  ]
 }
