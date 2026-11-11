@@ -8251,6 +8251,26 @@
    "prompt": "Explicit user request 11 Nov: check all task completion statuses, merge safely with everyones changes preserved and no unresolved conflicts; report after each push. Preserve archived/unsafe WIP and retain truthful open statuses. Verify integrated source and original workspace sync.",
    "reserved_for": "ramim",
    "effort": 2
+  },
+  {
+   "id": "M4-22",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Style the new next-step, idle-nudge and door-passage toasts in the M4-20 UI pass",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-11.",
+   "evidence": "",
+   "updated": "2026-11-11",
+   "prompt": "Playtest 11 Nov (tester: one cannot tell what to do after a task; got stuck in a door passage). Sadman added three HUD behaviours in game/scripts/ui/chapter1_campaign_hud.gd: (1) _announce_next appends 'Next: <goal> · <distance>, follow the ◇ marker' under each result toast; (2) _tick_nudge shows a quiet toast after 25 s without a new goal; (3) explain_dead_end_passage fires from a PassageSensor in game/scripts/world/campaign_room.gd when the player steps into an open door's dead-end passage. Behaviour and wording are tested (test_player_text 13038/0). Please fold their look and wording into M4-20 and consider a clearer off-screen goal arrow (the ◇ marker clamps to the screen edge when the target is behind the player).",
+   "reserved_for": "ramim",
+   "effort": 2
   }
  ],
  "requirements": [

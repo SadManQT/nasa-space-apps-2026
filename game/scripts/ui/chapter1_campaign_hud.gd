@@ -60,6 +60,10 @@ var _advance: Button
 var _goal_icon: UiDesign.LineIcon
 # World marker and prompt
 var _marker: Marker
+## Playtest 11 Nov: players lost track of the next job. Seconds without a new goal
+## while free to move; at NUDGE_SECONDS a quiet toast points at the marker.
+const NUDGE_SECONDS := 25.0
+var _idle_seconds := 0.0
 var _prompt: PanelContainer
 var _prompt_key: Label
 var _prompt_label: Label
@@ -147,6 +151,7 @@ class Marker extends Control:
 		draw_circle(centre, 2.5, tone)
 
 func _ready() -> void:
+	add_to_group("campaign_hud")
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_words = UiDesign.text().get("hud", {})
@@ -793,6 +798,10 @@ func _apply_goal() -> void:
 	_advance.visible = ready and not complete
 	_advance.disabled = complete or not ready
 	_marker_node = runtime.physical_target(String(_goal_info.get("target_id", ""))) if not String(_goal_info.get("target_id", "")).is_empty() else null
+	if changed:
+		_idle_seconds = 0.0
+		if not complete and not _title.text.is_empty() and _marker_node != null:
+			_announce_next.call_deferred()
 	for lesson_id in HowToCard.first_time_for(String(_goal_info.get("target_id", ""))):
 		offer_first_time(lesson_id)   # doc 25 §7: the card shows the first time its mechanic is needed
 	_wn_goal.text = _title.text
@@ -1595,6 +1604,43 @@ func _process(delta: float) -> void:
 		offer_first_time("move")
 	_flush_onboarding()
 	_update_world_overlay()
+	_tick_nudge(delta)
+
+## The player stepped into an open door's passage. Rooms change between scenes,
+## so say where the passage goes and where the current job is.
+func explain_dead_end_passage(destination: String) -> void:
+	_idle_seconds = 0.0
+	var where := ""
+	if not _title.text.is_empty() and is_instance_valid(_marker_node) and _marker_node.is_inside_tree():
+		where = " Your job is in this room: %s, %s away. Follow the ◇ marker." % [_title.text, UiDesign.distance_text(_distance_to(_marker_node))]
+	show_status("This passage leads to the %s; the crew moves there when the story does.%s" % [destination, where])
+
+## After a job, the result toast also says what comes next and how far it is.
+func _announce_next() -> void:
+	if _status == null or _title.text.is_empty() or not is_instance_valid(_marker_node) or not _marker_node.is_inside_tree():
+		return
+	var next := "Next: %s · %s, follow the ◇ marker" % [_title.text, UiDesign.distance_text(_distance_to(_marker_node))]
+	# A result still pending (shown, or waiting behind an open panel) keeps its text;
+	# the next step is added beneath it, never written over it.
+	if _toast_timer > 0.0:
+		if not _status.text.contains("Next: "):
+			_status.text += "\n" + next
+			_toast_timer = maxf(_toast_timer, 6.0)
+	else:
+		show_status(next)
+
+## Free movement with no new goal for a while: point at the marker once more
+## (and again every NUDGE_SECONDS), never opening a panel or pausing play.
+func _tick_nudge(delta: float) -> void:
+	if _chrome_hidden or runtime.is_cutscene_active() or bool(runtime.get("_ui_paused")) or not panels.active_panel().is_empty() or _title.text.is_empty() or not is_instance_valid(_marker_node):
+		return
+	if not _nearby_id.is_empty():
+		_idle_seconds = 0.0
+		return
+	_idle_seconds += delta
+	if _idle_seconds >= NUDGE_SECONDS:
+		_idle_seconds = 0.0
+		show_status("Not sure where to go? %s is %s away: follow the ◇ marker, or press %s for What now." % [_title.text, UiDesign.distance_text(_distance_to(_marker_node)), String(_words.get("what_now_key", "H"))])
 
 ## Projects the goal marker (with distance) and the prompt on the object in reach.
 func _update_world_overlay() -> void:

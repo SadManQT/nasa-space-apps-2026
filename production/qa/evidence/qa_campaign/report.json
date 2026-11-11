@@ -1,0 +1,257 @@
+{
+  "failures": [],
+  "scenes": [
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-02",
+      "scene_id": "EX-CH06-S01",
+      "targets": 3
+    },
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-02",
+      "scene_id": "EX-CH06-S02",
+      "targets": 3
+    },
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-02",
+      "scene_id": "EX-CH06-S03",
+      "targets": 1
+    },
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-02",
+      "scene_id": "EX-CH06-S04",
+      "targets": 3
+    },
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-02",
+      "scene_id": "EX-CH06-S05",
+      "targets": 3
+    },
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-01",
+      "scene_id": "EX-CH06-S06",
+      "targets": 3
+    },
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-01",
+      "scene_id": "EX-CH06-S07",
+      "targets": 2
+    },
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-01",
+      "scene_id": "EX-CH06-S08",
+      "targets": 2
+    },
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-01",
+      "scene_id": "EX-CH06-S09",
+      "targets": 2
+    },
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-02",
+      "scene_id": "EX-CH06-S10",
+      "targets": 1
+    },
+    {
+      "date": "2047-01-12 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-02",
+      "scene_id": "EX-CH06-S11",
+      "targets": 3
+    },
+    {
+      "date": "2047-01-13 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-03",
+      "scene_id": "EX-CH06-S12",
+      "targets": 3
+    },
+    {
+      "date": "2047-02-14 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-01",
+      "scene_id": "EX-CH07-S01",
+      "targets": 3
+    },
+    {
+      "date": "2047-02-14 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-04",
+      "scene_id": "EX-CH07-S02",
+      "targets": 3
+    },
+    {
+      "date": "2047-02-14 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-04",
+      "scene_id": "EX-CH07-S03",
+      "targets": 1
+    },
+    {
+      "date": "2047-02-14 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-04",
+      "scene_id": "EX-CH07-S04",
+      "targets": 4
+    },
+    {
+      "date": "2047-02-14 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-04",
+      "scene_id": "EX-CH07-S05",
+      "targets": 3
+    },
+    {
+      "date": "2047-02-14 06:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-04",
+      "scene_id": "EX-CH07-S06",
+      "targets": 3
+    },
+    {
+      "date": "2047-02-14 20:24 UTC",
+      "dev_text": [],
+      "room_id": "LOC-04",
+      "scene_id": "EX-CH07-S07",
+      "targets": 3
+    },
+    {
+      "date": "2047-02-14 20:24 UTC",
+      "dev_text": [],
+      "room_id": "LOC-04",
+      "scene_id": "EX-CH07-S08",
+      "targets": 3
+    },
+    {
+      "date": "2047-02-16 01:12 UTC",
+      "dev_text": [],
+      "room_id": "LOC-01",
+      "scene_id": "EX-CH07-S09",
+      "targets": 3
+    },
+    {
+      "date": "2047-02-16 01:22 UTC",
+      "dev_text": [],
+      "room_id": "LOC-01",
+      "scene_id": "EX-CH07-S10",
+      "targets": 3
+    },
+    {
+      "date": "2047-03-01 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-02",
+      "scene_id": "EX-CH07-S11",
+      "targets": 4
+    },
+    {
+      "date": "2047-04-07 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-08",
+      "scene_id": "EX-CH07-S12",
+      "targets": 3
+    },
+    {
+      "date": "2047-04-08 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-08",
+      "scene_id": "EX-CH08-S01",
+      "targets": 3
+    },
+    {
+      "date": "2047-04-08 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-11",
+      "scene_id": "EX-CH08-S02",
+      "targets": 2
+    },
+    {
+      "date": "2047-04-08 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-11",
+      "scene_id": "EX-CH08-S03",
+      "targets": 3
+    },
+    {
+      "date": "2047-04-08 10:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-11",
+      "scene_id": "EX-CH08-S04",
+      "targets": 3
+    },
+    {
+      "date": "2047-04-08 18:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-03",
+      "scene_id": "EX-CH08-S05",
+      "targets": 3
+    },
+    {
+      "date": "2047-04-09 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-01",
+      "scene_id": "EX-CH08-S06",
+      "targets": 3
+    },
+    {
+      "date": "2047-04-09 00:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-12",
+      "scene_id": "EX-CH08-S07",
+      "targets": 5
+    },
+    {
+      "date": "2047-04-09 00:45 UTC",
+      "dev_text": [],
+      "room_id": "LOC-12",
+      "scene_id": "EX-CH08-S08",
+      "targets": 3
+    },
+    {
+      "date": "2047-04-09 01:45 UTC",
+      "dev_text": [],
+      "room_id": "LOC-12",
+      "scene_id": "EX-CH08-S09",
+      "targets": 3
+    },
+    {
+      "date": "2047-04-09 02:15 UTC",
+      "dev_text": [],
+      "room_id": "LOC-01",
+      "scene_id": "EX-CH08-S10",
+      "targets": 3
+    },
+    {
+      "date": "2047-04-10 03:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-08",
+      "scene_id": "EX-CH08-S11",
+      "targets": 3
+    },
+    {
+      "date": "2047-04-10 06:00 UTC",
+      "dev_text": [],
+      "room_id": "LOC-03",
+      "scene_id": "EX-CH08-S12",
+      "targets": 4
+    }
+  ]
+}

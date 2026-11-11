@@ -143,6 +143,9 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-118">M1-118</a> Guard Mission Table layout focus when its panel is freed <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-121">M1-121</a> Re-audit all saved branches and prioritize explainer UI blockers <span class="chip ">codex</span> <span class="chip ">P0</span></li>
 </ul></details>
+<details><summary>Unplanned: requires explicit batch assignment (1)</summary><ul>
+<li><a class="id" href="#M4-22">M4-22</a> Style the new next-step, idle-nudge and door-passage toasts in the M4-20 UI pass <span class="chip ">any</span> <span class="chip ">P1</span></li>
+</ul></details>
 </div>
 <div class="panel" data-member="sadman"><b>Khandaker Shadman Sakib Siddiquee</b> <span class="id">sadman</span><div class="meta">Chapters 5/7; Care Round and physical story integration · 22% share</div><div class="counts"><span class="chip s-done">14 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:93%"></i></div>
 <details open><summary>Blocked (1)</summary><ul>
@@ -8998,6 +9001,27 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "reserved_for": "ramim",
    "effort": 2,
    "batch_phase": "implementation"
+  },
+  {
+   "id": "M4-22",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Style the new next-step, idle-nudge and door-passage toasts in the M4-20 UI pass",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-11.",
+   "evidence": "",
+   "updated": "2026-11-11",
+   "prompt": "Playtest 11 Nov (tester: one cannot tell what to do after a task; got stuck in a door passage). Sadman added three HUD behaviours in game/scripts/ui/chapter1_campaign_hud.gd: (1) _announce_next appends 'Next: <goal> · <distance>, follow the ◇ marker' under each result toast; (2) _tick_nudge shows a quiet toast after 25 s without a new goal; (3) explain_dead_end_passage fires from a PassageSensor in game/scripts/world/campaign_room.gd when the player steps into an open door's dead-end passage. Behaviour and wording are tested (test_player_text 13038/0). Please fold their look and wording into M4-20 and consider a clearer off-screen goal arrow (the ◇ marker clamps to the screen edge when the target is behind the player).",
+   "reserved_for": "ramim",
+   "effort": 2,
+   "batch_phase": "unplanned"
   }
  ],
  "requirements": [
