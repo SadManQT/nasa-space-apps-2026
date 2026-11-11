@@ -1,5 +1,7 @@
 ## Exercises all twelve scenes through the real campaign controller and HUD.
 extends SceneTree
+
+const CareRound = preload("res://scripts/campaign/care_round_runtime.gd")
 const PlantInput = preload("res://tools/support/p01_input_fixture.gd")
 
 const CampaignScene: PackedScene = preload("res://scenes/campaign/chapter1_campaign.tscn")
@@ -90,6 +92,9 @@ func _run() -> void:
 			if not bool(result.get("accepted", false)):
 				_finish()
 				return
+			if String(target_id) == "confirm_date_transition":
+				var photos := CareRound.photo_entries(campaign.director.snapshot()).filter(func(e): return FileAccess.file_exists(String(e.path)))
+				_check((campaign.hud.find_child("PhotoDateCard", true, false) != null) == not photos.is_empty(), "25 Apr date card shows the player's photos exactly when there are some (%d)" % photos.size())
 		# Save and reload a planted garden, not just the first scene's empty state.
 		if index == 3:
 			var saved := campaign.save_campaign()

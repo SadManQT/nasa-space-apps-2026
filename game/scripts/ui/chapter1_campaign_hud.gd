@@ -28,6 +28,7 @@ const CommsServiceScript = preload("res://scripts/comms/comms_service.gd")
 const CommsPanelScript = preload("res://scripts/ui/comms_panel.gd")
 const EvaVisorHudScript = preload("res://scripts/eva/eva_visor_hud.gd")
 const Chapter1FeedbackScript = preload("res://scripts/feedback/chapter1_feedback.gd")
+const CareRoundScript = preload("res://scripts/campaign/care_round_runtime.gd")
 
 var runtime: Chapter1Campaign
 var panels: CampaignPanels
@@ -320,6 +321,8 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 			var chapter_number := int(String(runtime.query().get("chapter_id", "CH01")).trim_prefix("CH"))
 			show_status("%s · %s" % [String(_words.get("chapter_label", "Chapter %d")) % chapter_number, scene_title])
 			_guide_toast = true
+			if next_scene == "EX-CH02-S01":  # doc 24 §2.9 CH01→CH02: the date card carries the player's own photos
+				show_photo_card("30 April 2046 · Tara opens", "2046-04-30")
 		_forecast = {}
 		_forecast_key = ""
 		_forecast_cache_key = ""
@@ -367,6 +370,8 @@ func refresh_after_action(result: Dictionary) -> void:
 			newly_done.append(id)
 	if result.get("accepted", false):
 		var done_id := String(newly_done[0]) if not newly_done.is_empty() else ""
+		if newly_done.has("confirm_date_transition"):  # doc 24 §2.9 CH01 S05→S06
+			show_photo_card("25 April 2046 · your latest photos", "2046-04-25")
 		if done_id.is_empty() and result.get("p01", null) is Dictionary:
 			done_id = String((result.get("p01", {}) as Dictionary).get("action", ""))
 		var notes_list := _result_notes(result.get("warnings", []) + result.get("ledger_summary", []))
@@ -1790,3 +1795,46 @@ func _clear_unselected_forecast() -> void:
 	_forecast_key = ""
 	_forecast_source = ""
 	outpost.bind_query(runtime.query())
+
+## A dated card with the player's own latest photo of each plant taken before
+## `before_date` (doc 24 §2.9 date cards). Top centre, clear of the middle third,
+## gone after six seconds; nothing shows when the player took no photos.
+func show_photo_card(heading: String, before_date: String) -> void:
+	if runtime == null or runtime.director == null:
+		return
+	var card := build_photo_card(runtime.director.snapshot(), heading, before_date, get_viewport().get_visible_rect().size.y)
+	if card == null:
+		return
+	add_child(card)
+	card.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP, Control.PRESET_MODE_MINSIZE, _margin())
+	get_tree().create_timer(6.0).timeout.connect(func(): if is_instance_valid(card): card.queue_free())
+
+static func build_photo_card(snapshot: Dictionary, heading: String, before_date: String, view_h: float) -> Control:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 12)
+	for individual_id in CareRoundScript.PLANT_IDS:
+		var entry: Dictionary = CareRoundScript.latest_photo_before(snapshot, individual_id, before_date)
+		var image := Image.load_from_file(ProjectSettings.globalize_path(String(entry.get("path", "")))) if not entry.is_empty() and FileAccess.file_exists(String(entry.get("path", ""))) else null
+		if image == null:
+			continue
+		var column := VBoxContainer.new()
+		var picture := TextureRect.new()
+		picture.name = "Photo_" + individual_id
+		picture.texture = ImageTexture.create_from_image(image)
+		picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		picture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		picture.custom_minimum_size = Vector2(UiDesign.px(240, view_h), UiDesign.px(160, view_h))
+		column.add_child(picture)
+		column.add_child(UiDesign.label("%s · %s" % [CareRoundScript.PLANT_NAMES.get(individual_id, individual_id), String(entry.get("date", ""))], "caption", "muted"))
+		row.add_child(column)
+	if row.get_child_count() == 0:
+		row.free()
+		return null
+	var card := UiDesign.glass_panel()
+	card.name = "PhotoDateCard"
+	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var box := VBoxContainer.new()
+	box.add_child(UiDesign.label(heading, "heading", "ivory"))
+	box.add_child(row)
+	card.add_child(box)
+	return card

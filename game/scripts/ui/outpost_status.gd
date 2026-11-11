@@ -240,7 +240,7 @@ func meter_view(id: String) -> Dictionary:
 		var word := String(field.get("word", group.fields[key]))
 		var amount := float(resources.get(key, 0))
 		var field_cap := _capacity(String(field.get("capacity", "")))
-		var line := "%s %s" % [word, UiDesign.number(amount)]
+		var line := "%s %s" % [word, UiDesign.number(snappedf(amount, 0.1))]  # the strip reads at a glance: one decimal
 		if field_cap > 0:
 			line += " %s %s" % [String(field.get("scale", "of")), UiDesign.number(field_cap)]
 		if field.has("unit"):

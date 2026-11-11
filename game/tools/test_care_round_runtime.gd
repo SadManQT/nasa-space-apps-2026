@@ -114,6 +114,13 @@ func _test_full_loop_two_dates() -> void:
 	_check(summary["ALO-01"] == ["2046-04-12", "2046-04-18"] and summary["TARA-01"] == ["2046-04-12", "2046-04-18"], "two photos on two dates for each plant: " + str(summary))
 	_check(Runtime.both_plants_photographed_before(director.snapshot(), "2046-04-25"), "Tara and Alo both have entries before 25 Apr")
 	_check(not Runtime.both_plants_photographed_before(director.snapshot(), "2046-04-12"), "nothing is counted before the first photo date")
+	load("res://scenes/ui/chapter1_campaign_hud.tscn")  # the scene first: the HUD script preloads scenes that point back at it
+	var hud_script: GDScript = load("res://scripts/ui/chapter1_campaign_hud.gd")
+	var card: Control = hud_script.build_photo_card(director.snapshot(), "25 April 2046", "2046-04-25", 720.0)
+	_check(card != null and card.find_child("Photo_ALO-01", true, false) is TextureRect and card.find_child("Photo_TARA-01", true, false) is TextureRect, "25 Apr date card shows the player's latest Alo and Tara photos (doc 24 §2.9)")
+	if card != null:
+		card.free()
+	_check(hud_script.build_photo_card(director.snapshot(), "", "2046-04-12", 720.0) == null, "no date card before the first photo")
 
 func _test_duplicate_photo_refused() -> void:
 	var before: Dictionary = director.snapshot()
