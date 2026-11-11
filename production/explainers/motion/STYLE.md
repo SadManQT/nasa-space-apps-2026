@@ -38,7 +38,7 @@ A 9-year-old and a judge should both follow every clip, the first time, with the
 
 ## 4. Sound
 
-- **No narration** (doc 25 §7.1: "calm narrator-free"). The captions carry every word, so a clip works with the sound off. ElevenLabs is therefore not used for these clips. If a future clip needs a real sound effect, generate it with ElevenLabs and log it in `production/ai_log_parts/`.
+- **Narrated for all ages** (Sadman, 11 Nov 2026, replacing the earlier narrator-free rule of doc 25 §7.1): every clip has a calm ElevenLabs narrator (voice "Justin Time – Warm eLearning Explainer", `eleven_multilingual_v2`) saying each caption and the closing `ends_on` line. The captions still carry every word, so a clip works with the sound off. Workflow: one take per clip with a `<break time="1.2s" />` between lines and unit symbols spoken in words; `build.py narrate <spec> <take.mp3>` splits the take at its longest pauses, stretches beats and captions so each line has its full spoken time, and records where each line plays; `render` mixes the voice over the pad (dipped about 12 dB). Narrated clips may run up to 65 s. Log every take in `production/ai_log_parts/`.
 - A quiet sound bed is synthesized in code by `build.py`, so it is reproducible and costs no credits. It is a soft D-major pad, with a chime on each new beat and a small "pop" as each caption appears, at about −30 dBFS RMS so it sits under the game's music.
 
 ## 5. Spec format (one JSON per clip in `specs/`)

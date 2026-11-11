@@ -1477,11 +1477,7 @@
        0,
        1.75
       ],
-      "service_rafi": [
-       5.35,
-       0,
-       2.85
-      ],
+      "service_rafi": [4.97, 0, 3.35],
       "service_mei": [
        1.0,
        0,
@@ -2387,11 +2383,7 @@
     "p12_save_recovery": "power_eclipse_board"
    },
    "anchors": {
-    "service_ferreira": [
-     -2.2,
-     0,
-     3.35
-    ],
+    "service_ferreira": [-1.68, 0, 2.93],
     "service_mei": [
      3.5,
      0,
@@ -2401,11 +2393,7 @@
    "by_scene": {
     "EX-CH06-S01": {
      "anchors": {
-      "service_ferreira": [
-       -2.2,
-       0,
-       3.35
-      ],
+      "service_ferreira": [-1.68, 0, 2.93],
       "service_mei": [
        3.5,
        0,
@@ -2425,11 +2413,7 @@
     },
     "EX-CH06-S02": {
      "anchors": {
-      "service_ferreira": [
-       -2.2,
-       0,
-       3.35
-      ],
+      "service_ferreira": [-1.68, 0, 2.93],
       "service_mei": [
        3.5,
        0,
@@ -2449,11 +2433,7 @@
     },
     "EX-CH06-S03": {
      "anchors": {
-      "service_ferreira": [
-       -2.2,
-       0,
-       3.35
-      ],
+      "service_ferreira": [-1.68, 0, 2.93],
       "service_mei": [
        3.5,
        0,
@@ -2473,11 +2453,7 @@
     },
     "EX-CH06-S04": {
      "anchors": {
-      "service_ferreira": [
-       -2.2,
-       0,
-       3.35
-      ],
+      "service_ferreira": [-1.68, 0, 2.93],
       "service_mei": [
        -0.5,
        0,
@@ -2497,11 +2473,7 @@
     },
     "EX-CH06-S05": {
      "anchors": {
-      "service_ferreira": [
-       -2.2,
-       0,
-       3.35
-      ],
+      "service_ferreira": [-1.68, 0, 2.93],
       "service_mei": [
        3.5,
        0,
@@ -2521,11 +2493,7 @@
     },
     "EX-CH06-S10": {
      "anchors": {
-      "service_ferreira": [
-       -2.2,
-       0,
-       3.35
-      ],
+      "service_ferreira": [-1.68, 0, 2.93],
       "service_mei": [
        3.5,
        0,
@@ -2549,11 +2517,7 @@
     },
     "EX-CH06-S11": {
      "anchors": {
-      "service_ferreira": [
-       -2.2,
-       0,
-       3.35
-      ],
+      "service_ferreira": [-1.68, 0, 2.93],
       "service_mei": [
        3.9,
        0,
@@ -3208,11 +3172,7 @@
     }
    ],
    "anchors": {
-    "service_ferreira": [
-     -2.45,
-     0,
-     2.95
-    ],
+    "service_ferreira": [-2.21, 0, 2.49],
     "service_rafi": [
      -2.9,
      0,
@@ -3585,11 +3545,7 @@
      0,
      0.55
     ],
-    "service_ferreira": [
-     -2.45,
-     0,
-     2.95
-    ]
+    "service_ferreira": [-2.21, 0, 2.49]
    },
    "stations": {
     "p10_clean_panel": "service_maintenance_console",

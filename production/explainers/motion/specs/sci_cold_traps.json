@@ -2,7 +2,7 @@
  "id": "sci_cold_traps",
  "title": "Why cold traps hold ice",
  "level": "explainer",
- "length_s": 38,
+ "length_s": 45.27,
  "fps": 24,
  "purpose": "Teach permanent shadow at the pole, how cold it gets there, and why that keeps ice.",
  "scenes": "cold_traps.js",
@@ -34,13 +34,13 @@
  },
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 15,
+   "from": 4.0,
+   "to": 15.45,
    "scene": "shadow",
    "label": "diagram",
    "credit": "Not to scale",
@@ -49,8 +49,8 @@
    "rim": "Sunlit rim"
   },
   {
-   "from": 15,
-   "to": 28,
+   "from": 15.45,
+   "to": 33.22,
    "scene": "thermo",
    "label": "measured",
    "credit": "NASA LRO Diviner (Paige et al. 2010) · JAXA Kaguya (Haruyama et al. 2008)",
@@ -59,8 +59,8 @@
    "ice": "Ice stays frozen"
   },
   {
-   "from": 28,
-   "to": 33,
+   "from": 33.22,
+   "to": 38.22,
    "scene": "card",
    "label": "measured",
    "credit": "Diviner estimate at one site",
@@ -68,40 +68,40 @@
    "sub": "The vault site in the game is fiction"
   },
   {
-   "from": 33,
-   "to": 38,
+   "from": 38.22,
+   "to": 45.27,
    "scene": "takeaway"
   }
  ],
  "captions": [
   [
    4.4,
-   8.4,
+   8.85,
    "Near the pole, the Sun stays so low that some crater floors never see it."
   ],
   [
-   8.8,
-   12.8,
+   9.25,
+   13.25,
    "Those floors sit in shadow all year, every year."
   ],
   [
-   15.4,
-   19.4,
+   15.85,
+   21.94,
    "In that dark, Shackleton's floor is colder than {floor_c} °C."
   ],
   [
-   19.8,
-   24.2,
+   22.34,
+   28.59,
    "One cold trap measured by NASA's Diviner is about {c} °C."
   ],
   [
-   24.6,
-   27.8,
+   28.99,
+   33.02,
    "Ice that drifts in there stays frozen for a very long time."
   ],
   [
-   28.4,
-   32.6,
+   33.62,
+   37.82,
    "That number is an estimate for one spot."
   ]
  ],
@@ -115,5 +115,46 @@
    "text": "Haruyama et al. 2008",
    "why": "source citation, kaguya_shackleton_floor citation"
   }
- ]
+ ],
+ "narration": {
+  "audio": "production/explainers/narration/sci_cold_traps.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.17,
+    "to": 4.32
+   },
+   {
+    "at": 9.35,
+    "from": 5.83,
+    "to": 9.36
+   },
+   {
+    "at": 15.95,
+    "from": 10.83,
+    "to": 16.62
+   },
+   {
+    "at": 22.44,
+    "from": 18.15,
+    "to": 24.1
+   },
+   {
+    "at": 29.09,
+    "from": 26.31,
+    "to": 30.04
+   },
+   {
+    "at": 33.72,
+    "from": 31.43,
+    "to": 33.6
+   },
+   {
+    "at": 38.82,
+    "from": 35.19,
+    "to": 40.04
+   }
+  ]
+ }
 }

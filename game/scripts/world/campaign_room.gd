@@ -862,6 +862,26 @@ func _build_kit_doors() -> void:
 		door.set_meta("boundary_id", portal.boundary_id)
 		door.setup(String(portal.boundary_id), String(portal.boundary_id).begins_with("door_"))
 		door_root.add_child(door)
+		# Rooms change between scenes, never by walking through a door: the open leaf
+		# only shows a short dead-end passage. A sensor (not a wall; open doors stay
+		# walkable) tells the player where their job is when they step in
+		# (playtest 11 Nov: "stuck at the door").
+		var sensor := Area3D.new()
+		sensor.name = "PassageSensor_" + String(portal.boundary_id)
+		sensor.position = door.position + basis * Vector3(0, 0, 0.9)
+		sensor.rotation = door.rotation
+		sensor.collision_layer = 0
+		sensor.collision_mask = 2
+		var sensor_shape := CollisionShape3D.new()
+		var sensor_box := BoxShape3D.new()
+		sensor_box.size = Vector3(1.2, 2.0, 1.2)
+		sensor_shape.shape = sensor_box
+		sensor.add_child(sensor_shape)
+		var destination := String(portal.destination)
+		sensor.body_entered.connect(func(body: Node3D) -> void:
+			if body is PlayerController and (body as PlayerController).controlled:
+				get_tree().call_group("campaign_hud", "explain_dead_end_passage", destination))
+		door_root.add_child(sensor)
 		var module := Kit.place(door, "EN_Kit_DoorFrame", Vector3(0.5, -1.05, 0))
 		for mesh in module.find_children("*", "MeshInstance3D", true, false):
 			(mesh as MeshInstance3D).cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
