@@ -38,7 +38,7 @@ func _run() -> void:
 	_check(panel.mouse_filter == Control.MOUSE_FILTER_IGNORE and audio.sound_caption.mouse_filter == Control.MOUSE_FILTER_IGNORE, "captions never intercept walking input")
 	var style := panel.get_theme_stylebox("panel") as StyleBoxFlat
 	_check(style != null and style.bg_color == UiDesign.colour("glass"), "panel uses house dark glass")
-	_check(style.border_color == UiDesign.colour("glass_edge") and style.corner_radius_top_left == 12, "panel uses house edge and radius")
+	_check(style.border_color == UiDesign.colour("glass_edge") and style.corner_radius_top_left == int(UiDesign.tokens().get("panel", {}).get("radius", 12)), "panel uses house edge and radius")
 	_check(audio.sound_caption.get_theme_color("font_color") == UiDesign.colour("ivory"), "caption uses high contrast ivory")
 	_check(is_equal_approx(audio.runtime.mix("sound_caption_s"), 3.0), "authored caption duration stays three seconds")
 	for row in CampaignAudioRuntime.read_metadata().audio.sfx:
@@ -78,6 +78,9 @@ func _run() -> void:
 		hud._on_next_line()
 		guard += 1
 	await create_timer(0.3).timeout
+	if hud.panels.hint_player.is_open():  # the first-time how-to that follows the opening dialogue
+		hud.panels.hint_player.close()
+		await _settle()
 	_check(not hud._dialogue_bar.visible, "walking has no dialogue bar")
 	await _show_sound("SFX_FAN_NORMAL")
 	_check_layout("walking", false)

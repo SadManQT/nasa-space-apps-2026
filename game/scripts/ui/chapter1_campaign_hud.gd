@@ -72,6 +72,7 @@ var _column: VBoxContainer
 var _toast: PanelContainer
 var _status: Label
 var _toast_timer := 0.0
+var _guide_toast := false  # the toast only repeats guidance; a crew message may replace it
 # Dialogue
 var _dialogue_bar: PanelContainer
 var _caption_speaker: Label
@@ -318,6 +319,7 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 		if not first_scene and not scene_title.is_empty() and not during_loading:
 			var chapter_number := int(String(runtime.query().get("chapter_id", "CH01")).trim_prefix("CH"))
 			show_status("%s · %s" % [String(_words.get("chapter_label", "Chapter %d")) % chapter_number, scene_title])
+			_guide_toast = true
 		_forecast = {}
 		_forecast_key = ""
 		_forecast_cache_key = ""
@@ -414,6 +416,7 @@ func refresh_after_action(result: Dictionary) -> void:
 func show_status(text: String) -> void:
 	if _status == null:
 		return
+	_guide_toast = false
 	var rewrite := UiDesign.toast_rewrite(text)
 	var line := String(rewrite.text)
 	if not String(rewrite.flag).is_empty():
@@ -1229,7 +1232,7 @@ func _flush_message_toasts() -> void:
 		return
 	if _chrome_hidden or _is_dialogue_active():
 		return
-	if _toast_timer > 0.0 and _toast != null and _toast.visible:
+	if _toast_timer > 0.0 and _toast != null and _toast.visible and not _guide_toast:
 		return
 	var next_toast: Dictionary = comms_service.pop_toast()
 	if not next_toast.is_empty():
@@ -1637,6 +1640,7 @@ func _announce_next() -> void:
 			_toast_timer = maxf(_toast_timer, 6.0)
 	else:
 		show_status(next)
+		_guide_toast = true
 
 ## Free movement with no new goal for a while: point at the marker once more
 ## (and again every NUDGE_SECONDS), never opening a panel or pausing play.
@@ -1650,6 +1654,7 @@ func _tick_nudge(delta: float) -> void:
 	if _idle_seconds >= NUDGE_SECONDS:
 		_idle_seconds = 0.0
 		show_status("Not sure where to go? %s is %s away: follow the ◇ marker, or press %s for What now." % [_title.text, UiDesign.distance_text(_distance_to(_marker_node)), String(_words.get("what_now_key", "H"))])
+		_guide_toast = true
 
 ## Projects the goal marker (with distance) and the prompt on the object in reach.
 func _update_world_overlay() -> void:
