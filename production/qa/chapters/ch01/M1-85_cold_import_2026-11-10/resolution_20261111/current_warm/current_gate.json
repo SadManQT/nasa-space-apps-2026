@@ -1,0 +1,94 @@
+{
+  "revision": "f9469d738a4f679b048fc66c158bc0afbc53cd44",
+  "game_tree": "e77596698f906dfd503e511434c09b8bf0d7ace2",
+  "collector_sha256": "d36ef117a1efda7c5411f04fe76d9ba7b91b8c955380df45a83d19236b992d54",
+  "godot_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "manifest_sha256": "a2088e4ddc349e6879f6760fb9fcc69d82b7c2d7dbff974829c964a2317d6c16",
+  "source_files": 7295,
+  "source_bytes": 1097386815,
+  "scratch": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-warm-20261111",
+  "original_save_before": "d6ccd5e08f297a131f344bfad1286a24986de9fbde66aa7b6b6d67f30e34b702",
+  "scope": "Warm copy of preserved failed current cold-import state at a new project/profile path. Required setup retained. Original cold remains FAILED; exact recorded editor auto-save normalization is disclosed, all other nonimport source stays exact. No authored settings/cache bypass or cold qualification.",
+  "limits": {
+    "SUITE_TIMEOUT": "300",
+    "PLAYER_TEXT_TIMEOUT": "1500",
+    "UPGRADE_PROFILE_TIMEOUT": "10800"
+  },
+  "complete": false,
+  "full_pass": false,
+  "runs": [
+    {
+      "kind": "focused",
+      "result": {
+        "command": [
+          "C:\\Program Files\\Git\\bin\\bash.exe",
+          "game/tools/run_tests.sh",
+          "m185_import_integrity"
+        ],
+        "pid": 19124,
+        "start_utc_epoch": 1794373922.1145551,
+        "duration_seconds": 11.832,
+        "timed_out": false,
+        "termination": {
+          "needed": false
+        },
+        "raw_exit_code": 0,
+        "unsigned_exit_hex": "0x0",
+        "effective_exit_code": 0,
+        "log_sha256": "e94329a3f33858456f335ca35395140da193d6ea4742477720f3cd3a06e530ad",
+        "test_log_dir": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-warm-20261111\\evidence\\smoke_runner_logs",
+        "isolated_env": {
+          "APPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-warm-20261111/profile/roaming",
+          "LOCALAPPDATA": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-warm-20261111/profile/local",
+          "TEMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-warm-20261111/profile/tmp",
+          "TMP": "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/m185-current-warm-20261111/profile/tmp"
+        },
+        "script_error_lines": [],
+        "generic_error_lines": [],
+        "generic_error_count": 0,
+        "warning_count": 0,
+        "last_printed_reimport": null,
+        "suite_summary": [
+          "1/1 suites passed"
+        ],
+        "setup_failure": false,
+        "native_crash_signature": false,
+        "audited_logs": [
+          {
+            "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-warm-20261111\\evidence\\smoke_runner_logs\\setup.log",
+            "sha256": "b728de0c23f24d9aa31bc7608b177d7ca13857d7c3aca862a08506d00675123b",
+            "engine_errors": [],
+            "script_errors": [],
+            "warning_count": 0,
+            "last_printed_reimport": null,
+            "suite_summary": [],
+            "setup_failure": false,
+            "native_crash_signature": false
+          },
+          {
+            "file": "D:\\The_Last_Braincell\\nasa-space-apps-2026\\.codex\\m185-current-warm-20261111\\evidence\\smoke_runner_logs\\test_m185_import_integrity.gd.log",
+            "sha256": "f5250137008ca3a9f577a8e5eb99d95707a03e243646f4be20450a4753c33e8c",
+            "engine_errors": [],
+            "script_errors": [],
+            "warning_count": 0,
+            "last_printed_reimport": null,
+            "suite_summary": [],
+            "setup_failure": false,
+            "native_crash_signature": false
+          }
+        ]
+      }
+    }
+  ],
+  "editor_normalization": {
+    "original_project_sha256": "cff48a51d3a479f387679d684d1ffaa7799018a371f554fffd85de787acf8836",
+    "editor_project_sha256": "8b5026164d8dd2462c1ee234c5a1471c4bd557aeb7b7184f4a54022c4340ae8a",
+    "only_removed_setting": "rendering/renderer/rendering_method.web",
+    "removed_value": "gl_compatibility",
+    "all_other_setting_values_equal": true,
+    "default_equivalence_source": "https://github.com/godotengine/godot/blob/4.7.2-stable/main/main.cpp#L2483",
+    "local_autosave_call": "game/addons/gohud/plugin.gd:57,77; _enter_tree declares fields and saves ProjectSettings",
+    "diff": "--- \n+++ \n@@ -22,6 +22,10 @@\n window/size/window_width_override=1280\n window/size/window_height_override=720\n window/stretch/mode=\"canvas_items\"\n+\n+[editor_plugins]\n+\n+enabled=PackedStringArray(\"res://addons/runtime_assets/plugin.cfg\", \"res://addons/gohud/plugin.cfg\")\n \n [importer_defaults]\n \n@@ -97,14 +101,9 @@\n \n common/physics_interpolation=true\n \n-[editor_plugins]\n-\n-enabled=PackedStringArray(\"res://addons/runtime_assets/plugin.cfg\", \"res://addons/gohud/plugin.cfg\")\n-\n [rendering]\n \n+textures/vram_compression/import_etc2_astc=true\n anti_aliasing/quality/msaa_3d=1\n anti_aliasing/quality/use_taa=true\n anti_aliasing/quality/use_taa.web=false\n-renderer/rendering_method.web=\"gl_compatibility\"\n-textures/vram_compression/import_etc2_astc=true\n",
+    "qualification": "Exact recorded editor auto-save normalization in isolated copy; not byte-identical project.godot. No authored settings change."
+  }
+}
