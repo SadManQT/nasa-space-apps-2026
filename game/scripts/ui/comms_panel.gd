@@ -167,6 +167,8 @@ func _build_ui() -> void:
 	_close_btn.pressed.connect(close_inbox)
 	for label in shell.find_children("*", "Label", true, false):
 		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), "accent" if label == _detail_sender_label else "ivory")
+	for compact_name in ["KickerLabel", "UnreadSummaryLabel", "ThreadHeader", "ListHeader", "DetailTimeLabel"]:
+		(shell.find_child(compact_name, true, false) as Label).autowrap_mode = TextServer.AUTOWRAP_OFF
 	for pane_name in ["ThreadPane", "MessageListPane", "MessageDetailPane"]:
 		var pane := shell.find_child(pane_name, true, false) as PanelContainer
 		pane.add_theme_stylebox_override("panel", UiDesign.glass_style(Color.TRANSPARENT, Color.TRANSPARENT, 12))
@@ -203,6 +205,14 @@ func refresh_view() -> void:
 			_unread_summary_label.text = "%d unread messages" % total_unread
 
 	var threads: Array = comms_service.threads_view() if comms_service != null else []
+	for tid in _thread_buttons:
+		var button: Button = _thread_buttons[tid]
+		var active: bool = tid == active_thread
+		button.toggle_mode = true
+		button.button_pressed = active
+		button.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent" if active else "navy"), active))
+		button.add_theme_color_override("font_color", UiDesign.colour("ink" if active else "ivory"))
+		button.add_theme_color_override("font_focus_color", UiDesign.colour("ink" if active else "ivory"))
 	for tinfo in threads:
 		var tid := String(tinfo.get("id", ""))
 		if not _thread_buttons.has(tid):

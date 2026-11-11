@@ -257,6 +257,7 @@ static func theme() -> Theme:
 	result.set_color("font_color", "Button", UiDesign.colour("ivory"))
 	result.set_color("font_hover_color", "Button", UiDesign.colour("ink"))
 	result.set_color("font_pressed_color", "Button", UiDesign.colour("ink"))
+	result.set_color("font_hover_pressed_color", "Button", UiDesign.colour("ink"))
 	result.set_color("font_focus_color", "Button", UiDesign.colour("ivory"))
 	result.set_color("font_disabled_color", "Button", UiDesign.colour("muted", Color("#A8B4C8")).darkened(0.25))
 	result.set_constant("h_separation", "Button", 8)

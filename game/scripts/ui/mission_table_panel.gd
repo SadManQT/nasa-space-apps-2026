@@ -577,6 +577,7 @@ func _field_row(shift: int, field: String, current: Dictionary, locked: bool) ->
 			button.add_theme_stylebox_override("normal", UiDesign.button_style(MUSTARD, true))
 			button.add_theme_stylebox_override("pressed", UiDesign.button_style(MUSTARD, true))
 			button.add_theme_color_override("font_color", INK)
+			button.add_theme_color_override("font_focus_color", INK)
 			button.add_theme_color_override("font_pressed_color", INK)
 		var picked = value
 		button.pressed.connect(func() -> void: choose(shift, field, picked))
@@ -737,6 +738,7 @@ func _render_footer() -> void:
 	try_button.pressed.connect(func() -> void: preview())
 	try_button.add_theme_stylebox_override("normal", UiDesign.button_style(MUSTARD, true))
 	try_button.add_theme_color_override("font_color", INK)
+	try_button.add_theme_color_override("font_focus_color", INK)
 	row.add_child(try_button)
 	var commit := _button("Prepare shift (Space)" if _view.get("gate", {}).get("preview_only", false) else "Lock in shift (Space)", "Commit")
 	commit.disabled = not reason.is_empty()

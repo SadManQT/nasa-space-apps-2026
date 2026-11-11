@@ -146,6 +146,7 @@ static func button(label: String, min_height: int = 44) -> Button:
 	result.add_theme_color_override("font_color", colour("ivory"))
 	result.add_theme_color_override("font_hover_color", colour("ink"))
 	result.add_theme_color_override("font_pressed_color", colour("ink"))
+	result.add_theme_color_override("font_hover_pressed_color", colour("ink"))
 	result.add_theme_color_override("font_focus_color", colour("ivory"))
 	result.add_theme_color_override("font_disabled_color", colour("muted", Color("#A8B4C8")).darkened(0.25))
 	result.add_theme_stylebox_override("normal", button_style(colour("navy"), false))

@@ -1246,6 +1246,8 @@ func open_family(family_id: String) -> bool:
 		panel.call("bind_campaign", runtime)
 	elif family_id in ["cadet_record", "jobs", "settings_menu"]:
 		panel.call("bind_runtime", runtime)
+		if family_id == "settings_menu":
+			panel.connect("onboarding_reset_requested", func(): panels.hint_player.reset_seen())
 	elif family_id == "save_slots":
 		if runtime.get("save_slots") != null:
 			panel.set("_slots", runtime.get("save_slots"))
@@ -1425,6 +1427,9 @@ func apply_accessibility() -> void:
 	var settings: Dictionary = runtime.query().get("accessibility", {})
 	if runtime.game_settings != null:
 		_prompt_key.text = runtime.game_settings.keyboard_glyph("interact")
+		var help_key := _goal_card.find_child("WhatNowKey", true, false) as Label
+		if help_key != null:
+			help_key.text = "%s - %s" % [runtime.game_settings.keyboard_glyph("what_now"), String(_words.get("what_now", "What now"))]
 		_next_line.text = "%s - %s" % [String(_words.get("next_line", "Next")), runtime.game_settings.keyboard_glyph("next_line")]
 		_advance.text = "%s - %s" % [String(_words.get("continue", "Continue")), runtime.game_settings.keyboard_glyph("advance")]
 	var captions := bool(settings.get("captions", true))
@@ -1499,13 +1504,14 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var key := (event as InputEventKey).physical_keycode
+	var legacy_keys := not FileAccess.file_exists(GameSettings.DEFAULT_PATH)
 	var free: bool = not is_instance_valid(_family_panel) and panels != null and not panels.hint_player.is_open() and panels.active_panel().is_empty() and (mission_table == null or not mission_table.is_open()) and (chapter4_panel == null or not chapter4_panel.is_open()) and (chapter6_panel == null or not chapter6_panel.is_open()) and (chapter8_panel == null or not chapter8_panel.is_open()) and (p01_panel == null or not p01_panel.is_open()) and (comms_panel == null or not bool(comms_panel.is_open()))
 	var pause_pressed := key == KEY_ESCAPE or (InputMap.has_action("pause") and event.is_action_pressed("pause"))
-	var messages_pressed := key == KEY_M or (InputMap.has_action("messages") and event.is_action_pressed("messages"))
-	var what_now_pressed := key == (KEY_E if panels.bindings_snapshot().get("what_now", "H") == "E" else KEY_H) or (InputMap.has_action("what_now") and event.is_action_pressed("what_now"))
-	var journal_pressed := key == KEY_J or (InputMap.has_action("journal") and event.is_action_pressed("journal"))
-	var advance_pressed := (key == KEY_ENTER or key == KEY_KP_ENTER) or (InputMap.has_action("advance") and event.is_action_pressed("advance"))
-	var next_line_pressed := key == KEY_SPACE or (InputMap.has_action("next_line") and event.is_action_pressed("next_line"))
+	var messages_pressed := (legacy_keys and key == KEY_M) or (InputMap.has_action("messages") and event.is_action_pressed("messages"))
+	var what_now_pressed := (legacy_keys and key == (KEY_E if panels.bindings_snapshot().get("what_now", "H") == "E" else KEY_H)) or (InputMap.has_action("what_now") and event.is_action_pressed("what_now"))
+	var journal_pressed := (legacy_keys and key == KEY_J) or (InputMap.has_action("journal") and event.is_action_pressed("journal"))
+	var advance_pressed := (legacy_keys and (key == KEY_ENTER or key == KEY_KP_ENTER)) or (InputMap.has_action("advance") and event.is_action_pressed("advance"))
+	var next_line_pressed := (legacy_keys and key == KEY_SPACE) or (InputMap.has_action("next_line") and event.is_action_pressed("next_line"))
 	if pause_pressed and free:
 		panels.open_panel("pause")
 		get_viewport().set_input_as_handled()

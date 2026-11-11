@@ -12,6 +12,9 @@ func _run() -> void:
 	if not storage.setup("ui-proposal-captures") or not storage.prepare_rendering_cache():
 		quit(1)
 		return
+	for path in ["res://assets/ui/title/aurora_cinematic.png", "res://assets/ui/branding/aurora_mark.svg"]:
+		var texture := load(path) as Texture2D
+		assert(texture != null and texture.get_width() > 0 and texture.get_height() > 0 and maxi(texture.get_width(), texture.get_height()) <= 2048, "UI asset import and texture budget")
 	root.size = Vector2i(1280, 720)
 	root.content_scale_size = root.size
 	var menu: MainMenu = load("res://scenes/ui/main_menu.tscn").instantiate()
@@ -40,6 +43,13 @@ func _run() -> void:
 	root.add_child(trainer)
 	await _shot("14_trainer")
 	trainer.free()
+	var moon := MoonTrainer.new()
+	moon.results_path = storage.directory.path_join("moon.json")
+	root.add_child(moon)
+	while not moon.field_ready:
+		await process_frame
+	await _shot("14_moon_trainer")
+	moon.free()
 	var campaign: Chapter1Campaign = load("res://scenes/campaign/chapter1_campaign.tscn").instantiate()
 	storage.configure(campaign)
 	root.add_child(campaign)
@@ -79,10 +89,11 @@ func _run() -> void:
 	campaign.hud.p01_panel.choose("calibrated_reading", 0)
 	campaign.hud.p01_panel.preview()
 	await _shot("07_calibration")
-	campaign.hud.p01_panel.close()
+	campaign.hud.p01_panel.discard()
 	campaign.hud.panels.open_panel("pause")
 	await _shot("15_pause")
 	campaign.hud.panels.close_panel()
+	campaign.hud.hide()
 	var route := Chapter1Route.new(CampaignDirector.new())
 	route.start_at("EX-CH01-S07")
 	var table: MissionTablePanel = load("res://scenes/ui/mission_table_panel.tscn").instantiate()
