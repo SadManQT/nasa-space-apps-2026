@@ -46,7 +46,7 @@
      "Prepare the return pump in segment 1 and the filtered camera in segment 2.",
      "Leave decorative floodlights off so the 7-unit recovery reserve stays whole."
     ],
-    "clip": "Planning the five eclipse segments (explainer clip pending)"
+    "how_to": "energy_budget"
    }
   },
   "P-12": {
@@ -64,8 +64,7 @@
      "Log ingress and the red ring through the filtered camera.",
      "When the camera feeder trips, isolate it and confirm zero current before resetting.",
      "Reconnect and test the camera branch only, then record egress."
-    ],
-    "clip": "Isolating and restoring the camera feeder (explainer clip pending)"
+    ]
    }
   }
  },

@@ -1,0 +1,76 @@
+{
+ "id": "how_storm_shelter",
+ "title": "The storm shelter run and the dosimeter",
+ "cards": [
+  "storm_shelter"
+ ],
+ "length_s": 14,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH07-S04",
+  "near": "p13_verify_water_shield",
+  "offset": [
+   0.0,
+   0.0,
+   1.4
+  ]
+ },
+ "setup": [],
+ "steps": [
+  [
+   0.5,
+   "ring",
+   "GoalCard",
+   3.0,
+   "Shelter plan"
+  ],
+  [
+   3.8,
+   "call",
+   "hud",
+   "open_family",
+   "hazards"
+  ],
+  [
+   4.6,
+   "ring",
+   "HazardHudPanel",
+   5.4,
+   "Dosimeter"
+  ],
+  [
+   10.2,
+   "click",
+   "CloseHazardHudButton"
+  ],
+  [
+   11.0,
+   "ring",
+   "Prompt",
+   3.0,
+   "Next check"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.7,
+   "When a storm is coming, people go behind the shielding first."
+  ],
+  [
+   3.8,
+   7.0,
+   "The hazard panel shows the storm level and the dosimeter."
+  ],
+  [
+   7.1,
+   10.1,
+   "The dosimeter gives the dose rate now and the total so far."
+  ],
+  [
+   10.2,
+   14.0,
+   "Water and regolith walls slow the particles. Stay in until the level falls."
+  ]
+ ]
+}

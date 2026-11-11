@@ -1,0 +1,88 @@
+{
+ "id": "how_controller_links",
+ "title": "Replacing the controller and checking both links",
+ "cards": [
+  "controller_links"
+ ],
+ "length_s": 16,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH08-S07",
+  "done": []
+ },
+ "setup": [
+  [
+   "call",
+   "hud",
+   "open_chapter8_panel",
+   "p16_isolate_power"
+  ]
+ ],
+ "steps": [
+  [
+   0.5,
+   "arrow",
+   [
+    180,
+    360
+   ],
+   3.4,
+   "What we know"
+  ],
+  [
+   4.0,
+   "arrow",
+   [
+    640,
+    380
+   ],
+   3.6,
+   "Your decision"
+  ],
+  [
+   8.0,
+   "click",
+   "Try"
+  ],
+  [
+   8.8,
+   "arrow",
+   [
+    1100,
+    360
+   ],
+   3.4,
+   "Before and after"
+  ],
+  [
+   12.4,
+   "ring",
+   "Commit",
+   2.6,
+   "Lock in"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.9,
+   "The procedure card lists each step in order."
+  ],
+  [
+   4.0,
+   7.9,
+   "Isolate, test for zero, replace, close, then restore power."
+  ],
+  [
+   8.0,
+   12.3,
+   "Then test the local link and the Earth link, each on its own."
+  ],
+  [
+   12.4,
+   16.0,
+   "Accept only an exact reply. One good link proves only itself."
+  ]
+ ],
+ "verify": "Decision choice clicks are added after a --dump of the M4-20 panel (Choice_<field>_<id> names)."
+}

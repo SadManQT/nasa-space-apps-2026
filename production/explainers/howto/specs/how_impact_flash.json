@@ -1,0 +1,76 @@
+{
+ "id": "how_impact_flash",
+ "title": "Classifying an impact flash",
+ "cards": [
+  "impact_flash"
+ ],
+ "length_s": 14,
+ "stage": {
+  "kind": "campaign",
+  "scene": "EX-CH05-S07",
+  "near": "p10_verify_flashes",
+  "offset": [
+   0.0,
+   0.0,
+   1.4
+  ]
+ },
+ "setup": [],
+ "steps": [
+  [
+   0.5,
+   "ring",
+   "GoalCard",
+   3.4,
+   "Verify the flashes"
+  ],
+  [
+   4.0,
+   "ring",
+   "Prompt",
+   2.6,
+   "In reach"
+  ],
+  [
+   6.8,
+   "key",
+   "E",
+   "E"
+  ],
+  [
+   7.6,
+   "ring",
+   "Toast",
+   3.6,
+   "Result"
+  ],
+  [
+   11.4,
+   "key",
+   "H",
+   "H"
+  ]
+ ],
+ "captions": [
+  [
+   0.3,
+   3.9,
+   "Some bright spots are impacts. Some are detector faults."
+  ],
+  [
+   4.0,
+   7.5,
+   "Compare more than one frame of each flash."
+  ],
+  [
+   7.6,
+   11.3,
+   "A real flash changes and fades. A fault looks the same every time."
+  ],
+  [
+   11.4,
+   14.0,
+   "Press H if you want one hint at a time."
+  ]
+ ]
+}

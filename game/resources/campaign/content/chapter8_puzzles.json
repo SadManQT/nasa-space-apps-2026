@@ -46,7 +46,7 @@
      "Choose a road the rover can actually drive.",
      "Keep the return in the battery."
     ],
-    "clip": "The rover and the return reserve (explainer clip pending)"
+    "how_to": "rover_route_planner"
    }
   },
   "P-16": {
@@ -65,7 +65,7 @@
      "Lock the road chain first, then Earth.",
      "Accept only the exact reply."
     ],
-    "clip": "Replacing the controller and checking both links (explainer clip pending)"
+    "how_to": "controller_links"
    }
   }
  },
