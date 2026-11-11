@@ -71,3 +71,7 @@ Commit verified work under your own verified GitHub identity. Sync before implem
 ## Subsequent user override: integrated 117-suite gate
 
 On 10 November the user explicitly authorized Ramim to override task/folder ownership as needed to make all 117 existing suites pass. M1-125 is the additional Ramim integration task. The current required gate has 119 suites after the two published owner-delivery suites; keep both. On the subsequent continue request, Ramim also resumes the existing M4-18 upgrade-consumer follow-up (54 active IDs total, including Sadman's M4-17/M1-126 deliveries). Preserve other owners' published and unfinished work, record exact-file transfers/reservations, and merge against current main before publishing. Existing assignments and deferred video/submission/manual QA remain; no threshold relaxation or unverified completion is authorized.
+
+## 11 November: M1-116 original-host continuation
+
+The user explicitly assigned Tanvir M1-116 to check and complete on the original Windows/Intel Arc laptop. This overrides its earlier Atik/Sadman assignment for this ID only. Preserve the existing collector, handoffs and failed native evidence; all other assignments and active reservations remain.
