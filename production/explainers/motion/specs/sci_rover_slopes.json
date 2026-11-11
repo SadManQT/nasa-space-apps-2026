@@ -2,7 +2,7 @@
  "id": "sci_rover_slopes",
  "title": "Rovers and slopes",
  "level": "explainer",
- "length_s": 36,
+ "length_s": 37.89,
  "fps": 24,
  "purpose": "Teach why rovers have a slope limit, what VIPER's design limit is, and why the safe route can be the longer one.",
  "scenes": "rover_slopes.js",
@@ -24,13 +24,13 @@
  },
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 18,
+   "from": 4.0,
+   "to": 18.0,
    "scene": "climb",
    "label": "measured",
    "credit": "NASA VIPER rover design figure",
@@ -38,8 +38,8 @@
    "slip": "Steeper: the wheels slip"
   },
   {
-   "from": 18,
-   "to": 27,
+   "from": 18.0,
+   "to": 27.0,
    "scene": "route",
    "label": "diagram",
    "credit": "Planning a route",
@@ -47,8 +47,8 @@
    "gentle": "Longer, gentle, safe"
   },
   {
-   "from": 27,
-   "to": 31,
+   "from": 27.0,
+   "to": 31.0,
    "scene": "card",
    "label": "measured",
    "credit": "NASA VIPER",
@@ -56,8 +56,8 @@
    "sub": "The game's rover and its roads are fiction"
   },
   {
-   "from": 31,
-   "to": 36,
+   "from": 31.0,
+   "to": 37.89,
    "scene": "takeaway"
   }
  ],
@@ -94,5 +94,46 @@
   ]
  ],
  "ends_on": "Check the slope before you drive. The short way is not always the safe way.",
- "literals": []
+ "literals": [],
+ "narration": {
+  "audio": "production/explainers/narration/sci_rover_slopes.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.0,
+    "to": 3.66
+   },
+   {
+    "at": 8.9,
+    "from": 5.11,
+    "to": 8.74
+   },
+   {
+    "at": 13.3,
+    "from": 11.19,
+    "to": 13.82
+   },
+   {
+    "at": 18.5,
+    "from": 15.07,
+    "to": 17.68
+   },
+   {
+    "at": 23.1,
+    "from": 18.93,
+    "to": 21.46
+   },
+   {
+    "at": 27.5,
+    "from": 22.85,
+    "to": 25.0
+   },
+   {
+    "at": 31.6,
+    "from": 26.37,
+    "to": 31.06
+   }
+  ]
+ }
 }

@@ -310,7 +310,14 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 	var scene := runtime.current_scene_data()
 	var next_scene := String(scene.get("id", ""))
 	if next_scene != _scene_id:
+		var first_scene := _scene_id.is_empty()
 		_scene_id = next_scene
+		# Playtest review 11 Nov: each scene opens with its story title so it reads as its own
+		# episode (STORY_FULL titles); the next-step line is added beneath it.
+		var scene_title := String(scene.get("title", ""))
+		if not first_scene and not scene_title.is_empty() and not during_loading:
+			var chapter_number := int(String(runtime.query().get("chapter_id", "CH01")).trim_prefix("CH"))
+			show_status("%s · %s" % [String(_words.get("chapter_label", "Chapter %d")) % chapter_number, scene_title])
 		_forecast = {}
 		_forecast_key = ""
 		_forecast_cache_key = ""
@@ -761,7 +768,9 @@ func _goal_for_state(current: Dictionary, gate: Dictionary, complete: bool) -> D
 	var info := {"goal": "", "why": "", "hint": "", "target_id": "", "place": "", "ready": false, "complete": complete}
 	if complete:
 		var done: Dictionary = _words.get("chapter_complete", {})
-		info.goal = String(done.get("goal", "Chapter complete"))
+		info.goal = String(done.get("goal", "Chapter %d complete"))
+		if info.goal.contains("%d"):
+			info.goal = info.goal % int(String(runtime.query().get("chapter_id", "CH01")).trim_prefix("CH"))
 		info.why = String(done.get("why", ""))
 		return info
 	if not current.is_empty():

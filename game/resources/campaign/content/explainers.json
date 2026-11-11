@@ -46,7 +46,7 @@
    "level": "explainer",
    "title": "Why cold traps hold ice",
    "path": "res://assets/explainers/science/sci_cold_traps.ogv",
-   "length_s": 38.04,
+   "length_s": 45.29,
    "labels": [
     "diagram",
     "measured"
@@ -63,32 +63,32 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.4,
+     "end": 8.85,
      "text": "Near the pole, the Sun stays so low that some crater floors never see it."
     },
     {
-     "start": 8.8,
-     "end": 12.8,
+     "start": 9.25,
+     "end": 13.25,
      "text": "Those floors sit in shadow all year, every year."
     },
     {
-     "start": 15.4,
-     "end": 19.4,
+     "start": 15.85,
+     "end": 21.94,
      "text": "In that dark, Shackleton's floor is colder than −183 °C."
     },
     {
-     "start": 19.8,
-     "end": 24.2,
+     "start": 22.34,
+     "end": 28.59,
      "text": "One cold trap measured by NASA's Diviner is about −235 °C."
     },
     {
-     "start": 24.6,
-     "end": 27.8,
+     "start": 28.99,
+     "end": 33.02,
      "text": "Ice that drifts in there stays frozen for a very long time."
     },
     {
-     "start": 28.4,
-     "end": 32.6,
+     "start": 33.62,
+     "end": 37.82,
      "text": "That number is an estimate for one spot."
     }
    ],
@@ -101,7 +101,7 @@
    "level": "explainer",
    "title": "Cotton on the Moon",
    "path": "res://assets/explainers/science/sci_cotton_moon.ogv",
-   "length_s": 34.04,
+   "length_s": 37.25,
    "labels": [
     "measured"
    ],
@@ -115,27 +115,27 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.6,
+     "end": 10.16,
      "text": "In 2019, China's Chang'e-4 lander carried seeds to the Moon's far side."
     },
     {
-     "start": 9.0,
-     "end": 13.4,
+     "start": 10.56,
+     "end": 15.69,
      "text": "Inside a small sealed can, a cotton seed sprouted into a green seedling."
     },
     {
-     "start": 13.8,
-     "end": 17.8,
+     "start": 16.09,
+     "end": 20.09,
      "text": "So a seed can sprout on the Moon, inside a sealed can."
     },
     {
-     "start": 18.2,
-     "end": 21.6,
+     "start": 20.49,
+     "end": 23.89,
      "text": "But it never flowered or made seeds."
     },
     {
-     "start": 22.4,
-     "end": 26.6,
+     "start": 24.69,
+     "end": 28.89,
      "text": "That was one small, sealed experiment."
     }
    ],
@@ -148,7 +148,7 @@
    "level": "explainer",
    "title": "Air, water and food for a crew",
    "path": "res://assets/explainers/science/sci_crew_needs.ogv",
-   "length_s": 39.04,
+   "length_s": 47.38,
    "labels": [
     "model"
    ],
@@ -166,37 +166,37 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.4,
+     "end": 10.2,
      "text": "Every day, one astronaut needs three things: air, water and food."
     },
     {
-     "start": 8.8,
-     "end": 12.2,
+     "start": 10.6,
+     "end": 14.0,
      "text": "About 0.9 kg of oxygen to breathe."
     },
     {
-     "start": 12.6,
-     "end": 16.0,
+     "start": 14.4,
+     "end": 20.33,
      "text": "About 3.2 kg of water to drink, and 0.8 kg of food."
     },
     {
-     "start": 16.4,
-     "end": 19.6,
+     "start": 20.73,
+     "end": 24.72,
      "text": "And they breathe out about 1.1 kg of carbon dioxide."
     },
     {
-     "start": 20.4,
-     "end": 24.4,
+     "start": 25.52,
+     "end": 29.75,
      "text": "A crew of four needs four times as much, every single day."
     },
     {
-     "start": 24.8,
-     "end": 28.4,
+     "start": 30.15,
+     "end": 33.75,
      "text": "Without any one of the three, the crew cannot stay."
     },
     {
-     "start": 31.3,
-     "end": 33.9,
+     "start": 36.65,
+     "end": 39.25,
      "text": "These are planning values for an average adult."
     }
    ],
@@ -209,7 +209,7 @@
    "level": "explainer",
    "title": "Where is Earth from the pole?",
    "path": "res://assets/explainers/science/sci_earth_position.ogv",
-   "length_s": 42.04,
+   "length_s": 53.21,
    "labels": [
     "model"
    ],
@@ -225,42 +225,42 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.4,
+     "end": 9.39,
      "text": "From the south pole, Earth never climbs high. It hugs the horizon."
     },
     {
-     "start": 8.8,
-     "end": 13.0,
+     "start": 9.79,
+     "end": 15.72,
      "text": "Through April 2046 it rocks slowly up above the edge, then down below it."
     },
     {
-     "start": 13.4,
-     "end": 17.6,
+     "start": 16.12,
+     "end": 23.07,
      "text": "From 15 April to 28 April, Earth is below the horizon: no direct radio link."
     },
     {
-     "start": 18.0,
-     "end": 20.6,
+     "start": 23.47,
+     "end": 26.07,
      "text": "Chapter 1's night falls inside that gap."
     },
     {
-     "start": 21.4,
-     "end": 25.6,
+     "start": 26.87,
+     "end": 31.52,
      "text": "On the best peak near the pole, Earth is in view 51% of the time."
     },
     {
-     "start": 26.0,
-     "end": 29.4,
+     "start": 31.92,
+     "end": 35.75,
      "text": "The same peak gets sunlight 92% of the time."
     },
     {
-     "start": 29.8,
-     "end": 32.6,
+     "start": 36.15,
+     "end": 39.32,
      "text": "That is why relay stations go on high peaks."
     },
     {
-     "start": 33.3,
-     "end": 36.8,
+     "start": 40.02,
+     "end": 44.43,
      "text": "So in the game, shift 4's link cutoff is a training drill."
     }
    ],
@@ -273,7 +273,7 @@
    "level": "explainer",
    "title": "Impact flashes",
    "path": "res://assets/explainers/science/sci_impact_flashes.ogv",
-   "length_s": 38.04,
+   "length_s": 42.83,
    "labels": [
     "diagram",
     "measured"
@@ -288,32 +288,32 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.4,
+     "end": 8.89,
      "text": "Tiny bits of space rock hit the Moon and make brief flashes of light."
     },
     {
-     "start": 8.8,
-     "end": 12.8,
+     "start": 9.29,
+     "end": 13.29,
      "text": "NASA watches the Moon's dark side for them about 10 nights a month."
     },
     {
-     "start": 13.2,
-     "end": 17.6,
+     "start": 13.69,
+     "end": 20.8,
      "text": "In the first five years they confirmed 126 flashes, 62% during meteor showers."
     },
     {
-     "start": 18.4,
-     "end": 22.6,
+     "start": 21.6,
+     "end": 25.8,
      "text": "A camera can glitch, so one sighting is not enough."
     },
     {
-     "start": 23.0,
-     "end": 28.4,
+     "start": 26.2,
+     "end": 31.6,
      "text": "A flash counts only when two telescopes both see it at the same moment."
     },
     {
-     "start": 29.4,
-     "end": 32.6,
+     "start": 32.6,
+     "end": 35.8,
      "text": "These flashes were watched from Earth."
     }
    ],
@@ -326,7 +326,7 @@
    "level": "explainer",
    "title": "Mapping the Moon with a laser",
    "path": "res://assets/explainers/science/sci_laser_mapping.ogv",
-   "length_s": 42.04,
+   "length_s": 47.21,
    "labels": [
     "diagram",
     "measured",
@@ -344,37 +344,37 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.6,
+     "end": 9.44,
      "text": "NASA's LRO spacecraft fires laser pulses at the Moon from orbit."
     },
     {
-     "start": 9.0,
-     "end": 14.6,
+     "start": 9.84,
+     "end": 15.44,
      "text": "Timing each echo gives the distance, and so the height of the ground."
     },
     {
-     "start": 15.4,
-     "end": 19.8,
+     "start": 16.24,
+     "end": 21.17,
      "text": "Millions of those heights make a map, down to one point every 5 m."
     },
     {
-     "start": 20.2,
-     "end": 23.8,
+     "start": 21.57,
+     "end": 25.17,
      "text": "This is the real ridge where Aurora stands."
     },
     {
-     "start": 24.2,
-     "end": 27.8,
+     "start": 25.57,
+     "end": 29.56,
      "text": "Two NASA maps of it agree to about 1.4 m."
     },
     {
-     "start": 28.4,
-     "end": 32.0,
+     "start": 30.16,
+     "end": 33.81,
      "text": "From heights you get slopes: how steep each step is."
     },
     {
-     "start": 32.4,
-     "end": 36.6,
+     "start": 34.21,
+     "end": 39.88,
      "text": "So the road to the cold trap is 8.6 km, never steeper than 12°."
     }
    ],
@@ -387,7 +387,7 @@
    "level": "explainer",
    "title": "The long road to Malapert",
    "path": "res://assets/explainers/science/sci_long_road.ogv",
-   "length_s": 38.04,
+   "length_s": 41.58,
    "labels": [
     "model"
    ],
@@ -402,32 +402,32 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.4,
+     "end": 8.73,
      "text": "Places on the Moon have official names, kept on a public map."
     },
     {
-     "start": 8.8,
-     "end": 13.2,
+     "start": 9.13,
+     "end": 14.8,
      "text": "Mons Malapert is a real mountain about 122 km from the south pole."
     },
     {
-     "start": 13.6,
-     "end": 17.6,
+     "start": 15.2,
+     "end": 19.2,
      "text": "That is almost three marathons laid end to end."
     },
     {
-     "start": 18.4,
-     "end": 22.8,
+     "start": 20.0,
+     "end": 24.4,
      "text": "But a rover cannot drive straight over craters and steep slopes."
     },
     {
-     "start": 23.2,
-     "end": 27.6,
+     "start": 24.8,
+     "end": 29.37,
      "text": "A road on gentle ground is about 198 km long."
     },
     {
-     "start": 28.4,
-     "end": 31.6,
+     "start": 30.17,
+     "end": 33.37,
      "text": "Those are the features' centres."
     }
    ],
@@ -440,7 +440,7 @@
    "level": "explainer",
    "title": "Low gravity",
    "path": "res://assets/explainers/science/sci_low_gravity.ogv",
-   "length_s": 34.04,
+   "length_s": 35.92,
    "labels": [
     "diagram"
    ],
@@ -480,7 +480,7 @@
    "level": "explainer",
    "title": "Moonquakes",
    "path": "res://assets/explainers/science/sci_moonquakes.ogv",
-   "length_s": 38.04,
+   "length_s": 45.21,
    "labels": [
     "diagram",
     "measured"
@@ -496,32 +496,32 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.4,
+     "end": 9.62,
      "text": "Apollo astronauts left seismometers on the Moon, and the ground moved."
     },
     {
-     "start": 8.8,
-     "end": 12.8,
+     "start": 10.02,
+     "end": 16.35,
      "text": "From 1971 to 1976 they recorded 28 shallow moonquakes."
     },
     {
-     "start": 13.2,
-     "end": 17.6,
+     "start": 16.75,
+     "end": 21.84,
      "text": "The strongest reached magnitude 3.2: enough to rattle a base."
     },
     {
-     "start": 19.4,
-     "end": 23.4,
+     "start": 23.64,
+     "end": 27.64,
      "text": "A quake shakes anything that is not held down."
     },
     {
-     "start": 23.8,
-     "end": 28.4,
+     "start": 28.04,
+     "end": 32.64,
      "text": "That is why equipment on the Moon is strapped and latched."
     },
     {
-     "start": 29.3,
-     "end": 32.7,
+     "start": 33.54,
+     "end": 36.94,
      "text": "These were recorded far from the south pole."
     }
    ],
@@ -534,7 +534,7 @@
    "level": "explainer",
    "title": "How plants grow in space",
    "path": "res://assets/explainers/science/sci_plant_growth.ogv",
-   "length_s": 42.04,
+   "length_s": 49.96,
    "labels": [
     "measured"
    ],
@@ -555,42 +555,42 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.6,
+     "end": 8.78,
      "text": "Fast Plants can go from seed to new seeds in about 40 days."
     },
     {
-     "start": 9.0,
-     "end": 12.6,
+     "start": 9.18,
+     "end": 12.78,
      "text": "They flower after about 14 days."
     },
     {
-     "start": 13.0,
-     "end": 17.4,
+     "start": 13.18,
+     "end": 18.41,
      "text": "Then pollen must travel from one plant to another; they cannot pollinate themselves."
     },
     {
-     "start": 17.8,
-     "end": 20.6,
+     "start": 18.81,
+     "end": 21.92,
      "text": "About 20 days later, the seeds are ripe."
     },
     {
-     "start": 21.4,
-     "end": 25.8,
+     "start": 22.72,
+     "end": 27.12,
      "text": "On the Mir space station, Brassica plants grew from seed to seed."
     },
     {
-     "start": 26.2,
-     "end": 29.6,
+     "start": 27.52,
+     "end": 36.65,
      "text": "Astronauts moved the pollen by hand, flower to flower."
     },
     {
-     "start": 29.9,
-     "end": 32.9,
+     "start": 37.0,
+     "end": 40.0,
      "text": "On the ISS, Brassica greens grew under lamps for 27 days."
     },
     {
-     "start": 33.3,
-     "end": 35.9,
+     "start": 40.4,
+     "end": 43.83,
      "text": "Those plants grew in orbit, not on the Moon."
     }
    ],
@@ -603,7 +603,7 @@
    "level": "explainer",
    "title": "Why the Sun stays low at the pole",
    "path": "res://assets/explainers/science/sci_polar_sun.ogv",
-   "length_s": 45.04,
+   "length_s": 59.54,
    "labels": [
     "diagram",
     "model"
@@ -626,38 +626,38 @@
      "text": "The Moon spins standing almost straight up, like a top."
     },
     {
-     "start": 8.5,
-     "end": 12.2,
+     "start": 8.55,
+     "end": 12.25,
      "text": "So at the south pole, sunlight comes in from the side."
     },
     {
-     "start": 12.5,
-     "end": 15.8,
+     "start": 12.6,
+     "end": 16.57,
      "text": "The Sun never climbs. It rolls around the edge of the sky."
     },
     {
-     "start": 16.4,
-     "end": 20.6,
+     "start": 17.17,
+     "end": 24.42,
      "text": "Here is how high the Sun gets in 2046 and 2047. Zero is the horizon."
     },
     {
-     "start": 21.0,
-     "end": 24.4,
+     "start": 24.82,
+     "end": 32.91,
      "text": "It stays between −1.56° and +1.59°: just a peek above or below."
     },
     {
-     "start": 24.8,
-     "end": 27.8,
+     "start": 33.31,
+     "end": 36.31,
      "text": "That is smaller than your thumb held out at arm's length!"
     },
     {
-     "start": 28.4,
-     "end": 32.6,
+     "start": 36.91,
+     "end": 43.36,
      "text": "So up high is best. A tall crater rim can stay sunny 240 days straight."
     },
     {
-     "start": 33.0,
-     "end": 37.6,
+     "start": 43.76,
+     "end": 50.53,
      "text": "Down in the crater it stays dark. Even on the rim, darkness can last 1.5 days."
     }
    ],
@@ -670,7 +670,7 @@
    "level": "explainer",
    "title": "Reading a proton-flux chart",
    "path": "res://assets/explainers/science/sci_proton_flux_chart.ogv",
-   "length_s": 45.04,
+   "length_s": 63.46,
    "labels": [
     "diagram",
     "measured"
@@ -689,47 +689,47 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.2,
+     "end": 9.56,
      "text": "A weather satellite near Earth counts tiny, fast bits of the Sun: protons."
     },
     {
-     "start": 8.5,
-     "end": 11.8,
+     "start": 9.91,
+     "end": 14.7,
      "text": "Its count is in pfu: protons per square centimetre, each second."
     },
     {
-     "start": 12.4,
-     "end": 16.2,
+     "start": 15.3,
+     "end": 19.27,
      "text": "On a normal scale, a quiet day is so small you cannot even see it."
     },
     {
-     "start": 16.6,
-     "end": 20.6,
+     "start": 19.67,
+     "end": 24.6,
      "text": "On a log scale, each step up is ten times bigger. Now both fit!"
     },
     {
-     "start": 21.4,
-     "end": 24.8,
+     "start": 25.4,
+     "end": 33.45,
      "text": "10 September 2017: an X8.2 flare bursts on the Sun at 15:35 UTC."
     },
     {
-     "start": 25.2,
-     "end": 28.8,
+     "start": 33.85,
+     "end": 39.94,
      "text": "At 16:45 UTC, the protons cross the storm line: 10 pfu."
     },
     {
-     "start": 29.2,
-     "end": 32.0,
+     "start": 40.34,
+     "end": 43.14,
      "text": "That is just seventy minutes after the flare began."
     },
     {
-     "start": 32.4,
-     "end": 35.8,
+     "start": 43.54,
+     "end": 50.05,
      "text": "Then they stay high for days, peaking at 1,493.5 pfu!"
     },
     {
-     "start": 36.3,
-     "end": 40.3,
+     "start": 50.55,
+     "end": 55.6,
      "text": "The Moon has no air or magnetic shield, so storms like this reach the ground."
     }
    ],
@@ -742,7 +742,7 @@
    "level": "explainer",
    "title": "The red ring",
    "path": "res://assets/explainers/science/sci_red_ring.ogv",
-   "length_s": 40.04,
+   "length_s": 45.17,
    "labels": [
     "diagram",
     "measured"
@@ -758,32 +758,32 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.8,
+     "end": 10.46,
      "text": "On 12 January 2047, the Sun, Earth and Moon line up."
     },
     {
-     "start": 9.2,
-     "end": 14.4,
+     "start": 10.86,
+     "end": 16.06,
      "text": "The Moon slides into Earth's shadow: a total lunar eclipse."
     },
     {
-     "start": 15.4,
-     "end": 19.8,
+     "start": 17.06,
+     "end": 24.93,
      "text": "From the Moon, Earth covers the whole Sun."
     },
     {
-     "start": 20.2,
-     "end": 24.6,
+     "start": 25.33,
+     "end": 29.73,
      "text": "Sunlight bending through Earth's air paints a thin red ring around it."
     },
     {
-     "start": 25.0,
-     "end": 28.6,
+     "start": 30.13,
+     "end": 33.73,
      "text": "The full shadow lasts about 70 minutes."
     },
     {
-     "start": 29.4,
-     "end": 33.6,
+     "start": 34.53,
+     "end": 38.73,
      "text": "Those minutes are for the whole Moon."
     }
    ],
@@ -796,7 +796,7 @@
    "level": "explainer",
    "title": "Relays and line of sight",
    "path": "res://assets/explainers/science/sci_relays.ogv",
-   "length_s": 40.04,
+   "length_s": 44.96,
    "labels": [
     "diagram",
     "model"
@@ -814,32 +814,32 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.6,
+     "end": 9.39,
      "text": "Radio travels in straight lines, and the Moon's surface curves away."
     },
     {
-     "start": 9.0,
-     "end": 15.4,
+     "start": 9.79,
+     "end": 16.28,
      "text": "Around 8 April 2047, Earth is below the pole's horizon: no direct link."
     },
     {
-     "start": 16.4,
-     "end": 21.0,
+     "start": 17.28,
+     "end": 21.88,
      "text": "A relay on a high peak can see both the base and Earth."
     },
     {
-     "start": 21.4,
-     "end": 25.8,
+     "start": 22.28,
+     "end": 27.01,
      "text": "To see Earth then, it must stand at least 1.4 km high."
     },
     {
-     "start": 26.2,
-     "end": 29.6,
+     "start": 27.41,
+     "end": 31.26,
      "text": "Repeaters along a road pass the signal hop by hop."
     },
     {
-     "start": 30.4,
-     "end": 34.6,
+     "start": 32.06,
+     "end": 36.26,
      "text": "This is geometry, before the real terrain check."
     }
    ],
@@ -852,7 +852,7 @@
    "level": "explainer",
    "title": "Rovers and slopes",
    "path": "res://assets/explainers/science/sci_rover_slopes.ogv",
-   "length_s": 36.04,
+   "length_s": 37.92,
    "labels": [
     "diagram",
     "measured"
@@ -906,7 +906,7 @@
    "level": "explainer",
    "title": "What shielding does",
    "path": "res://assets/explainers/science/sci_shielding.ogv",
-   "length_s": 42.04,
+   "length_s": 51.46,
    "labels": [
     "diagram",
     "model"
@@ -923,37 +923,37 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.4,
+     "end": 8.8,
      "text": "Fast protons lose energy as they push through anything in their way."
     },
     {
-     "start": 8.8,
-     "end": 12.8,
+     "start": 9.2,
+     "end": 13.85,
      "text": "Water is great at this, because it is packed with light hydrogen atoms."
     },
     {
-     "start": 13.0,
-     "end": 15.8,
+     "start": 14.2,
+     "end": 17.15,
      "text": "The thicker the wall, the fewer get through."
     },
     {
-     "start": 16.4,
-     "end": 20.6,
+     "start": 17.75,
+     "end": 23.32,
      "text": "A model of a huge 1972 solar storm shows what thicker shielding does."
     },
     {
-     "start": 21.0,
-     "end": 25.4,
+     "start": 23.72,
+     "end": 31.85,
      "text": "Behind the thinnest wall, about 185 mSv. Behind the thickest, about 85."
     },
     {
-     "start": 25.8,
-     "end": 29.6,
+     "start": 32.25,
+     "end": 36.05,
      "text": "Thicker walls cut the dose, but it never drops to zero."
     },
     {
-     "start": 30.4,
-     "end": 35.6,
+     "start": 36.85,
+     "end": 43.5,
      "text": "So crews do three things: put shielding up, get behind it fast, and stay there."
     }
    ],
@@ -966,7 +966,7 @@
    "level": "explainer",
    "title": "Solar power and batteries",
    "path": "res://assets/explainers/science/sci_solar_power.ogv",
-   "length_s": 41.04,
+   "length_s": 46.54,
    "labels": [
     "diagram",
     "model"
@@ -985,42 +985,42 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.4,
+     "end": 9.61,
      "text": "Near the pole the Sun stays low, so solar panels stand tall and upright."
     },
     {
-     "start": 8.8,
-     "end": 12.4,
+     "start": 10.01,
+     "end": 14.32,
      "text": "This NASA design hangs a 10 kW panel from a 16 m mast."
     },
     {
-     "start": 12.6,
-     "end": 14.8,
+     "start": 14.67,
+     "end": 16.87,
      "text": "It turns to keep facing the Sun."
     },
     {
-     "start": 15.4,
-     "end": 19.4,
+     "start": 17.47,
+     "end": 22.86,
      "text": "A battery works like a water tank: sunlight fills it, the base drains it."
     },
     {
-     "start": 19.8,
-     "end": 23.4,
+     "start": 23.26,
+     "end": 27.61,
      "text": "When the tank is full, any extra power spills away and is lost."
     },
     {
-     "start": 23.8,
-     "end": 26.6,
+     "start": 28.01,
+     "end": 30.81,
      "text": "So spare power is best used while you have it."
     },
     {
-     "start": 27.4,
-     "end": 31.0,
+     "start": 31.61,
+     "end": 35.88,
      "text": "When the Sun hides, nothing flows in. The base lives on the tank."
     },
     {
-     "start": 31.4,
-     "end": 34.6,
+     "start": 36.28,
+     "end": 39.69,
      "text": "If the tank runs dry, the lights and heaters go dark."
     }
    ],
@@ -1033,7 +1033,7 @@
    "level": "explainer",
    "title": "Solar storms in 2012 and 2017",
    "path": "res://assets/explainers/science/sci_storms_2012_2017.ogv",
-   "length_s": 42.04,
+   "length_s": 50.0,
    "labels": [
     "measured"
    ],
@@ -1052,32 +1052,32 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.8,
+     "end": 11.67,
      "text": "In July 2012, the Sun threw out a huge cloud at about 3,435 km/s."
     },
     {
-     "start": 9.2,
-     "end": 14.8,
+     "start": 12.07,
+     "end": 17.67,
      "text": "It missed Earth and hit the STEREO-A spacecraft instead."
     },
     {
-     "start": 16.4,
-     "end": 20.8,
+     "start": 19.27,
+     "end": 25.92,
      "text": "STEREO-A's protons rose within hours; the shock arrived about 17 hours later."
     },
     {
-     "start": 21.2,
-     "end": 25.8,
+     "start": 26.32,
+     "end": 33.11,
      "text": "The 2017 storm did reach Earth, peaking near 1,494 pfu."
     },
     {
-     "start": 26.2,
-     "end": 29.6,
+     "start": 33.51,
+     "end": 36.91,
      "text": "Both are real. Only one hit home."
     },
     {
-     "start": 30.4,
-     "end": 35.6,
+     "start": 37.71,
+     "end": 42.91,
      "text": "So the game's storm asks: what if the 2012 storm had hit the Moon?"
     }
    ],
@@ -1090,7 +1090,7 @@
    "level": "explainer",
    "title": "How we know there is water",
    "path": "res://assets/explainers/science/sci_water_evidence.ogv",
-   "length_s": 40.04,
+   "length_s": 46.46,
    "labels": [
     "measured"
    ],
@@ -1106,37 +1106,37 @@
    "captions": [
     {
      "start": 4.4,
-     "end": 8.6,
+     "end": 11.26,
      "text": "On 9 October 2009, NASA crashed a spent rocket stage into a dark crater."
     },
     {
-     "start": 9.0,
-     "end": 13.0,
+     "start": 11.66,
+     "end": 15.66,
      "text": "A second spacecraft flew through the plume and measured it."
     },
     {
-     "start": 13.4,
-     "end": 17.6,
+     "start": 16.06,
+     "end": 21.67,
      "text": "About 5.6% of it was water ice, give or take 2.9%."
     },
     {
-     "start": 18.4,
-     "end": 22.6,
+     "start": 22.47,
+     "end": 26.67,
      "text": "Another instrument looked for ice right at the surface."
     },
     {
-     "start": 23.0,
-     "end": 27.4,
+     "start": 27.07,
+     "end": 31.47,
      "text": "It found exposed ice in only 3.5% of the cold traps."
     },
     {
-     "start": 27.8,
-     "end": 29.8,
+     "start": 31.87,
+     "end": 33.87,
      "text": "So ice is patchy."
     },
     {
-     "start": 30.4,
-     "end": 34.6,
+     "start": 34.47,
+     "end": 39.38,
      "text": "Some places hold plenty, most hold little, and none of it is ready to drink."
     }
    ],

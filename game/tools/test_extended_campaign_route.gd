@@ -189,7 +189,7 @@ func _verify_scene(id: String, state: Dictionary) -> void:
 			var stock: Dictionary = state.inventories.get("working_stock", {})
 			_check(String(stock.get("cross", "")) == "Tara x Alo" and bool(stock.get("sealed", false)) and not stock.has("total") and not stock.has("count"), "the working stock is Tara x Alo, sealed, with no count")
 			_check(state.inventories.founder_seed42.total == 42 and state.inventories.founder_seed42.allocated == 12 and state.inventories.founder_seed42.reserve == 30 and state.inventories.founder_seed42.reserve_compartments.size() == 2 and int(state.inventories.founder_seed42.reserve_compartments[0]) == 15 and int(state.inventories.founder_seed42.reserve_compartments[1]) == 15 and state.inventories.allocated12 == 12, "founder 42 = 12 + 30 (15 + 15) is unchanged after Tara's harvest")
-		"EX-CH04-S08":
+		"EX-CH04-S10":   # canon order: return in S09, dry warm-up and the twelve-specimen count in S10
 			expected = {"E": 18, "A": 7, "H": 6, "C": 8, "R": 16.8}
 			_check(state.route.energy == 40 and state.route.provisions == 48 and state.inventories.vault12.stored == 12, "survey return conserves rover and twelve distinct specimens")
 		"EX-CH05-S11": expected = {"E": 16, "A": 4.25, "H": 6, "C": 8, "R": 13.5}

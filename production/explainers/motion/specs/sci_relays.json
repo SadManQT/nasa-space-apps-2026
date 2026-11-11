@@ -2,7 +2,7 @@
  "id": "sci_relays",
  "title": "Relays and line of sight",
  "level": "explainer",
- "length_s": 40,
+ "length_s": 44.93,
  "fps": 24,
  "purpose": "Teach why terrain and the Moon's curve block radio, why relays sit on high peaks, and how high one must be.",
  "scenes": "relays.js",
@@ -32,13 +32,13 @@
  },
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 16,
+   "from": 4.0,
+   "to": 16.88,
    "scene": "blocked",
    "label": "diagram",
    "credit": "Not to scale",
@@ -47,8 +47,8 @@
    "blocked": "Blocked by the horizon"
   },
   {
-   "from": 16,
-   "to": 30,
+   "from": 16.88,
+   "to": 31.66,
    "scene": "relay",
    "label": "model",
    "credit": "NASA JPL Horizons · ESA Moonlight",
@@ -57,8 +57,8 @@
    "road": "Repeaters along the road"
   },
   {
-   "from": 30,
-   "to": 35,
+   "from": 31.66,
+   "to": 36.66,
    "scene": "card",
    "label": "model",
    "credit": "Geometry without terrain",
@@ -66,43 +66,84 @@
    "sub": "The real terrain check needs the LOLA map; the game's relays are fiction"
   },
   {
-   "from": 35,
-   "to": 40,
+   "from": 36.66,
+   "to": 44.93,
    "scene": "takeaway"
   }
  ],
  "captions": [
   [
    4.4,
-   8.6,
+   9.39,
    "Radio travels in straight lines, and the Moon's surface curves away."
   ],
   [
-   9.0,
-   15.4,
+   9.79,
+   16.28,
    "Around {day} {year}, Earth is below the pole's horizon: no direct link."
   ],
   [
-   16.4,
-   21.0,
+   17.28,
+   21.88,
    "A relay on a high peak can see both the base and Earth."
   ],
   [
-   21.4,
-   25.8,
+   22.28,
+   27.01,
    "To see Earth then, it must stand at least {h} km high."
   ],
   [
-   26.2,
-   29.6,
+   27.41,
+   31.26,
    "Repeaters along a road pass the signal hop by hop."
   ],
   [
-   30.4,
-   34.6,
+   32.06,
+   36.26,
    "This is geometry, before the real terrain check."
   ]
  ],
  "ends_on": "If you cannot see it, you cannot talk to it. Put a relay where both ends are in view.",
- "literals": []
+ "literals": [],
+ "narration": {
+  "audio": "production/explainers/narration/sci_relays.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.27,
+    "to": 4.96
+   },
+   {
+    "at": 9.89,
+    "from": 6.37,
+    "to": 12.56
+   },
+   {
+    "at": 17.38,
+    "from": 13.93,
+    "to": 17.88
+   },
+   {
+    "at": 22.38,
+    "from": 19.31,
+    "to": 23.74
+   },
+   {
+    "at": 27.51,
+    "from": 25.45,
+    "to": 29.0
+   },
+   {
+    "at": 32.16,
+    "from": 30.27,
+    "to": 33.14
+   },
+   {
+    "at": 37.26,
+    "from": 34.51,
+    "to": 40.58
+   }
+  ]
+ }
 }

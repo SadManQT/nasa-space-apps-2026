@@ -2,7 +2,7 @@
  "id": "sci_crew_needs",
  "title": "Air, water and food for a crew",
  "level": "explainer",
- "length_s": 39,
+ "length_s": 47.32,
  "fps": 24,
  "purpose": "Teach the daily oxygen, water and food one person needs (NASA BVAD), that a crew multiplies it, and why margins matter.",
  "scenes": "crew_needs.js",
@@ -43,13 +43,13 @@
  },
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 20,
+   "from": 4.0,
+   "to": 25.12,
    "scene": "day",
    "label": "model",
    "credit": "NASA Baseline Values and Assumptions (BVAD) · planning values",
@@ -64,8 +64,8 @@
    "co2_v": "{co2} kg"
   },
   {
-   "from": 20,
-   "to": 31,
+   "from": 25.12,
+   "to": 36.35,
    "scene": "crew",
    "label": "model",
    "credit": "NASA BVAD · four crew members",
@@ -73,8 +73,8 @@
    "missing": "Missing any one: the crew cannot stay"
   },
   {
-   "from": 31,
-   "to": 34,
+   "from": 36.35,
+   "to": 39.35,
    "scene": "limits",
    "label": "model",
    "credit": "NASA BVAD planning values",
@@ -82,45 +82,45 @@
    "sub": "The game counts air and food in simpler units"
   },
   {
-   "from": 34,
-   "to": 39,
+   "from": 39.35,
+   "to": 47.32,
    "scene": "takeaway"
   }
  ],
  "captions": [
   [
    4.4,
-   8.4,
+   10.2,
    "Every day, one astronaut needs three things: air, water and food."
   ],
   [
-   8.8,
-   12.2,
+   10.6,
+   14.0,
    "About {o2} kg of oxygen to breathe."
   ],
   [
-   12.6,
-   16.0,
+   14.4,
+   20.33,
    "About {water} kg of water to drink, and {food} kg of food."
   ],
   [
-   16.4,
-   19.6,
+   20.73,
+   24.72,
    "And they breathe out about {co2} kg of carbon dioxide."
   ],
   [
-   20.4,
-   24.4,
+   25.52,
+   29.75,
    "A crew of four needs four times as much, every single day."
   ],
   [
-   24.8,
-   28.4,
+   30.15,
+   33.75,
    "Without any one of the three, the crew cannot stay."
   ],
   [
-   31.3,
-   33.9,
+   36.65,
+   39.25,
    "These are planning values for an average adult."
   ]
  ],
@@ -130,5 +130,51 @@
    "text": "×4",
    "why": "the crew size (four) shown as a multiplier, not a measurement"
   }
- ]
+ ],
+ "narration": {
+  "audio": "production/explainers/narration/sci_crew_needs.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.0,
+    "to": 5.5
+   },
+   {
+    "at": 10.7,
+    "from": 6.71,
+    "to": 9.74
+   },
+   {
+    "at": 14.5,
+    "from": 11.07,
+    "to": 16.7
+   },
+   {
+    "at": 20.83,
+    "from": 18.07,
+    "to": 21.76
+   },
+   {
+    "at": 25.62,
+    "from": 23.37,
+    "to": 27.3
+   },
+   {
+    "at": 30.25,
+    "from": 28.73,
+    "to": 31.8
+   },
+   {
+    "at": 36.75,
+    "from": 33.09,
+    "to": 35.36
+   },
+   {
+    "at": 39.95,
+    "from": 36.97,
+    "to": 42.74
+   }
+  ]
+ }
 }

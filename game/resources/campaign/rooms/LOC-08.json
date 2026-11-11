@@ -1510,9 +1510,12 @@
     ]
    },
    "stations": {
-    "p08_scan_lid": "garage_cargo_lock",
-    "p08_save_viability_pending": "base_handover",
-    "p08_transfer_case": "garage_cargo_lock"
+    "p08_transfer_case": "garage_cargo_lock",
+    "p08_return_to_base": "garage_route_board",
+    "p08_dock_dry_glovebox": "garage_cargo_lock",
+    "p08_manifest_reconciled": "rover_loadout",
+    "p08_personnel_home": "base_handover",
+    "p08_quarantine_complete": "garage_cargo_lock"
    },
    "obstacles": [
     {
@@ -1687,7 +1690,11 @@
      0.0,
      -2.2
     ],
-    "rover_ferreira": [-5.02, 0.0, -3.14]
+    "rover_ferreira": [
+     -5.02,
+     0.0,
+     -3.14
+    ]
    },
    "stations": {
     "p09_check_lander_clearance": "garage_pad_camera",

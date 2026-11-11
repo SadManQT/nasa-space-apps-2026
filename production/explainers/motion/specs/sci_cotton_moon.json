@@ -2,7 +2,7 @@
  "id": "sci_cotton_moon",
  "title": "Cotton on the Moon",
  "level": "explainer",
- "length_s": 34,
+ "length_s": 37.22,
  "fps": 24,
  "purpose": "Teach what the Chang'e-4 cotton experiment showed (a seedling) and what it did not (no flowers).",
  "scenes": "cotton_moon.js",
@@ -20,13 +20,13 @@
  },
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 22,
+   "from": 4.0,
+   "to": 24.29,
    "scene": "can",
    "label": "measured",
    "credit": "CNSA Chang'e-4 biological experiment (Chongqing University)",
@@ -36,8 +36,8 @@
    "no": "Flowered: no"
   },
   {
-   "from": 22,
-   "to": 27,
+   "from": 24.29,
+   "to": 29.29,
    "scene": "card",
    "label": "measured",
    "credit": "Chang'e-4",
@@ -45,35 +45,35 @@
    "sub": "The finale's cotton is fiction"
   },
   {
-   "from": 27,
-   "to": 34,
+   "from": 29.29,
+   "to": 37.22,
    "scene": "takeaway"
   }
  ],
  "captions": [
   [
    4.4,
-   8.6,
+   10.16,
    "In {year}, China's Chang'e-4 lander carried seeds to the Moon's far side."
   ],
   [
-   9.0,
-   13.4,
+   10.56,
+   15.69,
    "Inside a small sealed can, a cotton seed sprouted into a green seedling."
   ],
   [
-   13.8,
-   17.8,
+   16.09,
+   20.09,
    "So a seed can sprout on the Moon, inside a sealed can."
   ],
   [
-   18.2,
-   21.6,
+   20.49,
+   23.89,
    "But it never flowered or made seeds."
   ],
   [
-   22.4,
-   26.6,
+   24.69,
+   28.89,
    "That was one small, sealed experiment."
   ]
  ],
@@ -83,5 +83,41 @@
    "text": "Chang'e-4",
    "why": "mission name"
   }
- ]
+ ],
+ "narration": {
+  "audio": "production/explainers/narration/sci_cotton_moon.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.0,
+    "to": 5.46
+   },
+   {
+    "at": 10.66,
+    "from": 7.25,
+    "to": 12.08
+   },
+   {
+    "at": 16.19,
+    "from": 13.33,
+    "to": 16.96
+   },
+   {
+    "at": 20.59,
+    "from": 18.37,
+    "to": 20.38
+   },
+   {
+    "at": 24.79,
+    "from": 21.69,
+    "to": 24.06
+   },
+   {
+    "at": 29.89,
+    "from": 25.45,
+    "to": 31.18
+   }
+  ]
+ }
 }

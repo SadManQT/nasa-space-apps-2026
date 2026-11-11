@@ -2,7 +2,7 @@
  "id": "sci_shielding",
  "title": "What shielding does",
  "level": "explainer",
- "length_s": 42,
+ "length_s": 51.41,
  "fps": 24,
  "purpose": "Teach how matter, especially water, slows fast protons, what a model storm dose looks like behind thicker walls, and that dose never reaches zero.",
  "scenes": "shielding.js",
@@ -30,13 +30,13 @@
  },
  "beats": [
   {
-   "from": 0,
-   "to": 4,
+   "from": 0.0,
+   "to": 4.0,
    "scene": "title"
   },
   {
-   "from": 4,
-   "to": 16,
+   "from": 4.0,
+   "to": 17.35,
    "scene": "stop",
    "label": "diagram",
    "credit": "Not to scale",
@@ -45,8 +45,8 @@
    "through": "Fewer get through"
   },
   {
-   "from": 16,
-   "to": 30,
+   "from": 17.35,
+   "to": 36.45,
    "scene": "chart",
    "label": "model",
    "credit": "NASA (Clowdsley 2021) · model of the August 1972 solar storm",
@@ -56,8 +56,8 @@
    "zero": "Never zero"
   },
   {
-   "from": 30,
-   "to": 36,
+   "from": 36.45,
+   "to": 43.9,
    "scene": "alara",
    "label": "diagram",
    "credit": "How crews stay safe",
@@ -66,45 +66,45 @@
    "c": "Stay inside"
   },
   {
-   "from": 36,
-   "to": 42,
+   "from": 43.9,
+   "to": 51.41,
    "scene": "takeaway"
   }
  ],
  "captions": [
   [
    4.4,
-   8.4,
+   8.8,
    "Fast protons lose energy as they push through anything in their way."
   ],
   [
-   8.8,
-   12.8,
+   9.2,
+   13.85,
    "Water is great at this, because it is packed with light hydrogen atoms."
   ],
   [
-   13.0,
-   15.8,
+   14.2,
+   17.15,
    "The thicker the wall, the fewer get through."
   ],
   [
-   16.4,
-   20.6,
+   17.75,
+   23.32,
    "A model of a huge 1972 solar storm shows what thicker shielding does."
   ],
   [
-   21.0,
-   25.4,
+   23.72,
+   31.85,
    "Behind the thinnest wall, about {d5} mSv. Behind the thickest, about {d15}."
   ],
   [
-   25.8,
-   29.6,
+   32.25,
+   36.05,
    "Thicker walls cut the dose, but it never drops to zero."
   ],
   [
-   30.4,
-   35.6,
+   36.85,
+   43.5,
    "So crews do three things: put shielding up, get behind it fast, and stay there."
   ]
  ],
@@ -118,5 +118,51 @@
    "text": "Clowdsley 2021",
    "why": "source citation, clowdsley_2021_shielding citation field"
   }
- ]
+ ],
+ "narration": {
+  "audio": "production/explainers/narration/sci_shielding.mp3",
+  "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+  "lines": [
+   {
+    "at": 4.5,
+    "from": 0.0,
+    "to": 4.1
+   },
+   {
+    "at": 9.3,
+    "from": 5.65,
+    "to": 10.0
+   },
+   {
+    "at": 14.3,
+    "from": 11.27,
+    "to": 13.92
+   },
+   {
+    "at": 17.85,
+    "from": 15.27,
+    "to": 20.54
+   },
+   {
+    "at": 23.82,
+    "from": 22.07,
+    "to": 29.9
+   },
+   {
+    "at": 32.35,
+    "from": 31.37,
+    "to": 34.68
+   },
+   {
+    "at": 36.95,
+    "from": 35.97,
+    "to": 42.32
+   },
+   {
+    "at": 44.5,
+    "from": 43.89,
+    "to": 49.2
+   }
+  ]
+ }
 }

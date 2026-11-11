@@ -4,6 +4,7 @@
     python3 production/tools/motion/build.py check [spec ...]          # validate every spec (default: all)
     python3 production/tools/motion/build.py stills <spec> [t ...]      # PNG stills + contact sheet (default: mid-beat times)
     python3 production/tools/motion/build.py render <spec>              # master MP4, game OGV, registry entry
+    python3 production/tools/motion/build.py narrate <spec> <take.mp3>  # fit the spec to its ElevenLabs narration
 
 Spec format and house style: production/explainers/motion/STYLE.md. Every number a player reads comes from a NASA
 fixture through a {token}; any other digit in on-screen text fails the check unless the spec lists it in "literals"
@@ -107,8 +108,9 @@ def resolve(spec):
     if spec.get("level") not in LEVELS:
         problems.append(f"level must be one of {sorted(LEVELS)}")
     length = spec.get("length_s", 0)
-    if not 8 <= length <= 45:
-        problems.append(f"length_s {length}: explainers run 8-45 s")
+    longest = 65 if spec.get("narration") else 45   # a narrated clip gives every spoken line its full time
+    if not 8 <= length <= longest:
+        problems.append(f"length_s {length}: explainers run 8-{longest} s")
     if spec.get("fps") != 24:
         problems.append("fps must be 24 (the game's films are 24 fps)")
     for s in spec.get("sources", []):
@@ -224,10 +226,105 @@ def sound_bed(spec, path, rate=44100):
         out[s:s + len(k)] += .22 * np.sin(2 * np.pi * (1300 - 4200 * k) * k) * np.exp(-k * 38)
     out *= np.minimum(1, t / 2.0) * np.minimum(1, (spec["length_s"] - t) / 2.5)
     out *= 10 ** (-30 / 20) / np.sqrt(np.mean(out ** 2))                                         # about -30 dBFS RMS
+    voice = narration_track(spec, n, rate)
+    if voice is not None:
+        # The pad dips under the narrator (about -12 dB, smoothed) and the voice sits near -18 dBFS RMS.
+        speaking = np.convolve((np.abs(voice) > 1e-3).astype(float), np.ones(int(.25 * rate)) / int(.25 * rate), "same")
+        out = out * (1 - .75 * np.clip(speaking * 4, 0, 1)) + voice
     pcm = (np.clip(out, -1, 1) * 32767).astype("<i2")
     with wave.open(str(path), "wb") as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(rate)
         w.writeframes(np.repeat(pcm[:, None], 2, axis=1).tobytes())
+
+
+# ---- narration (11 Nov 2026, Sadman: every explainer is narrated for all ages; ElevenLabs, logged in AI_PROMPT_LOG) ----
+NARRATION = EXPL.parent / "narration"
+
+
+def decode(path, rate=44100):
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(path), "-ac", "1", "-ar", str(rate), "-f", "s16le", "-"],
+                         check=True, capture_output=True).stdout
+    return np.frombuffer(raw, dtype="<i2").astype(float) / 32768.0
+
+
+def spoken_spans(audio, rate, want):
+    """The want spoken lines in a narration take: split at its want-1 longest pauses (the inserted breaks are about
+    1.5 s; a speaker's own pauses inside a line are shorter). Returns [(start_s, end_s)]."""
+    win = int(.02 * rate)
+    frames = audio[: len(audio) // win * win].reshape(-1, win)
+    loud = 20 * np.log10(np.sqrt(np.mean(frames ** 2, axis=1)) + 1e-9) > -40
+    on = np.flatnonzero(loud)
+    if len(on) == 0:
+        fail("narration take is silent")
+    gaps = []
+    for i, j in zip(on, on[1:]):
+        if (j - i) * .02 >= .35:
+            gaps.append(((j - i) * .02, i, j))
+    if len(gaps) < want - 1:
+        fail(f"narration has {len(gaps) + 1} spoken parts, the clip needs {want}; re-take it with a clear pause per line")
+    cuts = sorted(sorted(gaps, reverse=True)[: want - 1], key=lambda g: g[1])
+    spans, start = [], on[0]
+    for _, i, j in cuts:
+        spans.append((start * .02, (i + 1) * .02))
+        start = j
+    spans.append((start * .02, (on[-1] + 1) * .02))
+    return [(max(0.0, a - .05), b + .08) for a, b in spans]
+
+
+def cmd_narrate(path, audio_path):
+    """Fit the clip to its narration: each caption (and the closing ends_on line) gets at least its spoken length;
+    beats, captions and length stretch with a piecewise-linear time map, then the spec records where each line plays."""
+    spec_path = Path(path)
+    raw = json.loads(spec_path.read_text())
+    rate = 44100
+    audio = decode(audio_path, rate)
+    caps = raw["captions"]
+    spans = spoken_spans(audio, rate, len(caps) + 1)
+    take = next(b for b in raw["beats"] if b["scene"] == "takeaway")
+    anchors = [(0.0, 0.0)]
+    lines, shift, prev_end = [], 0.0, 0.0
+    for (s, e, _), (a, b) in zip(caps, spans):
+        new_s = max(s + shift, prev_end + .35)
+        new_e = new_s + max(e - s, (b - a) + .3)
+        anchors += [(s, new_s), (e, new_e)]
+        lines.append({"at": round(new_s + .1, 2), "from": round(a, 3), "to": round(b, 3)})
+        shift, prev_end = new_e - e, new_e
+    def remap(x):
+        for (o0, n0), (o1, n1) in zip(anchors, anchors[1:]):
+            if x <= o1:
+                return n0 + (x - o0) * ((n1 - n0) / (o1 - o0) if o1 > o0 else 1)
+        return x + shift
+    for c in caps:
+        c[0], c[1] = round(remap(c[0]), 2), round(remap(c[1]), 2)
+    for beat in raw["beats"]:
+        beat["from"], beat["to"] = round(remap(beat["from"]), 2), round(remap(beat["to"]), 2)
+    a, b = spans[-1]
+    say_at = take["from"] + .6
+    take["to"] = round(max(take["to"], say_at + (b - a) + 1.6), 2)
+    lines.append({"at": round(say_at, 2), "from": round(a, 3), "to": round(b, 3)})
+    raw["length_s"] = take["to"]
+    target = NARRATION / f"{raw['id']}.mp3"
+    if Path(audio_path).resolve() != target.resolve():
+        shutil.copy(audio_path, target)
+    raw["narration"] = {"audio": str(target.relative_to(ROOT)), "voice": "ElevenLabs Justin Time (uFIXVu9mmnDZ7dTKCBTX), eleven_multilingual_v2",
+                        "lines": lines}
+    spec_path.write_text(json.dumps(raw, indent=1, ensure_ascii=False) + "\n")
+    print(f"{raw['id']}: {len(lines)} narrated lines, length {raw['length_s']} s")
+
+
+def narration_track(spec, n, rate):
+    info = spec.get("narration")
+    if not info:
+        return None
+    audio = decode(ROOT / info["audio"], rate)
+    audio *= 10 ** (-18 / 20) / max(1e-9, np.sqrt(np.mean(audio[np.abs(audio) > .02] ** 2)))
+    out = np.zeros(n)
+    for line in info["lines"]:
+        piece = audio[int(line["from"] * rate): int(line["to"] * rate)]
+        s = int(line["at"] * rate)
+        piece = piece[: max(0, n - s)]
+        out[s: s + len(piece)] += piece
+    return np.clip(out, -.98, .98)
 
 
 # ---- registry -------------------------------------------------------------------------------------------------
@@ -320,12 +417,14 @@ def cmd_render(path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2 or sys.argv[1] not in ("check", "stills", "render"):
+    if len(sys.argv) < 2 or sys.argv[1] not in ("check", "stills", "render", "narrate"):
         print(__doc__); sys.exit(2)
     mode, rest = sys.argv[1], sys.argv[2:]
     if mode == "check":
         cmd_check(rest)
     elif mode == "stills":
         cmd_stills(rest[0], [float(x) for x in rest[1:]])
+    elif mode == "narrate":
+        cmd_narrate(rest[0], rest[1])
     else:
         cmd_render(rest[0])
