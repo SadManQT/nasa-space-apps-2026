@@ -515,6 +515,8 @@ func perform_target(target_id: String, payload: Dictionary = {}) -> Dictionary:
 		var clear := _has_line_of_sight(target)
 		if not clear:
 			result = {"accepted": false, "reason": "Move into clear view of " + String(target.get_meta("focus_label", "the target")) + "."}
+		elif director != null and String(director.crew().get("mode", "solo")) == "class" and not _class_puzzle_spec(target_id).is_empty() and String(nearby_target().get("target_id", "")) != target_id:
+			result = {"accepted": false, "reason": "Walk up to this puzzle target and face it before signing."}
 		else:
 			var bay := _room.garage()
 			var cycled: Dictionary = bay.request_dock_cycle("habitat")
