@@ -2,6 +2,8 @@
 
 This report is limited to Asif's ten assigned IDs. It is not a new acceptance claim.
 
+**Latest state, 12 November:** the provider-session handoff is complete, source is saved on `asif/finish-chains-20261111`, and upstream is integrated. The frozen full gate finished **130/136**, exit1; current focused Class **3/3**, Chapter 2 **4/4** and native **75/0** pass, while the current shared-HUD caption gate remains **0/1**, 22/82 failures. The user explicitly retains Ramim's HUD/P01 reservations, so M1-37's live UI remains blocked on that future handoff. Seven already completed task statuses and M1-19 dependencies remain unchanged. See the detailed [provider gate](M1-103.md) and [Chapter 2 evidence](M1-105.md). The older pending-handoff notes below are historical checkpoints.
+
 ## Source and preservation
 
 - Latest upstream inspected: `6dde320f`. The original `main` checkout remains at `1af7d9f0`, with its source WIP, imports, settings and four historical reservation groups untouched.
@@ -10,7 +12,7 @@ This report is limited to Asif's ten assigned IDs. It is not a new acceptance cl
 - A local preservation copy covers all present files from the original four reservation groups and the provider's three uncommitted files. SHA-256 manifest: `C:/Users/Asif/AppData/Local/Temp/asif-handoff-01a1caac-20261111/manifest.json` (27 records). Originals stay in place. This local copy is not published game source.
 - The upstream assignment histories record the authorized earlier saved-work handoff to Sadman and retain the original exact-file lists. Do not reintroduce obsolete reservations over completed tasks, or clear an active reservation merely because the member name matches.
 
-## Current one-writer boundary
+## One-writer boundary at the initial checkpoint
 
 | Files | Recorded session / reservation | Action in this continuation |
 | --- | --- | --- |
@@ -57,3 +59,5 @@ No full current-source gate, later-puzzle physical/UI pass or manual acceptance 
 The user has now answered **"Take over; earlier session stays stopped."** Session `01a1caac` is the receiving writer for M1-103/M1-105 in `asif-finish`, published in `be968553`, with exact test/evidence reservations. The provider source and its uncommitted diff were integrated against upstream `9eab3e50` with a three-way merge; the saved provider worktree and original checkout remain untouched. The earlier pending-handoff text above is a historical checkpoint, not a current blocker.
 
 The new provider passes the actual physical Class guard **61/0**, existing Class UI **60/0**, session bridge **43/0** (`3/3 suites passed`). Chapter 2 focused coverage passes **4/4**; the additional rejected-preview fix passes **51/0**, **1/1**. Current results and remaining full/UI acceptance are maintained in [M1-103.md](M1-103.md) and [M1-105.md](M1-105.md). The unrelated M4-22 shared UI reservation remains in force.
+
+Final preservation verification on 12 November still matches **all 27 original records**. The post-merge archives retain that check, the source hashes and the six generated UID backups accepted before upstream synchronization. No automatic lock expiry, competing reservation deletion, force push or other session's source reset was used.
