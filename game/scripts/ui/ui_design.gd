@@ -158,11 +158,13 @@ static func button(label: String, min_height: int = 44) -> Button:
 static func button_style(fill: Color, highlighted: bool) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = fill
-	style.set_corner_radius_all(3)
+	style.set_corner_radius_all(8)
 	style.set_border_width_all(1)
 	style.border_color = colour("glass_edge")
-	style.content_margin_left = 14
-	style.content_margin_right = 14
+	style.content_margin_left = 18
+	style.content_margin_right = 18
+	style.content_margin_top = 6
+	style.content_margin_bottom = 6
 	style.anti_aliasing = true
 	if highlighted:
 		style.set_border_width_all(2)

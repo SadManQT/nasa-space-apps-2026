@@ -151,11 +151,13 @@ func _show_title(preloaded_snapshot: Variant = null, incremental: bool = false) 
 	_menu_layer.name = "TitleLayer"
 	add_child(_menu_layer)
 	_menu = MENU_SCENE.instantiate() as MainMenu
+	_menu.save_path = save_path
 	if incremental:
 		_menu.defer_panels = true
 	_menu_layer.add_child(_menu)
 	_menu.new_expedition_requested.connect(_choose_crew)
 	_menu.continue_requested.connect(_continue_expedition)
+	_menu.slot_continue_requested.connect(_launch_campaign)
 	_menu.science_requested.connect(_menu.open_science)
 	_menu.showcase_requested.connect(_open_showcase)
 	_menu.trainer_requested.connect(_open_trainer)
@@ -171,6 +173,8 @@ func _show_title(preloaded_snapshot: Variant = null, incremental: bool = false) 
 	if is_inside_tree():
 		await get_tree().process_frame
 	_menu.setup(snapshot)
+	if FileAccess.file_exists(GameSettings.DEFAULT_PATH):
+		_menu.set_accessibility(GameSettings.new().accessibility_for_campaign())
 	_show_load_notice()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	preparation.prepare_campaign.call_deferred()

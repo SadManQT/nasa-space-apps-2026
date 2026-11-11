@@ -234,11 +234,11 @@ static func theme() -> Theme:
 	# One preset at boot keeps Gohud components consistent with the house kit.
 	GoUi.use_preset(GoThemePresets.SCIFI_DARK)
 	GoUi.config.color_overrides = {GoTheme.ACCENT: UiDesign.colour("accent"), GoTheme.ACCENT_FILL: UiDesign.colour("accent"), GoTheme.ON_ACCENT: UiDesign.colour("ink"), GoTheme.TEXT: UiDesign.colour("ivory"), GoTheme.MUTED: UiDesign.colour("muted"), GoTheme.SURFACE: UiDesign.colour("navy")}
-	GoUi.config.metric_overrides = {GoTheme.RADIUS: 4, GoTheme.RADIUS_SMALL: 3, GoTheme.RADIUS_LARGE: 4}
+	GoUi.config.metric_overrides = {GoTheme.RADIUS: 8, GoTheme.RADIUS_SMALL: 6, GoTheme.RADIUS_LARGE: 10}
 	GoUi.refresh()
 	var result := Theme.new()
-	# Persist Gohud's chamfered surface in the Theme: visible in the editor and runtime.
-	var hero := GoUi.skin().surface_box(GoTheme.BOX_CARD, UiDesign.colour("glass_edge"), 1.0)
+	# The approved proposals use quiet curved surfaces rather than industrial corners.
+	var hero := UiDesign.glass_style()
 	for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
 		hero.set_content_margin(side, 0.0)
 	result.set_type_variation("HeroPanel", "PanelContainer")

@@ -51,23 +51,15 @@ func _test_title_and_new_expedition() -> void:
 	await process_frame
 	await process_frame
 
-	var title_text := _collect_text(menu)
-	for entry in [
-		"LAST LIGHT ACADEMY",
-		"NEW EXPEDITION",
-		"CONTINUE",
-		"MISSION TRAINER",
-		"MOON TRAINER",
-		"CHAPTERS, PROGRESS & ACHIEVEMENTS",
-		"SCIENCE + SOURCES",
-		"SETTINGS / ACCESSIBILITY",
-		"CREDITS",
-		"INDEPENDENT TEAM PROJECT  ·  NOT NASA-ENDORSED",
-	]:
-		_check(title_text.contains(entry), "UI_01 Title Screen contains: " + entry)
+	for entry in ["NewExpedition", "Continue", "MissionTrainerEntry", "MoonTrainerEntry", "ChapterSelectEntry", "ScienceEntry", "SettingsEntry", "CreditsEntry"]:
+		var action := menu.find_child(entry, true, false) as Button
+		_check(action != null and not action.text.is_empty(), "UI_01 Title Screen retains named action: " + entry)
+	var title := menu.find_child("Title", true, false) as Label
+	_check(title != null and title.text.replace("\n", " ").replace(" ", "").contains("LASTLIGHTACADEMY"), "UI_01 title retains the game identity")
+	_check(_collect_text(menu).contains("NOT NASA-ENDORSED"), "UI_01 title retains the independence credit")
 
 	# Verify footer does not overlap the main menu buttons
-	var credits_btn := _find_button_with_text(menu, "CREDITS")
+	var credits_btn := menu.find_child("CreditsEntry", true, false) as Button
 	var footer_lbl := menu._footer_status
 	if credits_btn != null and footer_lbl != null:
 		_check(not credits_btn.get_global_rect().intersects(footer_lbl.get_global_rect()), "UI_01 Title footer never overlaps menu actions")

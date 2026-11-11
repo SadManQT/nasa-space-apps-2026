@@ -1,6 +1,81 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/p01_panel.gd" id="1"]
+[ext_resource type="FontFile" path="res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf" id="2"]
+[ext_resource type="FontFile" path="res://addons/gohud/assets/fonts/roboto/Roboto.ttf" id="3"]
+[ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="4"]
+
+[sub_resource type="StyleBoxFlat" id="FrameStyle"]
+bg_color = Color(0.045, 0.07, 0.12, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.36, 0.46, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 24.0
+content_margin_top = 20.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id="CardStyle"]
+bg_color = Color(0.085, 0.12, 0.18, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.36, 0.46, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="GoldStyle"]
+bg_color = Color(0.96, 0.75, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.88, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="FocusStyle"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.86, 0.94, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+draw_center = false
+
+[sub_resource type="Theme" id="ShellTheme"]
+default_font = ExtResource("3")
+default_font_size = 16
+Label/colors/font_color = Color(0.92, 0.94, 0.96, 1)
+Button/colors/font_color = Color(0.92, 0.94, 0.96, 1)
+Button/colors/font_hover_color = Color(0.04, 0.05, 0.07, 1)
+Button/styles/normal = SubResource("CardStyle")
+Button/styles/hover = SubResource("GoldStyle")
+Button/styles/pressed = SubResource("GoldStyle")
+Button/styles/focus = SubResource("FocusStyle")
 
 [node name="P01Panel" type="Control"]
 layout_mode = 3
@@ -10,4 +85,308 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = SubResource("ShellTheme")
 script = ExtResource("1")
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.01, 0.02, 0.04, 0.7)
+
+[node name="Frame" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("FrameStyle")
+
+[node name="Stack" type="VBoxContainer" parent="Frame"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Brand" type="HBoxContainer" parent="Frame/Stack"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="Mark" type="TextureRect" parent="Frame/Stack/Brand"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Academy" type="Label" parent="Frame/Stack/Brand"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 16
+text = "LAST LIGHT ACADEMY"
+autowrap_mode = 3
+
+[node name="ProbeTitle" type="Label" parent="Frame/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 36
+text = "Calibrate the moisture probe"
+autowrap_mode = 3
+
+[node name="ProbeSubtitle" type="Label" parent="Frame/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.68, 0.74, 0.82, 1)
+text = "Set the dry zero ? Try your values before changing the equipment."
+autowrap_mode = 3
+
+[node name="Steps" type="GridContainer" parent="Frame/Stack"]
+layout_mode = 2
+columns = 3
+theme_override_constants/h_separation = 8
+
+[node name="StepDry" type="Label" parent="Frame/Stack/Steps"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.04, 0.05, 0.07, 1)
+text = "1   Dry reference"
+autowrap_mode = 3
+theme_override_styles/normal = SubResource("GoldStyle")
+
+[node name="StepWet" type="Label" parent="Frame/Stack/Steps"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "2   Wet reference"
+autowrap_mode = 3
+theme_override_styles/normal = SubResource("CardStyle")
+
+[node name="StepCheck" type="Label" parent="Frame/Stack/Steps"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "3   Check both"
+autowrap_mode = 3
+theme_override_styles/normal = SubResource("CardStyle")
+
+[node name="ProbeScroll" type="ScrollContainer" parent="Frame/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="ProbeColumns" type="GridContainer" parent="Frame/Stack/ProbeScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 16
+
+[node name="ObservedCard" type="PanelContainer" parent="Frame/Stack/ProbeScroll/ProbeColumns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="Content" type="VBoxContainer" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="ObservedHeading" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 24
+text = "Observed data"
+autowrap_mode = 3
+
+[node name="ProbeObserved" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Reference targets: dry raw 10 to 0; wet raw 110 to 100.
+
+Probe: not calibrated
+
+Check known references before trusting the seedlings? moisture reading."
+autowrap_mode = 3
+
+[node name="Rule" type="HSeparator" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="WhyHeading" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 22
+text = "Why calibrate?"
+autowrap_mode = 3
+
+[node name="ProbeExplanation" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Two known references let you trust the probe before measuring the seedlings."
+autowrap_mode = 3
+
+[node name="PredictionCard" type="PanelContainer" parent="Frame/Stack/ProbeScroll/ProbeColumns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="Content" type="VBoxContainer" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="PredictionHeading" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 24
+text = "Your prediction"
+autowrap_mode = 3
+
+[node name="EquipmentInputs" type="VBoxContainer" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ReferenceSample" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content/EquipmentInputs"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Dry reference       Wet reference"
+autowrap_mode = 3
+
+[node name="RawSample" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content/EquipmentInputs"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Raw reading     ?     Calibrated value"
+autowrap_mode = 3
+
+[node name="NumbersSample" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content/EquipmentInputs"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 36
+text = "10                           0"
+autowrap_mode = 3
+
+[node name="Rule" type="HSeparator" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProjectedHeading" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content"]
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 22
+text = "Projected result"
+autowrap_mode = 3
+
+[node name="ProbePrediction" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Choose your values, then try them. The real equipment stays unchanged during a prediction."
+autowrap_mode = 3
+
+[node name="ProbePrerequisite" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Record the dry reference before moving the probe."
+autowrap_mode = 3
+
+[node name="ProbeNotice" type="Label" parent="Frame/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Choose what you predict, then try it safely. Nothing changes until you confirm."
+autowrap_mode = 3
+
+[node name="ProbeFooter" type="HFlowContainer" parent="Frame/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="TrySample" type="Button" parent="Frame/Stack/ProbeFooter"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Try it"
+theme_override_styles/normal = SubResource("GoldStyle")
+theme_override_colors/font_color = Color(0.04, 0.05, 0.07, 1)
+
+[node name="LockSample" type="Button" parent="Frame/Stack/ProbeFooter"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Lock in"
+
+[node name="HintSample" type="Button" parent="Frame/Stack/ProbeFooter"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Hint"
+
+[node name="SourceSample" type="Button" parent="Frame/Stack/ProbeFooter"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Data cards"
+
+[node name="CloseSample" type="Button" parent="Frame/Stack/ProbeFooter"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Close"

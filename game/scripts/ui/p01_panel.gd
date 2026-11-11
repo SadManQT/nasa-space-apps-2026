@@ -23,7 +23,8 @@ var _observed := false
 var _notice := ""
 var _settings: Dictionary = {}
 var _frame: PanelContainer
-var _stack: VBoxContainer
+var _equipment: VBoxContainer
+var _footer: HFlowContainer
 var _focus := ""
 var _return_focus: Control
 var _covered := false
@@ -33,17 +34,19 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	z_index = 100
 	theme = UiKit.theme()
-	var shade := ColorRect.new()
-	shade.color = UiDesign.colour("scrim")
-	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	shade.mouse_filter = Control.MOUSE_FILTER_STOP
-	add_child(shade)
-	_frame = UiDesign.glass_panel(UiDesign.colour("amara"))
-	_frame.mouse_filter = Control.MOUSE_FILTER_STOP
-	add_child(_frame)
-	_stack = VBoxContainer.new()
-	_stack.add_theme_constant_override("separation", 12)
-	_frame.add_child(_stack)
+	$Shade.color = UiDesign.colour("scrim")
+	_frame = $Frame
+	_frame.add_theme_stylebox_override("panel", UiDesign.glass_style())
+	_equipment = %EquipmentInputs
+	_footer = %ProbeFooter
+	for card in [%ObservedCard, %PredictionCard]:
+		card.add_theme_stylebox_override("panel", UiDesign.glass_style())
+	for label in [%ProbeTitle, %ObservedHeading, %PredictionHeading]:
+		UiDesign.style_label(label, "title" if label == %ProbeTitle else "heading")
+	for label in [%ProbeSubtitle, %ProbeObserved, %ProbePrediction, %ProbeExplanation, %ProbePrerequisite, %ProbeNotice]:
+		UiDesign.style_label(label, "body", "muted" if label == %ProbeSubtitle else "ivory")
+	for label in [%StepDry, %StepWet, %StepCheck]:
+		UiDesign.style_label(label, "body")
 	get_viewport().size_changed.connect(_render)
 	hide()
 
@@ -207,29 +210,16 @@ func _render() -> void:
 	var focused := get_viewport().gui_get_focus_owner()
 	if _focus.is_empty() and focused != null and is_ancestor_of(focused):
 		_focus = String(focused.name)
-	for child in _stack.get_children():
-		_stack.remove_child(child)
-		child.queue_free()
-	_frame.position = Vector2(16, 16)
-	_frame.size = get_viewport_rect().size - Vector2(32, 32)
-	_label(_stack, _action_title(), "heading")
-	_label(_stack, "Check the probe, then plant the pair safely.", "body")
-	var scroll := ScrollContainer.new()
-	scroll.name = "ProbeScroll"
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	scroll.follow_focus = true
-	_stack.add_child(scroll)
-	var columns := GridContainer.new()
-	columns.columns = 3 if get_viewport_rect().size.x >= 1200 and not _settings.get("large_text", false) else 1
-	columns.add_theme_constant_override("h_separation", 24)
-	columns.add_theme_constant_override("v_separation", 16)
-	columns.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.add_child(columns)
-	var observed := _column(columns, "Observed data")
-	var actual := _label(observed, _readings(_view), "body")
-	actual.name = "ProbeObserved"
-	var equipment := _column(columns, "Your prediction")
+	for host in [_equipment, _footer]:
+		for child in host.get_children():
+			host.remove_child(child)
+			child.queue_free()
+	%ProbeTitle.text = "Calibrate the moisture probe" if _target in ["calibrate_probe", "span_probe", "recheck_probe"] else _action_title()
+	%ProbeSubtitle.text = _action_title() + " · Try your values before changing the equipment."
+	%ProbeColumns.columns = 2 if get_viewport_rect().size.x >= 1100 and not _settings.get("large_text", false) else 1
+	%ProbeObserved.text = _readings(_view)
+	_render_steps()
+	var equipment := _equipment
 	if _leaving:
 		_label(equipment, "Discard these unconfirmed choices? The equipment will stay as it is.")
 		_button(equipment, "Keep choosing", "KeepChoosing", func(): _leaving = false; _render())
@@ -253,19 +243,13 @@ func _render() -> void:
 		fb_label.name = "ProbeActionFeedback"
 	else:
 		_render_inputs(equipment)
-	var forecast := _column(columns, "Projected result")
-	var projected := _label(forecast, _readings(_prediction.p01) if _prediction.get("accepted", false) and _prediction.has("p01") else PREDICTION_PROMPT)
-	projected.name = "ProbePrediction"
-	_label(forecast, _explanation())
+	%ProbePrediction.text = _readings(_prediction.p01) if _prediction.get("accepted", false) and _prediction.has("p01") else PREDICTION_PROMPT
+	%ProbeExplanation.text = _explanation()
 	var reason := String(_view.get("prerequisite_reason", ""))
-	if not reason.is_empty():
-		_label(forecast, reason)
-	var notice := _label(_stack, _notice)
-	notice.name = "ProbeNotice"
-	var footer := HFlowContainer.new()
-	footer.add_theme_constant_override("h_separation", 8)
-	footer.add_theme_constant_override("v_separation", 8)
-	_stack.add_child(footer)
+	%ProbePrerequisite.text = reason
+	%ProbePrerequisite.visible = not reason.is_empty()
+	%ProbeNotice.text = _notice
+	var footer := _footer
 	if not _observed and not _confirming and not _leaving:
 		_button(footer, "Undo choices", "UndoChoices", undo)
 		_button(footer, "Try it", "TryIt", preview)
@@ -275,6 +259,17 @@ func _render() -> void:
 	_button(footer, "Close", "CloseProbe", request_close)
 	UiDesign.apply_type(_frame, get_viewport_rect().size.y, 1.5 if _settings.get("large_text", false) else 1.0)
 	_restore_focus.call_deferred()
+
+func _render_steps() -> void:
+	var calibrating := _target in ["calibrate_probe", "span_probe", "recheck_probe"]
+	var active := ["calibrate_probe", "span_probe", "recheck_probe"].find(_target) if calibrating else (2 if _confirming or _observed else (1 if not _prediction.is_empty() else 0))
+	var labels := [%StepDry, %StepWet, %StepCheck]
+	var words := ["Dry reference", "Wet reference", "Check both"] if calibrating else ["Choose", "Try it", "Confirm"]
+	for index in labels.size():
+		var label := labels[index] as Label
+		label.text = "%d   %s" % [index + 1, words[index]]
+		label.add_theme_color_override("font_color", UiDesign.colour("ink" if active == index else "muted"))
+		label.add_theme_stylebox_override("normal", UiDesign.glass_style(UiDesign.colour("accent") if active == index else Color.TRANSPARENT, UiDesign.colour("accent") if active == index else UiDesign.colour("navy"), 10))
 
 func _render_inputs(column: VBoxContainer) -> void:
 	match String(_view.get("action", "")):
@@ -298,8 +293,22 @@ func _render_inputs(column: VBoxContainer) -> void:
 			_button(column, ("Selected: " if _choices.get("confirmed", false) else "Select: ") + _action_title(), "SelectAction", func(): choose("confirmed", true); _render())
 
 func _options(column: VBoxContainer, field: String, options: Array) -> void:
+	var row := HFlowContainer.new()
+	row.add_theme_constant_override("h_separation", 8)
+	row.add_theme_constant_override("v_separation", 8)
+	column.add_child(row)
 	for option in options:
-		_button(column, ("Selected: " if _choices.get(field) == option[0] else "") + option[1], "Choose_" + option[0], func(): choose(field, option[0]); _render())
+		var selected: bool = _choices.get(field) == option[0]
+		var button := _button(row, ("Selected: " if selected else "") + option[1], "Choose_" + option[0], func(): choose(field, option[0]); _render())
+		if selected:
+			button.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent"), true))
+			button.add_theme_color_override("font_color", UiDesign.colour("ink"))
+	var choices := row.get_children()
+	for index in range(choices.size() - 1):
+		var current := choices[index] as Button
+		var next := choices[index + 1] as Button
+		current.focus_neighbor_bottom = current.get_path_to(next)
+		next.focus_neighbor_top = next.get_path_to(current)
 
 func _number(column: VBoxContainer, field: String, title: String, step: float) -> void:
 	_label(column, title)
@@ -346,14 +355,6 @@ func _selection_text() -> String:
 			lines.append(field.replace("_", " ").capitalize() + ": " + str(_choices[field]))
 	return "\n".join(lines) if not lines.is_empty() else _action_title()
 
-func _column(parent: Control, title: String) -> VBoxContainer:
-	var column := VBoxContainer.new()
-	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	column.add_theme_constant_override("separation", 12)
-	parent.add_child(column)
-	_label(column, title, "heading")
-	return column
-
 func _label(parent: Node, text: String, token: String = "body") -> Label:
 	var label := UiDesign.label(text, token)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -364,6 +365,9 @@ func _label(parent: Node, text: String, token: String = "body") -> Label:
 func _button(parent: Node, text: String, id: String, action: Callable) -> Button:
 	var button := UiDesign.button(text)
 	button.name = id
+	if id in ["TryIt", "ConfirmChoice"]:
+		button.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent"), true))
+		button.add_theme_color_override("font_color", UiDesign.colour("ink"))
 	button.pressed.connect(action)
 	parent.add_child(button)
 	return button

@@ -147,192 +147,38 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _build_ui() -> void:
-	var scrim := ColorRect.new()
-	scrim.name = "Scrim"
-	scrim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	scrim.color = UiDesign.colour("scrim", Color(0.02, 0.04, 0.08, 0.78))
-	add_child(scrim)
-
-	var outer := MarginContainer.new()
-	outer.name = "OuterMargin"
-	outer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	outer.add_theme_constant_override("margin_left", 64)
-	outer.add_theme_constant_override("margin_right", 64)
-	outer.add_theme_constant_override("margin_top", 44)
-	outer.add_theme_constant_override("margin_bottom", 44)
-	add_child(outer)
-
-	var frame := UiDesign.glass_panel(UiDesign.colour("glass_edge", Color(1, 1, 1, 0.18)), 16)
-	frame.name = "InboxFrame"
-	frame.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	frame.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	outer.add_child(frame)
-
-	var root_col := VBoxContainer.new()
-	root_col.name = "RootColumn"
-	root_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	root_col.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	root_col.add_theme_constant_override("separation", 16)
-	frame.add_child(root_col)
-
-	# Header bar
-	var header := HBoxContainer.new()
-	header.name = "HeaderBar"
-	header.add_theme_constant_override("separation", 16)
-	root_col.add_child(header)
-
-	var title_col := VBoxContainer.new()
-	title_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title_col.add_theme_constant_override("separation", 2)
-	header.add_child(title_col)
-
-	var kicker := UiDesign.label("STATION COMMUNICATIONS", "caption", "accent")
-	kicker.name = "KickerLabel"
-	title_col.add_child(kicker)
-
-	_title_label = UiDesign.label("Messages", "title", "ivory")
-	_title_label.name = "TitleLabel"
-	title_col.add_child(_title_label)
-
-	_unread_summary_label = UiDesign.label("All messages read", "caption", "muted")
-	_unread_summary_label.name = "UnreadSummaryLabel"
-	_unread_summary_label.autowrap_mode = TextServer.AUTOWRAP_OFF
-	_unread_summary_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	header.add_child(_unread_summary_label)
-
-	_close_btn = UiDesign.button("Close", 40)
-	_close_btn.name = "CloseButton"
-	_close_btn.custom_minimum_size = Vector2(108, 40)
+	var shell: Control = self
+	if not has_node("OuterMargin"):
+		shell = load("res://scenes/ui/comms_panel.tscn").instantiate()
+		shell.set_script(null)
+		add_child(shell)
+	theme = UiKit.theme()
+	_title_label = shell.find_child("TitleLabel", true, false)
+	_unread_summary_label = shell.find_child("UnreadSummaryLabel", true, false)
+	_thread_list_box = shell.find_child("ThreadListBox", true, false)
+	_message_list_box = shell.find_child("MessageListBox", true, false)
+	_empty_list_label = shell.find_child("EmptyListLabel", true, false)
+	_detail_sender_label = shell.find_child("DetailSenderLabel", true, false)
+	_detail_time_label = shell.find_child("DetailTimeLabel", true, false)
+	_detail_subject_label = shell.find_child("DetailSubjectLabel", true, false)
+	_detail_goal_badge = shell.find_child("DetailGoalBadge", true, false)
+	_detail_body_label = shell.find_child("DetailBodyLabel", true, false)
+	_close_btn = shell.find_child("CloseButton", true, false)
 	_close_btn.pressed.connect(close_inbox)
-	header.add_child(_close_btn)
-
-	# Three-pane body: Threads (left), Message List (middle), Message Reader (right)
-	var body_row := HBoxContainer.new()
-	body_row.name = "BodyRow"
-	body_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body_row.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body_row.add_theme_constant_override("separation", 18)
-	root_col.add_child(body_row)
-
-	# Left pane: 5 threads
-	var thread_pane := UiDesign.glass_panel(Color.TRANSPARENT, 12)
-	thread_pane.name = "ThreadPane"
-	thread_pane.custom_minimum_size = Vector2(220, 0)
-	thread_pane.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body_row.add_child(thread_pane)
-
-	var thread_col := VBoxContainer.new()
-	thread_col.add_theme_constant_override("separation", 10)
-	thread_pane.add_child(thread_col)
-
-	var thread_header := UiDesign.label("CHANNELS", "caption", "muted")
-	thread_header.name = "ThreadHeader"
-	thread_col.add_child(thread_header)
-
-	_thread_list_box = VBoxContainer.new()
-	_thread_list_box.name = "ThreadListBox"
-	_thread_list_box.add_theme_constant_override("separation", 8)
-	thread_col.add_child(_thread_list_box)
-
+	for label in shell.find_children("*", "Label", true, false):
+		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), "accent" if label == _detail_sender_label else "ivory")
+	for pane_name in ["ThreadPane", "MessageListPane", "MessageDetailPane"]:
+		var pane := shell.find_child(pane_name, true, false) as PanelContainer
+		pane.add_theme_stylebox_override("panel", UiDesign.glass_style(Color.TRANSPARENT, Color.TRANSPARENT, 12))
 	for tid in CommsServiceScript.THREAD_ORDER:
-		var tbtn := UiDesign.button(String(CommsServiceScript.THREAD_LABELS.get(tid, tid.capitalize())), 44)
-		tbtn.name = "Thread_" + tid
-		tbtn.custom_minimum_size = Vector2(190, 44)
-		tbtn.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		var captured_tid := String(tid)
-		tbtn.pressed.connect(func() -> void: select_thread(captured_tid))
-		_thread_list_box.add_child(tbtn)
-		_thread_buttons[tid] = tbtn
-
-	# Middle pane: message list for selected thread
-	var list_pane := UiDesign.glass_panel(Color.TRANSPARENT, 12)
-	list_pane.name = "MessageListPane"
-	list_pane.custom_minimum_size = Vector2(340, 0)
-	list_pane.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body_row.add_child(list_pane)
-
-	var list_col := VBoxContainer.new()
-	list_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	list_col.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	list_col.add_theme_constant_override("separation", 10)
-	list_pane.add_child(list_col)
-
-	var list_header := UiDesign.label("INBOX", "caption", "muted")
-	list_header.name = "ListHeader"
-	list_col.add_child(list_header)
-
-	var scroll := ScrollContainer.new()
-	scroll.name = "MessageScroll"
-	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	list_col.add_child(scroll)
-
-	_message_list_box = VBoxContainer.new()
-	_message_list_box.name = "MessageListBox"
-	_message_list_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_message_list_box.add_theme_constant_override("separation", 8)
-	scroll.add_child(_message_list_box)
-
-	_empty_list_label = UiDesign.label("No messages in this channel yet.", "caption", "muted")
-	_empty_list_label.name = "EmptyListLabel"
-	_empty_list_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_message_list_box.add_child(_empty_list_label)
-
-	# Right pane: message detail reader
-	var detail_pane := UiDesign.glass_panel(UiDesign.colour("accent"), 12)
-	detail_pane.name = "MessageDetailPane"
-	detail_pane.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	detail_pane.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body_row.add_child(detail_pane)
-
-	var detail_col := VBoxContainer.new()
-	detail_col.name = "DetailColumn"
-	detail_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	detail_col.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	detail_col.add_theme_constant_override("separation", 12)
-	detail_pane.add_child(detail_col)
-
-	var meta_row := HBoxContainer.new()
-	meta_row.add_theme_constant_override("separation", 12)
-	detail_col.add_child(meta_row)
-
-	_detail_sender_label = UiDesign.label("Station Inbox", "caption", "accent")
-	_detail_sender_label.name = "DetailSenderLabel"
-	_detail_sender_label.autowrap_mode = TextServer.AUTOWRAP_OFF
-	_detail_sender_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	meta_row.add_child(_detail_sender_label)
-
-	_detail_time_label = UiDesign.label("", "caption", "muted")
-	_detail_time_label.name = "DetailTimeLabel"
-	_detail_time_label.autowrap_mode = TextServer.AUTOWRAP_OFF
-	meta_row.add_child(_detail_time_label)
-
-	_detail_subject_label = UiDesign.label("Select a message to read", "heading", "ivory")
-	_detail_subject_label.name = "DetailSubjectLabel"
-	_detail_subject_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_detail_subject_label.set_meta("verbatim", true)
-	detail_col.add_child(_detail_subject_label)
-
-	_detail_goal_badge = UiDesign.label("NEXT STEP ON HUD", "caption", "good")
-	_detail_goal_badge.name = "DetailGoalBadge"
-	_detail_goal_badge.visible = false
-	detail_col.add_child(_detail_goal_badge)
-
-	var body_scroll := ScrollContainer.new()
-	body_scroll.name = "DetailBodyScroll"
-	body_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	detail_col.add_child(body_scroll)
-
-	_detail_body_label = UiDesign.label("Incoming notes from the crew, the Commander, Earth, the Academy, and the station archive appear here as the mission unfolds.", "body", "ivory")
-	_detail_body_label.name = "DetailBodyLabel"
-	_detail_body_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_detail_body_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_detail_body_label.set_meta("verbatim", true)
-	body_scroll.add_child(_detail_body_label)
-
+		var button := UiDesign.button(String(CommsServiceScript.THREAD_LABELS.get(tid, tid.capitalize())))
+		button.name = "Thread_" + tid
+		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		var channel := String(tid)
+		button.pressed.connect(func(): select_thread(channel))
+		_thread_list_box.add_child(button)
+		_thread_buttons[tid] = button
 	_apply_font_sizes()
 
 
@@ -411,10 +257,10 @@ func _rebuild_message_list() -> void:
 		var prefix := "● " if not is_msg_read else ""
 		var mbtn := UiDesign.button("%s%s — %s" % [prefix, sender, subject], 48)
 		mbtn.name = "MsgItem_" + msg_id
-		mbtn.custom_minimum_size = Vector2(300, 48)
+		mbtn.custom_minimum_size = Vector2(0, 64)
 		mbtn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		mbtn.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		mbtn.clip_text = true
+		mbtn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		mbtn.set_meta("verbatim", true)
 		var captured_id := msg_id
 		mbtn.pressed.connect(func() -> void: select_message(captured_id))

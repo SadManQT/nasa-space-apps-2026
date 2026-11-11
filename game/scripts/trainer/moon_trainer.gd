@@ -14,6 +14,7 @@ signal exit_requested
 const DEFAULT_RESULTS_PATH := "user://moon_trainer_results.json"
 const SCHEMA_VERSION := 1
 const PANELS_SCENE := preload("res://scenes/ui/campaign_panels.tscn")
+const SHELL_SCENE := preload("res://scenes/trainer/moon_trainer.tscn")
 const VisorHudScript := preload("res://scripts/eva/eva_visor_hud.gd")
 const CoverageMapScript := preload("res://scripts/network/coverage_map_panel.gd")
 const RoutePlannerScript := preload("res://scripts/rover/rover_route_planner.gd")
@@ -255,54 +256,17 @@ func _build_ui() -> void:
 	_course_root.name = "TrainingCourse"
 	_sub_viewport.add_child(_course_root)
 
-	var margin := MarginContainer.new()
-	_console = margin
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for side in ["left", "right", "top", "bottom"]:
-		margin.add_theme_constant_override("margin_" + side, 28)
-	add_child(margin)
-
-	var layout := HBoxContainer.new()
-	layout.add_theme_constant_override("separation", 20)
-	margin.add_child(layout)
-
-	var glass := UiDesign.glass_panel()
-	glass.custom_minimum_size = Vector2(620, 0)
-	glass.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	layout.add_child(glass)
-
-	var stack := VBoxContainer.new()
-	stack.add_theme_constant_override("separation", 10)
-	glass.add_child(stack)
-
-	var header := HBoxContainer.new()
-	header.add_theme_constant_override("separation", 12)
-	stack.add_child(header)
-	var title_lbl := UiDesign.label("Moon Trainer · Free Field Sorties", "title")
-	title_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	header.add_child(title_lbl)
-
-	_notice = UiDesign.label("Real south-polar LOLA terrain. No story spoilers; results save separately from your expedition.", "body", "accent")
-	stack.add_child(_notice)
-
-	_assist_selector = HBoxContainer.new()
-	_assist_selector.name = "AssistModeBar"
-	_assist_selector.add_theme_constant_override("separation", 8)
-	stack.add_child(_assist_selector)
+	var shell := SHELL_SCENE.instantiate() as Control
+	_console = shell
+	add_child(shell)
+	_notice = shell.find_child("MoonTrainerNotice", true, false) as Label
+	_assist_selector = shell.find_child("AssistModeBar", true, false) as HBoxContainer
+	_scroll = shell.find_child("MoonTrainerScroll", true, false) as ScrollContainer
+	_body = shell.find_child("MoonTrainerBody", true, false) as VBoxContainer
+	for label_node in shell.find_children("*", "Label", true, false):
+		var label := label_node as Label
+		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), "muted" if label.get_meta("muted", false) else "ivory")
 	_rebuild_assist_bar()
-
-	_scroll = ScrollContainer.new()
-	_scroll.name = "MoonTrainerScroll"
-	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	_scroll.follow_focus = true
-	stack.add_child(_scroll)
-
-	_body = VBoxContainer.new()
-	_body.name = "MoonTrainerBody"
-	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_body.add_theme_constant_override("separation", 10)
-	_scroll.add_child(_body)
 
 	visor_hud = VisorHudScript.new()
 	visor_hud.name = "EvaVisorHud"
@@ -361,6 +325,9 @@ func _rebuild_assist_bar() -> void:
 		var btn := UiDesign.button(label_text)
 		btn.name = "Assist_" + mode_id.to_lower()
 		btn.custom_minimum_size = Vector2(120, 44)
+		btn.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent" if is_active else "navy"), is_active))
+		btn.add_theme_color_override("font_color", UiDesign.colour("ink" if is_active else "ivory"))
+		btn.add_theme_color_override("font_focus_color", UiDesign.colour("ink" if is_active else "ivory"))
 		btn.pressed.connect(func() -> void: set_assist_mode(mode_id))
 		_assist_selector.add_child(btn)
 
@@ -372,6 +339,8 @@ func set_assist_mode(mode_id: String) -> void:
 	eva_suit.set_assist_mode(clean)
 	rover.set_assist_mode(clean)
 	_rebuild_assist_bar()
+	_scale()
+	(_assist_selector.get_node("Assist_" + clean.to_lower()) as Button).grab_focus.call_deferred()
 	if visor_hud != null and visor_hud.visible:
 		visor_hud.refresh()
 
@@ -397,16 +366,22 @@ func show_catalog() -> void:
 	for row in SORTIES:
 		var sid := String(row.id)
 		var saved: Dictionary = results.get(sid, {})
-		var title_line := String(row.title)
+		var card := UiDesign.glass_panel()
+		card.name = "SortieCard_" + sid
+		_body.add_child(card)
+		var contents := VBoxContainer.new()
+		contents.add_theme_constant_override("separation", 10)
+		card.add_child(contents)
+		contents.add_child(UiDesign.label(String(row.title), "heading"))
+		contents.add_child(UiDesign.label(String(row.summary), "caption", "muted"))
+		var title_line := "Start sortie"
 		if not saved.is_empty():
 			title_line += " · %s (%d%% avg)" % [String(saved.get("grade", "Distinction")), int(round(float(saved.get("average", 96.0))))]
 		var btn := UiDesign.button(title_line)
 		btn.name = "Sortie_" + sid
 		btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		btn.pressed.connect(func() -> void: start_sortie(sid))
-		_body.add_child(btn)
-		var desc := UiDesign.label(String(row.summary), "caption", "muted")
-		_body.add_child(desc)
+		contents.add_child(btn)
 
 	var exit_btn := UiDesign.button("Back to Title")
 	exit_btn.name = "MoonTrainerExit"

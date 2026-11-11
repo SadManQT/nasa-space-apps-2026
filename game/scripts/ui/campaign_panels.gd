@@ -128,7 +128,7 @@ const JOURNAL_TABS := [
 	{"id": "manual", "label": "Manual"},
 ]
 const JOURNAL_PANEL_WIDTH := 1180.0
-const PANEL_WIDTH := 780.0
+const PANEL_WIDTH := 960.0
 const SIDE_WIDTH := 200.0
 const STATUS_BADGES := {"OBSERVED": "• OBSERVED", "VERIFIED": "• VERIFIED", "INFERRED": "• INFERRED", "UNKNOWN": "• UNKNOWN", "LINKED": "• LINKED", "ARCHIVED": "• ARCHIVED"}
 var _builders: Dictionary = {}
@@ -289,70 +289,36 @@ func emit_command(verb: String, target_id: String = "", payload: Dictionary = {}
 	return command
 
 func _build() -> void:
-	_overlay = ColorRect.new()
-	_overlay.color = Color(0.0, 0.01, 0.03, 0.74)
-	_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	var shell: Control = self
+	if not has_node("Panel"):
+		# Script-only callers receive the same authored composition as the editor scene.
+		shell = load("res://scenes/ui/campaign_panels.tscn").instantiate()
+		shell.set_script(null)
+		add_child(shell)
+	theme = UiKit.theme()
+	_overlay = shell.get_node("Overlay")
 	var shader := Shader.new()
 	shader.code = BLUR_SHADER
 	var material := ShaderMaterial.new()
 	material.shader = shader
 	_overlay.material = material
 	_overlay.hide()
-	add_child(_overlay)
-	_panel = _panel_style(Vector2(780, 540), UiDesign.colour("glass_edge", Color(1, 1, 1, 0.18)))
+	_panel = shell.get_node("Panel")
+	_panel.add_theme_stylebox_override("panel", UiDesign.glass_style(Color.TRANSPARENT, Color.TRANSPARENT, 0))
+	_panel.z_index = 40
 	_panel.minimum_size_changed.connect(_layout_panel.call_deferred)
-	_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	_panel.hide()
-	add_child(_panel)
-	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 28)
-	margin.add_theme_constant_override("margin_right", 28)
-	margin.add_theme_constant_override("margin_top", 22)
-	margin.add_theme_constant_override("margin_bottom", 20)
-	_panel.add_child(margin)
-	var page := VBoxContainer.new()
-	page.add_theme_constant_override("separation", 10)
-	margin.add_child(page)
-	_title = UiDesign.label("", "heading", "accent")
-	page.add_child(_title)
-	_description = UiDesign.label("", "caption", "muted")
-	page.add_child(_description)
-	var divider := HSeparator.new()
-	divider.modulate = Color(1, 1, 1, 0.18)
-	page.add_child(divider)
-	_columns = HBoxContainer.new()
-	_columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_columns.add_theme_constant_override("separation", 18)
-	page.add_child(_columns)
-	# Left tab column (UI_07 contract); shown only by the journal.
-	_side = VBoxContainer.new()
-	_side.name = "JournalTabs"
-	_side.custom_minimum_size.x = SIDE_WIDTH
-	_side.add_theme_constant_override("separation", 8)
+	var page := shell.get_node("Panel/Margin/Page")
+	_title = page.get_node("Title")
+	_description = page.get_node("Description")
+	_columns = page.get_node("Columns")
+	_side = _columns.get_node("JournalTabs")
 	_side.hide()
-	_columns.add_child(_side)
-	var scroll := ScrollContainer.new()
-	_scroll = scroll
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	scroll.follow_focus = true
-	scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
-	_columns.add_child(scroll)
-	_body = VBoxContainer.new()
-	_body.add_theme_constant_override("separation", 9)
-	_body.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.add_child(_body)
-	var footer := HBoxContainer.new()
-	footer.alignment = BoxContainer.ALIGNMENT_END
-	footer.add_theme_constant_override("separation", 8)
-	page.add_child(footer)
-	var hud_words: Dictionary = UiDesign.text().get("hud", {})
-	_close_button = _button("%s · %s" % [String(hud_words.get("close", "Close")), String(hud_words.get("close_key", "Esc"))])
+	_scroll = _columns.get_node("Scroll")
+	_scroll.get_v_scroll_bar().focus_mode = Control.FOCUS_ALL
+	_body = _scroll.get_node("Body")
+	_close_button = page.get_node("Footer/Close")
 	_close_button.pressed.connect(close_panel)
-	footer.add_child(_close_button)
 
 func _animate_open() -> void:
 	var seconds := presentation_transition_seconds()
@@ -725,9 +691,12 @@ func _set_settings(settings: Dictionary, emit_change: bool) -> void:
 		_assist_mode = String(settings.assist_mode)
 	var bindings = settings.get("bindings", {})
 	if bindings is Dictionary and bindings.get("use", "") in ["E", "H"] and bindings.get("what_now", "") in ["E", "H"] and bindings.use != bindings.what_now:
+		var changed: bool = _bindings.use != bindings.use or _bindings.what_now != bindings.what_now
 		_bindings["use"] = bindings.use
 		_bindings["what_now"] = bindings.what_now
-	_apply_bindings()
+		# An accessibility refresh must not undo full Settings keyboard remapping.
+		if changed and not FileAccess.file_exists(GameSettings.DEFAULT_PATH):
+			_apply_bindings()
 	_apply_accessibility()
 	if _active_panel == "journal_discovery":
 		# Column stacking and photo strips depend on the text scale.

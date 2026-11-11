@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/ui/chapter1_campaign_hud.gd" id="1_hud"]
+[ext_resource type="Script" path="res://scripts/ui/chapter1_campaign_hud.gd" id="1"]
+[ext_resource type="Theme" path="res://resources/ui/lla_theme.tres" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="3"]
 
-[node name="Chapter1CampaignHUD" type="Control"]
+[node name="Chapter1CampaignHud" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,4 +12,119 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_hud")
+theme = ExtResource("2")
+script = ExtResource("1")
+
+[node name="GoalCard" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 380.0
+offset_bottom = 148.0
+mouse_filter = 2
+
+[node name="Content" type="VBoxContainer" parent="GoalCard"]
+layout_mode = 2
+theme_override_constants/separation = 4
+mouse_filter = 2
+
+[node name="Chapter" type="Label" parent="GoalCard/Content"]
+layout_mode = 2
+text = "AURORA STATION"
+metadata/lla_type = "caption"
+theme_override_colors/font_color = Color(0.72,0.77,0.84,1)
+mouse_filter = 2
+
+[node name="Goal" type="HBoxContainer" parent="GoalCard/Content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="GoalCard/Content/Goal"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Calibrate the probe at the workbench"
+autowrap_mode = 2
+metadata/lla_type = "heading"
+accessibility_name = "Current goal"
+mouse_filter = 2
+
+[node name="Why" type="Label" parent="GoalCard/Content"]
+layout_mode = 2
+text = "Reliable readings help us care for Alo."
+autowrap_mode = 2
+metadata/lla_type = "body"
+theme_override_colors/font_color = Color(0.72,0.77,0.84,1)
+mouse_filter = 2
+
+[node name="WhatNowKey" type="Label" parent="GoalCard/Content"]
+layout_mode = 2
+text = "H - What now?"
+metadata/lla_type = "caption"
+theme_override_colors/font_color = Color(0.72,0.77,0.84,1)
+mouse_filter = 2
+
+[node name="Continue" type="Button" parent="GoalCard/Content"]
+visible = false
+layout_mode = 2
+custom_minimum_size = Vector2(0,44)
+text = "Continue - Enter"
+
+[node name="Dialogue" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -168.0
+offset_right = 360.0
+offset_bottom = -32.0
+mouse_filter = 0
+
+[node name="Content" type="VBoxContainer" parent="Dialogue"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SpeakerRow" type="HBoxContainer" parent="Dialogue/Content"]
+layout_mode = 2
+
+[node name="Speaker" type="Label" parent="Dialogue/Content/SpeakerRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mei"
+metadata/lla_type = "caption"
+theme_override_colors/font_color = Color(0.96,0.77,0.32,1)
+mouse_filter = 2
+
+[node name="Count" type="Label" parent="Dialogue/Content/SpeakerRow"]
+layout_mode = 2
+text = "1 / 3"
+metadata/lla_type = "caption"
+mouse_filter = 2
+
+[node name="Line" type="Label" parent="Dialogue/Content"]
+layout_mode = 2
+text = "The workbench is ready."
+autowrap_mode = 2
+metadata/lla_type = "body"
+metadata/verbatim = true
+mouse_filter = 2
+
+[node name="Actions" type="HBoxContainer" parent="Dialogue/Content"]
+layout_mode = 2
+alignment = 2
+theme_override_constants/separation = 8
+
+[node name="Auto" type="Button" parent="Dialogue/Content/Actions"]
+layout_mode = 2
+custom_minimum_size = Vector2(76,44)
+text = "Auto"
+toggle_mode = true
+focus_mode = 0
+
+[node name="Next" type="Button" parent="Dialogue/Content/Actions"]
+layout_mode = 2
+custom_minimum_size = Vector2(112,44)
+text = "Next - Space"
+focus_mode = 0

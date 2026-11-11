@@ -14,7 +14,7 @@ func _run() -> void:
  for kind in ["CheckButton", "CheckBox"]:
   var pressed := theme.get_stylebox("pressed",kind) as StyleBoxFlat
   _check(UiKit.contrast_ratio(Color("#ECEEF0"), pressed.bg_color) >= 4.5, "checked row supports existing ivory-label overrides")
- _check(theme.get_stylebox("panel", "HeroPanel") is GoStyleBoxCut, "authored hero uses the Gohud sci-fi surface")
+ _check(theme.get_stylebox("panel", "HeroPanel") is StyleBoxFlat, "approved soft surface is serialized in the shared theme")
  var menu := load("res://scenes/ui/main_menu.tscn").instantiate() as MainMenu
  _check(menu.get_node_or_null("Page") != null, "title composition exists before ready")
  root.size = Vector2i(1280,720)
