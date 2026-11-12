@@ -1038,7 +1038,8 @@
     "production/qa/builds/atik_20261112/ci_runs.json",
     "README.md",
     "production/qa/publish_candidate.py",
-    ".github/workflows/publish-judging-candidate.yml"
+    ".github/workflows/publish-judging-candidate.yml",
+    "CREDITS.md"
    ],
    "edit_files": [
     "production/qa/build_release.py",
@@ -1052,7 +1053,8 @@
     "README.md",
     "production/qa/publish_candidate.py",
     ".github/workflows/publish-judging-candidate.yml",
-    "production/qa/builds/atik_20261112/release_notes.md"
+    "production/qa/builds/atik_20261112/release_notes.md",
+    "CREDITS.md"
    ]
   },
   {
