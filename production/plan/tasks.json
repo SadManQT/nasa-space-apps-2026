@@ -6792,7 +6792,7 @@
    "priority": "P0",
    "tool": "any",
    "title": "Profile and remove native first campaign draw hitch on M4",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -6840,11 +6840,7 @@
     "PRODUCTION_HANDBOOK.md",
     "production/AI_PROMPT_LOG.md"
    ],
-   "blocker": "11 Nov Sadman: reproduced on M4 (cold caches: title frame 24.2 s, first campaign frame 11.5 s; warm: 1.3 s / 0.48 s) and profiled with a debug-symbol 4.7.2 build: first-use Metal shader compilation (main thread in CAMetalLayer nextDrawable while MTLCompilerService compiles). Fix = export shader_baker, which needs Apple's Metal toolchain (Xcode); this Mac has only Command Line Tools and no room for Xcode. Evidence production/qa/perf/M1-92_sadman_20261111/README.md. Also fixed the export plugin that broke every exported build.",
-   "edit_files": [
-    "production/qa/perf/atik_20261112/M1-92.md",
-    "production/qa/perf/atik_20261112/host_tools.json"
-   ]
+   "blocker": "12 Nov original M4/macOS27.0.1: metal, metallib and xctrace each unavailable (exit72); matching native symbol build and controlled baked/unbaked campaign comparison not available. Sadman symbolicated macOS26.5.2 profiles and export fix preserved; no first-load repair inferred from warm/cache or headless passes. Saved report and exact diagnostics: production/qa/perf/atik_20261112/M1-92.md and host_tools.json. Resume with matching native profiling plus GPU-capable Metal toolchain; no quality/threshold/cache changes."
   },
   {
    "id": "M1-93",
