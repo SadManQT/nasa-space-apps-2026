@@ -1,0 +1,1013 @@
+{
+	"cpu_only": false,
+	"events": [
+		{
+			"duration_ms": 2025.435,
+			"event": "title_build",
+			"max_frame_interval_ms": 1272.417,
+			"steps": [
+				{
+					"ms": 89.292,
+					"step": "worker_decode:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"ms": 5.296,
+					"step": "worker_mipmaps:res://assets/props/PR_MissionTable/PR_MissionTable.glb"
+				},
+				{
+					"end_usec": 1983835,
+					"ms": 1.489,
+					"start_usec": 1982346,
+					"step": "glb_generate_scene:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2096008,
+					"ms": 0.183,
+					"start_usec": 2095825,
+					"step": "glb_pack:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2103046,
+					"ms": 0.008,
+					"start_usec": 2103038,
+					"step": "glb_free_nodes:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2103086,
+					"ms": 0.038,
+					"start_usec": 2103048,
+					"step": "glb_publish_cache:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2112352,
+					"ms": 0.001,
+					"start_usec": 2112351,
+					"step": "glb_release_animations:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2112380,
+					"ms": 0.022,
+					"start_usec": 2112358,
+					"step": "glb_release_json:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2122470,
+					"ms": 0.02,
+					"start_usec": 2122450,
+					"step": "glb_release_state:res://assets/props/PR_MissionTable/PR_MissionTable.glb",
+					"thread_id": 1
+				},
+				{
+					"ms": 94.196,
+					"step": "worker_decode:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"ms": 5.066,
+					"step": "worker_mipmaps:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb"
+				},
+				{
+					"end_usec": 2237787,
+					"ms": 1.081,
+					"start_usec": 2236706,
+					"step": "glb_generate_scene:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2245874,
+					"ms": 0.131,
+					"start_usec": 2245743,
+					"step": "glb_pack:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2253983,
+					"ms": 0.015,
+					"start_usec": 2253968,
+					"step": "glb_free_nodes:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2254014,
+					"ms": 0.029,
+					"start_usec": 2253985,
+					"step": "glb_publish_cache:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2262156,
+					"ms": 0.003,
+					"start_usec": 2262153,
+					"step": "glb_release_animations:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2262188,
+					"ms": 0.023,
+					"start_usec": 2262165,
+					"step": "glb_release_json:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2270403,
+					"ms": 0.025,
+					"start_usec": 2270378,
+					"step": "glb_release_state:res://assets/props/PR_BatteryJar/PR_BatteryJar.glb",
+					"thread_id": 1
+				},
+				{
+					"ms": 30.944,
+					"step": "worker_decode:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"ms": 1.964,
+					"step": "worker_mipmaps:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb"
+				},
+				{
+					"end_usec": 2312030,
+					"ms": 0.191,
+					"start_usec": 2311839,
+					"step": "glb_generate_scene:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2320876,
+					"ms": 0.132,
+					"start_usec": 2320744,
+					"step": "glb_pack:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2329055,
+					"ms": 0.023,
+					"start_usec": 2329032,
+					"step": "glb_free_nodes:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2329092,
+					"ms": 0.034,
+					"start_usec": 2329058,
+					"step": "glb_publish_cache:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2337255,
+					"ms": 0.002,
+					"start_usec": 2337253,
+					"step": "glb_release_animations:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2337281,
+					"ms": 0.02,
+					"start_usec": 2337261,
+					"step": "glb_release_json:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2345461,
+					"ms": 0.021,
+					"start_usec": 2345440,
+					"step": "glb_release_state:res://assets/props/PR_SeedPacket/PR_SeedPacket.glb",
+					"thread_id": 1
+				},
+				{
+					"ms": 124.734,
+					"step": "worker_content_validation"
+				},
+				{
+					"end_usec": 2489086,
+					"ms": 0.796,
+					"start_usec": 2488290,
+					"step": "toon:PR_MissionTable",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2489124,
+					"ms": 0.014,
+					"start_usec": 2489110,
+					"step": "toon:PR_BatteryJar",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2489152,
+					"ms": 0.011,
+					"start_usec": 2489141,
+					"step": "toon:PR_SeedPacket",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 2489310,
+					"ms": 2.307,
+					"start_usec": 2487003,
+					"step": "title_stage",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 3859286,
+					"ms": 73.927,
+					"start_usec": 3785359,
+					"step": "title_ui_save_validation",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 70
+		},
+		{
+			"duration_ms": 1327.061,
+			"event": "new_campaign",
+			"max_frame_interval_ms": 539.669,
+			"steps": [
+				{
+					"end_usec": 23909847,
+					"ms": 0.06,
+					"start_usec": 23909787,
+					"step": "campaign_scene_instance",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 23935498,
+					"ms": 5.838,
+					"start_usec": 23929660,
+					"step": "content_validation",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 23952388,
+					"ms": 15.254,
+					"start_usec": 23937134,
+					"step": "route_profile",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24011555,
+					"ms": 3.663,
+					"start_usec": 24007892,
+					"step": "room_shell:LOC-01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24244584,
+					"ms": 233.027,
+					"start_usec": 24011557,
+					"step": "room_fixtures_doors:LOC-01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24245820,
+					"ms": 1.234,
+					"start_usec": 24244586,
+					"step": "room_navigation:LOC-01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24246585,
+					"ms": 247.252,
+					"start_usec": 23999333,
+					"step": "room_rebuild",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24803494,
+					"ms": 19.297,
+					"start_usec": 24784197,
+					"step": "campaign_place_crew",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24817560,
+					"ms": 0.347,
+					"start_usec": 24817213,
+					"step": "hud_instantiate",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24826646,
+					"ms": 9.083,
+					"start_usec": 24817563,
+					"step": "hud_ready",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24940130,
+					"ms": 2.399,
+					"start_usec": 24937731,
+					"step": "hud_panels",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 24975738,
+					"ms": 31.9,
+					"start_usec": 24943838,
+					"step": "hud_comms_mission_table",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25005833,
+					"ms": 0.316,
+					"start_usec": 25005517,
+					"step": "hud_chapter_panels",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25030399,
+					"ms": 4.497,
+					"start_usec": 25025902,
+					"step": "hud_p01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25096722,
+					"ms": 3.631,
+					"start_usec": 25093091,
+					"step": "hud_query_projection",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25097221,
+					"ms": 0.498,
+					"start_usec": 25096723,
+					"step": "hud_panels_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25097965,
+					"ms": 0.742,
+					"start_usec": 25097223,
+					"step": "hud_outpost_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25098017,
+					"ms": 4.935,
+					"start_usec": 25093082,
+					"step": "hud_initial_query",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25098021,
+					"ms": 176.43,
+					"start_usec": 24921591,
+					"step": "hud_setup",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25098023,
+					"ms": 280.824,
+					"start_usec": 24817199,
+					"step": "campaign_ui",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25115001,
+					"ms": 5.717,
+					"start_usec": 25109284,
+					"step": "campaign_save",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25125558,
+					"ms": 0.96,
+					"start_usec": 25124598,
+					"step": "hud_messages_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25129036,
+					"ms": 3.477,
+					"start_usec": 25125559,
+					"step": "hud_caption_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25161414,
+					"ms": 21.034,
+					"start_usec": 25140380,
+					"step": "hud_targets_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25177438,
+					"ms": 2.588,
+					"start_usec": 25174850,
+					"step": "hud_query_projection",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25177830,
+					"ms": 0.391,
+					"start_usec": 25177439,
+					"step": "hud_panels_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25178350,
+					"ms": 0.519,
+					"start_usec": 25177831,
+					"step": "hud_outpost_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25186165,
+					"ms": 7.791,
+					"start_usec": 25178374,
+					"step": "hud_accessibility_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25186172,
+					"ms": 61.927,
+					"start_usec": 25124245,
+					"step": "campaign_hud_refresh",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 41
+		},
+		{
+			"duration_ms": 81.973,
+			"event": "room_enter_EX-CH01-S01",
+			"max_frame_interval_ms": 62.536,
+			"steps": [
+				{
+					"end_usec": 25259776,
+					"ms": 2.158,
+					"start_usec": 25257618,
+					"step": "room_shell:LOC-01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25261303,
+					"ms": 1.526,
+					"start_usec": 25259777,
+					"step": "room_fixtures_doors:LOC-01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25262240,
+					"ms": 0.936,
+					"start_usec": 25261304,
+					"step": "room_navigation:LOC-01",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25272609,
+					"ms": 8.922,
+					"start_usec": 25263687,
+					"step": "campaign_place_crew",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25272611,
+					"ms": 21.232,
+					"start_usec": 25251379,
+					"step": "room_rebuild",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25273480,
+					"ms": 0.704,
+					"start_usec": 25272776,
+					"step": "hud_messages_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25273602,
+					"ms": 0.121,
+					"start_usec": 25273481,
+					"step": "hud_caption_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25288446,
+					"ms": 14.843,
+					"start_usec": 25273603,
+					"step": "hud_targets_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25290949,
+					"ms": 2.501,
+					"start_usec": 25288448,
+					"step": "hud_query_projection",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25291268,
+					"ms": 0.318,
+					"start_usec": 25290950,
+					"step": "hud_panels_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25291754,
+					"ms": 0.485,
+					"start_usec": 25291269,
+					"step": "hud_outpost_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 25299246,
+					"ms": 7.468,
+					"start_usec": 25291778,
+					"step": "hud_accessibility_refresh",
+					"thread_id": 1
+				},
+				{
+					"ms": 82.632,
+					"step": "worker_decode:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb"
+				},
+				{
+					"ms": 5.162,
+					"step": "worker_mipmaps:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb"
+				},
+				{
+					"end_usec": 25326480,
+					"ms": 0.893,
+					"start_usec": 25325587,
+					"step": "glb_generate_scene:res://assets/props/PR_WaterWallPanel/PR_WaterWallPanel.glb",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 2
+		},
+		{
+			"duration_ms": 99.54,
+			"event": "room_enter_EX-CH01-S02",
+			"max_frame_interval_ms": 66.515,
+			"steps": [
+				{
+					"end_usec": 65389445,
+					"ms": 1.36,
+					"start_usec": 65388085,
+					"step": "room_shell:LOC-04",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65391968,
+					"ms": 2.522,
+					"start_usec": 65389446,
+					"step": "room_fixtures_doors:LOC-04",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65392260,
+					"ms": 0.29,
+					"start_usec": 65391970,
+					"step": "room_navigation:LOC-04",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65397780,
+					"ms": 4.117,
+					"start_usec": 65393663,
+					"step": "campaign_place_crew",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65397782,
+					"ms": 12.852,
+					"start_usec": 65384930,
+					"step": "room_rebuild",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65408208,
+					"ms": 0.951,
+					"start_usec": 65407257,
+					"step": "hud_messages_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65408434,
+					"ms": 0.225,
+					"start_usec": 65408209,
+					"step": "hud_caption_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65422471,
+					"ms": 14.036,
+					"start_usec": 65408435,
+					"step": "hud_targets_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65423872,
+					"ms": 1.4,
+					"start_usec": 65422472,
+					"step": "hud_query_projection",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65424604,
+					"ms": 0.731,
+					"start_usec": 65423873,
+					"step": "hud_panels_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65425123,
+					"ms": 0.518,
+					"start_usec": 65424605,
+					"step": "hud_outpost_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 65431540,
+					"ms": 6.393,
+					"start_usec": 65425147,
+					"step": "hud_accessibility_refresh",
+					"thread_id": 1
+				},
+				{
+					"ms": 14.81,
+					"step": "worker_decode:res://assets/props/narrative/PR_DrawerLidNote.glb"
+				},
+				{
+					"ms": 1.723,
+					"step": "worker_mipmaps:res://assets/props/narrative/PR_DrawerLidNote.glb"
+				},
+				{
+					"end_usec": 65477201,
+					"ms": 0.141,
+					"start_usec": 65477060,
+					"step": "glb_generate_scene:res://assets/props/narrative/PR_DrawerLidNote.glb",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 2
+		},
+		{
+			"duration_ms": 4003.673,
+			"event": "room_enter_EX-CH01-S04",
+			"max_frame_interval_ms": 3112.104,
+			"steps": [
+				{
+					"ms": 40.022,
+					"step": "worker_decode:res://assets/props/narrative/PR_LabelHolder.glb"
+				},
+				{
+					"ms": 0.642,
+					"step": "worker_mipmaps:res://assets/props/narrative/PR_LabelHolder.glb"
+				},
+				{
+					"end_usec": 105695394,
+					"ms": 0.446,
+					"start_usec": 105694948,
+					"step": "glb_generate_scene:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 105715318,
+					"ms": 0.608,
+					"start_usec": 105714710,
+					"step": "glb_pack:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 105729530,
+					"ms": 0.062,
+					"start_usec": 105729468,
+					"step": "glb_free_nodes:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 105729700,
+					"ms": 0.162,
+					"start_usec": 105729538,
+					"step": "glb_publish_cache:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 105747297,
+					"ms": 0.011,
+					"start_usec": 105747286,
+					"step": "glb_release_animations:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 105747466,
+					"ms": 0.144,
+					"start_usec": 105747322,
+					"step": "glb_release_json:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 105763040,
+					"ms": 0.227,
+					"start_usec": 105762813,
+					"step": "glb_release_state:res://assets/props/narrative/PR_LabelHolder.glb",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 105793691,
+					"ms": 1.958,
+					"start_usec": 105791733,
+					"step": "room_shell:LOC-03",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 105798493,
+					"ms": 4.8,
+					"start_usec": 105793693,
+					"step": "room_fixtures_doors:LOC-03",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 105799096,
+					"ms": 0.6,
+					"start_usec": 105798496,
+					"step": "room_navigation:LOC-03",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 105800667,
+					"ms": 21.595,
+					"start_usec": 105779072,
+					"step": "room_rebuild",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 106174743,
+					"ms": 13.326,
+					"start_usec": 106161417,
+					"step": "campaign_place_crew",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109382820,
+					"ms": 1.329,
+					"start_usec": 109381491,
+					"step": "hud_messages_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109383097,
+					"ms": 0.275,
+					"start_usec": 109382822,
+					"step": "hud_caption_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109447635,
+					"ms": 34.338,
+					"start_usec": 109413297,
+					"step": "hud_targets_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109465148,
+					"ms": 4.559,
+					"start_usec": 109460589,
+					"step": "hud_query_projection",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109466668,
+					"ms": 1.518,
+					"start_usec": 109465150,
+					"step": "hud_panels_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109467587,
+					"ms": 0.916,
+					"start_usec": 109466671,
+					"step": "hud_outpost_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 109482371,
+					"ms": 14.736,
+					"start_usec": 109467635,
+					"step": "hud_accessibility_refresh",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 34
+		},
+		{
+			"duration_ms": 134.372,
+			"event": "room_enter_EX-CH01-S05",
+			"max_frame_interval_ms": 78.694,
+			"steps": [
+				{
+					"end_usec": 149604339,
+					"ms": 2.026,
+					"start_usec": 149602313,
+					"step": "room_shell:LOC-02",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149606667,
+					"ms": 2.326,
+					"start_usec": 149604341,
+					"step": "room_fixtures_doors:LOC-02",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149607117,
+					"ms": 0.449,
+					"start_usec": 149606668,
+					"step": "room_navigation:LOC-02",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149614757,
+					"ms": 6.333,
+					"start_usec": 149608424,
+					"step": "campaign_place_crew",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149614759,
+					"ms": 18.039,
+					"start_usec": 149596720,
+					"step": "room_rebuild",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149627836,
+					"ms": 0.921,
+					"start_usec": 149626915,
+					"step": "hud_messages_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149628055,
+					"ms": 0.218,
+					"start_usec": 149627837,
+					"step": "hud_caption_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149644577,
+					"ms": 16.521,
+					"start_usec": 149628056,
+					"step": "hud_targets_refresh",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149646563,
+					"ms": 1.983,
+					"start_usec": 149644580,
+					"step": "hud_query_projection",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149647340,
+					"ms": 0.777,
+					"start_usec": 149646563,
+					"step": "hud_panels_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149647887,
+					"ms": 0.546,
+					"start_usec": 149647341,
+					"step": "hud_outpost_bind",
+					"thread_id": 1
+				},
+				{
+					"end_usec": 149655262,
+					"ms": 7.352,
+					"start_usec": 149647910,
+					"step": "hud_accessibility_refresh",
+					"thread_id": 1
+				}
+			],
+			"transition_frames": 2
+		}
+	],
+	"metadata": {
+		"chapter1_room_sweep": true,
+		"cpu": "Apple M4",
+		"cpu_only": false,
+		"display": "macOS",
+		"driver": "metal",
+		"engine": {
+			"build": "official",
+			"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+			"hex": 263938,
+			"major": 4,
+			"minor": 7,
+			"patch": 2,
+			"status": "stable",
+			"string": "4.7.2-stable (official)",
+			"timestamp": 0
+		},
+		"expected_rooms": [
+			"LOC-01",
+			"LOC-04",
+			"LOC-03",
+			"LOC-02"
+		],
+		"gpu": "Apple M4 (Apple9)",
+		"max_fps": 0,
+		"measured_rooms": [
+			"LOC-01",
+			"LOC-04",
+			"LOC-03",
+			"LOC-02"
+		],
+		"os": "macOS",
+		"physics_ticks": 60,
+		"renderer": "forward_plus",
+		"room_coverage_complete": true,
+		"seconds": 20.0,
+		"transition_schema": 3,
+		"vsync": 1,
+		"window": "(1920, 1080)"
+	},
+	"preparation_recoveries": [],
+	"summaries": [
+		{
+			"frames_or_calls": 1579,
+			"max_ms": 975.212,
+			"over_33ms": 9,
+			"p50_ms": 10.762,
+			"p95_ms": 13.533,
+			"p99_ms": 18.162,
+			"sample": "title"
+		},
+		{
+			"frames_or_calls": 1139,
+			"max_ms": 154.609,
+			"over_33ms": 17,
+			"p50_ms": 16.788,
+			"p95_ms": 20.964,
+			"p99_ms": 34.644,
+			"sample": "LOC-01_walk"
+		},
+		{
+			"frames_or_calls": 1195,
+			"max_ms": 40.667,
+			"over_33ms": 4,
+			"p50_ms": 16.674,
+			"p95_ms": 18.122,
+			"p99_ms": 19.582,
+			"sample": "LOC-01_panels"
+		},
+		{
+			"frames_or_calls": 1186,
+			"max_ms": 36.037,
+			"over_33ms": 1,
+			"p50_ms": 16.801,
+			"p95_ms": 19.512,
+			"p99_ms": 22.329,
+			"sample": "LOC-04_walk"
+		},
+		{
+			"frames_or_calls": 1200,
+			"max_ms": 24.907,
+			"over_33ms": 0,
+			"p50_ms": 16.658,
+			"p95_ms": 18.469,
+			"p99_ms": 19.828,
+			"sample": "LOC-04_panels"
+		},
+		{
+			"frames_or_calls": 1200,
+			"max_ms": 34.276,
+			"over_33ms": 1,
+			"p50_ms": 16.699,
+			"p95_ms": 18.344,
+			"p99_ms": 19.431,
+			"sample": "LOC-03_walk"
+		},
+		{
+			"frames_or_calls": 1198,
+			"max_ms": 35.656,
+			"over_33ms": 2,
+			"p50_ms": 16.659,
+			"p95_ms": 18.2,
+			"p99_ms": 19.438,
+			"sample": "LOC-03_panels"
+		},
+		{
+			"frames_or_calls": 1176,
+			"max_ms": 37.838,
+			"over_33ms": 1,
+			"p50_ms": 16.833,
+			"p95_ms": 19.266,
+			"p99_ms": 21.509,
+			"sample": "LOC-02_walk"
+		},
+		{
+			"frames_or_calls": 1185,
+			"max_ms": 32.607,
+			"over_33ms": 0,
+			"p50_ms": 16.733,
+			"p95_ms": 18.952,
+			"p99_ms": 21.816,
+			"sample": "LOC-02_panels"
+		}
+	]
+}

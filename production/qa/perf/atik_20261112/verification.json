@@ -1,0 +1,139 @@
+{
+  "date": "2026-11-12",
+  "samples": [
+    {
+      "renderer": "forward_plus",
+      "sample": "title",
+      "rows": 1579,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "forward_plus",
+      "sample": "LOC-01_walk",
+      "rows": 1139,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "forward_plus",
+      "sample": "LOC-01_panels",
+      "rows": 1195,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "forward_plus",
+      "sample": "LOC-04_walk",
+      "rows": 1186,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "forward_plus",
+      "sample": "LOC-04_panels",
+      "rows": 1200,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "forward_plus",
+      "sample": "LOC-03_walk",
+      "rows": 1200,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "forward_plus",
+      "sample": "LOC-03_panels",
+      "rows": 1198,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "forward_plus",
+      "sample": "LOC-02_walk",
+      "rows": 1176,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "forward_plus",
+      "sample": "LOC-02_panels",
+      "rows": 1185,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "compatibility",
+      "sample": "title",
+      "rows": 1934,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "compatibility",
+      "sample": "LOC-01_walk",
+      "rows": 1057,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "compatibility",
+      "sample": "LOC-01_panels",
+      "rows": 1200,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "compatibility",
+      "sample": "LOC-04_walk",
+      "rows": 1172,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "compatibility",
+      "sample": "LOC-04_panels",
+      "rows": 1200,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "compatibility",
+      "sample": "LOC-03_walk",
+      "rows": 1195,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "compatibility",
+      "sample": "LOC-03_panels",
+      "rows": 1200,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "compatibility",
+      "sample": "LOC-02_walk",
+      "rows": 1201,
+      "csv_matches_json": true
+    },
+    {
+      "renderer": "compatibility",
+      "sample": "LOC-02_panels",
+      "rows": 1200,
+      "csv_matches_json": true
+    }
+  ],
+  "artifacts": {
+    "forward_plus.json": {
+      "bytes": 22146,
+      "sha256": "44e46de2271613a46ae58b356a8652b8703ad9d610cba9fe48efe7f72bc052ad"
+    },
+    "forward_plus.csv": {
+      "bytes": 1535480,
+      "sha256": "07ffa845bbe447d5a83fa0b8b897378688cdac0233311ae569ecf6a5f10f1782"
+    },
+    "forward_plus.log": {
+      "bytes": 20880,
+      "sha256": "5b86ba2754fdd1bcc12ab7143422529ee619d3ed1a6afbf782b6ce78cbd1669f"
+    },
+    "compatibility.json": {
+      "bytes": 21633,
+      "sha256": "68dce79b3b36651a24afacc60f9c314a09d4e157a98efad0bf8b4b4928f0c53a"
+    },
+    "compatibility.csv": {
+      "bytes": 1575063,
+      "sha256": "841f7d16bd72605337c82625f9077a0bd905ca995319593d027c37c8e15961bc"
+    },
+    "compatibility.log": {
+      "bytes": 21111,
+      "sha256": "d13f9067211646ada9c320964a447054b463919585ff0c3d88b152c9d3b2da1a"
+    }
+  }
+}
