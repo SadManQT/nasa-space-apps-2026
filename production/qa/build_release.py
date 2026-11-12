@@ -164,7 +164,10 @@ def main():
             command.append('--headless')
         command.extend(['--', '--export-smoke'])
         if args.evidence:
-            command.extend(['--evidence-dir=' + str(ROOT / 'production/qa/evidence')])
+            # Keep new captures beside this candidate; never overwrite earlier QA.
+            evidence_directory = output / 'evidence'
+            evidence_directory.mkdir()
+            command.extend(['--evidence-dir=' + str(evidence_directory)])
         with tempfile.TemporaryDirectory(prefix='lla-export-smoke-') as outside_project:
             run_checked(command, output / 'smoke.log', outside_project, timeout=180, result_pattern=r'EXPORT SMOKE RESULT: PASS \(\d+ checks, 0 failures\)')
     (output / 'README.txt').write_text(

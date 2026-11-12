@@ -462,17 +462,19 @@ func _run_export_smoke() -> void:
 	for index in 3:
 		await get_tree().physics_frame
 	checks.append(bool(campaign.perform_target("commission_route").get("accepted", false)))
+	# The first job can immediately start the next room transition. A constructed
+	# player/HUD alone does not prove the exported campaign is ready to interact.
+	# Use elapsed time: 900 headless frames can finish before a worker settles.
+	var settle_deadline := Time.get_ticks_msec() + 15000
+	while (campaign.loading or preparation.busy()) and Time.get_ticks_msec() < settle_deadline:
+		await get_tree().process_frame
+	checks.append(not campaign.loading and not preparation.busy())
+	print("EXPORT_SMOKE_READY scene=%s loading=%s background=%s" % [campaign.route.current_scene_id(), campaign.loading, preparation.busy()])
 	await _export_smoke_capture("M1-20_native_chapter1")
 	checks.append(FileAccess.file_exists(save_path))
 	checks.append(_save_service.clear(save_path))
 	var failures := checks.count(false)
 	print("EXPORT SMOKE RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks.size(), failures])
-	# Slow runners are still loading the next rooms here; quitting mid-load
-	# reports "resources still in use at exit". Settle (at most ~15 s), then free.
-	for index in 900:
-		if not preparation.busy():
-			break
-		await get_tree().process_frame
 	_campaign.queue_free()
 	for index in 30:
 		await get_tree().process_frame
