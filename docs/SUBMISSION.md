@@ -2,12 +2,12 @@
 
 Team **The Last BrainCell** · Dhaka, Bangladesh · Challenge: **Build a Junior Astronaut Mission Trainer** · Project: **Last Light Academy**
 
-One section per field of the project page on spaceappschallenge.org, in the order the Bangladesh Participants Guide lists them ([competition-rules.md](competition-rules.md) §C). Paste the text under each heading. Written 7 November 2026 (board M2-02) from the repository as it stands that day; every number comes from the files named in the section.
+One section per field of the project page on spaceappschallenge.org, in the order the Bangladesh Participants Guide lists them ([competition-rules.md](competition-rules.md) §C). Paste the text under each heading. Written 7 November 2026 (board M2-02) and updated 12 November 2026 to the repository as it stands that day; every number comes from the files named in the section.
 
 **Before pasting (M2-10), replace or check:**
 - `[link after upload, M2-06 / M2-08]`: the YouTube links of the 240-second video (M2-06) and the 30-second video (M2-08).
 - `[metric from M1-22 when the playtest runs]`: the learner playtest numbers. Delete the sentence if M1-22 has not run; never estimate.
-- Items marked **[status on 7 Nov]**: four-player Class mode (M1-37), the decision replay and debrief (M1-19), the Chapters 2–8 puzzle panels (M3-2P to M3-8P) and the 12 November release (M3-93). Change "in progress" to "built" only when the board says `done`.
+- Items marked **[status on 12 Nov]**: four-player Class mode (M1-37, blocked) and the release build for judging (M3-93). Change "in progress" to "built" only when the board says `done`.
 - Open every link in a private window: everything must open with no login.
 
 ---
@@ -16,7 +16,7 @@ One section per field of the project page on spaceappschallenge.org, in the orde
 
 Last Light Academy is a free, open-source 3D mission trainer for learners aged 10 to 15. Players run Aurora Station, an outpost at the Moon's south pole, through a 36-hour lunar night. At the Mission Table they plan seven 7.2-hour shifts, trading off the four demands the challenge names: life support (the air tank), radiation shielding (a water wall), power (a battery of "sun-drops") and food production (the garden and Alo, a small mustard plant). Every plan is previewed before it is locked in, and the station then lives with it: a blackout, a storm dose, a wilting plant or a first bloom. The trade-offs are real ones. The water that shields the crew from a replay of the 10 September 2017 solar storm is the water Alo drinks, and the power that keeps the crew warm also makes their air.
 
-The game is NASA-data-first. Its key numbers come from 29 NASA and partner sources bundled offline: NASA DONKI space-weather records, NASA's Life Support Baseline Values (BVAD), LRO LOLA terrain and illumination, JPL Horizons Sun and Earth positions, LRO CRaTER radiation dose and more. In-game Data Cards show the source behind each number and label it as measured, computed or a training assumption. Chapter 1 is playable today; the campaign is written for 8 chapters, 32 missions and 96 scenes across one Moon year.
+The game is NASA-data-first. Its key numbers come from 29 NASA and partner sources bundled offline: NASA DONKI space-weather records, NASA's Life Support Baseline Values (BVAD), LRO LOLA terrain and illumination, JPL Horizons Sun and Earth positions, LRO CRaTER radiation dose and more. In-game Data Cards show the source behind each number and label it as measured, computed or a training assumption. All 8 chapters, 32 missions and 96 scenes across one Moon year are playable, with 16 interactive mission puzzles and 19 narrated science explainers.
 
 - **240-second video:** [link after upload, M2-06 / M2-08]
 - **GitHub repository:** https://github.com/SadManQT/nasa-space-apps-2026
@@ -25,7 +25,7 @@ The game is NASA-data-first. Its key numbers come from 29 NASA and partner sourc
 
 ## 2. Project Demo
 
-- **30-second video (English subtitles):** [link after upload, M2-06 / M2-08]
+- **30-second video (English on-screen text):** [link after upload, M2-08] (file: `production/pitch/LastLightAcademy_Video3_30s.mp4`)
 - **Seven-slide deck (NASA's accepted alternative, English):** https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/video/deck.pdf
 
 ---
@@ -33,7 +33,7 @@ The game is NASA-data-first. Its key numbers come from 29 NASA and partner sourc
 ## 3. Final Project
 
 - **Play it (Windows and macOS builds, with run steps and SHA-256 hashes):** https://github.com/SadManQT/nasa-space-apps-2026/releases
-  - **[status on 7 Nov]** The newest published build is the preview `v0.1.0-preview.20261105`. The release build for judging is due on 12 November (board M3-93); put its tag link here when it is published.
+  - **[status on 12 Nov]** The newest published build is the preview `v0.1.0-preview.20261105`; every push since is exported and smoke-tested for Windows by GitHub Actions. Put the judging release tag link here when it is published (board M3-93).
 - **Source code, documentation and the full design:** https://github.com/SadManQT/nasa-space-apps-2026
 - **Five-minute judge route:** title screen → **New Expedition** → Chapter 1. Walk to the Mission Table and press **E**, plan a shift, press **Try it** to see the forecast, then **Lock in shift**. Open a **Data Card** to see the NASA source behind a number.
 
@@ -60,20 +60,21 @@ Four cadets (Kai on power and heat, Amara on air, Mei on the garden, Rafi on spa
 | Power | A battery of 20 sun-drops (1 drop ≈ 10 kWh). Daylight adds 8 per shift in shifts 1–2; the five dark shifts add nothing. Heat, the air maker and the grow lamp all spend drops. A demand below zero is a blackout. | NASA LaRC 10 kW relocatable south-pole solar array: 8 drops × 10 kWh / 7.2 h = 11.1 kW, 56 % of two arrays |
 | Food production | Garden condition, Alo's health and 12 crew-days of rations (four crew eat 1.2 per shift). Light and warmth cost power; water is shared with the shield. | NASA BVAD food rate; NASA OSDR *Brassica rapa* grown on the ISS; seed-to-seed *Brassica rapa* on Mir |
 
-**Real decisions, real consequences.** Nothing is pre-filled: the player sets heat, air production, garden light and water for every shift, presses **Try it** to see the real forecast, then locks the shift in. Each cadet's role card holds facts the others need. The night ends in one of four endings: Golden Bloom (an expert goal), Bloom, Alo Lost (retry only) or Mission Stopped. Bloom continues the story; the others teach through a retry from the right checkpoint. **[status on 7 Nov]** A shift-by-shift replay of the player's decisions (what they chose, what the forecast said, what happened, and why) followed by a predict–observe–explain science debrief is built and reviewed in the game; its final full test gate is pending a loading-time fix (board M1-19, M1-68).
+**Real decisions, real consequences.** Nothing is pre-filled: the player sets heat, air production, garden light and water for every shift, presses **Try it** to see the real forecast, then locks the shift in. Each cadet's role card holds facts the others need. The night ends in one of four endings: Golden Bloom (an expert goal), Bloom, Alo Lost (retry only) or Mission Stopped. Bloom continues the story; the others teach through a retry from the right checkpoint. A shift-by-shift replay of the player's decisions (what they chose, what the forecast said, what happened, and why) is followed by a predict–observe–explain science debrief (board M1-19, done).
 
 **A story that makes the science matter.** A first-bloom mystery runs through eight chapters and one Moon year: pollination by hand, a moonquake leak, a rover trip into a cold trap, meteor impact flashes, a total lunar eclipse on 12 January 2047, a "what if" super-storm and a relay up Mons Malapert to bring back the link to Earth. Every chapter adds a new trade-off with its own NASA data.
 
 **Built with care for young players.** Captions are on and nothing is timed by default; text can be 1.5 times larger and motion can be reduced. Every spoken line has a caption. The game runs offline, so a classroom needs no internet.
 
-**What is in the repository today [status on 7 Nov]:**
-- A Godot 4.7 3D game that starts at the title screen and runs the campaign through all 8 chapters and 96 scenes, with voiced and captioned dialogue, saves and retries.
-- Chapter 1 played as designed: the crew in lit 3D rooms built from a modular habitat kit, the interactive P-02 Mission Table, the four Outpost Status cards and the endings.
-- Data Cards for all 16 puzzles and 19 short science explainer clips, every number drawn from the NASA fixtures.
+**What is in the repository today [status on 12 Nov]:**
+- A Godot 4.7 3D game that starts at the title screen and plays all 8 chapters, 32 missions and 96 scenes, with voiced and captioned dialogue, saves, retries and a decision replay and debrief.
+- All 16 puzzles as interactive panels: plan, press **Try it** to see the forecast from the same simulation, then lock in. Mission rules, risk cards and hints sit one click away.
+- A clear path through every scene: a goal card with the distance to the ◇ marker, a "Next" line after each job, a What now panel on **H**, and a short how-to clip the first time a mechanic appears.
+- Data Cards for all 16 puzzles and 19 narrated science explainer clips, every number drawn from the NASA fixtures.
 - The exteriors stand on real south-pole terrain built from LRO LOLA elevation data, lit by JPL Horizons Sun positions for each scene's date.
 - 386 voice lines, a 12-cue score, 38 sound effects and 18 cutscenes, all installed.
-- 58 automated test suites (`game/tools/run_tests.sh`). The latest full run passed 57 of 58; the one failure is a loading-time gate being fixed (board M1-68). Rendering holds about 60 fps on an Apple M4 Mac in the timed rooms ([perf report](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/qa/perf_2026-11-04.md)); other hardware is not measured yet.
-- In progress: the four-player Class mode with private role clues (board M1-37), interactive puzzle panels for Chapters 2–8 (M3-2P to M3-8P), the remaining Chapter 4 and 8 rooms, and the learner playtest (M1-22).
+- 136 automated test suites (`game/tools/run_tests.sh`), including a walk through all 96 scenes and 13,048 checks on every line of player text at normal and 150 % text size. Rendering holds 60 fps on an Apple M4 Mac ([perf report](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/qa/perf_2026-11-04.md)); each push is exported and smoke-tested on Windows.
+- In progress: the four-player Class mode with private role clues (board M1-37) and the learner playtest (M1-22).
 
 ### How: NASA data at the core
 
@@ -95,7 +96,7 @@ The datasets, what each is, where it comes from and how the game uses it, are in
 
 - **Who it is for.** Learners aged 10 to 15 in classrooms and at home. The main night of Chapter 1 is designed to take about 20 minutes, so one night fits in a lesson.
 - **Built for classrooms with little bandwidth.** It runs offline on Windows and macOS, needs no account, and is free under the Apache-2.0 licence, so schools can copy, translate and adapt it.
-- **Teamwork by design.** Each cadet holds facts the others need, so the plan only works when the crew talks. **[status on 7 Nov]** The four-player Class mode we registered, with shared decisions and private role clues on one machine, is in progress (board M1-37); the solo game gives one player all four roles.
+- **Teamwork by design.** Each cadet holds facts the others need, so the plan only works when the crew talks. **[status on 12 Nov]** The four-player Class mode we registered, with shared decisions and private role clues on one machine, is in progress (board M1-37); the solo game gives one player all four roles.
 - **From Bangladesh to the Moon.** Alo is *Brassica rapa*, the species of Bangladesh's own mustard and of the Wisconsin Fast Plants grown in classrooms around the world; the game opens on an Earth mustard field. The Academy's founder in the story, Dr Noor Rahman, is a Bangladeshi botanist. Players see their own world in the mission.
 - **Honest science.** Every number shows its source and its label, so learners practise asking "how do we know?", the habit real mission teams depend on.
 - **Learning evidence.** [metric from M1-22 when the playtest runs] The playtest measures time to the first objective, P-02 attempts, the ending reached, and whether each player can explain the numbers afterwards in one predict and one explain question.
@@ -132,7 +133,7 @@ The repository is public and needs no login or permission request: https://githu
 
 We are a team of six building a full 3D Moon-outpost game, so we used AI where it saves the most time and where we have no specialist, and we disclose all of it. Every generation is logged with its tool, model, exact prompt (or where the prompt is stored), inputs, result and what a person changed or decided, including rejected results: [production/AI_PROMPT_LOG.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/AI_PROMPT_LOG.md). The full disclosure is [docs/AI_USE.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/docs/AI_USE.md).
 
-**What AI made.** The 3D models of the characters, plants and props; concept art and character turnaround sheets; character animation clips; all 383 voice lines, the 12-cue music score and the sound effects; the animated shots in the 18 cutscenes; and most of the game code, pipeline scripts and production documents, written against our specifications and checked by tests and a second AI.
+**What AI made.** The 3D models of the characters, plants and props; concept art and character turnaround sheets; character animation clips; all 386 voice lines, the narration of the 19 science explainers, the 12-cue music score and the sound effects; the animated shots in the 18 cutscenes; and most of the game code, pipeline scripts and production documents, written against our specifications and checked by tests and a second AI.
 
 **What the team made.** The story, characters and every line of dialogue (each voice line is our script word for word); every puzzle rule and number; the science mapping; the art direction; every approval and rejection; and the final review of every commit, each made from a team member's own GitHub account.
 
@@ -152,7 +153,7 @@ We are a team of six building a full 3D Moon-outpost game, so we used AI where i
 | ByteDance Seedance 2.5, in ElevenLabs Flows | Short animated shots from our start frames | The animated shots cut into cutscenes CS-01 to CS-17 | "Slow, steady cinematic push-in across the grey lunar ground toward the small base …" (motion only; no dialogue) |
 | Google Veo 3.1, in Google Flow | One painterly Earth shot | The 6-second mustard-field shot that opens the game (CS-01) | "Gentle winter-morning breeze moving through the flowering yellow mustard field …" from our approved start frame |
 
-**Checks on AI output.** Every 2D design sheet is approved by a person before 3D credits are spent. Every generated asset passes an automated asset gate and a visual review against our science rules (black sky, hard shadows, lunar gravity, plants never with faces, no NASA logos). Cutscene shots are checked frame by frame; voices are picked by matching a local Whisper transcript to the script. AI-written code is reviewed by a second AI and by 58 automated test suites.
+**Checks on AI output.** Every 2D design sheet is approved by a person before 3D credits are spent. Every generated asset passes an automated asset gate and a visual review against our science rules (black sky, hard shadows, lunar gravity, plants never with faces, no NASA logos). Cutscene shots are checked frame by frame; voices are picked by matching a local Whisper transcript to the script. AI-written code is reviewed by a second AI and by 136 automated test suites.
 
 ---
 
@@ -205,7 +206,7 @@ All extracts ship offline in `game/resources/data/nasa/`, one JSON file per sour
 28. **Chang'e-4 cotton experiment** (CNSA mission, Chongqing University, Qiu et al. 2021, DOI 10.3390/ijms222111723). <https://doi.org/10.3390/ijms222111723> · A cotton seed germinated on the Moon in 2019 and did not survive the lunar night: the real trial behind the story's opening (P-09).
 29. **Moonlight lunar communications** (ESA). <https://www.esa.int/Applications/Connectivity_and_Secure_Communications/Moonlight2> · Terrain and the Moon's curve can block the line of sight to Earth at the south pole; relays fix it (P-15, P-16).
 
-**Registered sources [status on 7 Nov].** Our registration named six sources: LRO LROC polar illumination maps, LRO LOLA terrain, JPL Horizons, NASA DONKI, LRO CRaTER and NASA BVAD. Five are in the game as listed above. The LROC illumination map is not processed yet; the illumination the game uses today comes from the LOLA study (source 7) and the LOLA-plus-Horizons horizon computation (source 6). The 2017 CRaTER storm curve is also still to process; until then the 2017 card shows GOES-13 at Earth orbit, labelled as such.
+**Registered sources [status on 12 Nov].** Our registration named six sources: LRO LROC polar illumination maps, LRO LOLA terrain, JPL Horizons, NASA DONKI, LRO CRaTER and NASA BVAD. Five are in the game as listed above. The LROC illumination map is not processed yet; the illumination the game uses today comes from the LOLA study (source 7) and the LOLA-plus-Horizons horizon computation (source 6). The 2017 CRaTER storm curve is also still to process; until then the 2017 card shows GOES-13 at Earth orbit, labelled as such.
 
 ---
 
