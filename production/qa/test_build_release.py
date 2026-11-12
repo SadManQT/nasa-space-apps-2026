@@ -3,8 +3,9 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 import zipfile
-from publish_candidate import verify_manifest
+from publish_candidate import find_release, verify_manifest
 
 spec = importlib.util.spec_from_file_location('build_release', Path(__file__).with_name('build_release.py'))
 builder = importlib.util.module_from_spec(spec)
@@ -13,6 +14,16 @@ NOTICES = ['FONT_LICENSES/' + n for n in builder.FONT_NOTICES] + ['THIRD_PARTY_N
 
 
 class PackageTests(unittest.TestCase):
+    def test_publisher_finds_existing_draft_when_tag_endpoint_omits_it(self):
+        draft = {'tag_name': 'v0.1.0-judging.20261112', 'draft': True}
+        other = {'tag_name': 'v0.1.0-preview.20261105', 'draft': False}
+        with patch('publish_candidate.gh_json', side_effect=[None, [other, draft]]) as api:
+            self.assertEqual(find_release(draft['tag_name']), draft)
+            self.assertEqual(api.call_args.args[0], '/releases?per_page=100&page=1')
+        with patch('publish_candidate.gh_json', return_value=other) as api:
+            self.assertEqual(find_release(other['tag_name']), other)
+            self.assertEqual(api.call_count, 1)
+
     def package(self, root, names):
         path = root / 'candidate.zip'
         with zipfile.ZipFile(path, 'w') as bundle:

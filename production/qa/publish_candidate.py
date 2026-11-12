@@ -27,6 +27,22 @@ def gh_json(path, missing_ok=False):
     return json.loads(result.stdout)
 
 
+def find_release(tag):
+    release = gh_json('/releases/tags/' + tag, missing_ok=True)
+    if release is not None:
+        return release
+    # GitHub's tag endpoint omits drafts, even when the caller can list them.
+    page = 1
+    while True:
+        releases = gh_json('/releases?per_page=100&page=' + str(page))
+        for candidate in releases:
+            if candidate['tag_name'] == tag:
+                return candidate
+        if len(releases) < 100:
+            return None
+        page += 1
+
+
 def verify_manifest(manifest, package, source, kind):
     if manifest.get('source_commit') != source or manifest.get('platform') != kind:
         raise RuntimeError('Candidate source/platform does not match the successful CI run')
@@ -89,7 +105,7 @@ def main():
                 bundle.write(ROOT / name, name)
             bundle.write(manifest_path, manifest_path.name)
             bundle.write(sums, sums.name)
-        release = gh_json('/releases/tags/' + args.tag, missing_ok=True)
+        release = find_release(args.tag)
         if release is not None and (not release['draft'] or not release['prerelease']):
             raise RuntimeError('An existing published release is preserved; choose a new authorized tag')
         if release is not None and release['target_commitish'] != source:
@@ -98,7 +114,9 @@ def main():
             subprocess.run(['gh', 'release', 'create', args.tag, '--repo', REPO, '--target', source,
                             '--draft', '--prerelease', '--title', 'Last Light Academy — judging candidate (12 November 2026)',
                             '--notes-file', str(args.notes_file.resolve())], check=True)
-            release = gh_json('/releases/tags/' + args.tag)
+            release = find_release(args.tag)
+            if release is None:
+                raise RuntimeError('Created draft is not visible; preserving it for inspection')
         existing = {a['name']: a for a in release['assets']}
         for path in packages + [sums, manifest_path, evidence]:
             if path.name in existing:
