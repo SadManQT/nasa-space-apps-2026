@@ -1,6 +1,0 @@
-M1-76 Compatibility-renderer check, macOS (OpenGL 4.1 Metal, Apple M4), Godot 4.7.2, 6 Nov 2026
-Command: Godot --path game --rendering-method gl_compatibility --script res://tools/test_room_presentation.gd (windowed)
-Unsupported-shadow errors (dual paraboloid / CubeMap mode) before the fix: 12
-After the fix: 0
-Headless run_tests.sh room_presentation: PASS (138 checks, 0 failures).
-Windowed only (before and after alike): 2 E-prompt targeting checks fail because the window's camera framing differs from headless; not shadow-related.

@@ -1,7 +1,0 @@
-FAIL tools/test_campaign_later_runtime.gd :: exit 1 :: LATER CAMPAIGN RUNTIME RESULT: FAIL (89 checks, 7 failures)
-       ERROR: FAIL loading ignores menu shortcuts until HUD setup is complete
-       ERROR: FAIL loading ignores menu shortcuts until HUD setup is complete
-       ERROR: FAIL loading ignores menu shortcuts until HUD setup is complete
-       ERROR: FAIL loading ignores menu shortcuts until HUD setup is complete
-       ERROR: FAIL loading ignores menu shortcuts until HUD setup is complete
-0/1 suites passed

@@ -1,5 +1,0 @@
-FAIL tools/test_p01_panel.gd :: exit 1 :: P01 PANEL RESULT: FAIL (116 checks, 2 failures)
-       ERROR: FAIL typed edits immediately invalidate visible forecast feedback
-       ERROR: FAIL typed edits remove the stale projected observation
-       P01 PANEL RESULT: FAIL (116 checks, 2 failures)
-0/1 suites passed

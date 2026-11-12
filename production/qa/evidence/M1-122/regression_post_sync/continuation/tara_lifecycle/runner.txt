@@ -1,2 +1,0 @@
-ok   tools/test_tara_lifecycle.gd :: TARA LIFECYCLE RESULT: PASS (75 checks, 0 failures)
-1/1 suites passed

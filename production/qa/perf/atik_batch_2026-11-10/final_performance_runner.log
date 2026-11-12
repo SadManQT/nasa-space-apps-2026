@@ -1,6 +1,0 @@
-FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (582 checks, 3 failures)
-       FAIL Ferreira raw load main-thread interval <50 ms (101.426)
-       FAIL production new campaign main-thread interval <50 ms (105.416)
-       FAIL production terrain exterior entry main-thread interval <50 ms (89.746)
-       PERFORMANCE RUNTIME RESULT: FAIL (582 checks, 3 failures)
-0/1 suites passed

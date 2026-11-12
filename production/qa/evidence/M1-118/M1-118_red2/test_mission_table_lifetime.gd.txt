@@ -1,8 +1,0 @@
-Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
-
-ERROR: Resumed function '_apply_focus()' after await, but class instance is gone. At script: res://scripts/ui/mission_table_panel.gd:767
-   at: resume (modules/gdscript/gdscript_function.cpp:323)
-ERROR: Resumed function '_apply_focus()' after await, but class instance is gone. At script: res://scripts/ui/mission_table_panel.gd:768
-   at: resume (modules/gdscript/gdscript_function.cpp:323)
-FAIL: no engine error after panel free: ["Method/function failed. Returning: Variant() Resumed function \'_apply_focus()\' after await, but class instance is gone. At script: res://scripts/ui/mission_table_panel.gd:767", "Method/function failed. Returning: Variant() Resumed function \'_apply_focus()\' after await, but class instance is gone. At script: res://scripts/ui/mission_table_panel.gd:768"]
-MISSION TABLE LIFETIME RESULT: FAIL (11 checks, 1 failures)

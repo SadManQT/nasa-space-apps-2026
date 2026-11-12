@@ -1,2 +1,0 @@
-ok   tools/test_science_watch.gd :: SCIENCE WATCH RESULT: PASS (65 checks, 0 failures)
-1/1 suites passed

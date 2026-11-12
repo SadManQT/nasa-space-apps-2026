@@ -1,2 +1,0 @@
-ok   tools/test_story_log.gd :: STORY LOG RESULT: PASS (64 checks, 0 failures)
-1/1 suites passed

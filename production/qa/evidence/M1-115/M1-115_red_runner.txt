@@ -1,7 +1,0 @@
-FAIL tools/test_p01_labels.gd :: exit 1 :: P01 LABELS RESULT: FAIL (104 checks, 38 failures)
-       FAIL: missing/wrong/malformed label forecast rejects without writes
-       FAIL: missing/wrong/malformed label cannot commit or spend a receipt
-       FAIL: missing/wrong/malformed label forecast rejects without writes
-       FAIL: missing/wrong/malformed label cannot commit or spend a receipt
-       FAIL: missing/wrong/malformed label forecast rejects without writes
-0/1 suites passed

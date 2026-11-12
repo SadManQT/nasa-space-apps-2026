@@ -1,5 +1,0 @@
-Known pre-existing Science Data teardown warning
-
-Baseline15ff10a Science Data146/0 ends with one ObjectDB leaked-instance warning. Earlier current157/0 verbose output identified generic RefCounted/refcount0 without a script binding. No suppression or unrelated teardown change was made. It is not claimed introduced or fixed by this task.
-
-Final integrated focused181/0 and native182/0 complete without that warning. The earlier full native12866/0 and final clean627/0 also complete without it. Raw earlier verbose/baseline logs remain locally in ignored diagnostics. Full gate remains pending controller review.

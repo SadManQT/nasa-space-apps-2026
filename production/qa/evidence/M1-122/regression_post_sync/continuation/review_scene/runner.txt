@@ -1,2 +1,0 @@
-ok   tools/test_review_scene.gd :: REVIEW RESULT: PASS (447 checks, 0 failures)
-1/1 suites passed

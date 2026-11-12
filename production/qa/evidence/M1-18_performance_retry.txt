@@ -1,7 +1,0 @@
-FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (537 checks, 7 failures)
-       FAIL Kai raw load main-thread interval <50 ms (51.280)
-       FAIL Amara raw load main-thread interval <50 ms (50.826)
-       FAIL Mei raw load main-thread interval <50 ms (57.054)
-       FAIL Rafi raw load main-thread interval <50 ms (57.689)
-       FAIL Ferreira raw load main-thread interval <50 ms (52.718)
-0/1 suites passed

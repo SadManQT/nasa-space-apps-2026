@@ -1,2 +1,0 @@
-ok   tools/test_m185_import_integrity.gd :: M185 IMPORT INTEGRITY RESULT: PASS (5 checks, 0 failures)
-1/1 suites passed

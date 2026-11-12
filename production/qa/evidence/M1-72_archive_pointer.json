@@ -1,9 +1,0 @@
-{
-  "note": "Intermediate artifacts archived before public curation; final public evidence is self-contained. Archive is local controller workspace history, not campaign acceptance evidence.",
-  "archive_root": ".superpowers/sdd/2026-11-06-ramim-continue/task-13-public-archive",
-  "inventory_path": ".superpowers/sdd/2026-11-06-ramim-continue/task-13-public-archive/inventory.json",
-  "inventory_sha256": "0e3fe6a50f1bb0c2b6346bd712c1ea275a9338a3d7ce94adc48191a46b6f20ad",
-  "archived_file_count": 71,
-  "removed_public_file_count": 35,
-  "raw_original_log_root": ".superpowers/sdd/2026-11-06-ramim-continue/task-13-raw-public-logs/"
-}

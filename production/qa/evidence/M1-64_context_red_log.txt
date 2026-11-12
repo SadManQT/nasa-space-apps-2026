@@ -1,4 +1,0 @@
-FAIL tools/test_hint_player.gd :: exit 1 :: HINT PLAYER RESULT: FAIL (85 checks, 1 failures)
-       ERROR: FAIL: What now preserves the scene's authored safe H1 clue
-       HINT PLAYER RESULT: FAIL (85 checks, 1 failures)
-0/1 suites passed

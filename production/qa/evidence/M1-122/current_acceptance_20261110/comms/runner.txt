@@ -1,2 +1,0 @@
-ok   tools/test_comms.gd :: COMMS RESULT: PASS (45 checks, 0 failures)
-1/1 suites passed

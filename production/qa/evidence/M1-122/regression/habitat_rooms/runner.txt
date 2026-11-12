@@ -1,2 +1,0 @@
-ok   tools/test_habitat_rooms.gd :: HABITAT ROOMS RESULT: PASS (360 checks, 0 failures)
-1/1 suites passed

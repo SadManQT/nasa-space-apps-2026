@@ -1,1 +1,0 @@
-CH03 ASSETS RESULT: PASS (331 checks, 0 failures)

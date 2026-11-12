@@ -1,5 +1,0 @@
-FAIL tools/test_campaign_media.gd :: exit 1 :: CAMPAIGN MEDIA RESULT: FAIL (113 checks, 2 failures)
-       ERROR: FAIL voice plays for the line whose caption is shown
-       ERROR: FAIL music ducks 8.0 dB under speech (got -4.4 dB)
-       CAMPAIGN MEDIA RESULT: FAIL (113 checks, 2 failures)
-0/1 suites passed

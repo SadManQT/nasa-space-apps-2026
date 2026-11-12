@@ -1,2 +1,0 @@
-ok   tools/test_mission_table_lifetime.gd :: MISSION TABLE LIFETIME RESULT: PASS (11 checks, 0 failures)
-1/1 suites passed

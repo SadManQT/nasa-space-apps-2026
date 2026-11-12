@@ -1,5 +1,0 @@
-FAIL tools/test_garden_collision.gd :: exit 1 :: GARDEN COLLISION RESULT: FAIL (18 checks, 2 failures)
-       FAIL: empty air outside visible Tara enclosure stays clear
-       FAIL: capsule reaches visible rack-front clearance
-       GARDEN COLLISION RESULT: FAIL (18 checks, 2 failures)
-0/1 suites passed

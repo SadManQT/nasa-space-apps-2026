@@ -1,7 +1,0 @@
-FAIL tools/test_route_messages.gd :: exit 1 :: ROUTE MESSAGES RESULT: FAIL (31 checks, 10 failures)
-       FAIL: route retry itself keeps delivered and read IDs
-       FAIL: the restored director checkpoint also keeps messages
-       FAIL: route retry itself keeps delivered and read IDs
-       FAIL: the restored director checkpoint also keeps messages
-       FAIL: retry retained metadata without a duplicate delivery
-0/1 suites passed

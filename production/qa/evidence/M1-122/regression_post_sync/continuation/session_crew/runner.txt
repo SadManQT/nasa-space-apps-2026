@@ -1,2 +1,0 @@
-ok   tools/test_session_crew.gd :: RESULT test_session_crew: 135 checks, 0 failures
-1/1 suites passed

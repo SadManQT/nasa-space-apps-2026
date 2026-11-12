@@ -1,9 +1,0 @@
-# Keep captured evidence bytes stable across Windows/macOS checkouts.
-capture*.json -text
-compatibility*.txt -text
-compatibility_retry.csv -text
-compatibility_retry.json -text
-hardware.json -text
-import.txt -text
-tests_performance_runtime.txt -text
-test_logs/*.log -text

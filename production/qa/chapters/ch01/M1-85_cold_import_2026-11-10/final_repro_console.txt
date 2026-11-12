@@ -1,8 +1,0 @@
-Materializing native_first 3206 files 1075612298 bytes
-cold_editor exit 0 seconds 250.848
-warm_editor exit 0 seconds 4.578
-warm_runner exit 0 seconds 12.308
-Materializing runner_first 3206 files 1075612298 bytes
-cold_runner exit 0 seconds 258.334
-warm_runner exit 0 seconds 12.235
-{"collection_complete": true, "crash_reproduced": false, "all_runs_successful": true}

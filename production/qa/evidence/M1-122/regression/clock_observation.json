@@ -1,9 +1,0 @@
-{
-  "observed_utc_epoch": 1794287387.136905,
-  "observed_utc": "2026-11-10 05:09:47 UTC",
-  "full_started_utc_epoch_approx": 1794253107.4372218,
-  "wall_elapsed_since_full_start_seconds": 34279.7,
-  "observation": "A large wall-clock gap occurred while the full runner remained active, across the user follow-up continue working. Sleep/resume versus clock change is not established. Do not treat aggregate elapsed time as a controlled benchmark; preserve individual raw results and unchanged limits. No own competing import or native capture process was launched.",
-  "current_game_tree": "b826763991dba6ab6c5ed0efc1034a13092b1fc3",
-  "tested_game_tree": "b826763991dba6ab6c5ed0efc1034a13092b1fc3"
-}

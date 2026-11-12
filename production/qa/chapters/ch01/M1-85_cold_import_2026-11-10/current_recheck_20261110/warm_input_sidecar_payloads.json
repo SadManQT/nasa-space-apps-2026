@@ -1,8 +1,0 @@
-[
-  {
-    "path": "game/assets/environment/kit/textures/T_Kit_Steel_Normal.png.import",
-    "sha256": "74addbcdf3dd29c63dbed706d60c7ebb0680c77e8c50895a996495d63e7f271c",
-    "text": "[remap]\n\nimporter=\"texture\"\ntype=\"CompressedTexture2D\"\nuid=\"uid://doqmfriyb24ib\"\npath=\"res://.godot/imported/T_Kit_Steel_Normal.png-a2829a615e94de0331b43b88f316a1be.ctex\"\nmetadata={\n\"vram_texture\": false\n}\n\n[deps]\n\nsource_file=\"res://assets/environment/kit/textures/T_Kit_Steel_Normal.png\"\ndest_files=[\"res://.godot/imported/T_Kit_Steel_Normal.png-a2829a615e94de0331b43b88f316a1be.ctex\"]\n\n[params]\n\ncompress/mode=0\ncompress/high_quality=false\ncompress/lossy_quality=0.7\ncompress/uastc_level=0\ncompress/rdo_quality_loss=0.0\ncompress/hdr_compression=1\ncompress/normal_map=0\ncompress/channel_pack=0\nmipmaps/generate=false\nmipmaps/limit=-1\nroughness/mode=0\nroughness/src_normal=\"\"\nprocess/channel_remap/red=0\nprocess/channel_remap/green=1\nprocess/channel_remap/blue=2\nprocess/channel_remap/alpha=3\nprocess/fix_alpha_border=true\nprocess/premult_alpha=false\nprocess/normal_map_invert_y=false\nprocess/hdr_as_srgb=false\nprocess/hdr_clamp_exposure=false\nprocess/size_limit=0\ndetect_3d/compress_to=1\n",
-    "post_control_before_sha256": "74addbcdf3dd29c63dbed706d60c7ebb0680c77e8c50895a996495d63e7f271c"
-  }
-]

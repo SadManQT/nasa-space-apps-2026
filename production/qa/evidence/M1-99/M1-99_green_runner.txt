@@ -1,2 +1,0 @@
-ok   tools/test_route_messages.gd :: ROUTE MESSAGES RESULT: PASS (31 checks, 0 failures)
-1/1 suites passed

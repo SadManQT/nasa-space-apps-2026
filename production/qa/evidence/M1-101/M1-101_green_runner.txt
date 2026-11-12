@@ -1,2 +1,0 @@
-ok   tools/test_hud_world_lifetime.gd :: HUD WORLD LIFETIME RESULT: PASS (12 checks, 0 failures)
-1/1 suites passed

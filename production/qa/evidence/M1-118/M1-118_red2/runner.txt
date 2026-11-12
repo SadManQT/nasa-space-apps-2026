@@ -1,4 +1,0 @@
-FAIL tools/test_mission_table_lifetime.gd :: exit 1 :: MISSION TABLE LIFETIME RESULT: FAIL (11 checks, 1 failures)
-       FAIL: no engine error after panel free: ["Method/function failed. Returning: Variant() Resumed function \'_apply_focus()\' after await, but class instance is gone. At script: res://scripts/ui/mission_table_panel.gd:767", "Method/function failed. Returning: Variant() Resumed function \'_apply_focus()\' after await, but class instance is gone. At script: res://scripts/ui/mission_table_panel.gd:768"]
-       MISSION TABLE LIFETIME RESULT: FAIL (11 checks, 1 failures)
-0/1 suites passed

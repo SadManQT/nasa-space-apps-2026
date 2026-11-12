@@ -1,4 +1,0 @@
-ok   tools/test_m155_mission_table.gd :: M155 MISSION TABLE RESULT: PASS (109 checks, 0 failures)
-ok   tools/test_mission_table_lifetime.gd :: MISSION TABLE LIFETIME RESULT: PASS (11 checks, 0 failures)
-ok   tools/test_p02_mission_table.gd :: P02 MISSION TABLE RESULT: PASS (78 checks, 0 failures)
-3/3 suites passed
