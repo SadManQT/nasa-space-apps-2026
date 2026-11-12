@@ -26,6 +26,7 @@ func _run() -> void:
 		room.upcoming_scene = scene_id
 		root.add_child(room)
 		crew.place(scene_id, room, Vector3(0, 0, -1.5))
+		_check(crew.local_ids.all(func(id): return is_zero_approx(crew.bodies[id].animation._talk_weight)), scene_id + " cut clears previous talking/listening pose before chair alignment")
 		_check(not crew._seated.is_empty(), scene_id + " stages actual seated listeners")
 		_check(not crew._seated.any(func(id): return crew.bodies[id] == crew.player) and crew.player.controlled, scene_id + " active player remains movable")
 		var origins := {}
@@ -60,6 +61,12 @@ func _run() -> void:
 		for id in crew.local_ids:
 			var body: PlayerController = crew.bodies[id]
 			_check(body.visual.position.is_zero_approx() and body.foot_ik_enabled, id + " standing scene clears seating offset and restores feet")
+		# A normal caption makes the standing cast talk/listen. The next cut must
+		# discard that blend before sampling the seated pelvis, not fade it later.
+		crew.present_line({"speaker_id": "amara", "origin_label": "LOCAL LIVE"}, false)
+		for frame in 30:
+			await physics_frame
+		_check(crew.bodies.amara.animation._talk_weight > 0.5, "standing dialogue establishes a talk blend before the next seated cut")
 		room.free()
 		standing.free()
 		await process_frame

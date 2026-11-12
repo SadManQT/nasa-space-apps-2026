@@ -274,6 +274,10 @@ func set_rest_clip(clip: String) -> bool:
 
 func reset_presentation() -> void:
 	set_talking(false)
+	# A scene cut discards the previous pose immediately. Fading a former
+	# standing Talk/Listen blend would corrupt the new chair-contact sample.
+	_talk_weight = 0.0
+	tree.set("parameters/Talk/blend_amount", 0.0)
 	set_rest_clip("Idle_loop")
 	tree.set("parameters/Action/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	tree.set("parameters/IdleVariation/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
