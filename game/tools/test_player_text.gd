@@ -23,7 +23,7 @@ const Chapter6Witness = preload("res://tools/support/chapter6_witness.gd")
 const Chapter8Witness = preload("res://tools/support/chapter8_witness.gd")
 const PANELS := ["what_now", "pause", "settings_accessibility", "journal_discovery", "outcome", "puzzle", "dialogue_captions", "sources", "resume", "chapter1_outcome"]
 ## The HUD pieces that may show while the player walks (doc 25 §2.2).
-const FREE_MOVEMENT := ["GoalCard", "TopRight", "Prompt", "GoalMarker"]
+const FREE_MOVEMENT := ["GoalCard", "TopRight", "Prompt", "GoalMarker", "ControlsHint"]  # ControlsHint: first three scenes only, top centre
 
 var storage = preload("res://tools/support/isolated_storage.gd").new()
 var checks := 0

@@ -293,6 +293,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-119">M1-119</a> Record the full Atik and Ramim gate and retained Windows traces <span class="chip ">any</span> <span class="chip ">P1</span></li>
 <li><a class="id" href="#M1-120">M1-120</a> Investigate measured Windows EVA scene generation over the loading budget <span class="chip ">any</span> <span class="chip ">P0</span></li>
 </ul></details>
+<details><summary>Unplanned: requires explicit batch assignment (3)</summary><ul>
+<li><a class="id" href="#M4-24">M4-24</a> Spawn camera faces the objective in every scene (no walls, no crew backs) <span class="chip ">any</span> <span class="chip ">P1</span></li>
+<li><a class="id" href="#M4-25">M4-25</a> Merge repetitive one-button chores into single panels <span class="chip ">any</span> <span class="chip ">P2</span></li>
+<li><a class="id" href="#M4-26">M4-26</a> Show the Chapter 1 bloom; explain battery capacity changes <span class="chip ">any</span> <span class="chip ">P2</span></li>
+</ul></details>
 </div>
 <div class="panel" data-member="asif"><b>Md. Asif Iqbal</b> <span class="id">asif</span><div class="meta">Class mode and Chapter 2/3 feature chains; curriculum · 20% share</div><div class="counts"><span class="chip s-done">7 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">1 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:70%"></i></div>
 <details open><summary>Working now (2)</summary><ul>
@@ -9100,6 +9105,72 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "updated": "2026-11-11",
    "prompt": "Playtest 11 Nov (tester: one cannot tell what to do after a task; got stuck in a door passage). Sadman added three HUD behaviours in game/scripts/ui/chapter1_campaign_hud.gd: (1) _announce_next appends 'Next: <goal> · <distance>, follow the ◇ marker' under each result toast; (2) _tick_nudge shows a quiet toast after 25 s without a new goal; (3) explain_dead_end_passage fires from a PassageSensor in game/scripts/world/campaign_room.gd when the player steps into an open door's dead-end passage. Behaviour and wording are tested (test_player_text 13038/0). Please fold their look and wording into M4-20 and consider a clearer off-screen goal arrow (the ◇ marker clamps to the screen edge when the target is behind the player).",
    "reserved_for": "ramim",
+   "effort": 2,
+   "batch_phase": "unplanned"
+  },
+  {
+   "id": "M4-24",
+   "milestone": "M4",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Spawn camera faces the objective in every scene (no walls, no crew backs)",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/player/",
+    "game/scripts/campaign/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-12.",
+   "evidence": "",
+   "updated": "2026-11-12",
+   "prompt": "Simulated-player review (production/qa/playtests/simulated_players_2026-11-12.md #2): CH02-S02, CH03-S01, CH07-S03, CH02-S03, CH05-S01 start with the camera in a wall or behind a crew member. On scene load, place the follow camera behind the player facing the current goal marker; fade crew who come within the camera's near range. Check with capture_campaign_qa start screenshots.",
+   "reserved_for": "sadman",
+   "effort": 2,
+   "batch_phase": "unplanned"
+  },
+  {
+   "id": "M4-25",
+   "milestone": "M4",
+   "priority": "P2",
+   "tool": "any",
+   "title": "Merge repetitive one-button chores into single panels",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/",
+    "game/resources/campaign/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-12.",
+   "evidence": "",
+   "updated": "2026-11-12",
+   "prompt": "Simulated-player review (production/qa/playtests/simulated_players_2026-11-12.md #5): CH01-S04 (10 steps), CH02-S05 (13), CH03-S02 (6), CH03-S04 (5). Design decision first (canon jobs and gate tests): e.g. one two-column planting panel, care visits 2-7 as one dated montage, stability checks as one gauge.",
+   "reserved_for": "sadman",
+   "effort": 2,
+   "batch_phase": "unplanned"
+  },
+  {
+   "id": "M4-26",
+   "milestone": "M4",
+   "priority": "P2",
+   "tool": "any",
+   "title": "Show the Chapter 1 bloom; explain battery capacity changes",
+   "status": "todo",
+   "owner": "",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/",
+    "game/resources/campaign/rooms/"
+   ],
+   "refs": [],
+   "note": "Filed by Sadman/claude on 2026-11-12.",
+   "evidence": "",
+   "updated": "2026-11-12",
+   "prompt": "Simulated-player review (production/qa/playtests/simulated_players_2026-11-12.md #7, #8): stage Alo's bloom when the CH01-S12 shutter opens; announce battery capacity changes (20 -> 32 -> 26) with their cause; hide base air while in a suit outside.",
+   "reserved_for": "sadman",
    "effort": 2,
    "batch_phase": "unplanned"
   }

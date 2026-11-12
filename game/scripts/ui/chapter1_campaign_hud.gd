@@ -328,6 +328,7 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 			_guide_toast = true
 			if next_scene == "EX-CH02-S01":  # doc 24 §2.9 CH01→CH02: the date card carries the player's own photos
 				show_photo_card("30 April 2046 · Tara opens", "2046-04-30")
+		_update_controls_hint()
 		_forecast = {}
 		_forecast_key = ""
 		_forecast_cache_key = ""
@@ -444,7 +445,7 @@ func show_status(text: String) -> void:
 			edge = UiDesign.colour("caution")
 	if text.begins_with("SAVE FAILED") or text.begins_with("AUTOSAVE FAILED"):
 		edge = UiDesign.colour("danger")
-	_toast.add_theme_stylebox_override("panel", UiDesign.scrim_style())  # state lives in the icon colour
+	_toast.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.8))  # state lives in the icon colour
 	_set_toast_icon(String(rewrite.kind), line, edge)
 	_toast_timer = float(UiDesign.tokens().get("motion", {}).get("toast_seconds", 5.0))
 	if not _chrome_hidden:
@@ -483,7 +484,7 @@ func _build() -> void:
 		add_child(shell)
 	theme = UiKit.theme()
 	_goal_card = shell.get_node("GoalCard")
-	_goal_card.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.66))
+	_goal_card.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.86))  # readable over the bright ceilings (simulated-player review)
 	_goal_card.minimum_size_changed.connect(func() -> void: _goal_card.reset_size.call_deferred())
 	var card_box := _goal_card.get_node("Content")
 	_chapter_line = card_box.get_node("Chapter")
@@ -533,7 +534,7 @@ func _build() -> void:
 	_column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_column)
 	_toast = UiDesign.glass_panel(Color.TRANSPARENT, 12)
-	_toast.add_theme_stylebox_override("panel", UiDesign.scrim_style())
+	_toast.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.8))
 	_toast.name = "Toast"
 	_toast.visible = false
 	_toast.set_meta("lla_shown", false)
@@ -1557,6 +1558,7 @@ func _on_panel_closed(_panel_id: String) -> void:
 	_modal_reading = reading
 	_set_modal_buttons(reading)
 	_set_chrome_hidden(reading)
+	_update_controls_hint()
 	_render_caption()
 	_flush_message_toasts()
 
@@ -1891,3 +1893,26 @@ func _open_class_signoff(view: Dictionary) -> void:
 
 func _play_seconds() -> float:
 	return float(runtime.get("_play_time_seconds")) if runtime != null else -1.0
+
+## First-time gamers (simulated-player review, 12 Nov): the controls stay on
+## screen, top centre, through the first three scenes of a new expedition.
+const CONTROLS_SCENES := ["EX-CH01-S01", "EX-CH01-S02", "EX-CH01-S03"]
+var _controls_hint: PanelContainer
+
+func _update_controls_hint() -> void:
+	if _controls_hint == null:
+		_controls_hint = PanelContainer.new()
+		_controls_hint.name = "ControlsHint"
+		_controls_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_controls_hint.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.8, 12, 32))
+		var text := UiDesign.float_label(UiDesign.label("Walk  W A S D   ·   Look  Mouse   ·   Use  E   ·   Help  H   ·   Pause  Esc", "caption", "ivory"))
+		text.name = "ControlsText"
+		text.autowrap_mode = TextServer.AUTOWRAP_OFF
+		_controls_hint.add_child(text)
+		add_child(_controls_hint)
+	var show := CONTROLS_SCENES.has(_scene_id) and not _chrome_hidden
+	_controls_hint.visible = show
+	if show:
+		_controls_hint.reset_size()
+		var view := get_viewport_rect().size
+		_controls_hint.position = Vector2((view.x - _controls_hint.size.x) * 0.5, float(_margin()))

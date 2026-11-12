@@ -248,7 +248,7 @@ func meter_view(id: String) -> Dictionary:
 			line += " " + String(field.unit)
 		lines.append(line)
 		spoken.append(line)
-		matters = matters or _matters_now(String(field.get("matters_from", "")))
+		matters = matters or (_matters_now(String(field.get("matters_from", ""))) and _matters_here(field))
 		if bool(_forecast.get("accepted", false)):
 			var next := float(predicted.get(key, amount))
 			if next != amount:
@@ -282,6 +282,15 @@ func _capacity(key: String) -> float:
 	if key.is_empty():
 		return 0.0
 	return float(_query.get("resources", {}).get(key, _query.get("outpost", {}).get(key, 0)))
+
+## A field with "matters_in" (scene id prefixes) only warns there: the storm
+## shelter matters during storms, not as a red line through calm chapters.
+func _matters_here(field: Dictionary) -> bool:
+	var places: Array = field.get("matters_in", [])
+	if places.is_empty():
+		return true
+	var current := String(_query.get("scene_id", ""))
+	return places.any(func(prefix): return current.begins_with(String(prefix)))
 
 func _matters_now(scene_from: String) -> bool:
 	if scene_from.is_empty():

@@ -146,7 +146,7 @@
   "job_done": "Done",
   "job_now": "Now",
   "job_later": "Later",
-  "distance": "%d m",
+  "distance": "%d m away",
   "here": "here",
   "last_result": "Last result",
   "data_cards": "Data cards",
@@ -237,7 +237,8 @@
     "capacity": "shelter_max",
     "icon": "shielding",
     "low": "too few shielded places for the crew in a storm",
-    "matters_from": "EX-CH01-S07"
+    "matters_from": "EX-CH01-S07",
+    "matters_in": ["EX-CH01-S07", "EX-CH01-S08", "EX-CH01-S09", "EX-CH01-S10", "EX-CH01-S11", "EX-CH07-"]
    },
    "Z": {
     "word": "Exposure (game score)",
