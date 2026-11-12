@@ -231,6 +231,7 @@ func unsigned_roles() -> Array:
 ## Runs the current plan through the shared simulation and records that this
 ## exact plan was previewed, which Commit requires.
 func preview() -> Dictionary:
+	PlaytestLog.event("try", {"puzzle": "P-02"})
 	_refresh_view()
 	var forecast: Dictionary = _view.get("gate_preview", {})
 	if forecast.is_empty():

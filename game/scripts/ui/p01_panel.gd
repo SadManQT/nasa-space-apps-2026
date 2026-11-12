@@ -112,6 +112,7 @@ func _payload() -> Dictionary:
 	return payload
 
 func preview() -> Dictionary:
+	PlaytestLog.event("try", {"puzzle": "P-01", "target": _target})
 	if _choices.is_empty() or (_simple_action() and _choices.get("confirmed") != true):
 		_prediction = {"accepted": false, "reason": "Choose an input before trying it."}
 	else:

@@ -200,6 +200,7 @@ func tap_lock() -> Dictionary:
 ## route preview. Nothing changes yet. LOCK IN requires an accepted try of the
 ## exact current selection.
 func try_it() -> Dictionary:
+	PlaytestLog.event("try", {"target": _target_id})
 	if _committed():
 		return _hold("This step is already locked in.")
 	_refresh_view()

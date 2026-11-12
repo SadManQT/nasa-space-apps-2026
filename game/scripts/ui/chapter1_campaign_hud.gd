@@ -164,6 +164,7 @@ func _ready() -> void:
 
 func setup(value: Chapter1Campaign) -> void:
 	runtime = value
+	PlaytestLog.event("session_start", {"scene": String(runtime.query().get("scene_id", "")), "crew_mode": String(runtime.director.crew().get("mode", "solo")) if runtime.director != null and runtime.director.has_method("crew") else "solo"})
 	var stamp := LoadTrace.begin()
 	panels = PANELS_SCENE.instantiate() as CampaignPanels
 	add_child(panels)
@@ -317,6 +318,7 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 	if next_scene != _scene_id:
 		var first_scene := _scene_id.is_empty()
 		_scene_id = next_scene
+		PlaytestLog.event("scene", {"scene": next_scene, "goal": _title.text if _title != null else ""}, _play_seconds())
 		# Playtest review 11 Nov: each scene opens with its story title so it reads as its own
 		# episode (STORY_FULL titles); the next-step line is added beneath it.
 		var scene_title := String(scene.get("title", ""))
@@ -371,6 +373,7 @@ func refresh_after_action(result: Dictionary) -> void:
 	for id in _done_ids:
 		if not before.has(id):
 			newly_done.append(id)
+	PlaytestLog.event("action", {"accepted": bool(result.get("accepted", false)), "done": newly_done, "scene": _scene_id, "reason": String(result.get("reason", "")).left(120)}, _play_seconds())
 	if result.get("accepted", false):
 		var done_id := String(newly_done[0]) if not newly_done.is_empty() else ""
 		if newly_done.has("confirm_date_transition"):  # doc 24 §2.9 CH01 S05→S06
@@ -916,6 +919,7 @@ func _result_notes(notes: Array) -> Array:
 
 func _request_job_hint() -> void:
 	var id := String(_goal_info.get("target_id", ""))
+	PlaytestLog.event("hint", {"target": id, "scene": _scene_id}, _play_seconds())
 	if _scene_id.begins_with("EX-CH01-") or id.is_empty():
 		panels.request_hint()
 		return
@@ -1143,6 +1147,7 @@ func _on_payload_requested(settings: Dictionary) -> void:
 func show_chapter1_outcome(page: String = "summary") -> bool:
 	if runtime == null or not runtime.route.current_scene_id().begins_with("EX-CH01-"):
 		return false
+	PlaytestLog.event("ending", {"ending": String(runtime.route.snapshot().get("ending", runtime.route.snapshot().get("p02", {}).get("ending", "")))}, _play_seconds())
 	var data := Debrief.view(runtime.director.snapshot(), runtime.route.snapshot())
 	if data.is_empty():
 		return false
@@ -1883,3 +1888,6 @@ func _open_class_signoff(view: Dictionary) -> void:
 		class_signoff.name = "ClassSignoffPanel"
 		add_child(class_signoff)
 	class_signoff.open_for(runtime, view)
+
+func _play_seconds() -> float:
+	return float(runtime.get("_play_time_seconds")) if runtime != null else -1.0
