@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           fetch-depth: 0
+      - name: Fetch the retained evidence images
+        run: git lfs pull --include="production/qa/builds/atik_20261112/**,production/qa/perf/atik_20261112/**" --exclude=""
       - name: Check package and source verification
         run: python3 production/qa/test_build_release.py
       - name: Publish the authorized judging pre-release
