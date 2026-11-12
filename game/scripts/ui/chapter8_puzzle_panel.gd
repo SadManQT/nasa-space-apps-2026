@@ -33,6 +33,7 @@ const MUSTARD := Color("#3AA0FF")
 const CYAN := Color("#FF6B9D")
 const GREEN := Color("#3EE0A0")
 const EDGE := Color("#252A3A")
+var _rules_open := false
 const RED := Color("#E56B6F")
 const MIN_TARGET := 44.0
 const STAGE_TEXT := {"learn": "LEARN · a guided example that cannot fail", "apply": "APPLY · real stakes", "twist": "TWIST · one new constraint"}
@@ -766,14 +767,20 @@ func _render_preview() -> Control:
 	for line in summary:
 		column.add_child(_wrap(String(line), 11, IVORY))
 	column.add_child(HSeparator.new())
-	column.add_child(_wrap("FLIGHT RULES IN FORCE", 12, CYAN))
-	for rule in scene.get("flight_rules", []):
-		column.add_child(_wrap(String(rule), 11, IVORY))
-	var risk: Dictionary = scene.get("risk", {})
-	if not risk.is_empty():
-		var level := String(risk.get("level", ""))
-		column.add_child(_wrap("RISK CARD · %s · likelihood %d × consequence %d · %s" % [String(risk.get("title", "")), int(risk.get("likelihood", 0)), int(risk.get("consequence", 0)), level], 11, RED if level.begins_with("HIGH") else MUSTARD))
-	column.add_child(_wrap("Reasonable first idea: " + String(scene.get("wrong_idea", "")), 11, MUTED))
+	# Less text on screen: the rules, risk card and first idea sit behind one toggle, closed by default.
+	var rules_toggle := _button(("▾ " if _rules_open else "▸ ") + "MISSION RULES AND RISK", "MissionRulesToggle")
+	rules_toggle.pressed.connect(func() -> void:
+		_rules_open = not _rules_open
+		_render())
+	column.add_child(rules_toggle)
+	if _rules_open:
+		for rule in scene.get("flight_rules", []):
+			column.add_child(_wrap(String(rule), 11, IVORY))
+		var risk: Dictionary = scene.get("risk", {})
+		if not risk.is_empty():
+			var level := String(risk.get("level", ""))
+			column.add_child(_wrap("RISK CARD · %s · likelihood %d × consequence %d · %s" % [String(risk.get("title", "")), int(risk.get("likelihood", 0)), int(risk.get("consequence", 0)), level], 11, RED if level.begins_with("HIGH") else MUSTARD))
+		column.add_child(_wrap("Reasonable first idea: " + String(scene.get("wrong_idea", "")), 11, MUTED))
 	column.add_child(HSeparator.new())
 	_render_hints(column)
 	return column
@@ -821,7 +828,8 @@ func _render_hints(column: VBoxContainer) -> void:
 	hint.disabled = shown >= total
 	hint.pressed.connect(func() -> void: reveal_hint())
 	column.add_child(hint)
-	column.add_child(_wrap("Aha: " + String(_view.get("scene", {}).get("aha", "")), 11, MUTED))
+	if shown >= total and total > 0:  # the aha is the answer: only after every hint
+		column.add_child(_wrap("Aha: " + String(_view.get("scene", {}).get("aha", "")), 11, MUTED))
 
 func _render_footer() -> void:
 	var reason := _commit_reason()

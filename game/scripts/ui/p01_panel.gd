@@ -341,14 +341,19 @@ func _readings(view: Dictionary) -> String:
 	var state: Dictionary = view.get("state", {})
 	var profile: Dictionary = view.get("profile", _view.profile)
 	var complete: Dictionary = view.get("completion", {})
-	return "\n".join([
-		"Reference targets: dry raw %s to %s; wet raw %s to %s." % [profile.references.dry.raw, profile.references.dry.calibrated, profile.references.wet.raw, profile.references.wet.calibrated],
-		"Seed packet: " + ("scanned" if state.get("packet_scanned", false) else "not scanned"),
-		"Probe: " + ("rechecked" if state.get("probe_rechecked", false) else ("span set" if state.get("probe_spanned", false) else ("zero set" if state.get("probe_zeroed", false) else "not calibrated"))),
-		"Alo: %s seed; moisture %s of 100; label: %s; %s" % [state.get("cassette_alo_seed_count", 0), state.get("moisture_alo", 0), _label_text(String(state.get("alo_label", ""))), "sealed" if state.get("alo_sealed", false) else "open"],
-		"Tara: %s seed; moisture %s of 100; label: %s; %s" % [state.get("cassette_tara_seed_count", 0), state.get("moisture_tara", 0), _label_text(String(state.get("tara_label", ""))), "sealed" if state.get("tara_sealed", false) else "open"],
-		"Paired planting: " + ("complete" if complete.get("complete", false) else "not complete"),
-	])
+	# Only the facts this step needs (less text on screen); the action decides which.
+	var action := String(view.get("action", _view.get("action", "")))
+	var lines: Array[String] = []
+	if action in ["set_zero", "set_span", "recheck"] or _target in ["calibrate_probe", "span_probe", "recheck_probe"]:
+		lines.append("Reference targets: dry raw %s to %s; wet raw %s to %s." % [profile.references.dry.raw, profile.references.dry.calibrated, profile.references.wet.raw, profile.references.wet.calibrated])
+		lines.append("Probe: " + ("rechecked" if state.get("probe_rechecked", false) else ("span set" if state.get("probe_spanned", false) else ("zero set" if state.get("probe_zeroed", false) else "not calibrated"))))
+	elif action == "scan_packet":
+		lines.append("Seed packet: " + ("scanned" if state.get("packet_scanned", false) else "not scanned"))
+	else:
+		lines.append("Alo: %s seed; moisture %s of 100; label: %s; %s" % [state.get("cassette_alo_seed_count", 0), state.get("moisture_alo", 0), _label_text(String(state.get("alo_label", ""))), "sealed" if state.get("alo_sealed", false) else "open"])
+		lines.append("Tara: %s seed; moisture %s of 100; label: %s; %s" % [state.get("cassette_tara_seed_count", 0), state.get("moisture_tara", 0), _label_text(String(state.get("tara_label", ""))), "sealed" if state.get("tara_sealed", false) else "open"])
+		lines.append("Paired planting: " + ("complete" if complete.get("complete", false) else "not complete"))
+	return "\n".join(lines)
 
 func _label_text(value: String) -> String:
 	return {"EXTERNAL_TEST": "External test", "INDOOR_REFERENCE": "Indoor reference"}.get(value, "Not labelled")
