@@ -8477,7 +8477,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Fix playable probe calibration and escape from door passages",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -8492,22 +8492,12 @@
     "game/scripts/ui/probe_calibration_activity.gd.uid"
    ],
    "refs": [],
-   "note": "Filed by Atik/codex on 2026-11-13.\nDoor cause verified in EvaSuit indoor footing; campaign_room.gd was inspected only and its unused reservation is released. Source repair saved/pushed at f72e3c49; full gate in progress.",
-   "evidence": "",
+   "note": "Filed by Atik/codex on 2026-11-13.\nDoor cause verified in EvaSuit indoor footing; campaign_room.gd was inspected only and its unused reservation is released. Source repair saved/pushed at f72e3c49; full gate finished138/139; sole failure is the unchanged300s player-text process cap, preserved in the QA report.",
+   "evidence": "Both user screenshot blockers repaired in f72e3c49554615ac749215ca1ef83e58c37bd4c1; evidence saved/pushed be1642e5. Actual doorway movement reproduces25.664743deg indoor floor contact wrongly classified lunar no_go; indoor footing fix permits entry/retreat while exterior26deg remains no_go. Existing ProbeCalibrationJob reused with real E pickup/place/read, visible RIGHT-hand prop, reach/line-of-sight checks, cancel/retry, normal Continue ownership restoration and original dry10->0/wet110->100/recheck0&100. Focused game/tools/run_tests.sh opening_blockers29/0,1/1; rendered Metal/Forward+ actual campaign29/0 with3inspected captures; fresh Windows export CI43297579977 startup11/0. Default full game/tools/run_tests.sh138/139, exit1: sole failure test_player_text.gd TIMEOUT after unchanged300s (exit124); retained as failed full gate, no threshold relaxation. EVA54/0, player105/0, probe83/0, campaign input39/0, runtime performance548/0;128upgrade profiles130308/0 across96logical route scenes each. Complete323-entry evidence archive incl failed attempts, raw full-suite logs, native captures and CI receipt: production/qa/evidence/Atik_opening_blockers_20261113_logs.zip; report production/qa/evidence/Atik_opening_blockers_20261113.md. User main folder repaired;70local files hash-preserved. Other owners locks/source preserved. Final release/performance/manual QA and text-walk qualification are not closed by this scoped two-bug delivery.",
    "updated": "2026-11-13",
    "prompt": "13 November user explicitly assigns Atik the two screenshot blockers. Connect the existing ProbeCalibrationJob to actual player interactions without bypassing pickup/place/read, preserve saves/cancel and P01 dry/wet/recheck. Reproduce door passage movement lock, fix its cause and test the real player collision and UI state. Preserve local settings/imports and other owner locks. Acceptance: actual campaign input completes probe chain; character can back out after passage guidance; focused regressions and game/tools/run_tests.sh results recorded separately from native/full gate.",
    "reserved_for": "atik",
-   "effort": 2,
-   "edit_files": [
-    "game/scripts/ui/chapter1_campaign_hud.gd",
-    "game/scripts/ui/probe_calibration_activity.gd",
-    "game/tools/test_opening_blockers.gd",
-    "game/tools/test_opening_blockers.gd.uid",
-    "production/qa/evidence/Atik_opening_blockers_20261113.md",
-    "production/qa/evidence/Atik_opening_blockers_20261113_logs.zip",
-    "game/scripts/eva/eva_suit.gd",
-    "game/scripts/ui/probe_calibration_activity.gd.uid"
-   ]
+   "effort": 2
   }
  ],
  "requirements": [

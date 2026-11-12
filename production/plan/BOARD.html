@@ -325,19 +325,17 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-124">M1-124</a> M1-105 handoff: restore lunar gravity indoors for Ramim acceptance <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:29%"></i></div>
-<details open><summary>Working now (1)</summary><ul>
-<li><a class="id" href="#M1-127">M1-127</a> Fix playable probe calibration and escape from door passages <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/codex on 2026-11-13</div></li>
-</ul></details>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">3 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:43%"></i></div>
 <details open><summary>Blocked (4)</summary><ul>
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">12 Nov measured M4/macOS27, 1080p/20s, four real campaign rooms: Metal room p95 18.122-20.964ms misses16.667ms60fps; Garden entry longestframe3112.104ms. M4 OpenGL p95 fits33.333m…</div></li>
 <li><a class="id" href="#M3-93">M3-93</a> 12 Nov release: the working full game (Chapters 1-8) as Windows and macOS builds, with the evidence package <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Published verified judging pre-release v0.1.0-judging.20261112 from817a6eea with Windows/macOS ZIPs, checksums, manifests and evidence; CI43237871699 both11/0, publisher4324757710…</div></li>
 <li><a class="id" href="#M3-73">M3-73</a> Act One release candidate (Chapters 1-4): Windows and macOS builds, soak test, Steam-ready packaging <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">Post-release Steam qualification depends on unfinished M3-93 and M3-74. Same-source portable Windows/macOS packages and hashes are delivered through M1-20, but two-hour soak with …</div></li>
 <li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">12 Nov original M4/macOS27.0.1: metal, metallib and xctrace each unavailable (exit72); matching native symbol build and controlled baked/unbaked campaign comparison not available.…</div></li>
 </ul></details>
-<details><summary>Done (2)</summary><ul>
+<details><summary>Done (3)</summary><ul>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Published https://github.com/SadManQT/nasa-space-apps-2026/releases/tag/v0.1.0-judging.20261112 from frozen817a6eea. Windows x86_64 and mac…</div></li>
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">10 Nov final reconciliation: user explicitly accepts the combined1-41 Ramim /42-119 Sadman-Claude result without repeating game tests. All1…</div></li>
+<li><a class="id" href="#M1-127">M1-127</a> Fix playable probe calibration and escape from door passages <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Both user screenshot blockers repaired in f72e3c49554615ac749215ca1ef83e58c37bd4c1; evidence saved/pushed be1642e5. Actual doorway movement…</div></li>
 </ul></details>
 <details><summary>Deferred: video, submission and manual QA (1)</summary><ul>
 <li><a class="id" href="#M2-13">M2-13</a> Browser candidate: reduce the download and bundle missing UI glyphs <span class="chip ">codex</span> <span class="chip ">P2</span></li>
@@ -9239,7 +9237,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "Fix playable probe calibration and escape from door passages",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Atik/codex",
    "deps": [],
    "paths": [
@@ -9254,22 +9252,12 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/ui/probe_calibration_activity.gd.uid"
    ],
    "refs": [],
-   "note": "Filed by Atik/codex on 2026-11-13.\nDoor cause verified in EvaSuit indoor footing; campaign_room.gd was inspected only and its unused reservation is released. Source repair saved/pushed at f72e3c49; full gate in progress.",
-   "evidence": "",
+   "note": "Filed by Atik/codex on 2026-11-13.\nDoor cause verified in EvaSuit indoor footing; campaign_room.gd was inspected only and its unused reservation is released. Source repair saved/pushed at f72e3c49; full gate finished138/139; sole failure is the unchanged300s player-text process cap, preserved in the QA report.",
+   "evidence": "Both user screenshot blockers repaired in f72e3c49554615ac749215ca1ef83e58c37bd4c1; evidence saved/pushed be1642e5. Actual doorway movement reproduces25.664743deg indoor floor contact wrongly classified lunar no_go; indoor footing fix permits entry/retreat while exterior26deg remains no_go. Existing ProbeCalibrationJob reused with real E pickup/place/read, visible RIGHT-hand prop, reach/line-of-sight checks, cancel/retry, normal Continue ownership restoration and original dry10->0/wet110->100/recheck0&100. Focused game/tools/run_tests.sh opening_blockers29/0,1/1; rendered Metal/Forward+ actual campaign29/0 with3inspected captures; fresh Windows export CI43297579977 startup11/0. Default full game/tools/run_tests.sh138/139, exit1: sole failure test_player_text.gd TIMEOUT after unchanged300s (exit124); retained as failed full gate, no threshold relaxation. EVA54/0, player105/0, probe83/0, campaign input39/0, runtime performance548/0;128upgrade profiles130308/0 across96logical route scenes each. Complete323-entry evidence archive incl failed attempts, raw full-suite logs, native captures and CI receipt: production/qa/evidence/Atik_opening_blockers_20261113_logs.zip; report production/qa/evidence/Atik_opening_blockers_20261113.md. User main folder repaired;70local files hash-preserved. Other owners locks/source preserved. Final release/performance/manual QA and text-walk qualification are not closed by this scoped two-bug delivery.",
    "updated": "2026-11-13",
    "prompt": "13 November user explicitly assigns Atik the two screenshot blockers. Connect the existing ProbeCalibrationJob to actual player interactions without bypassing pickup/place/read, preserve saves/cancel and P01 dry/wet/recheck. Reproduce door passage movement lock, fix its cause and test the real player collision and UI state. Preserve local settings/imports and other owner locks. Acceptance: actual campaign input completes probe chain; character can back out after passage guidance; focused regressions and game/tools/run_tests.sh results recorded separately from native/full gate.",
    "reserved_for": "atik",
    "effort": 2,
-   "edit_files": [
-    "game/scripts/ui/chapter1_campaign_hud.gd",
-    "game/scripts/ui/probe_calibration_activity.gd",
-    "game/tools/test_opening_blockers.gd",
-    "game/tools/test_opening_blockers.gd.uid",
-    "production/qa/evidence/Atik_opening_blockers_20261113.md",
-    "production/qa/evidence/Atik_opening_blockers_20261113_logs.zip",
-    "game/scripts/eva/eva_suit.gd",
-    "game/scripts/ui/probe_calibration_activity.gd.uid"
-   ],
    "batch_phase": "implementation"
   }
  ],
