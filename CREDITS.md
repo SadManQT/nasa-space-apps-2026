@@ -15,6 +15,7 @@ The story, characters, dialogue, puzzle rules and numbers, science mapping, art 
 | Tool | Licence | Used for | Ships in the game? | Link |
 |---|---|---|---|---|
 | **Godot Engine 4.7** | MIT | The game engine | Yes: the MIT notice and Godot's third-party notices must appear in the build (see §9) | <https://godotengine.org/license/> |
+| **gohud** | MIT, copyright 2026 JaeHo Song; bundled components retain their own notices | Runtime UI widgets, themes and icons | Yes: native ZIPs include its LICENSE, third-party notices (including Tabler Icons), and bundled font OFL notices under `THIRD_PARTY_NOTICES/gohud/` | [Supplied notices](game/addons/gohud/THIRD_PARTY_NOTICES.md) |
 | **Blender** | GNU GPL (tool only; files made with it are ours) | Model clean-up, rigging fixes, previews; the pitch video's scenes | No | <https://www.blender.org/about/license/> |
 | **FFmpeg** | LGPL/GPL (tool only) | Cutscene assembly (dissolves, captions, music ducking) in `production/tools/compose_cutscene.py` | No | <https://ffmpeg.org/legal.html> |
 | **Python** (standard library) | PSF License (tool only) | Pipeline scripts, `production/tools/fetch_nasa_data.py` | No | <https://docs.python.org/3/license.html> |

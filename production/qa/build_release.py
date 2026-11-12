@@ -10,6 +10,9 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 VERSION = '4.7.2'
 BASE = f'https://github.com/godotengine/godot-builds/releases/download/{VERSION}-stable/'
 FONT_NOTICES = ('OFL_Inter.txt', 'OFL_Saira.txt')
+GOHUD_NOTICES = ('LICENSE', 'THIRD_PARTY_NOTICES.md',
+                 'assets/fonts/cinzel/OFL.txt', 'assets/fonts/roboto/OFL.txt',
+                 'assets/fonts/nunito/OFL.txt', 'assets/fonts/noto_sans_cjk/OFL.txt')
 
 def sha256_file(path):
     digest = hashlib.sha256()
@@ -28,6 +31,7 @@ def validate_package(package, kind):
             if path.is_absolute() or '..' in path.parts or (path.parts and ':' in path.parts[0]):
                 raise RuntimeError('Unsafe package path: ' + name)
         notices = {'FONT_LICENSES/' + name for name in FONT_NOTICES}
+        notices.update('THIRD_PARTY_NOTICES/gohud/' + name for name in GOHUD_NOTICES)
         if not ({'LICENSE', 'CREDITS.md', 'README.txt'} | notices).issubset(names):
             raise RuntimeError('Package is missing credits, license, font notices or launch instructions')
         if kind == 'windows':
@@ -188,6 +192,8 @@ def main():
             bundle.write(output / name, name)
         for name in FONT_NOTICES:
             bundle.write(ROOT / 'game/assets/fonts/ui' / name, 'FONT_LICENSES/' + name)
+        for name in GOHUD_NOTICES:
+            bundle.write(ROOT / 'game/addons/gohud' / name, 'THIRD_PARTY_NOTICES/gohud/' + name)
     entry_count = validate_package(package, args.platform)
     source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     game_changes = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD', '--', 'game'], cwd=ROOT, text=True).splitlines()

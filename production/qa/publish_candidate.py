@@ -12,7 +12,7 @@ import subprocess
 import tempfile
 import zipfile
 
-from build_release import sha256_file, validate_package
+from build_release import sha256_file, validate_package, runtime_hashes
 
 ROOT = Path(__file__).resolve().parents[2]
 REPO = 'SadManQT/nasa-space-apps-2026'
@@ -38,6 +38,8 @@ def verify_manifest(manifest, package, source, kind):
     if expected.get('sha256') != sha256_file(package):
         raise RuntimeError('Candidate package digest mismatch')
     validate_package(package, kind)
+    if manifest.get('runtime_files_sha256') != runtime_hashes(package):
+        raise RuntimeError('Candidate runtime identity manifest mismatch')
 
 
 def main():
