@@ -197,6 +197,8 @@ static func make_viewport_capture(tree_root: Window, panel: Control) -> Callable
 		var path := photo_path(individual_id, date)
 		if FileAccess.file_exists(path):
 			return {"accepted": false, "message": "A photograph already exists for this date."}
+		if DisplayServer.get_name() == "headless":
+			return {"accepted": false, "message": "The camera has no rendered frame yet. Try again."}
 		if panel != null:
 			panel.hide()
 		# Two process frames are enough for the world to redraw; frame_post_draw

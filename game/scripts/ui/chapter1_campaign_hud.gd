@@ -1772,6 +1772,14 @@ func _clear_of_cards(control: Control) -> void:
 			control.position.y = card.get_rect().end.y + 8.0
 
 func _project(camera: Camera3D, world_point: Vector3, view: Vector2, margin: float) -> Vector2:
+	var local_point := camera.get_camera_transform().affine_inverse() * world_point
+	# Perspective projection divides by depth. A target can cross the camera's
+	# plane while turning or changing rooms; give it a stable edge marker there.
+	if camera.projection != Camera3D.PROJECTION_ORTHOGONAL and is_zero_approx(local_point.z):
+		var x := view.x * 0.5
+		if not is_zero_approx(local_point.x):
+			x = view.x - margin if local_point.x > 0.0 else margin
+		return Vector2(x, view.y - margin)
 	var point := camera.unproject_position(world_point)
 	if camera.is_position_behind(world_point):
 		point = Vector2(view.x - point.x, view.y - margin)
