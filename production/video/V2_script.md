@@ -78,12 +78,12 @@ Times are mm:ss. "C" numbers are the captures listed further down; "N" numbers a
 | Time | Picture | Narration | On screen |
 |---|---|---|---|
 | 3:25–3:31 | **C03** the commons at 150 % text with captions on (Settings → Large text) | N46: "It's free, open source, and runs offline on Windows and Mac." | "Apache-2.0 · captions on · nothing timed by default · text 1.5× · reduced motion". Optional lower third: "Playtest: [metric from M1-22 when the playtest runs]" (delete if M1-22 has not run) |
-| 3:31–3:35 | **C12** the four role cards side by side (or the Class mode screen if M1-37 is in the build) | N47: "Next: a four-player class mode, with private clues for every role." | |
+| 3:31–3:35 | **C12** the Class mode screens (crew choice, privacy hand-off, team sign-off) | N47: "Up to four players share one screen, each with private clues." | |
 | 3:35–3:49 | **F8** the five fitted EVA suits (M3-3A lineup, caption bar cropped), then the team card | N48–N50: "We are Team The Last BrainCell, from Dhaka, Bangladesh: Nafis Mohtasim Ramim, Khandaker Shadman Sakib Siddiquee, Md. Asif Iqbal, Abu Sayem Mohammed Tanvir, Shahariar Rahman Shanto and MD Atik Khan." | Team card, each name with role: Nafis Mohtasim Ramim (team leader; UI/UX and player systems) · Khandaker Shadman Sakib Siddiquee (producer, art and media lead, integrator) · Md. Asif Iqbal (science and accessibility review) · Abu Sayem Mohammed Tanvir (QA and playtest lead) · Shahariar Rahman Shanto (presenter) · MD Atik Khan (gameplay runtime, Moon systems and builds) |
 | 3:49–3:55 | **C11** Alo's flower, held | N51–N52: "AI-made assets are credited on screen. One night. Four friends. The first flower on the Moon." | AI credits card: "Made with AI tools, every generation logged in our repository: Claude Code (Anthropic) · OpenAI Codex · Google Antigravity · Nano Banana Pro (Gemini 3 Pro Image) · GPT Image 2.5 · Topaz · Tripo AI · Meshy · ElevenLabs (voices, music, effects) · Seedance 2.5 · Google Veo 3.1. Story, dialogue, puzzles, science mapping and art direction by the team." |
 | 3:55–3:58 | Black | (none) | **Last Light Academy** · github.com/SadManQT/nasa-space-apps-2026 · "NASA data: DONKI, BVAD, LRO LOLA, LRO CRaTER, JPL Horizons and more, credited in the game" · "An independent team project, not endorsed by NASA" |
 
-**Alternative line if Class mode ships.** If board M1-37 is `done` and the frozen build has Class mode, replace N47 with "Up to four players share one screen, each with private clues." (same length, same timing) and use the real Class mode screen in C12. Otherwise keep N47 as written: it says "next", which is true.
+**Class mode is built (M1-37 done, 12 Nov).** N47 and C12 now show it; the earlier "Next: a four-player class mode" line is retired.
 
 ## Narration (= V2_subtitles.srt)
 
@@ -137,7 +137,7 @@ In and out times are mm:ss,ms. The text is the .srt text; numbers in the voice: 
 | 44 | 03:16,200 | 03:20,200 | NASA data | The ground is real LRO LOLA elevation data, |
 | 45 | 03:20,300 | 03:24,600 | NASA data | and the Sun and Earth move as JPL Horizons computes them. |
 | 46 | 03:25,000 | 03:30,600 | Impact and team | It's free, open source, and runs offline on Windows and Mac. |
-| 47 | 03:30,800 | 03:34,600 | Impact and team | Next: a four-player class mode, with private clues for every role. |
+| 47 | 03:30,800 | 03:34,600 | Impact and team | Up to four players share one screen, each with private clues. |
 | 48 | 03:34,800 | 03:38,400 | Impact and team | We are Team The Last BrainCell, from Dhaka, Bangladesh: |
 | 49 | 03:38,600 | 03:43,400 | Impact and team | Nafis Mohtasim Ramim, Khandaker Shadman Sakib Siddiquee, Md. Asif Iqbal, |
 | 50 | 03:43,600 | 03:48,600 | Impact and team | Abu Sayem Mohammed Tanvir, Shahariar Rahman Shanto and MD Atik Khan. |

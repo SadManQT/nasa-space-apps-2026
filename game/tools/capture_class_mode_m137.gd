@@ -81,6 +81,13 @@ func _run() -> void:
 	panel.sign_off("mei")
 	panel.sign_off("rafi")
 	await _capture("team_plan_all_signed")
+	panel.queue_free()
+	# Later puzzles (every puzzle but P-02): the real sign-off panel, two of four signed.
+	var signoff := ClassSignoffPanel.new()
+	root.add_child(signoff)
+	signoff.open_for(null, {"focus_label": "P-13 · The storm plan", "crew": route.director().crew(),
+		"required_roles": ["kai", "amara", "mei", "rafi"], "signed_roles": ["kai", "amara"]})
+	await _capture("later_puzzle_signoff")
 	print("M1-37 CAPTURE RESULT: %s" % ("PASS" if failures == 0 else "FAIL"))
 	quit(0 if failures == 0 else 1)
 

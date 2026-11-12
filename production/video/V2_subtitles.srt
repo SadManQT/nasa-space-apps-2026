@@ -219,8 +219,8 @@ and runs offline on Windows and Mac.
 
 47
 00:03:30,800 --> 00:03:34,600
-Next: a four-player class mode,
-with private clues for every role.
+Up to four players share one screen,
+each with private clues.
 
 48
 00:03:34,800 --> 00:03:38,400

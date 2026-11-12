@@ -62,6 +62,8 @@ func _render(notice: String = "") -> void:
 	panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(panel)
 	panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_MINSIZE)
+	panel.grow_horizontal = Control.GROW_DIRECTION_BOTH  # stay centred as the rows fill it
+	panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	panel.custom_minimum_size = Vector2(620, 0)
 	_box = VBoxContainer.new()
 	_box.add_theme_constant_override("separation", 12)
@@ -79,7 +81,7 @@ func _render(notice: String = "") -> void:
 		who.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(who)
 		var done := signed.has(role_id)
-		var button := UiDesign.button("✓ Signed" if done else "Sign", 44, "check" if done else "")
+		var button := UiDesign.button("Signed" if done else "Sign", 44, "check" if done else "")
 		button.name = "Sign_" + String(role_id)
 		button.disabled = done
 		button.custom_minimum_size.x = 140

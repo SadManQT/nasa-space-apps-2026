@@ -160,7 +160,7 @@ func _test_campaign_cutscenes() -> void:
 	_check(String(campaign.cutscene_player.plan.get("mode", "")) == "video" and campaign.cutscene_player.video.is_playing(), "CS-01 plays as full-screen video")
 	_check(campaign._player.process_mode == Node.PROCESS_MODE_DISABLED, "the expedition holds still under the film")
 	_check(not campaign.audio.voice.playing, "no voice plays under the film")
-	var before := JSON.stringify(campaign._save_snapshot())
+	var before := _gameplay_state()
 	await _press(KEY_E)
 	await _press(KEY_SPACE)
 	_check(campaign.cutscene_player.video.paused, "Space pauses the film")
@@ -169,7 +169,7 @@ func _test_campaign_cutscenes() -> void:
 	campaign.cutscene_player.skip()
 	await _frames(2)
 	_check(not closed.is_empty() and bool(closed[-1].skipped) and not bool(closed[-1].completes_predicate) and not bool(closed[-1].completes_scene), "skip reports presentation only")
-	_check(JSON.stringify(campaign._save_snapshot()) == before, "watching and skipping (and keys pressed under the film) change no gameplay state")
+	_check(_gameplay_state() == before, "watching and skipping (and keys pressed under the film) change no gameplay state")
 	_check(not bool(campaign.route.gate_status().get("ready", true)), "the scene gate still waits for its physical operations")
 	_check(not campaign.is_cutscene_active() and campaign._player.process_mode == Node.PROCESS_MODE_INHERIT, "play resumes after the skip")
 	await _seconds(0.5)
@@ -234,9 +234,9 @@ func _test_missing_film_fallback() -> void:
 	var player := campaign.cutscene_player
 	_check(campaign.is_cutscene_active() and player.plan.get("mode", "") == "text_fallback", "a missing OGV opens the text fallback")
 	_check(player._fallback.visible and not player._frame.visible and player._fallback_text.text.contains(String(campaign.current_dialogue()[0].text)), "the fallback shows the scene's exact lines")
-	var before := JSON.stringify(campaign._save_snapshot())
+	var before := _gameplay_state()
 	await _press(KEY_SPACE)
-	_check(not campaign.is_cutscene_active() and JSON.stringify(campaign._save_snapshot()) == before, "dismissing the text card resumes play and changes nothing")
+	_check(not campaign.is_cutscene_active() and _gameplay_state() == before, "dismissing the text card resumes play and changes nothing")
 	campaign.free()
 	CampaignCutscenePlayer.autoplay = false
 	await _frames(2)
@@ -248,6 +248,14 @@ func _press(key: Key) -> void:
 		event.pressed = pressed
 		Input.parse_input_event(event)
 		await _frames(2)
+
+## The campaign snapshot without its save-slot stamp: the slot metadata holds the
+## wall-clock save time (to the second) and the rounded play time, which tick on
+## their own and are not gameplay state.
+func _gameplay_state() -> String:
+	var snapshot: Dictionary = campaign._save_snapshot()
+	(snapshot.get("presentation_resume", {}) as Dictionary).erase(SaveSlots.SLOT_META_KEY)
+	return JSON.stringify(snapshot)
 
 func _frames(count: int) -> void:
 	for i in count:

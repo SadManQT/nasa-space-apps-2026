@@ -104,9 +104,10 @@ func _test_night_shift_tension_and_alo_posture() -> void:
 	var storm_s5: Dictionary = FeedbackScript.night_shift_tension(5)
 	var dawn_s7: Dictionary = FeedbackScript.night_shift_tension(7)
 
-	_check(not bool(day_s1.get("is_dark", true)) and String(day_s1.get("fans_state", "")).contains("SFX_FAN_NORMAL"), "Shift 1 has daylight lamp and nominal fan pitch")
-	_check(bool(night_s4.get("is_dark", false)) and String(night_s4.get("fans_state", "")).contains("SFX_FAN_LOWPOWER") and String(night_s4.get("earth_link_state", "")).contains("STORED GUIDANCE"), "Shift 4 dims lights, slows fans to SFX_FAN_LOWPOWER, and switches Earth link to STORED GUIDANCE")
+	_check(not bool(day_s1.get("is_dark", true)) and String(day_s1.get("fans_sfx", "")).contains("SFX_FAN_NORMAL"), "Shift 1 has daylight lamp and nominal fan pitch")
+	_check(bool(night_s4.get("is_dark", false)) and String(night_s4.get("fans_sfx", "")).contains("SFX_FAN_LOWPOWER") and String(night_s4.get("earth_link_state", "")).contains("STORED GUIDANCE"), "Shift 4 dims lights, slows fans to SFX_FAN_LOWPOWER, and switches Earth link to STORED GUIDANCE")
 	_check(bool(storm_s5.get("is_storm", false)) and String(storm_s5.get("lights_state", "")).contains("35%"), "Shift 5 storm peak dims shelter lighting to 35% warm amber")
+	_check(not String(day_s1.get("fans_state", "")).contains("SFX_") and not String(night_s4.get("fans_state", "")).contains("SFX_"), "the fan line players read carries no sound IDs")
 	_check(is_equal_approx(float(dawn_s7.get("hours_to_dawn", -1.0)), 0.0), "Shift 7 countdown reaches dawn (0.0 h)")
 
 	# Alo botanical posture checks (never a face or eyes)

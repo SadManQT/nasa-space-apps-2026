@@ -7,7 +7,7 @@ One section per field of the project page on spaceappschallenge.org, in the orde
 **Before pasting (M2-10), replace or check:**
 - `[link after upload, M2-06 / M2-08]`: the YouTube links of the 240-second video (M2-06) and the 30-second video (M2-08).
 - `[metric from M1-22 when the playtest runs]`: the learner playtest numbers. Delete the sentence if M1-22 has not run; never estimate.
-- Items marked **[status on 12 Nov]**: four-player Class mode (M1-37, blocked) and the release build for judging (M3-93). Change "in progress" to "built" only when the board says `done`.
+- Items marked **[status on 12 Nov]**: the release build for judging (M3-93). Change "in progress" to "built" only when the board says `done`. Class mode (M1-37) is done.
 - Open every link in a private window: everything must open with no login.
 
 ---
@@ -74,7 +74,8 @@ Four cadets (Kai on power and heat, Amara on air, Mei on the garden, Rafi on spa
 - The exteriors stand on real south-pole terrain built from LRO LOLA elevation data, lit by JPL Horizons Sun positions for each scene's date.
 - 386 voice lines, a 12-cue score, 38 sound effects and 18 cutscenes, all installed.
 - 136 automated test suites (`game/tools/run_tests.sh`), including a walk through all 96 scenes and 13,048 checks on every line of player text at normal and 150 % text size. Rendering holds 60 fps on an Apple M4 Mac ([perf report](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/qa/perf_2026-11-04.md)); each push is exported and smoke-tested on Windows.
-- In progress: the four-player Class mode with private role clues (board M1-37) and the learner playtest (M1-22).
+- Four-player Class mode on one machine: choose Class (2–4 players) on New Expedition. Each cadet's crew note is read privately behind a pass-the-screen cover (or from printed cards), and all four roles sign every puzzle's exact choice and forecast before it locks in.
+- In progress: the learner playtest (M1-22).
 
 ### How: NASA data at the core
 
@@ -96,7 +97,7 @@ The datasets, what each is, where it comes from and how the game uses it, are in
 
 - **Who it is for.** Learners aged 10 to 15 in classrooms and at home. The main night of Chapter 1 is designed to take about 20 minutes, so one night fits in a lesson.
 - **Built for classrooms with little bandwidth.** It runs offline on Windows and macOS, needs no account, and is free under the Apache-2.0 licence, so schools can copy, translate and adapt it.
-- **Teamwork by design.** Each cadet holds facts the others need, so the plan only works when the crew talks. **[status on 12 Nov]** The four-player Class mode we registered, with shared decisions and private role clues on one machine, is in progress (board M1-37); the solo game gives one player all four roles.
+- **Teamwork by design.** Each cadet holds facts the others need, so the plan only works when the crew talks. In the four-player Class mode we registered, up to four learners share one machine: each reads their own role's facts privately, and every decision locks in only when all four roles sign it. The solo game gives one player all four roles.
 - **From Bangladesh to the Moon.** Alo is *Brassica rapa*, the species of Bangladesh's own mustard and of the Wisconsin Fast Plants grown in classrooms around the world; the game opens on an Earth mustard field. The Academy's founder in the story, Dr Noor Rahman, is a Bangladeshi botanist. Players see their own world in the mission.
 - **Honest science.** Every number shows its source and its label, so learners practise asking "how do we know?", the habit real mission teams depend on.
 - **Learning evidence.** [metric from M1-22 when the playtest runs] The playtest measures time to the first objective, P-02 attempts, the ending reached, and whether each player can explain the numbers afterwards in one predict and one explain question.

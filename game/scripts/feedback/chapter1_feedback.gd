@@ -740,7 +740,8 @@ static func night_shift_tension(shift_index: int) -> Dictionary:
 		"hours_to_dawn": hours_to_dawn,
 		"countdown_label": "Dawn in %d shift%s (%.1f h)" % [dark_shifts_left, "" if dark_shifts_left == 1 else "s", hours_to_dawn] if dark_shifts_left > 0 else "Dawnlight on the mast array (0.0 h)",
 		"lights_state": "Warm amber storm-shelter dim (35%)" if is_storm else ("Night conservation dim (60%)" if is_dark else "Full daylight array lamp (100%)"),
-		"fans_state": "SFX_FAN_LOWPOWER · Quiet night circulation (low pitch)" if is_dark else "SFX_FAN_NORMAL · Nominal daylight airflow",
+		"fans_sfx": "SFX_FAN_LOWPOWER" if is_dark else "SFX_FAN_NORMAL",
+		"fans_state": "Fans slowed for the night" if is_dark else "Fans at normal daytime speed",
 		"earth_link_state": "STORED GUIDANCE (Earth below horizon)" if s >= 4 else "LIVE LINK · Ferreira on console",
 	}
 
