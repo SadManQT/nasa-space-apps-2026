@@ -8288,7 +8288,7 @@
    "priority": "P0",
    "tool": "claude",
    "title": "Implement the approved 15-sheet UI proposal across the playable interfaces",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Sadman/claude",
    "deps": [],
    "paths": [
@@ -8307,7 +8307,7 @@
    ],
    "refs": [],
    "note": "User-directed Sadman takeover12Nov2026. Saved branch ramim/ui-proposals-20261111@ac3603b7; read production/plan/M4-22_SADMAN_HANDOFF.md and finish the existing plan. Ramim reservations released only after source/evidence push. Do not mark Done or discard/reimplement saved work.",
-   "evidence": "",
+   "evidence": "Instrument Light + Deep Space UI on every screen (production/plan/ui_direction_20261112.md); captures production/qa/evidence/M4-22/; full run_tests.sh 136/136 on 12 Nov; Windows export smoke green on GitHub",
    "updated": "2026-11-12",
    "prompt": "User 11 Nov: implement ui_proposal references, replacing rejected industrial style. UI only: cinematic title, soft navy/gold surfaces, premium fonts, settings, HUD, mission/puzzle panels, journal, garden, route, comms, debrief, chapters, trainer and supporting interfaces. Keep every existing feature, command, accessibility and navigation working. Publish exact-file reservations; preserve competing WIP; native/scripted verification and safe sync/push.",
    "reserved_for": "sadman",
