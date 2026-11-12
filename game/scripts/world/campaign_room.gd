@@ -19,6 +19,9 @@ const AUTHORED_ASSEMBLIES := ["habitat_kit", "exterior_kit"]
 const PROP_ASSEMBLIES := ["habitat_kit", "site_kit", "exterior_kit"]
 ## PR_CrewSeat: cushion runs from 0.2 m behind to 0.5 m in front of the pivot at 0.44 m high.
 const SEAT_SIT_OFFSET_M := 0.3
+## Pelvis joint above the cushion, inside the backrest and centered between the armrests.
+## The clip's own root offset varies by character; it is not a chair contact point.
+const SEAT_PELVIS_LOCAL := Vector3(0.0, 0.54, 0.12)
 const PlantServiceScript = preload("res://scripts/biology/plant_service.gd")
 ## Stage node inside PL_Alo_Sprout / PL_Tara_Sprout for each PlantService.seedling_form, and its words.
 const SEEDLING_NODES := {"seed": "Stage_Seed", "cotyledon": "Stage_Cotyledon", "true_leaf": "Stage_TrueLeaf"}
@@ -704,14 +707,20 @@ func has_installed_seat_at(at: Vector3) -> bool:
 ## is none: the base furniture or, from M3-5R, a seat of the applied chapter staging (Ferreira's chair at the head of
 ## the Commons table from EX-CH05-S01). A seat that staging hides does not count.
 func installed_seat_facing(at: Vector3) -> Vector3:
+	return installed_seat_pose(at).get("facing", Vector3.ZERO)
+
+## Room-space contact frame, shared by the Safe Room and rotated/staged Commons chairs.
+func installed_seat_pose(at: Vector3) -> Dictionary:
 	for prop in _layout.get("props", []) + _stage.get("props", []):
 		if not prop is Dictionary or String(prop.get("path", "")).get_file() != "PR_CrewSeat.glb" or String(prop.get("id", "")) in _stage.get("hide", []):
 			continue
 		var facing := Basis(Vector3.UP, deg_to_rad(float(prop.get("rotation_degrees", [0, 0, 0])[1]))) * Vector3.BACK
 		var sit := Presentation.vector(prop.position) + facing * SEAT_SIT_OFFSET_M
 		if Vector2(sit.x - at.x, sit.z - at.z).length() < 0.15:
-			return facing
-	return Vector3.ZERO
+			var scale := Presentation.vector(prop.get("scale", [1, 1, 1]))
+			var pelvis := Presentation.vector(prop.position) + facing * SEAT_PELVIS_LOCAL.z * scale.z + Vector3.UP * SEAT_PELVIS_LOCAL.y * scale.y
+			return {"facing": facing, "pelvis": pelvis}
+	return {}
 
 ## Stages the room for one scene: applies the chapter staging that RoomContract.staging reports for it (dated
 ## furniture, the scene's prop states and light level, stations, collision and a rebuilt navigation map; see

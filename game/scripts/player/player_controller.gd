@@ -375,6 +375,25 @@ func face_towards(point: Vector3) -> void:
 		_yaw = atan2(direction.x, direction.z)
 		visual.global_rotation.y = _yaw
 
+## Align the actual seated pelvis to the chair, rather than assuming all imported
+## SitIdle clips share the standing root's origin. Keep the gameplay capsule on the floor.
+func sit_at(pelvis_target: Vector3) -> bool:
+	if animation == null or not animation.has_clip("SitIdle_loop"):
+		return false
+	var rig := animation.skeleton
+	var hips := LocomotionClips.bone(rig, "Hips")
+	if hips < 0:
+		return false
+	animation.set_rest_clip("SitIdle_loop")
+	foot_ik_enabled = false
+	pose_modifier.feet_enabled = false
+	pose_modifier.lean_enabled = false
+	animation.advance(0.0, 0.0)
+	var pelvis := rig.global_transform * rig.get_bone_global_pose(hips).origin
+	visual.global_position += pelvis_target - pelvis
+	pose_modifier.reset_placement()
+	return true
+
 func reset_placement() -> void:
 	# Allow broadphase transforms to settle before capsule recovery or floor snap.
 	placement_frames = 2
