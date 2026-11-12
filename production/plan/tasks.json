@@ -8487,7 +8487,9 @@
     "game/tools/test_opening_blockers.gd",
     "game/tools/test_opening_blockers.gd.uid",
     "production/qa/evidence/Atik_opening_blockers_20261113.md",
-    "production/qa/evidence/Atik_opening_blockers_20261113_logs.zip"
+    "production/qa/evidence/Atik_opening_blockers_20261113_logs.zip",
+    "game/scripts/eva/eva_suit.gd",
+    "game/scripts/ui/probe_calibration_activity.gd.uid"
    ],
    "refs": [],
    "note": "Filed by Atik/codex on 2026-11-13.",
@@ -8503,7 +8505,9 @@
     "game/tools/test_opening_blockers.gd",
     "game/tools/test_opening_blockers.gd.uid",
     "production/qa/evidence/Atik_opening_blockers_20261113.md",
-    "production/qa/evidence/Atik_opening_blockers_20261113_logs.zip"
+    "production/qa/evidence/Atik_opening_blockers_20261113_logs.zip",
+    "game/scripts/eva/eva_suit.gd",
+    "game/scripts/ui/probe_calibration_activity.gd.uid"
    ]
   }
  ],
