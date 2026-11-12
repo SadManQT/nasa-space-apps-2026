@@ -1,0 +1,60 @@
+{
+  "selected_run": 43237871699,
+  "runs": [
+    {
+      "id": 43224056842,
+      "head_sha": "f25540dbb420234500cccb6d654178d1167523d5",
+      "path": ".github/workflows/judging-candidate.yml",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "html_url": "https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/43224056842",
+      "created_at": "2026-11-12T13:06:03Z",
+      "updated_at": "2026-11-12T13:16:33Z",
+      "qualification": "macos14 runner unavailable; Windows passed; not a complete green matrix"
+    },
+    {
+      "id": 43224498270,
+      "head_sha": "409f7618293f97022d6842d0a3f0268245f9e506",
+      "path": ".github/workflows/judging-candidate.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/43224498270",
+      "created_at": "2026-11-12T13:08:50Z",
+      "updated_at": "2026-11-12T13:26:40Z",
+      "qualification": "both10/0; superseded to include current notices"
+    },
+    {
+      "id": 43231702299,
+      "head_sha": "54377fb01006bddc68d08a292bdaadf6f8e2a586",
+      "path": ".github/workflows/judging-candidate.yml",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "html_url": "https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/43231702299",
+      "created_at": "2026-11-12T13:53:53Z",
+      "updated_at": "2026-11-12T13:59:13Z",
+      "qualification": "cancelled own in-progress font-only build after discovering supplied gohud notices also needed packaging"
+    },
+    {
+      "id": 43232501383,
+      "head_sha": "c6bf309aa8dc86b443a9d4b16767af5e7b49ffae",
+      "path": ".github/workflows/judging-candidate.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/43232501383",
+      "created_at": "2026-11-12T13:58:52Z",
+      "updated_at": "2026-11-12T14:17:24Z",
+      "qualification": "both10/0; complete notices; superseded to strengthen campaign-readiness assertion"
+    },
+    {
+      "id": 43237871699,
+      "head_sha": "817a6eea2919440530c619614c7c8b87190bde1b",
+      "path": ".github/workflows/judging-candidate.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/43237871699",
+      "created_at": "2026-11-12T14:30:23Z",
+      "updated_at": "2026-11-12T14:45:22Z",
+      "qualification": "selected final candidate; both11/0; source817a6eea"
+    }
+  ]
+}

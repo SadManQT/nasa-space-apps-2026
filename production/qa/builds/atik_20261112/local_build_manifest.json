@@ -1,0 +1,29 @@
+{
+  "source_commit": "817a6eea2919440530c619614c7c8b87190bde1b",
+  "platform": "macos",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "game_version": "0.1.0-preview.20261105",
+  "game_tracked_changes_after_import": [
+    "game/project.godot"
+  ],
+  "smoke": "windowed",
+  "package": {
+    "name": "last-light-academy-0.1.0-macos.zip",
+    "bytes": 1115757981,
+    "sha256": "6877387c59c769562cfef92824ac4782603be05fd672afe2a3aab816a6b6b334",
+    "entries": 17
+  },
+  "runtime_files_sha256": {
+    "Last Light Academy.app/Contents/MacOS/Last Light Academy": "6135ad137facbb26cd73a5f7f7d541d334a84fc81650e870ef075cdd14a129cd",
+    "Last Light Academy.app/Contents/Resources/icon.icns": "779ff524928785811d6d4c61f47a26491160b1092db9b610e85fcdfd9b2d2b2a",
+    "Last Light Academy.app/Contents/Resources/Last Light Academy.pck": "b9b396a0be4e93db71d74cb5b69229ef66665cbb3e278c5366486802d684ce47",
+    "Last Light Academy.app/Contents/Resources/PrivacyInfo.xcprivacy": "0535353bb08c25b8ce5ed9ac7e442a5994f402e0f6cbc4bed668cfc63c2ceac3",
+    "Last Light Academy.app/Contents/Info.plist": "102635fae996fee905adaad0fabb9805679d0407f22421793cb8e2f5e0774d68",
+    "Last Light Academy.app/Contents/PkgInfo": "7e50a30efad50208a173203ced60818d693bb61266b75aa10927d1a2adce80cb"
+  },
+  "logs": {
+    "smoke.log": "6acf7fb5590b58ae0ffd077aaebfeb839ae2c60a21f8795becdee23e5f8c1412",
+    "export.log": "4d9cbed39d76e82557e4016ad0bd15f4fb04b455f6490991e0f0dd40a58be4b7",
+    "import.log": "f15ffd4c558b01611d562c8c257508942bdc2dc542124f423ae2a592a46edfa6"
+  }
+}

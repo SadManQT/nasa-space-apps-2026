@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-12",
+  "owner": "Atik/codex",
+  "baseline_commit": "a5f5c1008a776a25034fe7702a6d5140465e5c6c",
+  "baseline_game_tree": "9742fcc054cb20f57d025ca957c06bf87b7871cc",
+  "source_commit": "153b9ce7f9809265b65ab21a5bc3080f918ec99f",
+  "current_game_tree": "9742fcc054cb20f57d025ca957c06bf87b7871cc",
+  "runtime_source_changes": [],
+  "local_import_diff": "diff --git a/game/project.godot b/game/project.godot\nindex 1ff18007..ac1a9c3b 100644\n--- a/game/project.godot\n+++ b/game/project.godot\n@@ -23,6 +23,10 @@ window/size/window_width_override=1280\n window/size/window_height_override=720\n window/stretch/mode=\"canvas_items\"\n \n+[editor_plugins]\n+\n+enabled=PackedStringArray(\"res://addons/runtime_assets/plugin.cfg\", \"res://addons/gohud/plugin.cfg\")\n+\n [importer_defaults]\n \n scene={\n@@ -97,14 +101,9 @@ interact={\n \n common/physics_interpolation=true\n \n-[editor_plugins]\n-\n-enabled=PackedStringArray(\"res://addons/runtime_assets/plugin.cfg\", \"res://addons/gohud/plugin.cfg\")\n-\n [rendering]\n \n+textures/vram_compression/import_etc2_astc=true\n anti_aliasing/quality/msaa_3d=1\n anti_aliasing/quality/use_taa=true\n anti_aliasing/quality/use_taa.web=false\n-renderer/rendering_method.web=\"gl_compatibility\"\n-textures/vram_compression/import_etc2_astc=true\n",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "full_initial_attempt": {
+    "path": "full/",
+    "result": "FAIL setup; 0 suites executed",
+    "setup_exit": 0,
+    "setup_errors": [
+      "8 dummy TextureStorage Parameter t null diagnostics",
+      "2 dummy TextureStorage RID leaks at exit"
+    ],
+    "runner_log": "/tmp/atik-full-20261112.log"
+  },
+  "full_retry": {
+    "path": "full_retry/",
+    "exit": 1,
+    "passed": 136,
+    "total": 138,
+    "failures": [
+      "FAIL tools/test_campaign_media.gd :: exit 1 :: CAMPAIGN MEDIA RESULT: FAIL (115 checks, 1 failures)",
+      "FAIL tools/test_player_text.gd :: exit 124 :: "
+    ],
+    "cache": "Retained from initial failed cold import; warm import setup passed with zero diagnostics. Not a cold-import certification."
+  },
+  "publication_authorization": "12 Nov Atik user: do remaining Atik parts without waiting for approval. Publish only the verified candidate with precise remaining limitations; final QA dependencies remain.",
+  "game_tree_after_full": "9742fcc054cb20f57d025ca957c06bf87b7871cc",
+  "release_candidate": {
+    "run_id": 43237871699,
+    "source_commit": "817a6eea2919440530c619614c7c8b87190bde1b",
+    "status": "both native CI jobs succeeded; publication pending",
+    "startup_checks_per_platform": 11,
+    "quality": "unchanged; only opt-in export QA in Main changed"
+  },
+  "post_full_focused": {
+    "campaign_session": "15/15 checks, 0 failures, 1/1; after opt-in export diagnostic change",
+    "player_text": {
+      "exit": 0,
+      "seconds": 519.809415292,
+      "process_guard_seconds": 1500,
+      "assertions_changed": false,
+      "performance_limits_changed": false,
+      "full_default_guard_timeout_remains_failed": true
+    },
+    "media_mandatory": "115/0, 1/1; intermittent later reproduction retained, no fixture fix applied",
+    "media_forensic": "7 passing repeats, eighth 115/1; sole difference generated saved_at_utc; unchanged original assertion",
+    "wrong_filter_attempt": "production_session matches no current suite; retained 0/1 no-result attempt, corrected to campaign_session; not a game failure"
+  },
+  "normal_gameplay_changes": "None; game/scripts/main.gd changes only its existing --export-smoke branch. Full run and rendered distributions predate that diagnostic hardening.",
+  "export_diagnostic_commit": "817a6eea2919440530c619614c7c8b87190bde1b",
+  "graphical_conditions": "Earlier background captures show a loading card and are visually inconclusive despite passing logical flags. Foreground --always-on-top source817a run11/0 has real Commons image; no timing/causal performance improvement claimed."
+}

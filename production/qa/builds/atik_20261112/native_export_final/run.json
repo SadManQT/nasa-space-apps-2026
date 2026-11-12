@@ -1,0 +1,24 @@
+{
+  "source_commit": "817a6eea2919440530c619614c7c8b87190bde1b",
+  "command": [
+    "/Users/atik130/Desktop/Hackathon/NASA/atik-release-20261112/builds/atik-export-ready-20261112/macos/unpacked/Last Light Academy.app/Contents/MacOS/Last Light Academy",
+    "--always-on-top",
+    "--",
+    "--export-smoke",
+    "--evidence-dir=/Users/atik130/Desktop/Hackathon/NASA/atik-release-20261112/production/qa/builds/atik_20261112/native_export_final"
+  ],
+  "exit": 0,
+  "seconds": 10.756203417,
+  "errors": [],
+  "markers": [
+    "EXPORT_SMOKE_READY scene=EX-CH01-S01 loading=false background=false",
+    "EXPORT SMOKE RESULT: PASS (11 checks, 0 failures)"
+  ],
+  "watchdogs": [],
+  "screenshots": [
+    "M1-20_native_title.png",
+    "M1-20_native_chapter1.png"
+  ],
+  "conditions": "Window explicitly always-on-top, retained caches; not a controlled before/after performance experiment. Earlier background captures retained separately.",
+  "architecture": "x86_64 arm64"
+}

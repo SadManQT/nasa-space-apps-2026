@@ -1,0 +1,8 @@
+{
+  "exit": 0,
+  "seconds": 519.809415292,
+  "process_guard_seconds": 1500,
+  "assertions_changed": false,
+  "performance_limits_changed": false,
+  "full_default_guard_timeout_remains_failed": true
+}

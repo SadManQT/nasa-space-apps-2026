@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/Users/atik130/Desktop/Last Light Academy Judging Candidate 2026-11-12/Mac CI Evidence/native-inspection/Last Light Academy.app/Contents/MacOS/Last Light Academy",
+    "--",
+    "--export-smoke",
+    "--evidence-dir=/Users/atik130/Desktop/Hackathon/NASA/atik-release-20261112/production/qa/builds/atik_20261112/native_export"
+  ],
+  "source_commit": "409f7618293f97022d6842d0a3f0268245f9e506",
+  "game_tree": "9742fcc054cb20f57d025ca957c06bf87b7871cc",
+  "candidate_status": "Earlier CI control; final distribution is being rebuilt with complete notices. Native file identities will be compared before attributing this test to final artifacts.",
+  "display": "windowed macOS / Forward+ Metal",
+  "os": "macOS27.0.1 / Apple M4 /16GiB",
+  "exit": 0,
+  "seconds": 83.19690541700001,
+  "errors": [],
+  "markers": [
+    "EXPORT SMOKE RESULT: PASS (10 checks, 0 failures)"
+  ],
+  "architecture": "x86_64 arm64",
+  "screenshots": [
+    "M1-20_native_title.png",
+    "M1-20_native_chapter1.png"
+  ],
+  "cache_conditions": "After native room sweeps, retained OS/driver caches; no cold-start claim",
+  "isolated_save": "--export-smoke injects /tmp/lla-export-PID.json before SaveService; existing user checkpoints are not read or replaced."
+}
