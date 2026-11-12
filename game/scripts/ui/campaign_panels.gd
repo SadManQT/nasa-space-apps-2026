@@ -108,7 +108,7 @@ var _ending_answers := {}
 var _assist_mode := "Cadet"
 var _bindings: Dictionary = {
 	"move": "W A S D",
-	"look": "Right Mouse",
+	"look": "Mouse",
 	"use": "E",
 	"what_now": "H",
 	"journal": "J",
@@ -418,22 +418,54 @@ func _render_data(value) -> void:
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_body.add_child(body)
 
+const PAUSE_ICONS := {"WhatNow": "what_now", "Messages": "message", "Journal": "journal", "Settings": "settings", "Save": "save", "SaveAndQuit": "exit",
+	"Open_save_slots": "save", "Open_cadet_record": "person", "Open_manual": "info", "Open_jobs": "goal", "Open_discovery": "leaf", "Open_greenhouse": "plant",
+	"Open_coverage": "place", "Open_route_planner": "route", "Open_rover": "rover", "Open_hazards": "warning", "Open_field": "tank", "Open_credits": "people"}
+
+## Pause (Instrument Light): Resume is the one gold action; the six everyday
+## actions are icon tiles; station tools are a quieter icon grid below.
 func _render_pause() -> void:
 	var words: Dictionary = UiDesign.text().get("hud", {})
-	var resume := _button(String(words.get("resume", "Resume")))
+	var resume := UiDesign.make_primary(UiDesign.button(String(words.get("resume", "Resume")), 52, "arrow_right"))
 	resume.name = "Resume"
 	resume.pressed.connect(close_panel)
 	_body.add_child(resume)
+	var tiles := GridContainer.new()
+	tiles.name = "PauseTiles"
+	tiles.columns = 3
+	tiles.add_theme_constant_override("h_separation", 10)
+	tiles.add_theme_constant_override("v_separation", 10)
+	var tools := GridContainer.new()
+	tools.name = "StationTools"
+	tools.columns = 3
+	tools.add_theme_constant_override("h_separation", 8)
+	tools.add_theme_constant_override("v_separation", 8)
 	for raw in _pause_actions:
 		if not raw is Dictionary:
 			continue
 		var entry: Dictionary = raw
-		var button := _button(String(entry.get("label", "")))
-		button.name = String(entry.get("name", String(entry.get("label", "")).to_pascal_case()))
+		var name := String(entry.get("name", String(entry.get("label", "")).to_pascal_case()))
+		var is_tool := name.begins_with("Open_")
+		var button := UiDesign.button(String(entry.get("label", "")), 44 if is_tool else 84, String(PAUSE_ICONS.get(name, "")))
+		button.name = name
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.clip_text = true
+		if is_tool:
+			button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		else:
+			button.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
+			button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			button.add_theme_constant_override("icon_max_width", 28)
 		var action: Callable = entry.get("action", Callable())
 		if action.is_valid():
 			button.pressed.connect(action)
-		_body.add_child(button)
+		(tools if is_tool else tiles).add_child(button)
+	_body.add_child(tiles)
+	if tools.get_child_count() > 0:
+		_body.add_child(UiDesign.label("Station tools", "caption", "muted"))
+		_body.add_child(tools)
+	else:
+		tools.free()
 	_render_resume_card(_journal_data())
 
 func _render_dialogue(value) -> void:
@@ -570,7 +602,7 @@ func _render_settings() -> void:
 		_body.add_child(row)
 	var controls := UiDesign.label("Controls\nMove: %s · Look: %s\nUse: %s · What now: %s · Journal: %s · Pause: %s\nNext line: Space · Continue: Enter" % [
 		String(_bindings.get("move", "W A S D")),
-		String(_bindings.get("look", "Right Mouse")),
+		String(_bindings.get("look", "Mouse")),
 		String(_bindings.get("use", "E")),
 		String(_bindings.get("what_now", "H")),
 		String(_bindings.get("journal", "J")),
@@ -662,7 +694,7 @@ func reset_bindings_and_settings(confirmed: bool = true) -> bool:
 	_assist_mode = "Cadet"
 	_bindings = {
 		"move": "W A S D",
-		"look": "Right Mouse",
+		"look": "Mouse",
 		"use": "E",
 		"what_now": "H",
 		"journal": "J",

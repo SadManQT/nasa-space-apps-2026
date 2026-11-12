@@ -78,7 +78,7 @@ func _run() -> void:
 	_send_key(KEY_ESCAPE)
 	await process_frame
 	var pause_body := hud.panels.get("_body") as VBoxContainer
-	_check(hud.panels.active_panel() == "pause" and pause_body.get_node_or_null("Settings") is Button and pause_body.get_node_or_null("SaveAndQuit") is Button, "Esc opens the pause menu with Settings and Save and quit")
+	_check(hud.panels.active_panel() == "pause" and pause_body.find_child("Settings", true, false) is Button and pause_body.find_child("SaveAndQuit", true, false) is Button, "Esc opens the pause menu with Settings and Save and quit")
 	_check(pause_body.get_child(0).name == "Resume" and (pause_body.get_child(0) as Button).text == "Resume", "pause menu leads with Resume")
 	_check(bool(campaign.director.query().get("paused", false)) and player.process_mode == Node.PROCESS_MODE_DISABLED, "opening a modal pauses authoritative actions and movement")
 	_check(advance.disabled, "modal panels exclude underlying controls from keyboard focus")

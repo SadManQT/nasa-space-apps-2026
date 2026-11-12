@@ -90,6 +90,7 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="Brand" type="HBoxContainer" parent="SafeArea/Panel/Page"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 18
 

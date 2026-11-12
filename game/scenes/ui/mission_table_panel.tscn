@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/mission_table_panel.gd" id="1"]
-[ext_resource type="FontFile" path="res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf" id="2"]
-[ext_resource type="FontFile" path="res://addons/gohud/assets/fonts/roboto/Roboto.ttf" id="3"]
+[ext_resource type="FontFile" path="res://assets/fonts/ui/SairaSemiCondensed-SemiBold.ttf" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/ui/Inter.ttf" id="3"]
 [ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="4"]
 
 [sub_resource type="StyleBoxFlat" id="FrameStyle"]
@@ -119,6 +119,7 @@ layout_mode = 2
 theme_override_constants/separation = 24
 
 [node name="Brand" type="HBoxContainer" parent="Frame/Stack/Header"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12

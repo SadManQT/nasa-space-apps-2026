@@ -134,7 +134,7 @@ func _rebuild_body() -> void:
 			_build_saves_tab()
 	for button_node in _body.find_children("*", "Button", true, false):
 		var button := button_node as Button
-		if not button.get_parent() is HFlowContainer:
+		if not button.get_parent() is HFlowContainer and not button.toggle_mode:
 			button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_scale()
 	_restore_focus.call_deferred(focus_name, previous_scroll)
@@ -204,13 +204,11 @@ func _build_display_tab() -> void:
 	sync_col.add_theme_constant_override("separation", 8)
 	sync_card.add_child(sync_col)
 	var vsync_on := bool(game_settings.display.get("vsync", true))
-	var vsync_btn := UiDesign.button("Vertical Sync: ON (Prevents screen tearing)" if vsync_on else "Vertical Sync: OFF")
-	vsync_btn.name = "VsyncToggle"
+	var vsync_btn := _switch(sync_col, "VsyncToggle", "Vertical sync", "settings", vsync_on)
 	vsync_btn.pressed.connect(func() -> void:
 		var next_on := not bool(game_settings.display.get("vsync", true))
 		game_settings.set_display_option("vsync", next_on)
 		_apply_and_notify("Vertical Sync %s." % ("enabled" if next_on else "disabled")))
-	sync_col.add_child(vsync_btn)
 
 	var cur_cap := int(game_settings.display.get("frame_cap", 60))
 	var cap_word := "Unlimited" if cur_cap <= 0 else ("%d FPS" % cur_cap)
@@ -368,8 +366,7 @@ func _build_assist_tab() -> void:
 		onboarding_reset_requested.emit()
 		_status_label.text = "Guidance will appear again on your next action.")
 	_body.add_child(replay)
-	_body.add_child(UiDesign.label("Captions, Subtitles & Assist Modes", "heading"))
-	_body.add_child(UiDesign.label("Story canon and real lunar math stay identical in every mode; assist modes change only guidance and timer pressure.", "caption", "muted"))
+	_body.add_child(UiDesign.label("Reading and help", "heading"))
 
 	# Captions & Subtitle Size
 	var cap_card := UiDesign.glass_panel()
@@ -379,45 +376,34 @@ func _build_assist_tab() -> void:
 	cap_card.add_child(cap_col)
 
 	var captions_on := bool(game_settings.accessibility.get("captions", true))
-	var cap_toggle := UiDesign.button("Dialogue and sound captions: ON" if captions_on else "Dialogue and sound captions: OFF")
-	cap_toggle.name = "CaptionsToggle"
+	var cap_toggle := _switch(cap_col, "CaptionsToggle", "Captions", "message", captions_on)
 	cap_toggle.pressed.connect(func() -> void:
 		var next_on := not bool(game_settings.accessibility.get("captions", true))
 		game_settings.set_accessibility_option("captions", next_on)
 		_apply_and_notify("Captions %s." % ("enabled" if next_on else "disabled")))
-	cap_col.add_child(cap_toggle)
 
 	var cur_sub_size := String(game_settings.accessibility.get("subtitle_size", "Medium"))
-	cap_col.add_child(UiDesign.label("Subtitle & Text Size · Current: %s (%d%%)" % [cur_sub_size, int(round(float(game_settings.accessibility.get("subtitle_scale", 1.0)) * 100.0))], "body", "ivory"))
-	var sub_row := HFlowContainer.new()
-	sub_row.add_theme_constant_override("h_separation", 8)
-	sub_row.add_theme_constant_override("v_separation", 8)
-	cap_col.add_child(sub_row)
+	var sub_row := _setting_row(cap_col, "Text size", "text_message")
 	for sz_opt in GameSettingsScript.SUBTITLE_SIZES:
-		var btn := UiDesign.button((sz_opt + " (Selected)") if sz_opt == cur_sub_size else sz_opt)
-		btn.name = "SubtitleSize_" + sz_opt.replace(" ", "")
+		var btn := _segment_button("SubtitleSize_" + sz_opt.replace(" ", ""), sz_opt, sz_opt == cur_sub_size)
 		btn.pressed.connect(func() -> void:
 			game_settings.set_accessibility_option("subtitle_size", sz_opt)
 			_apply_and_notify("Subtitle and text size set to %s." % sz_opt))
 		sub_row.add_child(btn)
 
 	var motion_on := bool(game_settings.accessibility.get("reduced_motion", false))
-	var motion_toggle := UiDesign.button("Reduced motion: ON (Steady camera and instant menu transitions)" if motion_on else "Reduced motion: OFF")
-	motion_toggle.name = "ReducedMotionToggle"
+	var motion_toggle := _switch(cap_col, "ReducedMotionToggle", "Reduced motion", "pause", motion_on)
 	motion_toggle.pressed.connect(func() -> void:
 		var next_on := not bool(game_settings.accessibility.get("reduced_motion", false))
 		game_settings.set_accessibility_option("reduced_motion", next_on)
 		_apply_and_notify("Reduced motion %s." % ("enabled" if next_on else "disabled")))
-	cap_col.add_child(motion_toggle)
 
 	var timer_on := bool(game_settings.accessibility.get("timer_free", true))
-	var timer_toggle := UiDesign.button("Timer-free play: ON (Take as long as you need on every decision)" if timer_on else "Timer-free play: OFF")
-	timer_toggle.name = "TimerFreeToggle"
+	var timer_toggle := _switch(cap_col, "TimerFreeToggle", "Timer-free play", "clock", timer_on)
 	timer_toggle.pressed.connect(func() -> void:
 		var next_on := not bool(game_settings.accessibility.get("timer_free", true))
 		game_settings.set_accessibility_option("timer_free", next_on)
 		_apply_and_notify("Timer-free play %s." % ("enabled" if next_on else "disabled")))
-	cap_col.add_child(timer_toggle)
 
 	# Assist Modes (Story, Cadet, Expedition) + Session Modes (Solo, Family, Class)
 	var assist_card := UiDesign.glass_panel()
@@ -427,29 +413,25 @@ func _build_assist_tab() -> void:
 	assist_card.add_child(assist_col)
 
 	var cur_assist := String(game_settings.accessibility.get("assist_mode", "Cadet"))
-	assist_col.add_child(UiDesign.label("Assist Mode · Current: %s" % cur_assist, "body", "ivory"))
+	var assist_row := _setting_row(assist_col, "Assist mode", "what_now")
 	var assist_descriptions := {
 		"Story": "Story: Full hints and no timer pressure for enjoying the narrative and science.",
 		"Cadet": "Cadet: Balanced guidance with standard station alerts and optional hints.",
 		"Expedition": "Expedition: Minimal prompts for players who want to read the instruments directly.",
 	}
 	for mode_id in GameSettingsScript.ASSIST_MODES:
-		var btn := UiDesign.button((mode_id + " (Selected) — " + assist_descriptions[mode_id]) if mode_id == cur_assist else (mode_id + " — " + assist_descriptions[mode_id]))
-		btn.name = "AssistMode_" + mode_id
+		var btn := _segment_button("AssistMode_" + mode_id, mode_id, mode_id == cur_assist)
+		btn.tooltip_text = assist_descriptions[mode_id]
 		btn.pressed.connect(func() -> void:
 			game_settings.set_accessibility_option("assist_mode", mode_id)
 			_apply_and_notify("Assist mode set to %s." % mode_id))
-		assist_col.add_child(btn)
+		assist_row.add_child(btn)
+	assist_col.add_child(UiDesign.label(String(assist_descriptions.get(cur_assist, "")).get_slice(": ", 1), "caption", "muted"))
 
 	var cur_session := String(game_settings.accessibility.get("session_mode", "Solo"))
-	assist_col.add_child(UiDesign.label("Group & Classroom Session Mode · Current: %s" % cur_session, "body", "ivory"))
-	var session_row := HFlowContainer.new()
-	session_row.add_theme_constant_override("h_separation", 8)
-	session_row.add_theme_constant_override("v_separation", 8)
-	assist_col.add_child(session_row)
+	var session_row := _setting_row(assist_col, "Play together", "people")
 	for smode in GameSettingsScript.SESSION_MODES:
-		var btn := UiDesign.button((smode + " Mode (Selected)") if smode == cur_session else (smode + " Mode"))
-		btn.name = "SessionMode_" + smode
+		var btn := _segment_button("SessionMode_" + smode, smode, smode == cur_session)
 		btn.pressed.connect(func() -> void:
 			game_settings.set_accessibility_option("session_mode", smode)
 			_apply_and_notify("Session mode set to %s." % smode))
@@ -464,16 +446,14 @@ func _build_assist_tab() -> void:
 	cut_col.add_child(UiDesign.label("Cutscenes & Pause Rules", "body", "ivory"))
 
 	var skip_on := game_settings.skip_viewed_cutscenes
-	var skip_toggle := UiDesign.button("Skip any cutscene immediately after the first viewing: ON" if skip_on else "Skip any cutscene immediately after the first viewing: OFF")
-	skip_toggle.name = "SkipViewedCutscenesToggle"
+	var skip_toggle := _switch(cut_col, "SkipViewedCutscenesToggle", "Skip films already seen", "recording", skip_on)
 	skip_toggle.pressed.connect(func() -> void:
 		var next_on := not game_settings.skip_viewed_cutscenes
 		game_settings.skip_viewed_cutscenes = next_on
 		game_settings.save_to_disk()
 		_apply_and_notify("Instant skip for viewed cutscenes %s." % ("enabled" if next_on else "disabled")))
-	cut_col.add_child(skip_toggle)
 
-	var pause_lbl := UiDesign.label("Pause Anywhere: Active — Press Esc or Start at any moment during free movement, puzzles or films to pause.", "caption", "good")
+	var pause_lbl := UiDesign.label("Pause Anywhere: Esc or Start, at any moment.", "caption", "muted")
 	pause_lbl.name = "PauseAnywhereStatus"
 	cut_col.add_child(pause_lbl)
 
@@ -615,3 +595,36 @@ func _input(event: InputEvent) -> void:
 		else:
 			closed.emit()
 		get_viewport().set_input_as_handled()
+
+## Instrument Light rows: icon + label on the left, the control on the right.
+func _setting_row(parent: Control, title: String, icon_kind: String) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 10)
+	row.add_child(UiKit.icon(icon_kind, "accent"))
+	var label := UiDesign.label(title, "body", "ivory")
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	row.add_child(label)
+	parent.add_child(row)
+	return row
+
+## An On/Off switch on its own row; the button keeps its test-facing name.
+func _switch(parent: Control, node_name: String, title: String, icon_kind: String, on: bool) -> Button:
+	var row := _setting_row(parent, title, icon_kind)
+	var button := UiDesign.button("On" if on else "Off", 44)
+	button.name = node_name
+	button.toggle_mode = true
+	button.set_pressed_no_signal(on)
+	button.custom_minimum_size.x = 88
+	button.accessibility_name = "%s: %s" % [title, "on" if on else "off"]
+	row.add_child(button)
+	return button
+
+## One option of a segmented control: gold when selected.
+func _segment_button(node_name: String, text_value: String, selected: bool) -> Button:
+	var button := UiDesign.button(text_value, 44)
+	button.name = node_name
+	button.toggle_mode = true
+	button.set_pressed_no_signal(selected)
+	button.accessibility_name = text_value + (" (selected)" if selected else "")
+	return button

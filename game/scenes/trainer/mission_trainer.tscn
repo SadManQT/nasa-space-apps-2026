@@ -4,20 +4,20 @@
 [ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="2_mark"]
 [ext_resource type="Texture2D" path="res://assets/ui/title/aurora_cinematic.png" id="3_art"]
 [ext_resource type="Texture2D" path="res://assets/ui/proposal/practice_atlas.png" id="4_practice"]
-[ext_resource type="FontFile" path="res://addons/gohud/assets/fonts/roboto/Roboto.ttf" id="5_body"]
-[ext_resource type="FontFile" path="res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf" id="6_heading"]
+[ext_resource type="FontFile" path="res://assets/fonts/ui/Inter.ttf" id="5_body"]
+[ext_resource type="FontFile" path="res://assets/fonts/ui/SairaSemiCondensed-SemiBold.ttf" id="6_heading"]
 
 [sub_resource type="StyleBoxFlat" id="Style_paper"]
 content_margin_left = 22.0
 content_margin_top = 18.0
 content_margin_right = 22.0
 content_margin_bottom = 18.0
-bg_color = Color(0.949, 0.937, 0.91, 0.99)
+bg_color = Color(0.063, 0.102, 0.161, 0.96)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.86, 0.85, 0.82, 1)
+border_color = Color(0.2, 0.267, 0.36, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_left = 16
@@ -28,12 +28,12 @@ content_margin_left = 8.0
 content_margin_top = 8.0
 content_margin_right = 8.0
 content_margin_bottom = 8.0
-bg_color = Color(0.975, 0.967, 0.947, 1)
+bg_color = Color(0.11, 0.157, 0.224, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.77, 0.79, 0.8, 1)
+border_color = Color(0.2, 0.267, 0.36, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_left = 12
@@ -44,7 +44,7 @@ content_margin_left = 8.0
 content_margin_top = 8.0
 content_margin_right = 8.0
 content_margin_bottom = 8.0
-bg_color = Color(0.99, 0.98, 0.95, 1)
+bg_color = Color(0.149, 0.208, 0.294, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -60,12 +60,12 @@ content_margin_left = 20.0
 content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
-bg_color = Color(0.945, 0.934, 0.91, 1)
+bg_color = Color(0.09, 0.13, 0.19, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.78, 0.79, 0.79, 1)
+border_color = Color(0.2, 0.267, 0.36, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_left = 12
@@ -76,12 +76,12 @@ content_margin_left = 14.0
 content_margin_top = 10.0
 content_margin_right = 14.0
 content_margin_bottom = 10.0
-bg_color = Color(0.98, 0.97, 0.95, 1)
+bg_color = Color(0.11, 0.157, 0.224, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.7, 0.72, 0.75, 1)
+border_color = Color(0.2, 0.267, 0.36, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_left = 8
@@ -92,12 +92,12 @@ content_margin_left = 14.0
 content_margin_top = 10.0
 content_margin_right = 14.0
 content_margin_bottom = 10.0
-bg_color = Color(0.914, 0.909, 0.888, 1)
+bg_color = Color(0.08, 0.11, 0.16, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.79, 0.8, 0.8, 1)
+border_color = Color(0.2, 0.267, 0.36, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_left = 8
@@ -129,7 +129,7 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.12, 0.39, 0.59, 1)
+border_color = Color(0.96, 0.77, 0.32, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_left = 8
@@ -159,17 +159,17 @@ thickness = 1
 [sub_resource type="Theme" id="Theme_paper"]
 default_font = ExtResource("5_body")
 default_font_size = 16
-Button/colors/font_color = Color(0.039, 0.063, 0.11, 1)
-Button/colors/font_hover_color = Color(0.039, 0.063, 0.11, 1)
+Button/colors/font_color = Color(0.949, 0.937, 0.906, 1)
+Button/colors/font_hover_color = Color(0.949, 0.937, 0.906, 1)
 Button/colors/font_pressed_color = Color(0.039, 0.063, 0.11, 1)
-Button/colors/font_focus_color = Color(0.039, 0.063, 0.11, 1)
-Button/colors/font_disabled_color = Color(0.31, 0.34, 0.37, 1)
+Button/colors/font_focus_color = Color(0.949, 0.937, 0.906, 1)
+Button/colors/font_disabled_color = Color(0.55, 0.6, 0.66, 1)
 Button/styles/normal = SubResource("Style_button")
-Button/styles/hover = SubResource("Style_gold")
+Button/styles/hover = SubResource("Style_selected")
 Button/styles/pressed = SubResource("Style_gold")
 Button/styles/disabled = SubResource("Style_disabled")
 Button/styles/focus = SubResource("Style_focus")
-Label/colors/font_color = Color(0.039, 0.063, 0.11, 1)
+Label/colors/font_color = Color(0.949, 0.937, 0.906, 1)
 HSeparator/styles/separator = SubResource("Style_rule")
 
 [sub_resource type="AtlasTexture" id="Atlas_Power"]
@@ -226,6 +226,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="BrandHeader" type="HBoxContainer" parent="SafeArea/Page"]
+visible = false
 custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
 theme_override_constants/separation = 18
@@ -282,7 +283,7 @@ text = "Moon trainer"
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "title"
-metadata/lla_colour = "ink"
+metadata/lla_colour = "ivory"
 theme_override_fonts/font = ExtResource("6_heading")
 
 [node name="Subtitle" type="Label" parent="SafeArea/Page/Panel/PaperPage/TitleRow"]
@@ -291,7 +292,7 @@ text = "Science practice for life and work at Aurora Station."
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "body"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 size_flags_horizontal = 3
 vertical_alignment = 1
 
@@ -301,7 +302,7 @@ text = "Practice freely. Training results are separate from your expedition."
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "caption"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 
 [node name="Content" type="HBoxContainer" parent="SafeArea/Page/Panel/PaperPage"]
 layout_mode = 2
@@ -354,7 +355,7 @@ text = "Plan the night"
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "heading"
-metadata/lla_colour = "ink"
+metadata/lla_colour = "ivory"
 theme_override_fonts/font = ExtResource("6_heading")
 
 [node name="Description" type="Label" parent="SafeArea/Page/Panel/PaperPage/Content/TrainerScroll/TrainerPages/CatalogBody/FeaturedCards/PowerCard/Contents"]
@@ -363,7 +364,7 @@ text = "Keep power and air stable through the lunar night."
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "body"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 size_flags_vertical = 3
 
 [node name="StartPowerPractice" type="Button" parent="SafeArea/Page/Panel/PaperPage/Content/TrainerScroll/TrainerPages/CatalogBody/FeaturedCards/PowerCard/Contents"]
@@ -372,6 +373,10 @@ layout_mode = 2
 text = "Start practice"
 autowrap_mode = 2
 theme_override_styles/normal = SubResource("Style_gold")
+theme_override_styles/hover = SubResource("Style_gold")
+theme_override_colors/font_color = Color(0.039, 0.063, 0.11, 1)
+theme_override_colors/font_hover_color = Color(0.039, 0.063, 0.11, 1)
+theme_override_colors/font_focus_color = Color(0.039, 0.063, 0.11, 1)
 
 [node name="TerrainCard" type="PanelContainer" parent="SafeArea/Page/Panel/PaperPage/Content/TrainerScroll/TrainerPages/CatalogBody/FeaturedCards"]
 layout_mode = 2
@@ -396,7 +401,7 @@ text = "Read the ground"
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "heading"
-metadata/lla_colour = "ink"
+metadata/lla_colour = "ivory"
 theme_override_fonts/font = ExtResource("6_heading")
 
 [node name="Description" type="Label" parent="SafeArea/Page/Panel/PaperPage/Content/TrainerScroll/TrainerPages/CatalogBody/FeaturedCards/TerrainCard/Contents"]
@@ -405,7 +410,7 @@ text = "Explore the real Moon Trainer: surface sorties and rover."
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "body"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 size_flags_vertical = 3
 
 [node name="OpenMoonTrainer" type="Button" parent="SafeArea/Page/Panel/PaperPage/Content/TrainerScroll/TrainerPages/CatalogBody/FeaturedCards/TerrainCard/Contents"]
@@ -437,7 +442,7 @@ text = "Care for the garden"
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "heading"
-metadata/lla_colour = "ink"
+metadata/lla_colour = "ivory"
 theme_override_fonts/font = ExtResource("6_heading")
 
 [node name="Description" type="Label" parent="SafeArea/Page/Panel/PaperPage/Content/TrainerScroll/TrainerPages/CatalogBody/FeaturedCards/GardenCard/Contents"]
@@ -446,7 +451,7 @@ text = "Garden scenarios are listed below and are coming soon."
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "body"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 size_flags_vertical = 3
 
 [node name="GardenComingSoon" type="Button" parent="SafeArea/Page/Panel/PaperPage/Content/TrainerScroll/TrainerPages/CatalogBody/FeaturedCards/GardenCard/Contents"]
@@ -462,7 +467,7 @@ text = "All training scenarios"
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "heading"
-metadata/lla_colour = "ink"
+metadata/lla_colour = "ivory"
 theme_override_fonts/font = ExtResource("6_heading")
 
 [node name="CatalogDescription" type="Label" parent="SafeArea/Page/Panel/PaperPage/Content/TrainerScroll/TrainerPages/CatalogBody"]
@@ -471,7 +476,7 @@ text = "16 scenarios across power, life support, shielding and food. One is avai
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "caption"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 
 [node name="ScenarioGrid" type="GridContainer" parent="SafeArea/Page/Panel/PaperPage/Content/TrainerScroll/TrainerPages/CatalogBody"]
 layout_mode = 2
@@ -657,7 +662,7 @@ text = "Practice a decision"
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "heading"
-metadata/lla_colour = "ink"
+metadata/lla_colour = "ivory"
 theme_override_fonts/font = ExtResource("6_heading")
 
 [node name="Description" type="Label" parent="SafeArea/Page/Panel/PaperPage/Content/PracticeGuide/Contents"]
@@ -666,7 +671,7 @@ text = "Use what you know to make a choice, see the result, and learn from it."
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "body"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 
 [node name="Step1" type="VBoxContainer" parent="SafeArea/Page/Panel/PaperPage/Content/PracticeGuide/Contents"]
 layout_mode = 2
@@ -678,7 +683,7 @@ text = "1   Observe"
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "heading"
-metadata/lla_colour = "ink"
+metadata/lla_colour = "ivory"
 theme_override_fonts/font = ExtResource("6_heading")
 
 [node name="Description" type="Label" parent="SafeArea/Page/Panel/PaperPage/Content/PracticeGuide/Contents/Step1"]
@@ -687,7 +692,7 @@ text = "Read the evidence."
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "caption"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 
 [node name="Step2" type="VBoxContainer" parent="SafeArea/Page/Panel/PaperPage/Content/PracticeGuide/Contents"]
 layout_mode = 2
@@ -699,7 +704,7 @@ text = "2   Try a plan"
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "heading"
-metadata/lla_colour = "ink"
+metadata/lla_colour = "ivory"
 theme_override_fonts/font = ExtResource("6_heading")
 
 [node name="Description" type="Label" parent="SafeArea/Page/Panel/PaperPage/Content/PracticeGuide/Contents/Step2"]
@@ -708,7 +713,7 @@ text = "Make a choice."
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "caption"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 
 [node name="Step3" type="VBoxContainer" parent="SafeArea/Page/Panel/PaperPage/Content/PracticeGuide/Contents"]
 layout_mode = 2
@@ -720,7 +725,7 @@ text = "3   Review what changed"
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "heading"
-metadata/lla_colour = "ink"
+metadata/lla_colour = "ivory"
 theme_override_fonts/font = ExtResource("6_heading")
 
 [node name="Description" type="Label" parent="SafeArea/Page/Panel/PaperPage/Content/PracticeGuide/Contents/Step3"]
@@ -729,7 +734,7 @@ text = "Learn from the result."
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "caption"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 
 [node name="FooterRule" type="HSeparator" parent="SafeArea/Page/Panel/PaperPage"]
 layout_mode = 2
@@ -744,7 +749,7 @@ text = "Choose your own pace. Training is independent of campaign saves."
 autowrap_mode = 2
 mouse_filter = 2
 metadata/lla_type = "caption"
-metadata/lla_colour = "navy"
+metadata/lla_colour = "ivory"
 size_flags_horizontal = 3
 vertical_alignment = 1
 

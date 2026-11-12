@@ -98,9 +98,25 @@ static func colour(name: String, fallback: Color = Color("#ECEEF0")) -> Color:
 
 ## One of the four type sizes ("title", "heading", "body", "caption") in canvas
 ## pixels for a canvas of `viewport_height`, times the large-text scale.
+static var _fonts: Dictionary = {}
+
+## The house faces (Instrument Light, AAA pass): Saira Semi Condensed for titles,
+## headings and buttons with a little tracking; Inter for reading text.
 static func font(token: String = "body") -> Font:
-	var key := "heading" if token in ["title", "heading"] else "body"
-	return load(String(tokens().get("font", {}).get(key, "res://addons/gohud/assets/fonts/roboto/Roboto.ttf"))) as Font
+	if _fonts.has(token):
+		return _fonts[token]
+	var faces: Dictionary = tokens().get("font", {})
+	var key := token if faces.has(token) else ("heading" if token == "title" else "body")
+	var base := load(String(faces.get(key, faces.get("body", "res://addons/gohud/assets/fonts/roboto/Roboto.ttf")))) as Font
+	var tracking := int(tokens().get("tracking", {}).get(token, 0))
+	var result: Font = base
+	if base != null and tracking != 0:
+		var variation := FontVariation.new()
+		variation.base_font = base
+		variation.spacing_glyph = tracking
+		result = variation
+	_fonts[token] = result
+	return result
 
 static func font_px(token: String, viewport_height: float, scale: float = 1.0) -> int:
 	var type: Dictionary = tokens().get("type", {})
@@ -114,7 +130,7 @@ static func font_px(token: String, viewport_height: float, scale: float = 1.0) -
 static func px(value: float, viewport_height: float) -> int:
 	return roundi(value * viewport_height / float(tokens().get("reference_height", 1080)))
 
-## Dark glass: deep navy at 80%, 12 px radius, one light edge (doc 25 §2.1).
+## Dark glass: deep navy, 10 px radius, one quiet edge, soft shadow (doc 25 §2.1, Instrument Light).
 static func glass_style(edge: Color = Color.TRANSPARENT, fill: Color = Color.TRANSPARENT, padding: int = -1) -> StyleBoxFlat:
 	var panel: Dictionary = tokens().get("panel", {})
 	var style := StyleBoxFlat.new()
@@ -123,6 +139,9 @@ static func glass_style(edge: Color = Color.TRANSPARENT, fill: Color = Color.TRA
 	style.set_border_width_all(int(panel.get("edge_width", 1)))
 	style.border_color = colour("glass_edge", Color(1, 1, 1, 0.18)) if edge == Color.TRANSPARENT else edge
 	style.anti_aliasing = true
+	style.shadow_color = Color(0, 0, 0, 0.35)
+	style.shadow_size = 12
+	style.shadow_offset = Vector2(0, 4)
 	var pad := int(panel.get("padding", 16)) if padding < 0 else padding
 	style.content_margin_left = pad
 	style.content_margin_right = pad
@@ -137,45 +156,85 @@ static func glass_panel(edge: Color = Color.TRANSPARENT, padding: int = -1) -> P
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return panel
 
-## A button in the one house style: navy at rest, accent on hover, outlined on focus.
-static func button(label: String, min_height: int = 44) -> Button:
+## A button in the one house style (Instrument Light): quiet glass at rest, a gold
+## edge on hover, gold fill only when pressed or selected. `icon_kind` adds a kit icon.
+static func button(label: String, min_height: int = 44, icon_kind: String = "") -> Button:
 	var result := Button.new()
 	result.text = label
 	result.custom_minimum_size = Vector2(0, min_height)
 	result.focus_mode = Control.FOCUS_ALL
+	style_button(result)
+	if not icon_kind.is_empty():
+		set_button_icon(result, icon_kind)
+	return result
+
+## Applies the house button states to any Button (also used by scene-authored buttons).
+static func style_button(result: Button) -> void:
+	result.add_theme_font_override("font", font("button"))
 	result.add_theme_color_override("font_color", colour("ivory"))
-	result.add_theme_color_override("font_hover_color", colour("ink"))
+	result.add_theme_color_override("font_hover_color", colour("ivory"))
 	result.add_theme_color_override("font_pressed_color", colour("ink"))
 	result.add_theme_color_override("font_hover_pressed_color", colour("ink"))
 	result.add_theme_color_override("font_focus_color", colour("ivory"))
 	result.add_theme_color_override("font_disabled_color", colour("muted", Color("#A8B4C8")).darkened(0.25))
+	result.add_theme_color_override("icon_normal_color", colour("accent"))
+	result.add_theme_color_override("icon_hover_color", colour("accent"))
+	result.add_theme_color_override("icon_focus_color", colour("accent"))
+	result.add_theme_color_override("icon_pressed_color", colour("ink"))
+	result.add_theme_color_override("icon_hover_pressed_color", colour("ink"))
 	result.add_theme_stylebox_override("normal", button_style(colour("navy"), false))
-	result.add_theme_stylebox_override("hover", button_style(colour("accent"), true))
-	result.add_theme_stylebox_override("pressed", button_style(colour("accent").darkened(0.12), true))
+	result.add_theme_stylebox_override("hover", button_style(colour("surface_hover", Color("#26354B")), true))
+	result.add_theme_stylebox_override("pressed", button_style(colour("accent"), true))
+	result.add_theme_stylebox_override("hover_pressed", button_style(colour("accent").lightened(0.08), true))
 	result.add_theme_stylebox_override("focus", focus_style())
 	result.add_theme_stylebox_override("disabled", button_style(colour("navy").darkened(0.35), false))
+
+## The one gold action of a screen ("Try it", "Resume", "New expedition").
+static func make_primary(result: Button) -> Button:
+	result.add_theme_stylebox_override("normal", button_style(colour("accent"), false, colour("accent")))
+	result.add_theme_stylebox_override("hover", button_style(colour("accent").lightened(0.12), true))
+	result.add_theme_stylebox_override("pressed", button_style(colour("accent").darkened(0.1), true))
+	for key in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color", "font_hover_pressed_color", "icon_normal_color", "icon_hover_color", "icon_focus_color", "icon_pressed_color"]:
+		result.add_theme_color_override(key, colour("ink"))
+	result.set_meta("lla_primary", true)
 	return result
 
-static func button_style(fill: Color, highlighted: bool) -> StyleBoxFlat:
+## A kit icon on a button, sized with the text.
+static func set_button_icon(result: Button, icon_kind: String) -> void:
+	var texture := kit_icon(icon_kind)
+	if texture == null:
+		return
+	result.icon = texture
+	result.expand_icon = false
+	result.add_theme_constant_override("icon_max_width", 22)
+	result.add_theme_constant_override("h_separation", 10)
+
+static func button_style(fill: Color, highlighted: bool, edge: Color = Color.TRANSPARENT) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = fill
-	style.set_corner_radius_all(8)
+	style.set_corner_radius_all(4)
 	style.set_border_width_all(1)
-	style.border_color = colour("glass_edge")
+	style.border_color = colour("glass_edge") if edge == Color.TRANSPARENT else edge
 	style.content_margin_left = 18
 	style.content_margin_right = 18
-	style.content_margin_top = 6
-	style.content_margin_bottom = 6
+	style.content_margin_top = 4  # Saira's tall line box already gives the label air; keeps rows at 44 px
+	style.content_margin_bottom = 4
 	style.anti_aliasing = true
 	if highlighted:
-		style.set_border_width_all(2)
+		# AAA list selection: a gold bar on the leading edge, a soft gold hairline round the rest.
 		style.border_color = colour("accent")
+		if fill.a > 0.0 and fill.get_luminance() < 0.4:  # dark rows only; gold fills stay solid
+			style.border_width_left = 3
+			style.border_color = colour("accent")
+			style.shadow_color = Color(colour("accent"), 0.18)
+			style.shadow_size = 10
 	return style
 
 ## Marks a label with a type token and colour; `apply_type` sizes it later.
 static func focus_style() -> StyleBoxFlat:
 	var style := button_style(Color.TRANSPARENT, true)
 	style.draw_center = false
+	style.set_border_width_all(2)  # keyboard focus stays a clear 2 px ring
 	style.border_color = colour("accent")
 	style.expand_margin_left = 2
 	style.expand_margin_right = 2
@@ -213,7 +272,7 @@ static func apply_type(node: Node, viewport_height: float, scale: float, skip: A
 				control.add_theme_font_override("font", font(String(control.get_meta("lla_type"))))
 				control.add_theme_font_size_override("font_size", font_px(String(control.get_meta("lla_type")), viewport_height, scale))
 			elif control is Button or control is CheckButton:
-				control.add_theme_font_size_override("font_size", font_px("body", viewport_height, scale))
+				control.add_theme_font_size_override("font_size", font_px("button", viewport_height, scale))
 			else:
 				# Text sized by its own owner (the M1-48 journal cards): keep that size and scale it for large text.
 				if not control.has_meta("lla_base_font_size") and control.get_theme_font_size("font_size") > 0:

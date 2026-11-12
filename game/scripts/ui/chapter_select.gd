@@ -462,7 +462,7 @@ func _scale() -> void:
 	var compact := bool(settings.get("large_text", false)) or get_viewport_rect().size.x < 1000.0
 	if _chapter_cards != null:
 		_chapter_cards.columns = 2 if compact else 3
-	(find_child("Tagline", true, false) as Control).visible = not compact
+	(find_child("Tagline", true, false) as Control).visible = false  # Instrument Light: no brand copy inside menus
 	(find_child("ChapterRange", true, false) as Control).visible = not compact
 	(find_child("SelectionRule", true, false) as Control).visible = not compact
 	UiDesign.apply_type(self, get_viewport_rect().size.y, 1.5 if bool(settings.get("large_text", false)) else 1.0)

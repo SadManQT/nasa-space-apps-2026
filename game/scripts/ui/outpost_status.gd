@@ -32,6 +32,7 @@ func _ready() -> void:
 	_rows.add_theme_constant_override("separation", 6)
 	add_child(_rows)
 	_title = UiDesign.label("Station", "caption", "muted")
+	_title.visible = false  # Instrument Light: the icons name each row; no heading needed
 	_rows.add_child(_title)
 	for group in _rules.get("groups", []):
 		var panel := VBoxContainer.new()

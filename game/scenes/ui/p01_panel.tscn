@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/p01_panel.gd" id="1"]
-[ext_resource type="FontFile" path="res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf" id="2"]
-[ext_resource type="FontFile" path="res://addons/gohud/assets/fonts/roboto/Roboto.ttf" id="3"]
+[ext_resource type="FontFile" path="res://assets/fonts/ui/SairaSemiCondensed-SemiBold.ttf" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/ui/Inter.ttf" id="3"]
 [ext_resource type="Texture2D" path="res://assets/ui/branding/aurora_mark.svg" id="4"]
 
 [ext_resource type="Texture2D" path="res://assets/ui/proposal/probe_setup.png" id="5"]
@@ -117,6 +117,7 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="Brand" type="HBoxContainer" parent="Frame/Stack"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
@@ -224,7 +225,7 @@ theme_override_constants/separation = 16
 
 [node name="ProbeArtwork" type="TextureRect" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 228)
+custom_minimum_size = Vector2(0, 132)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("5")

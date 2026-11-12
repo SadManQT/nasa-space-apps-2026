@@ -4,6 +4,7 @@
  "icon_px": 24,
  "min_interaction_px": 44,
  "icons": {
+  "exit": "Exit",
   "power": "Power",
   "life": "Air",
   "water": "Water",

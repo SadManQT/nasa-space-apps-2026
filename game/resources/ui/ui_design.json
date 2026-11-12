@@ -1,36 +1,40 @@
 {
  "schema_version": 1,
- "source": "Approved user ui_proposal sheets01-15, 11 Nov 2026; cinematic navy/gold presentation with doc25 clarity and accessibility.",
+ "source": "Instrument Light (12 Nov 2026, production/plan/ui_direction_20261112.md) over the approved 11 Nov proposal sheets: quiet navy glass, sun-gold only for the one action now, icons first.",
  "reference_height": 1080,
  "type": {
   "title": 40,
-  "heading": 28,
+  "heading": 32,
   "body": 20,
   "caption": 18,
   "minimum": 18,
   "large_text_scale": 1.5,
-  "max_line_characters": 60
+  "max_line_characters": 60,
+  "subhead": 24,
+  "button": 22
  },
  "colour": {
   "ink": "#0A101C",
-  "navy": "#202C40",
+  "navy": "#121C2A",
   "ivory": "#F2EFE7",
   "muted": "#B8C4D6",
   "accent": "#F5C451",
   "caution": "#F2A33A",
   "danger": "#E56B6F",
   "good": "#68C78B",
-  "glass": "#152137F5",
-  "glass_edge": "#4A596F",
+  "glass": "#0A111CE8",
+  "glass_edge": "#2A3747",
   "scrim": "#080D17AD",
   "kai": "#F26B21",
   "amara": "#20B8C9",
   "mei": "#4CAF50",
   "rafi": "#8E5CC2",
-  "ferreira": "#B8A06A"
+  "ferreira": "#B8A06A",
+  "surface_hover": "#1A2738",
+  "data": "#6FD3E0"
  },
  "panel": {
-  "radius": 8,
+  "radius": 6,
   "edge_width": 1,
   "padding": 20,
   "grid": 8,
@@ -62,8 +66,18 @@
   "debug_overlay": "F10"
  },
  "font": {
-  "body": "res://addons/gohud/assets/fonts/roboto/Roboto.ttf",
-  "heading": "res://assets/props/narrative/fonts/BarlowSemiCondensed-SemiBold.ttf",
+  "body": "res://assets/fonts/ui/Inter.ttf",
+  "heading": "res://assets/fonts/ui/SairaSemiCondensed-SemiBold.ttf",
+  "subhead": "res://assets/fonts/ui/SairaSemiCondensed-Medium.ttf",
+  "button": "res://assets/fonts/ui/SairaSemiCondensed-Medium.ttf",
   "display": "res://addons/gohud/assets/fonts/cinzel/Cinzel.ttf"
+ },
+ "tracking": {
+  "title": 2,
+  "heading": 1,
+  "subhead": 1,
+  "button": 1,
+  "caption": 0,
+  "body": 0
  }
 }

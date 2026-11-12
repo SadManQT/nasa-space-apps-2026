@@ -115,6 +115,7 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="Mark" type="TextureRect" parent="OuterMargin/PageColumn/StationHeader"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3")
@@ -123,6 +124,7 @@ stretch_mode = 5
 custom_minimum_size = Vector2(40, 40)
 
 [node name="BrandLabel" type="Label" parent="OuterMargin/PageColumn/StationHeader"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 text = "LAST LIGHT ACADEMY"
@@ -132,6 +134,7 @@ theme_override_font_sizes/font_size = 20
 vertical_alignment = 1
 
 [node name="KickerLabel" type="Label" parent="OuterMargin/PageColumn/StationHeader"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 text = "Aurora Station   |   Lunar South Pole   |   2046 – 2047"

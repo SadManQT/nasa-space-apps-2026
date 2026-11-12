@@ -107,7 +107,7 @@ func bind_campaign(campaign: Node) -> void:
 			"lineage": String(specimen.get("lineage_id", "")).trim_prefix("LINEAGE-").replace("-", " x "),
 			"visual_record": specimen.duplicate(true), "stage": stage.replace("_", " ").capitalize(), "mature": stage == "mature_dry" and not bool(specimen.get("harvested", false)),
 			"is_archived_founder": stage in ["archived_petal", "archived_nameplate"], "alive": specimen.get("alive", false),
-			"stress_cause": "; ".join(causes), "conditions": "Dated plant record - Instrument temperature/moisture readings are not recorded here.",
+			"stress_cause": "; ".join(causes), "conditions": "-",  # campaign records carry no instrument readings; the card shows none
 			"summary": "Planted: %s - Last care: %s" % [specimen.get("planted_at", ""), specimen.get("last_care_at", "Not yet recorded")]})
 	show_tab(active_tab)
 
@@ -205,18 +205,19 @@ func _render_chambers_tab() -> void:
 		head.add_child(heading)
 		box.add_child(UiDesign.label(String(p.get("stage", "")), "heading"))
 
-		box.add_child(UiDesign.label("Lineage: " + String(p.get("lineage", "")), "body"))
+		box.add_child(UiKit.icon_label("leaf", String(p.get("lineage", "")), "caption", "muted", "mei"))
 		var conditions := String(p.get("conditions", ""))
 		if conditions.is_empty():
-			conditions = "Conditions: %.1f C - Moisture %d%% - Date: %s" % [float(p.get("temperature_c", 22.0)), int(p.get("moisture_pct", 65)), date_label]
-		box.add_child(UiDesign.label(conditions, "caption", "muted"))
+			conditions = "%.1f °C · moisture %d%%" % [float(p.get("temperature_c", 22.0)), int(p.get("moisture_pct", 65))]
+		if conditions != "-":
+			box.add_child(UiDesign.label(conditions, "caption", "muted"))
 
 		if not stress.is_empty():
 			var stress_lbl := UiDesign.label("⚠ STRESS CAUSE: " + stress, "body", "caution")
 			stress_lbl.name = "Stress_" + pid
 			box.add_child(stress_lbl)
 		else:
-			var nominal_lbl := UiDesign.label("● Nominal turgor and leaf posture (no stress).", "caption", "good")
+			var nominal_lbl := UiDesign.label("● Healthy", "caption", "good")
 			nominal_lbl.name = "Stress_" + pid
 			box.add_child(nominal_lbl)
 

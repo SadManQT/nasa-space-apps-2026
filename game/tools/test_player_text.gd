@@ -287,7 +287,7 @@ func _check_goal_bounds(hud: Control, state: String) -> void:
 	var centre := Rect2(Vector2(1280, 720) / 3.0, Vector2(1280, 720) / 3.0)
 	_check(hud.get_viewport_rect().encloses(card.get_global_rect()) and not card.get_global_rect().intersects(centre), state + " goal card fits and centre stays clear")
 	for label in [hud._title, hud._why, hud._chapter_line]:
-		_check(card.get_global_rect().encloses(label.get_global_rect()), state + " goal text stays inside card")
+		_check(not label.is_visible_in_tree() or card.get_global_rect().encloses(label.get_global_rect()), state + " goal text stays inside card")  # 150 % text hides the why line
 		_check(label.get_visible_line_count() == label.get_line_count(), state + " goal text is not truncated")
 	var key: String = hud.runtime.route.current_scene_id().substr(3, 4) + ("_150" if hud.panels.text_scale() > 1.0 else "_normal")
 	var worst: Dictionary = _goal_bounds.get(key, {"jobs": 0, "height": 0})

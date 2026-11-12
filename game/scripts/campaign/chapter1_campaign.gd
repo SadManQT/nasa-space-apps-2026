@@ -822,7 +822,7 @@ func set_ui_paused(value: bool) -> void:
 		_crew.set_paused(value or is_cutscene_active())
 	if audio != null:
 		audio.set_paused(value)
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_sync_mouse_capture()
 
 func retry_checkpoint() -> Dictionary:
 	_chapter2_pending = {}
@@ -1129,19 +1129,31 @@ func _fail_startup(reason: String) -> void:
 	back.pressed.connect(func() -> void: exit_requested.emit())
 	page.add_child(back)
 	back.grab_focus()
+	_force_cursor = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and not event.pressed:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+## Third-person controls as in most current games: during free movement the
+## cursor is hidden and the mouse always turns the camera; any menu, panel,
+## film or loading screen shows the cursor again, and closing it hides it.
+var _force_cursor := false
+
+func _process(_delta: float) -> void:
+	_sync_mouse_capture()
+
+func _sync_mouse_capture() -> void:
+	if DisplayServer.get_name() == "headless" or not is_inside_tree():
+		return
+	var free_play := not loading and not _ui_paused and not _force_cursor and _player != null and not is_cutscene_active() and get_window().has_focus()
+	var mode := Input.MOUSE_MODE_CAPTURED if free_play else Input.MOUSE_MODE_VISIBLE
+	if Input.mouse_mode != mode:
+		Input.mouse_mode = mode
 
 func _unhandled_input(event: InputEvent) -> void:
 	if loading or _ui_paused or _player == null:
 		return
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	elif event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		_player.follow_camera.look(event.screen_relative * _player.follow_camera.mouse_sensitivity)
+		_player.follow_camera.recenter_delay = INF  # mouse players aim the camera themselves; only the stick recentres
 		if hud != null and hud.has_method("offer_first_time"):
 			hud.offer_first_time("look")
 	elif event.is_action_pressed("interact") and not event.is_echo():
@@ -1229,7 +1241,7 @@ func _place_crew() -> void:
 		if game_settings != null:
 			_player.follow_camera.camera.fov = float(game_settings.display.get("fov", 75.0))
 	_crew.set_paused(_ui_paused)
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_sync_mouse_capture()
 	_setup_garage_dock()
 	_sync_world_boundaries()
 	LoadTrace.end("campaign_place_crew", stamp)
@@ -1493,7 +1505,7 @@ func _set_cinematic(value: bool) -> void:
 	audio.set_cinematic(value)
 	if _crew != null:
 		_crew.set_paused(value or _ui_paused)
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_sync_mouse_capture()
 
 
 func completed_chapters() -> Array:

@@ -13,6 +13,7 @@
   "\\b(commit|commits|committed|committing|stage|staged|staging|acknowledge|acknowledged|acknowledgement|acknowledgment|role constraints?|operations?)\\b"
  ],
  "words": {
+  "read and acknowledge": "read",
   "shelter, s6": "shelter, shielding level 6",
   "l2": "2",
   "e3": "3",

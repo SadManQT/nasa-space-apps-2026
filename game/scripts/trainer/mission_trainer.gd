@@ -76,7 +76,7 @@ func _ready() -> void:
 	_back_button.pressed.connect(func() -> void: exit_requested.emit() if _page == "catalog" else show_catalog())
 	for label_node in shell.find_children("*", "Label", true, false):
 		var label := label_node as Label
-		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), String(label.get_meta("lla_colour", "ink")))
+		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), String(label.get_meta("lla_colour", "ivory")))
 	(shell.find_child("StartPowerPractice", true, false) as Button).pressed.connect(func(): select_scenario("P-02"))
 	(shell.find_child("OpenMoonTrainer", true, false) as Button).pressed.connect(_open_moon_trainer)
 	(shell.find_child("CatalogExit", true, false) as Button).pressed.connect(func(): exit_requested.emit())

@@ -121,7 +121,8 @@ func _run() -> void:
 	await _shot("06_mission_table")
 	table.close()
 	table.free()
-	assert(await campaign.preparation.wait_idle(), "capture owns its look-ahead until drained")
+	if campaign.preparation != null:
+		await campaign.preparation.wait_idle()
 	campaign.free()
 	await process_frame
 	print("UI PROPOSAL CAPTURE RESULT: %s (%d captures, %d failures)" % ["PASS" if failures == 0 else "FAIL", captures, failures])

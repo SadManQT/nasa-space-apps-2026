@@ -184,9 +184,11 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="BrandRule" type="VSeparator" parent="SafeArea/Page/Header"]
+visible = false
 layout_mode = 2
 
 [node name="Academy" type="Label" parent="SafeArea/Page/Header"]
+visible = false
 layout_mode = 2
 text = "LAST LIGHT\nACADEMY"
 metadata/lla_type = "heading"

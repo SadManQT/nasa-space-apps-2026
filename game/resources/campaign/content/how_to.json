@@ -81,12 +81,12 @@
       "title": "How to look around",
       "purpose": "Turn the camera to inspect room signs, crew members and wall displays.",
       "steps": [
-        "Hold the Right Mouse Button and move the mouse, or use the Right Stick.",
+        "Move the mouse, or use the Right Stick.",
         "Center the camera on a crew member or station to read its label.",
         "Turn on Reduced Motion in Settings if you prefer instant transitions."
       ],
       "clip": "",
-      "nudge": "Hold the Right Mouse Button to look around the room.",
+      "nudge": "Move the mouse to look around the room.",
       "relationship": "Looking around helps you spot the gold objective marker, wall status boards and crew stations before you commit a plan.",
       "example": "Different example - hypothetical: panning across a practice dome reveals both the air tank gauge on the left wall and the chamber lamp on the right.",
       "chapter": 1,

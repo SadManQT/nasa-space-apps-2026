@@ -76,6 +76,7 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="Mark" type="TextureRect" parent="SafeArea/Layout/ConsolePanel/Page/Header"]
+visible = false
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 mouse_filter = 2
@@ -87,6 +88,7 @@ stretch_mode = 5
 layout_mode = 2
 
 [node name="Brand" type="Label" parent="SafeArea/Layout/ConsolePanel/Page/Header"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "LAST LIGHT ACADEMY"

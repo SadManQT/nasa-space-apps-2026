@@ -632,11 +632,11 @@ func _layout() -> void:
 		return
 	var view := get_viewport_rect().size
 	var margin := _margin()
-	var goal_width := minf(float(UiDesign.px(600, view.y)), view.x / 3.0 - margin - 8.0)
+	var goal_width := minf(float(UiDesign.px(480, view.y)), view.x / 3.0 - margin - 8.0)  # a compact goal chip (Instrument Light)
 	_goal_card.position = Vector2(margin, margin)
 	_goal_card.custom_minimum_size = Vector2(goal_width, 0)
 	_goal_card.size = Vector2(goal_width, 0)
-	var column_width := float(UiDesign.px(540, view.y))
+	var column_width := float(UiDesign.px(440, view.y))
 	_column.set_anchors_preset(Control.PRESET_TOP_RIGHT)
 	_column.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	_column.grow_vertical = Control.GROW_DIRECTION_END
@@ -771,7 +771,7 @@ func _apply_goal() -> void:
 	var changed := _title.text != String(_goal_info.get("goal", ""))
 	_title.text = String(_goal_info.get("goal", ""))
 	_why.text = String(_goal_info.get("why", ""))
-	_why.visible = not _why.text.is_empty()
+	_apply_goal_detail()
 	_chapter_line.text = _chapter_text()
 	var complete := bool(_goal_info.get("complete", false))
 	var ready := bool(_goal_info.get("ready", false))
@@ -786,12 +786,25 @@ func _apply_goal() -> void:
 		offer_first_time(lesson_id)   # doc 25 §7: the card shows the first time its mechanic is needed
 	_wn_goal.text = _title.text
 	_wn_why.text = _why.text
-	_wn_why.visible = _why.visible
+	_wn_why.visible = not _wn_why.text.is_empty()  # What now always carries the why
 	_wn_hint.text = String(_goal_info.get("hint", ""))
 	_wn_hint.get_parent().hide()
 	_update_where()
 	if changed and not _title.text.is_empty():
 		_pulse_goal()
+
+## At 150 % text the goal chip keeps only the chapter line and the goal, so it
+## stays clear of the screen centre; the why and the H hint live in What now.
+var _large_text := false
+
+func _apply_goal_detail() -> void:
+	if _why == null:
+		return
+	_why.visible = not _why.text.is_empty() and not _large_text
+	var help_key := _goal_card.find_child("WhatNowKey", true, false) as Label
+	if help_key != null:
+		help_key.visible = not _large_text
+	_chapter_line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
 func _chapter_text() -> String:
 	var chapter_id := String(runtime.query().get("chapter_id", "CH01"))
@@ -1463,6 +1476,8 @@ func apply_accessibility() -> void:
 	_caption_line.visible = captions
 	_caption_count.visible = captions
 	var scale := 1.5 if bool(settings.get("large_text", false)) else 1.0
+	_large_text = scale > 1.0
+	_apply_goal_detail()
 	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, chapter2_panel, chapter3_panel, chapter4_panel, chapter6_panel, chapter8_panel, p01_panel, comms_panel])
 	if comms_panel != null:
 		comms_panel.set_text_scale(bool(settings.get("large_text", false)))
@@ -1609,11 +1624,11 @@ func explain_dead_end_passage(destination: String) -> void:
 func _announce_next() -> void:
 	if _status == null or _title.text.is_empty() or not is_instance_valid(_marker_node) or not _marker_node.is_inside_tree():
 		return
-	var next := "Next: %s · %s, follow the ◇ marker" % [_title.text, UiDesign.distance_text(_distance_to(_marker_node))]
+	var next := "Next ▸ %s · %s" % [_title.text, UiDesign.distance_text(_distance_to(_marker_node))]
 	# A result still pending (shown, or waiting behind an open panel) keeps its text;
 	# the next step is added beneath it, never written over it.
 	if _toast_timer > 0.0:
-		if not _status.text.contains("Next: "):
+		if not _status.text.contains("Next ▸ "):
 			_status.text += "\n" + next
 			_toast_timer = maxf(_toast_timer, 6.0)
 	else:

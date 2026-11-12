@@ -166,7 +166,7 @@ func _check_targets_and_theme() -> void:
 	var normal := theme.get_stylebox("normal", "Button") as StyleBoxFlat
 	_check(normal != null and normal.bg_color.is_equal_approx(UiDesign.colour("navy")), "theme Button normal is the navy token")
 	var hover := theme.get_stylebox("hover", "Button") as StyleBoxFlat
-	_check(hover != null and hover.bg_color.is_equal_approx(UiDesign.colour("accent")), "theme Button hover is the accent token")
+	_check(hover != null and hover.bg_color.is_equal_approx(UiDesign.colour("surface_hover")) and hover.border_color.is_equal_approx(UiDesign.colour("accent")), "theme Button hover lifts the surface with an accent edge (Instrument Light)")
 	_check(theme.get_color("font_color", "Label").is_equal_approx(UiDesign.colour("ivory")), "theme Label colour is ivory")
 	_check(theme.default_font_size == int(UiDesign.tokens().type.body), "theme default font size is the body token")
 	for kind in ["PanelContainer/panel", "ProgressBar/fill", "HSlider/grabber_area", "LineEdit/normal", "HSeparator/separator"]:
