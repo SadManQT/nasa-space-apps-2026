@@ -325,7 +325,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-124">M1-124</a> M1-105 handoff: restore lunar gravity indoors for Ramim acceptance <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:33%"></i></div>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:29%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
+<li><a class="id" href="#M1-127">M1-127</a> Fix playable probe calibration and escape from door passages <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/codex on 2026-11-13</div></li>
+</ul></details>
 <details open><summary>Blocked (4)</summary><ul>
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">12 Nov measured M4/macOS27, 1080p/20s, four real campaign rooms: Metal room p95 18.122-20.964ms misses16.667ms60fps; Garden entry longestframe3112.104ms. M4 OpenGL p95 fits33.333m…</div></li>
 <li><a class="id" href="#M3-93">M3-93</a> 12 Nov release: the working full game (Chapters 1-8) as Windows and macOS builds, with the evidence package <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Published verified judging pre-release v0.1.0-judging.20261112 from817a6eea with Windows/macOS ZIPs, checksums, manifests and evidence; CI43237871699 both11/0, publisher4324757710…</div></li>
@@ -9229,6 +9232,42 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "reserved_for": "sadman",
    "effort": 2,
    "batch_phase": "unplanned"
+  },
+  {
+   "id": "M1-127",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Fix playable probe calibration and escape from door passages",
+   "status": "in_progress",
+   "owner": "Atik/codex",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/scripts/ui/probe_calibration_activity.gd",
+    "game/scripts/world/campaign_room.gd",
+    "game/tools/test_opening_blockers.gd",
+    "game/tools/test_opening_blockers.gd.uid",
+    "production/qa/evidence/Atik_opening_blockers_20261113.md",
+    "production/qa/evidence/Atik_opening_blockers_20261113_logs.zip"
+   ],
+   "refs": [],
+   "note": "Filed by Atik/codex on 2026-11-13.",
+   "evidence": "",
+   "updated": "2026-11-13",
+   "prompt": "13 November user explicitly assigns Atik the two screenshot blockers. Connect the existing ProbeCalibrationJob to actual player interactions without bypassing pickup/place/read, preserve saves/cancel and P01 dry/wet/recheck. Reproduce door passage movement lock, fix its cause and test the real player collision and UI state. Preserve local settings/imports and other owner locks. Acceptance: actual campaign input completes probe chain; character can back out after passage guidance; focused regressions and game/tools/run_tests.sh results recorded separately from native/full gate.",
+   "reserved_for": "atik",
+   "effort": 2,
+   "edit_files": [
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/scripts/ui/probe_calibration_activity.gd",
+    "game/scripts/world/campaign_room.gd",
+    "game/tools/test_opening_blockers.gd",
+    "game/tools/test_opening_blockers.gd.uid",
+    "production/qa/evidence/Atik_opening_blockers_20261113.md",
+    "production/qa/evidence/Atik_opening_blockers_20261113_logs.zip"
+   ],
+   "batch_phase": "implementation"
   }
  ],
  "requirements": [
@@ -9944,7 +9983,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "M1-23",
     "M1-92",
     "M3-93",
-    "M3-73"
+    "M3-73",
+    "M1-127"
    ],
    "tanvir": [
     "M1-122",
@@ -10005,7 +10045,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
   ],
   "instructions": "production/plan/CURRENT_BATCH.md"
  },
- "updated": "2026-11-12"
+ "updated": "2026-11-13"
 }</script>
 <script>
 const data = JSON.parse(document.getElementById("data").textContent);

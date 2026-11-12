@@ -87,3 +87,7 @@ User stopped Ramim further implementation because of usage limits and explicitly
 ## 12 November Atik user override: export, performance and judging release
 
 Atik explicitly requested the remaining Atik work in the latest task summary and authorized all necessary commands and publishing without another approval. Resume only `M1-20`, `M1-23`, `M1-92`, `M3-93` and `M3-73`; these exact IDs move to Atik’s active row. M1-53 and M1-116 are already completed with owner evidence and are not reopened. Preserve all other assignments and locks. Prepare current Windows/macOS candidates and performance evidence; retain human-QA dependencies and label candidates truthfully. Publishing is authorized; final qualification still requires the recorded acceptance evidence. No other tasks are assigned by this override.
+
+## 13 November: Atik opening blockers
+
+The user explicitly assigns Atik M1-127: repair the two reported playable blockers (door passage movement and the unwired probe retrieve/place/read interaction). This exact task is added to Atik’s active IDs. Preserve existing owner reservations, all local saves/settings/imports and the established calibration/campaign contracts. No other work is reassigned.

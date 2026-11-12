@@ -8470,6 +8470,41 @@
    "prompt": "Simulated-player review (production/qa/playtests/simulated_players_2026-11-12.md #7, #8): stage Alo's bloom when the CH01-S12 shutter opens; announce battery capacity changes (20 -> 32 -> 26) with their cause; hide base air while in a suit outside.",
    "reserved_for": "sadman",
    "effort": 2
+  },
+  {
+   "id": "M1-127",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Fix playable probe calibration and escape from door passages",
+   "status": "in_progress",
+   "owner": "Atik/codex",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/scripts/ui/probe_calibration_activity.gd",
+    "game/scripts/world/campaign_room.gd",
+    "game/tools/test_opening_blockers.gd",
+    "game/tools/test_opening_blockers.gd.uid",
+    "production/qa/evidence/Atik_opening_blockers_20261113.md",
+    "production/qa/evidence/Atik_opening_blockers_20261113_logs.zip"
+   ],
+   "refs": [],
+   "note": "Filed by Atik/codex on 2026-11-13.",
+   "evidence": "",
+   "updated": "2026-11-13",
+   "prompt": "13 November user explicitly assigns Atik the two screenshot blockers. Connect the existing ProbeCalibrationJob to actual player interactions without bypassing pickup/place/read, preserve saves/cancel and P01 dry/wet/recheck. Reproduce door passage movement lock, fix its cause and test the real player collision and UI state. Preserve local settings/imports and other owner locks. Acceptance: actual campaign input completes probe chain; character can back out after passage guidance; focused regressions and game/tools/run_tests.sh results recorded separately from native/full gate.",
+   "reserved_for": "atik",
+   "effort": 2,
+   "edit_files": [
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/scripts/ui/probe_calibration_activity.gd",
+    "game/scripts/world/campaign_room.gd",
+    "game/tools/test_opening_blockers.gd",
+    "game/tools/test_opening_blockers.gd.uid",
+    "production/qa/evidence/Atik_opening_blockers_20261113.md",
+    "production/qa/evidence/Atik_opening_blockers_20261113_logs.zip"
+   ]
   }
  ],
  "requirements": [
@@ -9185,7 +9220,8 @@
     "M1-23",
     "M1-92",
     "M3-93",
-    "M3-73"
+    "M3-73",
+    "M1-127"
    ],
    "tanvir": [
     "M1-122",
