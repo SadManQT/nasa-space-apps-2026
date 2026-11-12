@@ -8522,7 +8522,9 @@
     "production/qa/evidence/Shanto_game_fixes_20261113.md",
     "game/scripts/trainer/moon_trainer.gd",
     "game/tools/test_moon_trainer.gd",
-    "production/qa/evidence/Shanto_game_fixes_20261113_logs.zip"
+    "production/qa/evidence/Shanto_game_fixes_20261113_logs.zip",
+    "game/scripts/missions/chapter1_route.gd",
+    "game/tools/test_worker_b_world_missions.gd"
    ],
    "refs": [],
    "note": "Filed by Shanto/codex on 2026-11-13.",
@@ -8545,7 +8547,9 @@
     "production/qa/evidence/Shanto_game_fixes_20261113.md",
     "game/scripts/trainer/moon_trainer.gd",
     "game/tools/test_moon_trainer.gd",
-    "production/qa/evidence/Shanto_game_fixes_20261113_logs.zip"
+    "production/qa/evidence/Shanto_game_fixes_20261113_logs.zip",
+    "game/scripts/missions/chapter1_route.gd",
+    "game/tools/test_worker_b_world_missions.gd"
    ]
   }
  ],
