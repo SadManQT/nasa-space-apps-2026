@@ -39,6 +39,7 @@ var chapter3_panel: Chapter3PuzzlePanel
 var chapter6_panel: Chapter6PuzzlePanel
 var chapter8_panel: Chapter8PuzzlePanel
 var p01_panel: P01Panel
+var probe_activity: Node3D
 var comms_service: RefCounted
 var comms_panel: Control
 var outpost: OutpostStatus
@@ -283,6 +284,17 @@ func setup(value: Chapter1Campaign) -> void:
 	runtime.chapter2_panel_requested.connect(func(view): open_chapter2_panel(String(view.get("target_id", ""))))
 	runtime.p01_panel_requested.connect(func(view):
 		if mission_table.is_open() or p01_panel.is_open() or not panels.active_panel().is_empty() or panels.hint_player.is_open():
+			return
+		if String(view.target_id) == "calibrate_probe" and view.has("probe_job") and not bool(view.probe_job.completed):
+			if is_instance_valid(probe_activity):
+				return
+			probe_activity = preload("res://scripts/ui/probe_calibration_activity.gd").new()
+			runtime.add_child(probe_activity)
+			probe_activity.setup(runtime)
+			probe_activity.closed.connect(func(completed: bool) -> void:
+				if completed:
+					p01_panel.open(runtime, "calibrate_probe")
+					p01_panel.teach_first_use())
 			return
 		if p01_panel.open(runtime, String(view.target_id)):
 			p01_panel.teach_first_use())

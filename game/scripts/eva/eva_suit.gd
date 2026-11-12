@@ -270,9 +270,11 @@ func estimate_route(distance_m: float, avg_slope_deg: float = 4.0, shadow_fracti
 ## Updates suit budget, scanner pulse and footing for `delta` seconds.
 ## Walking inside the station (`indoor == true`) costs nothing (doc 25 §4.2).
 func step(delta: float, moving_speed: float = 0.0, slope_deg: float = 0.0, lean_axis: float = 0.0, surface_tags: Array = [], payload_inventory: RefCounted = null, payload_id: String = "") -> Dictionary:
-	current_slope_deg = maxf(0.0, slope_deg)
+	# Station thresholds can report a steep capsule/floor-edge normal. The
+	# lunar no-go rule must not strand a player on an indoor doorway lip.
+	current_slope_deg = 0.0 if indoor else maxf(0.0, slope_deg)
 	current_band = classify_slope(current_slope_deg)
-	current_surface_tags = surface_tags.duplicate()
+	current_surface_tags = [] if indoor else surface_tags.duplicate()
 	in_cold_shadow = current_surface_tags.has("cold_shadow")
 	lean_input = clampf(lean_axis, -1.0, 1.0)
 
