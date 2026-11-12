@@ -24,7 +24,10 @@ func _run() -> void:
 	await _near(campaign, id)
 	var before: Dictionary = campaign.director.snapshot()
 	var held: Dictionary = campaign.perform_target(id, payload)
-	_check(bool(held.get("class_team_plan_required", false)) and String(held.get("reason", "")).contains("unavailable"), "missing Class UI fails clearly at the actual physical target")
+	var panel: ClassSignoffPanel = campaign.hud.get("class_signoff") if campaign.hud != null else null
+	_check(bool(held.get("class_team_plan_required", false)) and panel != null and panel.visible and panel.find_child("Sign_kai", true, false) != null, "the HUD opens the Class team sign-off at the actual physical target")
+	if panel != null:
+		panel.close()
 	_check(campaign.director.snapshot() == before, "an unsigned physical choice changes no live state")
 	var requests: Array = []
 	campaign.class_team_plan_requested.connect(func(view): requests.append(view))
@@ -51,7 +54,14 @@ func _run() -> void:
 	await _near(campaign, id)
 	campaign.cancel_class_team_plan()
 	_check(campaign.class_team_plan_view(id, payload).signed_roles.is_empty(), "cancel invalidates every signature")
-	await _sign_all(campaign, id, payload)
+	if panel != null:
+		panel.open_for(campaign, campaign.class_team_plan_view(id, payload))
+		for role_id in ["kai", "amara", "mei", "rafi"]:
+			panel.sign(role_id)
+		_check(panel.signed_roles().size() == 4 and (panel.find_child("SignoffStatus", true, false) as Label).text.begins_with("All signed"), "every role signs through the sign-off panel")
+		panel.close()
+	else:
+		await _sign_all(campaign, id, payload)
 	var committed: Dictionary = campaign.perform_target(id, payload)
 	_check(bool(committed.get("accepted", false)) and campaign.route.snapshot().p04.mapping.get("date", "") == "2034-04", "four current signatures commit the chosen token through the real route")
 	_check(campaign.director.snapshot().receipts.size() == before.receipts.size() + 1, "the signed physical action charges exactly one receipt")

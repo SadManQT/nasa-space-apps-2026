@@ -169,6 +169,8 @@ func setup(value: Chapter1Campaign) -> void:
 	add_child(panels)
 	panels.set_command_sink(Callable(runtime, "handle_ui_command"))
 	panels.panel_opened.connect(_on_panel_opened)
+	if runtime.has_signal("class_team_plan_requested"):
+		runtime.class_team_plan_requested.connect(_open_class_signoff)  # M1-37: Class sign-off for every later puzzle
 	panels.panel_closed.connect(_on_panel_closed)
 	panels.manual_requested.connect(func() -> void: open_family("manual"))
 	panels.ending_retry_requested.connect(func() -> void:
@@ -1871,3 +1873,13 @@ static func build_photo_card(snapshot: Dictionary, heading: String, before_date:
 	box.add_child(row)
 	card.add_child(box)
 	return card
+
+## M1-37: the Class team sign-off over the held puzzle lock-in.
+var class_signoff: ClassSignoffPanel
+
+func _open_class_signoff(view: Dictionary) -> void:
+	if class_signoff == null or not is_instance_valid(class_signoff):
+		class_signoff = ClassSignoffPanel.new()
+		class_signoff.name = "ClassSignoffPanel"
+		add_child(class_signoff)
+	class_signoff.open_for(runtime, view)
