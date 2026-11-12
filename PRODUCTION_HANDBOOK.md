@@ -2,7 +2,7 @@
 
 **Read this first.** This is the single source of truth for making the game's assets and cutscenes: what is canon, what has been decided, how the pipeline works, what exists, and what is next. It is written for every team member and for AI agents (Claude Code, Codex, Antigravity). If you change a decision, change it here in the same commit.
 
-Last updated: 11 November 2026.
+Last updated: 12 November 2026.
 
 ---
 
@@ -321,6 +321,10 @@ Rules from the cinematic guide and the final story: cutscenes are short, embedde
 Optional opening (from the gameplay entry flow): mustard fields to the Moon chamber, 20–30 s, with no claim that Alo existed before the story.
 
 ## 10. Status (latest first)
+
+**12 Nov 2026 - Asif provider source saved; acceptance blocked (M1-103/M1-105/M1-37):** frozen mandatory runner on `cd81ed84`: **130/136**, exit1, six exact failures retained. Latest upstream `fe5a45cc` integrated in `0c4c1c4b`: Class **3/3**, Chapter 2 **4/4**, native actual nearby USE/preview/confirm **75/0**, normal exit0, zero ERROR diagnostics, two inspected captures. Caption fix now passes **82/0**, **1/1**, superseding the earlier22 failures. Current performance remains **548 checks /4 failures**, **0/1**, title107.975/new campaign68.745/garden57.193/full cast50.840 ms versus unchanged50 ms. No green current full gate or new Done state is claimed. M1-37 later-puzzle private/signing UI needs HUD/P01 handoff; the user retains Ramim M4-22 reservations. Human four-person QA remains deferred. Original WIP **27/27 unchanged**; seven prior Done tasks and upgrade dependencies retained. Source and full/latest raw logs: [M1-103](production/qa/evidence/M1-103.md), [M1-105](production/qa/evidence/M1-105.md).
+
+**11 Nov 2026 - Asif provider continuation (M1-103/M1-105, confirmed session handoff):** the stopped provider session's saved source is integrated in `asif-finish`, preserving upstream and the original worktrees. Class non-P02 physical commits now require all four roles to sign the same payload/scene/revision/full forecast; missing UI fails clearly, and retry/cancel/Continue cannot retain old signatures. Chapter 2 preview also rechecks physical selection and opening scene/revision, and every rejected preview forgets the earlier payload. Mandatory focused Class suites **3/3** (61/0 physical guard, 60/0 existing UI, 43/0 session bridge); Chapter 2 **4/4**, then the additional preview-rejection check **51/0**, **1/1**. Native Forward+ actual panel/confirm path **75/0**, normal exit0, zero ERROR diagnostics, two inspected PNGs. Current full evidence is pending; this does not complete the later-puzzle Class UI or deferred four-person QA. See [M1-103](production/qa/evidence/M1-103.md) and [M1-105](production/qa/evidence/M1-105.md).
 
 **11 Nov 2026 - M1-116 original Arc bounded exit accepted (Tanvir, explicit user reassignment):** unchanged actual campaign fixture passes45/0 twice on this Windows11/Intel Arc130V using Forward+ Vulkan, normal exits28.208s/20.997s; Compatibility45/0 exits16.829s. Required focused runner39/0,1/1 clean; actual launcher/engine lifecycle and source/save guards verified. No Game runtime patch or timeout cause claimed. The separate initial editor0/runner1 dummy-renderer error remains failed evidence; cold/full/manual qualification limits remain. See [M1-116 source-pinned evidence](production/qa/evidence/M1-116_arc_20261111/README.md).
 
