@@ -4,11 +4,37 @@
 GODOT=/path/to/Godot python3 production/qa/build_release.py --platform macos --smoke
 python3 production/qa/build_release.py --platform windows --install-tools --smoke
 """
-import argparse, hashlib, os, pathlib, platform, re, shutil, subprocess, tempfile, urllib.request, zipfile
+import argparse, hashlib, json, os, pathlib, platform, re, shutil, subprocess, tempfile, urllib.request, zipfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 VERSION = '4.7.2'
 BASE = f'https://github.com/godotengine/godot-builds/releases/download/{VERSION}-stable/'
+
+def sha256_file(path):
+    digest = hashlib.sha256()
+    with pathlib.Path(path).open('rb') as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+def validate_package(package, kind):
+    with zipfile.ZipFile(package) as bundle:
+        if bundle.testzip() is not None:
+            raise RuntimeError('Package CRC verification failed')
+        names = bundle.namelist()
+        for name in names:
+            path = pathlib.PurePosixPath(name.replace('\\', '/'))
+            if path.is_absolute() or '..' in path.parts or (path.parts and ':' in path.parts[0]):
+                raise RuntimeError('Unsafe package path: ' + name)
+        if not {'LICENSE', 'CREDITS.md', 'README.txt'}.issubset(names):
+            raise RuntimeError('Package is missing credits, license or launch instructions')
+        if kind == 'windows':
+            runtime = 'LastLightAcademy.exe' in names and 'LastLightAcademy.pck' in names
+        else:
+            runtime = any('.app/Contents/MacOS/' in n and not n.endswith('/') for n in names) and any(n.endswith('.pck') for n in names)
+        if not runtime:
+            raise RuntimeError('Package is missing its executable or game pack')
+        return len(names)
 
 def download(name, directory):
     target = directory / name
@@ -77,12 +103,17 @@ def main():
     parser.add_argument('--install-tools', action='store_true')
     parser.add_argument('--smoke', action='store_true')
     parser.add_argument('--evidence', action='store_true')
+    parser.add_argument('--output-root', type=pathlib.Path, default=ROOT / 'builds/2026-11-04',
+                        help='Separate candidate output directory; refuses an existing package')
     args = parser.parse_args()
+    output = args.output_root.resolve() / args.platform
+    package = output.parent / ('last-light-academy-0.1.0-' + args.platform + '.zip')
+    if package.exists() or (output.exists() and any(output.iterdir())):
+        raise RuntimeError('Use a new output root; existing build evidence is preserved: ' + str(output))
     engine = install_tools(args.platform) if args.install_tools else os.environ.get('GODOT', shutil.which('godot') or '/Applications/Godot.app/Contents/MacOS/Godot')
     version = subprocess.check_output([engine, '--version'], text=True).strip()
     if not version.startswith(VERSION + '.'):
         raise RuntimeError('Expected the pinned Godot 4.7.2, got ' + version)
-    output = ROOT / 'builds/2026-11-04' / args.platform
     output.mkdir(parents=True, exist_ok=True)
     filename = output / ('LastLightAcademy.exe' if args.platform == 'windows' else 'LastLightAcademy.zip')
     preset = 'Windows x86_64' if args.platform == 'windows' else 'macOS Universal unsigned'
@@ -122,13 +153,12 @@ def main():
         'Windows: keep the EXE and PCK together; run LastLightAcademy.exe.\n'
         'macOS: unzip the app and open it. This team build is unsigned and unnotarized.\n'
         'If blocked, use System Settings > Privacy & Security > Open Anyway for this app.\n'
-        'WASD: move; hold right mouse button: look; E: use nearby operation.\n'
+        'WASD: move; mouse: look while walking; E: use nearby operation.\n'
         'Tab/arrows/Enter: UI; Escape: pause. Captions and large text are in Settings.\n'
         'Source, AI disclosure and QA: https://github.com/SadManQT/nasa-space-apps-2026\n'
         'This is a development candidate; the repository board tracks remaining work.\n', encoding='utf-8')
     for name in ['LICENSE', 'CREDITS.md']:
         shutil.copy2(ROOT / name, output / name)
-    package = output.parent / ('last-light-academy-0.1.0-' + args.platform + '.zip')
     with zipfile.ZipFile(package, 'w', compression=zipfile.ZIP_DEFLATED) as bundle:
         if args.platform == 'macos':
             with zipfile.ZipFile(filename) as app_archive:
@@ -140,11 +170,20 @@ def main():
                     bundle.write(native, native.name)
         for name in ['LICENSE', 'CREDITS.md', 'README.txt']:
             bundle.write(output / name, name)
-    with zipfile.ZipFile(package) as bundle:
-        if bundle.testzip() is not None:
-            raise RuntimeError('Package CRC verification failed')
-    print('PACKAGE', package.name, package.stat().st_size, hashlib.sha256(package.read_bytes()).hexdigest(), flush=True)
-    print('BUILD RESULT:', args.platform, 'PASS', 'sha256', hashlib.sha256(filename.read_bytes()).hexdigest(), flush=True)
+    entry_count = validate_package(package, args.platform)
+    source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    game_changes = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD', '--', 'game'], cwd=ROOT, text=True).splitlines()
+    manifest = {'source_commit': source, 'platform': args.platform, 'engine': version,
+                'game_version': re.search(r'config/version="([^"]+)"', (ROOT / 'game/project.godot').read_text()).group(1),
+                'game_tracked_changes_after_import': game_changes,
+                'smoke': 'windowed' if args.smoke and args.evidence else 'headless' if args.smoke else 'not_run',
+                'package': {'name': package.name, 'bytes': package.stat().st_size,
+                            'sha256': sha256_file(package), 'entries': entry_count},
+                'logs': {p.name: sha256_file(p) for p in output.glob('*.log')}}
+    (output / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
+    (output / 'SHA256SUMS.txt').write_text(manifest['package']['sha256'] + '  ' + package.name + '\n', encoding='utf-8')
+    print('PACKAGE', package.name, package.stat().st_size, manifest['package']['sha256'], flush=True)
+    print('BUILD RESULT:', args.platform, 'PASS', 'sha256', sha256_file(filename), flush=True)
 
 if __name__ == '__main__':
     main()

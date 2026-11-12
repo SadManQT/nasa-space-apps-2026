@@ -1,0 +1,43 @@
+name: Judging candidate packages
+on:
+  workflow_dispatch:
+  push:
+    branches: [atik/release-20261112]
+    paths: ['production/qa/build_release.py', '.github/workflows/judging-candidate.yml']
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: windows
+          - os: macos-14
+            target: macos
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Fetch all runtime LFS files
+        shell: bash
+        run: git lfs pull --include="game/**" --exclude=""
+      - name: Check package validation
+        run: python3 production/qa/test_build_release.py
+      - name: Export and boot the packaged game outside the project
+        run: python3 production/qa/build_release.py --platform ${{ matrix.target }} --install-tools --smoke --output-root builds/judging
+      - name: Retain packages, checksums and complete build evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: judging-${{ matrix.target }}-${{ github.sha }}
+          compression-level: 0
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            builds/judging/*.zip
+            builds/judging/${{ matrix.target }}/*.log
+            builds/judging/${{ matrix.target }}/manifest.json
+            builds/judging/${{ matrix.target }}/SHA256SUMS.txt
+            builds/judging/${{ matrix.target }}/README.txt
