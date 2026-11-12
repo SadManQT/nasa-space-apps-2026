@@ -146,7 +146,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 36
-text = "Calibrate the moisture probe"
+text = "Test the water meter"
 autowrap_mode = 3
 
 [node name="ProbeSubtitle" type="Label" parent="Frame/Stack"]
@@ -171,7 +171,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(0.04, 0.05, 0.07, 1)
-text = "1   Dry reference"
+text = "1   Dry soil"
 autowrap_mode = 3
 theme_override_styles/normal = SubResource("GoldStyle")
 
@@ -181,7 +181,7 @@ layout_mode = 2
 mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
-text = "2   Wet reference"
+text = "2   Wet soil"
 autowrap_mode = 3
 theme_override_styles/normal = SubResource("CardStyle")
 
@@ -238,7 +238,7 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.68, 0.74, 0.82, 1)
-text = "REFERENCE SETUP  /  SIMULATED INSTRUMENT"
+text = "PRACTICE METER"
 autowrap_mode = 3
 
 [node name="ObservedHeading" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
@@ -248,7 +248,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 24
-text = "Observed data"
+text = "What you can see"
 autowrap_mode = 3
 
 [node name="ProbeObserved" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
@@ -274,7 +274,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 22
-text = "Why calibrate?"
+text = "Why test it?"
 autowrap_mode = 3
 
 [node name="ProbeExplanation" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/ObservedCard/Content"]
@@ -306,7 +306,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 24
-text = "Your prediction"
+text = "Your turn"
 autowrap_mode = 3
 
 [node name="EquipmentInputs" type="VBoxContainer" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content"]
@@ -349,7 +349,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 22
-text = "Projected result"
+text = "What would happen"
 autowrap_mode = 3
 
 [node name="ProbePrediction" type="Label" parent="Frame/Stack/ProbeScroll/ProbeColumns/PredictionCard/Content"]

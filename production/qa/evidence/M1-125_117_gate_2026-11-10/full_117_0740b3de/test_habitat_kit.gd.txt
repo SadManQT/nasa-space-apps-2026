@@ -1,4 +1,0 @@
-Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
-
-FAIL T_Kit_Paint_ORM_LOD1.png registers tracked uid://c4y0dt47sdboo without fallback
-HABITAT KIT RESULT: FAIL (225 checks, 1 failures)

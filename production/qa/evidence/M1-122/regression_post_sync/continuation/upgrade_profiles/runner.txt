@@ -1,7 +1,0 @@
-FAIL tools/test_upgrade_profiles.gd :: exit 1 :: UPGRADE PROFILES RESULT: FAIL (16 checks, 5 failures)
-       FAIL PROFILE mask=0 scene=EX-CH05-S03 action=p09_commit_sequence reason=P-09 requires the timestamp order and supported all-returned conclusion.
-       FAIL PROFILE mask=1 scene=EX-CH05-S03 action=p09_commit_sequence reason=P-09 requires the timestamp order and supported all-returned conclusion.
-       FAIL PROFILE mask=2 scene=EX-CH05-S03 action=p09_commit_sequence reason=P-09 requires the timestamp order and supported all-returned conclusion.
-       FAIL PROFILE mask=3 scene=EX-CH05-S03 action=p09_commit_sequence reason=P-09 requires the timestamp order and supported all-returned conclusion.
-       FAIL PROFILE mask=4 scene=EX-CH05-S03 action=p09_commit_sequence reason=P-09 requires the timestamp order and supported all-returned conclusion.
-0/1 suites passed

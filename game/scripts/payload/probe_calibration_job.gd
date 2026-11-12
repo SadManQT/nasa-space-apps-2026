@@ -46,11 +46,11 @@ const CALIBRATED_DRY := 0
 
 ## Teaching text, single-sourced in words from ui_text.json
 ## `targets.calibrate_probe` (tests assert the match).
-const BRIEF_GOAL := "Set the probe's dry zero at the bench"
-const BRIEF_WHY := "A probe only tells the truth after it is calibrated"
-const BRIEF_PROMPT := "Set the dry zero"
-const BRIEF_RESULT := "Dry zero set."
-const BRIEF_HINT := "Dry reference first, then wet."
+const BRIEF_GOAL := "Test the water meter in dry soil"
+const BRIEF_WHY := "A meter must be tested before you trust it"
+const BRIEF_PROMPT := "Test in dry soil"
+const BRIEF_RESULT := "Dry test done."
+const BRIEF_HINT := "Dry soil first. Wet soil comes next."
 
 const STATES := ["at_rack", "held", "at_bench", "zeroed"]
 
@@ -119,7 +119,7 @@ func brief() -> Dictionary:
 			"Take the moisture probe from its rack at the bench.",
 			"Carry it to the bench cradle.",
 			"Place it on the dry reference and read the display.",
-			"The dry zero is set when the display reads 0.",
+			"The dry test is done when the display reads 0.",
 		],
 	}
 
@@ -209,7 +209,7 @@ func cancel() -> Dictionary:
 				return {"accepted": true, "reason": "Probe back on its rack. Nothing is lost; start again when ready.", "state": _state, "probe_place": probe_place()}
 			return result
 		"at_bench":
-			return {"accepted": true, "reason": "Probe stays in the bench cradle. Read the dry zero when ready.", "state": _state, "probe_place": probe_place()}
+			return {"accepted": true, "reason": "Probe stays in the bench cradle. Read the dry test when ready.", "state": _state, "probe_place": probe_place()}
 		"zeroed":
 			return _reject("Dry zero is already set; the calibration stands.")
 	return _reject("Unknown probe state.")

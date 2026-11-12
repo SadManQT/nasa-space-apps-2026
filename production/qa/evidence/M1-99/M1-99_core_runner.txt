@@ -1,2 +1,0 @@
-ok   tools/test_director_message_metadata.gd :: DIRECTOR MESSAGE METADATA RESULT: PASS (76 checks, 0 failures)
-1/1 suites passed

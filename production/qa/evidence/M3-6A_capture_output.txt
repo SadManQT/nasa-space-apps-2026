@@ -1,1 +1,0 @@
-ECLIPSE PROPS RESULT: PASS (580 checks, 0 failures)

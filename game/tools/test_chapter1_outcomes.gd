@@ -129,7 +129,7 @@ func _test_ui() -> void:
 		safe_campaign.initial_snapshot = safe_state
 		root.add_child(safe_campaign)
 		await process_frame
-		_test_blocked_continue(safe_campaign, safe_ending, "Review how the night ended")
+		_test_blocked_continue(safe_campaign, safe_ending, "See how the night ended")
 		safe_campaign.route.perform("review_outcome")
 		for large in [false, true]:
 			safe_campaign.hud.panels.set_accessibility({"large_text": large})
@@ -137,7 +137,7 @@ func _test_ui() -> void:
 			_check(not (safe_campaign.hud.panels.find_child("EndingContinue", true, false) as Button).disabled, "%s ready physical gate enables Continue at large=%s" % [safe_ending, large])
 		(safe_campaign.hud.panels.find_child("EndingContinue", true, false) as Button).pressed.emit()
 		_check(safe_campaign.route.current_scene_id() == "EX-CH01-S12", safe_ending + " continues only into the final story scene")
-		_test_blocked_continue(safe_campaign, safe_ending, "Check Alo's chamber at the glove port")
+		_test_blocked_continue(safe_campaign, safe_ending, "Check Alo's box is safe to open")
 		for target_id in ["verify_chamber", "open_shutter", "tag_bloom", "inspect_tara", "complete_debrief"]:
 			safe_campaign.hud.refresh_after_action(safe_campaign.route.perform(target_id))
 		_check(safe_campaign.hud.panels.find_child("ReplayChoice", true, false) != null, "the physical science debrief opens with decision replay")

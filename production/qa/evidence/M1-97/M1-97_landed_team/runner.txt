@@ -1,7 +1,0 @@
-FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (581 checks, 6 failures)
-       FAIL Amara raw load main-thread interval <50 ms (50.394)
-       FAIL production title main-thread interval <50 ms (62.831)
-       FAIL production new campaign main-thread interval <50 ms (152.698)
-       FAIL production garden entry main-thread interval <50 ms (73.106)
-       FAIL production full cast entry main-thread interval <50 ms (81.398)
-0/1 suites passed

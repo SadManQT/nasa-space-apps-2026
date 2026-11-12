@@ -1,2 +1,0 @@
-ok   tools/test_hint_player.gd :: HINT PLAYER RESULT: PASS (85 checks, 0 failures)
-1/1 suites passed

@@ -1,7 +1,0 @@
-FAIL tools/test_player_text.gd :: exit 124 :: 
-       ERROR: FAIL p07_choose_route_b real route witness succeeds: Route B is the only route within both slope and return-reserve limits.
-       ERROR: FAIL p07_choose_route_b authored success result
-       ERROR: FAIL p07_choose_route_b actual Last result uses authored success
-       ERROR: FAIL p07_verify_slope is the actual current goal
-       ERROR: FAIL p07_verify_slope HUD uses authored goal and why
-0/1 suites passed

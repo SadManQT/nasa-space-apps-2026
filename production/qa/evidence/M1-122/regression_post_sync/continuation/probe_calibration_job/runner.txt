@@ -1,2 +1,0 @@
-ok   tools/test_probe_calibration_job.gd :: PROBE CALIBRATION JOB RESULT: PASS (83 checks, 0 failures)
-1/1 suites passed

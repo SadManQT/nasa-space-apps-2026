@@ -258,7 +258,7 @@ func _test_live_campaign_feedback_integration() -> void:
 	_check(opened_mt, "MissionTablePanel opens for 'p02_shift1' in live EX-CH01-S07 scene")
 	await process_frame
 	var mt_text := _collect_text(campaign.hud.mission_table)
-	_check(mt_text.contains("Atmosphere ·") and mt_text.contains("Alo posture ("), "MissionTablePanel displays Chapter1Feedback shift tension and Alo botanical posture")
+	_check(mt_text.contains("Tonight ·") and mt_text.contains("Alo now:"), "MissionTablePanel displays Chapter1Feedback shift tension and Alo botanical posture")
 	campaign.hud.mission_table.close()
 
 	# 4. Verify CampaignPanels._render_chapter1_outcome includes outcome_reward_card and alo_posture
@@ -281,7 +281,7 @@ func _test_live_campaign_feedback_integration() -> void:
 	campaign.hud.panels.open_chapter1_outcome(debrief_data, "summary")
 	await process_frame
 	var ch1_out_text := _collect_text(campaign.hud.panels)
-	_check(ch1_out_text.contains("GOLDEN BLOOM") and ch1_out_text.contains("Alo botanical posture"), "CampaignPanels chapter1_outcome summary renders Chapter1Feedback reward celebration and Alo posture")
+	_check(ch1_out_text.contains("GOLDEN BLOOM") and ch1_out_text.contains("Alo now:"), "CampaignPanels chapter1_outcome summary renders Chapter1Feedback reward celebration and Alo posture")
 	campaign.hud.panels.close_panel()
 
 	campaign.free()

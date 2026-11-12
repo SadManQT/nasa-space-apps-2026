@@ -1,9 +1,0 @@
-{
-  "intentional_agent_interruption": true,
-  "reason": "Collector was launched before independent review completed. Stop and restart using reviewed bounded termination and distinct logs; this is not a native crash.",
-  "time_utc_epoch": 1794251316.6472116,
-  "target_diagnostic_pid": 22132,
-  "tree_kill_exit": 0,
-  "output": "SUCCESS: The process with PID 2920 (child process of PID 28036) has been terminated.\nSUCCESS: The process with PID 28036 (child process of PID 22132) has been terminated.\nSUCCESS: The process with PID 22132 (child process of PID 28592) has been terminated.\n",
-  "error": ""
-}

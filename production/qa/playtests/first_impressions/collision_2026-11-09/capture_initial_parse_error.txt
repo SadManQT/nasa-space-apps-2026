@@ -1,7 +1,0 @@
-Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
-OpenGL API 3.3.0 - Build 32.0.101.9150 - Compatibility - Using Device: Intel - Intel(R) Arc(TM) 130V GPU (8GB)
-
-SCRIPT ERROR: Parse Error: Cannot infer the type of "base" variable because the value doesn't have a set type.
-   at: GDScript::reload (D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-qa-20261106/production/qa/playtests/first_impressions/collision_2026-11-09/capture_collision.gd:42)
-ERROR: Failed to load script "D:/The_Last_Braincell/nasa-space-apps-2026/.codex/worktrees/tanvir-qa-20261106/production/qa/playtests/first_impressions/collision_2026-11-09/capture_collision.gd" with error "Parse error".
-   at: load (modules/gdscript/gdscript_resource_format.cpp:46)

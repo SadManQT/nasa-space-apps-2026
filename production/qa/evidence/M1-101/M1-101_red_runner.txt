@@ -1,7 +1,0 @@
-FAIL tools/test_hud_world_lifetime.gd :: exit 1 :: HUD WORLD LIFETIME RESULT: FAIL (12 checks, 4 failures)
-       FAIL: detached real target has no world distance
-       FAIL: detached real target never displays a stale world marker
-       FAIL: detached real player has no world distance
-       FAIL: no world overlays while the real player leaves the tree
-       HUD WORLD LIFETIME RESULT: FAIL (12 checks, 4 failures)
-0/1 suites passed

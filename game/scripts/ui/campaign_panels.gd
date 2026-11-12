@@ -928,7 +928,8 @@ func _render_card(value) -> void:
 	_card_text("What this means for Aurora\n" + String(card.get("takeaway", "")), true)
 	if not bool(card.get("pending", true)):
 		var visual: Dictionary = card.get("visual", {})
-		var visual_title := String(visual.get("label", "")).replace("_", " ").capitalize()
+		# The card title names the chart; the fixture column name stays in the smaller line below it.
+		var visual_title := String(card.get("title", String(visual.get("label", "")).replace("_", " ").capitalize()))
 		if visual.get("kind") != "line":
 			visual_title += " · %s %s" % [str(visual.get("values", [0])[0]), visual.get("unit", "")]
 		_card_text(visual_title, true)
@@ -936,7 +937,7 @@ func _render_card(value) -> void:
 		chart.series = visual
 		_body.add_child(chart)
 		var values: Array = visual.get("values", [])
-		_card_text(String(visual.get("label", "")).replace("_", " ") + " · " + String(visual.get("unit", "")) + "\n" + ("First %s · last %s · min %s · max %s\n%s → %s" % [values[0], values[-1], values.min(), values.max(), visual.get("start", ""), visual.get("end", "")] if values.size() > 1 else str(values[0])) + "\n" + String(visual.get("axis", "")))
+		_card_text("Data column: " + String(visual.get("label", "")).replace("_", " ") + " · " + String(visual.get("unit", "")) + "\n" + ("First %s · last %s · lowest %s · highest %s\n%s → %s" % [values[0], values[-1], values.min(), values.max(), visual.get("start", ""), visual.get("end", "")] if values.size() > 1 else str(values[0])) + "\n" + String(visual.get("axis", "")))
 		_card_text(String(card.get("title", "")), true)
 		_card_text("Evidence · " + String(card.get("evidence_label", "")) + "\n" + String(card.get("agency", "")) + "\nDataset: " + String(card.get("dataset_id", "")))
 		_card_text("What was measured or supplied\n" + ScienceScript.describe(card.get("fields_used", [])) + "\n" + ScienceScript.describe(card.get("values", {})), false, true)
@@ -1604,7 +1605,7 @@ func _render_chapter1_outcome(value) -> void:
 		var reward := Chapter1FeedbackScript.outcome_reward_card(stars, int(resources.get("H", 0)), int(data.get("retry_shift", 5)), String(data.get("ending", "")))
 		var posture := Chapter1FeedbackScript.alo_posture(int(resources.get("H", 0)), int(resources.get("W", 0)), 7 if bool(data.get("safe_ending", false)) else int(data.get("retry_shift", 1)), bool(data.get("safe_ending", false)))
 		_card_text("%s\n%s\n%s" % [String(reward.get("title", "")), String(reward.get("celebration", "")), String(reward.get("retry_prompt", ""))])
-		_card_text("Alo botanical posture (%s) · %s" % [String(posture.get("stage", "")), String(posture.get("posture_description", ""))])
+		_card_text("Alo now: %s" % String(posture.get("plain", posture.get("posture_description", ""))))
 		_ending_button("Review decisions \u00b7 shift by shift", "ReviewDecisions", func(): _ending_go("replay", "ReplayNext"), replay.is_empty())
 		if replay.is_empty():
 			_card_text("This older checkpoint has no shift receipts to replay.")

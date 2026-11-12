@@ -1,2 +1,0 @@
-ok   tools/test_worker_c_content.gd :: WORKER C CONTENT RESULT: PASS (566 checks, 0 failures)
-1/1 suites passed

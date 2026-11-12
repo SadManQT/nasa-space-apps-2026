@@ -1,4 +1,0 @@
-warm_control_runner exit 0 seconds 42.947
-restored_sidecars_runner exit 0 seconds 277.973
-unchanged_retry_runner exit 0 seconds 12.16
-{"collection_complete": true, "crash_reproduced": false, "all_runs_successful": true, "non_crlf_text_changes": 2}

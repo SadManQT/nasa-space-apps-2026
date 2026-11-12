@@ -1,5 +1,0 @@
-FAIL tools/test_performance_runtime.gd :: exit 1 :: PERFORMANCE RUNTIME RESULT: FAIL (537 checks, 2 failures)
-       FAIL production title main-thread interval <50 ms (51.869)
-       FAIL production new campaign main-thread interval <50 ms (66.577)
-       PERFORMANCE RUNTIME RESULT: FAIL (537 checks, 2 failures)
-0/1 suites passed

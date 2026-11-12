@@ -1,9 +1,0 @@
-{
-  "command": [
-    "C:/Program Files/Git/bin/bash.exe",
-    "game/tools/run_tests.sh",
-    "garden_collision"
-  ],
-  "exit_code": 1,
-  "duration_seconds": 29.799
-}

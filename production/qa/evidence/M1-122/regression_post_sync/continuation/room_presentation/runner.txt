@@ -1,2 +1,0 @@
-ok   tools/test_room_presentation.gd :: ROOM PRESENTATION RESULT: PASS (155 checks, 0 failures)
-1/1 suites passed

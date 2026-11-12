@@ -1,3 +1,0 @@
-ok   tools/test_p01_inputs.gd :: P01 INPUTS RESULT: PASS (317 checks, 0 failures)
-ok   tools/test_p01_nearby.gd :: P01 NEARBY RESULT: PASS (29 checks, 0 failures)
-2/2 suites passed

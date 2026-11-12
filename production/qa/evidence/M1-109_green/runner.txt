@@ -1,7 +1,0 @@
-FAIL tools/test_main_menu_contrast.gd :: exit 1 :: MAIN MENU CONTRAST RESULT: FAIL (154 checks, 4 failures)
-       ERROR: FAIL: settings restores valid title focus 100
-       ERROR: FAIL: settings Tab uses current availability 100
-       ERROR: FAIL: settings restores valid title focus 150
-       ERROR: FAIL: settings Tab uses current availability 150
-       MAIN MENU CONTRAST RESULT: FAIL (154 checks, 4 failures)
-0/1 suites passed

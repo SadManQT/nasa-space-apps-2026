@@ -1,9 +1,0 @@
-{
-  "head": "5ae47b8fb97d2b7854139b8e34d5a5a1af3b018f",
-  "canonical_metadata_count": 2939,
-  "canonical_crlf_count": 0,
-  "effective_policy": "text set; eol lf for every tracked Game import sidecar",
-  "canonical_pairs_sha256": "abeee5ee939eb8143901e15d11007e7ca8f46de76d4f3c76b54e952110093f8b",
-  "metadata_files_rewritten": 0,
-  "rule_sha256": "78531baa4833ca52dd3a306efdbd4df7e7d0750e5d0bdc0c183885d8a4075754"
-}

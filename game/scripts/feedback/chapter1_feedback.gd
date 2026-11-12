@@ -738,8 +738,8 @@ static func night_shift_tension(shift_index: int) -> Dictionary:
 		"is_dark": is_dark,
 		"is_storm": is_storm,
 		"hours_to_dawn": hours_to_dawn,
-		"countdown_label": "Dawn in %d shift%s (%.1f h)" % [dark_shifts_left, "" if dark_shifts_left == 1 else "s", hours_to_dawn] if dark_shifts_left > 0 else "Dawnlight on the mast array (0.0 h)",
-		"lights_state": "Warm amber storm-shelter dim (35%)" if is_storm else ("Night conservation dim (60%)" if is_dark else "Full daylight array lamp (100%)"),
+		"countdown_label": "Sunrise in %d shift%s (%.1f hours)" % [dark_shifts_left, "" if dark_shifts_left == 1 else "s", hours_to_dawn] if dark_shifts_left > 0 else "Sunrise is here",
+		"lights_state": "Lights very low for the storm (35%)" if is_storm else ("Lights low to save power (60%)" if is_dark else "Lights full (100%)"),
 		"fans_sfx": "SFX_FAN_LOWPOWER" if is_dark else "SFX_FAN_NORMAL",
 		"fans_state": "Fans slowed for the night" if is_dark else "Fans at normal daytime speed",
 		"earth_link_state": "STORED GUIDANCE (Earth below horizon)" if s >= 4 else "LIVE LINK · Ferreira on console",
@@ -748,22 +748,28 @@ static func night_shift_tension(shift_index: int) -> Dictionary:
 static func alo_posture(alo_health: int, water_in_wall: int, shift_index: int, bloomed: bool = false) -> Dictionary:
 	## Canon rule: Alo's progress is felt through botanical posture and growth — NEVER a face or eyes.
 	var stage := "Seedling"
+	var plain := "Alo stands straight under her lamp."
 	var posture := "Upright hypocotyl stem, cotyledons level under the chamber lamp."
 	if (bloomed or shift_index >= 7) and alo_health >= 5:
 		stage = "Golden Four-Petal Bloom"
+		plain = "Alo is strong, with four bright yellow petals wide open."
 		posture = "Sturdy upright stem leaning into the warm lamp; four bright yellow Brassica rapa petals open wide above turgid true leaves."
 	elif bloomed or (shift_index >= 7 and alo_health > 0):
 		stage = "First Open Flower"
+		plain = "Alo has opened her first yellow flower. Her lower leaves are a little curled."
 		posture = "Stem upright; yellow flower petals open at dawn with slight lower-leaf curl from the long night."
 	elif water_in_wall >= 4 or alo_health <= 3:
 		stage = "Thirst / Cold Curl"
+		plain = "Alo is thirsty. Her leaves droop and curl."
 		posture = "Petiole angle droops 18° and leaf margins curl inward to conserve moisture while the shelter borrows the reservoir."
 	elif shift_index >= 4:
 		stage = "Closed Night Bud"
+		plain = "Alo holds a tight green bud and waits for light."
 		posture = "Compact green floral bud held tight at the apex; leaves angled toward the dim chamber LED."
 	return {
 		"stage": stage,
 		"posture_description": posture,
+		"plain": plain,
 		"has_face_or_eyes": false,
 		"botanical_note": "Observed through stem angle, leaf turgor, and floral bud opening (never anthropomorphic).",
 	}
@@ -778,11 +784,11 @@ static func outcome_reward_card(stars: Dictionary, alo_health: int, retry_shift:
 	if is_golden:
 		return {
 			"tier": "GOLDEN_BLOOM",
-			"title": "★ ★ ★  GOLDEN BLOOM  ·  COMMISSIONING MASTERED",
+			"title": "★ ★ ★  GOLDEN BLOOM",
 			"star_count": 3,
 			"golden_bloom": true,
-			"celebration": "All three stars earned with Alo at H=%d (>=5)! The shutter opens to a bright yellow four-petal flower, CUE-04 'First Flower' resolves in warm white light, and N.'s 2034 recording unlocks." % alo_health,
-			"retry_prompt": "Replay any shift from the Mission Trainer to test an alternate trade study.",
+			"celebration": "All three stars. Alo is strong (health %d). The window opens on a bright yellow flower with four petals, and an old recording plays for you." % alo_health,
+			"retry_prompt": "Want to try a different plan? Replay any shift from the Mission Trainer.",
 			"sfx": "SFX_UI_SHIFT_COMMIT",
 		}
 	elif not stopped and alo_alive and star_count >= 1:
@@ -791,17 +797,17 @@ static func outcome_reward_card(stars: Dictionary, alo_health: int, retry_shift:
 			"title": "★".repeat(star_count) + "☆".repeat(3 - star_count) + "  FIRST FLOWER AT DAWN",
 			"star_count": star_count,
 			"golden_bloom": false,
-			"celebration": "The crew is safe and Alo opens her first yellow flower at dawn (H=%d). Check the causal review to see how to reach Golden Bloom (3 stars and H >= 5)." % alo_health,
-			"retry_prompt": "Want Golden Bloom? Retry from Shift %d checkpoint with zero lost story progress." % retry_shift,
+			"celebration": "The crew is safe and Alo opens her first yellow flower at sunrise (health %d). Golden Bloom needs all 3 stars and Alo health 5 or more. The review shows how." % alo_health,
+			"retry_prompt": "Want Golden Bloom? Retry from Shift %d. You keep your story progress." % retry_shift,
 			"sfx": "SFX_UI_SHIFT_COMMIT",
 		}
 	return {
 		"tier": "RETRY_INVITATION",
-		"title": "FLIGHT RULE CHECKPOINT  ·  SAFE TO TRY AGAIN",
+		"title": "NOT THIS TIME  ·  SAFE TO TRY AGAIN",
 		"star_count": star_count,
 		"golden_bloom": false,
-		"celebration": "A mistake is information, not punishment (SFX_UI_SOFT_ERROR). The paused forecast names the exact demand that ran short so you can adjust the schedule.",
-		"retry_prompt": "Retry immediately from Shift %d checkpoint — your earlier discoveries stay saved." % retry_shift,
+		"celebration": "A mistake teaches you something. The review shows what ran out, so you can change your plan.",
+		"retry_prompt": "Try again from Shift %d. Everything you found before is still saved." % retry_shift,
 		"sfx": "SFX_UI_SOFT_ERROR",
 	}
 
@@ -823,7 +829,7 @@ static func build_feedback_banner(parent: Control, action_id: String, shift_inde
 	box.add_child(UiDesign.label("Why: " + String(fb.get("why", "")), "caption", "ivory"))
 	box.add_child(UiDesign.label("Next step: " + String(fb.get("next_step", "")), "caption", "good"))
 	box.add_child(UiDesign.label("%s: \"%s\"" % [String(fb.get("crew_speaker", "Crew")), String(fb.get("crew_reaction", ""))], "body", "accent"))
-	box.add_child(UiDesign.label("Night Shift %d Atmosphere · %s · %s · %s" % [
+	box.add_child(UiDesign.label("Night shift %d · %s · %s · %s" % [
 		int(tension.get("shift", 1)),
 		String(tension.get("countdown_label", "")),
 		String(tension.get("lights_state", "")),

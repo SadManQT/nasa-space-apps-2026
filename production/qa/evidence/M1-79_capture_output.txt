@@ -1,7 +1,0 @@
-SIGN PROBE: M1-79_player.png text box 129x17 px at (880, 313), em 12.6 px (15.1 px at 1080 lines), letters cover 21 % of the box
-SIGN PROBE: M1-79_anchor_eye.png text box 143x20 px at (823, 410), em 14.1 px (17.0 px at 1080 lines), letters cover 20 % of the box
-SIGN PROBE: M1-79_display_wall.png text box 372x66 px at (797, 367), em 38.3 px (46.0 px at 1080 lines), letters cover 17 % of the box
-SIGN PROBE: M1-79_ch06_player.png text box 129x17 px at (880, 313), em 12.6 px (15.1 px at 1080 lines), letters cover 21 % of the box
-SIGN PROBE: M1-79_ch07_pin_board.png text box 662x94 px at (500, 285), em 62.5 px (74.9 px at 1080 lines), letters cover 19 % of the box
-SIGN PROBE RESULT: PASS (0 failures)
-M1-79 CAPTURE RESULT: PASS

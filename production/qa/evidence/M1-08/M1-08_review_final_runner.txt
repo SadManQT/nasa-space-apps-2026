@@ -1,5 +1,0 @@
-ok   tools/test_p01_inputs.gd :: P01 INPUTS RESULT: PASS (317 checks, 0 failures)
-ok   tools/test_p01_labels.gd :: P01 LABELS RESULT: PASS (104 checks, 0 failures)
-ok   tools/test_p01_nearby.gd :: P01 NEARBY RESULT: PASS (29 checks, 0 failures)
-ok   tools/test_p01_panel.gd :: P01 PANEL RESULT: PASS (139 checks, 0 failures)
-4/4 suites passed

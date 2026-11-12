@@ -1,7 +1,7 @@
 extends Control
 class_name P01Panel
 
-const PREDICTION_PROMPT := "Choose your values, then try them. The real equipment stays unchanged during a prediction."
+const PREDICTION_PROMPT := "Pick your numbers, then press Try it. Nothing real changes until you press Lock in."
 const Chapter1FeedbackScript = preload("res://scripts/feedback/chapter1_feedback.gd")
 
 ## Local selections only. The campaign owns forecasts, validation and physical commits.
@@ -65,7 +65,7 @@ func open(campaign: Chapter1Campaign, target_id: String) -> bool:
 	_confirming = false
 	_leaving = false
 	_observed = false
-	_notice = "Choose what you predict, then try it safely. Nothing changes until you confirm."
+	_notice = _do_this()
 	show()
 	opened.emit(_target)
 	_render()
@@ -91,7 +91,7 @@ func choose(field: String, value) -> void:
 	_prediction = {}
 	_preview_context = ""
 	_confirming = false
-	_notice = "Selection changed. Try it to see what this would do."
+	_notice = "Changed. Press Try it to see what would happen.\n" + _do_this()
 	var notice := find_child("ProbeNotice", true, false) as Label
 	if notice != null:
 		notice.text = _notice
@@ -103,7 +103,7 @@ func undo() -> void:
 	_choices.clear()
 	_prediction.clear()
 	_preview_context = ""
-	_notice = "Choices cleared. The equipment has not changed."
+	_notice = "Cleared. Nothing real has changed."
 	_render()
 
 func _payload() -> Dictionary:
@@ -114,18 +114,18 @@ func _payload() -> Dictionary:
 func preview() -> Dictionary:
 	PlaytestLog.event("try", {"puzzle": "P-01", "target": _target})
 	if _choices.is_empty() or (_simple_action() and _choices.get("confirmed") != true):
-		_prediction = {"accepted": false, "reason": "Choose an input before trying it."}
+		_prediction = {"accepted": false, "reason": "Pick something first, then press Try it."}
 	else:
 		_prediction = _campaign.forecast_target(_target, _payload())
 	_preview_context = _context() if _prediction.get("accepted", false) else ""
-	_notice = "Prediction accepted. Compare the projected observation, then confirm when ready." if _prediction.get("accepted", false) else "Try again: " + UiDesign.player_words(String(_prediction.get("reason", "Check your selection.")))
+	_notice = "That works. Press Lock in to do it for real." if _prediction.get("accepted", false) else "Try again: " + UiDesign.player_words(String(_prediction.get("reason", "Check your selection.")))
 	_focus = "LockIn" if _prediction.get("accepted", false) else "TryIt"
 	_render()
 	return _prediction.duplicate(true)
 
 func request_commit() -> Dictionary:
 	if not visible or _observed or _preview_context.is_empty() or _preview_context != _context():
-		_notice = "Try these choices again before confirming; the equipment or your selection may have changed."
+		_notice = "Press Try it again first. Something changed."
 		_render()
 		return {"accepted": false, "reason": _notice}
 	_confirming = true
@@ -183,11 +183,38 @@ func reveal_hint() -> void:
 	if hint_player == null:
 		return
 	var lesson := HowToCard.lesson("probe")
-	lesson.nudge = "Check the instrument before trusting it."
-	lesson.relationship = "Use the two reference cups. " + String(lesson.get("relationship", ""))
-	lesson.example = "Dry must read 0, wet 100, then fill both to 50. Any calibrated moisture from 40 through 60 is accepted."
+	lesson.nudge = "Test the meter before you trust it."
+	lesson.relationship = "Use the dry cup and the wet cup. " + String(lesson.get("relationship", ""))
+	lesson.example = "Dry must say 0. Wet must say 100. Then water both plants to 50. Anything from 40 to 60 is fine."
 	hint_player.set_settings(_settings)
 	hint_player.request_hint("p01", lesson)
+
+## Plain step-by-step instruction for this job (kids asked "what do I do?").
+## Expedition assist mode keeps the puzzle: it gets the short prompt only.
+func _do_this() -> String:
+	if String(_settings.get("assist_mode", "Cadet")) == "Expedition":
+		return PREDICTION_PROMPT
+	var profile: Dictionary = _view.get("profile", {})
+	var refs: Dictionary = profile.get("references", {})
+	var middle := int((float(profile.get("moisture_min", 40)) + float(profile.get("moisture_max", 60))) / 2.0)
+	match String(_view.get("action", "")):
+		"set_zero":
+			return "Do this: pick Dry soil cup. Set The meter shows to %s and It should say to %s. Press Try it, then Lock in." % [refs.dry.raw, refs.dry.calibrated]
+		"set_span":
+			return "Do this: pick Wet soil cup. Set The meter shows to %s and It should say to %s. Press Try it, then Lock in." % [refs.wet.raw, refs.wet.calibrated]
+		"recheck":
+			return "Do this: set Dry cup now says to %s and Wet cup now says to %s. Press Try it, then Lock in." % [refs.dry.calibrated, refs.wet.calibrated]
+		"plant_alo":
+			return "Do this: pick Alo's box and set 1 seed. Press Try it, then Lock in."
+		"plant_tara":
+			return "Do this: pick Tara's box and set 1 seed. Press Try it, then Lock in."
+		"water_alo", "water_tara":
+			return "Do this: set the water to %d. Press Try it, then Lock in." % middle
+		"label_alo_external":
+			return "Do this: pick Outside test. Press Try it, then Lock in."
+		"label_tara_indoor":
+			return "Do this: pick Indoor. Press Try it, then Lock in."
+	return "Do this: press the Select button. Press Try it, then Lock in."
 
 func _context() -> String:
 	var state := _campaign.director.snapshot()
@@ -198,12 +225,12 @@ func _simple_action() -> bool:
 	return _view.get("action", "") in ["scan_packet", "seal_alo", "seal_tara"]
 
 func _action_title() -> String:
-	return {"set_zero": "Set the dry zero", "set_span": "Set the wet span", "recheck": "Recheck both references", "scan_packet": "Scan the seed packet", "plant_alo": "Place Alo's seed", "plant_tara": "Place Tara's seed", "water_alo": "Water Alo", "water_tara": "Water Tara", "label_alo_external": "Label Alo's cassette", "label_tara_indoor": "Label Tara's cassette", "seal_alo": "Close Alo's seal", "seal_tara": "Close Tara's seal"}.get(_view.get("action", ""), "Check the equipment")
+	return {"set_zero": "Test in dry soil", "set_span": "Test in wet soil", "recheck": "Test both again", "scan_packet": "Look at the seed packet", "plant_alo": "Plant Alo's seed", "plant_tara": "Plant Tara's seed", "water_alo": "Water Alo", "water_tara": "Water Tara", "label_alo_external": "Label Alo's box", "label_tara_indoor": "Label Tara's box", "seal_alo": "Close Alo's lid", "seal_tara": "Close Tara's lid"}.get(_view.get("action", ""), "Check the equipment")
 
 func _explanation() -> String:
 	if _target in ["calibrate_probe", "span_probe", "recheck_probe"]:
-		return "Two known references let you trust the probe before measuring the seedlings."
-	return "One seed per cassette, calibrated moisture and distinct labels make this a fair comparison."
+		return "A meter can be wrong. Test it in dry soil and wet soil, then you can trust it with the plants."
+	return "One seed in each box, the same water and clear labels make it a fair test."
 
 func _render() -> void:
 	if not visible or _campaign == null:
@@ -215,8 +242,8 @@ func _render() -> void:
 		for child in host.get_children():
 			host.remove_child(child)
 			child.queue_free()
-	%ProbeTitle.text = "Calibrate the moisture probe" if _target in ["calibrate_probe", "span_probe", "recheck_probe"] else _action_title()
-	%ProbeSubtitle.text = _action_title() + " · Try your values before changing the equipment."
+	%ProbeTitle.text = "Test the water meter" if _target in ["calibrate_probe", "span_probe", "recheck_probe"] else _action_title()
+	%ProbeSubtitle.text = _action_title() + " · Try it first. Nothing changes until you lock in."
 	%ProbeColumns.columns = 2 if get_viewport_rect().size.x >= 1100 and not _settings.get("large_text", false) else 1
 	%ProbeArtwork.visible = _target in ["calibrate_probe", "span_probe", "recheck_probe"]
 	%ArtworkCaption.visible = %ProbeArtwork.visible
@@ -224,15 +251,15 @@ func _render() -> void:
 	_render_steps()
 	var equipment := _equipment
 	if _leaving:
-		_label(equipment, "Discard these unconfirmed choices? The equipment will stay as it is.")
+		_label(equipment, "Leave without locking in? Nothing will change.")
 		_button(equipment, "Keep choosing", "KeepChoosing", func(): _leaving = false; _render())
-		_button(equipment, "Discard choices and leave", "DiscardChoices", discard)
+		_button(equipment, "Leave without saving", "DiscardChoices", discard)
 	elif _confirming:
-		_label(equipment, "Use this prediction at the equipment?\n" + _selection_text())
-		_button(equipment, "Confirm choice", "ConfirmChoice", confirm_commit)
-		_button(equipment, "Back to prediction", "BackToPrediction", cancel_confirm)
+		_label(equipment, "Do this for real?\n" + _selection_text())
+		_button(equipment, "Yes, do it", "ConfirmChoice", confirm_commit)
+		_button(equipment, "Go back", "BackToPrediction", cancel_confirm)
 	elif _observed:
-		_label(equipment, "Action complete. Close this panel and follow the next goal.")
+		_label(equipment, "Done. Press Close and follow the blue marker.")
 		var p01_state: Dictionary = _view.get("state", {}) if _view.get("state", null) is Dictionary else {}
 		var fb := Chapter1FeedbackScript.action_feedback(_target, p01_state)
 		var fb_label := _label(equipment, "What changed: %s\nWhy: %s\nNext step: %s\n%s · %s: \"%s\"" % [
@@ -254,7 +281,7 @@ func _render() -> void:
 	%ProbeNotice.text = _notice
 	var footer := _footer
 	if not _observed and not _confirming and not _leaving:
-		_button(footer, "Undo choices", "UndoChoices", undo)
+		_button(footer, "Start again", "UndoChoices", undo)
 		_button(footer, "Try it", "TryIt", preview)
 		_button(footer, "Lock in", "LockIn", request_commit)
 	_button(footer, "Hint", "ProbeHint", reveal_hint)
@@ -267,7 +294,7 @@ func _render_steps() -> void:
 	var calibrating := _target in ["calibrate_probe", "span_probe", "recheck_probe"]
 	var active := ["calibrate_probe", "span_probe", "recheck_probe"].find(_target) if calibrating else (2 if _confirming or _observed else (1 if not _prediction.is_empty() else 0))
 	var labels := [%StepDry, %StepWet, %StepCheck]
-	var words := ["Dry reference", "Wet reference", "Check both"] if calibrating else ["Choose", "Try it", "Confirm"]
+	var words := ["Dry soil", "Wet soil", "Check both"] if calibrating else ["Choose", "Try it", "Confirm"]
 	for index in labels.size():
 		var label := labels[index] as Label
 		label.text = "%d   %s" % [index + 1, words[index]]
@@ -277,21 +304,21 @@ func _render_steps() -> void:
 func _render_inputs(column: VBoxContainer) -> void:
 	match String(_view.get("action", "")):
 		"set_zero", "set_span":
-			_options(column, "reference", [["dry", "Dry reference"], ["wet", "Wet reference"]])
-			_number(column, "raw_reading", "Raw reading", 10)
-			_number(column, "calibrated_reading", "Calibrated reading", 10)
+			_options(column, "reference", [["dry", "Dry soil cup"], ["wet", "Wet soil cup"]])
+			_number(column, "raw_reading", "The meter shows", 10)
+			_number(column, "calibrated_reading", "It should say", 10)
 		"recheck":
-			_number(column, "dry_reading", "Dry reading", 10)
-			_number(column, "wet_reading", "Wet reading", 10)
+			_number(column, "dry_reading", "Dry cup now says", 10)
+			_number(column, "wet_reading", "Wet cup now says", 10)
 		"plant_alo", "plant_tara":
-			_options(column, "cassette", [["alo", "Alo cassette"], ["tara", "Tara cassette"]])
-			_number(column, "seed_count", "Seeds to place", 1)
+			_options(column, "cassette", [["alo", "Alo's box"], ["tara", "Tara's box"]])
+			_number(column, "seed_count", "How many seeds", 1)
 		"label_alo_external", "label_tara_indoor":
-			_label(column, "Alo is in the outer test chamber. Tara stays in the indoor reference bay.")
-			_options(column, "label", [[_view.profile.labels.alo, "External test"], [_view.profile.labels.tara, "Indoor reference"]])
+			_label(column, "Alo lives in the outside box. Tara lives indoors, so you can compare them.")
+			_options(column, "label", [[_view.profile.labels.alo, "Outside test"], [_view.profile.labels.tara, "Indoor"]])
 		"water_alo", "water_tara":
-			_label(column, "Calibrated moisture · %s–%s of 100 is safe. Excess can drain to waste." % [_view.profile.moisture_min, _view.profile.moisture_max])
-			_number(column, "moisture", "Moisture of 100", 10)
+			_label(column, "Water from %s to %s out of 100 is safe. Extra water drains away." % [_view.profile.moisture_min, _view.profile.moisture_max])
+			_number(column, "moisture", "Water out of 100", 10)
 		_:
 			_button(column, ("Selected: " if _choices.get("confirmed", false) else "Select: ") + _action_title(), "SelectAction", func(): choose("confirmed", true); _render())
 
@@ -346,18 +373,18 @@ func _readings(view: Dictionary) -> String:
 	var action := String(view.get("action", _view.get("action", "")))
 	var lines: Array[String] = []
 	if action in ["set_zero", "set_span", "recheck"] or _target in ["calibrate_probe", "span_probe", "recheck_probe"]:
-		lines.append("Reference targets: dry raw %s to %s; wet raw %s to %s." % [profile.references.dry.raw, profile.references.dry.calibrated, profile.references.wet.raw, profile.references.wet.calibrated])
-		lines.append("Probe: " + ("rechecked" if state.get("probe_rechecked", false) else ("span set" if state.get("probe_spanned", false) else ("zero set" if state.get("probe_zeroed", false) else "not calibrated"))))
+		lines.append("In dry soil the meter shows %s. Dry should say %s.\nIn wet soil the meter shows %s. Wet should say %s." % [profile.references.dry.raw, profile.references.dry.calibrated, profile.references.wet.raw, profile.references.wet.calibrated])
+		lines.append("Meter: " + ("tested twice, ready" if state.get("probe_rechecked", false) else ("wet test done" if state.get("probe_spanned", false) else ("dry test done" if state.get("probe_zeroed", false) else "not tested yet"))))
 	elif action == "scan_packet":
-		lines.append("Seed packet: " + ("scanned" if state.get("packet_scanned", false) else "not scanned"))
+		lines.append("Seed packet: " + ("looked at" if state.get("packet_scanned", false) else "not looked at yet"))
 	else:
-		lines.append("Alo: %s seed; moisture %s of 100; label: %s; %s" % [state.get("cassette_alo_seed_count", 0), state.get("moisture_alo", 0), _label_text(String(state.get("alo_label", ""))), "sealed" if state.get("alo_sealed", false) else "open"])
-		lines.append("Tara: %s seed; moisture %s of 100; label: %s; %s" % [state.get("cassette_tara_seed_count", 0), state.get("moisture_tara", 0), _label_text(String(state.get("tara_label", ""))), "sealed" if state.get("tara_sealed", false) else "open"])
-		lines.append("Paired planting: " + ("complete" if complete.get("complete", false) else "not complete"))
+		lines.append("Alo: %s seed · water %s of 100 · label: %s · lid %s" % [state.get("cassette_alo_seed_count", 0), state.get("moisture_alo", 0), _label_text(String(state.get("alo_label", ""))), "closed" if state.get("alo_sealed", false) else "open"])
+		lines.append("Tara: %s seed · water %s of 100 · label: %s · lid %s" % [state.get("cassette_tara_seed_count", 0), state.get("moisture_tara", 0), _label_text(String(state.get("tara_label", ""))), "closed" if state.get("tara_sealed", false) else "open"])
+		lines.append("Both plants ready: " + ("yes" if complete.get("complete", false) else "not yet"))
 	return "\n".join(lines)
 
 func _label_text(value: String) -> String:
-	return {"EXTERNAL_TEST": "External test", "INDOOR_REFERENCE": "Indoor reference"}.get(value, "Not labelled")
+	return {"EXTERNAL_TEST": "Outside test", "INDOOR_REFERENCE": "Indoor"}.get(value, "no label yet")
 
 func _selection_text() -> String:
 	var lines: Array[String] = []

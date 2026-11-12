@@ -1,6 +1,0 @@
-M3-97 composer compatibility, 6 Nov 2026 port round (real renders, not a dry run)
-Old composer = origin/main production/tools/compose_cutscene.py (fc72c90); new = this change.
-Same spec, same inputs, rendered once with each through production/tools/heavy.py; outputs compared decoded.
-PASS CS-01 (trims, speed ramp, push-ins, dissolve, sound captions, slate, title, SFX_FAN_NORMAL bed at 5.4 s): video framemd5 identical (6bea181fb5ae6a19); decoded audio bit-identical, 678336 samples, max |diff| 0.0; first sound 5.418 s in both.
-PASS CS-08 (music bed with ducking, four voice lines): video framemd5 identical (f7986a88509f2303); decoded audio bit-identical, 870000 samples, max |diff| 0.0.
-The new keys (hold_end, tail_black, sfx, music_at/music_in, music_mutes, caption tags, caption-only lines, pending cue slots) change nothing for specs that do not use them.

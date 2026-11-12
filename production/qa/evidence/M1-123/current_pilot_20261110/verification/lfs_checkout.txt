@@ -1,1 +1,0 @@
-Checking out LFS objects: 100% (1197/1197), 1.1 GB | 73 MB/s, done.

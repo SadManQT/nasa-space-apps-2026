@@ -1,1 +1,0 @@
-godot_gated: windowed Godot cannot open inside this sandbox. Write production/qa/evidence/<task>_capture.sh instead; the night shift runs it outside the sandbox.

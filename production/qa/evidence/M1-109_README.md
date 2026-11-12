@@ -1,7 +1,0 @@
-# M1-109 - Continue keyboard focus
-
-Reviewed source7ffabe8 (game172555bdc35d507564a47145482a582a9e00a7e1) removes unavailable Continue from keyboard focus and restores it for a valid checkpoint. Availability updates during briefing, Science and Settings stay in the existing modal snapshot, so background controls remain disabled and close restores current state. The shared panel close helper retains a valid external focus fallback rather than clearing it.
-
-Behavioral RED154checks/30failures; setup-only fix left4 Settings-close failures; final focused menu154/0, worker content572/0, hints124/0 (850 total), each through game/tools/run_tests.sh with its mandatory setup. Native Forward+ on the frozen commit229/0, no warnings/errors,13 PNGs/nine source hashes verified; enabled and skipped-unavailable Continue at150% visually inspected. Tests use a real saved/reloaded checkpoint accepted by the production restore validator and verify UI leaves save bytes unchanged.
-
-Source/spec and quality review C0/I0/M0. The full integrated runner/all-eight-chapter text gate remains pending; no full-game pass or hardware playthrough is claimed. First invalid save-fixture attempts, earlier intermediate logs and exact raw transcripts are preserved privately in the archive named by provenance JSON. Published logs use UTF8/LF with trailing transcript whitespace trimmed only. ExistingM1-75 evidence is preserved; this capture uses its ownM1-109 prefix.
