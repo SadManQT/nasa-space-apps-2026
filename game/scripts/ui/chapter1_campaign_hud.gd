@@ -71,6 +71,7 @@ var _prompt_label: Label
 # Toast and station strip
 var _column: VBoxContainer
 var _toast: PanelContainer
+var _toast_icon: UiDesign.LineIcon
 var _status: Label
 var _toast_timer := 0.0
 var _guide_toast := false  # the toast only repeats guidance; a crew message may replace it
@@ -439,9 +440,30 @@ func show_status(text: String) -> void:
 	if text.begins_with("SAVE FAILED") or text.begins_with("AUTOSAVE FAILED"):
 		edge = UiDesign.colour("danger")
 	_toast.add_theme_stylebox_override("panel", UiDesign.glass_style(edge, Color.TRANSPARENT, 12))
+	_set_toast_icon(String(rewrite.kind), line, edge)
 	_toast_timer = float(UiDesign.tokens().get("motion", {}).get("toast_seconds", 5.0))
 	if not _chrome_hidden:
 		_fade(_toast, true)
+
+func _set_toast_icon(kind: String, line: String, edge: Color) -> void:
+	if _toast_icon == null:
+		return
+	var icon_kind := "info"
+	if kind == "good":
+		icon_kind = "check"
+	elif kind == "caution" or edge == UiDesign.colour("danger"):
+		icon_kind = "warning"
+	elif line.begins_with("Next ▸"):
+		icon_kind = "goal"
+	elif line.begins_with("Not sure where to go"):
+		icon_kind = "what_now"
+	elif line.begins_with("This passage leads"):
+		icon_kind = "place"
+	elif line.begins_with("New message"):
+		icon_kind = "message"
+	_toast_icon.kind = icon_kind
+	_toast_icon.colour = edge if kind in ["good", "caution"] or edge == UiDesign.colour("danger") else UiDesign.colour("accent")
+	_toast_icon.queue_redraw()
 
 func _hide_toast() -> void:
 	_toast_timer = 0.0
@@ -509,7 +531,16 @@ func _build() -> void:
 	_toast.set_meta("lla_shown", false)
 	_status = UiDesign.label("", "body", "ivory")
 	_status.accessibility_name = "Message"
-	_toast.add_child(_status)
+	_status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	# M4-23: every toast leads with an icon that names its kind (result, warning, next step, place).
+	var toast_row := HBoxContainer.new()
+	toast_row.add_theme_constant_override("separation", 12)
+	toast_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_toast_icon = UiDesign.LineIcon.new("info", UiDesign.colour("accent"))
+	_toast_icon.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	toast_row.add_child(_toast_icon)
+	toast_row.add_child(_status)
+	_toast.add_child(toast_row)
 	_column.add_child(_toast)
 	outpost = Outpost.new()
 	outpost.name = "OutpostStatus"
