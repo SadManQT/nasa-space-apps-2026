@@ -327,13 +327,11 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-124">M1-124</a> M1-105 handoff: restore lunar gravity indoors for Ramim acceptance <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">1 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">4 todo</span></div><div class="bar"><i style="width:17%"></i></div>
-<details open><summary>Working now (1)</summary><ul>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">1 done</span><span class="chip s-in_progress">3 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">2 todo</span></div><div class="bar"><i style="width:17%"></i></div>
+<details open><summary>Working now (3)</summary><ul>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/codex on 2026-11-12</div></li>
-</ul></details>
-<details open><summary>Next up today (2)</summary><ul>
-<li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span></li>
-<li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span></li>
+<li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">claimed by Atik/codex on 2026-11-12</div></li>
+<li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/codex on 2026-11-12</div></li>
 </ul></details>
 <details><summary>To do (2)</summary><ul>
 <li><a class="id" href="#M3-93">M3-93</a> 12 Nov release: the working full game (Chapters 1-8) as Windows and macOS builds, with the evidence package <span class="chip ">codex</span> <span class="chip ">P0</span></li>
@@ -1637,8 +1635,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P1",
    "tool": "codex",
    "title": "Performance and low-spec pass",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/codex",
    "deps": [
     "M1-06"
    ],
@@ -1664,6 +1662,15 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
      "status": "blocked",
      "reason": "Atik user explicitly requests remaining Atik export/performance/release work, including M1-92, and authorizes publishing without another approval. Preserve existing source and completed owner evidence."
     }
+   ],
+   "edit_files": [
+    "production/qa/perf/atik_20261112/M1-23.md",
+    "production/qa/perf/atik_20261112/forward_plus.json",
+    "production/qa/perf/atik_20261112/forward_plus.csv",
+    "production/qa/perf/atik_20261112/forward_plus.log",
+    "production/qa/perf/atik_20261112/compatibility.json",
+    "production/qa/perf/atik_20261112/compatibility.csv",
+    "production/qa/perf/atik_20261112/compatibility.log"
    ],
    "batch_phase": "implementation"
   },
@@ -7485,8 +7492,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "any",
    "title": "Profile and remove native first campaign draw hitch on M4",
-   "status": "todo",
-   "owner": "",
+   "status": "in_progress",
+   "owner": "Atik/codex",
    "deps": [],
    "paths": [
     "game/scripts/loading/",
@@ -7534,6 +7541,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "production/AI_PROMPT_LOG.md"
    ],
    "blocker": "11 Nov Sadman: reproduced on M4 (cold caches: title frame 24.2 s, first campaign frame 11.5 s; warm: 1.3 s / 0.48 s) and profiled with a debug-symbol 4.7.2 build: first-use Metal shader compilation (main thread in CAMetalLayer nextDrawable while MTLCompilerService compiles). Fix = export shader_baker, which needs Apple's Metal toolchain (Xcode); this Mac has only Command Line Tools and no room for Xcode. Evidence production/qa/perf/M1-92_sadman_20261111/README.md. Also fixed the export plugin that broke every exported build.",
+   "edit_files": [
+    "production/qa/perf/atik_20261112/M1-92.md",
+    "production/qa/perf/atik_20261112/host_tools.json"
+   ],
    "batch_phase": "implementation"
   },
   {
