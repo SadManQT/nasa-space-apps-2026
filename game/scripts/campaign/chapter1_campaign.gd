@@ -1321,6 +1321,27 @@ func _refresh_world_now(incremental_assets: bool = false) -> void:
 		_place_crew()
 	LoadTrace.end("room_rebuild", stamp)
 
+## M4-24: a scene opens with the player and camera turned toward the first job
+## still to do (simulated-player review: views used to start in walls or on a
+## crew member's back). Aboard the rover the cab seat keeps its own facing.
+func _face_first_job() -> void:
+	if _player == null or _player.has_meta("aboard") or route == null:
+		return
+	for target in targets_for_current_scene():
+		if not target is Dictionary or target_completed(target):
+			continue
+		var node := physical_target(String(target.get("target_id", "")))
+		if node == null:
+			continue
+		var flat := node.global_position - _player.global_position
+		flat.y = 0.0
+		if flat.length() < 0.3:
+			return
+		_player.face_towards(_player.global_position + flat)
+		_player.follow_camera.yaw = atan2(flat.x, flat.z) - PI
+		_player.reset_placement()
+		return
+
 func _place_crew() -> void:
 	var stamp := LoadTrace.begin()
 	var anchors: Dictionary = RoomContract.anchors(route.current_room_id())
@@ -1340,6 +1361,7 @@ func _place_crew() -> void:
 	var story_log: Dictionary = director.snapshot().get("story_log", {}) if director != null else {}
 	_player = _crew.place(route.current_scene_id(), _room, Vector3(player_anchor[0], player_anchor[1], player_anchor[2]), story_log.get("choices", {}), story_log.get("moments", []))
 	_player.generic_interaction_input = false
+	_face_first_job()
 	_bind_player_eva()
 	if field_systems != null:
 		field_systems.bind_scene()

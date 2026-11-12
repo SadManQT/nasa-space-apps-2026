@@ -101,11 +101,11 @@ func bind_query(query: Dictionary, forecast: Dictionary = {}) -> void:
 		var show: bool = changed or forecast_changes or low
 		card.values.text = view.current_text
 		card.status.text = view.status_word
-		card.status.visible = not view.status_word.is_empty()
-		var tone := _tone(view.status)
+		card.status.visible = low and not view.status_word.is_empty()  # a warning only where it matters now
+		var tone := _tone(view.status) if low else UiDesign.colour("good")
 		card.status.add_theme_color_override("font_color", tone)
 		card.values.add_theme_color_override("font_color", UiDesign.colour("ivory"))  # the status line and icon carry the warning
-		card.icon.colour = tone if view.status != "OK" else UiDesign.colour("accent")
+		card.icon.colour = tone if low else UiDesign.colour("accent")
 		card.icon.queue_redraw()
 		card.bar.max_value = view.capacity
 		card.bar.visible = view.has_capacity

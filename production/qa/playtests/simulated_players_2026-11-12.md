@@ -15,8 +15,8 @@
 
 | # | Problem (personas) | Evidence | Status |
 |---|---|---|---|
-| 1 | A red "too few shielded places" warning stays on screen in calm chapters (all) | Shown from CH01-S07 to CH08-S12 | **Fixed:** the storm-shelter row only warns during the Chapter 1 storm night (S07–S11) and the Chapter 7 storm (`matters_in` in ui_text.json) |
-| 2 | The camera starts inside walls or behind crew (E, A) | CH02-S02, CH03-S01, CH07-S03, CH02-S03, CH05-S01 | **Open, filed:** spawn-camera framing per scene needs a room-by-room pass |
+| 1 | A red "too few shielded places" warning stays on screen in calm chapters (all) | Shown from CH01-S07 to CH08-S12 | **Fixed:** the storm-shelter row only warns during the Chapter 1 storm night (S07–S11) and the Chapter 7 storm (`matters_in` in ui_text.json); outside those, the row shows no red status even when it appears for a value change |
+| 2 | The camera starts inside walls or behind crew (E, A) | CH02-S02, CH03-S01, CH07-S03, CH02-S03, CH05-S01 | **Fixed (M4-24):** every scene now opens with the player and camera turned toward the first unfinished job; checked on fresh start screenshots. CH07-S03 still has a panel close to the camera |
 | 3 | The goal text is hard to read on bright ceilings (A, E) | Every CH01 shot | **Fixed:** stronger dark backing behind the goal (0.86) and the toast (0.8) |
 | 4 | "· 7 m" reads like a time (A, E, B) | "Next ▸ … · 7 m" | **Fixed:** distances now read "7 m away" |
 | 5 | Repetitive one-button chores (B, A) | CH01-S04 has 10 steps, CH02-S05 has 13, CH03-S02 has 6, CH03-S04 has 5 | **Open, filed:** merging steps changes canon jobs and tests, so it needs a design decision |
