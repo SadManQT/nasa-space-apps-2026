@@ -1,6 +1,6 @@
 # Atik — opening campaign blockers, 13 November 2026
 
-M1-127 is the user’s explicit two-bug assignment. Baseline: 798b10aa; published reservations: 33fc0e83 and 24fe7b55. No other tasks, calibration thresholds, exterior slope limits, assets, local settings or player save files were changed.
+M1-127 is the user’s explicit two-bug assignment. Baseline: 798b10aa; published reservations: 33fc0e83 and 24fe7b55. Implementation: f72e3c49554615ac749215ca1ef83e58c37bd4c1. No other tasks, calibration thresholds, exterior slope limits, assets, local settings or player save files were changed.
 
 ## Doorway movement: reproduced cause and repair
 
@@ -22,6 +22,7 @@ Exact game files: `game/scripts/eva/eva_suit.gd`, `game/scripts/ui/chapter1_camp
 - Intermediate attempts are retained, including a test save-key typo (`route` versus existing `route_runtime`) and an omitted indoor test precondition. These are not counted as passing runs.
 - Focused `game/tools/run_tests.sh opening_blockers`:29checks,0failures,1/1. Real E events open and operate the activity; no probe-transfer fixture is called. Includes reach rejection, carried/placed cancellation and retry, Continue reconstruction, original panel calibration and restored movement.
 - Rendered Metal/Forward+ M4 run:29checks,0failures, normal exit; three actual campaign captures were inspected (door escape, carried probe, calibration completion). Temporary isolated saves only. This is scripted integration evidence, not human learner QA or performance certification.
+- Fresh Windows packaged export/startup:11checks,0failures; [CI43297579977](https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/43297579977), sourcef72e3c49. Export ZIP SHA256`51fb7359ba0dfc5d32bb6caafb0743c5a870b2fd856854989aee9d9a222c7bac`. This is startup/export evidence, not Windows rendered controller QA. No release assets were replaced.
 - Full gate: pending; results will be added before closure. Full runner uses its default limits; no assertion or timing threshold is weakened.
 
 Source work and tests are isolated in the existing Atik release worktree. The user’s44local editor/import modifications and UI concept images remain preserved in the main working folder. The gameplay save is untouched; automated checks use unique temporary user/save directories. The already-running editor/game process is not killed.
