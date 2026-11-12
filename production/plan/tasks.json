@@ -1043,7 +1043,8 @@
     ".github/workflows/judging-candidate.yml",
     "production/qa/builds/atik_20261112/README.md",
     "production/qa/builds/atik_20261112/manifest.json",
-    "production/qa/builds/atik_20261112/ci_runs.json"
+    "production/qa/builds/atik_20261112/ci_runs.json",
+    "production/qa/builds/atik_20261112/media_snapshot_probe.gd"
    ]
   },
   {
