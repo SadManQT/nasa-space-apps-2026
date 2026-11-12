@@ -61,6 +61,29 @@ func _run() -> void:
 	while not trainer.field_ready:
 		await process_frame
 	_check(trainer.complete_sortie().is_empty() and not trainer.results.has("sortie_carry"), "Unperformed field actions cannot produce a completed report card")
+	# Exercise the other trainer's pointer/controller/keyboard control callbacks too.
+	var field_toggle := trainer.find_child("ToggleFieldConsole", true, false) as Button
+	field_toggle.pressed.emit()
+	var field_mouse := Input.MOUSE_MODE_CAPTURED if FollowCamera.may_capture_pointer() else Input.MOUSE_MODE_VISIBLE
+	_check(trainer.field_active and Input.mouse_mode == field_mouse, "console button enters field with the platform's mouse mode")
+	field_toggle.pressed.emit()
+	_check(not trainer.field_active and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "field button returns to console and releases mouse")
+	var start := InputEventJoypadButton.new()
+	start.button_index = JOY_BUTTON_START
+	start.pressed = true
+	trainer._unhandled_input(start)
+	_check(trainer.field_active, "controller Start enters field")
+	trainer._unhandled_input(start)
+	_check(not trainer.field_active, "controller Start returns to console")
+	_press_key(trainer, KEY_TAB)
+	_check(trainer.field_active, "Tab enters field")
+	var lamp_before: bool = trainer.eva_suit.headlamp_on
+	_press_key(trainer, KEY_L)
+	_check(trainer.eva_suit.headlamp_on != lamp_before, "L toggles walking astronaut headlamp")
+	_press_key(trainer, KEY_L)
+	_check(trainer.eva_suit.headlamp_on == lamp_before, "L restores walking astronaut headlamp")
+	_press_key(trainer, KEY_TAB)
+	_check(not trainer.field_active, "Tab returns to console")
 	_check_no_spoilers(trainer, "catalog")
 	await _save_shot("M3-67_catalog.png")
 

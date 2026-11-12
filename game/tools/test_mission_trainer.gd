@@ -226,11 +226,39 @@ func _test_ui() -> void:
 	await process_frame
 	trainer = main.get("_trainer")
 	_check(trainer.store.results.has("P-02"), "reopened trainer reads separately persisted real result")
-	trainer.exit_requested.emit()
+	trainer.select_scenario("P-02")
+	await process_frame
+	await _click(trainer.find_child("TrainerExit", true, false) as Button)
+	_check(is_instance_valid(main.get("_trainer")) and trainer._page == "catalog", "mouse Back from a brief returns to catalog without leaving trainer")
+	# Exercise GUI dispatch: emitting pressed alone misses mouse focus/hover reentrancy.
+	await _click(trainer.find_child("TrainerExit", true, false) as Button)
+	_check(not is_instance_valid(main.get("_trainer")) and menu.is_visible_in_tree(), "real mouse Back closes trainer and restores title without freezing")
+	_check(root.gui_get_focus_owner() == menu.find_child("MissionTrainerEntry", true, false), "mouse Back restores trainer title entry focus")
+	for cycle in 3:
+		await _click(menu.find_child("MissionTrainerEntry", true, false) as Button)
+		trainer = main.get("_trainer")
+		_check(is_instance_valid(trainer), "mouse can reopen trainer after Back cycle " + str(cycle))
+		if is_instance_valid(trainer):
+			await _click(trainer.find_child("TrainerExit", true, false) as Button)
+		_check(menu.is_visible_in_tree() and menu.process_mode == Node.PROCESS_MODE_INHERIT, "mouse Back cycle restores responsive title " + str(cycle))
 	_check(await main.preparation.wait_idle(), "title-owned look-ahead drains before fixture teardown")
 	await process_frame
 	await process_frame
 	main.free()
+	await process_frame
+	await process_frame
+
+func _click(button: Button) -> void:
+	await process_frame
+	var pointer := InputEventMouseMotion.new()
+	pointer.position = button.get_global_rect().get_center()
+	root.push_input(pointer, true)
+	for pressed in [true, false]:
+		var click := InputEventMouseButton.new()
+		click.position = pointer.position
+		click.button_index = MOUSE_BUTTON_LEFT
+		click.pressed = pressed
+		root.push_input(click, true)
 	await process_frame
 	await process_frame
 

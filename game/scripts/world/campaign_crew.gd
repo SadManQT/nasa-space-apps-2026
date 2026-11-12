@@ -93,13 +93,12 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 	_seated.clear()
 	for id in local_ids:
 		var body: PlayerController = bodies[id]
-		var facing := room.installed_seat_facing(body.position)
-		if id == active or facing == Vector3.ZERO:
+		var seat := room.installed_seat_pose(body.position)
+		if id == active or seat.is_empty():
 			continue
-		body.face_towards(body.position + facing)
-		body.animation.set_rest_clip("SitIdle_loop")
-		body.foot_ik_enabled = false
-		_seated.append(id)
+		body.face_towards(body.position + seat.facing)
+		if body.sit_at(room.to_global(seat.pelvis)):
+			_seated.append(id)
 	_build_screen()
 	_attach_carried(room.stage().get("carried", {}))
 	return player

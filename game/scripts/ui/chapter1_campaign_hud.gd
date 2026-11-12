@@ -39,6 +39,7 @@ var chapter3_panel: Chapter3PuzzlePanel
 var chapter6_panel: Chapter6PuzzlePanel
 var chapter8_panel: Chapter8PuzzlePanel
 var p01_panel: P01Panel
+var probe_activity: Node3D
 var comms_service: RefCounted
 var comms_panel: Control
 var outpost: OutpostStatus
@@ -283,6 +284,17 @@ func setup(value: Chapter1Campaign) -> void:
 	runtime.chapter2_panel_requested.connect(func(view): open_chapter2_panel(String(view.get("target_id", ""))))
 	runtime.p01_panel_requested.connect(func(view):
 		if mission_table.is_open() or p01_panel.is_open() or not panels.active_panel().is_empty() or panels.hint_player.is_open():
+			return
+		if String(view.target_id) == "calibrate_probe" and view.has("probe_job") and not bool(view.probe_job.completed):
+			if is_instance_valid(probe_activity):
+				return
+			probe_activity = preload("res://scripts/ui/probe_calibration_activity.gd").new()
+			runtime.add_child(probe_activity)
+			probe_activity.setup(runtime)
+			probe_activity.closed.connect(func(completed: bool) -> void:
+				if completed:
+					p01_panel.open(runtime, "calibrate_probe")
+					p01_panel.teach_first_use())
 			return
 		if p01_panel.open(runtime, String(view.target_id)):
 			p01_panel.teach_first_use())
@@ -1760,6 +1772,14 @@ func _clear_of_cards(control: Control) -> void:
 			control.position.y = card.get_rect().end.y + 8.0
 
 func _project(camera: Camera3D, world_point: Vector3, view: Vector2, margin: float) -> Vector2:
+	var local_point := camera.get_camera_transform().affine_inverse() * world_point
+	# Perspective projection divides by depth. A target can cross the camera's
+	# plane while turning or changing rooms; give it a stable edge marker there.
+	if camera.projection != Camera3D.PROJECTION_ORTHOGONAL and is_zero_approx(local_point.z):
+		var x := view.x * 0.5
+		if not is_zero_approx(local_point.x):
+			x = view.x - margin if local_point.x > 0.0 else margin
+		return Vector2(x, view.y - margin)
 	var point := camera.unproject_position(world_point)
 	if camera.is_position_behind(world_point):
 		point = Vector2(view.x - point.x, view.y - margin)

@@ -29,6 +29,7 @@ var _revision := 0
 var _opening := false
 var _guide: Control
 var _back_button: Button
+var _exiting := false
 var moon_trainer: Control
 var moon_trainer_results_path := "user://moon_trainer_results.json"
 
@@ -73,13 +74,13 @@ func _ready() -> void:
 	_body = _catalog_body
 	_guide = shell.find_child("PracticeGuide", true, false) as Control
 	_back_button = shell.find_child("TrainerExit", true, false) as Button
-	_back_button.pressed.connect(func() -> void: exit_requested.emit() if _page == "catalog" else show_catalog())
+	_back_button.pressed.connect(_go_back)
 	for label_node in shell.find_children("*", "Label", true, false):
 		var label := label_node as Label
 		UiDesign.style_label(label, String(label.get_meta("lla_type", "body")), String(label.get_meta("lla_colour", "ivory")))
 	(shell.find_child("StartPowerPractice", true, false) as Button).pressed.connect(func(): select_scenario("P-02"))
 	(shell.find_child("OpenMoonTrainer", true, false) as Button).pressed.connect(_open_moon_trainer)
-	(shell.find_child("CatalogExit", true, false) as Button).pressed.connect(func(): exit_requested.emit())
+	(shell.find_child("CatalogExit", true, false) as Button).pressed.connect(_go_back)
 	for image_node in _featured_cards.find_children("Image", "TextureRect", true, false):
 		var texture := (image_node as TextureRect).texture as AtlasTexture
 		var index: int = image_node.get_parent().get_parent().get_index()
@@ -221,17 +222,22 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	var back_pad: bool = event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_B
 	if (event.is_action_pressed("ui_cancel") or back_pad) and not event.is_echo():
-		if table.is_open() or panels.hint_player.is_open():
-			return
-		if not panels.active_panel().is_empty():
-			panels.close_panel()
-			get_viewport().set_input_as_handled()
-			return
-		if _page == "catalog":
-			exit_requested.emit()
-		else:
-			show_catalog()
 		get_viewport().set_input_as_handled()
+		_go_back()
+
+func _go_back() -> void:
+	if _exiting or is_queued_for_deletion() or is_instance_valid(moon_trainer):
+		return
+	if table.is_open() or panels.hint_player.is_open():
+		return
+	if not panels.active_panel().is_empty():
+		panels.close_panel()
+		return
+	if _page == "catalog":
+		_exiting = true
+		exit_requested.emit()
+	else:
+		show_catalog()
 
 func _clear() -> void:
 	for child in _exercise_body.get_children():

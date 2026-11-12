@@ -217,6 +217,8 @@ func _test_viewport_capture_never_fabricates() -> void:
 	DirAccess.remove_absolute(path)
 	var result: Dictionary = await capture.call({"individual_id": fresh_id, "date": fresh_date, "scene_id": "EX-CH01-S05", "alignment": {"x": 0.0, "y": 0.0}})
 	_check(result.has("accepted"), "viewport capture answers with a result dictionary")
+	if DisplayServer.get_name() == "headless":
+		_check(not result.accepted and String(result.get("message", "")).contains("rendered frame"), "headless capture refuses before accessing an unavailable render texture")
 	if bool(result.get("accepted", false)):
 		_check(FileAccess.file_exists(String(result.get("photo_path", ""))), "an accepted viewport capture saved a real file")
 		DirAccess.remove_absolute(String(result.get("photo_path", "")))

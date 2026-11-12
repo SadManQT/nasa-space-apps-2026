@@ -17,6 +17,28 @@ func _run() -> void:
 	root.add_child(campaign)
 	await process_frame
 	var hud = campaign.hud
+	var camera := Camera3D.new()
+	campaign.add_child(camera)
+	camera.position = Vector3(2, 1, 3)
+	camera.rotation_degrees.y = 37
+	camera.h_offset = 0.2
+	camera.v_offset = 0.1
+	camera.force_update_transform()
+	camera.reset_physics_interpolation()
+	await process_frame
+	var projection_frame := camera.get_camera_transform()
+	var view := Vector2(1280, 720)
+	for x in [-2.0, 0.0, 2.0]:
+		for depth in [-0.000001, 0.0, 0.000001]:
+			var projected: Vector2 = hud._project(camera, projection_frame * Vector3(x, 0, depth), view, 24.0)
+			_check(projected.is_finite() and Rect2(Vector2(24, 24), view - Vector2(47, 47)).has_point(projected), "camera-plane marker stays finite and within viewport")
+			_check(is_equal_approx(projected.y, 696.0) and (is_equal_approx(projected.x, 640.0) if x == 0.0 else (projected.x < 640.0) == (x < 0.0)), "camera-plane marker preserves left/right direction")
+	for depth in [-2.0, 2.0]:
+		_check(hud._project(camera, projection_frame * Vector3(0.5, 0.2, depth), view, 24.0).is_finite(), "front and behind markers still project normally")
+	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
+	var orthographic: Vector2 = hud._project(camera, projection_frame.origin, view, 24.0)
+	_check(orthographic.is_finite() and Rect2(Vector2(24, 24), view - Vector2(47, 47)).has_point(orthographic), "orthographic camera-plane projection stays finite and bounded")
+	camera.free()
 	var target: Node3D = campaign.physical_target("commission_route")
 	var player: Node3D = campaign._player
 	player.global_position = target.global_position + Vector3(3, 0, 4)
