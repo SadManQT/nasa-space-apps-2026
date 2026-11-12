@@ -54,6 +54,9 @@ func _ready() -> void:
 	await preparation.resource("res://scenes/ui/main_menu.tscn")
 	await preparation.resource("res://scenes/ui/campaign_panels.tscn")
 	await preparation.resource("res://resources/ui/lla_theme.tres")
+	# UiKit's first preset lookup also loads its font/theme dependencies. Keep
+	# that cold resource work in the existing threaded preparation path.
+	await preparation.resource(String(GoThemePresets.BUILTIN[GoThemePresets.SCIFI_DARK]))
 	_save_service = _new_save_service()
 	var stamp := LoadTrace.begin()
 	_build_stage()
@@ -150,11 +153,15 @@ func _show_title(preloaded_snapshot: Variant = null, incremental: bool = false) 
 	_menu_layer = CanvasLayer.new()
 	_menu_layer.name = "TitleLayer"
 	add_child(_menu_layer)
+	var ui_stamp := LoadTrace.begin()
 	_menu = MENU_SCENE.instantiate() as MainMenu
+	LoadTrace.end("title_menu_instantiate", ui_stamp)
 	_menu.save_path = save_path
 	if incremental:
 		_menu.defer_panels = true
+	ui_stamp = LoadTrace.begin()
 	_menu_layer.add_child(_menu)
+	LoadTrace.end("title_menu_ready", ui_stamp)
 	_menu.new_expedition_requested.connect(_choose_crew)
 	_menu.continue_requested.connect(_continue_expedition)
 	_menu.slot_continue_requested.connect(_launch_campaign)
@@ -166,13 +173,17 @@ func _show_title(preloaded_snapshot: Variant = null, incremental: bool = false) 
 	if is_inside_tree():
 		await get_tree().process_frame
 	if incremental and is_instance_valid(_menu):
+		ui_stamp = LoadTrace.begin()
 		_menu.attach_panels()
+		LoadTrace.end("title_menu_panels", ui_stamp)
 		if is_inside_tree():
 			await get_tree().process_frame
 	var snapshot: Dictionary = preloaded_snapshot if preloaded_snapshot is Dictionary else _load_campaign_snapshot()
 	if is_inside_tree():
 		await get_tree().process_frame
+	ui_stamp = LoadTrace.begin()
 	_menu.setup(snapshot)
+	LoadTrace.end("title_menu_setup", ui_stamp)
 	if FileAccess.file_exists(GameSettings.DEFAULT_PATH):
 		_menu.set_accessibility(GameSettings.new().accessibility_for_campaign())
 	_show_load_notice()

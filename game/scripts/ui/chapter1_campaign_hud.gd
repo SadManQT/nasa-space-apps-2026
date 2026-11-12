@@ -212,12 +212,16 @@ func setup(value: Chapter1Campaign) -> void:
 	var director_ref = runtime.get("director") if runtime != null else null
 	var content_ref: Dictionary = runtime.content if runtime != null and runtime.get("content") is Dictionary else {}
 	comms_service.setup(director_ref, content_ref, false)
+	if runtime.incremental_loading:
+		await get_tree().process_frame
 	comms_panel = CommsPanelScript.new()
 	comms_panel.name = "CommsPanel"
 	add_child(comms_panel)
 	comms_panel.bind_service(comms_service)
 	comms_panel.opened.connect(func() -> void: _on_panel_opened("comms"))
 	comms_panel.closed.connect(func() -> void: _on_panel_closed("comms"))
+	if runtime.incremental_loading:
+		await get_tree().process_frame
 	mission_table = MISSION_TABLE_SCENE.instantiate() as MissionTablePanel
 	add_child(mission_table)
 	mission_table.opened.connect(func(_target: String) -> void: _on_panel_opened("mission_table"))
@@ -358,7 +362,8 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 	if during_loading and runtime.incremental_loading:
 		await get_tree().process_frame
 	stamp = LoadTrace.begin()
-	_build_targets()
+	# The final pass below styles the refreshed goal and query together.
+	_build_targets(false)
 	LoadTrace.end("hud_targets_refresh", stamp)
 	if during_loading and runtime.incremental_loading:
 		await get_tree().process_frame
@@ -723,7 +728,7 @@ func _layout() -> void:
 	_debug.offset_right = margin + float(UiDesign.px(900, view.y))
 
 ## Works out the one goal for the current scene state and rebuilds the jobs list.
-func _build_targets() -> void:
+func _build_targets(refresh_accessibility: bool = true) -> void:
 	if _targets == null or runtime == null:
 		return
 	for child in _targets.get_children():
@@ -772,7 +777,8 @@ func _build_targets() -> void:
 	_update_debug(gate)
 	if panels != null and not panels.active_panel().is_empty():
 		_set_modal_buttons(true)
-	apply_accessibility()
+	if refresh_accessibility:
+		apply_accessibility()
 
 func _job_row(target: Dictionary, state: String) -> Control:
 	var row := HBoxContainer.new()
