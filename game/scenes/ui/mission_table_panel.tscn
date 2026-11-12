@@ -38,7 +38,7 @@ content_margin_right = 16.0
 content_margin_bottom = 16.0
 
 [sub_resource type="StyleBoxFlat" id="GoldStyle"]
-bg_color = Color(0.96, 0.75, 0.2, 1)
+bg_color = Color(0.227, 0.627, 1.0, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -313,7 +313,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 22
-text = "Choose this shift?s settings"
+text = "Choose this shift's settings"
 autowrap_mode = 3
 
 [node name="AirTitle" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/PlanCard/PlanContent"]
@@ -399,7 +399,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 theme_override_colors/font_color = Color(0.4, 0.84, 0.92, 1)
-text = "Preview ? nothing changes yet."
+text = "Preview · nothing changes yet."
 autowrap_mode = 3
 
 [node name="Battery" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
@@ -407,7 +407,7 @@ layout_mode = 2
 mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
-text = "Battery ? before ? after"
+text = "Battery · before → after"
 autowrap_mode = 3
 
 [node name="BatteryBar" type="ProgressBar" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
@@ -422,7 +422,7 @@ layout_mode = 2
 mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
-text = "Air ? before ? after"
+text = "Air · before → after"
 autowrap_mode = 3
 
 [node name="AirBar" type="ProgressBar" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
@@ -437,7 +437,7 @@ layout_mode = 2
 mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
-text = "Alo ? before ? after"
+text = "Alo · before → after"
 autowrap_mode = 3
 
 [node name="AloBar" type="ProgressBar" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
@@ -452,7 +452,7 @@ layout_mode = 2
 mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
-text = "Garden ? before ? after"
+text = "Garden · before → after"
 autowrap_mode = 3
 
 [node name="GardenBar" type="ProgressBar" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/ForecastCard/ForecastContent"]
@@ -491,7 +491,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 20
-text = "Kai ? Power & heat"
+text = "Kai · Power & heat"
 autowrap_mode = 3
 
 [node name="KaiNote" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/CrewCard/CrewContent"]
@@ -512,7 +512,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 20
-text = "Amara ? Atmosphere"
+text = "Amara · Atmosphere"
 autowrap_mode = 3
 
 [node name="AmaraNote" type="Label" parent="Frame/Stack/TableBodyScroll/Body/PlanColumns/CrewCard/CrewContent"]

@@ -23,14 +23,16 @@ signal opened(target_id: String)
 signal closed(target_id: String)
 
 const PuzzleScript = preload("res://scripts/puzzles/chapter8_puzzles.gd")
-const INK := Color("#05060A")
-const NAVY := Color("#1F2A44")
-const NAVY_DEEP := Color("#0B1426")
-const IVORY := Color("#ECEEF0")
-const MUTED := Color("#A8B4C8")
-const MUSTARD := Color("#F2C230")
-const CYAN := Color("#20B8C9")
-const GREEN := Color("#4CAF50")
+# Instrument Light palette (12 Nov AAA pass): the same tokens as the rest of the UI.
+const INK := Color("#0A101C")
+const NAVY := Color("#12151F")
+const NAVY_DEEP := Color("#0A0C12")
+const IVORY := Color("#EEF1F8")
+const MUTED := Color("#9AA4BA")
+const MUSTARD := Color("#3AA0FF")
+const CYAN := Color("#FF6B9D")
+const GREEN := Color("#3EE0A0")
+const EDGE := Color("#252A3A")
 const RED := Color("#E56B6F")
 const MIN_TARGET := 44.0
 const STAGE_TEXT := {"learn": "LEARN · a guided example that cannot fail", "apply": "APPLY · real stakes", "twist": "TWIST · one new constraint"}
@@ -63,7 +65,7 @@ func _ready() -> void:
 	_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(_overlay)
 	_frame = PanelContainer.new()
-	_frame.add_theme_stylebox_override("panel", _box(NAVY_DEEP, Color(0.13, 0.72, 0.78, 0.84), 14, 1))
+	_frame.add_theme_stylebox_override("panel", _box(Color(NAVY_DEEP, 0.97), EDGE, 8, 1))
 	_frame.mouse_filter = Control.MOUSE_FILTER_STOP
 	# Anchored, not sized: an autowrapped label reports a huge minimum height
 	# on its first frame, and an anchored frame settles back to the viewport
@@ -1018,7 +1020,7 @@ func _option_button(text: String, node_name: String, selected: bool, disabled: b
 	button.add_theme_font_size_override("font_size", _fs(12))
 	if selected:
 		for state in ["normal", "pressed", "disabled"]:
-			button.add_theme_stylebox_override(state, _box(Color("#2C3D63"), MUSTARD, 7, 2))
+			button.add_theme_stylebox_override(state, UiDesign.button_style(Color("#1A2738"), true))
 	button.pressed.connect(action)
 	return button
 
@@ -1044,8 +1046,8 @@ func _column(title: String, width: float) -> VBoxContainer:
 
 func _card_box(highlight: bool, available: bool) -> PanelContainer:
 	var box := PanelContainer.new()
-	var border := GREEN if highlight else (Color(0.26, 0.40, 0.62, 0.8) if available else Color(0.3, 0.33, 0.4, 0.6))
-	var style := _box(NAVY if available else Color("#141B2B"), border, 9, 1)
+	var border := GREEN if highlight else (EDGE if available else Color(EDGE, 0.5))
+	var style := _box(NAVY if available else Color("#0E1018"), border, 9, 1)
 	style.content_margin_left = 10
 	style.content_margin_right = 10
 	style.content_margin_top = 8
@@ -1058,6 +1060,7 @@ func _label(text: String, size: int, color: Color) -> Label:
 	label.text = text
 	label.add_theme_font_size_override("font_size", _fs(size))
 	label.add_theme_color_override("font_color", color)
+	label.add_theme_font_override("font", UiDesign.font("subhead" if size >= 15 else "body"))  # Saira for titles, Inter for reading
 	return label
 
 func _wrap(text: String, size: int, color: Color) -> Label:
@@ -1073,17 +1076,10 @@ func _button(text: String, node_name: String) -> Button:
 	button.text = text
 	button.custom_minimum_size = Vector2(0, MIN_TARGET)
 	button.focus_mode = Control.FOCUS_ALL
+	UiDesign.style_button(button)  # the house button: hairline at rest, gold leading bar on hover
 	button.add_theme_font_size_override("font_size", _fs(13))
-	button.add_theme_color_override("font_color", IVORY)
+	button.add_theme_stylebox_override("pressed", UiDesign.button_style(NAVY, true))
 	button.add_theme_color_override("font_pressed_color", IVORY)
-	button.add_theme_color_override("font_hover_color", INK)
-	button.add_theme_color_override("font_focus_color", IVORY)
-	button.add_theme_color_override("font_disabled_color", Color(0.66, 0.71, 0.78, 0.75))
-	button.add_theme_stylebox_override("normal", _box(NAVY, Color(0.32, 0.45, 0.66, 0.9), 7, 1))
-	button.add_theme_stylebox_override("pressed", _box(NAVY, Color(0.32, 0.45, 0.66, 0.9), 7, 1))
-	button.add_theme_stylebox_override("hover", _box(MUSTARD, INK, 7, 2))
-	button.add_theme_stylebox_override("focus", _box(Color(0, 0, 0, 0), IVORY, 7, 3))
-	button.add_theme_stylebox_override("disabled", _box(Color("#151C2C"), Color(0.25, 0.28, 0.36, 0.8), 7, 1))
 	return button
 
 func _box(fill: Color, border: Color, radius: int, width: int) -> StyleBoxFlat:
@@ -1091,7 +1087,7 @@ func _box(fill: Color, border: Color, radius: int, width: int) -> StyleBoxFlat:
 	style.bg_color = fill
 	style.border_color = border
 	style.set_border_width_all(width)
-	style.set_corner_radius_all(radius)
+	style.set_corner_radius_all(mini(radius, 6))  # sharper house corners
 	style.content_margin_left = 8
 	style.content_margin_right = 8
 	style.content_margin_top = 4

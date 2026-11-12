@@ -20,7 +20,7 @@ var _cards_grid: GridContainer
 func _init() -> void:
 	name = "HazardHudPanel"
 	custom_minimum_size = Vector2(960, 560)
-	add_theme_stylebox_override("panel", Design.glass_style(Design.colour("warning", Color("#F2C230")), Color(0.04, 0.07, 0.13, 0.94), 20))
+	add_theme_stylebox_override("panel", Design.glass_style(Design.colour("warning", Color("#3AA0FF")), Color(0.04, 0.07, 0.13, 0.94), 20))
 	_build_ui()
 
 func bind_hazards(hazards: RefCounted) -> void:

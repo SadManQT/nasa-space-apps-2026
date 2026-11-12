@@ -46,7 +46,7 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.96, 0.77, 0.32, 1)
+border_color = Color(0.227, 0.627, 1.0, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_left = 16
@@ -74,14 +74,14 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.96, 0.77, 0.32, 1)
+border_color = Color(0.227, 0.627, 1.0, 1)
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_left = 24
 corner_radius_bottom_right = 24
 
 [sub_resource type="StyleBoxFlat" id="Style_marker_active"]
-bg_color = Color(0.96, 0.77, 0.32, 1)
+bg_color = Color(0.227, 0.627, 1.0, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -109,7 +109,7 @@ content_margin_left = 18.0
 content_margin_top = 8.0
 content_margin_right = 18.0
 content_margin_bottom = 8.0
-bg_color = Color(0.96, 0.77, 0.32, 1)
+bg_color = Color(0.227, 0.627, 1.0, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_left = 10
@@ -244,7 +244,7 @@ mouse_filter = 2
 [node name="TimelineCurve" type="Line2D" parent="SafeArea/Page/ChapterRoute"]
 points = PackedVector2Array(24, 32, 75, 23, 130, 17, 185, 13, 240, 11, 295, 11, 350, 13, 405, 16, 460, 20, 515, 24, 570, 28, 625, 32, 680, 36, 735, 39, 790, 42, 845, 45, 900, 48, 955, 51, 1010, 54, 1065, 58, 1120, 62, 1184, 67)
 width = 2.5
-default_color = Color(0.96, 0.77, 0.32, 0.9)
+default_color = Color(0.227, 0.627, 1.0, 0.9)
 antialiased = true
 
 [node name="ChapterStep_1" type="Button" parent="SafeArea/Page/ChapterRoute"]

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "content_revision": "p05_falling_pressure-player-v2",
-  "source": "game-design/08_PUZZLE_DESIGNS.md P-05; game-design/22_PUZZLE_CLUE_DESIGN.md 5.1?5.2; full-game-story/STORY_FULL.md EX-CH03-S01..S06",
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-05; game-design/22_PUZZLE_CLUE_DESIGN.md 5.1–5.2; full-game-story/STORY_FULL.md EX-CH03-S01..S06",
   "puzzle_id": "P-05",
   "roles": {
     "amara": {
@@ -56,7 +56,7 @@
       "id": "EX-CH03-S01",
       "mission": "EX-M0301",
       "title": "The Warning and the Gauge",
-      "story_date": "6 May 2046 ? after the shallow moonquake",
+      "story_date": "6 May 2046 · after the shallow moonquake",
       "stage": "learn",
       "goal": "Use an independent gauge before isolating any air line.",
       "why": "The electronic panel names a tank, but its diagnosis is unverified.",
@@ -85,7 +85,7 @@
       "aha": "Use an independent gauge before isolating any air line.",
       "wrong_idea": "Close the red main reserve valve on the panel warning alone.",
       "flight_rules": [
-        "FR-02 ? Protect the main air reserve; verify with an independent gauge."
+        "FR-02 · Protect the main air reserve; verify with an independent gauge."
       ],
       "risk": {
         "title": "Crew air cut by an unverified diagnosis",
@@ -98,7 +98,7 @@
       "id": "EX-CH03-S02",
       "mission": "EX-M0301",
       "title": "Six Places, Three Taps",
-      "story_date": "6 May 2046 ? four abstract investigation phases",
+      "story_date": "6 May 2046 · four abstract investigation phases",
       "stage": "apply",
       "goal": "Find the falling branch with t0 and t10 readings; inspect two candidates each in phases one to three, then repair in phase four.",
       "why": "Only the garden branch falls over the ten-second manual comparison.",
@@ -107,7 +107,7 @@
           "id": "c1",
           "kind": "Instrument",
           "where": "Three-tap manifold",
-          "text": "MAIN 100?100, GARDEN 82?74, RETURN 100?100 relative units.",
+          "text": "MAIN 100→100, GARDEN 82→74, RETURN 100→100 relative units.",
           "holders": [
             "amara"
           ],
@@ -128,7 +128,7 @@
       "aha": "Find the falling branch with t0 and t10 readings; inspect at most two candidates in each phase.",
       "wrong_idea": "Treat a noisy warning as proof that the main tank leaks.",
       "flight_rules": [
-        "FR-02 ? Inspect at most two locations per phase; keep crew air on."
+        "FR-02 · Inspect at most two locations per phase; keep crew air on."
       ],
       "risk": {
         "title": "Missed leak or unnecessary trunk isolation",
@@ -141,7 +141,7 @@
       "id": "EX-CH03-S03",
       "mission": "EX-M0301",
       "title": "The Smallest Safe Boundary",
-      "story_date": "6 May 2046 ? after phase-two aftershock",
+      "story_date": "6 May 2046 · after phase-two aftershock",
       "stage": "apply",
       "goal": "Verify annex auto-isolation, compare boundaries, and agree on rollback.",
       "why": "The aftershock changes the annex indicator; the garden leak remains the supported fault.",
@@ -170,7 +170,7 @@
       "aha": "Verify annex auto-isolation, compare boundaries, and agree on rollback.",
       "wrong_idea": "Isolate the habitat trunk to stop both the leak and crew air.",
       "flight_rules": [
-        "FR-02 ? Keep protected crew air online and verify rollback before isolation."
+        "FR-02 · Keep protected crew air online and verify rollback before isolation."
       ],
       "risk": {
         "title": "Habitat breathing supply interrupted",
@@ -183,7 +183,7 @@
       "id": "EX-CH03-S04",
       "mission": "EX-M0302",
       "title": "Controlled Garden Repair",
-      "story_date": "7 May 2046 ? controlled repair",
+      "story_date": "7 May 2046 · controlled repair",
       "stage": "twist",
       "goal": "Close GARDEN only, verify the hold, clamp from the safe side and log five steady checks.",
       "why": "A clamp seated is not a verified repair.",
@@ -212,7 +212,7 @@
       "aha": "Close GARDEN only, verify the hold, clamp from the safe side and log five steady checks.",
       "wrong_idea": "Clamp the pressurised collar or reopen it fast.",
       "flight_rules": [
-        "FR-02 ? Verify hold before clamp and five steady checks two seconds apart."
+        "FR-02 · Verify hold before clamp and five steady checks two seconds apart."
       ],
       "risk": {
         "title": "Pressure surge at a fresh clamp",
@@ -225,7 +225,7 @@
       "id": "EX-CH03-S05",
       "mission": "EX-M0302",
       "title": "The Wrong Note",
-      "story_date": "7 May 2046 ? handover",
+      "story_date": "7 May 2046 · handover",
       "stage": "twist",
       "goal": "Correct a copied paper note to match five physical checks.",
       "why": "The tested valve setting is supported; the copied note is wrong.",
@@ -260,7 +260,7 @@
       "aha": "Correct a copied paper note to match five physical checks.",
       "wrong_idea": "Change a tested valve to match an unverified paper note.",
       "flight_rules": [
-        "FR-02 ? Keep verified valve position and preserve the monitoring record."
+        "FR-02 · Keep verified valve position and preserve the monitoring record."
       ],
       "risk": {
         "title": "New leak introduced by clerical correction",
@@ -273,7 +273,7 @@
       "id": "EX-CH03-S06",
       "mission": "EX-M0302",
       "title": "The N.R. Hatch",
-      "story_date": "7 May 2046 ? annex boundary",
+      "story_date": "7 May 2046 · annex boundary",
       "stage": "twist",
       "goal": "Isolate the annex feed, confirm zero differential and look by camera.",
       "why": "An isolated hatch can be inspected without authorising entry.",
@@ -307,7 +307,7 @@
       "aha": "Isolate the annex feed, confirm zero differential and look by camera.",
       "wrong_idea": "Open the hatch before measuring the pressure differential.",
       "flight_rules": [
-        "FR-02 ? Confirm zero differential before camera inspection; entry remains uncleared."
+        "FR-02 · Confirm zero differential before camera inspection; entry remains uncleared."
       ],
       "risk": {
         "title": "Unverified hatch opening",

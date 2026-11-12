@@ -94,7 +94,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Mei"
 metadata/lla_type = "caption"
-theme_override_colors/font_color = Color(0.96,0.77,0.32,1)
+theme_override_colors/font_color = Color(0.227, 0.627, 1.0,1)
 mouse_filter = 2
 
 [node name="Count" type="Label" parent="Dialogue/Content/SpeakerRow"]

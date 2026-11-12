@@ -247,9 +247,7 @@ func refresh_view() -> void:
 		var active: bool = tid == active_thread
 		button.toggle_mode = true
 		button.button_pressed = active
-		button.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent" if active else "navy"), active))
-		button.add_theme_color_override("font_color", UiDesign.colour("ink" if active else "ivory"))
-		button.add_theme_color_override("font_focus_color", UiDesign.colour("ink" if active else "ivory"))
+		UiDesign.nav_item(button, active)  # Deep Space sidebar: leading bar, no solid block
 		button.add_theme_color_override("icon_normal_color", UiDesign.colour("ink" if active else "ivory"))
 	for tinfo in threads:
 		var tid := String(tinfo.get("id", ""))

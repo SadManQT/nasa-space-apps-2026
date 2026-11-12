@@ -366,7 +366,7 @@ class SlopeProfileCanvas extends Control:
 		var max_scale_deg := 24.0
 		var limit_y := rect.size.y * (1.0 - (limit_deg / max_scale_deg))
 		# Draw 15 deg VIPER limit line
-		draw_line(Vector2(12, limit_y), Vector2(rect.size.x - 12, limit_y), Color("#F2C230"), 2.0)
+		draw_line(Vector2(12, limit_y), Vector2(rect.size.x - 12, limit_y), Color("#3AA0FF"), 2.0)
 
 		var profile: Array = estimate.get("slope_profile_deg", [])
 		if profile.is_empty():

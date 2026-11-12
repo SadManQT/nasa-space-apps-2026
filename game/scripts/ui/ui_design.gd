@@ -19,8 +19,8 @@ static var _banned: RegEx
 ## A 24 px line icon drawn from the design palette; `kind` names the glyph.
 class LineIcon extends Control:
 	var kind := ""
-	var colour := Color("#F2C230")
-	func _init(icon_kind: String = "", icon_colour: Color = Color("#F2C230")) -> void:
+	var colour := Color("#3AA0FF")
+	func _init(icon_kind: String = "", icon_colour: Color = Color("#3AA0FF")) -> void:
 		kind = icon_kind
 		colour = icon_colour
 		custom_minimum_size = Vector2(24, 24)
@@ -220,15 +220,50 @@ static func style_button(result: Button) -> void:
 	result.add_theme_stylebox_override("focus", focus_style())
 	result.add_theme_stylebox_override("disabled", button_style(colour("navy").darkened(0.35), false))
 
-## The one gold action of a screen ("Try it", "Resume", "New expedition").
+## The one action of a screen ("Try it", "Resume", "New expedition"): a cerulean
+## to neon-rose gradient, the only gradient in the interface.
+static func gradient_style(from: Color, to: Color, radius_px: int = 4) -> StyleBoxTexture:
+	var gradient := Gradient.new()
+	gradient.set_color(0, from)
+	gradient.set_color(1, to)
+	var texture := GradientTexture2D.new()
+	texture.gradient = gradient
+	texture.fill_from = Vector2(0, 0.5)
+	texture.fill_to = Vector2(1, 0.5)
+	texture.width = 128
+	texture.height = 8
+	var style := StyleBoxTexture.new()
+	style.texture = texture
+	style.content_margin_left = 18
+	style.content_margin_right = 18
+	style.content_margin_top = 4
+	style.content_margin_bottom = 4
+	return style
+
 static func make_primary(result: Button) -> Button:
-	result.add_theme_stylebox_override("normal", button_style(colour("accent"), false, colour("accent")))
-	result.add_theme_stylebox_override("hover", button_style(colour("accent").lightened(0.12), true))
-	result.add_theme_stylebox_override("pressed", button_style(colour("accent").darkened(0.1), true))
+	result.add_theme_stylebox_override("normal", gradient_style(colour("accent"), colour("rose", Color("#FF4F8B"))))
+	result.add_theme_stylebox_override("hover", gradient_style(colour("accent").lightened(0.15), colour("rose", Color("#FF4F8B")).lightened(0.15)))
+	result.add_theme_stylebox_override("pressed", gradient_style(colour("accent").darkened(0.1), colour("rose", Color("#FF4F8B")).darkened(0.1)))
 	for key in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color", "font_hover_pressed_color", "icon_normal_color", "icon_hover_color", "icon_focus_color", "icon_pressed_color"]:
 		result.add_theme_color_override(key, colour("ink"))
 	result.set_meta("lla_primary", true)
 	return result
+
+## A sidebar / tab entry: a plain row at rest; when selected, a soft cerulean tint
+## with a bright leading bar. Text stays light either way (no solid blocks).
+static func nav_item(item: Button, selected: bool) -> void:
+	var rest := button_style(Color(0, 0, 0, 0), false, Color(0, 0, 0, 0.001))
+	var on := button_style(Color(colour("accent"), 0.14), false, Color(0, 0, 0, 0.001))
+	on.border_width_left = 3
+	on.border_color = colour("accent")
+	item.add_theme_stylebox_override("normal", on if selected else rest)
+	item.add_theme_stylebox_override("hover", on if selected else button_style(Color(1, 1, 1, 0.05), false, Color(0, 0, 0, 0.001)))
+	item.add_theme_stylebox_override("pressed", on)
+	item.add_theme_stylebox_override("hover_pressed", on)
+	for key in ["font_color", "font_focus_color", "font_pressed_color", "font_hover_pressed_color"]:
+		item.add_theme_color_override(key, colour("ivory") if selected else colour("muted"))
+	item.add_theme_color_override("font_hover_color", colour("ivory"))
+	item.alignment = HORIZONTAL_ALIGNMENT_LEFT
 
 ## A kit icon on a button, sized with the text.
 static func set_button_icon(result: Button, icon_kind: String) -> void:

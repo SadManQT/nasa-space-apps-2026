@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "content_revision": "p06_harvest_future-player-v2",
-  "source": "game-design/08_PUZZLE_DESIGNS.md P-06; game-design/22_PUZZLE_CLUE_DESIGN.md 5.3?5.4; full-game-story/STORY_FULL.md EX-CH03-S07..S12",
+  "source": "game-design/08_PUZZLE_DESIGNS.md P-06; game-design/22_PUZZLE_CLUE_DESIGN.md 5.3–5.4; full-game-story/STORY_FULL.md EX-CH03-S07..S12",
   "puzzle_id": "P-06",
   "roles": {
     "amara": {
@@ -56,7 +56,7 @@
       "id": "EX-CH03-S07",
       "mission": "EX-M0303",
       "title": "Young Leaves, Old Map",
-      "story_date": "8 May 2046 ? cold annex",
+      "story_date": "8 May 2046 · cold annex",
       "stage": "learn",
       "goal": "Classify the cold annex seedlings and scan the vault map without disturbing them.",
       "why": "Curled day-12 seedlings are not flowers or mature pods.",
@@ -91,7 +91,7 @@
       "aha": "Classify the cold annex seedlings and scan the vault map without disturbing them.",
       "wrong_idea": "Call curled seedlings failed flowers and handle the archive material.",
       "flight_rules": [
-        "FR-06 ? Preserve living material and distinguish observation from inference."
+        "FR-06 · Preserve living material and distinguish observation from inference."
       ],
       "risk": {
         "title": "Premature plant handling",
@@ -104,7 +104,7 @@
       "id": "EX-CH03-S08",
       "mission": "EX-M0303",
       "title": "A Map Is a Preparation List",
-      "story_date": "8 May 2046 ? archive handover",
+      "story_date": "8 May 2046 · archive handover",
       "stage": "learn",
       "goal": "Keep map provenance and list present-day route checks.",
       "why": "An old location can guide a survey, but departure still needs slope, reserve and communications.",
@@ -138,7 +138,7 @@
       "aha": "Keep map provenance and list present-day route checks.",
       "wrong_idea": "Treat the map as permission to depart.",
       "flight_rules": [
-        "FR-05 ? Verify slope, return reserve and link before any future field route."
+        "FR-05 · Verify slope, return reserve and link before any future field route."
       ],
       "risk": {
         "title": "Archive mistaken for route clearance",
@@ -151,7 +151,7 @@
       "id": "EX-CH03-S09",
       "mission": "EX-M0303",
       "title": "Alo Is Mature",
-      "story_date": "16 May 2046 ? plant day 35",
+      "story_date": "16 May 2046 · plant day 35",
       "stage": "apply",
       "goal": "Confirm mature brown pods before stopping Alo-only irrigation.",
       "why": "Mature pods need a controlled five-day dry-down; Tara keeps her own water.",
@@ -180,7 +180,7 @@
       "aha": "Confirm mature brown pods before stopping Alo-only irrigation.",
       "wrong_idea": "Stop both Alo and Tara irrigation before checking maturity.",
       "flight_rules": [
-        "FR-06 ? Confirm maturity and isolate Alo irrigation only."
+        "FR-06 · Confirm maturity and isolate Alo irrigation only."
       ],
       "risk": {
         "title": "Premature harvest or Tara dehydration",
@@ -193,7 +193,7 @@
       "id": "EX-CH03-S10",
       "mission": "EX-M0304",
       "title": "Five Days and Forty-Two Seeds",
-      "story_date": "21 May 2046 ? five-day dry-down complete",
+      "story_date": "21 May 2046 · five-day dry-down complete",
       "stage": "apply",
       "goal": "Reach moisture 20 or lower, count six wells of seven and choose a 12/30 split.",
       "why": "The 42-seed parent line must supply both descendants and a sealed founder reserve.",
@@ -222,7 +222,7 @@
       "aha": "Reach moisture 20 or lower, count six wells of seven and choose a 12/30 split.",
       "wrong_idea": "Open damp pods early or spend all 42 seeds on planting.",
       "flight_rules": [
-        "FR-06 ? Dry mature pods to 20 or lower; protect founder reserve."
+        "FR-06 · Dry mature pods to 20 or lower; protect founder reserve."
       ],
       "risk": {
         "title": "Wet seed storage or lost founder reserve",
@@ -235,7 +235,7 @@
       "id": "EX-CH03-S11",
       "mission": "EX-M0304",
       "title": "Two Places for a Lineage",
-      "story_date": "21 May 2046 ? seed split",
+      "story_date": "21 May 2046 · seed split",
       "stage": "apply",
       "goal": "Plant 12 positions, seal 30 founder seeds and preserve the parent-line label.",
       "why": "The sealed reserve is 15 plus 15; the planting tray carries twelve.",
@@ -264,7 +264,7 @@
       "aha": "Plant 12 positions, seal 30 founder seeds and preserve the parent-line label.",
       "wrong_idea": "Rename or plant reserve seeds before the parent line is recorded.",
       "flight_rules": [
-        "FR-06 ? Keep 12 planted and 30 sealed with the original lineage."
+        "FR-06 · Keep 12 planted and 30 sealed with the original lineage."
       ],
       "risk": {
         "title": "Lineage or reserve lost",
@@ -277,7 +277,7 @@
       "id": "EX-CH03-S12",
       "mission": "EX-M0304",
       "title": "The October Hand-off",
-      "story_date": "21 May?October 2046 ? care montage",
+      "story_date": "21 May–October 2046 · care montage",
       "stage": "twist",
       "goal": "Reconcile the living descendants with the founder reserve and survey preparation.",
       "why": "Alo continues in descendants and preserved seed, not as the same living plant.",
@@ -311,7 +311,7 @@
       "aha": "Reconcile the living descendants with the founder reserve and survey preparation.",
       "wrong_idea": "Present the old map as a completed route permission.",
       "flight_rules": [
-        "FR-06 ? Keep the living lineage and reserve distinct in the handover."
+        "FR-06 · Keep the living lineage and reserve distinct in the handover."
       ],
       "risk": {
         "title": "Continuity claim unsupported",
@@ -583,7 +583,7 @@
       "scene": "EX-CH03-S10",
       "kind": "choice",
       "title": "Read the five-day dry-down",
-      "goal": "Confirm May 16?21 and moisture at or below 20.",
+      "goal": "Confirm May 16–21 and moisture at or below 20.",
       "why": "The pods must dry before opening.",
       "options": [
         {
@@ -646,7 +646,7 @@
       "options": [
         {
           "id": "supported",
-          "label": "6 ? 7 = 42",
+          "label": "6 × 7 = 42",
           "detail": "Supported by the scene evidence and flight rule.",
           "payload": {
             "wells": 6,
@@ -655,7 +655,7 @@
         },
         {
           "id": "held",
-          "label": "6 ? 6 = 36",
+          "label": "6 × 6 = 36",
           "detail": "Test this idea against the witness before acting.",
           "payload": {
             "wells": 6,
@@ -793,12 +793,12 @@
       "scene": "EX-CH03-S11",
       "kind": "choice",
       "title": "Write the parent line first",
-      "goal": "Keep Alo ? Tara on the lineage label.",
+      "goal": "Keep Alo · Tara on the lineage label.",
       "why": "Dedication follows the biological record.",
       "options": [
         {
           "id": "supported",
-          "label": "Record Alo ? Tara, then dedicate",
+          "label": "Record Alo · Tara, then dedicate",
           "detail": "Supported by the scene evidence and flight rule.",
           "payload": {
             "lineage": "Alo x Tara"

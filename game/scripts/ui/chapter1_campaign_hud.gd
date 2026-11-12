@@ -1773,7 +1773,7 @@ func _fade(control: Control, shown: bool) -> void:
 	var previous = control.get_meta("lla_fade") if control.has_meta("lla_fade") else null
 	if previous is Tween and (previous as Tween).is_valid():
 		(previous as Tween).kill()  # a late hide callback must not hide what was just shown
-	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)  # soft settle
 	control.set_meta("lla_fade", tween)
 	control.set_meta("lla_shown", shown)
 	if shown:

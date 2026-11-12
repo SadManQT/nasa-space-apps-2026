@@ -185,7 +185,7 @@ class MapCanvas extends Control:
 		var summit_pt := _map_pt([940.0, 110.0], rect.size)
 		var earth_pt := Vector2(rect.size.x - 28.0, 28.0)
 		var voice_ok: bool = network.is_voice_ready()
-		draw_line(summit_pt, earth_pt, Color("#F2C230") if voice_ok else Color(0.8, 0.7, 0.3, 0.25), 3.0 if voice_ok else 1.5, true)
+		draw_line(summit_pt, earth_pt, Color("#3AA0FF") if voice_ok else Color(0.8, 0.7, 0.3, 0.25), 3.0 if voice_ok else 1.5, true)
 		draw_circle(earth_pt, 8.0, Color("#4CA8FF") if voice_ok else Color(0.3, 0.5, 0.7, 0.4))
 
 		# Draw placed markers, fixed lines, path lights, repeaters
@@ -193,7 +193,7 @@ class MapCanvas extends Control:
 			var pt := _map_pt(item.get("position_m", [200.0, 200.0]), rect.size)
 			var kind := String(item.get("kind", "marker"))
 			var is_beacon := bool(item.get("canon_beacon", false))
-			var col := Color("#F2C230") if is_beacon else Color("#6EC6FF")
+			var col := Color("#3AA0FF") if is_beacon else Color("#6EC6FF")
 			if kind == "fixed_line":
 				draw_line(pt - Vector2(12, -8), pt + Vector2(12, -8), Color("#FF9F43"), 2.5)
 			elif kind == "path_light":

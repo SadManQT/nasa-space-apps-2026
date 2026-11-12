@@ -81,8 +81,8 @@ static func role_info(role_id: String) -> Dictionary:
 	return info
 
 static func role_color(role_id: String) -> Color:
-	var value := String(role_info(role_id).get("color", "#F2C230"))
-	return Color.html(value) if Color.html_is_valid(value) else Color("#F2C230")
+	var value := String(role_info(role_id).get("color", "#3AA0FF"))
+	return Color.html(value) if Color.html_is_valid(value) else Color("#3AA0FF")
 
 ## "SOLO" or "CLASS · 4 PLAYERS", for chips and headers.
 static func mode_label(crew) -> String:

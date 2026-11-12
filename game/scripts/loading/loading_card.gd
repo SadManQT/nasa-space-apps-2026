@@ -19,8 +19,8 @@ func _ready() -> void:
 	var card := PanelContainer.new()
 	card.theme = preload("res://resources/ui/lla_theme.tres")
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color("#1F2A44")
-	style.border_color = Color("#F2C230")
+	style.bg_color = Color("#12151F")
+	style.border_color = Color("#3AA0FF")
 	style.set_border_width_all(1)
 	style.set_corner_radius_all(12)
 	style.content_margin_left = 28
@@ -34,7 +34,7 @@ func _ready() -> void:
 	card.add_child(row)
 	lamp = Label.new()
 	lamp.text = "●"
-	lamp.add_theme_color_override("font_color", Color("#F2C230"))
+	lamp.add_theme_color_override("font_color", Color("#3AA0FF"))
 	row.add_child(lamp)
 	var label := Label.new()
 	label.text = "Preparing Aurora…"

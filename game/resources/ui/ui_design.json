@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "source": "Instrument Light (12 Nov 2026, production/plan/ui_direction_20261112.md) over the approved 11 Nov proposal sheets: quiet navy glass, sun-gold only for the one action now, icons first.",
+ "source": "Deep Space pass (12 Nov 2026, user): jet black ground, cerulean blue for the one action now, neon rose for previews and highlights; Saira + Inter.",
  "reference_height": 1080,
  "type": {
   "title": 40,
@@ -14,24 +14,25 @@
   "button": 22
  },
  "colour": {
-  "ink": "#0A101C",
-  "navy": "#121C2A",
-  "ivory": "#F2EFE7",
-  "muted": "#B8C4D6",
-  "accent": "#F5C451",
-  "caution": "#F2A33A",
-  "danger": "#E56B6F",
-  "good": "#68C78B",
-  "glass": "#0A111CE8",
-  "glass_edge": "#2A3747",
-  "scrim": "#080D17AD",
+  "ink": "#05060A",
+  "navy": "#12151F",
+  "ivory": "#EEF1F8",
+  "muted": "#9AA4BA",
+  "accent": "#3AA0FF",
+  "caution": "#FFB84D",
+  "danger": "#FF4D6D",
+  "good": "#3EE0A0",
+  "glass": "#0A0C12F2",
+  "glass_edge": "#252A3A",
+  "scrim": "#030407D9",
   "kai": "#F26B21",
   "amara": "#20B8C9",
   "mei": "#4CAF50",
   "rafi": "#8E5CC2",
   "ferreira": "#B8A06A",
-  "surface_hover": "#1A2738",
-  "data": "#6FD3E0"
+  "surface_hover": "#1A1F2E",
+  "data": "#FF6B9D",
+  "rose": "#FF4F8B"
  },
  "panel": {
   "radius": 6,
@@ -42,8 +43,8 @@
   "max_layers": 2
  },
  "motion": {
-  "show_seconds": 0.2,
-  "hide_seconds": 0.15,
+  "show_seconds": 0.28,
+  "hide_seconds": 0.2,
   "count_seconds": 0.35,
   "pulse_count": 2,
   "toast_seconds": 5.0,

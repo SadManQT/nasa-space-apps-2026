@@ -22,11 +22,11 @@ const Chapter1FeedbackScript = preload("res://scripts/feedback/chapter1_feedback
 var science = ScienceScript.new()
 
 const INK := Color("#05060A")
-const NAVY := Color("#1F2A44")
+const NAVY := Color("#12151F")
 const IVORY := Color("#ECEEF0")
 const MUTED := Color("#A8B4C8")
-const MUSTARD := Color("#F2C230")
-const CYAN := Color("#20B8C9")
+const MUSTARD := Color("#3AA0FF")
+const CYAN := Color("#FF6B9D")
 const GREEN := Color("#4CAF50")
 
 const PANEL_IDS := [
@@ -328,8 +328,9 @@ func _animate_open() -> void:
 	if _tween != null and _tween.is_valid():
 		_tween.kill()
 	_panel.modulate.a = 0.0
-	_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	_tween.tween_property(_panel, "modulate:a", 1.0, seconds)
+	# Deep Space motion: a soft quintic fade (geometry stays put so layout and focus are exact from the first frame).
+	_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+	_tween.tween_property(_panel, "modulate:a", 1.0, maxf(seconds, 0.28))
 
 ## Hands body children an owner wants back (meta "lla_keep") to that owner
 ## instead of freeing them with the rest of the body.
@@ -1104,9 +1105,7 @@ func _render_journal_tabs(journal: Dictionary) -> void:
 		button.button_group = group
 		button.button_pressed = active
 		button.custom_minimum_size = Vector2(SIDE_WIDTH, 44)
-		button.add_theme_stylebox_override("pressed", _button_style(Color("#243B5A"), IVORY, true))
-		button.add_theme_color_override("font_pressed_color", IVORY)
-		button.add_theme_color_override("font_hover_pressed_color", IVORY)
+		UiDesign.nav_item(button, active)
 		button.accessibility_name = "%s tab%s" % [String(item.label).capitalize(), ", open" if active else ""]
 		button.pressed.connect(func() -> void: select_journal_tab(tab_id))
 		_side.add_child(button)

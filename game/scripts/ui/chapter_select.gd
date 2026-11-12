@@ -229,9 +229,7 @@ func show_tab(tab_id: String) -> void:
 		var tab := tab_node as Button
 		var selected: bool = tab.name == "Tab_" + active_tab
 		tab.button_pressed = selected
-		tab.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent" if selected else "navy"), selected))
-		tab.add_theme_color_override("font_color", UiDesign.colour("ink" if selected else "ivory"))
-		tab.add_theme_color_override("font_focus_color", UiDesign.colour("ink" if selected else "ivory"))
+		UiDesign.nav_item(tab, selected)  # Deep Space sidebar: leading bar, no solid block
 	_route_bar.visible = active_tab == "chapters"
 	_chapter_cards.visible = active_tab == "chapters"
 	_selection_button.visible = active_tab == "chapters"

@@ -19,12 +19,12 @@ signal cancelled
 
 const CrewScript = preload("res://scripts/classmode/crew_modes.gd")
 const INK := Color("#05060A")
-const NAVY_DEEP := Color("#0B1426")
-const NAVY := Color("#1F2A44")
+const NAVY_DEEP := Color("#0A0C12")
+const NAVY := Color("#12151F")
 const IVORY := Color("#ECEEF0")
 const MUTED := Color("#A8B4C8")
-const MUSTARD := Color("#F2C230")
-const CYAN := Color("#20B8C9")
+const MUSTARD := Color("#3AA0FF")
+const CYAN := Color("#FF6B9D")
 const MIN_TARGET := 44.0
 const STAGE_COVER := "cover"
 const STAGE_REVEAL := "reveal"
@@ -53,7 +53,7 @@ func _ready() -> void:
 	add_child(_backdrop)
 	_frame = PanelContainer.new()
 	_frame.name = "HandoffFrame"
-	_frame.add_theme_stylebox_override("panel", _box(NAVY_DEEP, Color(0.95, 0.76, 0.22, 0.8), 14, 1))
+	_frame.add_theme_stylebox_override("panel", _box(NAVY_DEEP, Color(0.227, 0.627, 1.0, 0.8), 14, 1))
 	_frame.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(_frame)
 	var margin := MarginContainer.new()

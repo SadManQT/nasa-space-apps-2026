@@ -16,14 +16,14 @@ func _draw() -> void:
 	var high := maxf(0.0, float(values.max()))
 	var span := maxf(high - low, 0.0001)
 	var area := Rect2(4, 8, maxf(size.x - 8, 1), size.y - 16)
-	draw_rect(area, Color("#1F2A44"))
+	draw_rect(area, Color("#12151F"))
 	var baseline := area.end.y - (0.0 - low) / span * area.size.y
 	draw_line(Vector2(area.position.x, baseline), Vector2(area.end.x, baseline), Color("#A8B4C8"), 1)
 	if series.get("kind") == "line" and values.size() > 1:
 		var points := PackedVector2Array()
 		for i in values.size():
 			points.append(Vector2(area.position.x + float(i) / (values.size() - 1) * area.size.x, area.end.y - (float(values[i]) - low) / span * area.size.y))
-		draw_polyline(points, Color("#F2C230"), 3, true)
+		draw_polyline(points, Color("#3AA0FF"), 3, true)
 	else:
 		var y := area.end.y - (float(values[0]) - low) / span * area.size.y
-		draw_rect(Rect2(area.position.x + area.size.x * 0.35, minf(y, baseline), area.size.x * 0.3, maxf(absf(baseline - y), 3)), Color("#20B8C9"))
+		draw_rect(Rect2(area.position.x + area.size.x * 0.35, minf(y, baseline), area.size.x * 0.3, maxf(absf(baseline - y), 3)), Color("#FF6B9D"))

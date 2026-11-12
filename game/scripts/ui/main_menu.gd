@@ -12,13 +12,13 @@ signal chapter_select_requested
 signal command_emitted(command: Dictionary)
 signal accessibility_requested
 
-const NAVY := Color("#1F2A44")
+const NAVY := Color("#12151F")
 const INK := Color("#0A101C")
 const IVORY := Color("#F2EFE7")
 const MUTED := Color("#B8C4D6")
-const MUSTARD := Color("#F5C451")
+const MUSTARD := Color("#3AA0FF")
 const ORANGE := Color("#F26B21")
-const CYAN := Color("#20B8C9")
+const CYAN := Color("#FF6B9D")
 const GREEN := Color("#4CAF50")
 const PURPLE := Color("#8E5CC2")
 const PANELS_SCENE: PackedScene = preload("res://scenes/ui/campaign_panels.tscn")
@@ -204,8 +204,8 @@ func _build() -> void:
 	)
 	for button in [_begin_button, _continue_button, %MissionTrainerEntry, %MoonTrainerEntry, %ChapterSelectEntry, %ScienceEntry, %SettingsEntry, %CreditsEntry, %DeveloperShowcaseEntry]:
 		button.add_theme_stylebox_override("normal", _button_style(MUSTARD if button == _begin_button else UiDesign.colour("navy"), 1.0 if button == _begin_button else 0.0))
-		button.add_theme_stylebox_override("hover", _button_style(Color("#FFD95A"), 1.0))
-		button.add_theme_stylebox_override("pressed", _button_style(Color("#D8A915"), 1.0))
+		button.add_theme_stylebox_override("hover", _button_style(Color("#6FB8FF"), 1.0))
+		button.add_theme_stylebox_override("pressed", _button_style(Color("#2A82D6"), 1.0))
 		button.add_theme_stylebox_override("focus", _button_style(Color.TRANSPARENT, 0.0, INK if button == _begin_button else MUSTARD))
 		button.add_theme_stylebox_override("disabled", _button_style(Color.TRANSPARENT, 0.0))
 		button.add_theme_color_override("font_color", INK if button == _begin_button else IVORY)
@@ -269,7 +269,7 @@ func attach_panels() -> void:
 	_apply_accessibility()
 
 func _build_briefing() -> void:
-	_briefing = _panel(Color(0.03, 0.05, 0.10, 0.98), 18, Color(0.95, 0.76, 0.22, 0.75))
+	_briefing = _panel(Color(0.03, 0.05, 0.10, 0.98), 18, Color(0.227, 0.627, 1.0, 0.75))
 	_briefing.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	_briefing.position = Vector2(-390, -270)
 	_briefing.size = Vector2(780, 540)
@@ -580,8 +580,8 @@ func _button(text: String, fill: Color, text_color: Color) -> Button:
 	button.add_theme_color_override("font_hover_color", INK)
 	button.add_theme_color_override("font_pressed_color", INK)
 	button.add_theme_stylebox_override("normal", _button_style(fill, 0.88))
-	button.add_theme_stylebox_override("hover", _button_style(MUSTARD if fill != MUSTARD else Color("#FFD95A"), 1.0))
-	button.add_theme_stylebox_override("pressed", _button_style(Color("#D8A915"), 1.0))
+	button.add_theme_stylebox_override("hover", _button_style(MUSTARD if fill != MUSTARD else Color("#6FB8FF"), 1.0))
+	button.add_theme_stylebox_override("pressed", _button_style(Color("#2A82D6"), 1.0))
 	button.add_theme_stylebox_override("focus", _button_style(Color.TRANSPARENT, 0.0, INK if fill == MUSTARD else MUSTARD))
 	button.add_theme_stylebox_override("disabled", _button_style(Color(0.12, 0.16, 0.24, 0.55), 0.55))
 	return button

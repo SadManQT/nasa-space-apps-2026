@@ -118,9 +118,7 @@ func _rebuild_body() -> void:
 		var tab := _tab_bar.get_node("Tab_" + String(spec[0])) as Button
 		var selected: bool = spec[0] == active_tab
 		tab.button_pressed = selected
-		tab.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent" if selected else "navy"), selected))
-		tab.add_theme_color_override("font_color", UiDesign.colour("ink" if selected else "ivory"))
-		tab.add_theme_color_override("font_focus_color", UiDesign.colour("ink" if selected else "ivory"))
+		UiDesign.nav_item(tab, selected)  # Deep Space sidebar: leading bar, no solid block
 	match active_tab:
 		"display":
 			_build_display_tab()
