@@ -31,7 +31,7 @@ func setup(value: Chapter1Campaign) -> void:
 	cradle.name = "DryReferenceCradle"
 	add_child(cradle)
 	cradle.global_position = bench.global_position + Vector3(-0.65, 0.1, 0)
-	for pair in [[rack, "MOISTURE PROBE · RACK"], [cradle, "DRY REFERENCE · BENCH"]]:
+	for pair in [[rack, "WATER METER · RACK"], [cradle, "DRY SOIL CUP · BENCH"]]:
 		var label := Label3D.new()
 		label.text = pair[1]
 		label.font_size = 30
@@ -57,7 +57,7 @@ func setup(value: Chapter1Campaign) -> void:
 	canvas.add_child(card)
 	var rows := VBoxContainer.new()
 	card.add_child(rows)
-	rows.add_child(UiDesign.label("Set the probe’s dry zero at the bench", "heading"))
+	rows.add_child(UiDesign.label("Test the water meter in dry soil", "heading"))
 	_notice = UiDesign.label("", "body")
 	_notice.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	rows.add_child(_notice)
@@ -81,7 +81,7 @@ func interact() -> Dictionary:
 	var point := target().global_position
 	var player := campaign._player
 	if Vector2(player.global_position.x - point.x, player.global_position.z - point.z).length() > REACH_M:
-		_notice.text = "Walk closer to the marked rack or dry-reference cradle. WASD moves; E uses it."
+		_notice.text = "Walk closer to the marked rack or the dry soil cup. Move with W A S D. Press E to use."
 		return {"accepted": false}
 	var ray := PhysicsRayQueryParameters3D.create(player.global_position + Vector3.UP, point, player.collision_mask, [player.get_rid()])
 	if not get_world_3d().direct_space_state.intersect_ray(ray).is_empty():
@@ -110,7 +110,7 @@ func _refresh() -> void:
 	elif not carried:
 		_held.clear()
 	_notice.text = job.prompt() + "\nWASD moves · Mouse looks · E uses the marked equipment. No timer."
-	_action.text = {"at_rack": "E · Take probe", "held": "E · Place on dry reference", "at_bench": "E · Read dry zero"}.get(job.state(), "Dry zero observed: 10 → 0")
+	_action.text = {"at_rack": "E · Take the water meter", "held": "E · Put it in the dry soil cup", "at_bench": "E · Read the meter"}.get(job.state(), "Dry test done: the meter showed 10, dry is 0")
 
 func _input(event: InputEvent) -> void:
 	if event.is_echo():
