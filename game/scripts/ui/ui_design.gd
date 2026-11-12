@@ -149,6 +149,37 @@ static func glass_style(edge: Color = Color.TRANSPARENT, fill: Color = Color.TRA
 	style.content_margin_bottom = pad
 	return style
 
+## In-play HUD surface (AAA pass): no box, a soft dark ellipse behind floating
+## text that dissolves before any edge. The ellipse is drawn `bleed` px beyond
+## the content so the text sits in its dense middle.
+static func scrim_style(strength: float = 0.62, pad: int = 18, bleed: int = 56) -> StyleBoxTexture:
+	var gradient := Gradient.new()
+	var ground := Color("#05080E")
+	gradient.set_color(0, Color(ground, strength))
+	gradient.set_color(1, Color(ground, 0.0))
+	gradient.add_point(0.6, Color(ground, strength * 0.7))
+	var texture := GradientTexture2D.new()
+	texture.gradient = gradient
+	texture.fill = GradientTexture2D.FILL_RADIAL
+	texture.fill_from = Vector2(0.5, 0.5)
+	texture.fill_to = Vector2(1.0, 0.5)  # radius 0.5 in UV: the ellipse touches the edges at zero
+	texture.width = 256
+	texture.height = 256
+	var style := StyleBoxTexture.new()
+	style.texture = texture
+	for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
+		style.set_content_margin(side, pad)
+		style.set_expand_margin(side, bleed)
+	return style
+
+## Floating HUD text keeps contrast over any scene: a soft dark shadow round each glyph.
+static func float_label(label: Label) -> Label:
+	label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
+	label.add_theme_constant_override("shadow_offset_x", 0)
+	label.add_theme_constant_override("shadow_offset_y", 2)
+	label.add_theme_constant_override("shadow_outline_size", 6)
+	return label
+
 ## A glass PanelContainer ready for children.
 static func glass_panel(edge: Color = Color.TRANSPARENT, padding: int = -1) -> PanelContainer:
 	var panel := PanelContainer.new()

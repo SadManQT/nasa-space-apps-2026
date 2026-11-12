@@ -26,7 +26,7 @@ var _ever_bound := false
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_theme_stylebox_override("panel", UiDesign.glass_style(Color.TRANSPARENT, Color.TRANSPARENT, 12))
+	add_theme_stylebox_override("panel", UiDesign.scrim_style(0.66))  # floats like the rest of the in-play HUD
 	_rules = JSON.parse_string(FileAccess.get_file_as_string(RULES_PATH))
 	_rows = VBoxContainer.new()
 	_rows.add_theme_constant_override("separation", 6)

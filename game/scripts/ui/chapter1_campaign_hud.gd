@@ -439,7 +439,7 @@ func show_status(text: String) -> void:
 			edge = UiDesign.colour("caution")
 	if text.begins_with("SAVE FAILED") or text.begins_with("AUTOSAVE FAILED"):
 		edge = UiDesign.colour("danger")
-	_toast.add_theme_stylebox_override("panel", UiDesign.glass_style(edge, Color.TRANSPARENT, 12))
+	_toast.add_theme_stylebox_override("panel", UiDesign.scrim_style())  # state lives in the icon colour
 	_set_toast_icon(String(rewrite.kind), line, edge)
 	_toast_timer = float(UiDesign.tokens().get("motion", {}).get("toast_seconds", 5.0))
 	if not _chrome_hidden:
@@ -478,7 +478,7 @@ func _build() -> void:
 		add_child(shell)
 	theme = UiKit.theme()
 	_goal_card = shell.get_node("GoalCard")
-	_goal_card.add_theme_stylebox_override("panel", UiDesign.glass_style(Color.TRANSPARENT, Color.TRANSPARENT, 14))
+	_goal_card.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.66))
 	_goal_card.minimum_size_changed.connect(func() -> void: _goal_card.reset_size.call_deferred())
 	var card_box := _goal_card.get_node("Content")
 	_chapter_line = card_box.get_node("Chapter")
@@ -489,6 +489,8 @@ func _build() -> void:
 	goal_row.move_child(_goal_icon, 0)
 	_title = goal_row.get_node("Title")
 	_why = card_box.get_node("Why")
+	for floating in [_chapter_line, _title, _why, card_box.get_node("WhatNowKey")]:
+		UiDesign.float_label(floating)
 	_advance = card_box.get_node("Continue")
 	_advance.disabled = true
 	_advance.pressed.connect(_on_advance_pressed)
@@ -526,10 +528,11 @@ func _build() -> void:
 	_column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_column)
 	_toast = UiDesign.glass_panel(Color.TRANSPARENT, 12)
+	_toast.add_theme_stylebox_override("panel", UiDesign.scrim_style())
 	_toast.name = "Toast"
 	_toast.visible = false
 	_toast.set_meta("lla_shown", false)
-	_status = UiDesign.label("", "body", "ivory")
+	_status = UiDesign.float_label(UiDesign.label("", "body", "ivory"))
 	_status.accessibility_name = "Message"
 	_status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	# M4-23: every toast leads with an icon that names its kind (result, warning, next step, place).
@@ -551,16 +554,27 @@ func _build() -> void:
 	add_child(eva_visor)
 	# The scene owns the caption composition; canon text arrives through the runtime.
 	_dialogue_bar = shell.get_node("Dialogue")
-	_dialogue_bar.add_theme_stylebox_override("panel", UiDesign.glass_style(Color.TRANSPARENT, Color.TRANSPARENT, 14))
+	_dialogue_bar.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.72, 20))  # cinematic subtitles, no box
 	_dialogue_bar.visible = false
 	_dialogue_bar.set_meta("lla_shown", false)
 	var dialogue_box := _dialogue_bar.get_node("Content")
 	_caption_speaker = dialogue_box.get_node("SpeakerRow/Speaker")
 	_caption_count = dialogue_box.get_node("SpeakerRow/Count")
 	_caption_line = dialogue_box.get_node("Line")
+	for floating in [_caption_speaker, _caption_count, _caption_line]:
+		UiDesign.float_label(floating)
+	_caption_line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_caption_speaker.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_auto_button = dialogue_box.get_node("Actions/Auto")
 	_auto_button.toggled.connect(_on_auto_toggled)
 	_next_line = dialogue_box.get_node("Actions/Next")
+	for quiet in [_auto_button, _next_line]:  # subtitle controls read as quiet text until hovered
+		var rest := UiDesign.button_style(Color(0, 0, 0, 0), false, Color(0, 0, 0, 0.001))
+		for state in ["normal", "disabled", "focus"]:
+			quiet.add_theme_stylebox_override(state, rest)
+		quiet.add_theme_stylebox_override("hover", UiDesign.button_style(Color(1, 1, 1, 0.06), false, Color(0, 0, 0, 0.001)))
+		quiet.add_theme_color_override("font_color", UiDesign.colour("muted"))
+		quiet.add_theme_color_override("font_disabled_color", Color(UiDesign.colour("muted"), 0.45))
 	_next_line.pressed.connect(_on_next_line)
 	# What now content (shown inside the panel layer on H).
 	_what_now_home = Control.new()
