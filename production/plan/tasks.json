@@ -1013,7 +1013,7 @@
    "refs": [
     "execution/RELEASE_01_EXPORT_AND_PACKAGE.md"
    ],
-   "note": "Release builds wait for the 12 Nov release (M3-93); finishing the game comes first (Sadman, 5 Nov 23:55).\n12 Nov Atik user explicitly resumes this task and release work without approval waits. Existing acceptance requirements and human QA dependencies remain binding. No completion inferred from a green CI build.",
+   "note": "Release builds wait for the 12 Nov release (M3-93); finishing the game comes first (Sadman, 5 Nov 23:55).\n12 Nov Atik user explicitly resumes this task and release work without approval waits. Existing acceptance requirements and human QA dependencies remain binding. No completion inferred from a green CI build.\n12 Nov exact integration: game/scripts/main.gd only the existing M1-20 opt-in _run_export_smoke diagnostic. The real native Chapter1 PNG captured its post-operation loading card; require the transition to settle and capture readiness before PASS. Normal startup/gameplay/UI methods remain unchanged. No competing Main file reservation was present.",
    "evidence": "",
    "updated": "2026-11-12",
    "prompt": "Goal: judges and teammates can download and run the game; there is no export_presets.cfg today.\nDo: per execution/RELEASE_01_EXPORT_AND_PACKAGE.md: Windows x86_64 and macOS (universal, unsigned with run instructions) presets;\nexclude dev scenes and tools from the pack; version string; build to builds/ (gitignored) and attach to a GitHub Release (ask the user\nbefore publishing). Investigate a Chapter 1 web build with the Compatibility renderer and reduced textures for a 'play in the browser'\njudge link: report size, load time and look, and recommend yes/no.\nAcceptance: both builds start on a clean machine to the title screen and into Chapter 1; sizes and steps in production/qa/release_<date>.md.",
@@ -1039,7 +1039,8 @@
     "README.md",
     "production/qa/publish_candidate.py",
     ".github/workflows/publish-judging-candidate.yml",
-    "CREDITS.md"
+    "CREDITS.md",
+    "game/scripts/main.gd"
    ],
    "edit_files": [
     "production/qa/build_release.py",
@@ -1063,7 +1064,12 @@
     "production/qa/builds/atik_20261112/native_export/stdout.log",
     "production/qa/builds/atik_20261112/native_export/M1-20_native_title.png",
     "production/qa/builds/atik_20261112/native_export/M1-20_native_chapter1.png",
-    "production/qa/builds/atik_20261112/native_payload_equivalence.json"
+    "production/qa/builds/atik_20261112/native_payload_equivalence.json",
+    "game/scripts/main.gd",
+    "production/qa/builds/atik_20261112/native_export_final/run.json",
+    "production/qa/builds/atik_20261112/native_export_final/stdout.log",
+    "production/qa/builds/atik_20261112/native_export_final/M1-20_native_title.png",
+    "production/qa/builds/atik_20261112/native_export_final/M1-20_native_chapter1.png"
    ]
   },
   {
