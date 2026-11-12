@@ -30,10 +30,13 @@ func _run() -> void:
 		_check(not crew._seated.is_empty(), scene_id + " stages actual seated listeners")
 		_check(not crew._seated.any(func(id): return crew.bodies[id] == crew.player) and crew.player.controlled, scene_id + " active player remains movable")
 		var origins := {}
+		var cycle_seconds := 2.0
 		for id in crew._seated:
 			origins[id] = crew.bodies[id].position
 			seen[id] = true
-		for frame in 120:
+			cycle_seconds = maxf(cycle_seconds, crew.bodies[id].animation.player.get_animation("motion/SitIdle_loop").length)
+		print("SEATED CYCLE %s %.2f seconds" % [scene_id, cycle_seconds])
+		for frame in ceili(cycle_seconds * 60.0) + 3:
 			await physics_frame
 			if frame % 20 != 19:
 				continue

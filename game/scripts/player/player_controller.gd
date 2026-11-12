@@ -40,6 +40,8 @@ var _gaze_modifiers: Array[SkeletonModifier3D] = []
 var eva_suit: RefCounted
 var eva_surface_tags: Array = []
 var eva_slope_override_deg: float = -1.0
+var _seat_hips := -1
+var _seat_pelvis_target := Vector3.ZERO
 
 func _ready() -> void:
 	floor_snap_length = 0.3
@@ -180,6 +182,7 @@ func _physics_process(delta: float) -> void:
 		pose_modifier.lean_enabled = false
 		_update_gaze(delta)
 		animation.skeleton.advance(delta)
+		_align_seated_pelvis()
 		return
 	if has_meta("aboard"):
 		desired_speed = 0.0
@@ -389,15 +392,25 @@ func sit_at(pelvis_target: Vector3) -> bool:
 	pose_modifier.feet_enabled = false
 	pose_modifier.lean_enabled = false
 	animation.advance(0.0, 0.0)
-	var pelvis := rig.global_transform * rig.get_bone_global_pose(hips).origin
-	visual.global_position += pelvis_target - pelvis
+	_seat_hips = hips
+	_seat_pelvis_target = pelvis_target
+	_align_seated_pelvis()
 	pose_modifier.reset_placement()
 	return true
+
+func _align_seated_pelvis() -> void:
+	if _seat_hips < 0:
+		return
+	# Imported idle clips sway their root; the cushion remains the contact point.
+	var rig := animation.skeleton
+	var pelvis := rig.global_transform * rig.get_bone_global_pose(_seat_hips).origin
+	visual.global_position += _seat_pelvis_target - pelvis
 
 func reset_placement() -> void:
 	# Allow broadphase transforms to settle before capsule recovery or floor snap.
 	placement_frames = 2
 	velocity = Vector3.ZERO
+	_seat_hips = -1
 	visual.position = Vector3.ZERO
 	pose_modifier.reset_placement()
 	follow_camera.reset_placement()
