@@ -36,7 +36,7 @@
   [
    5.0,
    "click",
-   "Align_→_ALO-01"
+   "Align_←_ALO-01"
   ],
   [
    6.0,
@@ -44,6 +44,16 @@
    "Current_ALO-01",
    2.6,
    "Lined up"
+  ],
+  [
+   7.2,
+   "click",
+   "observe_ALO-01"
+  ],
+  [
+   8.1,
+   "click",
+   "measure_ALO-01"
   ],
   [
    9.0,

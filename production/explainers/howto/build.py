@@ -12,7 +12,7 @@ game/assets/explainers/<id>.ogv, the entry is written to game/resources/campaign
 "how_to"; never edit it by hand) and a contact sheet of stills lands in build/<id>/sheet.jpg for review.
 Godot runs through production/tools/godot_gated, one job at a time.
 """
-import json, re, shutil, subprocess, sys
+import json, os, re, shutil, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -67,7 +67,9 @@ def run(cmd, **kw):
 
 
 def godot(*args, log=None):
-    out = subprocess.run([str(GODOT), "--path", str(ROOT / "game"), *map(str, args)], text=True, capture_output=True)
+    # HOWTO_BACKGROUND=1: park the recording window mostly off-screen so it does not cover the user's work.
+    park = ["--position", "6000,6000"] if os.environ.get("HOWTO_BACKGROUND") and "--headless" not in args else []
+    out = subprocess.run([str(GODOT), "--path", str(ROOT / "game"), *park, *map(str, args)], text=True, capture_output=True)
     if log:
         Path(log).write_text(out.stdout + out.stderr)
     return out

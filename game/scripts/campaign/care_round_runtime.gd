@@ -389,9 +389,22 @@ func _commit_plant_care(individual_id: String, care_id: String, date: String, co
 		"expected_state_revision": int(query.get("state_revision", 0)),
 		"target_id": individual_id,
 		"verb": "plant_care",
-		"payload": {"individual_id": individual_id, "care_id": care_id, "scenario_datetime": date + " " + VISIT_TIME},
+		"payload": {"individual_id": individual_id, "care_id": care_id, "scenario_datetime": _visit_datetime(individual_id, date)},
 	}
 	return _director.commit(command)
+
+## The visit is stamped at 06:00, but never before the plant's last recorded
+## change on the same day (planting day: the seed goes in after 06:00), so a
+## same-day round can never ask the plant to move backward in time.
+func _visit_datetime(individual_id: String, date: String) -> String:
+	var stamp := date + " " + VISIT_TIME
+	for plant in _director.snapshot().get("plants", []):
+		if plant is Dictionary and String(plant.get("individual_id", "")) == individual_id:
+			for key in ["last_advanced_at", "planted_at"]:
+				var when := String(plant.get(key, ""))
+				if when.begins_with(date) and when > stamp:
+					stamp = when
+	return stamp
 
 func _reopen_with_fresh_view() -> void:
 	if _panel == null or not is_instance_valid(_panel) or _director == null:

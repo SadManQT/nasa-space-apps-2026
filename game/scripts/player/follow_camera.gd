@@ -26,6 +26,11 @@ var _quiet_time: float = 0.0
 var _initialized: bool = false
 var _arm_length: float = 0.0
 
+## A real play session may take the pointer; tools, tests and clip recording never do.
+static func may_capture_pointer() -> bool:
+	var args := OS.get_cmdline_args()
+	return DisplayServer.get_name() != "headless" and not (args.has("--script") or args.has("-s") or args.has("--write-movie"))
+
 func _ready() -> void:
 	target = get_parent() as CharacterBody3D
 	top_level = true
@@ -47,7 +52,7 @@ func _ready() -> void:
 	camera.near = 0.05
 	camera.current = active
 	spring.add_child(camera)
-	if active and capture_mouse and DisplayServer.get_name() != "headless":
+	if active and capture_mouse and may_capture_pointer():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -55,7 +60,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		look(event.screen_relative * mouse_sensitivity)
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and may_capture_pointer():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func look(motion: Vector2) -> void:

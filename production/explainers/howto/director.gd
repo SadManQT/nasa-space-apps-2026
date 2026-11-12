@@ -9,6 +9,7 @@ extends "res://tools/test_player_text.gd"
 const FPS := 24.0
 const TrainerScene := preload("res://scenes/trainer/moon_trainer.tscn")
 const HowTo := preload("res://scripts/ui/how_to_card.gd")
+const PlantFixture := preload("res://tools/support/p01_input_fixture.gd")
 
 var spec: Dictionary = {}
 var campaign: Chapter1Campaign
@@ -80,11 +81,13 @@ func _open_care_round() -> void:
 	var round_runtime = preload("res://scripts/campaign/care_round_runtime.gd").new(campaign.director)
 	set_meta("care_runtime", round_runtime)
 	var dates: Array = visit.get("dates", [])
-	print("director: care round ", round_runtime.open_round(care, String(visit.scene_id), String(dates[0]) if not dates.is_empty() else "", readings, {}, _care_capture))
+	print("director: care round ", round_runtime.open_round(care, String(visit.scene_id), String(dates[0]) if not dates.is_empty() else "", readings, {}, round_runtime.make_viewport_capture(root, care)))  # the game's own capture: hides the panel, photographs the room
 
 func _care_capture(request: Dictionary) -> Dictionary:
 	await RenderingServer.frame_post_draw
-	var path: String = storage.directory.path_join("%s.png" % request.get("individual_id", "plant"))
+	# The real Growth Record path, so the panel shows the photo exactly as it does in play.
+	var path := ProjectSettings.globalize_path(preload("res://scripts/campaign/care_round_runtime.gd").photo_path(String(request.get("individual_id", "plant")), String(request.get("date", spec.get("stage", {}).get("date", "2046-04-11")))))
+	DirAccess.make_dir_recursive_absolute(path.get_base_dir())
 	return {"accepted": root.get_texture().get_image().save_png(path) == OK, "photo_path": path}
 
 func _campaign_at(destination: String, done: Array) -> void:
@@ -133,7 +136,10 @@ func _perform(target_id: String) -> Dictionary:
 		campaign.hud.refresh_scene()
 	for target in campaign.targets_for_current_scene():
 		if String(target.target_id) == target_id:
-			var result: Dictionary = campaign.route.perform(target_id, _player_payload(target, campaign.director.snapshot()))
+			var payload := _player_payload(target, campaign.director.snapshot())
+			if payload.is_empty():
+				payload = PlantFixture.payload(target_id)  # P-01 planting choices (cassette, seed count, moisture, label), as the tests use
+			var result: Dictionary = campaign.route.perform(target_id, payload)
 			if not result.get("accepted", false):
 				print("director: %s held: %s" % [target_id, result.get("reason", "")])
 			return result
@@ -338,8 +344,8 @@ func _dump(node: Node, indent: String) -> void:
 ## ---- overlay ------------------------------------------------------------------------------------------------
 
 class Overlay extends Control:
-	const ACCENT := Color("#F2C230")
-	const IVORY := Color("#ECEEF0")
+	const ACCENT := Color("#FF4F8B")  # neon rose: how-to marks stand apart from the cerulean UI
+	const IVORY := Color("#EEF1F8")
 	const INK := Color("#05060A")
 	var director
 	var t := 0.0

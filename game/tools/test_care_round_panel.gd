@@ -34,7 +34,7 @@ func _run() -> void:
 	await process_frame
 	_check(root.gui_get_focus_owner() == panel._scroll and panel._scroll.scroll_vertical == 0, "entry focus starts at reading top without hiding the sequence")
 	_check(view == before and requests.is_empty(), "opening and rendering never mutates input or requests gameplay")
-	_check(panel.find_child("Readings_ALO-01", true, false).text.contains("40.25") and panel.find_child("Readings_TARA-01", true, false).text.contains("Unavailable"), "paired readings preserve fractions and missing values")
+	_check(panel.find_child("Readings_ALO-01", true, false).text.contains("40.25") and panel.find_child("Readings_TARA-01", true, false).text.contains("Not measured yet"), "paired readings preserve fractions and missing values")
 	_check(panel.find_child("Ghost_ALO-01", true, false).texture != null and panel.find_child("Ghost_TARA-01", true, false).texture != null, "both supplied previous images render as ghosts")
 	_check(await panel.request_action("ALO-01", "measure") and requests[-1].payload.values == {"moisture": 40.25, "temperature": 21.0}, "measurement request carries only supplied readings")
 	_check(not await panel.request_action("TARA-01", "measure"), "runtime disallowed action cannot emit")

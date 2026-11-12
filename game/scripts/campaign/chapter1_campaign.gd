@@ -1141,7 +1141,7 @@ func _process(_delta: float) -> void:
 	_sync_mouse_capture()
 
 func _sync_mouse_capture() -> void:
-	if DisplayServer.get_name() == "headless" or not is_inside_tree():
+	if not is_inside_tree() or not FollowCamera.may_capture_pointer():  # tools, tests and clip recording never take the pointer
 		return
 	var free_play := not loading and not _ui_paused and not _force_cursor and _player != null and not is_cutscene_active() and get_window().has_focus()
 	var mode := Input.MOUSE_MODE_CAPTURED if free_play else Input.MOUSE_MODE_VISIBLE

@@ -228,7 +228,31 @@ func _add_plant(pair: HBoxContainer, plant: Dictionary) -> void:
 	var current := _photo(preview, String(plant.get("current_photo_path", "")), "Current_" + id)
 	var ghost := _photo(preview, String(plant.get("previous_photo_path", "")), "Ghost_" + id)
 	ghost.modulate.a = 0.28
-	stack.add_child(UiDesign.label(("Current image unavailable. " if current.texture == null else "") + ("Previous photo unavailable." if ghost.texture == null else "Faint overlay: previous photo."), "caption"))
+	if current.texture == null and ghost.texture == null:
+		# A viewfinder, not an error: nothing has been photographed on this date yet.
+		var frame := Panel.new()
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color(1, 1, 1, 0.03)
+		style.border_color = Color(UiDesign.colour("accent"), 0.55)
+		style.set_border_width_all(1)
+		style.set_corner_radius_all(6)
+		frame.add_theme_stylebox_override("panel", style)
+		frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		preview.add_child(frame)
+		frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		var empty := VBoxContainer.new()
+		empty.alignment = BoxContainer.ALIGNMENT_CENTER
+		empty.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		frame.add_child(empty)
+		empty.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		var icon := UiKit.icon("plant", "accent", 40)
+		icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		empty.add_child(icon)
+		var note := UiDesign.label("No photo yet today: take one to compare growth", "caption", "muted")
+		note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty.add_child(note)
+	elif ghost.texture != null:
+		stack.add_child(UiDesign.label("Faint overlay: previous photo.", "caption", "muted"))
 	var hint := UiDesign.label("Frame aligned. Ready to photograph.", "caption")
 	hint.name = "Alignment_" + id
 	stack.add_child(hint)
@@ -264,7 +288,7 @@ func _add_plant(pair: HBoxContainer, plant: Dictionary) -> void:
 
 func _reading(plant: Dictionary, key: String, suffix: String) -> String:
 	var value: Variant = plant.get(key)
-	return UiDesign.number(float(value)) + suffix if (value is float or value is int) and is_finite(float(value)) else "Unavailable"
+	return UiDesign.number(float(value)) + suffix if (value is float or value is int) and is_finite(float(value)) else "Not measured yet"
 
 func _photo(parent: Control, path: String, node_name: String) -> TextureRect:
 	var photo := TextureRect.new()

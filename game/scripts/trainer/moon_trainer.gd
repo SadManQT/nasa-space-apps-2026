@@ -624,7 +624,7 @@ func enter_field() -> void:
 		vehicle.active_camera().make_current()
 	else:
 		player.follow_camera.camera.make_current()
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if DisplayServer.get_name() != "headless" else Input.MOUSE_MODE_VISIBLE
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if FollowCamera.may_capture_pointer() else Input.MOUSE_MODE_VISIBLE
 
 func leave_field() -> void:
 	var was_active := field_active
