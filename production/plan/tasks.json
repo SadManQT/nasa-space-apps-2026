@@ -1001,7 +1001,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "Export presets and release builds (Windows, macOS; web feasibility)",
-   "status": "in_progress",
+   "status": "done",
    "owner": "Atik/codex",
    "deps": [
     "M0-02"
@@ -1014,7 +1014,7 @@
     "execution/RELEASE_01_EXPORT_AND_PACKAGE.md"
    ],
    "note": "Release builds wait for the 12 Nov release (M3-93); finishing the game comes first (Sadman, 5 Nov 23:55).\n12 Nov Atik user explicitly resumes this task and release work without approval waits. Existing acceptance requirements and human QA dependencies remain binding. No completion inferred from a green CI build.\n12 Nov exact integration: game/scripts/main.gd only the existing M1-20 opt-in _run_export_smoke diagnostic. The real native Chapter1 PNG captured its post-operation loading card; require the transition to settle and capture readiness before PASS. Normal startup/gameplay/UI methods remain unchanged. No competing Main file reservation was present.\nMain exact-file reservation released after saved/pushed817a6eea, focused production session15/0 and actual native foreground export11/0; only the opt-in diagnostic changed. Current artifact/credits/report reservations remain. Preserve this delivered diagnostic if Main is edited by another owner.",
-   "evidence": "",
+   "evidence": "Published https://github.com/SadManQT/nasa-space-apps-2026/releases/tag/v0.1.0-judging.20261112 from frozen817a6eea. Windows x86_64 and macOS universal exports pass11/0 startup checks each on fresh CI43237871699; packaged title/Chapter1/first physical operation/settled loading/save. Public5assets verified: ZIP1093690361B sha256a0f6532244e1a3fa8a19b6fcec63f5e026a3fcf1cf467c5c0b5419f2f61335d3; Mac1115758023B sha2563592787930db95e3c2450206a05a54845e6b6e6c3b1bbd6b9e1b19ef83228c4c. Publisher43247577107 succeeds;7Python package tests pass. Native M4 foreground11/0 images demonstrate same-source actual Commons; PCK differs from CI and that limit is explicit. Six app-file hashes compared. Current notices/instructions/checksums/evidence supplied; historical browser feasibility/no-go reused, M2-13 deferred. Full game gate136/138 remains qualified, focused campaign15/0, text13048/0 with documented guard, intermittent media UTC-only reproduction handed off unapplied; no final QA/performance claim. Saved/pushed5fc56236: production/qa/builds/atik_20261112/README.md, ci_runs.json, manifest.json, native_payload_equivalence.json, all340raw log entries incl publication failures and7package contract tests. Only own exact-file locks released after saved/pushed work; preserve other owners.",
    "updated": "2026-11-12",
    "prompt": "Goal: judges and teammates can download and run the game; there is no export_presets.cfg today.\nDo: per execution/RELEASE_01_EXPORT_AND_PACKAGE.md: Windows x86_64 and macOS (universal, unsigned with run instructions) presets;\nexclude dev scenes and tools from the pack; version string; build to builds/ (gitignored) and attach to a GitHub Release (ask the user\nbefore publishing). Investigate a Chapter 1 web build with the Compatibility renderer and reduced textures for a 'play in the browser'\njudge link: report size, load time and look, and recommend yes/no.\nAcceptance: both builds start on a clean machine to the title screen and into Chapter 1; sizes and steps in production/qa/release_<date>.md.",
    "blocker": "Draft pre-release v0.1.0-preview.20261105 is on GitHub with both ZIPs (built from 57b837b; CI run 41970276437 green on Windows and macOS; production/qa/release_2026-11-05.md). Sadman: press Publish on the draft at https://github.com/SadManQT/nasa-space-apps-2026/releases, then update README.md's Download line.",
@@ -1041,34 +1041,6 @@
     ".github/workflows/publish-judging-candidate.yml",
     "CREDITS.md",
     "game/scripts/main.gd"
-   ],
-   "edit_files": [
-    "production/qa/build_release.py",
-    "production/qa/test_build_release.py",
-    ".github/workflows/judging-candidate.yml",
-    "production/qa/builds/atik_20261112/README.md",
-    "production/qa/builds/atik_20261112/manifest.json",
-    "production/qa/builds/atik_20261112/ci_runs.json",
-    "production/qa/builds/atik_20261112/media_snapshot_probe.gd",
-    "production/qa/builds/atik_20261112/media_snapshot_diff.json",
-    "README.md",
-    "production/qa/publish_candidate.py",
-    ".github/workflows/publish-judging-candidate.yml",
-    "production/qa/builds/atik_20261112/release_notes.md",
-    "CREDITS.md",
-    "production/qa/builds/atik_20261112/media_handoff.md",
-    "production/qa/builds/atik_20261112/media_snapshot_owner.patch",
-    "production/qa/builds/atik_20261112/media_repeats.json",
-    "production/qa/builds/atik_20261112/logs.zip",
-    "production/qa/builds/atik_20261112/native_export/run.json",
-    "production/qa/builds/atik_20261112/native_export/stdout.log",
-    "production/qa/builds/atik_20261112/native_export/M1-20_native_title.png",
-    "production/qa/builds/atik_20261112/native_export/M1-20_native_chapter1.png",
-    "production/qa/builds/atik_20261112/native_payload_equivalence.json",
-    "production/qa/builds/atik_20261112/native_export_final/run.json",
-    "production/qa/builds/atik_20261112/native_export_final/stdout.log",
-    "production/qa/builds/atik_20261112/native_export_final/M1-20_native_title.png",
-    "production/qa/builds/atik_20261112/native_export_final/M1-20_native_chapter1.png"
    ]
   },
   {
