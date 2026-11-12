@@ -3,6 +3,419 @@
  "about": "Explainer clips the hint player, data cards and Journal play (MASTER_PLAN.md section 5). Science explainers are built by production/tools/motion/build.py from production/explainers/motion/specs/; do not edit their entries by hand.",
  "explainers": [
   {
+   "id": "how_care_photo",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The care-round photo",
+   "path": "res://assets/explainers/how_care_photo.ogv",
+   "length_s": 14.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "care_photo"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 4.0,
+     "text": "Each care round, photograph both plants from the same spot."
+    },
+    {
+     "start": 4.1,
+     "end": 8.8,
+     "text": "Nudge today's view until it lines up with the faint earlier photo."
+    },
+    {
+     "start": 8.9,
+     "end": 14.0,
+     "text": "Take the photo. It is filed with today's date for comparing growth."
+    }
+   ],
+   "ends_on": "Take the photo. It is filed with today's date for comparing growth.",
+   "spec": "production/explainers/howto/specs/how_care_photo.json"
+  },
+  {
+   "id": "how_controller_links",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Replacing the controller and checking both links",
+   "path": "res://assets/explainers/how_controller_links.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "controller_links"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.9,
+     "text": "The procedure card lists each step in order."
+    },
+    {
+     "start": 4.0,
+     "end": 7.9,
+     "text": "Isolate, test for zero, replace, close, then restore power."
+    },
+    {
+     "start": 8.0,
+     "end": 12.3,
+     "text": "Then test the local link and the Earth link, each on its own."
+    },
+    {
+     "start": 12.4,
+     "end": 16.0,
+     "text": "Accept only an exact reply. One good link proves only itself."
+    }
+   ],
+   "ends_on": "Accept only an exact reply. One good link proves only itself.",
+   "spec": "production/explainers/howto/specs/how_controller_links.json"
+  },
+  {
+   "id": "how_energy_budget",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The energy budget for darkness",
+   "path": "res://assets/explainers/how_energy_budget.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "energy_budget"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.9,
+     "text": "In darkness nothing recharges the battery."
+    },
+    {
+     "start": 4.0,
+     "end": 7.9,
+     "text": "Keep the essentials on in every segment, then add what fits."
+    },
+    {
+     "start": 8.0,
+     "end": 12.3,
+     "text": "Try it shows the battery after each segment."
+    },
+    {
+     "start": 12.4,
+     "end": 16.0,
+     "text": "Lock in only if the reserve survives the last segment."
+    }
+   ],
+   "ends_on": "Lock in only if the reserve survives the last segment.",
+   "spec": "production/explainers/howto/specs/how_energy_budget.json"
+  },
+  {
+   "id": "how_evidence_board",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The evidence board",
+   "path": "res://assets/explainers/how_evidence_board.ogv",
+   "length_s": 14.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "evidence"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 2.5,
+     "text": "Press J for the Journal, then open Evidence."
+    },
+    {
+     "start": 2.6,
+     "end": 5.7,
+     "text": "Observed holds what was seen, with its source."
+    },
+    {
+     "start": 5.8,
+     "end": 8.7,
+     "text": "Inferred holds what we think it means."
+    },
+    {
+     "start": 8.8,
+     "end": 12.0,
+     "text": "Unknown keeps the blanks. A clue moves only with a new source."
+    },
+    {
+     "start": 12.1,
+     "end": 14.0,
+     "text": "Esc closes the Journal."
+    }
+   ],
+   "ends_on": "Esc closes the Journal.",
+   "spec": "production/explainers/howto/specs/how_evidence_board.json"
+  },
+  {
+   "id": "how_goal_what_now",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The goal card and What now",
+   "path": "res://assets/explainers/how_goal_what_now.ogv",
+   "length_s": 15.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "goal",
+    "journal"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 4.4,
+     "text": "The goal card at the top left always says what to do and why."
+    },
+    {
+     "start": 4.5,
+     "end": 8.6,
+     "text": "Press H for What now: the goal, where it is, and help."
+    },
+    {
+     "start": 8.7,
+     "end": 12.4,
+     "text": "Hint gives one small step at a time. It never changes your rewards."
+    },
+    {
+     "start": 12.5,
+     "end": 15.0,
+     "text": "Esc closes it. The clock waits while you read."
+    }
+   ],
+   "ends_on": "Esc closes it. The clock waits while you read.",
+   "spec": "production/explainers/howto/specs/how_goal_what_now.json"
+  },
+  {
+   "id": "how_harvest_ledger",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The harvest ledger",
+   "path": "res://assets/explainers/how_harvest_ledger.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "harvest_ledger"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.9,
+     "text": "The ledger keeps every seed of the line accounted for."
+    },
+    {
+     "start": 4.0,
+     "end": 7.9,
+     "text": "Count each well before you split the seeds."
+    },
+    {
+     "start": 8.0,
+     "end": 12.3,
+     "text": "Try it checks that planting and reserve add up."
+    },
+    {
+     "start": 12.4,
+     "end": 16.0,
+     "text": "Lock in the split. The lineage stays on the record."
+    }
+   ],
+   "ends_on": "Lock in the split. The lineage stays on the record.",
+   "spec": "production/explainers/howto/specs/how_harvest_ledger.json"
+  },
+  {
+   "id": "how_impact_flash",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Classifying an impact flash",
+   "path": "res://assets/explainers/how_impact_flash.ogv",
+   "length_s": 14.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "impact_flash"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.9,
+     "text": "Some bright spots are impacts. Some are detector faults."
+    },
+    {
+     "start": 4.0,
+     "end": 7.5,
+     "text": "Compare more than one frame of each flash."
+    },
+    {
+     "start": 7.6,
+     "end": 11.3,
+     "text": "A real flash changes and fades. A fault looks the same every time."
+    },
+    {
+     "start": 11.4,
+     "end": 14.0,
+     "text": "Press H if you want one hint at a time."
+    }
+   ],
+   "ends_on": "Press H if you want one hint at a time.",
+   "spec": "production/explainers/howto/specs/how_impact_flash.json"
+  },
+  {
+   "id": "how_lock_shift",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Locking in a shift",
+   "path": "res://assets/explainers/how_lock_shift.ogv",
+   "length_s": 14.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "lock_shift"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.0,
+     "text": "When the forecast looks safe, press Lock in."
+    },
+    {
+     "start": 3.1,
+     "end": 7.4,
+     "text": "Lock in asks once more. Read the plan one last time."
+    },
+    {
+     "start": 7.5,
+     "end": 9.5,
+     "text": "Back returns to the table with nothing changed."
+    },
+    {
+     "start": 9.6,
+     "end": 14.0,
+     "text": "Confirm uses the plan, and the shift goes ahead."
+    }
+   ],
+   "ends_on": "Confirm uses the plan, and the shift goes ahead.",
+   "spec": "production/explainers/howto/specs/how_lock_shift.json"
+  },
+  {
+   "id": "how_markers_lines",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Markers and fixed lines",
+   "path": "res://assets/explainers/how_markers_lines.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "survey_markers_network"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.7,
+     "text": "Survey markers and fixed lines make a route safe for later trips."
+    },
+    {
+     "start": 3.8,
+     "end": 8.3,
+     "text": "At the outlined site, press E to place the marker. It stays."
+    },
+    {
+     "start": 8.4,
+     "end": 14.1,
+     "text": "The Coverage Map shows each link back to the station."
+    },
+    {
+     "start": 14.2,
+     "end": 16.0,
+     "text": "A blocked link needs a marker on higher ground."
+    }
+   ],
+   "ends_on": "A blocked link needs a marker on higher ground.",
+   "spec": "production/explainers/howto/specs/how_markers_lines.json"
+  },
+  {
+   "id": "how_messages",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Messages",
+   "path": "res://assets/explainers/how_messages.ogv",
+   "length_s": 14.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "messages"
+   ],
+   "captions": [
+    {
+     "start": 0.2,
+     "end": 2.0,
+     "text": "Crew and Earth send short messages between jobs."
+    },
+    {
+     "start": 2.1,
+     "end": 4.7,
+     "text": "Press M to open Messages. Threads are on the left."
+    },
+    {
+     "start": 4.8,
+     "end": 8.3,
+     "text": "Pick a thread, then a message. Unread ones are marked."
+    },
+    {
+     "start": 8.4,
+     "end": 12.0,
+     "text": "Some messages point at your goal. Reading pauses the clock."
+    },
+    {
+     "start": 12.1,
+     "end": 14.0,
+     "text": "Esc closes Messages."
+    }
+   ],
+   "ends_on": "Esc closes Messages.",
+   "spec": "production/explainers/howto/specs/how_messages.json"
+  },
+  {
+   "id": "how_mission_table",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The Mission Table in three steps",
+   "path": "res://assets/explainers/how_mission_table.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "mission_table"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 4.2,
+     "text": "Step 1: read the shift at the top: daylight or dark, and the time."
+    },
+    {
+     "start": 4.3,
+     "end": 8.2,
+     "text": "Step 2: choose the air and light rows the crew suggests."
+    },
+    {
+     "start": 8.3,
+     "end": 13.0,
+     "text": "Step 3: press Try it. The forecast shows the result. Nothing changes yet."
+    },
+    {
+     "start": 13.1,
+     "end": 16.0,
+     "text": "Change a row and try again as often as you like."
+    }
+   ],
+   "ends_on": "Change a row and try again as often as you like.",
+   "spec": "production/explainers/howto/specs/how_mission_table.json"
+  },
+  {
    "id": "how_move_look",
    "kind": "how_to",
    "level": "method",
@@ -29,7 +442,7 @@
     {
      "start": 6.1,
      "end": 10.2,
-     "text": "To look around, hold the right mouse button and move, or use the right stick."
+     "text": "To look around, move the mouse or use the right stick."
     },
     {
      "start": 10.5,
@@ -39,6 +452,376 @@
    ],
    "ends_on": "Head for the gold outline. Walking never runs down a hidden clock.",
    "spec": "production/explainers/howto/specs/how_move_look.json"
+  },
+  {
+   "id": "how_payload_carrying",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Carrying and stacking supplies",
+   "path": "res://assets/explainers/how_payload_carrying.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "payload_carrying"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.6,
+     "text": "When the alarm sounds, the supplies go to the shelter."
+    },
+    {
+     "start": 3.7,
+     "end": 8.0,
+     "text": "Walk to a case and press E to pick it up."
+    },
+    {
+     "start": 8.1,
+     "end": 11.8,
+     "text": "Carry it to an outlined slot and press E to set it down."
+    },
+    {
+     "start": 11.9,
+     "end": 16.0,
+     "text": "Every case you place counts in the plan's forecast."
+    }
+   ],
+   "ends_on": "Every case you place counts in the plan's forecast.",
+   "spec": "production/explainers/howto/specs/how_payload_carrying.json"
+  },
+  {
+   "id": "how_pollination_route",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The pollination route",
+   "path": "res://assets/explainers/how_pollination_route.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "pollination_route"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.9,
+     "text": "The left side holds what we know: the clues and who found them."
+    },
+    {
+     "start": 4.0,
+     "end": 7.9,
+     "text": "Choose the donor, the brush and the carrier for this step."
+    },
+    {
+     "start": 8.0,
+     "end": 12.3,
+     "text": "Try it shows before and after. Nothing moves yet."
+    },
+    {
+     "start": 12.4,
+     "end": 16.0,
+     "text": "Lock in when it is right. Then reverse with the clean brush."
+    }
+   ],
+   "ends_on": "Lock in when it is right. Then reverse with the clean brush.",
+   "spec": "production/explainers/howto/specs/how_pollination_route.json"
+  },
+  {
+   "id": "how_recorder_history",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Reading a recorder's history",
+   "path": "res://assets/explainers/how_recorder_history.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "recorder_history"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.9,
+     "text": "Read the photographed plate, the date and the channel labels."
+    },
+    {
+     "start": 4.0,
+     "end": 7.9,
+     "text": "Put one token in each empty slot of the local copy."
+    },
+    {
+     "start": 8.0,
+     "end": 12.3,
+     "text": "Try it checks the copy. The original stays untouched."
+    },
+    {
+     "start": 12.4,
+     "end": 16.0,
+     "text": "Playback opens only when every label matches."
+    }
+   ],
+   "ends_on": "Playback opens only when every label matches.",
+   "spec": "production/explainers/howto/specs/how_recorder_history.json"
+  },
+  {
+   "id": "how_reference_gauge",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Isolating a fault with a reference gauge",
+   "path": "res://assets/explainers/how_reference_gauge.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "reference_gauge"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.9,
+     "text": "A warning light is a claim. A second gauge checks it."
+    },
+    {
+     "start": 4.0,
+     "end": 7.9,
+     "text": "Read each line now and again ten minutes later."
+    },
+    {
+     "start": 8.0,
+     "end": 12.3,
+     "text": "The line that falls while the others hold is the fault."
+    },
+    {
+     "start": 12.4,
+     "end": 16.0,
+     "text": "Isolate only that line, then check that it holds."
+    }
+   ],
+   "ends_on": "Isolate only that line, then check that it holds.",
+   "spec": "production/explainers/howto/specs/how_reference_gauge.json"
+  },
+  {
+   "id": "how_repeaters_coverage",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Repeaters and the coverage map",
+   "path": "res://assets/explainers/how_repeaters_coverage.ogv",
+   "length_s": 14.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "repeaters_coverage"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.5,
+     "text": "Radio travels in straight lines from one repeater to the next."
+    },
+    {
+     "start": 3.6,
+     "end": 7.0,
+     "text": "The Coverage Map draws every link back to the station."
+    },
+    {
+     "start": 7.1,
+     "end": 10.1,
+     "text": "Terrain between two repeaters blocks the link."
+    },
+    {
+     "start": 10.2,
+     "end": 14.0,
+     "text": "Restore or move a repeater until every link shows clear."
+    }
+   ],
+   "ends_on": "Restore or move a repeater until every link shows clear.",
+   "spec": "production/explainers/howto/specs/how_repeaters_coverage.json"
+  },
+  {
+   "id": "how_rover_reserve",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The rover and the return reserve",
+   "path": "res://assets/explainers/how_rover_reserve.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "rover_route_planner"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 5.7,
+     "text": "Open the Route Planner and compare the routes on the slope map."
+    },
+    {
+     "start": 5.8,
+     "end": 9.9,
+     "text": "Each route lists its steepest slope and the energy it needs."
+    },
+    {
+     "start": 10.0,
+     "end": 16.0,
+     "text": "Confirm only a route that keeps the return in the battery."
+    }
+   ],
+   "ends_on": "Confirm only a route that keeps the return in the battery.",
+   "spec": "production/explainers/howto/specs/how_rover_reserve.json"
+  },
+  {
+   "id": "how_scanner_slopes",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The scanner pulse and slopes",
+   "path": "res://assets/explainers/how_scanner_slopes.ogv",
+   "length_s": 16.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "eva_suit_scanner"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.3,
+     "text": "Before you cross the ground, read it."
+    },
+    {
+     "start": 3.4,
+     "end": 8.5,
+     "text": "Hold F to pulse the scanner. Bands run from 1, flat, to 4, no-go."
+    },
+    {
+     "start": 8.6,
+     "end": 12.7,
+     "text": "The visor keeps your oxygen, power and cooling above the return line."
+    },
+    {
+     "start": 12.8,
+     "end": 16.0,
+     "text": "Walk the low bands. Steeper ground costs more and can be unsafe."
+    }
+   ],
+   "ends_on": "Walk the low bands. Steeper ground costs more and can be unsafe.",
+   "spec": "production/explainers/howto/specs/how_scanner_slopes.json"
+  },
+  {
+   "id": "how_station_strip",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The station strip",
+   "path": "res://assets/explainers/how_station_strip.ogv",
+   "length_s": 12.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "station_strip"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 2.6,
+     "text": "Some jobs use the station's power, air or water."
+    },
+    {
+     "start": 2.7,
+     "end": 5.6,
+     "text": "The station strip appears at the top right when a value changes."
+    },
+    {
+     "start": 5.7,
+     "end": 8.5,
+     "text": "Each bar has a word as well as a colour: steady, low or full."
+    },
+    {
+     "start": 8.6,
+     "end": 12.0,
+     "text": "It fades again while you walk, so the view stays clear."
+    }
+   ],
+   "ends_on": "It fades again while you walk, so the view stays clear.",
+   "spec": "production/explainers/howto/specs/how_station_strip.json"
+  },
+  {
+   "id": "how_storm_shelter",
+   "kind": "how_to",
+   "level": "method",
+   "title": "The storm shelter run and the dosimeter",
+   "path": "res://assets/explainers/how_storm_shelter.ogv",
+   "length_s": 14.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "storm_shelter"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 3.7,
+     "text": "When a storm is coming, people go behind the shielding first."
+    },
+    {
+     "start": 3.8,
+     "end": 7.0,
+     "text": "The hazard panel shows the storm level and the dosimeter."
+    },
+    {
+     "start": 7.1,
+     "end": 10.1,
+     "text": "The dosimeter gives the dose rate now and the total so far."
+    },
+    {
+     "start": 10.2,
+     "end": 14.0,
+     "text": "Water and regolith walls slow the particles. Stay in until the level falls."
+    }
+   ],
+   "ends_on": "Water and regolith walls slow the particles. Stay in until the level falls.",
+   "spec": "production/explainers/howto/specs/how_storm_shelter.json"
+  },
+  {
+   "id": "how_use",
+   "kind": "how_to",
+   "level": "method",
+   "title": "Using things",
+   "path": "res://assets/explainers/how_use.ogv",
+   "length_s": 12.04,
+   "labels": [],
+   "sources": [],
+   "used_by": [
+    "use"
+   ],
+   "captions": [
+    {
+     "start": 0.3,
+     "end": 2.4,
+     "text": "Walk up to the marked station or crew member."
+    },
+    {
+     "start": 2.5,
+     "end": 5.0,
+     "text": "When the key prompt appears, the thing is in reach."
+    },
+    {
+     "start": 5.1,
+     "end": 7.6,
+     "text": "Press E, or the bottom face button, to use it."
+    },
+    {
+     "start": 7.7,
+     "end": 9.8,
+     "text": "The note at the top right says what changed."
+    },
+    {
+     "start": 9.9,
+     "end": 12.0,
+     "text": "Esc steps back at any time without losing progress."
+    }
+   ],
+   "ends_on": "Esc steps back at any time without losing progress.",
+   "spec": "production/explainers/howto/specs/how_use.json"
   },
   {
    "id": "sci_cold_traps",
@@ -1144,27 +1927,5 @@
    "spec": "production/explainers/motion/specs/sci_water_evidence.json"
   }
  ],
- "pending_render": [
-  "how_care_photo",
-  "how_controller_links",
-  "how_energy_budget",
-  "how_evidence_board",
-  "how_goal_what_now",
-  "how_harvest_ledger",
-  "how_impact_flash",
-  "how_lock_shift",
-  "how_markers_lines",
-  "how_messages",
-  "how_mission_table",
-  "how_payload_carrying",
-  "how_pollination_route",
-  "how_recorder_history",
-  "how_reference_gauge",
-  "how_repeaters_coverage",
-  "how_rover_reserve",
-  "how_scanner_slopes",
-  "how_station_strip",
-  "how_storm_shelter",
-  "how_use"
- ]
+ "pending_render": []
 }

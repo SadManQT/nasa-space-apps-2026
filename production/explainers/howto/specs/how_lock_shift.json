@@ -22,6 +22,30 @@
   [
    "call",
    "hud.mission_table",
+   "share_card",
+   "kai"
+  ],
+  [
+   "call",
+   "hud.mission_table",
+   "share_card",
+   "amara"
+  ],
+  [
+   "call",
+   "hud.mission_table",
+   "share_card",
+   "mei"
+  ],
+  [
+   "call",
+   "hud.mission_table",
+   "share_card",
+   "rafi"
+  ],
+  [
+   "call",
+   "hud.mission_table",
    "preview"
   ]
  ],

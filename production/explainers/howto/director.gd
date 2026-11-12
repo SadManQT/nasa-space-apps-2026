@@ -50,7 +50,7 @@ func _run() -> void:
 func _stage(stage: Dictionary) -> void:
 	match String(stage.get("kind", "campaign")):
 		"trainer":
-			trainer = TrainerScene.instantiate()
+			trainer = load("res://scripts/trainer/moon_trainer.gd").new()  # as main.gd opens it; the .tscn is now only its shell
 			trainer.set("results_path", storage.directory.path_join("moon_results.json"))
 			root.add_child(trainer)
 			for frame in 30:

@@ -19,8 +19,9 @@
  "steps": [
   [
    0.6,
-   "click",
-   "OpenRoutePlannerAction"
+   "call",
+   "trainer",
+   "_open_rover_planner"
   ],
   [
    1.6,

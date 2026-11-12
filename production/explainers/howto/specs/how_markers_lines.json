@@ -45,8 +45,9 @@
   ],
   [
    8.4,
-   "click",
-   "OpenCoverageMapAction"
+   "call",
+   "trainer",
+   "_perform_marker_and_map"
   ],
   [
    9.4,
