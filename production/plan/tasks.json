@@ -8519,7 +8519,10 @@
     "game/tools/test_campaign_crew.gd",
     "game/tools/test_seated_crew.gd",
     "game/tools/test_seated_crew.gd.uid",
-    "production/qa/evidence/Shanto_game_fixes_20261113.md"
+    "production/qa/evidence/Shanto_game_fixes_20261113.md",
+    "game/scripts/trainer/moon_trainer.gd",
+    "game/tools/test_moon_trainer.gd",
+    "production/qa/evidence/Shanto_game_fixes_20261113_logs.zip"
    ],
    "refs": [],
    "note": "Filed by Shanto/codex on 2026-11-13.",
@@ -8539,7 +8542,10 @@
     "game/tools/test_campaign_crew.gd",
     "game/tools/test_seated_crew.gd",
     "game/tools/test_seated_crew.gd.uid",
-    "production/qa/evidence/Shanto_game_fixes_20261113.md"
+    "production/qa/evidence/Shanto_game_fixes_20261113.md",
+    "game/scripts/trainer/moon_trainer.gd",
+    "game/tools/test_moon_trainer.gd",
+    "production/qa/evidence/Shanto_game_fixes_20261113_logs.zip"
    ]
   }
  ],
