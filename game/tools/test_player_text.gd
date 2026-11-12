@@ -418,6 +418,12 @@ func _finish() -> void:
 		var file := FileAccess.open("res://../production/qa/evidence/M1-62_bounds.json", FileAccess.WRITE)
 		file.store_string(JSON.stringify({"scope": "Scripted actual HUD and route witnesses; chapter-start native rooms; every later job at both scales. No physical campaign playtest.", "engine": Engine.get_version_info(), "viewport": [1280, 720], "worst_goal_cards": _goal_bounds, "checks": checks, "failures": failures}, " "))
 		file.close()
+	# Reading-level review: PLAYER_TEXT_DUMP=/path writes every distinct string the walk read.
+	var dump_path := OS.get_environment("PLAYER_TEXT_DUMP")
+	if not dump_path.is_empty():
+		var dump := FileAccess.open(dump_path, FileAccess.WRITE)
+		dump.store_string(JSON.stringify(_seen.keys(), " "))
+		dump.close()
 	storage.cleanup()
 	print("PLAYER TEXT RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)

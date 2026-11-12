@@ -172,6 +172,16 @@ static func scrim_style(strength: float = 0.62, pad: int = 18, bleed: int = 56) 
 		style.set_expand_margin(side, bleed)
 	return style
 
+## A solid dark plate for HUD text that must be readable over any scene
+## (children could not read the goal over bright ceilings with the soft scrim).
+static func plate_style(strength: float = 0.84, pad: int = 16) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(Color("#05080E"), strength)
+	style.set_corner_radius_all(8)
+	for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
+		style.set_content_margin(side, pad)
+	return style
+
 ## Floating HUD text keeps contrast over any scene: a soft dark shadow round each glyph.
 static func float_label(label: Label) -> Label:
 	label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))

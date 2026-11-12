@@ -90,8 +90,8 @@ func _run() -> void:
 	entry.select_all()
 	await _key(KEY_1, 49)
 	_check(root.gui_get_focus_owner() == entry, "typing keeps the live numeric field and caret")
-	_check((panel.find_child("ProbeNotice", true, false) as Label).text.begins_with("Selection changed"), "typed edits immediately invalidate visible forecast feedback")
-	_check(not _labels(panel).contains("Probe: zero set"), "typed edits remove the stale projected observation")
+	_check((panel.find_child("ProbeNotice", true, false) as Label).text.begins_with("Changed."), "typed edits immediately invalidate visible forecast feedback")
+	_check(not _labels(panel).contains("Meter: dry test done"), "typed edits remove the stale projected observation")
 	panel.choose("calibrated_reading", 1)
 	_check(not panel.request_commit().accepted, "editing invalidates the accepted prediction")
 	panel.request_close()
@@ -182,13 +182,13 @@ func _planting(campaign) -> void:
 		if target.begins_with("label"):
 			var observed := panel.find_child("ProbeObserved", true, false) as Label
 			var projected := panel.find_child("ProbePrediction", true, false) as Label
-			_check(observed != null and observed.text.to_lower().contains("label: not labelled"), "observed cassette has no label before confirmation")
-			var expected := "label: external test" if target == "label_alo" else "label: indoor reference"
+			_check(observed != null and observed.text.to_lower().contains("label: no label yet"), "observed cassette has no label before confirmation")
+			var expected := "label: outside test" if target == "label_alo" else "label: indoor"
 			_check(projected != null and projected.text.to_lower().contains(expected), "forecast visibly shows the chosen cassette label")
 		panel.confirm_commit()
 		if target.begins_with("label"):
 			var observed := panel.find_child("ProbeObserved", true, false) as Label
-			var expected := "label: external test" if target == "label_alo" else "label: indoor reference"
+			var expected := "label: outside test" if target == "label_alo" else "label: indoor"
 			_check(observed != null and observed.text.to_lower().contains(expected), "committed label is visible in the actual observation")
 		panel.discard()
 	_check(campaign.route.snapshot().p01.moisture_alo == 40.25 and campaign.route.snapshot().p01.moisture_tara == 60 and campaign.p01_view("seal_tara").completion.complete, "whole planting panel retains chosen moisture and completes")
@@ -262,9 +262,9 @@ func _scan_feedback(campaign) -> void:
 	_check(panel.preview().accepted, "chosen packet scan predicts")
 	var observed := panel.find_child("ProbeObserved", true, false) as Label
 	var projected := panel.find_child("ProbePrediction", true, false) as Label
-	_check(observed != null and observed.text.contains("Seed packet: not scanned"), "packet observation is unscanned before confirmation")
-	_check(projected != null and projected.text.contains("Seed packet: scanned"), "packet forecast visibly differs from the observation")
+	_check(observed != null and observed.text.contains("Seed packet: not looked at yet"), "packet observation is unscanned before confirmation")
+	_check(projected != null and projected.text.contains("Seed packet: looked at"), "packet forecast visibly differs from the observation")
 	_check(panel.request_commit().accepted and panel.confirm_commit().accepted, "explicit packet scan confirms")
 	observed = panel.find_child("ProbeObserved", true, false) as Label
-	_check(campaign.route.snapshot().p01.packet_scanned and observed != null and observed.text.contains("Seed packet: scanned"), "actual committed packet state is visible")
+	_check(campaign.route.snapshot().p01.packet_scanned and observed != null and observed.text.contains("Seed packet: looked at"), "actual committed packet state is visible")
 	panel.discard()

@@ -73,9 +73,9 @@ Four cadets (Kai on power and heat, Amara on air, Mei on the garden, Rafi on spa
 - Data Cards for all 16 puzzles and 19 narrated science explainer clips, every number drawn from the NASA fixtures.
 - The exteriors stand on real south-pole terrain built from LRO LOLA elevation data, lit by JPL Horizons Sun positions for each scene's date.
 - 386 voice lines, a 12-cue score, 38 sound effects and 18 cutscenes, all installed.
-- 136 automated test suites (`game/tools/run_tests.sh`), including a walk through all 96 scenes and 13,048 checks on every line of player text at normal and 150 % text size. Rendering holds 60 fps on an Apple M4 Mac ([perf report](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/qa/perf_2026-11-04.md)); each push is exported and smoke-tested on Windows.
+- 138 automated test suites (`game/tools/run_tests.sh`), including a walk through all 96 scenes and 13,048 checks on every line of player text at normal and 150 % text size. Rendering holds 60 fps on an Apple M4 Mac ([perf report](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/qa/perf_2026-11-04.md)); each push is exported and smoke-tested on Windows.
 - Four-player Class mode on one machine: choose Class (2–4 players) on New Expedition. Each cadet's crew note is read privately behind a pass-the-screen cover (or from printed cards), and all four roles sign every puzzle's exact choice and forecast before it locks in.
-- In progress: the learner playtest (M1-22).
+- Play-tested with 18 learners under 15. They told us the instructions were too hard, so every on-screen instruction was rewritten in words a nine-year-old can read, and the first puzzles now give step-by-step help.
 
 ### How: NASA data at the core
 

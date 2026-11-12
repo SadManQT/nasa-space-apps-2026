@@ -71,16 +71,16 @@ func _test_title_and_new_expedition() -> void:
 	await process_frame
 	_check(menu._briefing.visible, "UI_02 New Expedition briefing opens")
 	var brief_text := _collect_text(menu._briefing)
-	for token in ["MISSION BRIEFING  /  CHAPTER 1", "ASSIST MODE", "KAI", "AMARA", "MEI", "RAFI", "ENTER AURORA"]:
+	for token in ["YOUR MISSION", "HOW MUCH HELP?", "KAI", "AMARA", "MEI", "RAFI", "ENTER AURORA"]:
 		_check(brief_text.contains(token), "UI_02 New Expedition briefing includes: " + token)
 
 	# Verify Assist Mode selection (Story, Cadet, Expedition)
 	_check(menu.assist_mode() == "Cadet", "UI_02 default Assist Mode is Cadet")
 	menu.set_assist_mode("Story")
-	_check(menu.assist_mode() == "Story" and menu._assist_summary.text.contains("Story Mode"), "UI_02 selects Story Assist Mode")
+	_check(menu.assist_mode() == "Story" and menu._assist_summary.text.contains("Story:"), "UI_02 selects Story Assist Mode")
 	_check(menu.accessibility_settings().get("assist_mode", "") == "Story", "Selected assist mode is included in real campaign launch settings")
 	menu.set_assist_mode("Expedition")
-	_check(menu.assist_mode() == "Expedition" and menu._assist_summary.text.contains("Expedition Mode"), "UI_02 selects Expedition Assist Mode")
+	_check(menu.assist_mode() == "Expedition" and menu._assist_summary.text.contains("Expedition:"), "UI_02 selects Expedition Assist Mode")
 	menu.set_assist_mode("Cadet")
 	await _maybe_capture("M1-18_new_expedition.png")
 

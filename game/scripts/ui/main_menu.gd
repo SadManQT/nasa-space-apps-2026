@@ -113,9 +113,9 @@ func set_assist_mode(mode_id: String) -> void:
 	_assist_mode = mode_id
 	if _assist_summary != null:
 		var descs := {
-			"Story": "Story Mode: Gentle guidance, early hints, and stress-free exploration.",
-			"Cadet": "Cadet Mode (Default): Standard guidance, 3-step hint ladder, and full science feedback.",
-			"Expedition": "Expedition Mode: Minimal automatic nudges; full instrumentation and manual checks.",
+			"Story": "Story: the most help. Hints come early. Best for a first play.",
+			"Cadet": "Cadet: normal help. Hints when you ask.",
+			"Expedition": "Expedition: the least help. For players who want a challenge.",
 		}
 		_assist_summary.text = String(descs.get(mode_id, ""))
 
@@ -285,7 +285,7 @@ func _build_briefing() -> void:
 	content.add_theme_constant_override("separation", 12)
 	margin.add_child(content)
 	var title := Label.new()
-	title.text = "MISSION BRIEFING  /  CHAPTER 1"
+	title.text = "YOUR MISSION"
 	title.add_theme_font_size_override("font_size", 26)
 	title.add_theme_color_override("font_color", MUSTARD)
 	content.add_child(title)
@@ -298,13 +298,13 @@ func _build_briefing() -> void:
 	body.add_theme_constant_override("separation", 12)
 	scroll.add_child(body)
 	var copy := Label.new()
-	copy.text = "Aurora Station is preparing for a 36-hour training scenario at the Moon's south pole.\n\nKeep the crew safe.\nKeep the station running.\nCare for Alo inside a pressurised chamber."
+	copy.text = "You are a cadet at Aurora, a small base on the Moon.\nThe Sun is about to set for 36 hours. No Sun means no new power.\n\nKeep your crew safe.\nKeep the base running.\nKeep Alo, a small mustard plant, alive until sunrise."
 	copy.add_theme_font_size_override("font_size", 18)
 	copy.add_theme_color_override("font_color", IVORY)
 	copy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	body.add_child(copy)
 	var loop := Label.new()
-	loop.text = "OBSERVE  →  DISCUSS  →  CHOOSE  →  EXECUTE  →  SEE IMPACT  →  DEBRIEF"
+	loop.text = "Follow the blue ◇ marker  ·  Press E to do a job  ·  Press H if you are stuck"
 	loop.add_theme_font_size_override("font_size", 14)
 	loop.add_theme_color_override("font_color", CYAN)
 	loop.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -314,10 +314,10 @@ func _build_briefing() -> void:
 	roles.add_theme_constant_override("h_separation", 10)
 	roles.add_theme_constant_override("v_separation", 10)
 	body.add_child(roles)
-	for item in [["KAI", "POWER & HEAT", ORANGE], ["AMARA", "AIR & MEASUREMENT", CYAN], ["MEI", "GARDEN & PLANT CARE", GREEN], ["RAFI", "SPACE WEATHER", PURPLE]]:
+	for item in [["KAI", "POWER AND HEAT", ORANGE], ["AMARA", "AIR", CYAN], ["MEI", "GARDEN", GREEN], ["RAFI", "STORM WATCH", PURPLE]]:
 		roles.add_child(_role_card(item[0], item[1], item[2]))
 	var assist_header := Label.new()
-	assist_header.text = "ASSIST MODE  ·  CHANGE ANYTIME IN SETTINGS"
+	assist_header.text = "HOW MUCH HELP?  ·  YOU CAN CHANGE THIS IN SETTINGS"
 	assist_header.add_theme_font_size_override("font_size", 13)
 	assist_header.add_theme_color_override("font_color", MUSTARD)
 	body.add_child(assist_header)
@@ -327,14 +327,14 @@ func _build_briefing() -> void:
 	body.add_child(assist_row)
 	_assist_summary = Label.new()
 	_assist_summary.name = "AssistModeSummary"
-	_assist_summary.text = "Cadet Mode (Default): Standard guidance, 3-step hint ladder, and full science feedback."
+	_assist_summary.text = "Cadet: normal help. Hints when you ask."
 	_assist_summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_assist_summary.add_theme_font_size_override("font_size", 13)
 	_assist_summary.add_theme_color_override("font_color", IVORY)
 	for mode_spec in [
-		["Story", "Story Mode: Gentle guidance, early hints, and stress-free exploration."],
-		["Cadet", "Cadet Mode (Default): Standard guidance, 3-step hint ladder, and full science feedback."],
-		["Expedition", "Expedition Mode: Minimal automatic nudges; full instrumentation and manual checks."],
+		["Story", "Story: the most help. Hints come early. Best for a first play."],
+		["Cadet", "Cadet: normal help. Hints when you ask."],
+		["Expedition", "Expedition: the least help. For players who want a challenge."],
 	]:
 		var m_id: String = mode_spec[0]
 		var m_desc: String = mode_spec[1]
@@ -350,7 +350,7 @@ func _build_briefing() -> void:
 		assist_row.add_child(m_btn)
 	body.add_child(_assist_summary)
 	var qualifier := Label.new()
-	qualifier.text = "SIMULATED · Training scenario\nThe station, cadets, 2046 dates and game resources are fictional."
+	qualifier.text = "This is a training story. The base, the cadets and the year 2046 are made up. The science is real."
 	qualifier.add_theme_font_size_override("font_size", 13)
 	qualifier.add_theme_color_override("font_color", MUTED)
 	body.add_child(qualifier)

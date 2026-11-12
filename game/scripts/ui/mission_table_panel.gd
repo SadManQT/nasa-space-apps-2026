@@ -657,16 +657,16 @@ func _render_forecast() -> Control:
 		heading = "Now → after shifts %d to %d" % [int(shifts.front()), int(shifts.back())]
 	var column := _column(heading, 0)
 	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	column.add_child(_wrap("SIMULATED · nothing changes yet.", 12, CYAN))
+	column.add_child(_wrap("Practice. Nothing changes until you lock in.", 12, CYAN))
 	var resources: Dictionary = _view.get("resources", {})
 	var forecast: Dictionary = _view.get("gate_preview", {})
 	var after: Dictionary = forecast.get("final_state", {}) if forecast.get("accepted", false) else {}
-	for row in [["E", "Battery", "energy_capacity", "battery units"], ["A", "Air", "air_capacity", "air units"], ["H", "Alo", "health_capacity", "health"], ["C", "Garden", "crop_capacity", "condition"]]:
+	for row in [["E", "Battery", "energy_capacity", "power"], ["A", "Air", "air_capacity", "air"], ["H", "Alo", "health_capacity", "health"], ["C", "Garden", "crop_capacity", "health"]]:
 		_forecast_bar(column, row[1], float(resources.get(row[0], 0)), float(after.get(row[0], resources.get(row[0], 0))), float(resources.get(row[2], 10)), row[3], not after.is_empty())
 	var tara := _tara_status(_route.director().snapshot())
-	var tara_row := _column("Tara · current reference", 0)
+	var tara_row := _column("Tara · the indoor plant", 0)
 	tara_row.name = "Forecast_Tara"
-	tara_row.add_child(_wrap(tara + " → unchanged by this shift model", 14, IVORY))
+	tara_row.add_child(_wrap(tara + " · safe indoors this shift", 14, IVORY))
 	var reference := ProgressBar.new()
 	reference.show_percentage = false
 	reference.max_value = 1
@@ -678,17 +678,17 @@ func _render_forecast() -> Control:
 	var sim := Simulation.new()
 	var now: Dictionary = sim.outpost_readouts(_route.director().snapshot())
 	var later: Dictionary = sim.outpost_readouts(forecast.snapshot) if not after.is_empty() else now
-	_forecast_bar(column, "Shelter", now.shelter_capacity, later.shelter_capacity, now.shelter_max, "shielding units", not after.is_empty(), "Storm shelter")
-	_forecast_bar(column, "Radiation", float(resources.get("Z", 0)), float(after.get("Z", resources.get("Z", 0))), 3, "training units · safe limit 3", not after.is_empty(), "Radiation dose")
-	column.add_child(_wrap("Water in wall: %s of %s → %s · Supplies: %s of %s → %s" % [_amount(resources.get("W", 0)), _amount(resources.get("water_capacity", 0)), _amount(after.get("W", resources.get("W", 0))), _amount(resources.get("K", 0)), _amount(resources.get("crate_capacity", 0)), _amount(after.get("K", resources.get("K", 0)))], 13, MUTED))
+	_forecast_bar(column, "Shelter", now.shelter_capacity, later.shelter_capacity, now.shelter_max, "shield", not after.is_empty(), "Storm shelter")
+	_forecast_bar(column, "Radiation", float(resources.get("Z", 0)), float(after.get("Z", resources.get("Z", 0))), 3, "safe up to 3", not after.is_empty(), "Storm score")
+	column.add_child(_wrap("Water in the wall: %s of %s → %s · Boxes stacked: %s of %s → %s" % [_amount(resources.get("W", 0)), _amount(resources.get("water_capacity", 0)), _amount(after.get("W", resources.get("W", 0))), _amount(resources.get("K", 0)), _amount(resources.get("crate_capacity", 0)), _amount(after.get("K", resources.get("K", 0)))], 13, MUTED))
 	var active_shift := int(shifts.front()) if not shifts.is_empty() else clampi(_committed() + 1, 1, 7)
 	var tension := Chapter1FeedbackScript.night_shift_tension(active_shift)
 	var after_state := after if not after.is_empty() else resources
 	var posture := Chapter1FeedbackScript.alo_posture(int(after_state.get("H", 6)), int(after_state.get("W", 0)), active_shift, false)
-	var tension_lbl := _wrap("Atmosphere · %s · %s · %s" % [String(tension.get("countdown_label", "")), String(tension.get("lights_state", "")), String(tension.get("fans_state", ""))], 12, MUTED)
+	var tension_lbl := _wrap("Tonight · %s · %s · %s" % [String(tension.get("countdown_label", "")), String(tension.get("lights_state", "")), String(tension.get("fans_state", ""))], 12, MUTED)
 	tension_lbl.name = "ForecastTension"
 	column.add_child(tension_lbl)
-	var posture_lbl := _wrap("Alo posture (%s): %s" % [String(posture.get("stage", "")), String(posture.get("posture_description", ""))], 12, CYAN)
+	var posture_lbl := _wrap("Alo now: %s" % String(posture.get("plain", "")), 12, CYAN)
 	posture_lbl.name = "ForecastAloPosture"
 	column.add_child(posture_lbl)
 
@@ -1149,16 +1149,16 @@ func _tara_status(state: Dictionary) -> String:
 func _consequence(forecast: Dictionary) -> String:
 	var unsafe: Array = forecast.get("unsafe_predicates", [])
 	if not unsafe.is_empty():
-		return _predicate_text(String(unsafe[0])).capitalize() + ". Retry is available after locking in."
+		return _predicate_text(String(unsafe[0])).capitalize() + ". You can try again after you lock in."
 	for record in forecast.get("trace", []):
 		if record.get("blackout", false):
-			return "Demand exceeds the battery: a blackout reduces air, Alo and garden health."
+			return "This plan uses more power than the battery has. The lights go out, and air, Alo and the garden all suffer."
 		if int(record.get("dose", 0)) > 0:
-			return "Storm shelter %d gives +%d training radiation units this shift, before any ordinary water return." % [int(record.shelter), int(record.dose)]
+			return "With shelter level %d the storm adds %d to the storm score this shift." % [int(record.shelter), int(record.dose)]
 	var before: Dictionary = _view.get("resources", {})
 	var after: Dictionary = forecast.get("final_state", {})
 	var biggest := -1.0
-	var message := "The displayed readings stay unchanged."
+	var message := "Nothing changes with this plan."
 	for spec in [["E", "Battery", "energy_capacity"], ["A", "Air", "air_capacity"], ["H", "Alo health", "health_capacity"], ["C", "Garden health", "crop_capacity"]]:
 		var change := float(after.get(spec[0], 0)) - float(before.get(spec[0], 0))
 		var fraction := absf(change) / maxf(1, float(before.get(spec[2], 10)))

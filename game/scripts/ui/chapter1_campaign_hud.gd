@@ -402,7 +402,7 @@ func refresh_after_action(result: Dictionary) -> void:
 			notes_list.append("Next step: " + String(fb_dict.get("next_step", "")))
 			notes_list.append("Meter tick: " + String(fb_dict.get("meter_tick", "")))
 			notes_list.append("%s: \"%s\"" % [String(fb_dict.get("crew_speaker", "Crew")), String(fb_dict.get("crew_reaction", ""))])
-			notes_list.append("Alo (%s): %s" % [String(posture_dict.get("stage", "")), String(posture_dict.get("posture_description", ""))])
+			notes_list.append("Alo now: %s" % String(posture_dict.get("plain", posture_dict.get("posture_description", ""))))
 		_last_outcome = {
 			"result": result.get("reason", "Done."),
 			"changes": result.get("deltas", []),
@@ -445,7 +445,7 @@ func show_status(text: String) -> void:
 			edge = UiDesign.colour("caution")
 	if text.begins_with("SAVE FAILED") or text.begins_with("AUTOSAVE FAILED"):
 		edge = UiDesign.colour("danger")
-	_toast.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.8))  # state lives in the icon colour
+	_toast.add_theme_stylebox_override("panel", UiDesign.plate_style(0.8, 12))  # state lives in the icon colour
 	_set_toast_icon(String(rewrite.kind), line, edge)
 	_toast_timer = float(UiDesign.tokens().get("motion", {}).get("toast_seconds", 5.0))
 	if not _chrome_hidden:
@@ -484,7 +484,7 @@ func _build() -> void:
 		add_child(shell)
 	theme = UiKit.theme()
 	_goal_card = shell.get_node("GoalCard")
-	_goal_card.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.86))  # readable over the bright ceilings (simulated-player review)
+	_goal_card.add_theme_stylebox_override("panel", UiDesign.plate_style(0.86))  # readable over the bright ceilings (simulated-player review)
 	_goal_card.minimum_size_changed.connect(func() -> void: _goal_card.reset_size.call_deferred())
 	var card_box := _goal_card.get_node("Content")
 	_chapter_line = card_box.get_node("Chapter")
@@ -534,7 +534,7 @@ func _build() -> void:
 	_column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_column)
 	_toast = UiDesign.glass_panel(Color.TRANSPARENT, 12)
-	_toast.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.8))
+	_toast.add_theme_stylebox_override("panel", UiDesign.plate_style(0.8, 12))
 	_toast.name = "Toast"
 	_toast.visible = false
 	_toast.set_meta("lla_shown", false)
@@ -1193,7 +1193,7 @@ func _set_dialogue_visible(shown: bool) -> void:
 	var current_shown := bool(_dialogue_bar.get_meta("lla_shown", _dialogue_bar.visible)) if _dialogue_bar.has_meta("lla_shown") else _dialogue_bar.visible
 	if shown != current_shown:  # mid-fade, `visible` is still the old state
 		_fade(_dialogue_bar, shown)
-	_goal_card.modulate.a = 0.6 if shown else 1.0
+	_goal_card.modulate.a = 0.9 if shown else 1.0  # stay readable while someone is talking
 
 ## Resumes the caption where the saved acknowledgements stopped, so a reload
 ## does not replay lines the player already read.
@@ -1904,7 +1904,7 @@ func _update_controls_hint() -> void:
 		_controls_hint = PanelContainer.new()
 		_controls_hint.name = "ControlsHint"
 		_controls_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		_controls_hint.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.8, 12, 32))
+		_controls_hint.add_theme_stylebox_override("panel", UiDesign.plate_style(0.8, 10))
 		var text := UiDesign.float_label(UiDesign.label("Walk  W A S D   ·   Look  Mouse   ·   Use  E   ·   Help  H   ·   Pause  Esc", "caption", "ivory"))
 		text.name = "ControlsText"
 		text.autowrap_mode = TextServer.AUTOWRAP_OFF
@@ -1914,5 +1914,6 @@ func _update_controls_hint() -> void:
 	_controls_hint.visible = show
 	if show:
 		_controls_hint.reset_size()
+		_controls_hint.size = _controls_hint.get_combined_minimum_size()
 		var view := get_viewport_rect().size
-		_controls_hint.position = Vector2((view.x - _controls_hint.size.x) * 0.5, float(_margin()))
+		_controls_hint.position = Vector2((view.x - _controls_hint.size.x) * 0.5, view.y * 0.70)  # clear of the goal, the Next box and the captions
