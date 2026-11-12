@@ -240,7 +240,7 @@
     "matters_from": "EX-CH01-S07"
    },
    "Z": {
-    "word": "Radiation dose",
+    "word": "Exposure (game score)",
     "icon": "radiation",
     "low": "lower is safer; each chapter sets a safe limit",
     "matters_from": "EX-CH01-S07"
@@ -1217,11 +1217,11 @@
    "hint": "The forecast says whether waiting is safe."
   },
   "verify_exposure_order": {
-   "goal": "Check the radiation dose before draining water",
-   "why": "The water shields you; check the dose before removing it",
-   "prompt": "Check the radiation dose",
-   "result": "Dose checked before the drain: order kept.",
-   "hint": "Dose first, drain second."
+   "goal": "Check the exposure score before draining water",
+   "why": "The water shields you; check the exposure before removing it",
+   "prompt": "Check the exposure score",
+   "result": "Exposure checked before the drain: order kept.",
+   "hint": "Exposure first, drain second."
   },
   "return_water": {
    "goal": "Return the borrowed water to the garden",
