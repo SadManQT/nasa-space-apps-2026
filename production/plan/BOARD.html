@@ -9254,7 +9254,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/scripts/ui/probe_calibration_activity.gd.uid"
    ],
    "refs": [],
-   "note": "Filed by Atik/codex on 2026-11-13.",
+   "note": "Filed by Atik/codex on 2026-11-13.\nDoor cause verified in EvaSuit indoor footing; campaign_room.gd was inspected only and its unused reservation is released. Source repair saved/pushed at f72e3c49; full gate in progress.",
    "evidence": "",
    "updated": "2026-11-13",
    "prompt": "13 November user explicitly assigns Atik the two screenshot blockers. Connect the existing ProbeCalibrationJob to actual player interactions without bypassing pickup/place/read, preserve saves/cancel and P01 dry/wet/recheck. Reproduce door passage movement lock, fix its cause and test the real player collision and UI state. Preserve local settings/imports and other owner locks. Acceptance: actual campaign input completes probe chain; character can back out after passage guidance; focused regressions and game/tools/run_tests.sh results recorded separately from native/full gate.",
@@ -9263,7 +9263,6 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "edit_files": [
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/scripts/ui/probe_calibration_activity.gd",
-    "game/scripts/world/campaign_room.gd",
     "game/tools/test_opening_blockers.gd",
     "game/tools/test_opening_blockers.gd.uid",
     "production/qa/evidence/Atik_opening_blockers_20261113.md",
