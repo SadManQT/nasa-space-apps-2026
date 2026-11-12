@@ -9,6 +9,7 @@ import argparse, hashlib, json, os, pathlib, platform, re, shutil, subprocess, t
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 VERSION = '4.7.2'
 BASE = f'https://github.com/godotengine/godot-builds/releases/download/{VERSION}-stable/'
+FONT_NOTICES = ('OFL_Inter.txt', 'OFL_Saira.txt')
 
 def sha256_file(path):
     digest = hashlib.sha256()
@@ -26,8 +27,9 @@ def validate_package(package, kind):
             path = pathlib.PurePosixPath(name.replace('\\', '/'))
             if path.is_absolute() or '..' in path.parts or (path.parts and ':' in path.parts[0]):
                 raise RuntimeError('Unsafe package path: ' + name)
-        if not {'LICENSE', 'CREDITS.md', 'README.txt'}.issubset(names):
-            raise RuntimeError('Package is missing credits, license or launch instructions')
+        notices = {'FONT_LICENSES/' + name for name in FONT_NOTICES}
+        if not ({'LICENSE', 'CREDITS.md', 'README.txt'} | notices).issubset(names):
+            raise RuntimeError('Package is missing credits, license, font notices or launch instructions')
         if kind == 'windows':
             runtime = 'LastLightAcademy.exe' in names and 'LastLightAcademy.pck' in names
         else:
@@ -35,6 +37,20 @@ def validate_package(package, kind):
         if not runtime:
             raise RuntimeError('Package is missing its executable or game pack')
         return len(names)
+
+def runtime_hashes(package):
+    result = {}
+    with zipfile.ZipFile(package) as bundle:
+        for entry in bundle.infolist():
+            name = entry.filename
+            if entry.is_dir() or not ('.app/' in name or name.endswith(('.exe', '.pck', '.dll'))):
+                continue
+            digest = hashlib.sha256()
+            with bundle.open(entry) as stream:
+                for block in iter(lambda: stream.read(1024 * 1024), b''):
+                    digest.update(block)
+            result[name] = digest.hexdigest()
+    return result
 
 def download(name, directory):
     target = directory / name
@@ -170,6 +186,8 @@ def main():
                     bundle.write(native, native.name)
         for name in ['LICENSE', 'CREDITS.md', 'README.txt']:
             bundle.write(output / name, name)
+        for name in FONT_NOTICES:
+            bundle.write(ROOT / 'game/assets/fonts/ui' / name, 'FONT_LICENSES/' + name)
     entry_count = validate_package(package, args.platform)
     source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     game_changes = subprocess.check_output(['git', 'diff', '--name-only', 'HEAD', '--', 'game'], cwd=ROOT, text=True).splitlines()
@@ -179,6 +197,7 @@ def main():
                 'smoke': 'windowed' if args.smoke and args.evidence else 'headless' if args.smoke else 'not_run',
                 'package': {'name': package.name, 'bytes': package.stat().st_size,
                             'sha256': sha256_file(package), 'entries': entry_count},
+                'runtime_files_sha256': runtime_hashes(package),
                 'logs': {p.name: sha256_file(p) for p in output.glob('*.log')}}
     (output / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
     (output / 'SHA256SUMS.txt').write_text(manifest['package']['sha256'] + '  ' + package.name + '\n', encoding='utf-8')

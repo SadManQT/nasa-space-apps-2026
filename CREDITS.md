@@ -20,12 +20,11 @@ The story, characters, dialogue, puzzle rules and numbers, science mapping, art 
 | **Python** (standard library) | PSF License (tool only) | Pipeline scripts, `production/tools/fetch_nasa_data.py` | No | <https://docs.python.org/3/license.html> |
 | **Adobe Mixamo** | Adobe Mixamo terms (royalty-free in projects; raw clips not redistributed) | Character animations in the pitch video only | No | <https://www.mixamo.com/> |
 
-## 3. Fonts (licence audit, 4 November 2026)
+## 3. Fonts (runtime update, 12 November 2026)
 
-- **`game/assets` contains no font files.** A search of the whole repository for `.ttf`, `.otf`, `.woff`, `.woff2` and `.fnt` found none, and no Godot theme, scene or script loads a `FontFile` or `SystemFont`.
-- **In-game text uses Godot's built-in default font, Open Sans** (© 2020 The Open Sans Project Authors, SIL Open Font License 1.1), which is compiled into the engine; its notice is part of Godot's third-party copyright list. It is redistributable. <https://github.com/googlefonts/opensans>
+- **The current UI uses Saira Semi Condensed and Inter**, installed in `game/assets/fonts/ui/`. Saira is copyright 2016 The Saira Project Authors (reserved font name "Saira"); Inter is copyright 2020 The Inter Project Authors. Both ship under the SIL Open Font License 1.1. The supplied notices are [OFL_Saira.txt](game/assets/fonts/ui/OFL_Saira.txt) and [OFL_Inter.txt](game/assets/fonts/ui/OFL_Inter.txt); native distribution ZIPs also include their complete, unchanged text under `FONT_LICENSES/`.
+- **Godot's built-in fallback font is Open Sans** (© 2020 The Open Sans Project Authors, SIL Open Font License 1.1), compiled into the engine. Its notice is part of Godot's third-party copyright list. <https://github.com/googlefonts/opensans>
 - **The pitch video uses Baloo Da 2** (Ek Type, SIL Open Font License 1.1). It is not in the game. <https://fonts.google.com/specimen/Baloo+Da+2>
-- **Result:** no font in the project lacks a redistributable licence, so none had to be replaced. The planned UI font family (asset A-59 in [game-design/14_ASSET_PRODUCTION_LIST.md](game-design/14_ASSET_PRODUCTION_LIST.md)) must be added together with its licence file (`OFL.txt`) in the same folder.
 
 ## 4. AI tools and generated content
 

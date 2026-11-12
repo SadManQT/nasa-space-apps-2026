@@ -22,8 +22,8 @@ class PackageTests(unittest.TestCase):
     def test_missing_runtime_or_credits_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            complete = ['LICENSE', 'CREDITS.md', 'README.txt', 'LastLightAcademy.exe', 'LastLightAcademy.pck']
-            self.assertEqual(builder.validate_package(self.package(root, complete), 'windows'), 5)
+            complete = ['LICENSE', 'CREDITS.md', 'README.txt', 'LastLightAcademy.exe', 'LastLightAcademy.pck', 'FONT_LICENSES/OFL_Inter.txt', 'FONT_LICENSES/OFL_Saira.txt']
+            self.assertEqual(builder.validate_package(self.package(root, complete), 'windows'), 7)
             for missing in complete:
                 with self.subTest(missing=missing), self.assertRaises(RuntimeError):
                     builder.validate_package(self.package(root, [n for n in complete if n != missing]), 'windows')
@@ -31,9 +31,9 @@ class PackageTests(unittest.TestCase):
     def test_mac_requires_both_app_and_game_pack(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            complete = ['LICENSE', 'CREDITS.md', 'README.txt', 'Game.app/Contents/MacOS/Game', 'Game.app/Contents/Resources/Game.pck']
-            self.assertEqual(builder.validate_package(self.package(root, complete), 'macos'), 5)
-            for missing in complete[-2:]:
+            complete = ['LICENSE', 'CREDITS.md', 'README.txt', 'FONT_LICENSES/OFL_Inter.txt', 'FONT_LICENSES/OFL_Saira.txt', 'Game.app/Contents/MacOS/Game', 'Game.app/Contents/Resources/Game.pck']
+            self.assertEqual(builder.validate_package(self.package(root, complete), 'macos'), 7)
+            for missing in complete:
                 with self.subTest(missing=missing), self.assertRaises(RuntimeError):
                     builder.validate_package(self.package(root, [n for n in complete if n != missing]), 'macos')
 
@@ -57,7 +57,7 @@ class PackageTests(unittest.TestCase):
 
     def test_publisher_rejects_other_source_or_tampered_package(self):
         with tempfile.TemporaryDirectory() as temp:
-            path = self.package(Path(temp), ['LICENSE', 'CREDITS.md', 'README.txt', 'LastLightAcademy.exe', 'LastLightAcademy.pck'])
+            path = self.package(Path(temp), ['LICENSE', 'CREDITS.md', 'README.txt', 'LastLightAcademy.exe', 'LastLightAcademy.pck', 'FONT_LICENSES/OFL_Inter.txt', 'FONT_LICENSES/OFL_Saira.txt'])
             manifest = {'source_commit': 'a' * 40, 'platform': 'windows', 'smoke': 'headless',
                         'package': {'name': path.name, 'bytes': path.stat().st_size, 'sha256': builder.sha256_file(path)}}
             verify_manifest(manifest, path, 'a' * 40, 'windows')
@@ -70,6 +70,15 @@ class PackageTests(unittest.TestCase):
             manifest['package']['sha256'] = '0' * 64
             with self.assertRaises(RuntimeError):
                 verify_manifest(manifest, path, 'a' * 40, 'windows')
+
+    def test_runtime_identity_ignores_distribution_document_changes(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = self.package(Path(temp), ['LastLightAcademy.exe', 'LastLightAcademy.pck', 'README.txt'])
+            before = builder.runtime_hashes(path)
+            with zipfile.ZipFile(path, 'a') as bundle:
+                bundle.writestr('FONT_LICENSES/OFL_Inter.txt', 'Supplied font license')
+            self.assertEqual(builder.runtime_hashes(path), before)
+            self.assertEqual(set(before), {'LastLightAcademy.exe', 'LastLightAcademy.pck'})
 
 
 if __name__ == '__main__':
