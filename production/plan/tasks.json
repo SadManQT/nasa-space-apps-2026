@@ -1146,7 +1146,7 @@
    "priority": "P1",
    "tool": "codex",
    "title": "Performance and low-spec pass",
-   "status": "in_progress",
+   "status": "blocked",
    "owner": "Atik/codex",
    "deps": [
     "M1-06"
@@ -1164,7 +1164,7 @@
    "prompt": "Per execution/QA_06_PERFORMANCE_AND_PORTABILITY.md: profile every Chapter 1 room on the team's weakest laptop; target 60 fps at 1080p on a\nmid laptop and 30 fps on integrated graphics with the Compatibility renderer + LODs; fix the top three costs (draw calls, shadow casters,\ntexture sizes, character shader cost). Record before/after in production/qa/perf_<date>.md.",
    "reserved_for": "atik",
    "effort": 2,
-   "blocker": "1080p four-room M4 Forward+/Compatibility captures delivered with complete coverage; Forward+ p95 misses60fps and first-use hitches remain. Await measured runtime fixes M1-92, Sadman asset review M1-94 and Tanvir integrated-laptop verification M1-93/weakest-machine confirmation. See production/qa/perf/M1-23.md.",
+   "blocker": "12 Nov measured M4/macOS27, 1080p/20s, four real campaign rooms: Metal room p95 18.122-20.964ms misses16.667ms60fps; Garden entry longestframe3112.104ms. M4 OpenGL p95 fits33.333ms but maxima hitch and no current weakest Windows host reachable. Raw221? 22417 CSV rows/18 distributions verified; exact data at production/qa/perf/atik_20261112/M1-23.md and verification.json. M1-92 matching native tools/measured fix and current weakest-host qualification still required; no quality/budget changes or steady-FPS completion claimed.",
    "assignment_history": [
     {
      "date": "2026-11-12",
@@ -1173,17 +1173,6 @@
      "status": "blocked",
      "reason": "Atik user explicitly requests remaining Atik export/performance/release work, including M1-92, and authorizes publishing without another approval. Preserve existing source and completed owner evidence."
     }
-   ],
-   "edit_files": [
-    "production/qa/perf/atik_20261112/M1-23.md",
-    "production/qa/perf/atik_20261112/forward_plus.json",
-    "production/qa/perf/atik_20261112/forward_plus.csv",
-    "production/qa/perf/atik_20261112/forward_plus.log",
-    "production/qa/perf/atik_20261112/compatibility.json",
-    "production/qa/perf/atik_20261112/compatibility.csv",
-    "production/qa/perf/atik_20261112/compatibility.log",
-    "production/qa/perf/atik_20261112/native_runs.json",
-    "production/qa/perf/atik_20261112/verification.json"
    ]
   },
   {
