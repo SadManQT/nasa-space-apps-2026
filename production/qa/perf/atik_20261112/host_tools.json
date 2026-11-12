@@ -1,0 +1,105 @@
+{
+  "date": "2026-11-12",
+  "source_commit": "ec2137dc3050a56bc701f69a7492485e8938db21",
+  "commands": [
+    {
+      "command": [
+        "sw_vers"
+      ],
+      "exit": 0,
+      "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0.1\nBuildVersion:\t\t26A434\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sysctl",
+        "-n",
+        "hw.model"
+      ],
+      "exit": 0,
+      "stdout": "Mac16,12\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sysctl",
+        "-n",
+        "machdep.cpu.brand_string"
+      ],
+      "exit": 0,
+      "stdout": "Apple M4\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sysctl",
+        "-n",
+        "hw.memsize"
+      ],
+      "exit": 0,
+      "stdout": "17179869184\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "xcode-select",
+        "-p"
+      ],
+      "exit": 0,
+      "stdout": "/Library/Developer/CommandLineTools\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "xcrun",
+        "--find",
+        "metal"
+      ],
+      "exit": 72,
+      "stdout": "",
+      "stderr": "xcrun: error: unable to find utility \"metal\", not a developer tool or in PATH\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "--find",
+        "metallib"
+      ],
+      "exit": 72,
+      "stdout": "",
+      "stderr": "xcrun: error: unable to find utility \"metallib\", not a developer tool or in PATH\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "--find",
+        "xctrace"
+      ],
+      "exit": 72,
+      "stdout": "",
+      "stderr": "xcrun: error: unable to find utility \"xctrace\", not a developer tool or in PATH\n"
+    },
+    {
+      "command": [
+        "df",
+        "-k",
+        "."
+      ],
+      "exit": 0,
+      "stdout": "Filesystem   1024-blocks      Used Available Capacity iused     ifree %iused  Mounted on\n/dev/disk3s5   239362496 187828428  22684184    90% 1439440 226841840    1%   /System/Volumes/Data\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/tmp/last-light-tools/Godot.app/Contents/MacOS/Godot",
+        "--version"
+      ],
+      "exit": 0,
+      "stdout": "4.7.2.stable.official.ed1daf0bf\n",
+      "stderr": ""
+    }
+  ],
+  "notes": [
+    "No cache clearing, engine migration, source performance change, or tool installation. Existing symbolicated Sadman profile is historical evidence; no new cause/fix claim."
+  ]
+}
