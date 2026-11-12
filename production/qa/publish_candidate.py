@@ -90,6 +90,8 @@ def main():
         release = gh_json('/releases/tags/' + args.tag, missing_ok=True)
         if release is not None and (not release['draft'] or not release['prerelease']):
             raise RuntimeError('An existing published release is preserved; choose a new authorized tag')
+        if release is not None and release['target_commitish'] != source:
+            raise RuntimeError('Existing draft targets another revision; preserving it')
         if release is None:
             subprocess.run(['gh', 'release', 'create', args.tag, '--repo', REPO, '--target', source,
                             '--draft', '--prerelease', '--title', 'Last Light Academy — judging candidate (12 November 2026)',
