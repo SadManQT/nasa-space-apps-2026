@@ -4120,7 +4120,7 @@
    "priority": "P0",
    "tool": "codex",
    "title": "12 Nov release: the working full game (Chapters 1-8) as Windows and macOS builds, with the evidence package",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [
     "M1-71",
@@ -4145,7 +4145,8 @@
      "status": "todo",
      "reason": "Atik user explicitly requests remaining Atik export/performance/release work, including M1-92, and authorizes publishing without another approval. Preserve existing source and completed owner evidence."
     }
-   ]
+   ],
+   "blocker": "Published verified judging pre-release v0.1.0-judging.20261112 from817a6eea with Windows/macOS ZIPs, checksums, manifests and evidence; CI43237871699 both11/0, publisher43247577107 success. Final release qualification remains blocked by M3-92 full-campaign QA, learner/controller/freeze acceptance and a fresh full green gate after the M1-24 owner reviews/delivers the saved media fixture correction. Current full136/138; focused outcomes separately recorded. Public URL https://github.com/SadManQT/nasa-space-apps-2026/releases/tag/v0.1.0-judging.20261112 and production/qa/builds/atik_20261112/README.md. Dependencies preserved; this is not final freeze certification."
   },
   {
    "id": "M2-13",
@@ -5870,7 +5871,7 @@
    "priority": "P2",
    "tool": "codex",
    "title": "Act One release candidate (Chapters 1-4): Windows and macOS builds, soak test, Steam-ready packaging",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [
     "M3-74",
@@ -5897,7 +5898,8 @@
      "status": "todo",
      "reason": "Atik user explicitly requests remaining Atik export/performance/release work, including M1-92, and authorizes publishing without another approval. Preserve existing source and completed owner evidence."
     }
-   ]
+   ],
+   "blocker": "Post-release Steam qualification depends on unfinished M3-93 and M3-74. Same-source portable Windows/macOS packages and hashes are delivered through M1-20, but two-hour soak with flat memory/60fps, manual controller and complete chapter-start/settings/save acceptance are unperformed; current Metal distributions also miss the60fps budget. Saved evidence: production/qa/builds/atik_20261112/README.md and production/qa/perf/atik_20261112/M1-23.md. Resume when dependencies and original-host/human checks are available; no final Steam pack certification claimed."
   },
   {
    "id": "M3-74",

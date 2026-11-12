@@ -327,17 +327,15 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-124">M1-124</a> M1-105 handoff: restore lunar gravity indoors for Ramim acceptance <span class="chip ">codex</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">1 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">2 blocked</span><span class="chip s-todo">2 todo</span></div><div class="bar"><i style="width:17%"></i></div>
+<div class="panel" data-member="atik"><b>MD Atik Khan</b> <span class="id">atik</span><div class="meta">Loading, performance and exit stability · 8% share</div><div class="counts"><span class="chip s-done">1 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">4 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:17%"></i></div>
 <details open><summary>Working now (1)</summary><ul>
 <li><a class="id" href="#M1-20">M1-20</a> Export presets and release builds (Windows, macOS; web feasibility) <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Atik/codex on 2026-11-12</div></li>
 </ul></details>
-<details open><summary>Blocked (2)</summary><ul>
+<details open><summary>Blocked (4)</summary><ul>
 <li><a class="id" href="#M1-23">M1-23</a> Performance and low-spec pass <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">12 Nov measured M4/macOS27, 1080p/20s, four real campaign rooms: Metal room p95 18.122-20.964ms misses16.667ms60fps; Garden entry longestframe3112.104ms. M4 OpenGL p95 fits33.333m…</div></li>
+<li><a class="id" href="#M3-93">M3-93</a> 12 Nov release: the working full game (Chapters 1-8) as Windows and macOS builds, with the evidence package <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">Published verified judging pre-release v0.1.0-judging.20261112 from817a6eea with Windows/macOS ZIPs, checksums, manifests and evidence; CI43237871699 both11/0, publisher4324757710…</div></li>
+<li><a class="id" href="#M3-73">M3-73</a> Act One release candidate (Chapters 1-4): Windows and macOS builds, soak test, Steam-ready packaging <span class="chip ">codex</span> <span class="chip ">P2</span><div class="meta">Post-release Steam qualification depends on unfinished M3-93 and M3-74. Same-source portable Windows/macOS packages and hashes are delivered through M1-20, but two-hour soak with …</div></li>
 <li><a class="id" href="#M1-92">M1-92</a> Profile and remove native first campaign draw hitch on M4 <span class="chip ">any</span> <span class="chip ">P0</span><div class="meta">12 Nov original M4/macOS27.0.1: metal, metallib and xctrace each unavailable (exit72); matching native symbol build and controlled baked/unbaked campaign comparison not available.…</div></li>
-</ul></details>
-<details><summary>To do (2)</summary><ul>
-<li><a class="id" href="#M3-93">M3-93</a> 12 Nov release: the working full game (Chapters 1-8) as Windows and macOS builds, with the evidence package <span class="chip ">codex</span> <span class="chip ">P0</span></li>
-<li><a class="id" href="#M3-73">M3-73</a> Act One release candidate (Chapters 1-4): Windows and macOS builds, soak test, Steam-ready packaging <span class="chip ">codex</span> <span class="chip ">P2</span></li>
 </ul></details>
 <details><summary>Done (1)</summary><ul>
 <li><a class="id" href="#M1-68">M1-68</a> Investigate and fix reproduced Windows loading performance gate failures <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">10 Nov final reconciliation: user explicitly accepts the combined1-41 Ramim /42-119 Sadman-Claude result without repeating game tests. All1…</div></li>
@@ -4728,7 +4726,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P0",
    "tool": "codex",
    "title": "12 Nov release: the working full game (Chapters 1-8) as Windows and macOS builds, with the evidence package",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [
     "M1-71",
@@ -4754,6 +4752,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
      "reason": "Atik user explicitly requests remaining Atik export/performance/release work, including M1-92, and authorizes publishing without another approval. Preserve existing source and completed owner evidence."
     }
    ],
+   "blocker": "Published verified judging pre-release v0.1.0-judging.20261112 from817a6eea with Windows/macOS ZIPs, checksums, manifests and evidence; CI43237871699 both11/0, publisher43247577107 success. Final release qualification remains blocked by M3-92 full-campaign QA, learner/controller/freeze acceptance and a fresh full green gate after the M1-24 owner reviews/delivers the saved media fixture correction. Current full136/138; focused outcomes separately recorded. Public URL https://github.com/SadManQT/nasa-space-apps-2026/releases/tag/v0.1.0-judging.20261112 and production/qa/builds/atik_20261112/README.md. Dependencies preserved; this is not final freeze certification.",
    "batch_phase": "implementation"
   },
   {
@@ -6532,7 +6531,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "priority": "P2",
    "tool": "codex",
    "title": "Act One release candidate (Chapters 1-4): Windows and macOS builds, soak test, Steam-ready packaging",
-   "status": "todo",
+   "status": "blocked",
    "owner": "",
    "deps": [
     "M3-74",
@@ -6560,6 +6559,7 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
      "reason": "Atik user explicitly requests remaining Atik export/performance/release work, including M1-92, and authorizes publishing without another approval. Preserve existing source and completed owner evidence."
     }
    ],
+   "blocker": "Post-release Steam qualification depends on unfinished M3-93 and M3-74. Same-source portable Windows/macOS packages and hashes are delivered through M1-20, but two-hour soak with flat memory/60fps, manual controller and complete chapter-start/settings/save acceptance are unperformed; current Metal distributions also miss the60fps budget. Saved evidence: production/qa/builds/atik_20261112/README.md and production/qa/perf/atik_20261112/M1-23.md. Resume when dependencies and original-host/human checks are available; no final Steam pack certification claimed.",
    "batch_phase": "implementation"
   },
   {

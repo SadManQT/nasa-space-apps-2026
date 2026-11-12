@@ -1,0 +1,26 @@
+{
+  "source_commit": "817a6eea2919440530c619614c7c8b87190bde1b",
+  "run_id": 43237871699,
+  "published_manifest_sha256": "8754002373aafdbe7a05ef1255e5f71665461e718fbe2273e04e29b057ad164f",
+  "runtime_files_compared": 6,
+  "runtime_identical": false,
+  "differences": {
+    "Last Light Academy.app/Contents/Resources/Last Light Academy.pck": {
+      "local": "b9b396a0be4e93db71d74cb5b69229ef66665cbb3e278c5366486802d684ce47",
+      "published": "d618de3189036b95ffa2770610261f16f6f11a5e767e251f0263e72a12d99f8d"
+    }
+  },
+  "local_package": {
+    "name": "last-light-academy-0.1.0-macos.zip",
+    "bytes": 1115757981,
+    "sha256": "6877387c59c769562cfef92824ac4782603be05fd672afe2a3aab816a6b6b334",
+    "entries": 17
+  },
+  "published_package": {
+    "name": "last-light-academy-0.1.0-macos.zip",
+    "bytes": 1115758023,
+    "sha256": "3592787930db95e3c2450206a05a54845e6b6e6c3b1bbd6b9e1b19ef83228c4c",
+    "entries": 17
+  },
+  "qualification": "Foreground native evidence is from the same source; identical runtime payload only if runtime_identical=true. ZIP metadata/container hashes are separately recorded."
+}

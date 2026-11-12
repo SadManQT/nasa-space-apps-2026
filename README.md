@@ -24,7 +24,7 @@ Last Light Academy is a 3D story game for ages 10–15, for classrooms and famil
 
 ## Play it
 
-**Download.** Windows (x86_64) and macOS (universal) builds of version `0.1.0-preview.20261105` are on the [Releases page](https://github.com/SadManQT/nasa-space-apps-2026/releases/tag/v0.1.0-preview.20261105), with run steps and SHA-256 hashes. Both start on fresh GitHub machines and enter Chapter 1 ([run 41970276437](https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/41970276437)).
+**Download.** The [12 November judging candidate](https://github.com/SadManQT/nasa-space-apps-2026/releases/tag/v0.1.0-judging.20261112) contains Windows (x86_64) and macOS (universal) builds from `817a6eea`, with instructions, SHA-256 hashes and an evidence archive. Both exported executables pass 11 startup checks on fresh [Windows/macOS runners](https://github.com/SadManQT/nasa-space-apps-2026/actions/runs/43237871699). The in-app version label remains `0.1.0-preview.20261105`; use the release tag and source manifest to identify this candidate. Final human QA and performance qualification remain open; see the [qualification report](production/qa/builds/atik_20261112/README.md), including the separate 136/138 full-gate result.
 
 - **Windows:** unzip, keep `LastLightAcademy.exe` and `LastLightAcademy.pck` together, run the EXE.
 - **macOS:** unzip, move the app to Applications and open it. The build is not signed. If macOS blocks it, use **Privacy & Security → Open Anyway**.
@@ -40,11 +40,11 @@ git clone https://github.com/SadManQT/nasa-space-apps-2026.git
 
 Then open `game/project.godot` in the Godot editor and press **Play** (F5). The first time, Godot imports about 460 MB of assets, so it takes a while. From a terminal: `godot --headless --path game --import` once, then `godot --path game`.
 
-**Controls:** WASD to move, hold the right mouse button to look, **E** to use what is in front of you, **Esc** to pause, Tab / arrow keys / Enter for on-screen buttons. Captions are on and nothing is timed by default. Settings can make text 1.5 times larger and reduce motion.
+**Controls:** WASD to move, mouse to look, **E** to use what is in front of you, **Esc** to pause, Tab / arrow keys / Enter for on-screen buttons. Captions are on and nothing is timed by default. Settings can make text 1.5 times larger and reduce motion.
 
 **Judge route (5 minutes):** title screen → **New Expedition** → Chapter 1. Walk to a console and press **E**, watch the four status cards change, and open a **Data Card** to see the NASA source behind a number.
 
-**Tests and builds:** `game/tools/run_tests.sh` runs every test suite (set `GODOT=/path/to/godot` if needed). `python3 production/qa/build_release.py --platform windows --install-tools --smoke` (or `--platform macos`) makes a release build and checks it starts.
+**Tests and builds:** `game/tools/run_tests.sh` runs every test suite (set `GODOT=/path/to/godot` if needed). `python3 production/qa/build_release.py --platform windows --install-tools --smoke --output-root builds/local-candidate` (or `--platform macos`) makes a release build and checks it starts. Choose a new output directory for each attempt; existing build evidence is preserved.
 
 ## Screenshots
 
