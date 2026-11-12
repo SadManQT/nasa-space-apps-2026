@@ -1013,7 +1013,7 @@
    "refs": [
     "execution/RELEASE_01_EXPORT_AND_PACKAGE.md"
    ],
-   "note": "Release builds wait for the 12 Nov release (M3-93); finishing the game comes first (Sadman, 5 Nov 23:55).\n12 Nov Atik user explicitly resumes this task and release work without approval waits. Existing acceptance requirements and human QA dependencies remain binding. No completion inferred from a green CI build.\n12 Nov exact integration: game/scripts/main.gd only the existing M1-20 opt-in _run_export_smoke diagnostic. The real native Chapter1 PNG captured its post-operation loading card; require the transition to settle and capture readiness before PASS. Normal startup/gameplay/UI methods remain unchanged. No competing Main file reservation was present.",
+   "note": "Release builds wait for the 12 Nov release (M3-93); finishing the game comes first (Sadman, 5 Nov 23:55).\n12 Nov Atik user explicitly resumes this task and release work without approval waits. Existing acceptance requirements and human QA dependencies remain binding. No completion inferred from a green CI build.\n12 Nov exact integration: game/scripts/main.gd only the existing M1-20 opt-in _run_export_smoke diagnostic. The real native Chapter1 PNG captured its post-operation loading card; require the transition to settle and capture readiness before PASS. Normal startup/gameplay/UI methods remain unchanged. No competing Main file reservation was present.\nMain exact-file reservation released after saved/pushed817a6eea, focused production session15/0 and actual native foreground export11/0; only the opt-in diagnostic changed. Current artifact/credits/report reservations remain. Preserve this delivered diagnostic if Main is edited by another owner.",
    "evidence": "",
    "updated": "2026-11-12",
    "prompt": "Goal: judges and teammates can download and run the game; there is no export_presets.cfg today.\nDo: per execution/RELEASE_01_EXPORT_AND_PACKAGE.md: Windows x86_64 and macOS (universal, unsigned with run instructions) presets;\nexclude dev scenes and tools from the pack; version string; build to builds/ (gitignored) and attach to a GitHub Release (ask the user\nbefore publishing). Investigate a Chapter 1 web build with the Compatibility renderer and reduced textures for a 'play in the browser'\njudge link: report size, load time and look, and recommend yes/no.\nAcceptance: both builds start on a clean machine to the title screen and into Chapter 1; sizes and steps in production/qa/release_<date>.md.",
@@ -1065,7 +1065,6 @@
     "production/qa/builds/atik_20261112/native_export/M1-20_native_title.png",
     "production/qa/builds/atik_20261112/native_export/M1-20_native_chapter1.png",
     "production/qa/builds/atik_20261112/native_payload_equivalence.json",
-    "game/scripts/main.gd",
     "production/qa/builds/atik_20261112/native_export_final/run.json",
     "production/qa/builds/atik_20261112/native_export_final/stdout.log",
     "production/qa/builds/atik_20261112/native_export_final/M1-20_native_title.png",
@@ -1164,7 +1163,7 @@
    "prompt": "Per execution/QA_06_PERFORMANCE_AND_PORTABILITY.md: profile every Chapter 1 room on the team's weakest laptop; target 60 fps at 1080p on a\nmid laptop and 30 fps on integrated graphics with the Compatibility renderer + LODs; fix the top three costs (draw calls, shadow casters,\ntexture sizes, character shader cost). Record before/after in production/qa/perf_<date>.md.",
    "reserved_for": "atik",
    "effort": 2,
-   "blocker": "12 Nov measured M4/macOS27, 1080p/20s, four real campaign rooms: Metal room p95 18.122-20.964ms misses16.667ms60fps; Garden entry longestframe3112.104ms. M4 OpenGL p95 fits33.333ms but maxima hitch and no current weakest Windows host reachable. Raw221? 22417 CSV rows/18 distributions verified; exact data at production/qa/perf/atik_20261112/M1-23.md and verification.json. M1-92 matching native tools/measured fix and current weakest-host qualification still required; no quality/budget changes or steady-FPS completion claimed.",
+   "blocker": "12 Nov measured M4/macOS27, 1080p/20s, four real campaign rooms: Metal room p95 18.122-20.964ms misses16.667ms60fps; Garden entry longestframe3112.104ms. M4 OpenGL p95 fits33.333ms but maxima hitch and no current weakest Windows host reachable. 22,417 raw CSV rows/18 distributions verified; exact data at production/qa/perf/atik_20261112/M1-23.md and verification.json. M1-92 matching native tools/measured fix and current weakest-host qualification still required; no quality/budget changes or steady-FPS completion claimed.",
    "assignment_history": [
     {
      "date": "2026-11-12",

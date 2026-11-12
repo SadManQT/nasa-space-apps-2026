@@ -162,6 +162,9 @@ def main():
         command = [executable]
         if not args.evidence:
             command.append('--headless')
+        else:
+            # Keep the graphical check visible while the CLI drives the game.
+            command.append('--always-on-top')
         command.extend(['--', '--export-smoke'])
         if args.evidence:
             # Keep new captures beside this candidate; never overwrite earlier QA.
