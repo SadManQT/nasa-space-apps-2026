@@ -381,7 +381,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-93">M1-93</a> Capture 1080p Chapter 1 room performance on the Intel Arc laptop <span class="chip ">any</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="shanto"><b>Shahariar Rahman Shanto</b> <span class="id">shanto</span><div class="meta">Save slots, autosave/migrations, settings and controls · 4% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">0 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:100%"></i></div>
+<div class="panel" data-member="shanto"><b>Shahariar Rahman Shanto</b> <span class="id">shanto</span><div class="meta">Save slots, autosave/migrations, settings and controls · 4% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:67%"></i></div>
+<details open><summary>Working now (1)</summary><ul>
+<li><a class="id" href="#M1-128">M1-128</a> Fix seated crew alignment and trainer mouse Back crash <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Shanto/codex on 2026-11-13</div></li>
+</ul></details>
 <details><summary>Done (2)</summary><ul>
 <li><a class="id" href="#M3-70">M3-70</a> Steam-quality settings, controls and saves <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">1/1 suites passed (ok tools/test_settings.gd 79/79) + 2/2 save suites passed + chapter_select/story_log/ui_families/first_five_minutes pass…</div></li>
 <li><a class="id" href="#M3-71">M3-71</a> Save slots, autosave and versioned save migrations at Steam quality <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">2/2 suites passed (ok tools/test_save_service_recovery.gd 92/92, ok tools/test_save_slots.gd 68/68); screenshots: production/qa/evidence/M3…</div></li>
@@ -9259,6 +9262,50 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "reserved_for": "atik",
    "effort": 2,
    "batch_phase": "implementation"
+  },
+  {
+   "id": "M1-128",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Fix seated crew alignment and trainer mouse Back crash",
+   "status": "in_progress",
+   "owner": "Shanto/codex",
+   "deps": [],
+   "paths": [
+    "game/scripts/world/campaign_room.gd",
+    "game/scripts/world/campaign_crew.gd",
+    "game/scripts/player/player_controller.gd",
+    "game/scripts/player/player_animation.gd",
+    "game/scripts/main.gd",
+    "game/scripts/trainer/mission_trainer.gd",
+    "game/tools/test_mission_trainer.gd",
+    "game/tools/test_campaign_crew.gd",
+    "game/tools/test_seated_crew.gd",
+    "game/tools/test_seated_crew.gd.uid",
+    "production/qa/evidence/Shanto_game_fixes_20261113.md"
+   ],
+   "refs": [],
+   "note": "Filed by Shanto/codex on 2026-11-13.",
+   "evidence": "",
+   "updated": "2026-11-13",
+   "prompt": "13 November user explicitly authorizes Shanto on this Windows workspace to fix screenshot seated crew placement and mission trainer mouse Back freeze/crash, check related game behavior, run regressions and push verified updates. Preserve other reservations, local settings/imports and saves. Test real pointer and keyboard navigation, seated models in installed chairs, transitions and full available gate. No new assets or story/science changes.",
+   "reserved_for": "shanto",
+   "effort": 2,
+   "edit_files": [
+    "game/scripts/world/campaign_room.gd",
+    "game/scripts/world/campaign_crew.gd",
+    "game/scripts/player/player_controller.gd",
+    "game/scripts/player/player_animation.gd",
+    "game/scripts/main.gd",
+    "game/scripts/trainer/mission_trainer.gd",
+    "game/tools/test_mission_trainer.gd",
+    "game/tools/test_campaign_crew.gd",
+    "game/tools/test_seated_crew.gd",
+    "game/tools/test_seated_crew.gd.uid",
+    "production/qa/evidence/Shanto_game_fixes_20261113.md"
+   ],
+   "batch_phase": "implementation"
   }
  ],
  "requirements": [
@@ -9985,7 +10032,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    ],
    "shanto": [
     "M3-71",
-    "M3-70"
+    "M3-70",
+    "M1-128"
    ]
   },
   "deferred_ids": [

@@ -8498,6 +8498,49 @@
    "prompt": "13 November user explicitly assigns Atik the two screenshot blockers. Connect the existing ProbeCalibrationJob to actual player interactions without bypassing pickup/place/read, preserve saves/cancel and P01 dry/wet/recheck. Reproduce door passage movement lock, fix its cause and test the real player collision and UI state. Preserve local settings/imports and other owner locks. Acceptance: actual campaign input completes probe chain; character can back out after passage guidance; focused regressions and game/tools/run_tests.sh results recorded separately from native/full gate.",
    "reserved_for": "atik",
    "effort": 2
+  },
+  {
+   "id": "M1-128",
+   "milestone": "M1",
+   "priority": "P0",
+   "tool": "codex",
+   "title": "Fix seated crew alignment and trainer mouse Back crash",
+   "status": "in_progress",
+   "owner": "Shanto/codex",
+   "deps": [],
+   "paths": [
+    "game/scripts/world/campaign_room.gd",
+    "game/scripts/world/campaign_crew.gd",
+    "game/scripts/player/player_controller.gd",
+    "game/scripts/player/player_animation.gd",
+    "game/scripts/main.gd",
+    "game/scripts/trainer/mission_trainer.gd",
+    "game/tools/test_mission_trainer.gd",
+    "game/tools/test_campaign_crew.gd",
+    "game/tools/test_seated_crew.gd",
+    "game/tools/test_seated_crew.gd.uid",
+    "production/qa/evidence/Shanto_game_fixes_20261113.md"
+   ],
+   "refs": [],
+   "note": "Filed by Shanto/codex on 2026-11-13.",
+   "evidence": "",
+   "updated": "2026-11-13",
+   "prompt": "13 November user explicitly authorizes Shanto on this Windows workspace to fix screenshot seated crew placement and mission trainer mouse Back freeze/crash, check related game behavior, run regressions and push verified updates. Preserve other reservations, local settings/imports and saves. Test real pointer and keyboard navigation, seated models in installed chairs, transitions and full available gate. No new assets or story/science changes.",
+   "reserved_for": "shanto",
+   "effort": 2,
+   "edit_files": [
+    "game/scripts/world/campaign_room.gd",
+    "game/scripts/world/campaign_crew.gd",
+    "game/scripts/player/player_controller.gd",
+    "game/scripts/player/player_animation.gd",
+    "game/scripts/main.gd",
+    "game/scripts/trainer/mission_trainer.gd",
+    "game/tools/test_mission_trainer.gd",
+    "game/tools/test_campaign_crew.gd",
+    "game/tools/test_seated_crew.gd",
+    "game/tools/test_seated_crew.gd.uid",
+    "production/qa/evidence/Shanto_game_fixes_20261113.md"
+   ]
   }
  ],
  "requirements": [
@@ -9224,7 +9267,8 @@
    ],
    "shanto": [
     "M3-71",
-    "M3-70"
+    "M3-70",
+    "M1-128"
    ]
   },
   "deferred_ids": [

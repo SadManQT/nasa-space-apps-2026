@@ -91,3 +91,7 @@ Atik explicitly requested the remaining Atik work in the latest task summary and
 ## 13 November: Atik opening blockers
 
 The user explicitly assigns Atik M1-127: repair the two reported playable blockers (door passage movement and the unwired probe retrieve/place/read interaction). This exact task is added to Atik’s active IDs. Preserve existing owner reservations, all local saves/settings/imports and the established calibration/campaign contracts. No other work is reassigned.
+
+## 13 November: Shanto seated crew and trainer Back repairs
+
+The user explicitly authorizes Shanto on this Windows workspace to repair the screenshot's seated crew alignment and Mission Trainer mouse Back freeze/crash, check related game behavior, and safely commit/push verified updates without further questions. M1-128 is added to Shanto's active IDs. Preserve other owners' reservations, local settings/imports, saves, story and science contracts; publish exact-file reservations and retain actual regression/full-gate results.
