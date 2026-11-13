@@ -138,10 +138,17 @@ func _build() -> void:
 ## path"); empty means no star challenge (puzzle decisions and chapter ends).
 func show_done(result_line: String, changed: String = "", next_goal: String = "", challenge_name: String = "") -> void:
 	_result.text = result_line if not result_line.is_empty() else "Well done."
-	_changed.text = plain_meter(changed)
-	_changed.visible = not changed.is_empty()
+	# Meter lines come from the feedback ledger and some use crew shorthand ("Acknowledged",
+	# "staged"); only a line in player words is shown (doc 25 §8.1, the same rule as all HUD text).
+	var meter := plain_meter(changed)
+	var plain := not meter.is_empty() and UiDesign.banned_regex().search(meter) == null
+	# At 150 % text the banner keeps to its first row and the challenge, so it stays out of the
+	# centre third; the goal card already shows the next job.
+	var large := bool(settings.get("large_text", false))
+	_changed.text = meter if plain else ""
+	_changed.visible = plain and not large
 	_next.text = ("Next ▸ " + next_goal) if not next_goal.is_empty() else ""
-	_next.visible = not next_goal.is_empty()
+	_next.visible = not next_goal.is_empty() and not large
 	_challenge_active = not challenge_name.is_empty()
 	_challenge_box.visible = _challenge_active
 	_outcome.remove_theme_color_override("font_color")
@@ -248,7 +255,7 @@ func _layout() -> void:
 	var left := maxf(reserve_left, margin)
 	var right := maxf(reserve_right, margin)
 	var available := view.x - left - right
-	var width := minf(float(UiDesign.px(680, view.y)), available)
+	var width := minf(float(UiDesign.px(760, view.y)), available)
 	var x := left + (available - width) * 0.5
 	var y := margin
 	if width < float(UiDesign.px(420, view.y)):

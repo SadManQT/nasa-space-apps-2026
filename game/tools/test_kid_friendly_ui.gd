@@ -158,6 +158,24 @@ func _job_feedback_unit() -> void:
 	feedback.hide_now()
 	_check(not feedback.is_showing(), "the card can be dismissed at once (a panel opening)")
 	_check(JobFeedback.plain_meter("Reserves unchanged: Battery E:14 - Air A:6") == "Reserves unchanged: Battery 14 · Air 6", "meter lines drop station letters: " + JobFeedback.plain_meter("Reserves unchanged: Battery E:14 - Air A:6"))
+	var changed := feedback.find_child("Changed", true, false) as Label
+	feedback.show_done("Safety card read.", "Charter & Flight Rules: Acknowledged", "Count your crew", "")
+	_check(not changed.visible, "a meter line in crew shorthand is not shown (doc 25 §8.1)")
+	feedback.show_done("Everyone is here.", "Crew Roll Call: 4/4 accounted for", "Fix the practice problem", "")
+	_check(changed.visible and changed.text.contains("4/4"), "a meter line in player words is shown")
+	# 150 % text at 1280x720 with the production HUD gap: the banner stays out of the centre third.
+	feedback.settings = {"large_text": true}
+	feedback.top_margin = 40.0
+	feedback.reserve_left = 368.0
+	feedback.reserve_right = 341.0
+	UiDesign.apply_type(feedback, 720.0, 1.5)
+	feedback.show_done("Practice problem fixed with no help from Earth.", "Crew Roll Call: 4/4 accounted for", "Check what happened at the table", "Fix the practice problem")
+	for frame in 4:
+		await process_frame
+	var big := feedback.card_rect()
+	_check(big.end.y < 720.0 / 3.0 and not changed.visible and not next.visible, "at 150 %% text the banner keeps to its first row and the challenge: %s" % str(big))
+	feedback.settings = {}
+	UiDesign.apply_type(feedback, 720.0, 1.0)
 	var headline := feedback.find_child("Headline", true, false) as Label
 	_check(headline.autowrap_mode == TextServer.AUTOWRAP_OFF, "the headline never wraps letter by letter")
 	_check(JobFeedback.progress_text(1, 3, 0) == "●○○  Job 2 of 3", "progress reads Job 2 of 3")
