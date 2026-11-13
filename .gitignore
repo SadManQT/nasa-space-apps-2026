@@ -114,3 +114,31 @@ production/qa/release_*.md
 production/qa/playtest_story_review_*.md
 production/qa/fun_*.md
 production/video/reference_local/
+
+# 13 Nov 2026: working material that is not needed to play the game or to judge the submission.
+# It stays on the team's machines (and in the branch archive/full-tree-2026-11-13), not on main.
+/ourpic/
+/execution/
+/production/terrain/
+/production/concept/
+/production/pitch/
+/production/rigs/
+/production/audio/vo_takes/
+/production/audio/vo_masters/
+/production/audio/sfx_masters/
+/production/audio/music_masters/
+/production/cutscenes/*
+!/production/cutscenes/shots.csv
+!/production/cutscenes/v8/
+/production/cutscenes/v8/*
+!/production/cutscenes/v8/src/
+/production/explainers/*
+!/production/explainers/howto/
+/production/explainers/howto/*
+!/production/explainers/howto/specs/
+/production/video/*
+!/production/video/deck.pdf
+!/production/video/deck.html
+!/production/video/deck_pdf.mjs
+/production/qa/evidence/*.log
+/Last-Light-Academy-Submission-*/

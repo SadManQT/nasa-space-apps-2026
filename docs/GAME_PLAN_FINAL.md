@@ -437,7 +437,7 @@ The same topics appear in Bangladesh's lower-secondary (classes 6–8) science l
 
 ## Sources
 
-All science and data sources are in [`SCIENCE_AND_DATA.md`](SCIENCE_AND_DATA.md). The research on winners, competitors and learning is in [`research/`](research/).
+All science and data sources are in [`SCIENCE_AND_DATA.md`](SCIENCE_AND_DATA.md). The research on winners, competitors and learning is in `research/`.
 
 **Fun and learning:**
 - [Gajadhar et al. 2008, "Shared fun is doubled fun"](https://research.tue.nl/en/publications/shared-fun-is-doubled-fun-player-enjoyment-as-a-function-of-socia/)
