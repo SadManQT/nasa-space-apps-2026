@@ -43,7 +43,7 @@ const TEAM_ROSTER := [
 	{"role": "Design and build (producer, art and media lead, integrator)", "name": "Khandaker Shadman Sakib Siddiquee (SadManQT)"},
 	{"role": "Research (science and accessibility review)", "name": "Md. Asif Iqbal"},
 	{"role": "Research (QA and playtest lead)", "name": "Abu Sayem Mohammed Tanvir (SayemTanvir)"},
-	{"role": "Presenter", "name": "Shahariar Rahman Shanto"},
+	{"role": "Build (storyline updates, UI/UX and 3D modelling)", "name": "Shahariar Rahman Shanto (ShantoNull11)"},
 	{"role": "Build (gameplay runtime, Moon systems and builds)", "name": "MD ATIK KHAN (ProgrammerAtik)"}
 ]
 

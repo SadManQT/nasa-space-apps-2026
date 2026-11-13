@@ -116,7 +116,7 @@ Team **The Last BrainCell** · Dhaka, Bangladesh · [Space Apps team page](https
 | Khandaker Shadman Sakib Siddiquee | Producer · art and media · integration |
 | Md. Asif Iqbal | Science and accessibility review |
 | Abu Sayem Mohammed Tanvir | Testing and playtests |
-| Shahariar Rahman Shanto | Presenter |
+| Shahariar Rahman Shanto | Storyline updates · UI/UX · 3D modelling |
 | MD Atik Khan | Gameplay, Moon systems and builds |
 
 ## What is in this repository
