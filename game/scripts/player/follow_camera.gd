@@ -15,6 +15,16 @@ class_name FollowCamera
 @export var recenter_delay: float = 1.5
 @export var recenter_speed: float = 1.4
 @export var capture_mouse: bool = true
+## Obstacles pull the camera in quickly but never within a single frame. Running through the
+## Safe Room's seat rows snapped the arm in by up to 0.5 m between two frames, so the player
+## jumped 80 px on screen (13 Nov review, M1-129).
+@export var pull_in_time: float = 0.07
+## How far the eased camera may trail an obstacle: less than the probe sphere's radius plus the
+## spring margin (0.30 m), so the near plane (0.05 m) never reaches the surface.
+const PULL_IN_SLACK_M := 0.18
+## Static world the camera keeps clear of (the spring arm itself no longer collides: this script
+## is the single owner of camera collision, so the two cannot fight over the arm length).
+@export_flags_3d_physics var obstacle_mask: int = 1
 
 var yaw: float = 0.0
 var pitch: float = -0.12
@@ -25,6 +35,8 @@ var _anchor := Vector3.ZERO
 var _quiet_time: float = 0.0
 var _initialized: bool = false
 var _arm_length: float = 0.0
+var _shoulder_fraction: float = 1.0
+var _snap := true
 
 ## A real play session may take the pointer; tools, tests and clip recording never do.
 static func may_capture_pointer() -> bool:
@@ -39,7 +51,7 @@ func _ready() -> void:
 	spring.spring_length = distance
 	_arm_length = distance
 	spring.margin = 0.12
-	spring.collision_mask = 1
+	spring.collision_mask = 0  # collision is swept and eased in update_camera (obstacle_mask)
 	var shape := SphereShape3D.new()
 	shape.radius = 0.18
 	spring.shape = shape
@@ -86,22 +98,36 @@ func update_camera(delta: float, facing_yaw: float, speed: float) -> void:
 	rotation = Vector3(pitch, yaw, 0.0)
 	# Sweep the shoulder too; a spring alone cannot protect a pivot inside a wall.
 	var shoulder := _anchor + global_basis.x * shoulder_offset
-	var safe_shoulder := _safe_point(desired, shoulder)
-	global_position = safe_shoulder
+	var reach := desired.distance_to(shoulder)
+	var shoulder_room := desired.distance_to(_safe_point(desired, shoulder)) / reach if reach > 0.001 else 1.0
+	_shoulder_fraction = _eased_room(_shoulder_fraction, shoulder_room, delta, reach)
+	global_position = desired.lerp(shoulder, _shoulder_fraction)
 	var endpoint := global_position + global_basis.z * distance
 	var safe_endpoint := _safe_point(global_position, endpoint)
 	var available := minf(distance, global_position.distance_to(safe_endpoint))
-	_arm_length = available if available < _arm_length else lerpf(_arm_length, available, 1.0 - exp(-delta / maxf(collision_recovery, 0.001)))
+	_arm_length = _eased_room(_arm_length / distance, available / distance, delta, distance) * distance
+	_snap = false
 	spring.spring_length = _arm_length
 	# Set immediately as well as using the arm's physics update (including inward moves).
 	camera.position.z = spring.spring_length
+
+## Moves a 0..1 fraction of free room toward what the sweep found: inward fast (pull_in_time) but
+## never more than PULL_IN_SLACK_M behind the obstacle, outward slowly (collision_recovery).
+## A placement reset (teleport, scene cut) takes the new room at once.
+func _eased_room(current: float, room: float, delta: float, length_m: float) -> float:
+	if _snap or length_m <= 0.001:
+		return room
+	if room < current:
+		var eased := lerpf(current, room, 1.0 - exp(-delta / maxf(pull_in_time, 0.001)))
+		return clampf(eased, room, room + PULL_IN_SLACK_M / length_m)
+	return lerpf(current, room, 1.0 - exp(-delta / maxf(collision_recovery, 0.001)))
 
 func _safe_point(from: Vector3, to: Vector3) -> Vector3:
 	var query := PhysicsShapeQueryParameters3D.new()
 	query.shape = spring.shape
 	query.transform = Transform3D(Basis.IDENTITY, from)
 	query.motion = to - from
-	query.collision_mask = spring.collision_mask
+	query.collision_mask = obstacle_mask
 	query.exclude = [target.get_rid()]
 	var fractions := target.get_world_3d().direct_space_state.cast_motion(query)
 	var length := from.distance_to(to)
@@ -112,3 +138,5 @@ func reset_placement() -> void:
 	_initialized = false
 	_quiet_time = 0.0
 	_arm_length = distance
+	_shoulder_fraction = 1.0
+	_snap = true
