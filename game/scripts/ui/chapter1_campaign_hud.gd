@@ -378,6 +378,10 @@ func refresh_scene(_result: Dictionary = {}, during_loading: bool = false) -> vo
 	if during_loading and runtime.incremental_loading:
 		await get_tree().process_frame
 	_refresh_query()
+	if during_loading and runtime.incremental_loading:
+		# The HUD-wide text pass is the largest single step of a scene refresh; give it its
+		# own frame so query binding and typing never share one 50 ms budget (M1-129).
+		await get_tree().process_frame
 	stamp = LoadTrace.begin()
 	apply_accessibility()
 	LoadTrace.end("hud_accessibility_refresh", stamp)
