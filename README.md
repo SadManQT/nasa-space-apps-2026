@@ -24,7 +24,7 @@ Challenge: **[Build a Junior Astronaut Mission Trainer](https://www.spaceappscha
 
 | | |
 |---|---|
-| **240-second video** | *link added after upload* |
+| **240-second video** | [Published 240sec YouTube Video](https://youtu.be/g5Qo5G6rj_0) |
 | **30-second video** | *link added after upload* |
 | **Play it** | [Windows and macOS builds](https://github.com/SadManQT/Last-Light-Academy/releases) |
 | **Project page text** | [docs/SUBMISSION.md](docs/SUBMISSION.md) |
