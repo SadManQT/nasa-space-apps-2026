@@ -254,8 +254,8 @@ static func theme() -> Theme:
 	result.set_stylebox("pressed", "Button", UiDesign.button_style(UiDesign.colour("accent"), true))
 	result.set_stylebox("hover_pressed", "Button", UiDesign.button_style(UiDesign.colour("accent").lightened(0.08), true))
 	result.set_type_variation("PrimaryButton", "Button")
-	result.set_stylebox("normal", "PrimaryButton", UiDesign.gradient_style(UiDesign.colour("accent"), UiDesign.colour("rose")))
-	result.set_stylebox("hover", "PrimaryButton", UiDesign.gradient_style(UiDesign.colour("accent").lightened(0.15), UiDesign.colour("rose").lightened(0.15)))
+	for state in ["normal", "hover", "pressed", "hover_pressed", "disabled"]:
+		result.set_stylebox(state, "PrimaryButton", UiDesign.primary_style(state))
 	for key in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
 		result.set_color(key, "PrimaryButton", UiDesign.colour("ink"))
 	result.set_stylebox("focus", "Button", UiDesign.focus_style())

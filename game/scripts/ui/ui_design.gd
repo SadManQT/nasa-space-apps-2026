@@ -230,8 +230,8 @@ static func style_button(result: Button) -> void:
 	result.add_theme_stylebox_override("focus", focus_style())
 	result.add_theme_stylebox_override("disabled", button_style(colour("navy").darkened(0.35), false))
 
-## The one action of a screen ("Try it", "Resume", "New expedition"): a cerulean
-## to neon-rose gradient, the only gradient in the interface.
+## A horizontal two-colour gradient box. No longer used for buttons (see
+## primary_style); kept for callers that draw decorative bars.
 static func gradient_style(from: Color, to: Color, radius_px: int = 4) -> StyleBoxTexture:
 	var gradient := Gradient.new()
 	gradient.set_color(0, from)
@@ -250,11 +250,39 @@ static func gradient_style(from: Color, to: Color, radius_px: int = 4) -> StyleB
 	style.content_margin_bottom = 4
 	return style
 
+## The one action of a screen in the house cerulean: the same solid blue as
+## the title's "New expedition", lighter on hover, deeper when pressed, with
+## dark ink text (contrast well above 4.5:1). The rose/cerulean gradient was
+## retired on 13 Nov (user review: it clashed with the dark-glass palette).
+static func primary_style(state: String = "normal") -> StyleBoxFlat:
+	var fill := colour("accent")
+	match state:
+		"hover", "focus":
+			fill = colour("accent_hover", Color("#6FB8FF"))
+		"pressed", "hover_pressed":
+			fill = colour("accent_pressed", Color("#2A82D6"))
+		"disabled":
+			fill = Color(colour("accent"), 0.35)
+	var style := StyleBoxFlat.new()
+	style.bg_color = fill
+	style.set_corner_radius_all(6)
+	style.content_margin_left = 18
+	style.content_margin_right = 18
+	style.content_margin_top = 4
+	style.content_margin_bottom = 4
+	style.anti_aliasing = true
+	style.shadow_color = Color(colour("accent"), 0.22)
+	style.shadow_size = 8 if state in ["hover", "focus"] else 0
+	return style
+
 static func make_primary(result: Button) -> Button:
-	result.add_theme_stylebox_override("normal", gradient_style(colour("accent"), colour("rose", Color("#FF4F8B"))))
-	result.add_theme_stylebox_override("hover", gradient_style(colour("accent").lightened(0.15), colour("rose", Color("#FF4F8B")).lightened(0.15)))
-	result.add_theme_stylebox_override("pressed", gradient_style(colour("accent").darkened(0.1), colour("rose", Color("#FF4F8B")).darkened(0.1)))
-	for key in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color", "font_hover_pressed_color", "icon_normal_color", "icon_hover_color", "icon_focus_color", "icon_pressed_color"]:
+	for state in ["normal", "hover", "pressed", "hover_pressed", "disabled"]:
+		result.add_theme_stylebox_override(state, primary_style(state))
+	# Keyboard focus keeps the clear 2 px ring, drawn in ivory so it shows on the blue fill.
+	var ring := focus_style()
+	ring.border_color = colour("ivory")
+	result.add_theme_stylebox_override("focus", ring)
+	for key in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color", "font_hover_pressed_color", "icon_normal_color", "icon_hover_color", "icon_focus_color", "icon_pressed_color", "icon_hover_pressed_color"]:
 		result.add_theme_color_override(key, colour("ink"))
 	result.set_meta("lla_primary", true)
 	return result
