@@ -24,7 +24,7 @@ Challenge: **[Build a Junior Astronaut Mission Trainer](https://www.spaceappscha
 
 | | |
 |---|---|
-| **240-second video** | *link added after upload* |
+| **240-second video** | [Published 240sec YouTube Video](https://youtu.be/g5Qo5G6rj_0) |
 | **30-second video** | *link added after upload* |
 | **Play it** | [Windows and macOS builds](https://github.com/SadManQT/Last-Light-Academy/releases) |
 | **Project page text** | [docs/SUBMISSION.md](docs/SUBMISSION.md) |
@@ -157,7 +157,7 @@ We used AI tools and we disclose them. The team wrote the story, the characters 
 
 The complete list of generation tools, with what each made and sample prompts, is in [docs/AI_USE.md](docs/AI_USE.md). Every generation is logged in [production/AI_PROMPT_LOG.md](production/AI_PROMPT_LOG.md).
 
-**The 240-second judging video uses AI-generated narration.** Each of the six team members cloned their own voice in ElevenLabs, with their consent, and every line in the film is spoken by the clone of the member named on screen. The pictures are our own: captures of the game, its cutscenes and science films, our playtest photos, and motion graphics drawn in code. The full account is in [docs/AI_USE.md](docs/AI_USE.md#the-240-second-judging-video-13-november).
+**The 240-second judging video uses AI-generated narration.** Each of the six team members cloned their own voice in ElevenLabs, with their consent, and every line in the film is spoken by the clone of the member named on screen. The pictures are our own: captures of the game, its cutscenes (AI-generated art, labelled on screen), its science films, and motion graphics drawn in code. The game's music is AI-generated too. No person under 18 appears in our videos. The full account is in [docs/AI_USE.md](docs/AI_USE.md#the-240-second-judging-video-13-november).
 
 ## Team
 

@@ -25,7 +25,7 @@ The game is NASA-data-first. Its key numbers come from 29 NASA and partner sourc
 
 ## 2. Project Demo
 
-- **30-second video (English on-screen text):** [link after upload, M2-08]
+- **30-second video (English narration with English captions):** [link after upload, M2-08]
 - **Seven-slide deck (NASA's accepted alternative, English):** https://github.com/SadManQT/Last-Light-Academy/blob/main/production/video/deck.pdf
 
 ---
