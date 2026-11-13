@@ -23,7 +23,7 @@ const Chapter6Witness = preload("res://tools/support/chapter6_witness.gd")
 const Chapter8Witness = preload("res://tools/support/chapter8_witness.gd")
 const PANELS := ["what_now", "pause", "settings_accessibility", "journal_discovery", "outcome", "puzzle", "dialogue_captions", "sources", "resume", "chapter1_outcome"]
 ## The HUD pieces that may show while the player walks (doc 25 §2.2).
-const FREE_MOVEMENT := ["GoalCard", "TopRight", "Prompt", "GoalMarker", "ControlsHint"]  # ControlsHint: first three scenes only, top centre
+const FREE_MOVEMENT := ["GoalCard", "TopRight", "Prompt", "GoalMarker", "ControlsHint", "JobFeedback"]  # ControlsHint: first three scenes only, bottom right; JobFeedback: the job-done banner, top centre (M1-129)
 
 var storage = preload("res://tools/support/isolated_storage.gd").new()
 var checks := 0
@@ -384,8 +384,12 @@ func _check_free_movement(hud: Control, scene_id: String) -> void:
 				extra.append("panel " + hud.panels.active_panel())
 			continue
 		if control.name in FREE_MOVEMENT:
-			if control.name in ["GoalCard", "TopRight"] and control.get_global_rect().intersects(centre):
+			if control.name in ["GoalCard", "TopRight", "ControlsHint"] and control.get_global_rect().intersects(centre):
 				extra.append("%s covers the centre %s" % [control.name, control.get_global_rect()])
+			if control.name == "JobFeedback":
+				var banner := (control as JobFeedback).card_rect()
+				if banner.intersects(centre):
+					extra.append("JobFeedback covers the centre %s" % banner)
 			continue
 		if control is MissionTablePanel and not (control as MissionTablePanel).is_open():
 			continue

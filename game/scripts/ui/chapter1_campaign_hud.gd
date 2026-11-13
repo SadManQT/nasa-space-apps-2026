@@ -122,6 +122,9 @@ var _done_ids: Dictionary = {}
 ## M1-129 kid-friendly flow: "Job 2 of 3" under the goal, and the job-done card with its star challenge.
 var _progress: Label
 var _job_feedback: JobFeedback
+## The scene's job list from the last _build_targets, reused by the progress line and the job-done
+## card so one refresh asks the runtime once (each call rebuilds and deep-copies the list).
+var _scene_targets: Array = []
 var _nearby_id := ""
 var _marker_node: Node3D
 var _chrome_hidden := false
@@ -142,7 +145,8 @@ class Marker extends Control:
 		_label.position = Vector2(0, 22)
 		_label.size = Vector2(96, 20)
 		_label.add_theme_color_override("font_outline_color", UiDesign.colour("ink"))
-		_label.add_theme_constant_override("outline_size", 4)
+		_label.add_theme_constant_override("outline_size", 7)
+		_label.add_theme_color_override("font_color", UiDesign.colour("accent").lightened(0.45))
 		add_child(_label)
 	func set_distance(text: String) -> void:
 		distance_text = text
@@ -451,7 +455,7 @@ func _show_job_done(done_id: String, line: String, feedback: Dictionary = {}) ->
 	if _job_feedback == null or _chrome_hidden or line.is_empty():
 		return
 	var spec: Dictionary = {}
-	for raw_target in runtime.targets_for_current_scene():
+	for raw_target in _scene_targets:
 		if raw_target is Dictionary and String(raw_target.get("target_id", "")) == done_id:
 			spec = raw_target
 	var hands_on := not spec.is_empty() and String(spec.get("puzzle_id", "")).is_empty()
@@ -743,6 +747,11 @@ func _layout() -> void:
 	_column.offset_right = -margin
 	_column.offset_top = margin
 	_column.offset_bottom = margin
+	if _job_feedback != null:
+		_job_feedback.top_margin = margin
+		_job_feedback.reserve_left = margin + goal_width + 8.0
+		_job_feedback.reserve_right = margin + column_width + 8.0
+		_job_feedback.below_cards = _goal_card.position.y + _goal_card.size.y + 8.0
 	var dialogue_width := float(UiDesign.px(1080, view.y))
 	_dialogue_bar.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 	_dialogue_bar.grow_horizontal = Control.GROW_DIRECTION_BOTH
@@ -769,6 +778,7 @@ func _build_targets(refresh_accessibility: bool = true) -> void:
 	var complete := runtime.is_chapter_complete()
 	var flags: Dictionary = gate.get("physical_flags", {})
 	var targets := runtime.targets_for_current_scene()
+	_scene_targets = targets
 	var current: Dictionary = {}
 	var fallback: Dictionary = {}
 	_done_ids = {}
@@ -818,7 +828,7 @@ func _update_progress() -> void:
 	if _progress == null or runtime == null:
 		return
 	var total := 0
-	for raw_target in runtime.targets_for_current_scene():
+	for raw_target in _scene_targets:
 		if raw_target is Dictionary:
 			total += 1
 	var text := JobFeedback.progress_text(_done_ids.size(), total, JobFeedback.stars())
@@ -1596,6 +1606,7 @@ func apply_accessibility() -> void:
 	_apply_goal_detail()
 	if _job_feedback != null:
 		_job_feedback.settings = settings
+		_layout()  # large text changes the goal card's height, which the banner's fallback uses
 	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, chapter2_panel, chapter3_panel, chapter4_panel, chapter6_panel, chapter8_panel, p01_panel, comms_panel])
 	if comms_panel != null:
 		comms_panel.set_text_scale(bool(settings.get("large_text", false)))
@@ -1807,7 +1818,8 @@ func _update_world_overlay() -> void:
 		return
 	var distance := _distance_to(_marker_node)
 	var fade := float(marker_tokens.get("fade_within_m", 3.0))
-	var alpha := clampf((distance - fade) / 1.5, 0.35, 1.0)
+	# M1-129: children read "4 m away" as greyed out; the marker stays clearly visible up close.
+	var alpha := clampf((distance - fade) / 1.5, 0.8, 1.0)
 	var behind := camera.is_position_behind(_marker_node.global_position + lift)
 	var point := _project(camera, _marker_node.global_position + lift, view, margin)
 	var inside := not behind and point.x > margin and point.x < view.x - margin and point.y > margin and point.y < view.y - margin
@@ -1827,6 +1839,9 @@ func _clear_of_cards(control: Control) -> void:
 	for card: Control in [_goal_card, _column]:
 		if card.visible and card.get_rect().intersects(Rect2(control.position, control.size)):
 			control.position.y = card.get_rect().end.y + 8.0
+	var banner := _job_feedback.card_rect() if _job_feedback != null else Rect2()
+	if banner.has_area() and banner.intersects(Rect2(control.position, control.size)):
+		control.position.y = banner.end.y + 8.0
 
 func _project(camera: Camera3D, world_point: Vector3, view: Vector2, margin: float) -> Vector2:
 	var local_point := camera.get_camera_transform().affine_inverse() * world_point
@@ -1978,19 +1993,49 @@ var _controls_hint: PanelContainer
 
 func _update_controls_hint() -> void:
 	if _controls_hint == null:
+		# M1-129 (13 Nov screenshots): the one-line strip sat across the player's character at 70 %
+		# of the screen. A small key list in the bottom-right corner keeps the character clear and
+		# reads like a game's key legend: a key chip, then what it does.
 		_controls_hint = PanelContainer.new()
 		_controls_hint.name = "ControlsHint"
 		_controls_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		_controls_hint.add_theme_stylebox_override("panel", UiDesign.plate_style(0.8, 10))
-		var text := UiDesign.float_label(UiDesign.label("Walk  W A S D   ·   Look  Mouse   ·   Use  E   ·   Help  H   ·   Pause  Esc", "caption", "ivory"))
-		text.name = "ControlsText"
-		text.autowrap_mode = TextServer.AUTOWRAP_OFF
-		_controls_hint.add_child(text)
+		_controls_hint.add_theme_stylebox_override("panel", UiDesign.plate_style(0.72, 10))
+		var rows := VBoxContainer.new()
+		rows.name = "ControlsText"
+		rows.add_theme_constant_override("separation", 4)
+		rows.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_controls_hint.add_child(rows)
+		for pair in [["W A S D", "Walk"], ["Shift", "Run"], ["Mouse", "Look"], ["E", "Use"], ["H", "Help"], ["Esc", "Pause"]]:
+			var row := HBoxContainer.new()
+			row.add_theme_constant_override("separation", 10)
+			row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			rows.add_child(row)
+			var chip := PanelContainer.new()
+			chip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			var chip_style := StyleBoxFlat.new()
+			chip_style.bg_color = Color(UiDesign.colour("accent"), 0.18)
+			chip_style.border_color = Color(UiDesign.colour("accent"), 0.7)
+			chip_style.set_border_width_all(1)
+			chip_style.set_corner_radius_all(5)
+			chip_style.content_margin_left = 8
+			chip_style.content_margin_right = 8
+			chip.add_theme_stylebox_override("panel", chip_style)
+			chip.custom_minimum_size = Vector2(UiDesign.px(120, 1080), 0)
+			var key := UiDesign.label(String(pair[0]), "caption", "ivory")
+			key.autowrap_mode = TextServer.AUTOWRAP_OFF
+			key.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			chip.add_child(key)
+			row.add_child(chip)
+			var what := UiDesign.float_label(UiDesign.label(String(pair[1]), "caption", "ivory"))
+			what.autowrap_mode = TextServer.AUTOWRAP_OFF
+			row.add_child(what)
 		add_child(_controls_hint)
+		UiDesign.apply_type(_controls_hint, get_viewport_rect().size.y, 1.0)
 	var show := CONTROLS_SCENES.has(_scene_id) and not _chrome_hidden
 	_controls_hint.visible = show
 	if show:
 		_controls_hint.reset_size()
 		_controls_hint.size = _controls_hint.get_combined_minimum_size()
 		var view := get_viewport_rect().size
-		_controls_hint.position = Vector2((view.x - _controls_hint.size.x) * 0.5, view.y * 0.70)  # clear of the goal, the Next box and the captions
+		var margin := float(_margin())
+		_controls_hint.position = Vector2(view.x - margin - _controls_hint.size.x, view.y - margin - _controls_hint.size.y)

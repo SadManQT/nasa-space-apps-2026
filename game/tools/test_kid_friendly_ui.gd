@@ -54,13 +54,13 @@ func _title_menu() -> void:
 func _credits() -> void:
 	var shanto: Dictionary = {}
 	for member in CreditsPanel.TEAM_ROSTER:
-		_check(String(member.role) != "Presenter", "credits list build roles, not Presenter: " + String(member.name))
 		if String(member.name).begins_with("Shahariar Rahman Shanto"):
 			shanto = member
 	var role := String(shanto.get("role", ""))
-	_check(role.contains("storyline") and role.contains("UI/UX") and role.contains("modelling"), "Shanto credited for storyline updates, UI/UX and modelling: " + role)
+	_check(role.begins_with("Presenter") and role.contains("story") and role.contains("modelling"), "Shanto credited as presenter and for story and modelling: " + role)
+	_check(role.length() <= 50, "the credit line stays short: %d characters" % role.length())
 	var readme := FileAccess.get_file_as_string(ProjectSettings.globalize_path("res://").path_join("../README.md").simplify_path())
-	_check(readme.contains("| Shahariar Rahman Shanto | Storyline updates · UI/UX · 3D modelling |"), "README team table matches the in-game credits")
+	_check(readme.contains("| Shahariar Rahman Shanto | Presenter · story and 3D modelling |"), "README team table matches the in-game credits")
 
 func _primary_palette() -> void:
 	var button := UiDesign.make_primary(UiDesign.button("Resume"))
@@ -125,7 +125,8 @@ func _camera_easing() -> void:
 func _seat_tuning() -> void:
 	for cast in ["amara", "ferreira", "kai", "mei", "rafi"]:
 		var tuning := load("res://resources/player/ch_%s.tres" % cast) as LocomotionTuning
-		_check(tuning != null and tuning.seat_recline_degrees <= 10.0 and tuning.seat_pelvis_height > 0.5 and tuning.seat_pelvis_height < 0.6 and tuning.seat_pelvis_forward > 0.05, cast + " has a measured, modest seat fit")
+		# Kai and Rafi's clips lean forward from the hips, so they recline further (18 and 20 degrees).
+		_check(tuning != null and tuning.seat_recline_degrees <= 25.0 and tuning.seat_pelvis_height > 0.5 and tuning.seat_pelvis_height < 0.6 and tuning.seat_pelvis_forward > 0.05, cast + " has a measured, modest seat fit")
 
 func _job_feedback_unit() -> void:
 	JobFeedback.save_stars(0)
@@ -136,7 +137,7 @@ func _job_feedback_unit() -> void:
 	feedback.show_done("Power path on. Extra sunlight now has a use.", "Battery: storing", "Check what happened at the table", "Switch on the power path")
 	_check(feedback.is_showing() and feedback.is_challenge_active(), "a hands-on job shows the card and its star challenge")
 	var label := feedback.find_child("ChallengeLabel", true, false) as Label
-	_check(label.text.contains("Switch on the power path") and label.text.contains("Click"), "the challenge names the job and how to play: " + label.text)
+	_check(label.text.contains("green") and label.tooltip_text == "Switch on the power path", "the challenge says how to play and names the job: " + label.text)
 	var next := feedback.find_child("Next", true, false) as Label
 	_check(next.visible and next.text.contains("Check what happened"), "the card says what comes next")
 	var zone := feedback.zone()
@@ -196,8 +197,12 @@ func _campaign_job_done() -> void:
 	for frame in 3:
 		await process_frame
 	var view := card_panel.get_viewport_rect().size
-	var rect := Rect2(card_panel.position, card_panel.size)
-	_check(rect.position.y < view.y * 0.25 and rect.end.y < view.y * 0.62, "the card stays in the upper part of the screen, clear of the subtitles: %s in %s" % [str(rect), str(view)])
+	var rect := card.card_rect()
+	var centre := Rect2(view / 3.0, view / 3.0)
+	_check(rect.has_area() and not rect.intersects(centre), "the banner keeps the centre third clear (doc 25 §8.2): %s in %s" % [str(rect), str(view)])
+	_check(not rect.intersects(hud._goal_card.get_rect()) and not rect.intersects(hud._column.get_rect()), "the banner sits between the goal card and the top-right column: %s goal %s column %s" % [str(rect), str(hud._goal_card.get_rect()), str(hud._column.get_rect())])
+	var keys: Control = hud._controls_hint
+	_check(keys != null and keys.visible and keys.get_rect().position.x > view.x * 0.6 and keys.get_rect().position.y > view.y * 0.6 and not keys.get_rect().intersects(centre), "the key list sits in the bottom-right corner, off the character: " + (str(keys.get_rect()) if keys != null else "missing"))
 	var result_label := card.find_child("Result", true, false) as Label
 	_check(result_label.text.begins_with("Power path on"), "the card shows the job's own result line: " + result_label.text)
 	_check(not hud._toast.visible or hud._toast.modulate.a < 1.0, "the top-right toast steps aside for the card")

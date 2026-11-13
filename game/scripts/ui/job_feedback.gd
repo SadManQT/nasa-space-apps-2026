@@ -27,7 +27,13 @@ var _headline: Label
 var _result: Label
 var _changed: Label
 var _next: Label
-var _challenge_box: VBoxContainer
+var _challenge_box: HBoxContainer
+## Set by the HUD layout: the banner sits in the top gap between the goal card (left) and the
+## toast/status column (right), at the same top margin as both.
+var reserve_left := 0.0
+var reserve_right := 0.0
+var top_margin := 0.0
+var below_cards := 0.0
 var _challenge_label: Label
 var _gauge: Gauge
 var _outcome: Label
@@ -82,10 +88,12 @@ func _build() -> void:
 	_card.z_index = 30  # above the first-scenes controls strip and the world marker
 	# Wrapped labels report their true height only after the first sort; shrink to it.
 	_card.minimum_size_changed.connect(func() -> void: _card.reset_size.call_deferred())
-	_card.add_theme_stylebox_override("panel", UiDesign.glass_style(UiDesign.colour("good"), Color(UiDesign.colour("glass"), 0.94), 18))
+	_card.add_theme_stylebox_override("panel", UiDesign.glass_style(UiDesign.colour("good"), Color(UiDesign.colour("glass"), 0.94), 14))
 	add_child(_card)
+	# A compact banner (doc 25 §8.2: nothing but the prompt and marker may reach the centre third
+	# while the player walks): headline and result on one row, then next, then the challenge row.
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 6)
+	box.add_theme_constant_override("separation", 4)
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_card.add_child(box)
 	var top := HBoxContainer.new()
@@ -93,38 +101,38 @@ func _build() -> void:
 	top.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(top)
 	var tick := UiDesign.LineIcon.new("check", UiDesign.colour("good"))
-	tick.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	tick.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	top.add_child(tick)
-	_headline = UiDesign.float_label(UiDesign.label("Job done!", "heading", "good"))
+	_headline = UiDesign.float_label(UiDesign.label("Job done!", "subhead", "good"))
 	_headline.name = "Headline"
 	_headline.autowrap_mode = TextServer.AUTOWRAP_OFF  # a two-word headline never wraps letter by letter
-	_headline.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_headline.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	top.add_child(_headline)
 	_result = UiDesign.float_label(UiDesign.label("", "body", "ivory"))
 	_result.name = "Result"
-	box.add_child(_result)
+	_result.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	top.add_child(_result)
+	_next = UiDesign.label("", "caption", "accent")
+	_next.name = "Next"
+	box.add_child(_next)
 	_changed = UiDesign.label("", "caption", "muted")
 	_changed.name = "Changed"
 	box.add_child(_changed)
-	_next = UiDesign.label("", "body", "accent")
-	_next.name = "Next"
-	box.add_child(_next)
-	_challenge_box = VBoxContainer.new()
+	_challenge_box = HBoxContainer.new()
 	_challenge_box.name = "StarChallenge"
-	_challenge_box.add_theme_constant_override("separation", 8)
+	_challenge_box.add_theme_constant_override("separation", 12)
 	_challenge_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	box.add_child(_challenge_box)
 	_challenge_label = UiDesign.label("", "caption", "caution")
 	_challenge_label.name = "ChallengeLabel"
+	_challenge_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_challenge_box.add_child(_challenge_label)
 	_gauge = Gauge.new()
 	_gauge.name = "Gauge"
-	_gauge.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_gauge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	_challenge_box.add_child(_gauge)
-	_outcome = UiDesign.label("", "caption", "ivory")
-	_outcome.name = "Outcome"
-	_outcome.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_challenge_box.add_child(_outcome)
+	# The outcome replaces the instruction on the same row once the player has pressed.
+	_outcome = _challenge_label
 
 ## Shows the card for a finished job. `challenge_name` is the job's own action ("Switch on the power
 ## path"); empty means no star challenge (puzzle decisions and chapter ends).
@@ -136,9 +144,11 @@ func show_done(result_line: String, changed: String = "", next_goal: String = ""
 	_next.visible = not next_goal.is_empty()
 	_challenge_active = not challenge_name.is_empty()
 	_challenge_box.visible = _challenge_active
-	_outcome.text = ""
+	_outcome.remove_theme_color_override("font_color")
+	_outcome.add_theme_color_override("font_color", UiDesign.colour("caution"))
 	if _challenge_active:
-		_challenge_label.text = "★ Star challenge: %s! Click when the needle is in the green." % challenge_name.rstrip(".!")
+		_challenge_label.text = "★ Click when the needle is in the green!"
+		_challenge_label.tooltip_text = challenge_name
 		_gauge.zone_start = _rng.randf_range(0.12, 0.88 - ZONE_WIDTH)
 		_gauge.result = 0
 		_needle_time = _rng.randf_range(0.0, SWEEP_SECONDS)
@@ -234,12 +244,27 @@ func _needle_at(seconds: float) -> float:
 
 func _layout() -> void:
 	var view := get_viewport_rect().size
-	var width := minf(float(UiDesign.px(620, view.y)), view.x - 64.0)
+	var margin := top_margin if top_margin > 0.0 else float(UiDesign.px(64, view.y))
+	var left := maxf(reserve_left, margin)
+	var right := maxf(reserve_right, margin)
+	var available := view.x - left - right
+	var width := minf(float(UiDesign.px(680, view.y)), available)
+	var x := left + (available - width) * 0.5
+	var y := margin
+	if width < float(UiDesign.px(420, view.y)):
+		# A narrow window leaves no gap between the cards: centre the banner under the goal card.
+		width = minf(float(UiDesign.px(680, view.y)), view.x - margin * 2.0)
+		x = (view.x - width) * 0.5
+		y = maxf(margin, below_cards)
 	_card.custom_minimum_size = Vector2(width, 0)
 	_card.size = Vector2(width, 0)
 	_card.reset_size()
-	_card.position = Vector2((view.x - width) * 0.5, view.y * 0.16)
-	_gauge.custom_minimum_size = Vector2(minf(GAUGE_SIZE.x * view.y / 720.0, width - 48.0), GAUGE_SIZE.y * view.y / 720.0)
+	_card.position = Vector2(x, y)
+	_gauge.custom_minimum_size = Vector2(float(UiDesign.px(220, view.y)), float(UiDesign.px(20, view.y)))
+
+## The banner's rectangle while it shows (the HUD keeps projected prompts clear of it).
+func card_rect() -> Rect2:
+	return Rect2(_card.position, _card.size) if is_showing() else Rect2()
 
 func _pop_in() -> void:
 	if _tween != null and _tween.is_valid():
