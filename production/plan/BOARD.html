@@ -381,9 +381,10 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
 <li><a class="id" href="#M1-93">M1-93</a> Capture 1080p Chapter 1 room performance on the Intel Arc laptop <span class="chip ">any</span> <span class="chip ">P1</span></li>
 </ul></details>
 </div>
-<div class="panel" data-member="shanto"><b>Shahariar Rahman Shanto</b> <span class="id">shanto</span><div class="meta">Save slots, autosave/migrations, settings and controls · 4% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">1 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:67%"></i></div>
-<details open><summary>Working now (1)</summary><ul>
+<div class="panel" data-member="shanto"><b>Shahariar Rahman Shanto</b> <span class="id">shanto</span><div class="meta">Save slots, autosave/migrations, settings and controls · 4% share</div><div class="counts"><span class="chip s-done">2 done</span><span class="chip s-in_progress">2 in progress</span><span class="chip s-blocked">0 blocked</span><span class="chip s-todo">0 todo</span></div><div class="bar"><i style="width:50%"></i></div>
+<details open><summary>Working now (2)</summary><ul>
 <li><a class="id" href="#M1-128">M1-128</a> Fix seated crew alignment and trainer mouse Back crash <span class="chip ">codex</span> <span class="chip ">P0</span><div class="meta">claimed by Shanto/codex on 2026-11-13</div></li>
+<li><a class="id" href="#M1-129">M1-129</a> Kid-friendly flow: clean title, credits role, calm palette, clear jobs and hands-on challenges <span class="chip ">any</span> <span class="chip ">P1</span><div class="meta">claimed by Shanto/claude on 2026-11-13</div></li>
 </ul></details>
 <details><summary>Done (2)</summary><ul>
 <li><a class="id" href="#M3-70">M3-70</a> Steam-quality settings, controls and saves <span class="chip ">codex</span> <span class="chip ">P1</span><div class="meta">1/1 suites passed (ok tools/test_settings.gd 79/79) + 2/2 save suites passed + chapter_select/story_log/ui_families/first_five_minutes pass…</div></li>
@@ -9328,6 +9329,61 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
     "game/tools/test_ch01_game_feel.gd"
    ],
    "batch_phase": "implementation"
+  },
+  {
+   "id": "M1-129",
+   "milestone": "M1",
+   "priority": "P1",
+   "tool": "any",
+   "title": "Kid-friendly flow: clean title, credits role, calm palette, clear jobs and hands-on challenges",
+   "status": "in_progress",
+   "owner": "Shanto/claude",
+   "deps": [],
+   "paths": [
+    "game/scripts/ui/main_menu.gd",
+    "game/scripts/ui/credits_panel.gd",
+    "game/scripts/ui/ui_design.gd",
+    "game/scripts/ui/ui_kit.gd",
+    "game/scripts/ui/campaign_panels.gd",
+    "game/scenes/ui/main_menu.tscn",
+    "game/resources/campaign/content/ui_text.json",
+    "CREDITS.md",
+    "game/tools/",
+    "game/scripts/player/locomotion_tuning.gd",
+    "game/scripts/player/follow_camera.gd",
+    "game/resources/player/",
+    "game/scripts/ui/chapter1_campaign_hud.gd",
+    "game/scenes/ui/",
+    "README.md",
+    "docs/"
+   ],
+   "refs": [],
+   "note": "Filed by Shanto/claude on 2026-11-13.",
+   "evidence": "",
+   "updated": "2026-11-13",
+   "prompt": "13 November: the user (Shanto) asked for a kid-friendly update on this Windows workspace. Remove the checkpoint code from the title menu, update Shanto's credits role (storyline, UI/UX and modelling, not presenter), replace the off-palette gradient Resume/primary button with the house cerulean, trim the pause menu to the everyday actions with station tools behind one toggle, make the current job and its progress obvious (job N of M, clear E prompt, a clear done moment) and add short optional hands-on challenges that never block story progress. Preserve story canon, science values, save format and other members' reservations (chapter1_campaign.gd is Asif's M1-105). Verify with run_tests.sh and rendered captures.",
+   "reserved_for": "shanto",
+   "effort": 2,
+   "edit_files": [
+    "game/scripts/ui/main_menu.gd",
+    "game/scripts/ui/credits_panel.gd",
+    "game/scripts/ui/ui_design.gd",
+    "game/scripts/ui/ui_kit.gd",
+    "game/scripts/ui/campaign_panels.gd",
+    "game/scenes/ui/main_menu.tscn",
+    "game/resources/campaign/content/ui_text.json",
+    "CREDITS.md",
+    "game/tools/test_kid_friendly_ui.gd",
+    "game/tools/test_kid_friendly_ui.gd.uid",
+    "game/scripts/player/locomotion_tuning.gd",
+    "game/scripts/player/follow_camera.gd",
+    "game/resources/player/ch_amara.tres",
+    "game/resources/player/ch_ferreira.tres",
+    "game/resources/player/ch_kai.tres",
+    "game/resources/player/ch_mei.tres",
+    "game/resources/player/ch_rafi.tres"
+   ],
+   "batch_phase": "implementation"
   }
  ],
  "requirements": [
@@ -10055,7 +10111,8 @@ button.primary { background: var(--accent); color: var(--accent-ink); border-col
    "shanto": [
     "M3-71",
     "M3-70",
-    "M1-128"
+    "M1-128",
+    "M1-129"
    ]
   },
   "deferred_ids": [

@@ -95,3 +95,7 @@ The user explicitly assigns Atik M1-127: repair the two reported playable blocke
 ## 13 November: Shanto seated crew and trainer Back repairs
 
 The user explicitly authorizes Shanto on this Windows workspace to repair the screenshot's seated crew alignment and Mission Trainer mouse Back freeze/crash, check related game behavior, and safely commit/push verified updates without further questions. M1-128 is added to Shanto's active IDs. Preserve other owners' reservations, local settings/imports, saves, story and science contracts; publish exact-file reservations and retain actual regression/full-gate results.
+
+## 13 November: Shanto kid-friendly flow update
+
+The user (Shanto) asks on this Windows workspace for a kid-friendly update: a clean title menu, Shanto's corrected credits role, one calm palette for the main action, a shorter pause menu, an obvious current job with its progress and a clear done moment, short optional hands-on challenges that never block the story, seat-fit and movement-feel repairs. M1-129 is added to Shanto's active IDs; the seat and movement repairs continue M1-128. `chapter1_campaign.gd` stays with Asif's M1-105 and is not edited. Preserve story, science, save format, other reservations and local settings/imports; retain actual test results.
