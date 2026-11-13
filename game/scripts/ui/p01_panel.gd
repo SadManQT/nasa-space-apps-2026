@@ -510,6 +510,17 @@ func _restore_focus() -> void:
 		target = find_child("CloseProbe", true, false) as Control
 	if target != null:
 		target.grab_focus()
+		var scroll_host := find_child("ProbeScroll", true, false) as ScrollContainer
+		if scroll_host != null:
+			# The chip rows and sliders change the column's height after this frame, so the
+			# follow-focus scroll made now lands in the wrong place (the cup buttons ended up
+			# hidden above the view). A fresh panel starts at the top; the focused control is
+			# brought into view again once the layout is final.
+			if String(target.name).begins_with("Choose_"):
+				scroll_host.scroll_vertical = 0
+			(func() -> void:
+				if is_instance_valid(target) and is_instance_valid(scroll_host) and target.is_visible_in_tree():
+					scroll_host.ensure_control_visible(target)).call_deferred()
 	_focus = ""
 	if bool(_prediction.get("accepted", false)) and not _confirming and not _leaving:
 		var scroll := find_child("ProbeScroll", true, false) as ScrollContainer

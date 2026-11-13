@@ -279,11 +279,16 @@ static func plain_meter(line: String) -> String:
 	return out.replace(" - ", " · ")
 
 ## The player's star tally (separate from the campaign save, so no save-format change).
+## Read from disk once per process; the goal card asks for it on every scene refresh.
+static var _stars_cache := -1
 static func stars() -> int:
-	if not FileAccess.file_exists(STARS_PATH):
-		return 0
-	var parsed = JSON.parse_string(FileAccess.get_file_as_string(STARS_PATH))
-	return maxi(0, int(parsed.get("stars", 0))) if parsed is Dictionary else 0
+	if _stars_cache >= 0:
+		return _stars_cache
+	_stars_cache = 0
+	if FileAccess.file_exists(STARS_PATH):
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string(STARS_PATH))
+		_stars_cache = maxi(0, int(parsed.get("stars", 0))) if parsed is Dictionary else 0
+	return _stars_cache
 
 static func save_stars(total: int) -> bool:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(STARS_PATH.get_base_dir()))
@@ -292,6 +297,7 @@ static func save_stars(total: int) -> bool:
 		return false
 	file.store_string(JSON.stringify({"stars": maxi(0, total)}))
 	file.close()
+	_stars_cache = maxi(0, total)
 	return true
 
 ## "Job 2 of 3" with filled and open dots, plus the star tally once there is one.
