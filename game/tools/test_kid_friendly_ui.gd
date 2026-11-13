@@ -26,6 +26,8 @@ func _run() -> void:
 	_camera_easing()
 	_seat_tuning()
 	await _job_feedback_unit()
+	await _loading_card()
+	await _feet_on_a_pivot()
 	await _campaign_job_done()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(JobFeedback.STARS_PATH))
 	storage.cleanup()
@@ -210,6 +212,67 @@ func _campaign_job_done() -> void:
 	_check(not card.is_showing(), "opening the pause menu clears the card")
 	hud.panels.close_panel()
 	campaign.free()
+	await process_frame
+
+func _loading_card() -> void:
+	var card := LoadingCard.new()
+	root.add_child(card)
+	for frame in 4:
+		await process_frame
+	_check(card.ticks >= 3 and card.find_child("Orbit", true, false) != null, "loading screen draws its orbit and keeps ticking")
+	_check(not card.current_tip().is_empty(), "loading screen shows a tip for young players")
+	var step := card.find_child("Step", true, false) as Label
+	var first := step.text
+	card._clock = LoadingCard.STEP_SECONDS * 1.5
+	await process_frame
+	_check(step.text != first and step.text in LoadingCard.STEPS, "loading step line changes over time: " + step.text)
+	card.queue_free()
+	await process_frame
+
+## A pivot on the spot must not leave a planted foot crossed behind the other leg.
+func _feet_on_a_pivot() -> void:
+	var floor_body := StaticBody3D.new()
+	var shape := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(60, 1, 60)
+	shape.shape = box
+	shape.position = Vector3(0, -0.5, 0)
+	floor_body.add_child(shape)
+	root.add_child(floor_body)
+	var player := (load("res://scenes/player/player.tscn") as PackedScene).instantiate() as PlayerController
+	player.character_glb = "res://assets/characters/CH_Mei/CH_Mei.glb"
+	root.add_child(player)
+	player.follow_camera.capture_mouse = false
+	player.position = Vector3(0, 0.05, 0)
+	player.reset_placement()
+	for frame in 30:
+		await physics_frame
+	var rig := player.animation.skeleton
+	var left := LocomotionClips.bone(rig, "LeftFoot")
+	var right := LocomotionClips.bone(rig, "RightFoot")
+	var crossed := 0
+	var frames := 0
+	for turn in 4:
+		# Walk a little, then reverse: the controller pivots on the spot through 180 degrees.
+		for frame in 40:
+			Input.action_press("move_forward")
+			await physics_frame
+		Input.action_release("move_forward")
+		for frame in 40:
+			Input.action_press("move_back")
+			await physics_frame
+			var basis := Basis(Vector3.UP, player._yaw)
+			var l := basis.inverse() * (rig.global_transform * rig.get_bone_global_pose(left).origin - player.global_position)
+			var r := basis.inverse() * (rig.global_transform * rig.get_bone_global_pose(right).origin - player.global_position)
+			frames += 1
+			if l.x < r.x - 0.02:
+				crossed += 1
+		Input.action_release("move_back")
+		for frame in 20:
+			await physics_frame
+	_check(crossed <= frames / 10, "feet do not cross while pivoting on the spot (%d of %d frames crossed)" % [crossed, frames])
+	player.queue_free()
+	floor_body.queue_free()
 	await process_frame
 
 func _text(node: Node) -> String:

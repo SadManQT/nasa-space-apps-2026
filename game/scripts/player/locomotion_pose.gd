@@ -18,6 +18,11 @@ var weights: Array[float] = [0.0, 0.0]
 var foot_bases: Array[Basis] = [Basis.IDENTITY, Basis.IDENTITY]
 var lock_positions: Array[Vector3] = [Vector3.ZERO, Vector3.ZERO]
 var _lock_bases: Array[Basis] = [Basis.IDENTITY, Basis.IDENTITY]
+## Body yaw when each foot locked. A planted foot that stays put while the body pivots on the
+## spot ends up crossed behind the other leg (13 Nov screenshots, M1-129), so a turn past
+## LOCK_RELEASE_DEGREES lets go of the foot and it follows the animation again.
+var _lock_yaw: Array[float] = [0.0, 0.0]
+const LOCK_RELEASE_DEGREES := 24.0
 var _rotations: Array[Quaternion] = []
 var _positions: Array[Vector3] = []
 var _previous_toes: Array[Vector3] = [Vector3.ZERO, Vector3.ZERO]
@@ -107,6 +112,10 @@ func _update_lean(delta: float) -> void:
 	var desired := Vector2(clampf(acceleration.dot(forward) * 0.008, -limit, limit), clampf(-turn * animation.horizontal_speed * 0.018, -limit, limit))
 	if not lean_enabled or animation.action_weight > 0.1:
 		desired = Vector2.ZERO
+	if seat_legs.size() == 2:
+		# Two of the authored SitIdle clips slump forward over the knees; the character's
+		# seat_spine_back_degrees sits the torso back against the chair (M1-129).
+		desired = Vector2(-deg_to_rad(tuning.seat_spine_back_degrees), 0.0)
 	_lean = _lean.lerp(desired, 1.0 - exp(-delta / 0.18))
 	if _spine >= 0:
 		var base := rig.get_bone_pose_rotation(_spine)
@@ -169,12 +178,24 @@ func _update_feet(delta: float, fresh: bool) -> void:
 		var predicted_hip := hip + actor.velocity * 0.04 - Vector3.UP * 0.10
 		if locked[side] and predicted_hip.distance_to(lock_positions[side]) > length:
 			_released[side] = true
+		var body_yaw := rig.global_basis.get_euler().y
+		if locked[side] and absf(angle_difference(_lock_yaw[side], body_yaw)) > deg_to_rad(LOCK_RELEASE_DEGREES):
+			_released[side] = true
+			contact = false  # this frame the foot follows the clip; it may plant again next frame
+		# A planted foot that has drifted across the body's centre line (behind the other leg)
+		# is let go as well, whatever the yaw did.
+		if locked[side]:
+			var local_lock := rig.global_transform.affine_inverse() * lock_positions[side]
+			if (side == 0 and local_lock.x < -0.03) or (side == 1 and local_lock.x > 0.03):
+				_released[side] = true
+				contact = false
 		contact = contact and not _released[side]
 		if contact and not locked[side]:
 			lock_positions[side] = foot.origin
 			lock_positions[side].y += float(hit.position.y) - _sample_side_height(side, sampled_heights)
 			_lock_bases[side] = Basis(Quaternion(Vector3.UP, hit.normal)) * foot.basis.orthonormalized()
 			_lock_toes[side] = rig.get_bone_pose_rotation(toe_bones[side])
+			_lock_yaw[side] = rig.global_basis.get_euler().y
 		if contact:
 			_release_time[side] = 0.0
 			weights[side] = move_toward(weights[side], 1.0, delta / 0.05)

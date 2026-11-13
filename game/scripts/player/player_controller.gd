@@ -43,6 +43,14 @@ var eva_slope_override_deg: float = -1.0
 var _seat_hips := -1
 var _seat_pelvis_target := Vector3.ZERO
 var _seat_recline := 0.0
+## Stuck guard (M1-129, 13 Nov review: "the character gets stuck and oscillates"). A body
+## pinned between two colliders is pushed out in alternating directions every physics frame
+## by the solver: a visible vibration. The guard holds it still instead, and after a short
+## while nudges it sideways along the freer side so a child can walk on.
+var _last_displacement := Vector3.ZERO
+var _stuck_seconds := 0.0
+const STUCK_ASSIST_AFTER_SECONDS := 0.35
+const STUCK_ASSIST_SPEED := 0.7
 
 func _ready() -> void:
 	floor_snap_length = 0.3
@@ -273,6 +281,8 @@ func _physics_process(delta: float) -> void:
 	if was_grounded and is_on_floor() and absf(height_change) > 0.04 and absf(height_change) < tuning.step_height + 0.05:
 		visual.position.y -= height_change
 	var displacement := global_position - before
+	_guard_pinned_body(before, displacement, input, delta)
+	displacement = global_position - before
 	horizontal_speed = Vector2(displacement.x, displacement.z).length() / delta
 	if is_on_wall() and horizontal_speed < _speed * 0.8:
 		for index in get_slide_collision_count():
@@ -287,6 +297,46 @@ func _physics_process(delta: float) -> void:
 	follow_camera.update_camera(delta, _yaw, horizontal_speed)
 	if generic_interaction_input and Input.is_action_just_pressed("interact"):
 		interact()
+
+## See _stuck_seconds. Holds a vibrating body still, then walks it out along the freer side.
+func _guard_pinned_body(before: Vector3, displacement: Vector3, input: Vector2, delta: float) -> void:
+	var flat := Vector3(displacement.x, 0.0, displacement.z)
+	var last := Vector3(_last_displacement.x, 0.0, _last_displacement.z)
+	_last_displacement = displacement
+	if input.length() < 0.1 or _speed < 0.2:
+		_stuck_seconds = 0.0
+		return
+	var vibrating := flat.length() < 0.03 and last.length() < 0.03 and flat.dot(last) < -0.00002
+	var blocked := flat.length() < _speed * delta * 0.25
+	if not vibrating and not blocked:
+		_stuck_seconds = 0.0
+		return
+	if vibrating:
+		global_position = Vector3(before.x, global_position.y, before.z)  # hold: no vibration
+	_stuck_seconds += delta
+	if _stuck_seconds < STUCK_ASSIST_AFTER_SECONDS:
+		return
+	# Nudge along whichever side of the facing direction has room (the way out of a corner).
+	var forward := Vector3(sin(_yaw), 0.0, cos(_yaw))
+	var side := forward.cross(Vector3.UP).normalized()
+	var probe := 0.12
+	var left_free := not test_move(global_transform, side * probe)
+	var right_free := not test_move(global_transform, -side * probe)
+	var nudge := Vector3.ZERO
+	if left_free and not right_free:
+		nudge = side
+	elif right_free and not left_free:
+		nudge = -side
+	elif left_free and right_free:
+		nudge = side if fmod(absf(global_position.x + global_position.z) * 7.0, 2.0) < 1.0 else -side
+	elif not test_move(global_transform, -forward * probe):
+		nudge = -forward  # back out, then the player can turn
+	if nudge != Vector3.ZERO:
+		var pushed := KinematicCollision3D.new()
+		if not test_move(global_transform, nudge * STUCK_ASSIST_SPEED * delta, pushed):
+			global_position += nudge * STUCK_ASSIST_SPEED * delta
+		elif pushed.get_travel().length() > 0.001:
+			global_position += pushed.get_travel()
 
 func _smooth_speed(delta: float) -> void:
 	var duration := tuning.acceleration_time if desired_speed > _speed else tuning.braking_time

@@ -25,3 +25,5 @@ class_name LocomotionTuning
 @export_range(0.3, 0.8, 0.005) var seat_pelvis_height: float = 0.54
 ## Pelvis joint in front of the seat pivot, in metres (the backrest is behind the pivot).
 @export_range(-0.2, 0.3, 0.005) var seat_pelvis_forward: float = 0.12
+## Extra backward spine rotation while seated, for clips that slump forward over the knees.
+@export_range(0.0, 30.0, 0.5) var seat_spine_back_degrees: float = 0.0
