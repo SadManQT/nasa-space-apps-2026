@@ -8528,7 +8528,9 @@
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_hud_world_lifetime.gd",
     "game/scripts/campaign/care_round_runtime.gd",
-    "game/tools/test_care_round_runtime.gd"
+    "game/tools/test_care_round_runtime.gd",
+    "README.md",
+    "game/tools/test_ch01_game_feel.gd"
    ],
    "refs": [],
    "note": "Filed by Shanto/codex on 2026-11-13.",
@@ -8557,7 +8559,9 @@
     "game/scripts/ui/chapter1_campaign_hud.gd",
     "game/tools/test_hud_world_lifetime.gd",
     "game/scripts/campaign/care_round_runtime.gd",
-    "game/tools/test_care_round_runtime.gd"
+    "game/tools/test_care_round_runtime.gd",
+    "README.md",
+    "game/tools/test_ch01_game_feel.gd"
    ]
   }
  ],
