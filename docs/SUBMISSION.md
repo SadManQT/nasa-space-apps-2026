@@ -2,7 +2,7 @@
 
 Team **The Last BrainCell** · Dhaka, Bangladesh · Challenge: **Build a Junior Astronaut Mission Trainer** · Project: **Last Light Academy**
 
-One section per field of the project page on spaceappschallenge.org, in the order the Bangladesh Participants Guide lists them ([competition-rules.md](competition-rules.md) §C). Paste the text under each heading. Written 7 November 2026 (board M2-02) and updated 12 November 2026 to the repository as it stands that day; every number comes from the files named in the section.
+One section per field of the project page on spaceappschallenge.org, in the order the Bangladesh Participants Guide lists them (competition-rules.md §C). Paste the text under each heading. Written 7 November 2026 (board M2-02) and updated 12 November 2026 to the repository as it stands that day; every number comes from the files named in the section.
 
 **Before pasting (M2-10), replace or check:**
 - `[link after upload, M2-06 / M2-08]`: the YouTube links of the 240-second video (M2-06) and the 30-second video (M2-08).
@@ -19,22 +19,22 @@ Last Light Academy is a free, open-source 3D mission trainer for learners aged 1
 The game is NASA-data-first. Its key numbers come from 29 NASA and partner sources bundled offline: NASA DONKI space-weather records, NASA's Life Support Baseline Values (BVAD), LRO LOLA terrain and illumination, JPL Horizons Sun and Earth positions, LRO CRaTER radiation dose and more. In-game Data Cards show the source behind each number and label it as measured, computed or a training assumption. All 8 chapters, 32 missions and 96 scenes across one Moon year are playable, with 16 interactive mission puzzles and 19 narrated science explainers.
 
 - **240-second video:** [link after upload, M2-06 / M2-08]
-- **GitHub repository:** https://github.com/SadManQT/nasa-space-apps-2026
+- **GitHub repository:** https://github.com/SadManQT/Last-Light-Academy
 
 ---
 
 ## 2. Project Demo
 
-- **30-second video (English on-screen text):** [link after upload, M2-08] (file: `production/pitch/LastLightAcademy_Video3_30s.mp4`)
-- **Seven-slide deck (NASA's accepted alternative, English):** https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/video/deck.pdf
+- **30-second video (English on-screen text):** [link after upload, M2-08]
+- **Seven-slide deck (NASA's accepted alternative, English):** https://github.com/SadManQT/Last-Light-Academy/blob/main/production/video/deck.pdf
 
 ---
 
 ## 3. Final Project
 
-- **Play it (Windows and macOS builds, with run steps and SHA-256 hashes):** https://github.com/SadManQT/nasa-space-apps-2026/releases
+- **Play it (Windows and macOS builds, with run steps and SHA-256 hashes):** https://github.com/SadManQT/Last-Light-Academy/releases
   - **[status on 12 Nov]** The newest published build is the preview `v0.1.0-preview.20261105`; every push since is exported and smoke-tested for Windows by GitHub Actions. Put the judging release tag link here when it is published (board M3-93).
-- **Source code, documentation and the full design:** https://github.com/SadManQT/nasa-space-apps-2026
+- **Source code, documentation and the full design:** https://github.com/SadManQT/Last-Light-Academy
 - **Five-minute judge route:** title screen → **New Expedition** → Chapter 1. Walk to the Mission Table and press **E**, plan a shift, press **Try it** to see the forecast, then **Lock in shift**. Open a **Data Card** to see the NASA source behind a number.
 
 ---
@@ -73,17 +73,17 @@ Four cadets (Kai on power and heat, Amara on air, Mei on the garden, Rafi on spa
 - Data Cards for all 16 puzzles and 19 narrated science explainer clips, every number drawn from the NASA fixtures.
 - The exteriors stand on real south-pole terrain built from LRO LOLA elevation data, lit by JPL Horizons Sun positions for each scene's date.
 - 386 voice lines, a 12-cue score, 38 sound effects and 18 cutscenes, all installed.
-- 138 automated test suites (`game/tools/run_tests.sh`), including a walk through all 96 scenes and 13,048 checks on every line of player text at normal and 150 % text size. Rendering holds 60 fps on an Apple M4 Mac ([perf report](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/qa/perf_2026-11-04.md)); each push is exported and smoke-tested on Windows.
+- 138 automated test suites (`game/tools/run_tests.sh`), including a walk through all 96 scenes and 13,048 checks on every line of player text at normal and 150 % text size. Rendering holds 60 fps on an Apple M4 Mac ([perf report](https://github.com/SadManQT/Last-Light-Academy/blob/main/production/qa/perf_2026-11-04.md)); each push is exported and smoke-tested on Windows.
 - Four-player Class mode on one machine: choose Class (2–4 players) on New Expedition. Each cadet's crew note is read privately behind a pass-the-screen cover (or from printed cards), and all four roles sign every puzzle's exact choice and forecast before it locks in.
 - Play-tested with 18 learners under 15. They told us the instructions were too hard, so every on-screen instruction was rewritten in words a nine-year-old can read, and the first puzzles now give step-by-step help.
 
 ### How: NASA data at the core
 
-We designed from the data outward. For every puzzle we asked which NASA observation decides the number, then built the mechanic around it ([SCIENCE_AND_DATA.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/docs/SCIENCE_AND_DATA.md) §B traces all 16 puzzles to their datasets).
+We designed from the data outward. For every puzzle we asked which NASA observation decides the number, then built the mechanic around it ([SCIENCE_AND_DATA.md](https://github.com/SadManQT/Last-Light-Academy/blob/main/docs/SCIENCE_AND_DATA.md) §B traces all 16 puzzles to their datasets).
 
-1. **Fetch.** A plain Python script ([production/tools/fetch_nasa_data.py](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/tools/fetch_nasa_data.py)) downloads the original records (DONKI, GOES-13, STEREO-A, CRaTER, JPL Horizons, the eclipse catalog, the Apollo catalog) or records values quoted from the cited papers with page references. No AI model produces a data value.
+1. **Fetch.** A plain Python script ([production/tools/fetch_nasa_data.py](https://github.com/SadManQT/Last-Light-Academy/blob/main/production/tools/fetch_nasa_data.py)) downloads the original records (DONKI, GOES-13, STEREO-A, CRaTER, JPL Horizons, the eclipse catalog, the Apollo catalog) or records values quoted from the cited papers with page references. No AI model produces a data value.
 2. **Keep the provenance.** Each source becomes a small JSON fixture in `game/resources/data/nasa/` with its URL, ID or DOI, retrieval date, licence, the values used and every derived number with its formula and the puzzle it drives.
-3. **Compute.** Derived numbers are computed, not typed: the 70-minute storm warning (particle onset minus flare start), the 1.07 kg air unit, the 36-hour night, Earth's height above the pole's horizon in April 2046, the 121.9 km to Mons Malapert. The terrain script ([production/tools/make_terrain.py](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/tools/make_terrain.py)) reads LOLA elevation models, computes horizon masks and asks JPL Horizons where the Sun and Earth stand at each scene's date.
+3. **Compute.** Derived numbers are computed, not typed: the 70-minute storm warning (particle onset minus flare start), the 1.07 kg air unit, the 36-hour night, Earth's height above the pole's horizon in April 2046, the 121.9 km to Mons Malapert. The terrain script ([production/tools/make_terrain.py](https://github.com/SadManQT/Last-Light-Academy/blob/main/production/tools/make_terrain.py)) reads LOLA elevation models, computes horizon masks and asks JPL Horizons where the Sun and Earth stand at each scene's date.
 4. **Show it.** Data Cards read the same fixtures, so the player sees the dataset name, what was measured, what the game computed, the URL and the citation. Every display carries a label: **Observed**, **Computed** or a **training assumption**.
 5. **Be honest about the gaps.** Numbers no dataset supports are tagged as gameplay values and listed publicly with the smallest change that would make each traceable (SCIENCE_AND_DATA.md §B3). Aurora Station, the cadets and the 2046 dates are fiction; the 2017 storm is a replay of real timing; the 2012 Moon strike in Chapter 7 is a labelled "what if".
 
@@ -114,17 +114,17 @@ Work on this project started before the hackathon with the permission of our Dha
 
 **Data.** NASA, with partner data from NOAA, USGS/IAU, ESA, ISRO, JAXA, CNSA and the Wisconsin Fast Plants Program, each labelled with its agency.
 
-Full credits, licences and a credit row for every file in `game/assets`: [CREDITS.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/CREDITS.md).
+Full credits, licences and a credit row for every file in `game/assets`: [CREDITS.md](https://github.com/SadManQT/Last-Light-Academy/blob/main/CREDITS.md).
 
 ---
 
 ## 5. GitHub access
 
-The repository is public and needs no login or permission request: https://github.com/SadManQT/nasa-space-apps-2026
+The repository is public and needs no login or permission request: https://github.com/SadManQT/Last-Light-Academy
 
-- Licence: Apache-2.0 ([LICENSE](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/LICENSE)).
-- Start here: the [README](https://github.com/SadManQT/nasa-space-apps-2026#readme) (play, build and test steps), [docs/SCIENCE_AND_DATA.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/docs/SCIENCE_AND_DATA.md) (every dataset and every puzzle number traced), [docs/AI_USE.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/docs/AI_USE.md) and [production/AI_PROMPT_LOG.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/AI_PROMPT_LOG.md) (every AI generation with its prompt), [docs/TEAM.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/docs/TEAM.md) (team and roles).
-- The team's task board, with every task, owner and piece of evidence: [production/plan/BOARD.html](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/plan/BOARD.html).
+- Licence: Apache-2.0 ([LICENSE](https://github.com/SadManQT/Last-Light-Academy/blob/main/LICENSE)).
+- Start here: the [README](https://github.com/SadManQT/Last-Light-Academy#readme) (play, build and test steps), [docs/SCIENCE_AND_DATA.md](https://github.com/SadManQT/Last-Light-Academy/blob/main/docs/SCIENCE_AND_DATA.md) (every dataset and every puzzle number traced), [docs/AI_USE.md](https://github.com/SadManQT/Last-Light-Academy/blob/main/docs/AI_USE.md) and [production/AI_PROMPT_LOG.md](https://github.com/SadManQT/Last-Light-Academy/blob/main/production/AI_PROMPT_LOG.md) (every AI generation with its prompt), [docs/TEAM.md](https://github.com/SadManQT/Last-Light-Academy/blob/main/docs/TEAM.md) (team and roles).
+- The team's task board, with every task, owner and piece of evidence: [production/plan/BOARD.html](https://github.com/SadManQT/Last-Light-Academy/blob/main/production/plan/BOARD.html).
 - Large assets are stored with Git LFS: run `git lfs install` before cloning.
 - Team page: https://www.spaceappschallenge.org/2026/find-a-team/the-last-braincell
 
@@ -132,7 +132,7 @@ The repository is public and needs no login or permission request: https://githu
 
 ## 6. Use of AI
 
-We are a team of six building a full 3D Moon-outpost game, so we used AI where it saves the most time and where we have no specialist, and we disclose all of it. Every generation is logged with its tool, model, exact prompt (or where the prompt is stored), inputs, result and what a person changed or decided, including rejected results: [production/AI_PROMPT_LOG.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/AI_PROMPT_LOG.md). The full disclosure is [docs/AI_USE.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/docs/AI_USE.md).
+We are a team of six building a full 3D Moon-outpost game, so we used AI where it saves the most time and where we have no specialist, and we disclose all of it. Every generation is logged with its tool, model, exact prompt (or where the prompt is stored), inputs, result and what a person changed or decided, including rejected results: [production/AI_PROMPT_LOG.md](https://github.com/SadManQT/Last-Light-Academy/blob/main/production/AI_PROMPT_LOG.md). The full disclosure is [docs/AI_USE.md](https://github.com/SadManQT/Last-Light-Academy/blob/main/docs/AI_USE.md).
 
 **What AI made.** The 3D models of the characters, plants and props; concept art and character turnaround sheets; character animation clips; all 386 voice lines, the narration of the 19 science explainers, the 12-cue music score and the sound effects; the animated shots in the 18 cutscenes; and most of the game code, pipeline scripts and production documents, written against our specifications and checked by tests and a second AI.
 
@@ -160,7 +160,7 @@ We are a team of six building a full 3D Moon-outpost game, so we used AI where i
 
 ## 7. NASA data sources used
 
-All extracts ship offline in `game/resources/data/nasa/`, one JSON file per source with its URL, ID or DOI, retrieval date, licence, values and formulas. The full table, with every ID and every puzzle it drives, is [docs/SCIENCE_AND_DATA.md](https://github.com/SadManQT/nasa-space-apps-2026/blob/main/docs/SCIENCE_AND_DATA.md) §B. Data Cards in the game read the same files.
+All extracts ship offline in `game/resources/data/nasa/`, one JSON file per source with its URL, ID or DOI, retrieval date, licence, values and formulas. The full table, with every ID and every puzzle it drives, is [docs/SCIENCE_AND_DATA.md](https://github.com/SadManQT/Last-Light-Academy/blob/main/docs/SCIENCE_AND_DATA.md) §B. Data Cards in the game read the same files.
 
 ### NASA data (21 sources)
 
@@ -248,11 +248,11 @@ All extracts ship offline in `game/resources/data/nasa/`, one JSON file per sour
 **Software and services**
 - Godot Engine 4.7 (MIT): https://godotengine.org
 - Blender: https://www.blender.org · ffmpeg: https://ffmpeg.org · Python and NumPy: https://www.python.org, https://numpy.org · playwright-core: https://playwright.dev
-- AI tools as listed in the Use of AI field; every generation in https://github.com/SadManQT/nasa-space-apps-2026/blob/main/production/AI_PROMPT_LOG.md
+- AI tools as listed in the Use of AI field; every generation in https://github.com/SadManQT/Last-Light-Academy/blob/main/production/AI_PROMPT_LOG.md
 
 **Our documents**
-- Science audit and data map: https://github.com/SadManQT/nasa-space-apps-2026/blob/main/docs/SCIENCE_AND_DATA.md
-- Puzzle numbers: https://github.com/SadManQT/nasa-space-apps-2026/blob/main/game-design/08_PUZZLE_DESIGNS.md
-- Credits and licences: https://github.com/SadManQT/nasa-space-apps-2026/blob/main/CREDITS.md
+- Science audit and data map: https://github.com/SadManQT/Last-Light-Academy/blob/main/docs/SCIENCE_AND_DATA.md
+- Puzzle numbers: https://github.com/SadManQT/Last-Light-Academy/blob/main/game-design/08_PUZZLE_DESIGNS.md
+- Credits and licences: https://github.com/SadManQT/Last-Light-Academy/blob/main/CREDITS.md
 
 *An independent team project. It is not endorsed by NASA and uses no NASA logos.*

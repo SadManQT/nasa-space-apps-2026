@@ -116,7 +116,7 @@ The game's numbers rest on these publications (DOIs checked 3 Nov 2026):
 - Suggs, R.M. et al. (2014) lunar impact flux, summarised in NTRS 20150016513; Moser, D.E., Suggs, R.M. & Ehlert, S.R. (2017), NTRS 20170004471
 - Bryant, S. (2009) Lunar Pole Illumination and Communications Maps, IPN Progress Report 42-176
 
-The other science and learning-research sources (Speyerer & Robinson 2013, Gläser et al. 2014, Watters et al. 2024, Hagedorn et al. 2024, Partap & Ya 2012, Poulet et al. 2014, Wouters et al. 2013, Aronson & Bridgeman 1979, Crookall, the GLE 72 study and the news and NASA pages for each fact) are listed with links in [docs/SCIENCE_AND_DATA.md](docs/SCIENCE_AND_DATA.md) (Sources) and [docs/research/similar-games-and-nasa-data.md](docs/research/similar-games-and-nasa-data.md).
+The other science and learning-research sources (Speyerer & Robinson 2013, Gläser et al. 2014, Watters et al. 2024, Hagedorn et al. 2024, Partap & Ya 2012, Poulet et al. 2014, Wouters et al. 2013, Aronson & Bridgeman 1979, Crookall, the GLE 72 study and the news and NASA pages for each fact) are listed with links in [docs/SCIENCE_AND_DATA.md](docs/SCIENCE_AND_DATA.md) (Sources) and docs/research/similar-games-and-nasa-data.md.
 
 ## 8. Pitch video (`LastLightAcademy_pitch_video.mp4`)
 
@@ -132,7 +132,7 @@ Twenty models first made for the video are reused in the game; they are listed i
 
 ## 9. In-game credits screen
 
-The credits screen (owned by the UI/release tasks, see [execution/RELEASE_02_CREDITS_AND_EVIDENCE.md](execution/RELEASE_02_CREDITS_AND_EVIDENCE.md)) shows only what ships in that build, in English, in this order:
+The credits screen (owned by the UI/release tasks, see the team's release notes) shows only what ships in that build, in English, in this order:
 
 1. **Team The Last BrainCell** — names and roles from `docs/TEAM.md`.
 2. **Story, characters, puzzles and science mapping** — the team.
