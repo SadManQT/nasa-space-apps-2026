@@ -162,6 +162,8 @@ The film is on YouTube; its link is on the project page and in the README. What 
 
 The generation is logged in `production/ai_log_parts/video2_narration_20261113.md`.
 
+**The 30-second demo video** is made the same way: the narration is the presenter's own cloned voice (ElevenLabs), the music is the game's score (ElevenLabs), the closing cutscene shot is labelled "AI-generated image" on screen, and the rest is gameplay recorded from our own game with motion graphics drawn in code. No person under 18 appears.
+
 ## Every generated file in `game/assets` and its log rows
 
 | `game/assets/` | Files | Made by | Log rows |
