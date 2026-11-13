@@ -119,6 +119,9 @@ var _scene_id := ""
 var _resume_pending := false
 var _goal_info: Dictionary = {}
 var _done_ids: Dictionary = {}
+## M1-129 kid-friendly flow: "Job 2 of 3" under the goal, and the job-done card with its star challenge.
+var _progress: Label
+var _job_feedback: JobFeedback
 var _nearby_id := ""
 var _marker_node: Node3D
 var _chrome_hidden := false
@@ -432,6 +435,7 @@ func refresh_after_action(result: Dictionary) -> void:
 			var line := _result_line(done_id)
 			_last_outcome["result"] = line
 			show_status(line)
+			_show_job_done(done_id, line, fb_dict)
 		if panels != null and runtime != null:
 			panels.bind_query(runtime.query().merged({"outcome": _last_outcome}, true))
 		if newly_done.has("complete_debrief"):
@@ -439,6 +443,23 @@ func refresh_after_action(result: Dictionary) -> void:
 		return
 	if result.has("reason"):
 		show_status(String(result.get("reason", "")))
+
+## The job-done card in the upper centre (M1-129): the job's result line, its meter tick, the next goal
+## and, after a hands-on job (no decision panel), the optional star challenge. The top-right toast keeps
+## the same line for the record but steps aside so the player reads it once, in one place.
+func _show_job_done(done_id: String, line: String, feedback: Dictionary = {}) -> void:
+	if _job_feedback == null or _chrome_hidden or line.is_empty():
+		return
+	var spec: Dictionary = {}
+	for raw_target in runtime.targets_for_current_scene():
+		if raw_target is Dictionary and String(raw_target.get("target_id", "")) == done_id:
+			spec = raw_target
+	var hands_on := not spec.is_empty() and String(spec.get("puzzle_id", "")).is_empty()
+	var challenge := String(_target_text(spec).get("prompt", "")) if hands_on else ""
+	var next_goal := "" if bool(_goal_info.get("complete", false)) else _title.text
+	_job_feedback.settings = runtime.query().get("accessibility", {})
+	_job_feedback.show_done(line, String(feedback.get("meter_tick", "")), next_goal, challenge)
+	_hide_toast()
 
 ## Shows one line in the toast (top right, five seconds). Runtime reasons are
 ## rewritten into player words; "do this first" reasons name the job.
@@ -512,6 +533,11 @@ func _build() -> void:
 	goal_row.move_child(_goal_icon, 0)
 	_title = goal_row.get_node("Title")
 	_why = card_box.get_node("Why")
+	_progress = UiDesign.float_label(UiDesign.label("", "caption", "accent"))
+	_progress.name = "JobProgress"
+	_progress.visible = false
+	card_box.add_child(_progress)
+	card_box.move_child(_progress, goal_row.get_index() + 1)
 	for floating in [_chapter_line, _title, _why, card_box.get_node("WhatNowKey")]:
 		UiDesign.float_label(floating)
 	_advance = card_box.get_node("Continue")
@@ -575,6 +601,11 @@ func _build() -> void:
 	eva_visor.name = "EvaVisorHud"
 	eva_visor.visible = false
 	add_child(eva_visor)
+	_job_feedback = JobFeedback.new()
+	add_child(_job_feedback)
+	_job_feedback.star_earned.connect(func(_total: int) -> void:
+		_update_progress()
+		_ui_sound("SFX_UI_CONFIRM"))
 	# The scene owns the caption composition; canon text arrives through the runtime.
 	_dialogue_bar = shell.get_node("Dialogue")
 	_dialogue_bar.add_theme_stylebox_override("panel", UiDesign.scrim_style(0.72, 20))  # cinematic subtitles, no box
@@ -773,12 +804,26 @@ func _build_targets(refresh_accessibility: bool = true) -> void:
 		_targets.add_child(_job_row(target, state))
 	_goal_info = _goal_for_state(current, gate, complete)
 	_apply_goal()
+	_update_progress()
 	_retry.disabled = complete or runtime.route.snapshot().get("retry_checkpoint", {}).is_empty()
 	_update_debug(gate)
 	if panels != null and not panels.active_panel().is_empty():
 		_set_modal_buttons(true)
 	if refresh_accessibility:
 		apply_accessibility()
+
+## "●●○ Job 3 of 3   ★ 4" under the goal: how far through this scene's jobs the player is,
+## and their star tally. Hidden for a single-job scene with no stars, and once the chapter is done.
+func _update_progress() -> void:
+	if _progress == null or runtime == null:
+		return
+	var total := 0
+	for raw_target in runtime.targets_for_current_scene():
+		if raw_target is Dictionary:
+			total += 1
+	var text := JobFeedback.progress_text(_done_ids.size(), total, JobFeedback.stars())
+	_progress.text = text
+	_progress.visible = not text.is_empty() and not bool(_goal_info.get("complete", false))
 
 func _job_row(target: Dictionary, state: String) -> Control:
 	var row := HBoxContainer.new()
@@ -1549,6 +1594,8 @@ func apply_accessibility() -> void:
 	var scale := 1.5 if bool(settings.get("large_text", false)) else 1.0
 	_large_text = scale > 1.0
 	_apply_goal_detail()
+	if _job_feedback != null:
+		_job_feedback.settings = settings
 	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, chapter2_panel, chapter3_panel, chapter4_panel, chapter6_panel, chapter8_panel, p01_panel, comms_panel])
 	if comms_panel != null:
 		comms_panel.set_text_scale(bool(settings.get("large_text", false)))
@@ -1592,6 +1639,8 @@ func _set_chrome_hidden(hidden: bool) -> void:
 		_dialogue_bar.visible = false
 		_toast.visible = false
 		outpost.hide_now()
+		if _job_feedback != null:
+			_job_feedback.hide_now()
 	elif _toast_timer > 0.0:
 		_fade(_toast, true)
 
@@ -1696,6 +1745,8 @@ func explain_dead_end_passage(destination: String) -> void:
 func _announce_next() -> void:
 	if _status == null or _title.text.is_empty() or not is_instance_valid(_marker_node) or not _marker_node.is_inside_tree():
 		return
+	if _job_feedback != null and _job_feedback.is_showing():
+		return  # the job-done card already says what comes next
 	var next := "Next ▸ %s · %s" % [_title.text, UiDesign.distance_text(_distance_to(_marker_node))]
 	# A result still pending (shown, or waiting behind an open panel) keeps its text;
 	# the next step is added beneath it, never written over it.

@@ -81,9 +81,11 @@ Open `game/project.godot` in Godot and press **Play** (F5). The first import tak
 
 **Controls:** WASD to walk, mouse to look, **E** to use, **H** for help, **Esc** to pause. Captions are on and nothing is timed. Settings can make text 1.5 times larger and reduce motion.
 
+**Always know what to do:** the goal card shows your job and how far through the scene you are (*Job 2 of 3*). When a job is done, a card says what you did, what changed and what comes next. After a hands-on job you can try the optional **star challenge**: click when the needle is in the green to earn a cadet star. It never blocks the story.
+
 **Five-minute route for judges:** title screen → **New Expedition** → Solo or Class → follow the blue ◇ marker to the Mission Table and press **E**. Plan a shift, press **Try it**, then **Lock in**. Open a **Data Card** to see the NASA source behind a number.
 
-**Tests:** `game/tools/run_tests.sh` runs all 140 automated suites, including a walk through all 96 scenes.
+**Tests:** `game/tools/run_tests.sh` runs all 141 automated suites, including a walk through all 96 scenes.
 
 ## Tested with young players
 
