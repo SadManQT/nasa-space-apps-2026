@@ -10,7 +10,7 @@
 ![Works offline](https://img.shields.io/badge/internet-not_needed-68C78B?style=for-the-badge&labelColor=0B1222)
 ![Licence: Apache 2.0](https://img.shields.io/badge/licence-Apache_2.0-20B8C9?style=for-the-badge&labelColor=0B1222)
 
-**[Play it](https://github.com/SadManQT/last-light-academy/releases)** &nbsp;·&nbsp; **[Science and data](docs/SCIENCE_AND_DATA.md)** &nbsp;·&nbsp; **[Classroom kit](docs/classroom/README.md)** &nbsp;·&nbsp; **[AI use](docs/AI_USE.md)** &nbsp;·&nbsp; **[Credits](CREDITS.md)**
+**[Play it](https://github.com/SadManQT/Last-Light-Academy/releases)** &nbsp;·&nbsp; **[Science and data](docs/SCIENCE_AND_DATA.md)** &nbsp;·&nbsp; **[Classroom kit](docs/classroom/README.md)** &nbsp;·&nbsp; **[AI use](docs/AI_USE.md)** &nbsp;·&nbsp; **[Credits](CREDITS.md)**
 
 Challenge: **[Build a Junior Astronaut Mission Trainer](https://www.spaceappschallenge.org/2026/challenges/build-a-junior-astronaut-mission-trainer/)** &nbsp;·&nbsp; Team **The Last BrainCell** &nbsp;·&nbsp; Dhaka, Bangladesh
 
@@ -26,7 +26,7 @@ Challenge: **[Build a Junior Astronaut Mission Trainer](https://www.spaceappscha
 |---|---|
 | **240-second video** | *link added after upload* |
 | **30-second video** | *link added after upload* |
-| **Play it** | [Windows and macOS builds](https://github.com/SadManQT/last-light-academy/releases) |
+| **Play it** | [Windows and macOS builds](https://github.com/SadManQT/Last-Light-Academy/releases) |
 | **Project page text** | [docs/SUBMISSION.md](docs/SUBMISSION.md) |
 
 ---
@@ -103,7 +103,7 @@ Aurora Station, the cadets, Alo and the 2046 dates are fiction. The 2017 storm i
 
 ## Play it
 
-**Download** a Windows or macOS build from [Releases](https://github.com/SadManQT/last-light-academy/releases).
+**Download** a Windows or macOS build from [Releases](https://github.com/SadManQT/Last-Light-Academy/releases).
 
 - **Windows:** unzip, keep `LastLightAcademy.exe` and `LastLightAcademy.pck` together, run the EXE.
 - **macOS:** unzip, move the app to Applications and open it. The build is not signed. If macOS blocks it, use **Privacy & Security → Open Anyway**.
@@ -112,7 +112,7 @@ Aurora Station, the cadets, Alo and the 2046 dates are fiction. The 2017 storm i
 
 ```bash
 git lfs install
-git clone https://github.com/SadManQT/last-light-academy.git
+git clone https://github.com/SadManQT/Last-Light-Academy.git
 ```
 
 Open `game/project.godot` in Godot and press **Play** (F5). The first import takes a few minutes.
