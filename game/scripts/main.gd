@@ -410,9 +410,12 @@ func _save_slot_exists() -> bool:
 
 func _show_load_notice() -> void:
 	if not _load_notice.is_empty() and is_instance_valid(_menu):
-		var note := _menu.get("_save_note") as Label
-		if note != null:
-			note.text = _load_notice
+		if _menu.has_method("show_note"):
+			_menu.call("show_note", _load_notice)
+		else:
+			var note := _menu.get("_save_note") as Label
+			if note != null:
+				note.text = _load_notice
 
 func _open_showcase() -> void:
 	get_tree().change_scene_to_file("res://scenes/dev/asset_showcase.tscn")

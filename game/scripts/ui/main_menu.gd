@@ -73,12 +73,22 @@ func setup(save_state: Dictionary) -> void:
 			_begin_button.grab_focus()
 		_continue_button.disabled = not has_save
 		_continue_button.focus_mode = continue_focus
-	_continue_button.text = "Continue expedition" if has_save else "Continue - no checkpoint"
-	_save_note.text = "Checkpoint: %s" % String(save_state.get("checkpoint_id", "Chapter 1")) if has_save else "A new expedition awaits. Your progress saves as you play."
-	_save_note.modulate = IVORY if has_save else MUTED
+	_continue_button.text = "Continue expedition" if has_save else "Continue"
+	# A clean title: the save's internal checkpoint code is never shown to players.
+	# The note line only appears when there is something they must know (main.gd's load notice).
+	show_note("")
 	if _panels != null:
 		_panels.bind_query(_query)
 	_apply_accessibility()
+
+## One short line under Continue, shown only when it has something to say
+## (a save that could not be opened); empty hides it so the menu stays clean.
+func show_note(text: String) -> void:
+	if _save_note == null:
+		return
+	_save_note.text = text
+	_save_note.modulate = IVORY
+	_save_note.visible = not text.is_empty()
 
 func bind_query(query: Dictionary) -> void:
 	_query = query.duplicate(true)
@@ -182,6 +192,7 @@ func _build() -> void:
 	_begin_button = %NewExpedition
 	_continue_button = %Continue
 	_save_note = %SaveNote
+	show_note("")
 	_footer_status = %AccessibilityStatus
 	_begin_button.pressed.connect(_show_briefing)
 	_continue_button.pressed.connect(func() -> void:
