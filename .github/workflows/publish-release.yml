@@ -1,0 +1,32 @@
+name: Publish release from a build run
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: The successful "Judging candidate packages" run to publish
+        required: true
+      tag:
+        description: The draft release to attach the packages to
+        required: true
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Download both packages from the build run
+        run: gh run download "${{ inputs.run_id }}" --dir packages
+      - name: Attach them to the release with their checksums
+        run: |
+          cd packages
+          find . -name '*.zip' -exec mv {} . \;
+          ls -la *.zip
+          sha256sum *.zip > SHA256SUMS.txt
+          gh release upload "${{ inputs.tag }}" *.zip SHA256SUMS.txt --clobber
+      - name: Publish the release as the latest
+        run: gh release edit "${{ inputs.tag }}" --draft=false --latest
