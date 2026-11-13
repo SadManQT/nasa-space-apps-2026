@@ -12,7 +12,7 @@
 
 **[Play it](https://github.com/SadManQT/Last-Light-Academy/releases)** &nbsp;·&nbsp; **[Science and data](docs/SCIENCE_AND_DATA.md)** &nbsp;·&nbsp; **[Classroom kit](docs/classroom/README.md)** &nbsp;·&nbsp; **[AI use](docs/AI_USE.md)** &nbsp;·&nbsp; **[Credits](CREDITS.md)**
 
-Challenge: **[Build a Junior Astronaut Mission Trainer](https://www.spaceappschallenge.org/2026/challenges/build-a-junior-astronaut-mission-trainer/)** &nbsp;·&nbsp; Team **The Last BrainCell** &nbsp;·&nbsp; Dhaka, Bangladesh
+Challenge: **Build a Junior Astronaut Mission Trainer** &nbsp;·&nbsp; Team **The Last BrainCell** &nbsp;·&nbsp; Dhaka, Bangladesh
 
 *An independent student project. It is not endorsed by NASA and uses no NASA logos.*
 
