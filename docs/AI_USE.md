@@ -156,7 +156,8 @@ The film is on YouTube; its link is on the project page and in the README. What 
 | **The narration voices** | **AI-generated.** Each of the six members cloned their own voice in ElevenLabs (instant voice clone, `eleven_v4`), with their consent. Every line is spoken by the clone of the member named on screen, and each member says their own name and role. No member's voice was used for another person's lines. |
 | Gameplay footage | Recorded from our own game with Godot's Movie Maker, driven by scripts that Claude Code wrote |
 | Cutscenes, science clips and music | The game's own, made as described in the sections above (Seedance, Claude Motion, ElevenLabs music) |
-| Playtest photos | Taken by the team. Every learner's face is blurred |
+| People on screen | Only the six team members, in their own photos. No person under 18 appears, as the Space Apps terms require |
+| How the AI content is marked | Every cutscene shot carries an on-screen "AI-generated image" label. The AI narration and music are named on the film's last card, in the video description and in the file's metadata |
 | Motion graphics, captions, the edit and the sound mix | Claude Code, as code (a web page rendered frame by frame, then ffmpeg), kept with the team's video working files. No image or video model was used for the film itself. |
 
 The generation is logged in `production/ai_log_parts/video2_narration_20261113.md`.
