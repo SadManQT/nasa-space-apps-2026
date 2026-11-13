@@ -62,6 +62,21 @@ func _run() -> void:
 	_check(root.gui_get_focus_owner() == panel.find_child("Choose_wet", true, false), "controller down reaches the next reference")
 	_check(campaign.query().paused and panel.selection().is_empty(), "reading pauses with every input unset")
 	_check(not panel.preview().accepted and not panel.request_commit().accepted, "unset input cannot predict or submit")
+	# M1-129: the meaningful numbers are one tap each and say what they are; a slider shows the number as a position.
+	var pick_raw := panel.find_child("Pick_raw_reading_10", true, false) as Button
+	var pick_calibrated := panel.find_child("Pick_calibrated_reading_0", true, false) as Button
+	var slider := panel.find_child("Slider_raw_reading", true, false) as HSlider
+	_check(pick_raw != null and pick_raw.text.begins_with("Dry cup reads") and pick_calibrated != null and pick_calibrated.text.begins_with("Dry should say"), "quick picks name the meter's readings in words")
+	_check(slider != null and slider.max_value >= 110 and slider.step == 10, "a 0-120 slider backs the meter reading")
+	if pick_raw != null and pick_calibrated != null:
+		pick_raw.pressed.emit()
+		await process_frame
+		(panel.find_child("Pick_calibrated_reading_0", true, false) as Button).pressed.emit()
+		await process_frame
+		_check(is_equal_approx(float(panel.selection().get("raw_reading", -1)), 10.0) and is_equal_approx(float(panel.selection().get("calibrated_reading", -1)), 0.0), "two taps fill both meter numbers")
+		_check((panel.find_child("Input_raw_reading", true, false) as LineEdit).text == "10", "the typed field shows the tapped number")
+		panel.undo()
+		await process_frame
 	panel.choose("reference", "wet")
 	panel.choose("raw_reading", 110)
 	panel.choose("calibrated_reading", 100)

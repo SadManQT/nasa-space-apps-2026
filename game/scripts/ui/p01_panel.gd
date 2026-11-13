@@ -348,17 +348,100 @@ func _number(column: VBoxContainer, field: String, title: String, step: float) -
 	_button(row, "−", "Minus_" + field, func(): _adjust(field, -step))
 	var entry := LineEdit.new()
 	entry.name = "Input_" + field
-	entry.placeholder_text = "Not chosen"
-	entry.text = str(_choices[field]) if _choices.has(field) else ""
+	entry.placeholder_text = "Tap a number below"
+	entry.text = ""
+	if _choices.has(field):
+		entry.text = UiDesign.number(float(_choices[field])) if str(_choices[field]).is_valid_float() else str(_choices[field])
 	entry.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	entry.custom_minimum_size = Vector2(90, 44)
 	entry.add_theme_font_override("font", UiDesign.font("heading"))
 	entry.add_theme_font_size_override("font_size", 26)
 	entry.accessibility_name = title
-	entry.tooltip_text = title + "; type a number or use minus and plus."
+	entry.tooltip_text = title + "; tap a number, slide, type, or use minus and plus."
 	entry.text_changed.connect(func(text): choose(field, text.to_float() if text.is_valid_float() else text))
 	row.add_child(entry)
 	_button(row, "+", "Plus_" + field, func(): _adjust(field, step))
+	# Kid-friendly picking (M1-129, 13 Nov review: "so difficult to choose"): the few numbers
+	# that mean something here are one tap each and say what they are, and a slider shows
+	# the number as a position. Typing and minus/plus still work.
+	var picks := _quick_picks(field)
+	if not picks.is_empty():
+		var chips := HFlowContainer.new()
+		chips.name = "Picks_" + field
+		chips.add_theme_constant_override("h_separation", 8)
+		chips.add_theme_constant_override("v_separation", 8)
+		column.add_child(chips)
+		for pick in picks:
+			var value := float(pick[0])
+			var chosen := _choices.has(field) and str(_choices[field]).is_valid_float() and is_equal_approx(float(_choices[field]), value)
+			var chip := _button(chips, String(pick[1]), "Pick_%s_%s" % [field, UiDesign.number(value)], func() -> void:
+				choose(field, value)
+				_render())
+			chip.tooltip_text = title + ": " + UiDesign.number(value)
+			if chosen:
+				chip.add_theme_stylebox_override("normal", UiDesign.button_style(UiDesign.colour("accent"), true))
+				chip.add_theme_color_override("font_color", UiDesign.colour("ink"))
+				chip.add_theme_color_override("font_focus_color", UiDesign.colour("ink"))
+	var span := _slider_range(field)
+	var slider := HSlider.new()
+	slider.name = "Slider_" + field
+	slider.min_value = float(span[0])
+	slider.max_value = float(span[1])
+	slider.step = float(span[2])
+	slider.tick_count = int((float(span[1]) - float(span[0])) / float(span[2])) + 1
+	slider.ticks_on_borders = true
+	slider.custom_minimum_size = Vector2(0, 32)
+	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	slider.focus_mode = Control.FOCUS_ALL
+	slider.accessibility_name = title + " slider"
+	if _choices.has(field) and str(_choices[field]).is_valid_float():
+		slider.value = clampf(float(_choices[field]), slider.min_value, slider.max_value)
+	slider.value_changed.connect(func(value: float) -> void:
+		choose(field, value)
+		entry.text = UiDesign.number(value))
+	slider.drag_ended.connect(func(changed: bool) -> void:
+		if changed:
+			_focus = slider.name
+			_render())
+	column.add_child(slider)
+
+## The values that mean something for this field, with what they mean: the meter's real
+## readings and what a correct meter says, one seed, and the safe watering band.
+func _quick_picks(field: String) -> Array:
+	var profile: Dictionary = _view.get("profile", {})
+	var refs: Dictionary = profile.get("references", {})
+	var dry: Dictionary = refs.get("dry", {})
+	var wet: Dictionary = refs.get("wet", {})
+	match field:
+		"raw_reading":
+			return [[dry.get("raw", 10), "Dry cup reads %s" % UiDesign.number(float(dry.get("raw", 10)))], [wet.get("raw", 110), "Wet cup reads %s" % UiDesign.number(float(wet.get("raw", 110)))]]
+		"calibrated_reading":
+			return [[dry.get("calibrated", 0), "Dry should say %s" % UiDesign.number(float(dry.get("calibrated", 0)))], [wet.get("calibrated", 100), "Wet should say %s" % UiDesign.number(float(wet.get("calibrated", 100)))]]
+		"dry_reading":
+			return [[dry.get("calibrated", 0), "Dry: %s" % UiDesign.number(float(dry.get("calibrated", 0)))], [dry.get("raw", 10), "Not fixed: %s" % UiDesign.number(float(dry.get("raw", 10)))]]
+		"wet_reading":
+			return [[wet.get("calibrated", 100), "Wet: %s" % UiDesign.number(float(wet.get("calibrated", 100)))], [wet.get("raw", 110), "Not fixed: %s" % UiDesign.number(float(wet.get("raw", 110)))]]
+		"seed_count":
+			return [[profile.get("seeds_per_cassette", 1), "%s seed" % UiDesign.number(float(profile.get("seeds_per_cassette", 1)))], [2, "2 seeds"]]
+		"moisture":
+			var low := float(profile.get("moisture_min", 40))
+			var high := float(profile.get("moisture_max", 60))
+			var middle := roundf((low + high) * 0.5)
+			return [[low, "%s · just enough" % UiDesign.number(low)], [middle, "%s · right in the middle" % UiDesign.number(middle)], [high, "%s · plenty" % UiDesign.number(high)]]
+	return []
+
+## [min, max, step] for the field's slider.
+func _slider_range(field: String) -> Array:
+	match field:
+		"raw_reading":
+			return [0, 120, 10]
+		"calibrated_reading", "dry_reading", "wet_reading":
+			return [0, 100, 10]
+		"seed_count":
+			return [0, 3, 1]
+		"moisture":
+			return [0, 100, 5]
+	return [0, 100, 10]
 
 func _adjust(field: String, amount: float) -> void:
 	var value = _choices.get(field)
