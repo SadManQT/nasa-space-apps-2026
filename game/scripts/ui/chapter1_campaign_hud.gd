@@ -125,6 +125,9 @@ var _job_feedback: JobFeedback
 ## The scene's job list from the last _build_targets, reused by the progress line and the job-done
 ## card so one refresh asks the runtime once (each call rebuilds and deep-copies the list).
 var _scene_targets: Array = []
+## Text scale the HUD was last typed at (1.0 or 1.5); the progress line waits for the next frame.
+var _typed_scale := 0.0
+var _progress_dirty := false
 var _nearby_id := ""
 var _marker_node: Node3D
 var _chrome_hidden := false
@@ -462,6 +465,8 @@ func _show_job_done(done_id: String, line: String, feedback: Dictionary = {}) ->
 	var challenge := String(_target_text(spec).get("prompt", "")) if hands_on else ""
 	var next_goal := "" if bool(_goal_info.get("complete", false)) else _title.text
 	_job_feedback.settings = runtime.query().get("accessibility", {})
+	# Sized here, as it appears (the HUD-wide text pass skips the hidden banner).
+	UiDesign.apply_type(_job_feedback, get_viewport_rect().size.y, 1.5 if _large_text else 1.0)
 	_job_feedback.show_done(line, String(feedback.get("meter_tick", "")), next_goal, challenge)
 	_hide_toast()
 
@@ -814,7 +819,7 @@ func _build_targets(refresh_accessibility: bool = true) -> void:
 		_targets.add_child(_job_row(target, state))
 	_goal_info = _goal_for_state(current, gate, complete)
 	_apply_goal()
-	_update_progress()
+	_progress_dirty = true  # drawn next frame, outside this refresh's loading step
 	_retry.disabled = complete or runtime.route.snapshot().get("retry_checkpoint", {}).is_empty()
 	_update_debug(gate)
 	if panels != null and not panels.active_panel().is_empty():
@@ -1604,10 +1609,20 @@ func apply_accessibility() -> void:
 	var scale := 1.5 if bool(settings.get("large_text", false)) else 1.0
 	_large_text = scale > 1.0
 	_apply_goal_detail()
+	# M1-129 loading budget: the banner and key list are sized when they appear, not on every
+	# refresh, and the banner re-fits only when the text size really changes.
+	var skip_type: Array = [panels, mission_table, chapter2_panel, chapter3_panel, chapter4_panel, chapter6_panel, chapter8_panel, p01_panel, comms_panel]
 	if _job_feedback != null:
-		_job_feedback.set_settings(settings)
-		_layout()  # large text changes the goal card's height, which the banner's fallback uses
-	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, chapter2_panel, chapter3_panel, chapter4_panel, chapter6_panel, chapter8_panel, p01_panel, comms_panel])
+		_job_feedback.settings = settings
+		if not _job_feedback.is_showing():
+			skip_type.append(_job_feedback)
+		if scale != _typed_scale:
+			_job_feedback.set_settings(settings)
+			_layout()  # large text changes the goal card's height, which the banner's fallback uses
+	if _controls_hint != null and not _controls_hint.visible:
+		skip_type.append(_controls_hint)
+	_typed_scale = scale
+	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, skip_type)
 	if comms_panel != null:
 		comms_panel.set_text_scale(bool(settings.get("large_text", false)))
 	if runtime.audio != null:
@@ -1719,6 +1734,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if runtime == null or runtime.loading:
 		return
+	if _progress_dirty:
+		_progress_dirty = false
+		_update_progress()
 	if _toast_timer > 0.0 and _toast.visible:
 		_toast_timer -= delta
 		if _toast_timer <= 0.0:
@@ -2030,10 +2048,10 @@ func _update_controls_hint() -> void:
 			what.autowrap_mode = TextServer.AUTOWRAP_OFF
 			row.add_child(what)
 		add_child(_controls_hint)
-		UiDesign.apply_type(_controls_hint, get_viewport_rect().size.y, 1.0)
 	var show := CONTROLS_SCENES.has(_scene_id) and not _chrome_hidden
 	_controls_hint.visible = show
 	if show:
+		UiDesign.apply_type(_controls_hint, get_viewport_rect().size.y, 1.5 if _large_text else 1.0)  # sized when shown
 		_controls_hint.reset_size()
 		_controls_hint.size = _controls_hint.get_combined_minimum_size()
 		var view := get_viewport_rect().size
