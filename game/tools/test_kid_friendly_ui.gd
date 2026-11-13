@@ -174,7 +174,20 @@ func _job_feedback_unit() -> void:
 		await process_frame
 	var big := feedback.card_rect()
 	_check(big.end.y < 720.0 / 3.0 and not changed.visible and not next.visible, "at 150 %% text the banner keeps to its first row and the challenge: %s" % str(big))
+	# Switching to large text while a normal banner shows (the text walk's case) re-applies the rules.
 	feedback.settings = {}
+	UiDesign.apply_type(feedback, 720.0, 1.0)
+	feedback.show_done("Practice problem fixed with no help from Earth.", "Crew Roll Call: 4/4 accounted for", "Check what happened at the table", "Fix the practice problem")
+	for frame in 3:
+		await process_frame
+	_check(next.visible and changed.visible, "a normal-size banner shows its next and meter lines")
+	UiDesign.apply_type(feedback, 720.0, 1.5)
+	feedback.set_settings({"large_text": true})
+	for frame in 4:
+		await process_frame
+	big = feedback.card_rect()
+	_check(big.end.y < 720.0 / 3.0 and not next.visible and not changed.visible, "switching to 150 %% text while the banner shows keeps it out of the centre third: %s" % str(big))
+	feedback.set_settings({})
 	UiDesign.apply_type(feedback, 720.0, 1.0)
 	var headline := feedback.find_child("Headline", true, false) as Label
 	_check(headline.autowrap_mode == TextServer.AUTOWRAP_OFF, "the headline never wraps letter by letter")

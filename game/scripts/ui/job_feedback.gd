@@ -134,6 +134,24 @@ func _build() -> void:
 	# The outcome replaces the instruction on the same row once the player has pressed.
 	_outcome = _challenge_label
 
+## New accessibility settings; a banner already on screen re-applies its size rules at once
+## (switching to 150 % text while it shows must not push it into the centre third).
+func set_settings(value: Dictionary) -> void:
+	settings = value
+	if is_showing():
+		_apply_size_rules()
+		_layout()
+
+## At 150 % text the banner keeps to its first row (result at most two lines) and the challenge.
+func _apply_size_rules() -> void:
+	var large := bool(settings.get("large_text", false))
+	_changed.visible = not _changed.text.is_empty() and not large
+	_next.visible = not _next.text.is_empty() and not large
+	_result.max_lines_visible = 2 if large else -1
+	_result.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS if large else TextServer.OVERRUN_NO_TRIMMING
+	if _challenge_active:
+		_challenge_label.text = "★ Click in the green!" if large else "★ Click when the needle is in the green!"
+
 ## Shows the card for a finished job. `challenge_name` is the job's own action ("Switch on the power
 ## path"); empty means no star challenge (puzzle decisions and chapter ends).
 func show_done(result_line: String, changed: String = "", next_goal: String = "", challenge_name: String = "") -> void:
@@ -144,11 +162,8 @@ func show_done(result_line: String, changed: String = "", next_goal: String = ""
 	var plain := not meter.is_empty() and UiDesign.banned_regex().search(meter) == null
 	# At 150 % text the banner keeps to its first row and the challenge, so it stays out of the
 	# centre third; the goal card already shows the next job.
-	var large := bool(settings.get("large_text", false))
 	_changed.text = meter if plain else ""
-	_changed.visible = plain and not large
 	_next.text = ("Next ▸ " + next_goal) if not next_goal.is_empty() else ""
-	_next.visible = not next_goal.is_empty() and not large
 	_challenge_active = not challenge_name.is_empty()
 	_challenge_box.visible = _challenge_active
 	_outcome.remove_theme_color_override("font_color")
@@ -163,6 +178,7 @@ func show_done(result_line: String, changed: String = "", next_goal: String = ""
 		_time_left = TIMER_FREE_CHALLENGE_SECONDS if bool(settings.get("timer_free", true)) else CHALLENGE_SECONDS
 	else:
 		_time_left = CARD_SECONDS
+	_apply_size_rules()
 	_layout()
 	visible = true
 	_card.visible = true

@@ -1605,7 +1605,7 @@ func apply_accessibility() -> void:
 	_large_text = scale > 1.0
 	_apply_goal_detail()
 	if _job_feedback != null:
-		_job_feedback.settings = settings
+		_job_feedback.set_settings(settings)
 		_layout()  # large text changes the goal card's height, which the banner's fallback uses
 	UiDesign.apply_type(self, get_viewport_rect().size.y, scale, [panels, mission_table, chapter2_panel, chapter3_panel, chapter4_panel, chapter6_panel, chapter8_panel, p01_panel, comms_panel])
 	if comms_panel != null:
