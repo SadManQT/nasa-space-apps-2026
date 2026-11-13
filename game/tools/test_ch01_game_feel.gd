@@ -164,7 +164,10 @@ func _test_rewards_and_golden_bloom() -> void:
 	host.queue_free()
 	await process_frame
 
-	_check(FileAccess.file_exists(ProjectSettings.globalize_path("res://../production/qa/fun_2026-11-10.md")), "production/qa/fun_2026-11-10.md report exists")
+	# Internal QA reports are private after the repository cleanup. A fresh
+	# public checkout must ship the player controls and the reproducible runner.
+	var guide := FileAccess.get_file_as_string("res://../README.md")
+	_check(["WASD", "**E**", "**H**", "**Esc**", "game/tools/run_tests.sh"].all(func(word): return guide.contains(word)), "public player guide documents controls and the test runner")
 
 func _test_live_campaign_feedback_integration() -> void:
 	var temp_save := "user://test_ch01_feel_campaign.save"

@@ -83,7 +83,7 @@ Open `game/project.godot` in Godot and press **Play** (F5). The first import tak
 
 **Five-minute route for judges:** title screen → **New Expedition** → Solo or Class → follow the blue ◇ marker to the Mission Table and press **E**. Plan a shift, press **Try it**, then **Lock in**. Open a **Data Card** to see the NASA source behind a number.
 
-**Tests:** `game/tools/run_tests.sh` runs all 138 automated suites, including a walk through all 96 scenes.
+**Tests:** `game/tools/run_tests.sh` runs all 140 automated suites, including a walk through all 96 scenes.
 
 ## Tested with young players
 
