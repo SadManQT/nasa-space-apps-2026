@@ -58,7 +58,7 @@ const PANEL_DEFINITIONS := {
 	"puzzle": {"title": "Your choice", "query_key": "puzzle", "description": "Try an option to see what it would mean."},
 	"chapter1_outcome": {"title": "First light", "query_key": "chapter1_outcome", "description": "Your night, your decisions, and the science behind them."},
 	"outcome": {"title": "Last result", "query_key": "outcome", "description": "What the last job changed."},
-	"pause": {"title": "Paused", "query_key": "pause", "description": "The clock stops while you read and plan."},
+	"pause": {"title": "Paused", "query_key": "pause", "description": "The game waits for you. Nothing changes until you press Resume."},
 	"settings_accessibility": {"title": "Settings", "query_key": "accessibility", "description": "Captions, text size, reduced motion and timer-free play."},
 	"credits": {"title": "Credits", "query_key": "credits", "description": "Who made this, and with what."},
 	"what_now": {"title": "What now", "query_key": "what_now", "description": "Your goal, why it matters, where to go and a hint."},
@@ -462,12 +462,26 @@ func _render_pause() -> void:
 			button.pressed.connect(action)
 		(tools if is_tool else tiles).add_child(button)
 	_body.add_child(tiles)
+	_render_resume_card(_journal_data())
+	# Kid-friendly pause (13 Nov review): the twelve station tools are for curious
+	# players, not the everyday loop, so they wait behind one quiet toggle.
 	if tools.get_child_count() > 0:
-		_body.add_child(UiDesign.label("Station tools", "caption", "muted"))
+		var more := UiDesign.button("More station tools  ▸", 44, "info")
+		more.name = "MoreTools"
+		more.toggle_mode = true
+		more.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		more.tooltip_text = "Save slots, cadet record, greenhouse, rover and more."
+		tools.visible = false
+		more.toggled.connect(func(open: bool) -> void:
+			tools.visible = open
+			more.text = "Hide station tools  ▾" if open else "More station tools  ▸"
+			if open and tools.get_child_count() > 0:
+				_scroll.ensure_control_visible.call_deferred(tools.get_child(tools.get_child_count() - 1))
+		)
+		_body.add_child(more)
 		_body.add_child(tools)
 	else:
 		tools.free()
-	_render_resume_card(_journal_data())
 
 func _render_dialogue(value) -> void:
 	if not captions_visible():
