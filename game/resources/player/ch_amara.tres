@@ -8,3 +8,6 @@ acceleration_time = 0.24
 braking_time = 0.19
 turn_rate = 8.5
 lean_degrees = 3
+seat_recline_degrees = 5
+seat_pelvis_height = 0.536
+seat_pelvis_forward = 0.13

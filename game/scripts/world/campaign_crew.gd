@@ -93,7 +93,7 @@ func place(scene_id: String, next_room: CampaignRoom, player_at: Vector3, choice
 	_seated.clear()
 	for id in local_ids:
 		var body: PlayerController = bodies[id]
-		var seat := room.installed_seat_pose(body.position)
+		var seat := room.installed_seat_pose(body.position, body.seat_pelvis_local())
 		if id == active or seat.is_empty():
 			continue
 		body.face_towards(body.position + seat.facing)

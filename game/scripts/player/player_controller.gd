@@ -42,6 +42,7 @@ var eva_surface_tags: Array = []
 var eva_slope_override_deg: float = -1.0
 var _seat_hips := -1
 var _seat_pelvis_target := Vector3.ZERO
+var _seat_recline := 0.0
 
 func _ready() -> void:
 	floor_snap_length = 0.3
@@ -378,8 +379,17 @@ func face_towards(point: Vector3) -> void:
 		_yaw = atan2(direction.x, direction.z)
 		visual.global_rotation.y = _yaw
 
+## This character's pelvis contact point in an installed crew seat (chair space,
+## before the seat's scale): measured per character in its LocomotionTuning.
+func seat_pelvis_local() -> Vector3:
+	if tuning == null:
+		return Vector3(0.0, 0.54, 0.12)
+	return Vector3(0.0, tuning.seat_pelvis_height, tuning.seat_pelvis_forward)
+
 ## Align the actual seated pelvis to the chair, rather than assuming all imported
 ## SitIdle clips share the standing root's origin. Keep the gameplay capsule on the floor.
+## The character's measured seat recline leans the whole body back about the pelvis,
+## so the thighs rest on the cushion instead of passing through it.
 func sit_at(pelvis_target: Vector3) -> bool:
 	if animation == null or not animation.has_clip("SitIdle_loop"):
 		return false
@@ -394,14 +404,46 @@ func sit_at(pelvis_target: Vector3) -> bool:
 	animation.advance(0.0, 0.0)
 	_seat_hips = hips
 	_seat_pelvis_target = pelvis_target
+	_seat_recline = deg_to_rad(tuning.seat_recline_degrees) if tuning != null else 0.0
 	_align_seated_pelvis()
 	pose_modifier.reset_placement()
+	pose_modifier.seat_legs = _seated_leg_targets()
 	return true
+
+## Seated leg targets in world space: each thigh rests level on the cushion (a few degrees up from
+## the hip joint) and each shin hangs over the seat's front edge, slightly forward, with the foot
+## no lower than the floor. The authored SitIdle clips were made for a lower seat, so without this
+## their thighs slope down through the cushion (13 Nov review, M1-129).
+const SEAT_THIGH_LIFT_DEGREES := 4.0
+const SEAT_SHIN_FORWARD_DEGREES := 8.0
+const SEAT_ANKLE_HEIGHT_M := 0.08
+func _seated_leg_targets() -> Array:
+	var rig := animation.skeleton
+	var forward := Vector3(sin(_yaw), 0.0, cos(_yaw))
+	var legs: Array = []
+	for side in ["Left", "Right"]:
+		var up := LocomotionClips.bone(rig, side + "UpLeg")
+		var knee := LocomotionClips.bone(rig, side + "Leg")
+		var foot := LocomotionClips.bone(rig, side + "Foot")
+		if up < 0 or knee < 0 or foot < 0:
+			return []
+		var hip := rig.global_transform * rig.get_bone_global_pose(up).origin
+		var thigh := (rig.global_transform * rig.get_bone_global_rest(knee).origin).distance_to(rig.global_transform * rig.get_bone_global_rest(up).origin)
+		var shin := (rig.global_transform * rig.get_bone_global_rest(foot).origin).distance_to(rig.global_transform * rig.get_bone_global_rest(knee).origin)
+		var lift := deg_to_rad(SEAT_THIGH_LIFT_DEGREES)
+		var knee_at := hip + forward * thigh * cos(lift) + Vector3.UP * thigh * sin(lift)
+		var drop := knee_at.y - (global_position.y + SEAT_ANKLE_HEIGHT_M)
+		var hang := maxf(deg_to_rad(SEAT_SHIN_FORWARD_DEGREES), acos(clampf(drop / maxf(shin, 0.001), -1.0, 1.0)))
+		var foot_at := knee_at + Vector3.DOWN * shin * cos(hang) + forward * shin * sin(hang)
+		legs.append({"foot": foot_at, "pole": knee_at + forward * 0.6 + Vector3.UP * 0.25})
+	return legs
 
 func _align_seated_pelvis() -> void:
 	if _seat_hips < 0:
 		return
-	# Imported idle clips sway their root; the cushion remains the contact point.
+	# Lean back about the character's own facing, then keep the cushion as the contact point
+	# (imported idle clips sway their root).
+	visual.global_basis = Basis(Vector3.UP, _yaw) * Basis(Vector3.RIGHT, -_seat_recline)
 	var rig := animation.skeleton
 	var pelvis := rig.global_transform * rig.get_bone_global_pose(_seat_hips).origin
 	visual.global_position += _seat_pelvis_target - pelvis
@@ -411,7 +453,9 @@ func reset_placement() -> void:
 	placement_frames = 2
 	velocity = Vector3.ZERO
 	_seat_hips = -1
+	_seat_recline = 0.0
 	visual.position = Vector3.ZERO
+	visual.global_basis = Basis(Vector3.UP, _yaw)
 	pose_modifier.reset_placement()
 	follow_camera.reset_placement()
 	force_update_transform()

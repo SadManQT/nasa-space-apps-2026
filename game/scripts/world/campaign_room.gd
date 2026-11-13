@@ -710,7 +710,8 @@ func installed_seat_facing(at: Vector3) -> Vector3:
 	return installed_seat_pose(at).get("facing", Vector3.ZERO)
 
 ## Room-space contact frame, shared by the Safe Room and rotated/staged Commons chairs.
-func installed_seat_pose(at: Vector3) -> Dictionary:
+## pelvis_local is the sitter's own pelvis contact in chair space (PlayerController.seat_pelvis_local()).
+func installed_seat_pose(at: Vector3, pelvis_local: Vector3 = SEAT_PELVIS_LOCAL) -> Dictionary:
 	for prop in _layout.get("props", []) + _stage.get("props", []):
 		if not prop is Dictionary or String(prop.get("path", "")).get_file() != "PR_CrewSeat.glb" or String(prop.get("id", "")) in _stage.get("hide", []):
 			continue
@@ -718,7 +719,7 @@ func installed_seat_pose(at: Vector3) -> Dictionary:
 		var sit := Presentation.vector(prop.position) + facing * SEAT_SIT_OFFSET_M
 		if Vector2(sit.x - at.x, sit.z - at.z).length() < 0.15:
 			var scale := Presentation.vector(prop.get("scale", [1, 1, 1]))
-			var pelvis := Presentation.vector(prop.position) + facing * SEAT_PELVIS_LOCAL.z * scale.z + Vector3.UP * SEAT_PELVIS_LOCAL.y * scale.y
+			var pelvis := Presentation.vector(prop.position) + facing * pelvis_local.z * scale.z + Vector3.UP * pelvis_local.y * scale.y
 			return {"facing": facing, "pelvis": pelvis}
 	return {}
 

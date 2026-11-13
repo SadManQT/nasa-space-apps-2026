@@ -33,6 +33,10 @@ var _lock_toes: Array[Quaternion] = [Quaternion.IDENTITY, Quaternion.IDENTITY]
 var _released: Array[bool] = [false, false]
 var _release_time: Array[float] = [0.0, 0.0]
 var _ground: Array[float] = [INF, INF]
+## Seated legs (M1-129): world-space {"foot", "pole"} per side (Left, Right) that rest
+## the thighs on a seat cushion and hang the shins over its front edge. Empty when standing.
+var seat_legs: Array = []
+const SEAT_TOE_DOWN_DEGREES := 12.0
 
 func setup(body: CharacterBody3D, motion: PlayerAnimation) -> void:
 	actor = body
@@ -112,6 +116,25 @@ func _update_lean(delta: float) -> void:
 
 func _update_feet(delta: float, fresh: bool) -> void:
 	var rig := get_skeleton()
+	if seat_legs.size() == 2:
+		# A seated body: the two-bone solvers place each knee and foot on the seat's
+		# leg targets; locomotion foot locking and pelvis drop do not apply.
+		# Feet relax from their standing rest orientation with the toes a little down, so a
+		# dangling foot never folds up into the trouser leg (FootOrientation applies foot_bases).
+		var body_visual = actor.get("visual")
+		var lateral: Vector3 = (body_visual as Node3D).global_basis.x.normalized() if body_visual is Node3D else rig.global_basis.x.normalized()
+		var toe_down := Basis(lateral, deg_to_rad(SEAT_TOE_DOWN_DEGREES))
+		for side in 2:
+			targets[side].global_position = seat_legs[side].foot
+			poles[side].global_position = seat_legs[side].pole
+			foot_bases[side] = (toe_down * (rig.global_basis * rig.get_bone_global_rest(foot_bones[side]).basis)).orthonormalized()
+			if toe_bones[side] >= 0:
+				toe_rotations[side] = rig.get_bone_rest(toe_bones[side]).basis.get_rotation_quaternion()
+			solvers[side].active = true
+			solvers[side].influence = 1.0
+			weights[side] = 0.0
+			locked[side] = false
+		return
 	if fresh:
 		for side in 2:
 			_previous_toes[side] = rig.get_bone_global_pose(toe_bones[side]).origin
@@ -238,6 +261,7 @@ func reset_placement() -> void:
 	weights = [0.0, 0.0]
 	_released = [false, false]
 	_ground = [INF, INF]
+	seat_legs = []
 	_pelvis_offset = 0.0
 	_lean = Vector2.ZERO
 	_last_velocity = Vector3.ZERO

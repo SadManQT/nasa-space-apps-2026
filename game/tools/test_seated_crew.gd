@@ -31,10 +31,19 @@ func _run() -> void:
 		_check(not crew._seated.any(func(id): return crew.bodies[id] == crew.player) and crew.player.controlled, scene_id + " active player remains movable")
 		var origins := {}
 		var cycle_seconds := 2.0
+		# The final pose (after leg IK and foot orientation) only exists while the skeleton
+		# emits skeleton_updated; get_bone_global_pose() afterwards returns the animated pose.
+		var final_legs := {}
+		var watchers := {}
 		for id in crew._seated:
 			origins[id] = crew.bodies[id].position
 			seen[id] = true
 			cycle_seconds = maxf(cycle_seconds, crew.bodies[id].animation.player.get_animation("motion/SitIdle_loop").length)
+			_check(crew.bodies[id].pose_modifier.seat_legs.size() == 2, scene_id + " " + id + " seated legs are placed on the seat")
+			var rig_watch: Skeleton3D = crew.bodies[id].animation.skeleton
+			var watch := func() -> void: final_legs[id] = _leg_points(rig_watch)
+			rig_watch.skeleton_updated.connect(watch)
+			watchers[id] = watch
 		print("SEATED CYCLE %s %.2f seconds" % [scene_id, cycle_seconds])
 		for frame in ceili(cycle_seconds * 60.0) + 3:
 			await physics_frame
@@ -55,6 +64,22 @@ func _run() -> void:
 				for side in ["Left", "Right"]:
 					var foot := rig.global_transform * rig.get_bone_global_pose(LocomotionClips.bone(rig, side + "Foot")).origin
 					_check(foot.y > chair.global_position.y - 0.04, scene_id + " " + id + " foot stays above deck")
+				# M1-129 (13 Nov screenshot): legs must not pass through the seat. PR_CrewSeat's cushion top
+				# is 0.38-0.44 m and its front edge 0.47 m in front of the pivot (measured by ray casts).
+				_check(final_legs.has(id), scene_id + " " + id + " final seated pose observed")
+				if not final_legs.has(id):
+					continue
+				var legs: Dictionary = final_legs[id]
+				for side in ["Left", "Right"]:
+					var hip := chair.to_local(legs[side + "UpLeg"])
+					var knee := chair.to_local(legs[side + "Leg"])
+					var foot := chair.to_local(legs[side + "Foot"])
+					var mid := (hip + knee) * 0.5
+					_check(knee.y > 0.46 and mid.y > 0.45, scene_id + " " + id + " " + side + " thigh rests on, not through, the cushion: knee " + str(knee) + " mid " + str(mid))
+					_check(knee.z > 0.44, scene_id + " " + id + " " + side + " knee reaches the seat's front edge: " + str(knee))
+					_check(foot.z > 0.47 and foot.y > -0.02 and foot.y < 0.30, scene_id + " " + id + " " + side + " shin hangs in front of the seat with the foot above the deck: " + str(foot))
+		for id in watchers:
+			crew.bodies[id].animation.skeleton.skeleton_updated.disconnect(watchers[id])
 		await _capture(room, crew, scene_id)
 		# Reusing persistent bodies at a standing scene must remove all seated offsets.
 		var standing := Room.new()
@@ -64,6 +89,7 @@ func _run() -> void:
 		for id in crew.local_ids:
 			var body: PlayerController = crew.bodies[id]
 			_check(body.visual.position.is_zero_approx() and body.foot_ik_enabled, id + " standing scene clears seating offset and restores feet")
+			_check(body.pose_modifier.seat_legs.is_empty() and body.visual.global_basis.y.is_equal_approx(Vector3.UP), id + " standing scene clears seated legs and recline")
 		# A normal caption makes the standing cast talk/listen. The next cut must
 		# discard that blend before sampling the seated pelvis, not fade it later.
 		crew.present_line({"speaker_id": "amara", "origin_label": "LOCAL LIVE"}, false)
@@ -78,6 +104,13 @@ func _run() -> void:
 	await process_frame
 	print("SEATED CREW RESULT: %s (%d checks, %d failures)" % ["PASS" if failures == 0 else "FAIL", checks, failures])
 	quit(0 if failures == 0 else 1)
+
+func _leg_points(rig: Skeleton3D) -> Dictionary:
+	var points := {}
+	for side in ["Left", "Right"]:
+		for part in ["UpLeg", "Leg", "Foot"]:
+			points[side + part] = rig.global_transform * rig.get_bone_global_pose(LocomotionClips.bone(rig, side + part)).origin
+	return points
 
 func _chair_at(room: CampaignRoom, floor_at: Vector3) -> Node3D:
 	for spec in room._layout.get("props", []) + room.stage().get("props", []):
